@@ -1,11 +1,10 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.Auth.AzureAd;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Auth.Jwt;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+﻿using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
 using Microsoft.Extensions.DependencyInjection;
+using ZANECO.WASM.Client.Infrastructure.Auth.AzureAd;
+using ZANECO.WASM.Client.Infrastructure.Auth.Jwt;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-
+namespace ZANECO.WASM.Client.Infrastructure.Auth;
 internal static class Startup
 {
     public static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration config) =>

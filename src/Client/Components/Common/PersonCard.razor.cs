@@ -1,10 +1,9 @@
-﻿using System.Security.Claims;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Common;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Components.Common;
-
+namespace ZANECO.WASM.Client.Components.Common;
 public partial class PersonCard
 {
     [Parameter]

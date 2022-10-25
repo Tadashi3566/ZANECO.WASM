@@ -1,9 +1,8 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 
-namespace FSH.BlazorWebAssembly.Client.Shared;
-
+namespace ZANECO.WASM.Client.Shared;
 public partial class MainLayout
 {
     [Parameter]

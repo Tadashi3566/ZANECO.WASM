@@ -14,8 +14,8 @@
                         <MudAvatar Square="true" Color="Color.Primary" Style="width:100%;height:300px;">@_firstLetterOfName</MudAvatar>
                     }
                 </div>
-                <MudText Typo="Typo.h6" Align="Align.Center">@_profileModel.FirstName @_profileModel.LastName</MudText>
-                <MudText Align="Align.Center">@_profileModel.Email</MudText>
+                <MudText Typo="Typo.h6" Align="Align.Center">@_user.FirstName @_user.LastName</MudText>
+                <MudText Align="Align.Center">@_user.Email</MudText>
             </MudCardContent>
             <MudCardActions Class="d-flex justify-center">
                 <InputFile id="fileInput" OnChange="UploadFiles" hidden accept=".jpg,.jpeg,.png" />
@@ -43,7 +43,7 @@
         </MudCard>
     </MudItem>
     <MudItem xs="12" sm="12" md="8">
-        <EditForm Model="@_profileModel" OnValidSubmit="UpdateProfileAsync">
+        <EditForm Model="@_user" OnValidSubmit="UpdateProfileAsync">
             <MudCard Elevation="25">
                 <MudCardHeader>
                     <CardHeaderContent>
@@ -55,22 +55,40 @@
                         <DataAnnotationsValidator />
                         <CustomValidation @ref="_customValidation" />
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="@_profileModel.FirstName" For="@(() => _profileModel.FirstName)"
+                            <MudTextField @bind-Value="@_user.FirstName"
+                                For="@(() => _user.FirstName)"
                                 Label="@L["First Name"]" Variant="Variant.Outlined" />
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="@_profileModel.LastName" For="@(() => _profileModel.LastName)"
+                            <MudTextField @bind-Value="@_user.LastName"
+                                For="@(() => _user.LastName)"
                                 Label="@L["Last Name"]" Variant="Variant.Outlined" />
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="@_profileModel.PhoneNumber"
-                                For="@(() => _profileModel.PhoneNumber)" Label="@L["Phone Number"]"
+                            <MudTextField @bind-Value="@_user.PhoneNumber"
+                                For="@(() => _user.PhoneNumber)"
+                                Label="@L["Phone Number"]"
                                 Variant="Variant.Outlined" />
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="@_profileModel.Email" Label="@L["Email"]"
-                                For="@(() => _profileModel.Email)" Variant="Variant.Outlined"
+                            <MudTextField @bind-Value="@_user.Email" Label="@L["Email"]"
+                                For="@(() => _user.Email)"
+                                Variant="Variant.Outlined"
                                 InputType="InputType.Email" Disabled=true />
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField @bind-Value="@_user.Description"
+                                          For="@(() => _user.Description)"
+                                          Label="@L["Description"]"
+                                          Lines="2"
+                                          Variant="Variant.Outlined" />
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField @bind-Value="@_user.Notes"
+                                          For="@(() => _user.Notes)"
+                                          Label="@L["Notes"]"
+                                          Lines="2"
+                                          Variant="Variant.Outlined" />
                         </MudItem>
                     </MudGrid>
                 </MudCardContent>

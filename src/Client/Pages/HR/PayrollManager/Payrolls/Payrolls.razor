@@ -1,0 +1,73 @@
+﻿@page "/payroll"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Payroll)]
+
+@inject NavigationManager NavigationManager
+
+<FshTitle Title="Payroll" Description="Manage Payroll" />
+
+<EntityTable @ref="_table" TEntity="PayrollDto" TId="Guid" TRequest="PayrollUpdateRequest" Context="@Context">
+    <ExtraActions>
+        @if (_canViewRoleClaims)
+        {
+            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/payroll/employeepayroll/{context.Id}"))" >Employees Payroll</MudMenuItem>
+            <MudMenuItem OnClick="@(() => PayrollGenerate(context.Id))" >Calculate Summary</MudMenuItem>
+        }
+    </ExtraActions>
+    <EditFormContent>
+        <MudItem xs="6">
+            <MudSelect Label="Payroll Type" For="@(() => context.PayrollType)" @bind-Value="context.PayrollType" >
+                <MudSelectItem Value="@("MONTHLY")"/>
+                <MudSelectItem Value="@("MID")"/>
+                <MudSelectItem Value="@("END")" />
+                <MudSelectItem Value="@("OTHERS")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="6">
+            <MudSelect Label="Employment Type" For="@(() => context.EmploymentType)" @bind-Value="context.EmploymentType">
+                <MudSelectItem Value="@("JOB ORDER")"/>
+                <MudSelectItem Value="@("REGULAR")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+
+        <MudItem xs="6" sm="4">
+            <MudDatePicker Label="Start Date" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Editable=true />
+        </MudItem>
+        <MudItem xs="6" sm="4">
+            <MudDatePicker Label="End Date" For="@(() => context.DateEnd)" @bind-Date="context.DateEnd" DateFormat="MMMM dd, yyyy" Editable=true />
+        </MudItem>
+        <MudItem xs="6" sm="4">
+            <MudNumericField Label="Working Days" For="@(() => context.WorkingDays)" @bind-Value="context.WorkingDays" />
+        </MudItem>
+        <MudItem xs="6" sm="4">
+            <MudDatePicker Label="Payroll Date" For="@(() => context.PayrollDate)" @bind-Date="context.PayrollDate" DateFormat="MMMM dd, yyyy" Editable=true />
+        </MudItem>
+
+        <MudItem xs="6" sm="4">
+            <MudNumericField Label="Total Salary" For="@(() => context.TotalSalary)" @bind-Value="context.TotalSalary" Format="N2" Disabled=true />
+        </MudItem>
+        <MudItem xs="6" sm="4">
+            <MudNumericField Label="Additional" For="@(() => context.TotalAdditional)" @bind-Value="context.TotalAdditional" Format="N2" Disabled=true />
+        </MudItem>
+        <MudItem xs="6" sm="4">
+            <MudNumericField Label="Gross" For="@(() => context.TotalGross)" @bind-Value="context.TotalGross" Format="N2" Disabled=true />
+        </MudItem>
+        <MudItem xs="6" sm="4">
+            <MudNumericField Label="Deduction" For="@(() => context.TotalDeduction)" @bind-Value="context.TotalDeduction" Format="N2" Disabled=true />
+        </MudItem>
+        <MudItem xs="6" sm="4">
+            <MudNumericField Label="Net" For="@(() => context.TotalNet)" @bind-Value="context.TotalNet" Format="N2" Disabled=true />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

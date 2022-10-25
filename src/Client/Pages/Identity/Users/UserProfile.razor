@@ -3,7 +3,7 @@
 
 @inject IStringLocalizer<UserProfile> _localizer
 
-<FshTitle Title="@Title" Description="@Description" />
+<FshTitle Title="@Title" Description="@Email" />
 @if (!_loaded)
 {
     <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
@@ -84,11 +84,16 @@ else
                             <MudField Label="@_localizer["Last Name"]" Variant="Variant.Outlined">@_lastName</MudField>
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudField Label="@_localizer["Phone Number"]" Variant="Variant.Outlined">@_phoneNumber
-                            </MudField>
+                            <MudField Label="@_localizer["Phone Number"]" Variant="Variant.Outlined">@_phoneNumber</MudField>
                         </MudItem>
                         <MudItem xs="12" md="6">
                             <MudField Label="@_localizer["Email"]" Variant="Variant.Outlined">@_email</MudField>
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudField Label="@_localizer["Description"]" Variant="Variant.Outlined">@_description</MudField>
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudField Label="@_localizer["Notes"]" Variant="Variant.Outlined">@_notes</MudField>
                         </MudItem>
                     </MudGrid>
                 </MudCardContent>

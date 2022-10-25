@@ -1,11 +1,11 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Common;
-using FSH.WebApi.Shared.Authorization;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Shared;
+namespace ZANECO.WASM.Client.Shared;
 
 public partial class NavMenu
 {
@@ -19,9 +19,30 @@ public partial class NavMenu
     private bool _canViewDashboard;
     private bool _canViewRoles;
     private bool _canViewUsers;
+
     private bool _canViewProducts;
     private bool _canViewBrands;
     private bool _canViewTenants;
+
+    private bool _canViewGroups;
+    private bool _canViewTickets;
+    private bool _canViewContacts;
+    private bool _canViewSMS;
+
+    private bool _canViewRating;
+    private bool _canViewSurveys;
+
+    private bool _canViewEmployees;
+    private bool _canViewAccounting;
+
+    // private bool _canViewHRAdditionals;
+    // private bool _canViewHRAttendance;
+    // private bool _canViewHRPayroll;
+
+    private bool _canViewCAD;
+
+    // private bool _canViewAccounts;
+
     private bool CanViewAdministrationGroup => _canViewUsers || _canViewRoles || _canViewTenants;
 
     protected override async Task OnParametersSetAsync()
@@ -32,8 +53,22 @@ public partial class NavMenu
         _canViewDashboard = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Dashboard);
         _canViewRoles = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Roles);
         _canViewUsers = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Users);
+
         _canViewProducts = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Products);
         _canViewBrands = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Brands);
         _canViewTenants = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Tenants);
+
+        _canViewGroups = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Groups);
+        _canViewTickets = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Tickets);
+        _canViewContacts = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Contacts);
+        _canViewSMS = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.SMS);
+
+        _canViewRating = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Rating);
+        _canViewSurveys = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Surveys);
+
+        _canViewEmployees = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Employees);
+        _canViewAccounting = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Employees);
+
+        _canViewCAD = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.CAD);
     }
 }

@@ -1,0 +1,139 @@
+﻿@page "/app/tickets"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Tickets)]
+
+<FshTitle Title="Tickets" Description="Manage Tickets" />
+
+<EntityTable @ref="_table" TEntity="TicketDto" TId="Guid" TRequest="TicketViewModel" Context="@Context">
+    <ExtraActions>
+        @if (_canViewRoleClaims)
+        {
+            <MudDivider/>
+            <MudMenuItem >Open</MudMenuItem>
+            <MudMenuItem >Suspend</MudMenuItem>
+            <MudMenuItem >Close</MudMenuItem>
+            <MudMenuItem >Approve</MudMenuItem>
+        }
+    </ExtraActions>
+    <EditFormContent>
+        <MudItem xs="12" md="6">
+            <AutocompleteGroup For="@(() => context.GroupId)" @bind-Value="context.GroupId"  />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+        </MudItem>
+
+        <MudItem xs="4">
+            <MudSelect Label="Impact" For="@(() => context.Impact)" @bind-Value="context.Impact" >
+                <MudSelectItem Value="@("MINOR")"/>
+                <MudSelectItem Value="@("MAJOR")"/>
+                <MudSelectItem Value="@("CRITICAL")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="4">
+            <MudSelect Label="Urgency" For="@(() => context.Urgency)" @bind-Value="context.Urgency" >
+                <MudSelectItem Value="@("LOW")"/>
+                <MudSelectItem Value="@("MID")"/>
+                <MudSelectItem Value="@("HIGH")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="4">
+            <MudSelect Label="Priority" For="@(() => context.Priority)" @bind-Value="context.Priority" >
+                <MudSelectItem Value="@("LOW")"/>
+                <MudSelectItem Value="@("MID")"/>
+                <MudSelectItem Value="@("HIGH")"/>
+            </MudSelect>
+        </MudItem>
+
+        <MudItem xs="12" md="8">
+            <AutocompleteEmployee Label="Requested By" For="@(() => context.RequestedBy)" @bind-Value="context.RequestedBy" />
+        </MudItem>
+        <MudItem xs="6" md="2">
+            @*<MudTextField Label="Through" For="@(() => context.RequestThrough)" @bind-Value="context.RequestThrough" />\*@
+            <MudSelect T="string" Label="Through" For="@(() => context.RequestThrough)" @bind-Value="context.RequestThrough">
+                <MudSelectItem Value="@("CHAT APP")"/>
+                <MudSelectItem Value="@("PERSONAL")"/>
+                <MudSelectItem Value="@("PHONE")"/>
+                <MudSelectItem Value="@("SYSTEM")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="6" md="2">
+            <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" />
+        </MudItem>
+
+        <MudItem xs="12" md="8">
+            <AutocompleteEmployee Label="Assigned To" For="@(() => context.AssignedTo)" @bind-Value="context.AssignedTo" />
+        </MudItem>
+        <MudItem xs="12" md="4">
+            <MudTextField Label="Status" For="@(() => context.Status)" @bind-Value="context.Status" ReadOnly=true />
+        </MudItem>
+
+        @*
+        <MudItem xs="12" md="8">
+            <MudTextField Label="Opened By" For="@(() => context.OpenedBy)" @bind-Value="context.OpenedBy" />
+        </MudItem>
+        <MudItem xs="12" md="4">
+            <MudTextField Label="Opened On" For="@(() => context.OpenedOn)" @bind-Value="context.OpenedOn" />
+        </MudItem>
+
+        <MudItem xs="12" md="8">
+            <MudTextField Label="Closed By" For="@(() => context.ClosedBy)" @bind-Value="context.ClosedBy" />
+        </MudItem>
+        <MudItem xs="12" md="4">
+            <MudTextField Label="Closed On" For="@(() => context.ClosedOn)" @bind-Value="context.ClosedOn" />
+        </MudItem>
+
+        <MudItem xs="12" md="8">
+            <MudTextField Label="Approved By" For="@(() => context.ApprovedBy)" @bind-Value="context.ApprovedBy" />
+        </MudItem>
+        <MudItem xs="12" md="4">
+            <MudTextField Label="Approved On" For="@(() => context.ApprovedOn)" @bind-Value="context.ApprovedOn" />
+        </MudItem>*@
+        
+        <MudItem xs="12" md="12">
+            <MudItem>
+                @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                {
+                    <MudAvatar Image ="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+            </MudItem>
+            <MudItem>
+                <div>
+                    <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
+                        Upload
+                    </MudButton>
+                    @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                            StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
+                            View
+                        </MudButton>
+
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                            StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
+                            Delete
+                        </MudButton>
+                    }
+                    @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                            StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;" >
+                            Clear
+                        </MudButton>
+                    }
+                </div>
+                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+            </MudItem>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

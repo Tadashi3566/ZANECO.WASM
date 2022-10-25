@@ -1,13 +1,11 @@
-﻿using System.Globalization;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Notifications;
-using FSH.BlazorWebAssembly.Client.Shared;
-using FSH.WebApi.Shared.Notifications;
-using MediatR.Courier;
+﻿using MediatR.Courier;
 using Microsoft.AspNetCore.Components;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Notifications;
+using ZANECO.WASM.Client.Shared;
+using ZANECO.WebApi.Shared.Notifications;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Personal;
-
+namespace ZANECO.WASM.Client.Pages.Personal;
 public partial class Dashboard
 {
     [Parameter]
@@ -24,7 +22,7 @@ public partial class Dashboard
     [Inject]
     private ICourier Courier { get; set; } = default!;
 
-    private readonly string[] _dataEnterBarChartXAxisLabels = DateTimeFormatInfo.CurrentInfo.AbbreviatedMonthNames;
+    private readonly string[] _dataEnterBarChartXAxisLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
     private readonly List<MudBlazor.ChartSeries> _dataEnterBarChartSeries = new();
     private bool _loaded;
 

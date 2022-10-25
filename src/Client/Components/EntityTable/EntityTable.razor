@@ -31,7 +31,7 @@
                             CheckedChanged="Context.AllColumnsCheckChanged"></MudCheckBox>
                         @foreach (var field in Context.Fields)
                         {
-                            <MudCheckBox @bind-Checked="@field.CheckedForSearch" Label="@(field.DisplayName)"></MudCheckBox>
+                            <MudSwitch @bind-Checked="@field.CheckedForSearch" Label="@(field.DisplayName)" Color="Color.Primary"></MudSwitch>
                         }
                     </div>
                 }
@@ -40,7 +40,7 @@
             </MudExpansionPanel>
         }
 
-        <FshTable @ref="_table" Elevation="25" ServerData="@ServerReloadFunc" Items="@_entityList" Filter="LocalSearch"
+        <FshTable @ref="_table" MultiSelection="@MultiSelection" Elevation="25" ServerData="@ServerReloadFunc" Items="@_entityList" Filter="LocalSearch"
             Loading="@Loading" LoadingProgressColor="@Color.Secondary" ChildRowContent="@ChildRowContent">
 
             <ToolBarContent>
@@ -102,7 +102,8 @@
                         }
                         else if (field.Type == typeof(bool))
                         {
-                            <MudCheckBox Checked="@field.ValueFunc(context)" ReadOnly Color="Color.Secondary"></MudCheckBox>
+                            <MudSwitch Checked="@field.ValueFunc(context)" Color="Color.Success" ReadOnly />
+                            @*<MudCheckBox Checked="@field.ValueFunc(context)" ReadOnly Color="Color.Secondary"></MudCheckBox>*@
                         }
                         else
                         {
@@ -122,11 +123,11 @@
                             OffsetX="true">
                             @if (CanUpdateEntity(context))
                             {
-                                <MudMenuItem @onclick="@(() => InvokeModal(context))">@L["Edit"]</MudMenuItem>
+                                <MudMenuItem OnClick="@(() => InvokeModal(context))" >@L["Edit"]</MudMenuItem>
                             }
                             @if (CanDeleteEntity(context))
                             {
-                                <MudMenuItem Style="color:red!important" @onclick="@(() => Delete(context))">@L["Delete"]</MudMenuItem>
+                                <MudMenuItem OnClick="@(() => Delete(context))" Style="color:red!important">@L["Delete"]</MudMenuItem>
                             }
                             @if (ExtraActions is not null)
                             {
@@ -137,8 +138,7 @@
                     else
                     {
                         <MudButton Variant="Variant.Filled" DisableElevation="true"
-                            StartIcon="@Icons.Material.Filled.DoNotTouch" IconColor="Color.Secondary" Size="Size.Small"
-                        Color="Color.Surface">
+                            StartIcon="@Icons.Material.Filled.DoNotTouch" IconColor="Color.Secondary" Size="Size.Small" Color="Color.Surface">
                             @L["No Allowed Actions"]
                         </MudButton>
                     }

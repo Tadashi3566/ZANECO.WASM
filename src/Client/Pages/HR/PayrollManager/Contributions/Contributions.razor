@@ -1,0 +1,53 @@
+﻿@page "/payroll/contributions"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Payroll)]
+
+@inject NavigationManager NavigationManager
+
+<FshTitle Title="Contributions" Description="Employee Contribution Management" />
+
+<EntityTable @ref="_table" TEntity="ContributionDto" TId="Guid" TRequest="ContributionUpdateRequest" Context="@Context" >
+    <EditFormContent>
+        <MudItem xs="12" sm="6" >
+            <MudSelect Label="Contribution Type" For="@(() => context.ContributionType)" @bind-Value="context.ContributionType" >
+                <MudSelectItem Value="@("PAG-IBIG")" />
+                <MudSelectItem Value="@("PHILHEALTH")" />
+                <MudSelectItem Value="@("SSS")" />
+                <MudSelectItem Value="@("TAX")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudDatePicker Label="From Date" DateFormat="MMMM dd, yyyy" For="@(() => context.DateEffectivityStart)" @bind-Date="context.DateEffectivityStart" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudDatePicker Label="To Date" DateFormat="MMMM dd, yyyy" For="@(() => context.DateEffectivityEnd)" @bind-Date="context.DateEffectivityEnd" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudNumericField Label="From" Format="N2" For="@(() => context.RangeStart)" @bind-Value="context.RangeStart" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudNumericField Label="To" Format="N2" For="@(() => context.RangeEnd)" @bind-Value="context.RangeEnd" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudNumericField Label="Employer Contribution" Format="N2" For="@(() => context.EmployerContribution)" @bind-Value="context.EmployerContribution" OnBlur="(() => CalculateTotalContribution(context.EmployerContribution, context.EmployeeContribution))" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudNumericField Label="Employee Contribution" Format="N2" For="@(() => context.EmployeeContribution)" @bind-Value="context.EmployeeContribution" OnBlur="(() => CalculateTotalContribution(context.EmployerContribution, context.EmployeeContribution))" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudNumericField Label="Total Contribution" Format="N2" For="@(() => context.TotalContribution)" @bind-Value=_totalContribution ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudNumericField Label="Percentage" Format="N3" For="@(() => context.Percentage)" @bind-Value="context.Percentage" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudSwitch Label="Fixed Contribution" Color="Color.Primary" For="@(() => context.IsFixed)" @bind-Checked="context.IsFixed" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+</EntityTable>

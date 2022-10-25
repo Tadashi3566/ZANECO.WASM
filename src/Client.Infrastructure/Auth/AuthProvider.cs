@@ -1,4 +1,4 @@
-﻿namespace FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
+﻿namespace ZANECO.WASM.Client.Infrastructure.Auth;
 
 public enum AuthProvider
 {

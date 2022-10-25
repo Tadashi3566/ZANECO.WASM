@@ -1,9 +1,8 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using ZANECO.WASM.Client.Infrastructure.Auth;
 
-namespace FSH.BlazorWebAssembly.Client.Components.Common;
-
+namespace ZANECO.WASM.Client.Components.Common;
 public partial class ErrorHandler
 {
     [Inject]

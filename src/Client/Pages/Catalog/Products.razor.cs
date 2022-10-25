@@ -1,14 +1,13 @@
-﻿using FSH.BlazorWebAssembly.Client.Components.EntityTable;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Common;
-using FSH.WebApi.Shared.Authorization;
-using Mapster;
+﻿using Mapster;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.EntityTable;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Catalog;
-
+namespace ZANECO.WASM.Client.Pages.Catalog;
 public partial class Products
 {
     [Inject]
@@ -37,7 +36,7 @@ public partial class Products
             idFunc: prod => prod.Id,
             searchFunc: async filter =>
             {
-                var productFilter = filter.Adapt<SearchProductsRequest>();
+                var productFilter = filter.Adapt<ProductSearchRequest>();
 
                 productFilter.BrandId = SearchBrandId == default ? null : SearchBrandId;
                 productFilter.MinimumRate = SearchMinimumRate;
@@ -53,7 +52,7 @@ public partial class Products
                     prod.Image = new FileUploadRequest() { Data = prod.ImageInBytes, Extension = prod.ImageExtension ?? string.Empty, Name = $"{prod.Name}_{Guid.NewGuid():N}" };
                 }
 
-                await ProductsClient.CreateAsync(prod.Adapt<CreateProductRequest>());
+                await ProductsClient.CreateAsync(prod.Adapt<ProductCreateRequest>());
                 prod.ImageInBytes = string.Empty;
             },
             updateFunc: async (id, prod) =>
@@ -64,12 +63,12 @@ public partial class Products
                     prod.Image = new FileUploadRequest() { Data = prod.ImageInBytes, Extension = prod.ImageExtension ?? string.Empty, Name = $"{prod.Name}_{Guid.NewGuid():N}" };
                 }
 
-                await ProductsClient.UpdateAsync(id, prod.Adapt<UpdateProductRequest>());
+                await ProductsClient.UpdateAsync(id, prod.Adapt<ProductUpdateRequest>());
                 prod.ImageInBytes = string.Empty;
             },
             exportFunc: async filter =>
             {
-                var exportFilter = filter.Adapt<ExportProductsRequest>();
+                var exportFilter = filter.Adapt<ProductExportRequest>();
 
                 exportFilter.BrandId = SearchBrandId == default ? null : SearchBrandId;
                 exportFilter.MinimumRate = SearchMinimumRate;
@@ -136,13 +135,13 @@ public partial class Products
         }
     }
 
-    public void ClearImageInBytes()
+    private void ClearImageInBytes()
     {
         Context.AddEditModal.RequestModel.ImageInBytes = string.Empty;
         Context.AddEditModal.ForceRender();
     }
 
-    public void SetDeleteCurrentImageFlag()
+    private void SetDeleteCurrentImageFlag()
     {
         Context.AddEditModal.RequestModel.ImageInBytes = string.Empty;
         Context.AddEditModal.RequestModel.ImagePath = string.Empty;
@@ -151,7 +150,7 @@ public partial class Products
     }
 }
 
-public class ProductViewModel : UpdateProductRequest
+public class ProductViewModel : ProductUpdateRequest
 {
     public string? ImagePath { get; set; }
     public string? ImageInBytes { get; set; }

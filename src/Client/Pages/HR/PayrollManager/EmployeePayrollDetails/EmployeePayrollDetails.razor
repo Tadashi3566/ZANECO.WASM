@@ -1,0 +1,39 @@
+﻿@page "/payroll/employeepayrolldetails"
+@page "/payroll/employeepayrolldetails/{EmployeeId:guid}/{PayrollId:guid}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Payroll)]
+
+<FshTitle Title="Employee Payroll Details" Description="Employee Payroll Detail Management" />
+
+<EntityTable @ref="_table" TEntity="EmployeePayrollDetailDto" TId="Guid" TRequest="EmployeePayrollDetailUpdateRequest" Context="@Context">
+    <AdvancedSearchContent>
+        <MudItem Class="mt-3">
+            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+            <AutocompletePayroll @bind-Value="SearchPayrollId" />
+        </MudItem>
+    </AdvancedSearchContent>
+
+    <EditFormContent>
+        <MudItem xs="12">
+            <AutocompletePayroll For="@(() => context.PayrollId)" @bind-Value="SearchPayrollId" Disabled="!SearchPayrollId.Equals(Guid.Empty)"/>
+        </MudItem>
+        <MudItem xs="12">
+            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
+        </MudItem>
+        <MudItem xs="12" sm="9">
+            <AutocompleteAdjustments For="@(() => context.AdjustmentId)" @bind-Value="context.AdjustmentId" />
+        </MudItem>
+        <MudItem xs="12" sm="3">
+            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+        </MudItem>
+        
+    </EditFormContent>
+
+</EntityTable>

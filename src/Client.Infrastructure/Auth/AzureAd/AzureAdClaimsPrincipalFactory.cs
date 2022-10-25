@@ -1,11 +1,10 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.WebApi.Shared.Authorization;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+﻿using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
 using Microsoft.Extensions.DependencyInjection;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Auth.AzureAd;
-
+namespace ZANECO.WASM.Client.Infrastructure.Auth.AzureAd;
 internal class AzureAdClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount>
 {
     // Can't work with actual services in the constructor here, have to

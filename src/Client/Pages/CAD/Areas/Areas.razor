@@ -1,0 +1,26 @@
+﻿@page "/cad/areas"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
+
+<FshTitle Title="Areas" Description="Manage Areas" />
+
+<EntityTable @ref="_table" TEntity="AreaDto" TId="Guid" TRequest="AreaUpdateRequest" Context="@Context">
+    <EditFormContent>
+        <MudItem xs="6" sm="3">
+            <MudTextField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" />
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudTextField Label="Code" For="@(() => context.Code)" @bind-Value="context.Code" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Area Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

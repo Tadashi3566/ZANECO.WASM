@@ -1,8 +1,7 @@
-using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
 using Microsoft.AspNetCore.Components;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 
-namespace FSH.BlazorWebAssembly.Client.Components.ThemeManager;
-
+namespace ZANECO.WASM.Client.Components.ThemeManager;
 public partial class RadiusPanel
 {
     [Parameter]

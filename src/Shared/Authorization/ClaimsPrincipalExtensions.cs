@@ -1,7 +1,6 @@
-using FSH.WebApi.Shared.Authorization;
+using System.Security.Claims;
 
-namespace System.Security.Claims;
-
+namespace ZANECO.WebApi.Shared.Authorization;
 public static class ClaimsPrincipalExtensions
 {
     public static string? GetEmail(this ClaimsPrincipal principal)

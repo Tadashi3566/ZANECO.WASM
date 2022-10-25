@@ -6,15 +6,9 @@
 
 <FshTitle Title="@L["Brands"]" Description="@L["Manage Brands."]" />
 
-<EntityTable TEntity="BrandDto" TId="Guid" TRequest="UpdateBrandRequest" Context="@Context">
+<EntityTable TEntity="BrandDto" TId="Guid" TRequest="BrandUpdateRequest" Context="@Context">
 
     <EditFormContent>
-        @if (!Context.AddEditModal.IsCreate)
-        {
-            <MudItem xs="12" md="6">
-                <MudTextField Value="context.Id" ReadOnly DisableUnderLine Label="@L[$"Brand Id"]" />
-            </MudItem>
-        }
         <MudItem xs="12" md="6">
             <MudTextField T="string" For="@(() => context.Name)" @bind-Value="context.Name" Label="@L["Name"]" />
         </MudItem>
@@ -28,7 +22,7 @@
 
 @code
 {
-    protected EntityServerTableContext<BrandDto, Guid, UpdateBrandRequest> Context { get; set; } = default!;
+    protected EntityServerTableContext<BrandDto, Guid, BrandUpdateRequest> Context { get; set; } = default!;
 
     protected override void OnInitialized() =>
         Context = new(
@@ -43,9 +37,9 @@
             },
             idFunc: brand => brand.Id,
             searchFunc: async filter => (await BrandsClient
-                .SearchAsync(filter.Adapt<SearchBrandsRequest>()))
+                .SearchAsync(filter.Adapt<BrandSearchRequest>()))
                 .Adapt<PaginationResponse<BrandDto>>(),
-            createFunc: async brand => await BrandsClient.CreateAsync(brand.Adapt<CreateBrandRequest>()),
+            createFunc: async brand => await BrandsClient.CreateAsync(brand.Adapt<BrandCreateRequest>()),
             updateFunc: async (id, brand) => await BrandsClient.UpdateAsync(id, brand),
             deleteFunc: async id => await BrandsClient.DeleteAsync(id),
             exportAction: string.Empty);

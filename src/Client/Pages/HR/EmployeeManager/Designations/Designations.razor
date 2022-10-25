@@ -1,0 +1,144 @@
+﻿@page "/hr/designations"
+@page "/hr/designations/{EmployeeId:guid}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Designations)]
+
+<FshTitle Title="Designations" Description="Employee Designation Management" />
+
+<EntityTable @ref="_table" TEntity="DesignationDto" TId="Guid" TRequest="DesignationViewModel" Context="@Context">
+
+    <AdvancedSearchContent>
+        <MudItem Class="mt-3">
+            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+        </MudItem>
+    </AdvancedSearchContent>
+    <ExtraActions>
+        @if (_canViewRoleClaims)
+        {
+            <MudDivider/>
+            <MudMenuItem OnClick="(() => SetCurrentDesignation(context.EmployeeId, context.Id))")">Set as Current Designation</MudMenuItem>
+        }
+    </ExtraActions>
+    <EditFormContent>
+        <MudItem xs="12">
+            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4">
+            <MudDatePicker Label="Start Date" For="@(() => context.StartDate)" @bind-Date="context.StartDate" DateFormat="MMMM dd, yyyy" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudDatePicker Label="End Date" For="@(() => context.EndDate)" @bind-Date="context.EndDate" DateFormat="MMMM dd, yyyy" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <AutocompleteArea For="@(() => context.Area)" @bind-Value="context.Area" />
+        </MudItem>
+        <MudItem xs="12">
+            <AutocompleteDepartment For="@(() => context.Department)" @bind-Value="context.Department" />
+        </MudItem>
+        <MudItem xs="12">
+            <AutocompleteDivision For="@(() => context.Division)" @bind-Value="context.Division" />
+        </MudItem>
+        <MudItem xs="12">
+            <AutocompleteSection For="@(() => context.Section)" @bind-Value="context.Section" />
+        </MudItem>
+        <MudItem xs="12">
+            <AutocompletePosition For="@(() => context.Position)" @bind-Value="context.Position" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4">
+            <AutocompleteRank For="@(() => context.SalaryRank)" @bind-Value="context.SalaryRank" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudSelect Label="Employment" For="@(() => context.EmploymentType)" @bind-Value="context.EmploymentType" >
+                <MudSelectItem Value="@("JOB ORDER")"/>
+                <MudSelectItem Value="@("PROBATION")"/>
+                <MudSelectItem Value="@("REGULAR")"/>
+                <MudSelectItem Value="@("RESIGNED")"/>
+                <MudSelectItem Value="@("RETIRED")"/>
+                <MudSelectItem Value="@("TERMINATED")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudSelect Label="Rate Type" For="@(() => context.RateType)" @bind-Value="context.RateType" >
+                <MudSelectItem Value="@("DAILY")"/>
+                <MudSelectItem Value="@("MONTHLY")"/>
+            </MudSelect>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4">
+            <MudNumericField Label="Days per Month" For="@(() => context.DaysPerMonth)" @bind-Value="context.DaysPerMonth" Disabled="@(!DisableInput(context.RateType))" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudNumericField Label="Per Day" For="@(() => context.RatePerDay)" @bind-Value="context.RatePerDay" Format="N2" Disabled=true />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudNumericField Label="Hours per Day" For="@(() => context.HoursPerDay)" @bind-Value="context.HoursPerDay" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudNumericField Label="Per Hour" For="@(() => context.RatePerHour)" @bind-Value="context.RatePerHour" Format="N2" Disabled=true />
+        </MudItem>
+
+         <MudItem xs="12">
+            <AutocompleteSchedule For="@(() => context.ScheduleId)" @bind-Value="context.ScheduleId" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4">
+            <MudSelect Label="Pay Type" For="@(() => context.PayType)" @bind-Value="context.PayType" >
+                <MudSelectItem Value="@("BI-MONTHLY")"/>
+                <MudSelectItem Value="@("MONTHLY")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <AutocompleteTax For="@(() => context.TaxType)" @bind-Value="context.TaxType"  />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudItem>
+                @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                {
+                    <MudAvatar Image ="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+            </MudItem>
+            <MudItem>
+                <div>
+                    <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
+                        Upload Document
+                    </MudButton>
+                    @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                            StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
+                            View
+                        </MudButton>
+
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                            StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
+                            Delete
+                        </MudButton>
+                    }
+                    @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                            StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;" >
+                            Clear
+                        </MudButton>
+                    }
+                </div>
+                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+            </MudItem>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

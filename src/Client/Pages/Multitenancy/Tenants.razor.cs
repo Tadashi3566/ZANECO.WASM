@@ -1,16 +1,15 @@
-﻿using FSH.BlazorWebAssembly.Client.Components.EntityTable;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-using FSH.BlazorWebAssembly.Client.Shared;
-using FSH.WebApi.Shared.Authorization;
-using Mapster;
+﻿using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.EntityTable;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Shared;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Multitenancy;
-
+namespace ZANECO.WASM.Client.Pages.Multitenancy;
 public partial class Tenants
 {
     [Inject]

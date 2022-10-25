@@ -1,7 +1,6 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.Theme;
+﻿using ZANECO.WASM.Client.Infrastructure.Theme;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
-
+namespace ZANECO.WASM.Client.Infrastructure.Preferences;
 public class ClientPreference : IPreference
 {
     public bool IsDarkMode { get; set; }

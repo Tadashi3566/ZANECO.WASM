@@ -1,9 +1,8 @@
-﻿using System.Text.RegularExpressions;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Theme;
-using MudBlazor;
+﻿using MudBlazor;
+using System.Text.RegularExpressions;
+using ZANECO.WASM.Client.Infrastructure.Theme;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
-
+namespace ZANECO.WASM.Client.Infrastructure.Preferences;
 public class ClientPreferenceManager : IClientPreferenceManager
 {
     private readonly ILocalStorageService _localStorageService;

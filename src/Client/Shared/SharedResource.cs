@@ -1,4 +1,4 @@
-﻿namespace FSH.BlazorWebAssembly.Client.Shared;
+﻿namespace ZANECO.WASM.Client.Shared;
 
 public class SharedResource
 {

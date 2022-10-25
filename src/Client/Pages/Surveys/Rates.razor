@@ -1,0 +1,23 @@
+﻿@page "/survey/rates"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Rating)]
+
+<FshTitle Title="Rates" Description="Manage Rates" />
+
+<EntityTable @ref="_table" TEntity="RateDto" TId="Guid" TRequest="RateUpdateRequest" Context="@Context">
+
+    <EditFormContent>
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Code" For="@(() => context.Number)" @bind-Value="context.Number" />
+        </MudItem>
+        <MudItem xs="12" md="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+        <MudItem xs="12" md="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12" md="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

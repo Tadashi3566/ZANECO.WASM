@@ -1,8 +1,7 @@
-﻿using FSH.WebApi.Shared.Authorization;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-
+namespace ZANECO.WASM.Client.Infrastructure.Auth;
 public class MustHavePermissionAttribute : AuthorizeAttribute
 {
     public MustHavePermissionAttribute(string action, string resource) =>

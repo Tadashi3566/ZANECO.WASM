@@ -1,17 +1,16 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.SignalR.Client;
+using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Common;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Notifications;
-using FSH.WebApi.Shared.Notifications;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-using Microsoft.AspNetCore.SignalR.Client;
+using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Infrastructure.Notifications;
+using ZANECO.WebApi.Shared.Notifications;
 
-namespace FSH.BlazorWebAssembly.Client.Components.Notifications;
-
+namespace ZANECO.WASM.Client.Components.Notifications;
 public partial class NotificationConnection : IDisposable, IAsyncDisposable
 {
     [Parameter]

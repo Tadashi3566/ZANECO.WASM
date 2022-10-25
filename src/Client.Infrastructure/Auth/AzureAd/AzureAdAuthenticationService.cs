@@ -1,9 +1,8 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Auth.AzureAd;
-
+namespace ZANECO.WASM.Client.Infrastructure.Auth.AzureAd;
 internal class AzureAdAuthenticationService : IAuthenticationService
 {
     private readonly SignOutSessionStateManager _signOut;

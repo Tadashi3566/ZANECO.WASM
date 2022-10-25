@@ -4,7 +4,7 @@
   "documentGenerator": {
     "fromDocument": {
       "json": "",
-      "url": "https://localhost:5001/swagger/v1/swagger.json",
+      "url": "https://localhost:5021/swagger/v1/swagger.json",
       "output": null,
       "newLineBehavior": "Auto"
     }
@@ -56,7 +56,7 @@
       "wrapResponseMethods": [],
       "generateResponseClasses": true,
       "responseClass": "SwaggerResponse",
-      "namespace": "FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient",
+      "namespace": "ZANECO.WASM.Client.Infrastructure.ApiClient",
       "requiredPropertiesMustBeDefined": true,
       "dateType": "System.DateTimeOffset",
       "jsonConverters": null,

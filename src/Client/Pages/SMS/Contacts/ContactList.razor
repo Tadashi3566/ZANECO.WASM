@@ -1,0 +1,79 @@
+﻿@page "/app/contactlist"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Contacts)]
+
+<FshTitle Title="Contacts" Description="Manage Contacts" />
+
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Context="context" Filter="new Func<ContactDto, bool>(Search)" MultiSelection=true>
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                <MudButton Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" StartIcon="@Icons.Material.Filled.ArrowBack" Link="/">
+                    Back
+                </MudButton>
+                @if (_canEditContacts)
+                {
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="SaveAsync" StartIcon="@Icons.Material.Filled.Save"
+                        ButtonType="ButtonType.Submit" Style="margin-left: 5px!important;">
+                        "Update"
+                    </MudButton>
+                }
+            </div>
+            <MudSpacer />
+            @if (_canSearhContacts)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" FullWidth=false
+                    Placeholder="Search For Contact Profile" Adornment="Adornment.End"
+                    AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3">
+                </MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<ContactDto, object?>(x => x.ContactType)">Contact Type</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<ContactDto, object?>(x => x.PhoneNumber)">Phone Number</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<ContactDto, object?>(x => x.Name)">Name</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<ContactDto, object?>(x => x.Address)">Address</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<ContactDto, object?>(x => x.Description)">Description</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<ContactDto, object?>(x => x.Notes)">Notes</MudTableSortLabel>
+            </MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Contact Type">
+                <MudHighlighter Text="@context.ContactType" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Phone Number">
+                <MudHighlighter Text="@context.PhoneNumber" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Name">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Address">
+                <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Description">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Notes">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+}

@@ -1,19 +1,18 @@
-﻿using System.Globalization;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Notifications;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
-using FSH.WebApi.Shared.Authorization;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
 using MudBlazor.Services;
+using System.Globalization;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Infrastructure.Notifications;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure;
-
+namespace ZANECO.WASM.Client.Infrastructure;
 public static class Startup
 {
-    private const string ClientName = "FullStackHero.API";
+    private const string ClientName = "ZANECO.API";
 
     public static IServiceCollection AddClientServices(this IServiceCollection services, IConfiguration config) =>
         services

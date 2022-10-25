@@ -1,11 +1,10 @@
-using FSH.BlazorWebAssembly.Client.Components.EntityTable;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
 using Mapster;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.EntityTable;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Personal;
-
+namespace ZANECO.WASM.Client.Pages.Personal;
 public partial class AuditLogs
 {
     [Inject]

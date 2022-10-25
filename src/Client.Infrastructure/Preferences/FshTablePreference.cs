@@ -1,7 +1,6 @@
-using FSH.WebApi.Shared.Notifications;
+using ZANECO.WebApi.Shared.Notifications;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
-
+namespace ZANECO.WASM.Client.Infrastructure.Preferences;
 public class FshTablePreference : INotificationMessage
 {
     public bool IsDense { get; set; }

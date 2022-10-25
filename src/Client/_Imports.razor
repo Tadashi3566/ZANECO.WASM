@@ -8,26 +8,25 @@
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using Microsoft.AspNetCore.Components.WebAssembly.Http
-@using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.Extensions.Configuration
 @using Microsoft.Extensions.DependencyInjection
 @using Microsoft.Extensions.Localization
 @using Microsoft.JSInterop
-@using FSH.BlazorWebAssembly.Client
-@using FSH.BlazorWebAssembly.Client.Shared
-@using FSH.BlazorWebAssembly.Client.Pages.Authentication
-@using FSH.BlazorWebAssembly.Client.Pages.Multitenancy
-@using FSH.BlazorWebAssembly.Client.Components.Common
-@using FSH.BlazorWebAssembly.Client.Components.EntityTable
-@using FSH.BlazorWebAssembly.Client.Components.Localization
-@using FSH.BlazorWebAssembly.Client.Components.Notifications
-@using FSH.BlazorWebAssembly.Client.Components.ThemeManager
-@using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient
-@using FSH.BlazorWebAssembly.Client.Infrastructure.Auth
-@using FSH.BlazorWebAssembly.Client.Infrastructure.Common
-@using FSH.BlazorWebAssembly.Client.Infrastructure.Notifications
-@using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences
-@using FSH.WebApi.Shared.Authorization
+@using ZANECO.WASM.Client
+@using ZANECO.WASM.Client.Shared
+@using ZANECO.WASM.Client.Pages.Authentication
+@using ZANECO.WASM.Client.Pages.Multitenancy
+@using ZANECO.WASM.Client.Components.Common
+@using ZANECO.WASM.Client.Components.EntityTable
+@using ZANECO.WASM.Client.Components.Localization
+@using ZANECO.WASM.Client.Components.Notifications
+@using ZANECO.WASM.Client.Components.ThemeManager
+@using ZANECO.WASM.Client.Infrastructure.ApiClient
+@using ZANECO.WASM.Client.Infrastructure.Auth
+@using ZANECO.WASM.Client.Infrastructure.Common
+@using ZANECO.WASM.Client.Infrastructure.Notifications
+@using ZANECO.WASM.Client.Infrastructure.Preferences
+@using ZANECO.WebApi.Shared.Authorization
 @using Blazored.LocalStorage
 @using Mapster
 @using MediatR.Courier
@@ -35,6 +34,7 @@
 
 @attribute [Authorize]
 
+@inject IAuthorizationService AuthenticationService
 @inject NavigationManager Navigation
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService

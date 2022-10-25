@@ -1,0 +1,31 @@
+﻿@page "/payroll/schedules"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Schedules)]
+
+@inject NavigationManager NavigationManager
+
+<FshTitle Title="Schedules" Description="Manage Schedules" />
+
+<EntityTable @ref="_table" TEntity="ScheduleDto" TId="Guid" TRequest="ScheduleUpdateRequest" Context="@Context">
+    <ExtraActions>
+        @if (_canViewRoleClaims)
+        {
+            <MudDivider/>
+            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/payroll/scheduledetails/{context.Id}"))" >Schedules</MudMenuItem>
+            <MudMenuItem OnClick="@(() => SetAsCurrentSchedule(context.Id))" >Set as Current Schedule</MudMenuItem>
+        }
+    </ExtraActions>
+    <EditFormContent>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

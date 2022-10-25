@@ -1,14 +1,13 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Common;
-using FSH.BlazorWebAssembly.Client.Shared;
-using FSH.WebApi.Shared.Authorization;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Shared;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Identity.Users;
-
+namespace ZANECO.WASM.Client.Pages.Identity.Users;
 public partial class UserProfile
 {
     [CascadingParameter]
@@ -23,7 +22,7 @@ public partial class UserProfile
     [Parameter]
     public string? Title { get; set; }
     [Parameter]
-    public string? Description { get; set; }
+    public string? Email { get; set; }
 
     private bool _active;
     private bool _emailConfirmed;
@@ -31,6 +30,8 @@ public partial class UserProfile
     private string? _firstName;
     private string? _lastName;
     private string? _phoneNumber;
+    private string? _description;
+    private string? _notes;
     private string? _email;
     private string? _imageUrl;
     private bool _loaded;
@@ -48,19 +49,19 @@ public partial class UserProfile
 
     protected override async Task OnInitializedAsync()
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => UsersClient.GetByIdAsync(Id), Snackbar)
-            is UserDetailsDto user)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.GetByIdAsync(Id), Snackbar) is UserDetailsDto user)
         {
             _firstName = user.FirstName;
             _lastName = user.LastName;
             _email = user.Email;
             _phoneNumber = user.PhoneNumber;
+            _description = user.Description;
+            _notes = user.Notes;
             _active = user.IsActive;
             _emailConfirmed = user.EmailConfirmed;
             _imageUrl = string.IsNullOrEmpty(user.ImageUrl) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + user.ImageUrl);
             Title = $"{_firstName} {_lastName}'s {_localizer["Profile"]}";
-            Description = _email;
+            Email = _email;
             if (_firstName?.Length > 0)
             {
                 _firstLetterOfName = _firstName.ToUpper().FirstOrDefault();

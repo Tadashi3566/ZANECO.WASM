@@ -1,0 +1,85 @@
+﻿@page "/app/groups"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Groups)]
+
+<FshTitle Title="Groups" Description="Manage Groups" />
+
+<EntityTable @ref="_table" TEntity="GroupDto" TId="Guid" TRequest="GroupViewModel" Context="@Context">
+
+    <EditFormContent>
+        <MudItem xs="12" md="6">
+            <MudSelect T="string" Label="Application" For="@(() => context.Application)" @bind-Value="context.Application">
+                <MudSelectItem Value="@("ACCOUNTING")"/>
+                <MudSelectItem Value="@("CAD")" />
+                <MudSelectItem Value="@("HR")" />
+                <MudSelectItem Value="@("SMS")" />
+                <MudSelectItem Value="@("TICKET")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <AutocompleteParent For="@(() => context.Parent)" @bind-Value="context.Parent" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <AutocompleteTag For="@(() => context.Tag)" @bind-Value="context.Tag" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Code" For="@(() => context.Code)" @bind-Value="context.Code" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+        <MudItem xs="12">
+            <AutocompleteManager Label="Manager" For="@(() => context.Manager)" @bind-Value="context.Manager" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+
+        <MudItem xs="12" md="12">
+            <MudItem>
+                @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                {
+                    <MudAvatar Image ="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+            </MudItem>
+            <MudItem>
+                <div>
+                    <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
+                        StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
+                        Upload
+                    </MudButton>
+                    @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                            StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
+                            View
+                        </MudButton>
+
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                            StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
+                            Delete
+                        </MudButton>
+                    }
+                    @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                            StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;" >
+                            Clear
+                        </MudButton>
+                    }
+                </div>
+                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+            </MudItem>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

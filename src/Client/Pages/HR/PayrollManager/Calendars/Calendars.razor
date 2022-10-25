@@ -1,0 +1,41 @@
+﻿@page "/payroll/calendar"
+@page "/payroll/calendar/{EmployeeId:guid}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Payroll)]
+
+<FshTitle Title="Calendar" Description="Employee Calendar Management" />
+
+<EntityTable @ref="_table" TEntity="CalendarDto" TId="Guid" TRequest="CalendarUpdateRequest" Context="@Context" MultiSelection=true>
+    <AdvancedSearchContent>
+        <MudItem Class="mt-3">
+            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+        </MudItem>
+    </AdvancedSearchContent>
+    <EditFormContent>
+        <MudItem xs="12">
+            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudDatePicker Label="Calendar Date" For="@(() => context.CalendarDate)" @bind-Date=" context.CalendarDate" DateFormat="MMMM dd, yyyy"  />
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <AutocompleteCalendarType For="@(() => context.CalendarType)" @bind-Value="context.CalendarType" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudSelect Label="Status" For="@(() => context.Status)" @bind-Value="context.Status" >
+                <MudSelectItem Value="@("FOR APPROVAL")"/>
+                <MudSelectItem Value="@("APPROVED")"/>
+                <MudSelectItem Value="@("DISAPPROVED")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+</EntityTable>

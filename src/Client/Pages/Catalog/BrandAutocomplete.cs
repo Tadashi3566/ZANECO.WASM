@@ -1,11 +1,10 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Shared;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Shared;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Catalog;
-
+namespace ZANECO.WASM.Client.Pages.Catalog;
 public class BrandAutocomplete : MudAutocomplete<Guid>
 {
     [Inject]
@@ -47,7 +46,7 @@ public class BrandAutocomplete : MudAutocomplete<Guid>
 
     private async Task<IEnumerable<Guid>> SearchBrands(string value)
     {
-        var filter = new SearchBrandsRequest
+        var filter = new BrandSearchRequest
         {
             PageSize = 10,
             AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }

@@ -1,7 +1,7 @@
-﻿using FSH.WebApi.Shared.Authorization;
-using MudBlazor;
+﻿using MudBlazor;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Components.EntityTable;
+namespace ZANECO.WASM.Client.Components.EntityTable;
 
 /// <summary>
 /// Abstract base class for the initialization Context of the EntityTable Component.

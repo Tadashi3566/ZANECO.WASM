@@ -1,11 +1,10 @@
-﻿using FSH.BlazorWebAssembly.Client.Components.Common;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Shared;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.Common;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Shared;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Identity.Account;
-
+namespace ZANECO.WASM.Client.Pages.Identity.Account;
 public partial class Security
 {
     [Inject]

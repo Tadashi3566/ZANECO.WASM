@@ -1,0 +1,22 @@
+﻿@page "/survey/ratingtemplates"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Rating)]
+
+<FshTitle Title="RatingTemplates" Description="Manage RatingTemplates" />
+
+<EntityTable @ref="_table" TEntity="RatingTemplateDto" TId="Guid" TRequest="RatingTemplateUpdateRequest" Context="@Context">
+    <EditFormContent>
+        <MudItem xs="12" md="6">
+            <RateAutocomplete For="@(() => context.RateId)" @bind-Value="context.RateId"  />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Comment" For="@(() => context.Comment)" @bind-Value="context.Comment" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

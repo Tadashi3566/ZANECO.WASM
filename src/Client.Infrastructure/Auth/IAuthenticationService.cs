@@ -1,7 +1,6 @@
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-
+namespace ZANECO.WASM.Client.Infrastructure.Auth;
 public interface IAuthenticationService
 {
     AuthProvider ProviderType { get; }

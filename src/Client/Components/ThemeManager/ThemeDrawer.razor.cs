@@ -1,9 +1,8 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Theme;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
+using ZANECO.WASM.Client.Infrastructure.Theme;
 
-namespace FSH.BlazorWebAssembly.Client.Components.ThemeManager;
-
+namespace ZANECO.WASM.Client.Components.ThemeManager;
 public partial class ThemeDrawer
 {
     [Parameter]

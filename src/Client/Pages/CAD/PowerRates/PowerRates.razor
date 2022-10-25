@@ -1,0 +1,23 @@
+﻿@page "/cad/powerrates"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
+
+<FshTitle Title="Power Rates" Description="Power Rate Management" />
+
+<EntityTable @ref="_table" TEntity="PowerRateDto" TId="Guid" TRequest="PowerRateUpdateRequest" Context="@Context">
+    <EditFormContent>
+        <MudItem xs="6" sm="3">
+            <MudTextField Label="Code" For="@(() => context.Code)" @bind-Value="context.Code" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

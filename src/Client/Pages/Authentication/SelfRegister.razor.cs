@@ -1,12 +1,11 @@
-﻿using FSH.BlazorWebAssembly.Client.Components.Common;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Shared;
-using FSH.WebApi.Shared.Multitenancy;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.Common;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Shared;
+using ZANECO.WebApi.Shared.MultiTenancy;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Authentication;
-
+namespace ZANECO.WASM.Client.Pages.Authentication;
 public partial class SelfRegister
 {
     private readonly CreateUserRequest _createUserRequest = new();
@@ -26,10 +25,7 @@ public partial class SelfRegister
     {
         BusySubmitting = true;
 
-        string? sucessMessage = await ApiHelper.ExecuteCallGuardedAsync(
-            () => UsersClient.SelfRegisterAsync(Tenant, _createUserRequest),
-            Snackbar,
-            _customValidation);
+        string? sucessMessage = await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.SelfRegisterAsync(Tenant, _createUserRequest), Snackbar, _customValidation);
 
         if (sucessMessage != null)
         {

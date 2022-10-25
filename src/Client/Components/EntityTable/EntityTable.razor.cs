@@ -1,16 +1,15 @@
-using FSH.BlazorWebAssembly.Client.Components.Dialogs;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-using FSH.BlazorWebAssembly.Client.Shared;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.Dialogs;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Shared;
 
-namespace FSH.BlazorWebAssembly.Client.Components.EntityTable;
-
+namespace ZANECO.WASM.Client.Components.EntityTable;
 public partial class EntityTable<TEntity, TId, TRequest>
     where TRequest : new()
 {
@@ -20,6 +19,8 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
     [Parameter]
     public bool Loading { get; set; }
+    [Parameter]
+    public bool MultiSelection { get; set; }
 
     [Parameter]
     public string? SearchString { get; set; }
@@ -69,9 +70,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
     }
 
     public Task ReloadDataAsync() =>
-        Context.IsClientContext
-            ? LocalLoadDataAsync()
-            : ServerLoadDataAsync();
+        Context.IsClientContext ? LocalLoadDataAsync() : ServerLoadDataAsync();
 
     private async Task<bool> CanDoActionAsync(string? action, AuthenticationState state) =>
         !string.IsNullOrWhiteSpace(action) &&
@@ -229,20 +228,17 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
         var parameters = new DialogParameters()
         {
-            { nameof(AddEditModal<TRequest>.ChildContent), EditFormContent },
+            { nameof(AddEditModal<TRequest>.EditFormContent), EditFormContent },
             { nameof(AddEditModal<TRequest>.OnInitializedFunc), Context.EditFormInitializedFunc },
-            { nameof(AddEditModal<TRequest>.IsCreate), isCreate }
+            { nameof(AddEditModal<TRequest>.EntityName), Context.EntityName }
         };
 
-        Func<TRequest, Task> saveFunc;
         TRequest requestModel;
-        string title, successMessage;
 
         if (isCreate)
         {
             _ = Context.CreateFunc ?? throw new InvalidOperationException("CreateFunc can't be null!");
-
-            saveFunc = Context.CreateFunc;
+            parameters.Add(nameof(AddEditModal<TRequest>.SaveFunc), Context.CreateFunc);
 
             requestModel =
                 Context.GetDefaultsFunc is not null
@@ -251,18 +247,16 @@ public partial class EntityTable<TEntity, TId, TRequest>
                         is { } defaultsResult
                 ? defaultsResult
                 : new TRequest();
-
-            title = $"{L["Create"]} {Context.EntityName}";
-            successMessage = $"{Context.EntityName} {L["Created"]}";
         }
         else
         {
             _ = Context.IdFunc ?? throw new InvalidOperationException("IdFunc can't be null!");
-            _ = Context.UpdateFunc ?? throw new InvalidOperationException("UpdateFunc can't be null!");
-
             var id = Context.IdFunc(entity!);
+            parameters.Add(nameof(AddEditModal<TRequest>.Id), id);
 
-            saveFunc = request => Context.UpdateFunc(id, request);
+            _ = Context.UpdateFunc ?? throw new InvalidOperationException("UpdateFunc can't be null!");
+            Func<TRequest, Task> saveFunc = entity => Context.UpdateFunc(id, entity);
+            parameters.Add(nameof(AddEditModal<TRequest>.SaveFunc), saveFunc);
 
             requestModel =
                 Context.GetDetailsFunc is not null
@@ -272,17 +266,13 @@ public partial class EntityTable<TEntity, TId, TRequest>
                         is { } detailsResult
                 ? detailsResult
                 : entity!.Adapt<TRequest>();
-
-            title = $"{L["Edit"]} {Context.EntityName}";
-            successMessage = $"{Context.EntityName} {L["Updated"]}";
         }
 
-        parameters.Add(nameof(AddEditModal<TRequest>.SaveFunc), saveFunc);
         parameters.Add(nameof(AddEditModal<TRequest>.RequestModel), requestModel);
-        parameters.Add(nameof(AddEditModal<TRequest>.Title), title);
-        parameters.Add(nameof(AddEditModal<TRequest>.SuccessMessage), successMessage);
 
-        var dialog = DialogService.ShowModal<AddEditModal<TRequest>>(parameters);
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+
+        var dialog = DialogService.Show<AddEditModal<TRequest>>(string.Empty, parameters, options);
 
         Context.SetAddEditModalRef(dialog);
 

@@ -9,17 +9,11 @@
 
     <AdvancedSearchContent>
         <BrandAutocomplete @bind-Value="SearchBrandId" />
-        <MudSlider T="decimal" @bind-value="SearchMinimumRate" Min="0" Max="9999" Step="100">@L["Minimum Rate"]: @_searchMinimumRate.ToString()</MudSlider>
-        <MudSlider T="decimal" @bind-value="SearchMaximumRate" Min="0" Max="9999" Step="100">@L["Maximum Rate"]: @_searchMaximumRate.ToString()</MudSlider>
+        <MudSlider T="decimal" @bind-value="SearchMinimumRate">@L["Minimum Rate"]: @_searchMinimumRate.ToString()</MudSlider>
+        <MudSlider T="decimal" @bind-value="SearchMaximumRate">@L["Maximum Rate"]: @_searchMaximumRate.ToString()</MudSlider>
     </AdvancedSearchContent>
 
     <EditFormContent>
-        @if (!Context.AddEditModal.IsCreate)
-        {
-            <MudItem xs="12" md="6">
-                <MudTextField Value="context.Id" ReadOnly DisableUnderLine Label="@L[$"Product Id"]" />
-            </MudItem>
-        }
         <MudItem xs="12" md="6">
             <MudTextField Label="@L["Name"]" For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
@@ -28,7 +22,7 @@
                 @bind-Value="context.Description" />
         </MudItem>
         <MudItem xs="12" md="6">
-            <BrandAutocomplete For="@(() => context.BrandId)" @bind-Value="context.BrandId" OffsetY="true" />
+            <BrandAutocomplete For="@(() => context.BrandId)" @bind-Value="context.BrandId"  />
         </MudItem>
         <MudItem xs="12" md="6">
             <MudTextField Label="@L["Rate"]" For="@(() => context.Rate)" @bind-Value="context.Rate" />

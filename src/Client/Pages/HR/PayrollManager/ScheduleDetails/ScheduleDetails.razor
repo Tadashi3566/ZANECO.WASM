@@ -1,0 +1,65 @@
+﻿@page "/payroll/scheduledetails"
+@page "/payroll/scheduledetails/{ScheduleId:guid}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.ScheduleDetails)]
+
+<FshTitle Title="Schedule Details" Description="Schedule Detail Management" />
+
+<EntityTable @ref="_table" TEntity="ScheduleDetailDto" TId="Guid" TRequest="ScheduleDetailUpdateRequest" Context="@Context">
+    <AdvancedSearchContent>
+        <MudItem Class="mt-3">
+            <AutocompleteSchedule @bind-Value="SearchScheduleId" />
+        </MudItem>
+    </AdvancedSearchContent>
+
+    <EditFormContent>
+        <MudItem xs="12">
+            <AutocompleteSchedule For="@(() => context.ScheduleId)" @bind-Value="SearchScheduleId" Disabled="!SearchScheduleId.Equals(Guid.Empty)" />
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudSelect Label="Schedule Type" For="@(() => context.ScheduleType)" @bind-Value="context.ScheduleType" >
+                <MudSelectItem Value="@("DAY-OFF")"/>
+                <MudSelectItem Value="@("ON-DUTY")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudSelect Label="Day" For="@(() => context.Day)" @bind-Value="context.Day" >
+                <MudSelectItem Value="@("SUNDAY")"/>
+                <MudSelectItem Value="@("MONDAY")"/>
+                <MudSelectItem Value="@("TUESDAY")"/>
+                <MudSelectItem Value="@("WEDNESDAY")"/>
+                <MudSelectItem Value="@("THURSDAY")"/>
+                <MudSelectItem Value="@("FRIDAY")"/>
+                <MudSelectItem Value="@("SATURDAY")"/>
+            </MudSelect>
+        </MudItem>
+
+        <MudItem xs="6" sm="3">
+            <MudTextField Label="Time-In 1" For="@(() => context.TimeIn1)" @bind-Value="context.TimeIn1" />
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudTextField Label="Time-Out 1" For="@(() => context.TimeOut1)" @bind-Value="context.TimeOut1" />
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudTextField Label="Time-In 2" For="@(() => context.TimeIn2)" @bind-Value="context.TimeIn2" />
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudTextField Label="Time-Out 2" For="@(() => context.TimeOut2)" @bind-Value="context.TimeOut2" />
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudTextField Label="Time-In 3" For="@(() => context.TimeIn3)" @bind-Value="context.TimeIn3" />
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudTextField Label="Time-Out 3" For="@(() => context.TimeOut3)" @bind-Value="context.TimeOut3" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+        </MudItem>
+        
+    </EditFormContent>
+
+</EntityTable>  

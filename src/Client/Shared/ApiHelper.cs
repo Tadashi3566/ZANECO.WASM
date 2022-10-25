@@ -1,11 +1,12 @@
-﻿using FSH.BlazorWebAssembly.Client.Components.Common;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using MudBlazor;
+﻿using MudBlazor;
+using ZANECO.WASM.Client.Components.Common;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
 
-namespace FSH.BlazorWebAssembly.Client.Shared;
-
+namespace ZANECO.WASM.Client.Shared;
 public static class ApiHelper
 {
+    public static string ErrorString = string.Empty;
+
     public static async Task<T?> ExecuteCallGuardedAsync<T>(
         Func<Task<T>> call,
         ISnackbar snackbar,
@@ -42,6 +43,49 @@ public static class ApiHelper
         catch (Exception ex)
         {
             snackbar.Add(ex.Message, Severity.Error);
+        }
+
+        return default;
+    }
+
+    public static async Task<T?> ExecuteCallGuardedAsync<T>(
+        Func<Task<T>> call,
+        string? successMessage = null)
+    {
+        try
+        {
+            var result = await call();
+
+            if (!string.IsNullOrWhiteSpace(successMessage))
+            {
+                // snackbar.Add(successMessage, Severity.Info);
+                ErrorString = successMessage;
+            }
+
+            return result;
+        }
+        catch (ApiException<HttpValidationProblemDetails> ex)
+        {
+            if (ex.Result.Errors is not null)
+            {
+                // customValidation?.DisplayErrors(ex.Result.Errors);
+                ErrorString = "Something went wrong! Check multiple errors.";
+            }
+            else
+            {
+                // snackbar.Add("Something went wrong!", Severity.Error);
+                ErrorString = "Something went wrong!";
+            }
+        }
+        catch (ApiException<ErrorResult> ex)
+        {
+            // snackbar.Add(ex.Result.Exception, Severity.Error);
+            ErrorString = ex.Result.Exception!;
+        }
+        catch (Exception ex)
+        {
+            // snackbar.Add(ex.Message, Severity.Error);
+            ErrorString = ex.Message;
         }
 
         return default;

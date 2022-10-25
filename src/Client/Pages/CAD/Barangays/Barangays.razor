@@ -1,0 +1,23 @@
+﻿@page "/cad/Barangays"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
+
+<FshTitle Title="Barangays" Description="Manage Barangays" />
+
+<EntityTable @ref="_table" TEntity="BarangayDto" TId="Guid" TRequest="BarangayUpdateRequest" Context="@Context">
+    <EditFormContent>
+        <MudItem xs="12">
+            <AreaAutocomplete For="@(() => context.AreaId)" @bind-Value="context.AreaId" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Barangay Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

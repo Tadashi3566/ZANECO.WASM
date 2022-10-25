@@ -1,55 +1,151 @@
-﻿@inject IStringLocalizer<NavMenu> L
-
-<PersonCard
+﻿<PersonCard
     Style="background-color: var(--mud-palette-drawer-background);color: var(--mud-palette-drawer-text); margin-bottom:0px!important" />
 <MudNavMenu>
-    <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">@L["Start"]</MudText>
-    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">@L["Home"]</MudNavLink>
+    <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">Start</MudText>
+    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
     <MudNavLink Href="https://fullstackhero.net/basics/getting-started/" Match="NavLinkMatch.All" Target="_blank"
-        Icon="@Icons.Material.Filled.RocketLaunch">@L["Getting Started"]</MudNavLink>
+        Icon="@Icons.Material.Filled.RocketLaunch">Getting Started</MudNavLink>
     @if (_canViewHangfire)
     {
-        <MudNavLink Href="@_hangfireUrl" Match="NavLinkMatch.All" Target="_blank" Icon="@Icons.Material.Filled.Work">@L["Hangfire"]</MudNavLink>
+        <MudNavLink Href="@_hangfireUrl" Match="NavLinkMatch.All" Target="_blank" Icon="@Icons.Material.Filled.Work">Hangfire</MudNavLink>
     }
-    <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">@L["Personal"]</MudText>
+    <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">Personal</MudText>
     @if (_canViewDashboard)
     {
-        <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard">@L["Dashboard"]</MudNavLink>
+        <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard">Dashboard</MudNavLink>
     }
-    <MudNavLink Href="/account" Icon="@Icons.Filled.ManageAccounts">@L["Account"]</MudNavLink>
-    <MudNavLink Href="/audit-logs" Icon="@Icons.Material.Filled.SecurityUpdateGood">@L["Logs"]</MudNavLink>
+    <MudNavLink Href="/account" Icon="@Icons.Filled.ManageAccounts">Account</MudNavLink>
+    <MudNavLink Href="/audit-logs" Icon="@Icons.Material.Filled.SecurityUpdateGood">Logs</MudNavLink>
     @if (_canViewProducts || _canViewBrands)
     {
-        <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">@L["Management"]</MudText>
-        <MudNavGroup Title="@L["Catalog"]" Expanded Icon="@Icons.Filled.AddBox">
+        <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">Management</MudText>
+        <MudNavGroup Title="Catalog" Icon="@Icons.Filled.AddBox" >
             @if (_canViewProducts)
             {
                 <MudNavLink Href="/catalog/products" Icon="@Icons.Filled.ShoppingBag" Class="fsh-nav-child">
-                    @L["Products"]
+                    Products
                 </MudNavLink>
             }
             @if (_canViewBrands)
             {
                 <MudNavLink Href="/catalog/brands" Icon="@Icons.Filled.ShoppingBag" Class="fsh-nav-child">
-                    @L["Brands"]
+                    Brands
                 </MudNavLink>
+            }
+        </MudNavGroup>
+    }
+    @if (_canViewContacts || _canViewGroups || _canViewTickets)
+    {
+        <MudNavGroup Title="Application" Icon="@Icons.Filled.AddBox">
+            @if (_canViewGroups)
+            {
+                <MudNavLink Href="app/groups" Icon="@Icons.Filled.Settings" Class="fsh-nav-child">Groups</MudNavLink>
+            }
+            @if (_canViewTickets)
+            {
+                <MudNavLink Href="app/tickets" Icon="@Icons.Filled.Queue" Class="fsh-nav-child">Tickets</MudNavLink>
+            }
+            @if (_canViewContacts)
+            {
+                <MudNavLink Href="app/contacts" Icon="@Icons.Filled.ContactPhone" Class="fsh-nav-child">Contacts</MudNavLink>
+                <MudNavLink Href="app/contactlist" Icon="@Icons.Filled.ContactPhone" Class="fsh-nav-child">Contacts</MudNavLink>
+            }
+            @if (_canViewSMS)
+            {
+                <MudNavLink Href="app/smstemplates" Icon="@Icons.Filled.ContactPhone" Class="fsh-nav-child">Message Templates</MudNavLink>
+                <MudNavLink Href="app/sms" Icon="@Icons.Filled.ContactPhone" Class="fsh-nav-child">Short Messages</MudNavLink>
+            }
+        </MudNavGroup>
+    }
+    @if (_canViewRating || _canViewSurveys)
+    {
+        <MudNavGroup Title="Survey" Icon="@Icons.Filled.AddBox">
+            @if (_canViewRating)
+            {
+                <MudNavLink Href="/survey/rates" Icon="@Icons.Filled.StarRate" Class="fsh-nav-child">Rates</MudNavLink>
+                <MudNavLink Href="/survey/ratingtemplates" Icon="@Icons.Filled.StarBorder" Class="fsh-nav-child">Templates</MudNavLink>
+            }
+            @if (_canViewSurveys)
+            {
+                <MudNavLink Href="/survey/surveys" Icon="@Icons.Filled.HotelClass" Class="fsh-nav-child">Surveys</MudNavLink>
+            }
+        </MudNavGroup>
+    }
+    @if (_canViewEmployees)
+    {
+        <MudNavGroup Title="HR" Icon="@Icons.Filled.AddBox" >
+            @if (_canViewEmployees)
+            {
+                <MudNavLink Href="/hr/employees" Icon="@Icons.Filled.Groups" Class="fsh-nav-child">Employees</MudNavLink>
+                @*<MudNavLink Href="/hr/employers" Icon="@Icons.Filled.ManageAccounts" Class="fsh-nav-child">Employers</MudNavLink>*@
+                @*<MudNavLink Href="/hr/designations" Icon="@Icons.Filled.ManageAccounts" Class="fsh-nav-child">Designations</MudNavLink>*@
+                <MudNavLink Href="/hr/powerbills" Icon="@Icons.Filled.ReceiptLong" Class="fsh-nav-child">Power Bills</MudNavLink>
+
+                <MudDivider/>
+
+                <MudNavLink Href="/hr/ranks" Icon="@Icons.Filled.LocalPolice" Class="fsh-nav-child">Ranks</MudNavLink>
+                <MudNavLink Href="/payroll/contributions" Icon="@Icons.Filled.ReceiptLong" Class="fsh-nav-child">Contributions</MudNavLink>
+
+                <MudNavLink Href="/payroll/calendar" Icon="@Icons.Filled.CalendarViewMonth" Class="fsh-nav-child">Calendar</MudNavLink>
+                <MudNavLink Href="/payroll/schedules" Icon="@Icons.Filled.CalendarViewMonth" Class="fsh-nav-child">Schedules</MudNavLink>
+                <MudNavLink Href="/payroll/scheduledetails" Icon="@Icons.Filled.CalendarViewWeek" Class="fsh-nav-child">Schedule Details</MudNavLink>
+                <MudNavLink Href="/payroll/attendance" Icon="@Icons.Filled.EventAvailable" Class="fsh-nav-child">Attendance</MudNavLink>
+
+                <MudNavLink Href="/payroll/adjustments" Icon="@Icons.Filled.Settings" Class="fsh-nav-child">Adjustments</MudNavLink>
+                <MudNavLink Href="/payroll/loans" Icon="@Icons.Filled.ManageAccounts" Class="fsh-nav-child">Employee Loans</MudNavLink>
+                <MudNavLink Href="/payroll/employeeadjustments" Icon="@Icons.Filled.ManageAccounts" Class="fsh-nav-child">Employee Adjustments</MudNavLink>
+
+
+                <MudNavLink Href="/payroll" Icon="@Icons.Filled.Payment" Class="fsh-nav-child">Payroll</MudNavLink>
+                <MudNavLink Href="/payroll/employeepayroll" Icon="@Icons.Filled.Payment" Class="fsh-nav-child">Employee Payroll</MudNavLink>
+                @*<MudNavLink Href="/payroll/employeepayrolldetails" Icon="@Icons.Filled.Payments" Class="fsh-nav-child">Payroll Details</MudNavLink>*@
+            }
+        </MudNavGroup>
+    }
+    @if (_canViewAccounting)
+    {
+        <MudNavGroup Title="Accounting" Icon="@Icons.Filled.AddBox">
+            @if (_canViewAccounting)
+            {
+                <MudNavLink Href="/accounting/Accounts" Icon="@Icons.Filled.Groups" Class="fsh-nav-child">Accounts</MudNavLink>
+                <MudNavLink Href="/accounting/checks" Icon="@Icons.Filled.Groups" Class="fsh-nav-child">Checks</MudNavLink>
+
+                <MudNavLink Href="/accounting/vouchers" Icon="@Icons.Filled.PersonSearch" Class="fsh-nav-child">Vouchers</MudNavLink>
+                <MudNavLink Href="/accounting/journals" Icon="@Icons.Filled.EventAvailable" Class="fsh-nav-child">Journals</MudNavLink>
+                <MudNavLink Href="/accounting/trialbalance" Icon="@Icons.Filled.Payment" Class="fsh-nav-child">Trial Balance</MudNavLink>
+            }
+        </MudNavGroup>
+    }
+    @if (_canViewCAD)
+    {
+        <MudNavGroup Title="Consumer Accounts" Icon="@Icons.Filled.AddBox">
+            @if (_canViewCAD)
+            {
+                <MudNavLink Href="/cad/areas" Icon="@Icons.Filled.Place" Class="fsh-nav-child">Areas</MudNavLink>
+                <MudNavLink Href="/cad/barangays" Icon="@Icons.Filled.Place" Class="fsh-nav-child">Barangays</MudNavLink>
+                <MudNavLink Href="/cad/routes" Icon="@Icons.Filled.AltRoute" Class="fsh-nav-child">Routes</MudNavLink>
+
+                <MudNavLink Href="/cad/powerrates" Icon="@Icons.Filled.Power" Class="fsh-nav-child">Power Rates</MudNavLink>
+
+                <MudNavLink Href="/cad/members" Icon="@Icons.Filled.Groups" Class="fsh-nav-child">Members</MudNavLink>
+                <MudNavLink Href="/cad/accounts" Icon="@Icons.Filled.Groups" Class="fsh-nav-child">Accounts</MudNavLink>
             }
         </MudNavGroup>
     }
     @if (CanViewAdministrationGroup)
     {
-        <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">@L["Administration"]</MudText>
+        <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">Administration</MudText>
         @if (_canViewUsers)
         {
-            <MudNavLink Match="NavLinkMatch.Prefix" Href="/users" Icon="@Icons.Material.Filled.PeopleAlt">@L["Users"]</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.Prefix" Href="/users" Icon="@Icons.Material.Filled.PeopleAlt">Users</MudNavLink>
         }
         @if (_canViewRoles)
         {
-            <MudNavLink Href="/roles" Icon="@Icons.Material.Filled.EmojiPeople">@L["Roles"]</MudNavLink>
+            <MudNavLink Href="/roles" Icon="@Icons.Material.Filled.EmojiPeople">Roles</MudNavLink>
         }
         @if(_canViewTenants)
         {
-            <MudNavLink Href="/tenants" Icon="@Icons.Filled.GroupWork" Disabled="!_canViewTenants">@L["Tenants"]</MudNavLink>
+            <MudNavLink Href="/tenants" Icon="@Icons.Filled.GroupWork" Disabled="!_canViewTenants">Tenants</MudNavLink>
         }
     }
 </MudNavMenu>

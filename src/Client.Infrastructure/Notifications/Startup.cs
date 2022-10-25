@@ -1,11 +1,10 @@
-﻿using FSH.WebApi.Shared.Notifications;
-using MediatR;
+﻿using MediatR;
 using MediatR.Courier;
 using MediatR.Courier.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using ZANECO.WebApi.Shared.Notifications;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Notifications;
-
+namespace ZANECO.WASM.Client.Infrastructure.Notifications;
 internal static class Startup
 {
     public static IServiceCollection AddNotifications(this IServiceCollection services)

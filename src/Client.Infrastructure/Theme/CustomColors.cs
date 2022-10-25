@@ -1,7 +1,6 @@
 ﻿using MudBlazor;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Theme;
-
+namespace ZANECO.WASM.Client.Infrastructure.Theme;
 public static class CustomColors
 {
     public static readonly List<string> ThemeColors = new()

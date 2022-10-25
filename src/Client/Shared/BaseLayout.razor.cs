@@ -1,9 +1,8 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Theme;
-using MudBlazor;
+﻿using MudBlazor;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
+using ZANECO.WASM.Client.Infrastructure.Theme;
 
-namespace FSH.BlazorWebAssembly.Client.Shared;
-
+namespace ZANECO.WASM.Client.Shared;
 public partial class BaseLayout
 {
     private ClientPreference? _themePreference;

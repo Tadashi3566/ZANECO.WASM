@@ -1,0 +1,197 @@
+﻿@page "/hr/employees"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Employees)]
+
+@inject NavigationManager NavigationManager
+
+<FshTitle Title="Employees" Description="Employee Management" />
+
+<EntityTable @ref="_table" TEntity="EmployeeDto" TId="Guid" TRequest="EmployeeViewModel" Context="@Context" MultiSelection=true>
+    <AdvancedSearchContent>
+        <MudItem Class="mt-3">
+            <AutocompletePayroll @bind-Value="SearchPayrollId" />
+        </MudItem>
+    </AdvancedSearchContent>
+    <ExtraActions>
+        @if (_canViewRoleClaims)
+        {
+            <MudDivider />
+            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/hr/employers/{context.Id}"))" >Employers</MudMenuItem>
+            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/hr/dependents/{context.Id}"))" >Dependents</MudMenuItem>
+            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/hr/designations/{context.Id}"))" >Designations</MudMenuItem>
+            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/hr/powerbills/{context.Id}"))" >Power Bill</MudMenuItem>
+            <MudDivider />
+            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/payroll/attendance/{context.Id}/{SearchPayrollId}"))" >Attendance</MudMenuItem>
+            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/payroll/loans/{context.Id}"))" >Loans</MudMenuItem>
+            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/payroll/employeeadjustments/{context.Id}"))" >Adjustments</MudMenuItem>
+            <MudMenuItem OnClick="@(() => EmployeePayrollGenerate(context.Id, SearchPayrollId))" >Generate Payroll</MudMenuItem>
+            <MudMenuItem OnClick="@(() => NavigatePage("/payroll/employeepayrolldetails", context.Id, SearchPayrollId))" >Payroll Details</MudMenuItem>
+        }
+    </ExtraActions>
+    <EditFormContent>
+        <MudItem xs="12">
+            <MudItem>
+                @if (!string.IsNullOrEmpty(context.ImageInBytes))
+                {
+                    <MudAvatar Image="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+            </MudItem>
+            <MudItem>
+                <div>
+                    <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
+                        Upload ID Picture
+                    </MudButton>
+                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                               StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;">
+                            View
+                        </MudButton>
+
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                               StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;">
+                            Delete
+                        </MudButton>
+                    }
+                    @if (!string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                               StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;">
+                            Clear
+                        </MudButton>
+                    }
+                </div>
+                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+            </MudItem>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudItem Class="d-flex">
+                <MudText Typo="Typo.subtitle1">Effectivity: </MudText>
+                <MudText Typo="Typo.subtitle1" Class="ml-2">@String.Format("{0:MMMM dd, yyyy}", context.StartDate) </MudText>
+                <MudText Typo="Typo.subtitle1" Class="ml-2">Area: </MudText>
+                <MudText Typo="Typo.subtitle1" Class="ml-2">@context.Area</MudText>
+            </MudItem>
+            <MudItem Class="d-flex">
+                <MudText Typo="Typo.subtitle1">Department: </MudText>
+                <MudText Typo="Typo.subtitle1" Class="ml-2">@context.Department</MudText>
+            </MudItem>
+            <MudItem Class="d-flex">
+                <MudText Typo="Typo.subtitle1">Section: </MudText>
+                <MudText Typo="Typo.subtitle1" Class="ml-2">@context.Section</MudText>
+            </MudItem>
+            <MudItem Class="d-flex">
+                <MudText Typo="Typo.subtitle1">Designation: </MudText>
+                <MudText Typo="Typo.subtitle1" Class="ml-2">@context.Position</MudText>
+            </MudItem>
+        </MudItem>
+
+        <MudItem xs="4">
+            <MudTextField Label="ID Number" For="@(() => context.Number)" @bind-Value="context.Number" />
+        </MudItem>
+        <MudItem xs="4">
+            <MudSelect Label="Gender" For="@(() => context.Gender)" @bind-Value="context.Gender">
+                <MudSelectItem Value="@("MALE")" />
+                <MudSelectItem Value="@("FEMALE")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="4">
+            <AutocompleteTitle For="@(() => context.Title)" @bind-Value="context.Title" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="First Name" For="@(() => context.FirstName)" @bind-Value="context.FirstName" Placeholder="Juan" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="Middle Name" For="@(() => context.MiddleName)" @bind-Value="context.MiddleName" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="Last Name" For="@(() => context.LastName)" @bind-Value="context.LastName" Placeholder="Dela Cruz" />
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <AutocompleteExtension For="@(() => context.Extension)" @bind-Value="context.Extension" />
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <AutocompleteCivilStatusEmployee For="@(() => context.CivilStatus)" @bind-Value="context.CivilStatus" />
+        </MudItem>
+
+        <MudItem xs="12" sm="8" md="6">
+            <MudTextField Label="Email Address" For="@(() => context.Email)" @bind-Value="context.Email" Placeholder="employee@zaneco.com.ph" />
+        </MudItem>
+        <MudItem xs="12" sm="4" md="4">
+            <MudTextField Label="Contact Number" For="@(() => context.ContactNumber)" @bind-Value="context.ContactNumber" Placeholder="+63912456789" />
+        </MudItem>
+        <MudItem xs="12" sm="12" md="8">
+            <MudTextField Label="Home Address" For="@(() => context.Address)" @bind-Value="context.Address" />
+        </MudItem>
+        <MudItem xs="12" sm="4" md="4">
+            <MudDatePicker Label="Birth Date" For="@(() => context.BirthDate)" @bind-Date="context.BirthDate" DateFormat="MMMM dd, yyyy" MinDate="@DateTime.Today.AddYears(-60)" MaxDate="@DateTime.Today.AddYears(-17)" />
+        </MudItem>
+        <MudItem xs="12" sm="8" md="8">
+            <AutocompleteBirthPlace For="@(() => context.BirthPlace)" @bind-Value="context.BirthPlace" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4">
+            <MudDatePicker Label="Date Hired" For="@(() => context.HireDate)" @bind-Date="context.HireDate" DateFormat="MMMM dd, yyyy" MinDate="context.BirthDate" MaxDate="@DateTime.Today" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudDatePicker Label="Date Regularized" For="@(() => context.RegularDate)" @bind-Date="context.RegularDate" DateFormat="MMMM dd, yyyy" MinDate="context.HireDate" MaxDate="@DateTime.Today" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="Social Security System (SSS)" For="@(() => context.Sss)" @bind-Value="context.Sss" />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="4">
+            <MudTextField Label="PhilHealth (PHIC)" For="@(() => context.Phic)" @bind-Value="context.Phic" />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="4">
+            <MudTextField Label="PAG-IBIG (HDMF)" For="@(() => context.Hdmf)" @bind-Value="context.Hdmf" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="Tax Identification Number (TIN)" For="@(() => context.Tin)" @bind-Value="context.Tin" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="Blood Type" For="@(() => context.BloodType)" @bind-Value="context.BloodType" />
+        </MudItem>
+        <MudItem xs="12" sm="8">
+            <AutocompletePayThrough Label="Pay Through" For="@(() => context.PayThrough)" @bind-Value="context.PayThrough" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Emergency Person" For="@(() => context.EmergencyPerson)" @bind-Value="context.EmergencyPerson" Placeholder="Juan Dela Cruz" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Emergency Address" For="@(() => context.EmergencyAddress)" @bind-Value="context.EmergencyAddress" />
+        </MudItem>
+        <MudItem xs="6">
+            <AutocompleteEmergencyRelation For="@(() => context.EmergencyRelation)" @bind-Value="context.EmergencyRelation" />
+        </MudItem>
+        <MudItem xs="6">
+            <MudTextField Label="Emergency Number" For="@(() => context.EmergencyNumber)" @bind-Value="context.EmergencyNumber" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Father Name" For="@(() => context.FatherName)" @bind-Value="context.FatherName" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Mother Name" For="@(() => context.MotherName)" @bind-Value="context.MotherName" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <AutocompleteEducation For="@(() => context.Education)" @bind-Value="context.Education" />
+        </MudItem>
+        <MudItem xs="12">
+            <AutocompleteCourse For="@(() => context.Course)" @bind-Value="context.Course" />
+        </MudItem>
+        <MudItem xs="12">
+            <AutocompleteAward For="@(() => context.Award)" @bind-Value="context.Award" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
+        </MudItem>
+    </EditFormContent>
+</EntityTable>

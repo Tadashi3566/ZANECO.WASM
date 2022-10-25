@@ -1,9 +1,8 @@
-using FSH.WebApi.Shared.Notifications;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using ZANECO.WebApi.Shared.Notifications;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Notifications;
-
+namespace ZANECO.WASM.Client.Infrastructure.Notifications;
 public class NotificationPublisher : INotificationPublisher
 {
     private readonly ILogger<NotificationPublisher> _logger;

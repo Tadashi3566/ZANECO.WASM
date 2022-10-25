@@ -1,10 +1,9 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.WebApi.Shared.Authorization;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Auth.Jwt;
-
+namespace ZANECO.WASM.Client.Infrastructure.Auth.Jwt;
 public class JwtAuthenticationService : AuthenticationStateProvider, IAuthenticationService, IAccessTokenProvider
 {
     private readonly SemaphoreSlim _semaphore = new(1, 1);

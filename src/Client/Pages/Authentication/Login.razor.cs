@@ -1,14 +1,12 @@
-﻿using FSH.BlazorWebAssembly.Client.Components.Common;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-using FSH.BlazorWebAssembly.Client.Shared;
-using FSH.WebApi.Shared.Multitenancy;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.Common;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Shared;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Authentication;
-
+namespace ZANECO.WASM.Client.Pages.Authentication;
 public partial class Login
 {
     [CascadingParameter]
@@ -21,7 +19,6 @@ public partial class Login
     public bool BusySubmitting { get; set; }
 
     private readonly TokenRequest _tokenRequest = new();
-    private string TenantId { get; set; } = string.Empty;
     private bool _passwordVisibility;
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
@@ -57,23 +54,13 @@ public partial class Login
         }
     }
 
-    private void FillAdministratorCredentials()
-    {
-        _tokenRequest.Email = MultitenancyConstants.Root.EmailAddress;
-        _tokenRequest.Password = MultitenancyConstants.DefaultPassword;
-        TenantId = MultitenancyConstants.Root.Id;
-    }
-
     private async Task SubmitAsync()
     {
         BusySubmitting = true;
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-            () => AuthService.LoginAsync(TenantId, _tokenRequest),
-            Snackbar,
-            _customValidation))
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => AuthService.LoginAsync("root", _tokenRequest), Snackbar, _customValidation))
         {
-            Snackbar.Add($"Logged in as {_tokenRequest.Email}", Severity.Info);
+            Snackbar.Add($"Logged in as {_tokenRequest.UserName}", Severity.Info);
         }
 
         BusySubmitting = false;

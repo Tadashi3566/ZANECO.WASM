@@ -1,0 +1,85 @@
+﻿@page "/cad/Members"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
+
+<FshTitle Title="Members" Description="Manage Members" />
+
+<EntityTable @ref="_table" TEntity="MemberDto" TId="Guid" TRequest="MemberViewModel" Context="@Context">
+
+    <EditFormContent>
+        <MudItem xs="12">
+            <MudItem>
+                @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                {
+                    <MudAvatar Image ="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+            </MudItem>
+            <MudItem>
+                <div>
+                    <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
+                        Upload Picture
+                    </MudButton>
+                    @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                            StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
+                            View
+                        </MudButton>
+
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                            StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
+                            Delete
+                        </MudButton>
+                    }
+                    @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                            StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;" >
+                            Clear
+                        </MudButton>
+                    }
+                </div>
+                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+            </MudItem>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Member Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudSelect Label="Gender" For="@(() => context.Gender)" @bind-Value="context.Gender" >
+                <MudSelectItem Value="@("MALE")"/>
+                <MudSelectItem Value="@("FEMALE")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <AutocompleteCivilStatusMember For="@(() => context.CivilStatus)" @bind-Value="context.CivilStatus" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="Phone Number" For="@(() => context.Phone)" @bind-Value="context.Phone" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudDatePicker Label="Birth Date" For="@(() => context.BirthDate)" @bind-Date="context.BirthDate" DateFormat="MMMM dd, yyyy" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudDatePicker Label="Application Date" For="@(() => context.ApplicationDate)" @bind-Date="context.ApplicationDate" DateFormat="MMMM dd, yyyy" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudDatePicker Label="Membership Date" For="@(() => context.MembershipDate)" @bind-Date="context.MembershipDate" DateFormat="MMMM dd, yyyy" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+        </MudItem>
+        
+    </EditFormContent>
+
+</EntityTable>

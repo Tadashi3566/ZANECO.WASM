@@ -1,0 +1,60 @@
+﻿@page "/payroll/adjustments"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Adjustments)]
+
+<FshTitle Title="Adjustments" Description="Manage Adjustments" />
+
+<EntityTable @ref="_table" TEntity="AdjustmentDto" TId="Guid" TRequest="AdjustmentUpdateRequest" Context="@Context">
+
+    <EditFormContent>
+        <MudItem xs="6">
+            <MudSelect Label="Adjustment Type" For="@(() => context.AdjustmentType)" @bind-Value="context.AdjustmentType" Disabled=true>
+                <MudSelectItem Value="@("ADDITIONAL")"/>
+                <MudSelectItem Value="@("DEDUCTION")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="6">
+            <MudSelect Label="Adjustment Type" For="@(() => context.EmployeeType)" @bind-Value="context.EmployeeType" >
+                <MudSelectItem Value="@("ALL")"/>
+                <MudSelectItem Value="@("REGULAR")"/>
+                <MudSelectItem Value="@("JOB ORDER")"/>
+            </MudSelect>
+        </MudItem>
+
+        <MudItem xs="6">
+            <MudNumericField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" />
+        </MudItem>
+        <MudItem xs="6">
+            <AutocompleteAdjustment Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+
+        <MudItem xs="6">
+            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" />
+        </MudItem>
+
+        <MudItem xs="6" sm="6" md="3">
+            <MudSelect Label="Payment Schedule" For="@(() => context.PaymentSchedule)" @bind-Value="context.PaymentSchedule">
+                <MudSelectItem Value="@("PAYROLL")"/>
+                <MudSelectItem Value="@("MID")"/>
+                <MudSelectItem Value="@("END")" />
+                <MudSelectItem Value="@("SCHEDULE")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudSwitch Label="Optional" For="@(() => context.IsOptional)" @bind-Checked="context.IsOptional" Color="Color.Success" />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudSwitch Label="Loan" For="@(() => context.IsLoan)" @bind-Checked="context.IsLoan" Color="Color.Success" />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudSwitch Label="Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" Color="Color.Success" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

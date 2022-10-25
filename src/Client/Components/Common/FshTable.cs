@@ -1,11 +1,10 @@
-﻿using FSH.BlazorWebAssembly.Client.Infrastructure.Notifications;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
-using MediatR.Courier;
+﻿using MediatR.Courier;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using ZANECO.WASM.Client.Infrastructure.Notifications;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 
-namespace FSH.BlazorWebAssembly.Client.Components.Common;
-
+namespace ZANECO.WASM.Client.Components.Common;
 public class FshTable<T> : MudTable<T>
 {
     [Inject]

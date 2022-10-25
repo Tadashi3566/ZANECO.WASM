@@ -1,0 +1,72 @@
+﻿@page "/payroll/attendance"
+@page "/payroll/attendance/{EmployeeId:guid}/{PayrollId:guid}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
+
+<FshTitle Title="Attendance" Description="Employee Attendance Management" />
+
+<MudGrid>
+    <DxGrid >
+        <Columns>
+            <DxGridDataColumn FieldName="AttendanceDate" Caption="Date" DisplayFormat="D" />
+            <DxGridDataColumn FieldName="ScheduleDetailDay" Caption="Day" />
+            <DxGridDataColumn FieldName="ActualTimeIn1" Caption="Time-In1" />
+            <DxGridDataColumn FieldName="ActualTimeOut1" Caption="Time-Out1" />
+            <DxGridDataColumn FieldName="Description" />
+            <DxGridDataColumn FieldName="Notes" />
+        </Columns>
+    </DxGrid>
+</MudGrid>
+
+<EntityTable @ref="_table" TEntity="AttendanceDto" TId="Guid" TRequest="AttendanceUpdateRequest" Context="@Context" MultiSelection=true>
+    <AdvancedSearchContent>
+        <MudItem Class="mt-3">
+            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+        </MudItem>
+    </AdvancedSearchContent>
+    <EditFormContent>
+        <MudItem xs="12">
+            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="6">
+            <MudDatePicker Label="Attendance Date" For="@(() => context.AttendanceDate)" @bind-Date=" context.AttendanceDate" DateFormat="MMMM dd, yyyy"  />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudTextField Label="Actual Time-In 1" For="@(() => context.ActualTimeIn1)" @bind-Value=" context.ActualTimeIn1" />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudTextField Label="Actual Time-Out 1" For="@(() => context.ActualTimeOut1)" @bind-Value="context.ActualTimeOut1" />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudTextField Label="Actual Time-In 2" For="@(() => context.ActualTimeIn2)" @bind-Value="context.ActualTimeIn2" />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudTextField Label="Actual Time-Out 2" For="@(() => context.ActualTimeOut2)" @bind-Value="context.ActualTimeOut2" />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudNumericField Label="Late (minutes)" For="@(() => context.LateMinutes)" @bind-Value="context.LateMinutes" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudNumericField Label="Undertime (minutes)" For="@(() => context.UnderTimeMinutes)" @bind-Value="context.UnderTimeMinutes" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudNumericField Label="Total Hours" For="@(() => context.TotalHours)" @bind-Value="context.TotalHours" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudNumericField Label="Paid Hours" For="@(() => context.PaidHours)" @bind-Value="context.PaidHours" />
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
+            <MudSelect Label="Status" For="@(() => context.Status)" @bind-Value="context.Status" >
+                <MudSelectItem Value="@("FOR APPROVAL")"/>
+                <MudSelectItem Value="@("APPROVED")"/>
+                <MudSelectItem Value="@("DISAPPROVED")"/>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+</EntityTable>

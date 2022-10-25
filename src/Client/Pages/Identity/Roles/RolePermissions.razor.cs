@@ -1,17 +1,15 @@
-﻿using System.Security.Claims;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-using FSH.BlazorWebAssembly.Client.Shared;
-using FSH.WebApi.Shared.Authorization;
-using FSH.WebApi.Shared.Multitenancy;
-using Mapster;
+﻿using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Shared;
+using ZANECO.WebApi.Shared.Authorization;
+using ZANECO.WebApi.Shared.MultiTenancy;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Identity.Roles;
-
+namespace ZANECO.WASM.Client.Pages.Identity.Roles;
 public partial class RolePermissions
 {
     [Parameter]

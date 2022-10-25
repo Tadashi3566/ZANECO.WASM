@@ -1,8 +1,7 @@
-﻿using FSH.WebApi.Shared.Authorization;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-
+namespace ZANECO.WASM.Client.Infrastructure.Auth;
 public static class AuthorizationServiceExtensions
 {
     public static async Task<bool> HasPermissionAsync(this IAuthorizationService service, ClaimsPrincipal user, string action, string resource) =>

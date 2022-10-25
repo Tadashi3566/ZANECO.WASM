@@ -1,9 +1,8 @@
-using FSH.BlazorWebAssembly.Client.Infrastructure.Notifications;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
 using Microsoft.AspNetCore.Components;
+using ZANECO.WASM.Client.Infrastructure.Notifications;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 
-namespace FSH.BlazorWebAssembly.Client.Components.ThemeManager;
-
+namespace ZANECO.WASM.Client.Components.ThemeManager;
 public partial class TableCustomizationPanel
 {
     [Parameter]

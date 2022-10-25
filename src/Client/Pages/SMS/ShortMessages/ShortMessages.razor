@@ -1,0 +1,30 @@
+﻿@page "/app/sms"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
+
+<FshTitle Title="Short Messages" Description="Manage Short Messages" />
+
+<EntityTable @ref="_table" TEntity="ShortMessageDto" TId="Guid" TRequest="ShortMessageUpdateRequest" Context="@Context">
+
+    <EditFormContent>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="Type" For="@(() => context.MessageType)" @bind-Value="context.MessageType" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="Sender" For="@(() => context.Sender)" @bind-Value="context.Sender" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="Receiver" For="@(() => context.Receiver)" @bind-Value="context.Receiver" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="3"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+
+    </EditFormContent>
+
+</EntityTable>

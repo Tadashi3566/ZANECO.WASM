@@ -1,0 +1,27 @@
+﻿@page "/app/smstemplates"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
+
+<FshTitle Title="Message Templates" Description="Manage Message Templates" />
+
+<EntityTable @ref="_table" TEntity="MessageTemplateDto" TId="Guid" TRequest="MessageTemplateUpdateRequest" Context="@Context">
+
+    <EditFormContent>
+        <MudItem xs="12" md="6">
+            <AutocompleteMessageTemplateType For="@(() => context.TemplateType)" @bind-Value="context.TemplateType" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="3"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+
+    </EditFormContent>
+
+</EntityTable>

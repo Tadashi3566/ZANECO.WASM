@@ -1,13 +1,12 @@
-﻿using FSH.BlazorWebAssembly.Client.Components.EntityTable;
-using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
-using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
-using FSH.WebApi.Shared.Authorization;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using ZANECO.WASM.Client.Components.EntityTable;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WebApi.Shared.Authorization;
 
-namespace FSH.BlazorWebAssembly.Client.Pages.Identity.Roles;
-
+namespace ZANECO.WASM.Client.Pages.Identity.Roles;
 public partial class Roles
 {
     [CascadingParameter]

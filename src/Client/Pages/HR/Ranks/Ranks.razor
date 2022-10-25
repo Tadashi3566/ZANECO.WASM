@@ -1,0 +1,31 @@
+﻿@page "/hr/ranks"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Ranks)]
+
+<FshTitle Title="Ranks" Description="Manage Ranks" />
+
+<EntityTable @ref="_table" TEntity="RankDto" TId="Guid" TRequest="RankUpdateRequest" Context="@Context">
+
+    <EditFormContent>
+        <MudItem xs="4">
+            <MudTextField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" />
+        </MudItem>
+        <MudItem xs="8">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+
+        <MudItem xs="6">
+            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2"/>
+        </MudItem>
+        <MudItem xs="6">
+            <MudNumericField Label="Step Increment" For="@(() => context.Step)" @bind-Value="context.Step" Format="N2"/>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>

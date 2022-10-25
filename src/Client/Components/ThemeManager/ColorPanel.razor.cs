@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace FSH.BlazorWebAssembly.Client.Components.ThemeManager;
-
+namespace ZANECO.WASM.Client.Components.ThemeManager;
 public partial class ColorPanel
 {
     [Parameter]

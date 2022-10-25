@@ -6,28 +6,28 @@
             OnClick="@((e) => DrawerToggle())" />
     </MudTooltip>
      <MudButton Variant="Variant.Text" DisableElevation="true" Link="/">
-            @L["fullstackhero"]</MudButton>
+            @L["ZANECO"]</MudButton>
     <MudSpacer />
+    
     <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
-        <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Secondary"
+        @*<MudButton DisableElevation Variant="Variant.Filled" Color="Color.Secondary"
             Link="https://opencollective.com/fullstackhero" Target="_blank" StartIcon="@Icons.Material.Filled.Favorite">
             @L["Sponsor"]</MudButton>
-        <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />
+        <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />*@
         <MudTooltip Text="Support">
             <MudMenu Icon="@Icons.Filled.SupportAgent" Color="Color.Inherit" Dense="true" Direction="Direction.Right"
-                OffsetY="true">
+                >
                 <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@L["Community"]</b></MudText>
-                <MudMenuItem Link="https://discord.gg/yQWpShsKrf" Target="_blank">@L["Discord"]</MudMenuItem>
-                <MudMenuItem Link="https://www.facebook.com/codewithmukesh" Target="_blank">@L["Facebook"]
-                </MudMenuItem>
-                <MudMenuItem Link="https://www.linkedin.com/in/iammukeshm/" Target="_blank">LinkedIn</MudMenuItem>
+                @*<MudMenuItem Link="https://discord.gg/yQWpShsKrf" Target="_blank">@L["Discord"]</MudMenuItem>*@
+                <MudMenuItem Link="https://www.facebook.com/lamdagzaneco" Target="_blank">@L["Facebook"]</MudMenuItem>
+                @*<MudMenuItem Link="https://www.linkedin.com/in/iammukeshm/" Target="_blank">LinkedIn</MudMenuItem>
                 <MudMenuItem Link="https://www.buymeacoffee.com/codewithmukesh" Target="_blank">Buy Me a Coffee!
                 </MudMenuItem>
                 <MudMenuItem Link="https://opencollective.com/fullstackhero" Target="_blank">Open Collective
                 </MudMenuItem>
                 <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@L["Resources"]</b></MudText>
                 <MudMenuItem Link="https://fullstackhero.net/" Target="_blank">@L["Documentation"]
-                </MudMenuItem>
+                </MudMenuItem>*@
             </MudMenu>
         </MudTooltip>
         <LanguageSelector />
@@ -38,31 +38,33 @@
         <NotificationConnectionStatus></NotificationConnectionStatus>
     </MudHidden>
     <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
-        <MudTooltip Text="Sponsor">
+        @*<MudTooltip Text="Sponsor">
             <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Inherit"
                 Link="https://opencollective.com/fullstackhero" Target="_blank" />
-        </MudTooltip>
-        <MudMenu Icon="@Icons.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right"
-            OffsetY="true">
-            <div class="px-2">
+        </MudTooltip>*@
+        <MudMenu Icon="@Icons.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right">
+            @*<div class="px-2">
                 <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit"
                     Link="https://github.com/fullstackhero/blazor-wasm-boilerplate" Target="_blank" />
                 <MudIconButton Icon="@Icons.Material.Filled.Coffee" Color="Color.Inherit"
                     Link="https://www.buymeacoffee.com/codewithmukesh" Target="_blank" />
             </div>
             <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@L["Community"]</b></MudText>
-            <MudMenuItem Link="https://discord.gg/yQWpShsKrf" Target="_blank">@L["Discord"]</MudMenuItem>
-            <MudMenuItem Link="https://www.facebook.com/codewithmukesh" Target="_blank">@L["Facebook"]
+            <MudMenuItem Link="https://discord.gg/yQWpShsKrf" Target="_blank">@L["Discord"]</MudMenuItem>*@
+            <MudMenuItem Link="https://www.facebook.com/lamdagzaneco" Target="_blank">
+                @L["Facebook"]
             </MudMenuItem>
-            <MudMenuItem Link="https://www.linkedin.com/in/iammukeshm/" Target="_blank">LinkedIn</MudMenuItem>
+            @*<MudMenuItem Link="https://www.linkedin.com/in/iammukeshm/" Target="_blank">LinkedIn</MudMenuItem>
             <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@L["Resources"]</b></MudText>
             <MudMenuItem Link="https://mudblazor.com/getting-started/installation" Target="_blank">
                 @L["MudBlazor Documentation"]</MudMenuItem>
             <MudMenuItem Link="https://fullstackhero.net/getting-started/" Target="_blank">
-                @L["Quick-Start Guide"]</MudMenuItem>
+                @L["Quick-Start Guide"]
+            </MudMenuItem>*@
         </MudMenu>
         <NotificationConnectionStatus></NotificationConnectionStatus>
     </MudHidden>
+
     <MudMenu AnchorOrigin="Origin.BottomRight" LockScroll="true" TransformOrigin="Origin.TopRight">
         <ActivatorContent>
             <MudIconButton Icon="@Icons.Filled.Person" Color="Color.Inherit" />
