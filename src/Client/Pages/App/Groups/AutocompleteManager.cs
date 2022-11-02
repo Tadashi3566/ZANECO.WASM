@@ -4,6 +4,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.App.Groups;
+
 public class AutocompleteManager : MudAutocomplete<string>
 {
     [Inject]
@@ -16,16 +17,17 @@ public class AutocompleteManager : MudAutocomplete<string>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Variant = Variant.Filled;
+        CoerceText = true;
+        CoerceValue = true;
         Dense = true;
         Margin = Margin.Dense;
         ResetValueOnEmptyText = true;
-        SearchFunc = SearchEmployees;
-        Clearable = true;
+        SearchFunc = SearchText;
+        Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }
 
-    private async Task<IEnumerable<string>> SearchEmployees(string value)
+    private async Task<IEnumerable<string>> SearchText(string value)
     {
         var filter = new EmployeeSearchRequest
         {

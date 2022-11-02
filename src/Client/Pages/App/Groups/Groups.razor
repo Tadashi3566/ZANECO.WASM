@@ -7,7 +7,7 @@
 
     <EditFormContent>
         <MudItem xs="12" md="6">
-            <MudSelect T="string" Label="Application" For="@(() => context.Application)" @bind-Value="context.Application">
+            <MudSelect T="string" Label="Application" For="@(() => context.Application)" @bind-Value="context.Application" Variant="Variant.Filled">
                 <MudSelectItem Value="@("ACCOUNTING")"/>
                 <MudSelectItem Value="@("CAD")" />
                 <MudSelectItem Value="@("HR")" />
@@ -16,10 +16,10 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" md="6">
-            <AutocompleteParent For="@(() => context.Parent)" @bind-Value="context.Parent" />
+            <AutocompleteParent Label="Parent" For="@(() => context.Parent)" @bind-Value="context.Parent" />
         </MudItem>
         <MudItem xs="12" md="6">
-            <AutocompleteTag For="@(() => context.Tag)" @bind-Value="context.Tag" />
+            <AutocompleteTag Label="Tag" For="@(() => context.Tag)" @bind-Value="context.Tag" />
         </MudItem>
         <MudItem xs="12" md="6">
             <MudTextField Label="Code" For="@(() => context.Code)" @bind-Value="context.Code" />

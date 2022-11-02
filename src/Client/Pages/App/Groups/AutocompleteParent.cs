@@ -19,13 +19,11 @@ public class AutocompleteParent : MudAutocomplete<string>
     {
         CoerceText = true;
         CoerceValue = true;
-        Label = "Parent";
-        Variant = Variant.Filled;
         Dense = true;
         Margin = Margin.Dense;
         ResetValueOnEmptyText = true;
         SearchFunc = SearchText;
-        Clearable = true;
+        Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }
 
