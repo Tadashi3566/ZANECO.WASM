@@ -2,7 +2,7 @@
 
 public class CadFunctions
 {
-    public static IEnumerable<string> BillMonths()
+    public static string[] BillMonths()
     {
         List<string> list = new();
 

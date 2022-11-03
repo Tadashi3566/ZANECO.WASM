@@ -29,7 +29,7 @@ public partial class PowerConsumptions
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
             },
-            enableAdvancedSearch: false,
+            enableAdvancedSearch: true,
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<PowerConsumptionSearchRequest>()))
@@ -51,14 +51,14 @@ public partial class PowerConsumptions
     //    }
     // }
 
-    private Task<IEnumerable<string>> SearchBillMonth(string value)
+    private async Task<IEnumerable<string>> SearchBillMonth(string value)
     {
-        var billMonths = CadFunctions.BillMonths();
+        string[] billMonths = CadFunctions.BillMonths();
 
         // if text is null or empty, show complete list
         if (string.IsNullOrEmpty(value))
-            return (Task<IEnumerable<string>>)billMonths;
-        return (Task<IEnumerable<string>>)billMonths.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+            return billMonths;
+        return billMonths.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
     }
 
 }

@@ -1,24 +1,23 @@
 ﻿@page "/cad/powerconsumptions"
 @attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
 
-<FshTitle Title="Power Rates" Description="Power Rate Management" />
+<FshTitle Title="Power Consumption" Description="Power Consumption Management" />
 
 <EntityTable @ref="_table" TEntity="PowerConsumptionDto" TId="Guid" TRequest="PowerConsumptionUpdateRequest" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
-            @*<MudAutocomplete T="string" Label="Bill Month" For="@(() => context.BillMonth)" @bind-Value="context.BillMonth" SearchFunc="SearchBillMonth" />*@
+            <MudAutocomplete T="string" Label="Bill Month" SearchFunc="SearchBillMonth" />
         </MudItem>
     </AdvancedSearchContent>
 
     <EditFormContent>
+        <MudItem xs="12" sm="6">
+            <AutocompletePowerSupplier For="@(() => context.GroupName)" @bind-Value="context.GroupName" />
+        </MudItem>
+
         <MudItem xs="6" sm="3">
             <MudAutocomplete T="string" Label="Bill Month" For="@(() => context.BillMonth)" @bind-Value="context.BillMonth" SearchFunc="SearchBillMonth" />
         </MudItem>
-
-        @*<MudItem xs="12">
-            <PowerSupplierAutocomplete For="@(() => context.GroupId)" @bind-Value="SearchBillMonth" Disabled="!SearchBillMonth.Equals(Guid.Empty)" />
-        </MudItem>*@
-
         <MudItem xs="6" sm="3">
             <MudNumericField Label="KWH Purchased" For="@(() => context.KwhPurchased)" @bind-Value="context.KwhPurchased" />
         </MudItem>
