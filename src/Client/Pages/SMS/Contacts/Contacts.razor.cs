@@ -13,9 +13,9 @@ public partial class Contacts
     [Inject]
     protected IContactsClient Client { get; set; } = default!;
 
-    protected EntityServerTableContext<ContactDto, Guid, ContactViewModel> Context { get; set; } = default!;
+    protected EntityServerTableContext<ContactGuidDto, Guid, ContactViewModel> Context { get; set; } = default!;
 
-    private EntityTable<ContactDto, Guid, ContactViewModel> _table = default!;
+    private EntityTable<ContactGuidDto, Guid, ContactViewModel> _table = default!;
 
     protected override void OnInitialized() =>
         Context = new(
@@ -25,7 +25,7 @@ public partial class Contacts
             fields: new()
             {
                 new(data => data.ContactType, "Contact Type", "ContactType"),
-                new(data => data.PhoneNumber, "Phone Number", "ContactNumber"),
+                new(data => data.PhoneNumber, "Phone Number", "PhoneNumber"),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Address, "Address", "Address"),
                 new(data => data.Description, "Description", "Description"),
@@ -35,7 +35,7 @@ public partial class Contacts
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<ContactSearchRequest>()))
-                .Adapt<PaginationResponse<ContactDto>>(),
+                .Adapt<PaginationResponse<ContactGuidDto>>(),
             createFunc: async data => await Client.CreateAsync(data.Adapt<ContactCreateRequest>()),
             updateFunc: async (id, Contact) => await Client.UpdateAsync(id, Contact),
             deleteFunc: async id => await Client.DeleteAsync(id),

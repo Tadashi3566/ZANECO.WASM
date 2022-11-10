@@ -19,7 +19,7 @@
             <MudAutocomplete T="string" Label="Bill Month" For="@(() => context.BillMonth)" @bind-Value="context.BillMonth" SearchFunc="SearchBillMonth" />
         </MudItem>
         <MudItem xs="6" sm="3">
-            <MudNumericField Label="KWH Purchased" For="@(() => context.KwhPurchased)" @bind-Value="context.KwhPurchased" />
+            <MudNumericField Label="KWH Purchased" For="@(() => context.KwhPurchased)" @bind-Value="context.KwhPurchased" Format="N2" />
         </MudItem>
 
         <MudItem xs="12">

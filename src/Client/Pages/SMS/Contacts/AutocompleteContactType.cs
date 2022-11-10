@@ -12,7 +12,7 @@ public class AutocompleteContactType : MudAutocomplete<string>
     [Inject]
     private IContactsClient Client { get; set; } = default!;
 
-    private List<ContactDto> _list = new();
+    private List<ContactGuidDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -39,7 +39,7 @@ public class AutocompleteContactType : MudAutocomplete<string>
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
                 () => Client.SearchAsync(filter), Snackbar)
-            is PaginationResponseOfContactDto response)
+            is PaginationResponseOfContactGuidDto response)
         {
             _list = response.Data.ToList();
         }

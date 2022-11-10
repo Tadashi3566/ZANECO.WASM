@@ -4,7 +4,7 @@
 
 <FshTitle Title="Contacts" Description="Manage Contacts" />
 
-<ContactTable @ref="_table" TEntity="ContactDto" TId="Guid" TRequest="ContactViewModel" Context="@Context">
+<ContactTable @ref="_table" TEntity="ContactGuidDto" TId="Guid" TRequest="ContactViewModel" Context="@Context">
 
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4">
@@ -14,7 +14,7 @@
             <MudTextField Label="Account Code" For="@(() => context.AccountCode)" @bind-Value="context.AccountCode" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
-            <MudTextField Label="Contact Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" />
+            <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
