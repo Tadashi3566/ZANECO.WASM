@@ -33,7 +33,7 @@ public partial class Calendars
             {
                 new(data => data.EmployeeName, "Name", "EmployeeName"),
                 new(data => data.CalendarType, "Type", "CalendarType"),
-                new(data => data.CalendarDate.ToString("MMM dd, yyyy"), "Date", "CalendarDate"),
+                new(data => data.CalendarDate, "Date", "CalendarDate"),
                 new(data => data.Day, "Day", "Day"),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Status, "Status", "Status"),
