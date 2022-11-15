@@ -8,12 +8,12 @@
     }
   },
   "profiles": {
-    "ZANECO.WASM": {
+    "ZANECO.WASM.Client": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "applicationUrl": "http://localhost:5022;https://localhost:5023;",
+      "applicationUrl": "http://localhost:5012;https://localhost:5013;",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

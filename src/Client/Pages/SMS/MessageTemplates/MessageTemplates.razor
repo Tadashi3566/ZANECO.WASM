@@ -1,4 +1,4 @@
-﻿@page "/app/smstemplates"
+﻿@page "/sms/templates"
 @attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
 
 <FshTitle Title="Message Templates" Description="Manage Message Templates" />
@@ -6,14 +6,30 @@
 <EntityTable @ref="_table" TEntity="MessageTemplateDto" TId="Guid" TRequest="MessageTemplateUpdateRequest" Context="@Context">
 
     <EditFormContent>
-        <MudItem xs="12" md="6">
-            <AutocompleteMessageTemplateType For="@(() => context.TemplateType)" @bind-Value="context.TemplateType" />
+        <MudItem xs="12" md="6" sm="4">
+            <MudSelect T="string" Label="Template Type" @bind-Value="context.TemplateType" For="@(() => context.TemplateType)" Variant="Variant.Filled">
+                <MudSelectItem Value="@("ADVISORY")" />
+                <MudSelectItem Value="@("POWER INTERRUPTION")" />
+                <MudSelectItem Value="@("OTHERS")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="6" sm="4">
+            <MudSwitch Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary"/>
+        </MudItem>
+        <MudItem xs="12" md="6" sm="4">
+            <MudSelect T="string" Label="Message Type" @bind-Value="context.MessageType" For="@(() => context.MessageType)" Variant="Variant.Filled">
+                <MudSelectItem Value="@("sms.automatic")" />
+                <MudSelectItem Value="@("sms.automatic.flash")" />
+            </MudSelect>
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" />
+            <MudTextField Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="3"/>
+            <MudTextField Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="5" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Recepients" For="@(() => context.Recepients)" @bind-Value="context.Recepients" Lines="5" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>

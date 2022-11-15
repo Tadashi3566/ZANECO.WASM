@@ -34,7 +34,7 @@
             }
         </MudNavGroup>
     }
-    @if (_canViewContacts || _canViewGroups || _canViewTickets)
+    @if (_canViewGroups || _canViewTickets)
     {
         <MudNavGroup Title="Application" Icon="@Icons.Filled.AddBox">
             @if (_canViewGroups)
@@ -45,15 +45,21 @@
             {
                 <MudNavLink Href="app/tickets" Icon="@Icons.Filled.Queue" Class="fsh-nav-child">Tickets</MudNavLink>
             }
+        </MudNavGroup>
+    }
+    @if (_canViewContacts || _canViewSMS)
+    {
+        <MudNavGroup Title="Messages" Icon="@Icons.Filled.AddBox">
             @if (_canViewContacts)
             {
-                <MudNavLink Href="app/contacts" Icon="@Icons.Filled.ContactPhone" Class="fsh-nav-child">Contacts</MudNavLink>
-                <MudNavLink Href="app/contactlist" Icon="@Icons.Filled.ContactPhone" Class="fsh-nav-child">Contacts</MudNavLink>
+                <MudNavLink Href="sms/contacts" Icon="@Icons.Filled.ContactPhone" Class="fsh-nav-child">Contacts</MudNavLink>
             }
             @if (_canViewSMS)
             {
-                <MudNavLink Href="app/smstemplates" Icon="@Icons.Filled.ContactPhone" Class="fsh-nav-child">Message Templates</MudNavLink>
-                <MudNavLink Href="app/sms" Icon="@Icons.Filled.ContactPhone" Class="fsh-nav-child">Short Messages</MudNavLink>
+                <MudNavLink Href="sms/templates" Icon="@Icons.Filled.Message" Class="fsh-nav-child">Templates</MudNavLink>
+                <MudNavLink Href="sms/inbox" Icon="@Icons.Filled.Message" Class="fsh-nav-child">Inbox</MudNavLink>
+                <MudNavLink Href="sms/outbox" Icon="@Icons.Filled.Message" Class="fsh-nav-child">Outbox</MudNavLink>
+                <MudNavLink Href="sms/logs" Icon="@Icons.Filled.Message" Class="fsh-nav-child">Logs</MudNavLink>
             }
         </MudNavGroup>
     }
