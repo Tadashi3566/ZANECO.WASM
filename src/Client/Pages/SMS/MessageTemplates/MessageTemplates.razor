@@ -3,8 +3,7 @@
 
 <FshTitle Title="Message Templates" Description="Manage Message Templates" />
 
-<EntityTable @ref="_table" TEntity="MessageTemplateDto" TId="Guid" TRequest="MessageTemplateUpdateRequest" Context="@Context">
-
+<EntityTable @ref="_table" TEntity="MessageTemplateDto" TId="int" TRequest="MessageTemplateUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" md="6" sm="4">
             <MudSelect T="string" Label="Template Type" @bind-Value="context.TemplateType" For="@(() => context.TemplateType)" Variant="Variant.Filled">
@@ -41,3 +40,12 @@
     </EditFormContent>
 
 </EntityTable>
+
+@code {
+    private RenderFragment<MessageTemplateDto> TemplateIsAPI => context => __builder =>
+    {
+        <MudItem>
+            <MudSwitch T="bool" Color="Color.Tertiary" @bind-Checked="context.IsAPI" ReadOnly=true />
+        </MudItem>
+    };
+}
