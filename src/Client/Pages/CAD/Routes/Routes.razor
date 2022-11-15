@@ -5,13 +5,13 @@
 
 <EntityTable @ref="_table" TEntity="RouteDto" TId="Guid" TRequest="RouteUpdateRequest" Context="@Context">
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AreaAutocomplete For="@(() => context.AreaId)" @bind-Value="context.AreaId" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Code" For="@(() => context.Code)" @bind-Value="context.Code" />
         </MudItem>
         <MudItem xs="12">

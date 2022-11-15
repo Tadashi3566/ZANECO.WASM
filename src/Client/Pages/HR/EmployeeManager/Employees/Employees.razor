@@ -103,13 +103,13 @@
             <AutocompleteTitle For="@(() => context.Title)" @bind-Value="context.Title" />
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="First Name" For="@(() => context.FirstName)" @bind-Value="context.FirstName" Placeholder="Juan" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Middle Name" For="@(() => context.MiddleName)" @bind-Value="context.MiddleName" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Last Name" For="@(() => context.LastName)" @bind-Value="context.LastName" Placeholder="Dela Cruz" />
         </MudItem>
         <MudItem xs="6" sm="3">
@@ -135,14 +135,14 @@
             <AutocompleteBirthPlace For="@(() => context.BirthPlace)" @bind-Value="context.BirthPlace" />
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Date Hired" For="@(() => context.HireDate)" @bind-Date="context.HireDate" DateFormat="MMMM dd, yyyy" MinDate="context.BirthDate" MaxDate="@DateTime.Today" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Date Regularized" For="@(() => context.RegularDate)" @bind-Date="context.RegularDate" DateFormat="MMMM dd, yyyy" MinDate="context.HireDate" MaxDate="@DateTime.Today" />
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Social Security System (SSS)" For="@(() => context.Sss)" @bind-Value="context.Sss" />
         </MudItem>
         <MudItem xs="6" sm="6" md="4">
@@ -151,10 +151,10 @@
         <MudItem xs="6" sm="6" md="4">
             <MudTextField Label="PAG-IBIG (HDMF)" For="@(() => context.Hdmf)" @bind-Value="context.Hdmf" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Tax Identification Number (TIN)" For="@(() => context.Tin)" @bind-Value="context.Tin" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Blood Type" For="@(() => context.BloodType)" @bind-Value="context.BloodType" />
         </MudItem>
         <MudItem xs="12" sm="8">

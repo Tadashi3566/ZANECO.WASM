@@ -24,13 +24,13 @@
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Start Date" For="@(() => context.StartDate)" @bind-Date="context.StartDate" DateFormat="MMMM dd, yyyy" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="End Date" For="@(() => context.EndDate)" @bind-Date="context.EndDate" DateFormat="MMMM dd, yyyy" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteArea For="@(() => context.Area)" @bind-Value="context.Area" />
         </MudItem>
         <MudItem xs="12">
@@ -46,10 +46,10 @@
             <AutocompletePosition For="@(() => context.Position)" @bind-Value="context.Position" />
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteRank For="@(() => context.SalaryRank)" @bind-Value="context.SalaryRank" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Employment" For="@(() => context.EmploymentType)" @bind-Value="context.EmploymentType" >
                 <MudSelectItem Value="@("JOB ORDER")"/>
                 <MudSelectItem Value="@("PROBATION")"/>
@@ -59,23 +59,23 @@
                 <MudSelectItem Value="@("TERMINATED")"/>
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Rate Type" For="@(() => context.RateType)" @bind-Value="context.RateType" >
                 <MudSelectItem Value="@("DAILY")"/>
                 <MudSelectItem Value="@("MONTHLY")"/>
             </MudSelect>
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Days per Month" For="@(() => context.DaysPerMonth)" @bind-Value="context.DaysPerMonth" Disabled="@(!DisableInput(context.RateType))" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Per Day" For="@(() => context.RatePerDay)" @bind-Value="context.RatePerDay" Format="N2" Disabled=true />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Hours per Day" For="@(() => context.HoursPerDay)" @bind-Value="context.HoursPerDay" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Per Hour" For="@(() => context.RatePerHour)" @bind-Value="context.RatePerHour" Format="N2" Disabled=true />
         </MudItem>
 
@@ -83,13 +83,13 @@
             <AutocompleteSchedule For="@(() => context.ScheduleId)" @bind-Value="context.ScheduleId" />
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Pay Type" For="@(() => context.PayType)" @bind-Value="context.PayType" >
                 <MudSelectItem Value="@("BI-MONTHLY")"/>
                 <MudSelectItem Value="@("MONTHLY")"/>
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteTax For="@(() => context.TaxType)" @bind-Value="context.TaxType"  />
         </MudItem>
 

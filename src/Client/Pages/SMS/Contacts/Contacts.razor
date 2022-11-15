@@ -3,16 +3,15 @@
 
 <FshTitle Title="Contacts" Description="Manage Contacts" />
 
-<EntityTable @ref="_table" TEntity="ContactDto" TId="int" TRequest="ContactViewModel" Context="@Context">
-
+<EntityTable MultiSelection=true @ref="_table" TEntity="ContactDto" TId="int" TRequest="ContactViewModel" Context="@Context">
     <EditFormContent>
-        <MudItem xs="12" sm="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteContactType For="@(() => context.ContactType)" @bind-Value="context.ContactType" />
         </MudItem>
-        <MudItem xs="12" sm="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Account Code" For="@(() => context.AccountCode)" @bind-Value="context.AccountCode" />
         </MudItem>
-        <MudItem xs="12" sm="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" />
         </MudItem>
         <MudItem xs="12">
@@ -69,5 +68,29 @@
             </MudItem>
         </MudItem>
     </EditFormContent>
-
 </EntityTable>
+
+@code {
+    private RenderFragment<ContactDto> TemplatePhoneNumber => context => __builder =>
+    {
+        <MudItem>
+            <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Secondary" Label="true" Color="Color.Surface">@context.PhoneNumber</MudChip>
+        </MudItem>
+    };
+
+    private RenderFragment<ContactDto> TemplateNameAddress => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1" >@context.Name</MudText>
+            <MudText Typo="Typo.caption">@context.Address</MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<ContactDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">@context.Description</MudText>
+            <MudText Typo="Typo.caption">@context.Notes</MudText>
+        </MudItem>
+    };
+}

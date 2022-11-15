@@ -1,0 +1,51 @@
+﻿@page "/sms/inbox"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
+
+<FshTitle Title="Message Templates" Description="Manage Message Templates" />
+
+<EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
+    <EditFormContent>
+        <MudItem xs="12" sm="4">
+            <MudTextField Label="Sender" For="@(() => context.MessageFrom)" @bind-Value="context.MessageFrom" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12" sm="4">
+            <MudTextField Label="Receiver" For="@(() => context.MessageTo)" @bind-Value="context.MessageTo" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Message" For="@(() => context.MessageText)" @bind-Value="context.MessageText" Lines="5" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+        </MudItem>
+
+    </EditFormContent>
+
+</EntityTable>
+
+@code {
+    private RenderFragment<MessageInDto> TemplateReceivedTime => context => __builder =>
+    {
+        <MudItem>
+            <MudChip Icon="@Icons.Material.Filled.Watch" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.ReceiveTime</MudChip>
+        </MudItem>
+    };
+
+    private RenderFragment<MessageInDto> TemplateSenderReceiver => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageTo</MudChip>
+        </MudItem>
+    };
+
+    private RenderFragment<MessageInDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">@context.Description</MudText>
+            <MudText Typo="Typo.caption">@context.Notes</MudText>
+        </MudItem>
+    };
+}

@@ -270,7 +270,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
         parameters.Add(nameof(AddEditModal<TRequest>.RequestModel), requestModel);
 
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true, DisableBackdropClick = true };
 
         var dialog = DialogService.Show<AddEditModal<TRequest>>(string.Empty, parameters, options);
 

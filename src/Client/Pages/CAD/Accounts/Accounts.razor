@@ -19,16 +19,16 @@
             <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" />
         </MudItem>
         
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Reading Date" For="@(() => context.PresentReadingDate)" @bind-Date="context.PresentReadingDate" DateFormat="MMMM dd, yyyy" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Bill Month" For="@(() => context.BillMonth)" @bind-Value="context.BillMonth" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="KWH" For="@(() => context.UsedKWH)" @bind-Value="context.UsedKWH" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Bill Amount" For="@(() => context.BillAmount)" @bind-Value="context.BillAmount" Format="N2" />
         </MudItem>
 

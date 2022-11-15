@@ -25,11 +25,13 @@ public partial class Contacts
             fields: new()
             {
                 new(data => data.ContactType, "Contact Type", "ContactType"),
-                new(data => data.PhoneNumber, "Phone Number", "PhoneNumber"),
-                new(data => data.Name, "Name", "Name"),
-                new(data => data.Address, "Address", "Address"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.PhoneNumber, "Phone Number", "PhoneNumber", Template: TemplatePhoneNumber),
+                new(data => data.Name, "Name/Address", "Name", Template: TemplateNameAddress),
+
+                // new(data => data.Address, "Address", "Address"),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
+
+                // new(data => data.Notes, "Notes", "Notes"),
             },
             enableAdvancedSearch: true,
             idFunc: data => data.Id,
