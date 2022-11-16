@@ -43,7 +43,7 @@ public partial class Contributions
                 new(data => data.EmployeeContribution.ToString("N2"), "Employee", "EmployeeContribution"),
                 new(data => data.TotalContribution.ToString("N2"), "Total", "TotalContribution"),
                 new(data => data.Percentage, "Percentage", "Percentage"),
-                new(data => data.IsFixed, "Fixed", "IsFixed"),
+                new(data => data.IsFixed, "Fixed", "IsFixed", typeof(bool)),
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
             },

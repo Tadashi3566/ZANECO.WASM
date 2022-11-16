@@ -1,0 +1,24 @@
+﻿@page "/sms/outs"
+@attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
+
+<FshTitle Title="Send Message" Description="Send Messages" />
+
+<EntityTable @ref="_table" TEntity="MessageOutDto" TId="int" TRequest="MessageOutCreateRequest" Context="@Context">
+    <EditFormContent>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSwitch Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary"/>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSelect T="string" Label="Message Type" @bind-Value="context.MessageType" For="@(() => context.MessageType)" Variant="Variant.Filled">
+                <MudSelectItem Value="@("sms.automatic")" />
+                <MudSelectItem Value="@("sms.automatic.flash")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Recepient" For="@(() => context.MessageTo)" @bind-Value="context.MessageTo" Lines="10" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Counter=160 Immediate=true HelperText="Recommended SMS is up to 160 characters" Label="Message" For="@(() => context.MessageText)" @bind-Value="context.MessageText" Lines="5" Variant="Variant.Filled" />
+        </MudItem>
+    </EditFormContent>
+</EntityTable>

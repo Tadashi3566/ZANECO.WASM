@@ -22,7 +22,7 @@ public partial class MessageTemplates
             fields: new()
             {
                 new(data => data.TemplateType, "Template Type", "TemplateType"),
-                new(data => data.IsAPI, "API", "IsAPI", Template: TemplateIsAPI),
+                new(data => data.IsAPI, "API", "IsAPI", typeof(bool)),
                 new(data => data.Subject, "Subject", "Subject"),
                 new(data => data.Message, "Message", "Message"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),

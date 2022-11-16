@@ -29,7 +29,7 @@
             <MudTextField Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Counter=160 HelperText="Recommended SMS is up to 160 characters" Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="5" Variant="Variant.Filled" />
+            <MudTextField Counter=160 Immediate=true HelperText="Recommended SMS is up to 160 characters" Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="5" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Recepients" For="@(() => context.Recepients)" @bind-Value="context.Recepients" Lines="10" Variant="Variant.Filled" />
@@ -45,13 +45,6 @@
 </EntityTable>
 
 @code {
-    private RenderFragment<MessageTemplateDto> TemplateIsAPI => context => __builder =>
-    {
-        <MudItem>
-            <MudSwitch T="bool" Color="Color.Tertiary" @bind-Checked="context.IsAPI" ReadOnly=true />
-        </MudItem>
-    };
-
     private RenderFragment<MessageTemplateDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
