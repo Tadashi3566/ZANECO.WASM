@@ -6,7 +6,7 @@
 <EntityTable MultiSelection=true @ref="_table" SelectedItems="@_selectedItems" TEntity="ContactDto" TId="int" TRequest="ContactViewModel" Context="@Context">
     <ExtraActions>
         <MudDivider/>
-        <MudButton EndIcon="@Icons.Filled.CopyAll" IconColor="Color.Secondary" OnClick="@(() => OnCopyPhoneNumbersChecked())" >Copy Phone Numbers</MudButton>
+        <MudMenuItem Icon="@Icons.Filled.CopyAll" IconColor="Color.Secondary" OnClick="@(() => OnCopyPhoneNumbersChecked())">Copy Phone Numbers</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>

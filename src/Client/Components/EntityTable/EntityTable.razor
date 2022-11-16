@@ -122,11 +122,11 @@
                             OffsetX="true">
                             @if (CanUpdateEntity(context))
                             {
-                                <MudMenuItem OnClick="@(() => InvokeModal(context))" >@L["Edit"]</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Filled.Edit" OnClick="@(() => InvokeModal(context))" >@L["Edit"]</MudMenuItem>
                             }
                             @if (CanDeleteEntity(context))
                             {
-                                <MudMenuItem OnClick="@(() => Delete(context))" Style="color:red!important">@L["Delete"]</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Filled.Delete" OnClick="@(() => Delete(context))" Style="color:red!important">@L["Delete"]</MudMenuItem>
                             }
                             @if (ExtraActions is not null)
                             {
