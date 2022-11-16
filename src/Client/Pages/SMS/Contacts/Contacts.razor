@@ -3,7 +3,12 @@
 
 <FshTitle Title="Contacts" Description="Manage Contacts" />
 
-<EntityTable MultiSelection=true @ref="_table" TEntity="ContactDto" TId="int" TRequest="ContactViewModel" Context="@Context">
+<EntityTable MultiSelection=true @ref="_table" SelectedItems="@_selectedItems" TEntity="ContactDto" TId="int" TRequest="ContactViewModel" Context="@Context">
+    <ExtraActions>
+        <MudDivider/>
+        <MudButton EndIcon="@Icons.Filled.CopyAll" IconColor="Color.Secondary" OnClick="@(() => OnCopyPhoneNumbersChecked())" >Copy Phone Numbers</MudButton>
+    </ExtraActions>
+
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteContactType For="@(() => context.ContactType)" @bind-Value="context.ContactType" />

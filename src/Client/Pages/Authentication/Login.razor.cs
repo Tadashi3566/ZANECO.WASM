@@ -4,7 +4,9 @@ using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Pages.Multitenancy;
 using ZANECO.WASM.Client.Shared;
+using ZANECO.WebApi.Shared.MultiTenancy;
 
 namespace ZANECO.WASM.Client.Pages.Authentication;
 public partial class Login
@@ -64,5 +66,11 @@ public partial class Login
         }
 
         BusySubmitting = false;
+    }
+
+    private void FillAdministratorCredentials()
+    {
+        _tokenRequest.UserName = MultitenancyConstants.Root.EmailAddress;
+        _tokenRequest.Password = MultitenancyConstants.DefaultPassword;
     }
 }

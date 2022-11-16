@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using System.Globalization;
+using TextCopy;
 using ZANECO.WASM.Client;
 using ZANECO.WASM.Client.Infrastructure;
 using ZANECO.WASM.Client.Infrastructure.Common;
@@ -10,6 +11,9 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
+
+var serviceCollection = builder.Services;
+serviceCollection.InjectClipboard();
 
 builder.Services.AddClientServices(builder.Configuration);
 

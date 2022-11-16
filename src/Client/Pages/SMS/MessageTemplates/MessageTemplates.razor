@@ -4,6 +4,10 @@
 <FshTitle Title="Message Templates" Description="Manage Message Templates" />
 
 <EntityTable @ref="_table" TEntity="MessageTemplateDto" TId="int" TRequest="MessageTemplateUpdateRequest" Context="@Context">
+    <ExtraActions>
+        <MudDivider />
+        <MudButton EndIcon="@Icons.Filled.Send" IconColor="Color.Secondary" OnClick="@(() => SendSMS())">Send</MudButton>
+    </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect T="string" Label="Template Type" @bind-Value="context.TemplateType" For="@(() => context.TemplateType)" Variant="Variant.Filled">
@@ -25,7 +29,7 @@
             <MudTextField Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="5" Variant="Variant.Filled" />
+            <MudTextField Counter=160 HelperText="Recommended SMS is up to 160 characters" Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="5" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Recepients" For="@(() => context.Recepients)" @bind-Value="context.Recepients" Lines="10" Variant="Variant.Filled" />

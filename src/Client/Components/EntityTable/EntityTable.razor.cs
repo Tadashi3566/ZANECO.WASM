@@ -21,7 +21,8 @@ public partial class EntityTable<TEntity, TId, TRequest>
     public bool Loading { get; set; }
     [Parameter]
     public bool MultiSelection { get; set; }
-
+    [Parameter]
+    public HashSet<TEntity>? SelectedItems { get; set; }
     [Parameter]
     public string? SearchString { get; set; }
     [Parameter]

@@ -36,4 +36,9 @@ public partial class MessageTemplates
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+
+    private async void SendSMS()
+    {
+        
+    }
 }

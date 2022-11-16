@@ -1,9 +1,9 @@
-﻿@page "/sms/inbox"
+﻿@page "/sms/logs"
 @attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
 
-<FshTitle Title="Message Inbox" Description="Manage Message Inbox" />
+<FshTitle Title="Message Logs" Description="Manage Message Logs" />
 
-<EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
+<EntityTable @ref="_table" TEntity="MessageLogDto" TId="int" TRequest="MessageLogUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" sm="4">
             <MudTextField Label="Sender" For="@(() => context.MessageFrom)" @bind-Value="context.MessageFrom" ReadOnly=true />
@@ -26,22 +26,22 @@
 </EntityTable>
 
 @code {
-    private RenderFragment<MessageInDto> TemplateReceivedTime => context => __builder =>
+    private RenderFragment<MessageLogDto> TemplateReceivedTime => context => __builder =>
     {
         <MudItem>
-            <MudChip Icon="@Icons.Material.Filled.Watch" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.ReceiveTime</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.Watch" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.SendTime</MudChip>
         </MudItem>
     };
 
-    private RenderFragment<MessageInDto> TemplateSenderReceiver => context => __builder =>
+    private RenderFragment<MessageLogDto> TemplateSenderReceiver => context => __builder =>
     {
-        <MudItem Class="d-flex flex-column">
+        <MudItem Class="d-flex flex-row">
             <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
             <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageTo</MudChip>
         </MudItem>
     };
 
-    private RenderFragment<MessageInDto> TemplateDescriptionNotes => context => __builder =>
+    private RenderFragment<MessageLogDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.subtitle1">@context.Description</MudText>
