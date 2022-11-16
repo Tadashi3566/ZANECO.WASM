@@ -1,6 +1,8 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
+using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
@@ -45,17 +47,28 @@ public partial class MessageTemplates
 
     private async void SendSMS(MessageTemplateDto request)
     {
-        string recepients = ClassSMS.RemoveWhiteSpaces(request.Recepients);
-        string[] recepientArray = recepients.Split(',');
-        recepientArray = ClassSMS.GetDistinctFromArray(recepientArray);
-        foreach (string recepient in recepientArray)
+        string transactionContent = $"You're sure you want to send SMS to {ClassSMS.RecepientCount(request.Recepients):N0} recepient(s)?";
+        var parameters = new DialogParameters
         {
-            _messageOut.IsAPI = request.IsAPI;
-            _messageOut.MessageType = request.MessageType;
-            _messageOut.MessageTo = recepient;
-            _messageOut.MessageText = request.Message;
+            { nameof(TransactionConfirmation.ContentText), transactionContent }
+        };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        var dialog = DialogService.Show<TransactionConfirmation>("Send", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            string recepients = ClassSMS.RemoveWhiteSpaces(request.Recepients);
+            string[] recepientArray = recepients.Split(',');
+            recepientArray = ClassSMS.GetDistinctFromArray(recepientArray);
+            foreach (string recepient in recepientArray)
+            {
+                _messageOut.IsAPI = request.IsAPI;
+                _messageOut.MessageType = request.MessageType;
+                _messageOut.MessageTo = recepient;
+                _messageOut.MessageText = request.Message;
 
-            await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar, successMessage: "SMS successfully created and sent to queue.");
+                await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar, successMessage: "SMS successfully created and sent to queue.");
+            }
         }
     }
 }

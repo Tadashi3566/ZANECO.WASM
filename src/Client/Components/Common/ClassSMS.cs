@@ -20,4 +20,9 @@ internal class ClassSMS
     {
         return array.Distinct().ToArray();
     }
+
+    public static int RecepientCount(string recepients)
+    {
+        return RemoveWhiteSpaces(recepients).Split(',').Length;
+    }
 }
