@@ -33,6 +33,8 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
 
     public void ForceRender() => StateHasChanged();
 
+    private bool IsBusy = false;
+
     // This should not be necessary anymore, except maybe in the case when the
     // UpdateEntityRequest has different validation rules than the CreateEntityRequest.
     // If that would happen a lot we can still change the design so this method doesn't need to be called manually.
@@ -74,6 +76,8 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
 
     private async Task SaveAsync()
     {
+        IsBusy = true;
+
         if (await ApiHelper.ExecuteCallGuardedAsync(
             () => SaveFunc(RequestModel),
             Snackbar,

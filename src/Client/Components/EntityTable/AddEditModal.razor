@@ -40,13 +40,25 @@
             @if (IsCreate)
             {
                 <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success" StartIcon="@Icons.Filled.Save" >
-                    @L["Save"]
+                    <MudItem Class="d-flex flex-row">
+                        @if (IsBusy)
+                        {
+                            <MudProgressCircular Color="Color.Tertiary" Indeterminate=true Size="Size.Small" />
+                        }
+                        <MudText Class="ml-2">@L["Save"]</MudText>
+                    </MudItem>
                 </MudButton>
             }
             else
             {
                 <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary" StartIcon="@Icons.Filled.Update">
-                    @L["Update"]
+                    <MudItem Class="d-flex flex-row">
+                        @if (IsBusy)
+                        {
+                            <MudProgressCircular Color="Color.Tertiary" Indeterminate=true Size="Size.Small" />
+                        }
+                        <MudText Class="ml-2">@L["Update"]</MudText>
+                    </MudItem>
                 </MudButton>
             }
         </DialogActions>
