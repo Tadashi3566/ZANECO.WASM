@@ -33,7 +33,7 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
 
     public void ForceRender() => StateHasChanged();
 
-    private bool IsBusy = false;
+    private bool _isBusy;
 
     // This should not be necessary anymore, except maybe in the case when the
     // UpdateEntityRequest has different validation rules than the CreateEntityRequest.
@@ -76,7 +76,7 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
 
     private async Task SaveAsync()
     {
-        IsBusy = true;
+        _isBusy = true;
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
             () => SaveFunc(RequestModel),
@@ -86,6 +86,8 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
         {
             MudDialog.Close();
         }
+
+        _isBusy = false;
     }
 
     private void Cancel() =>

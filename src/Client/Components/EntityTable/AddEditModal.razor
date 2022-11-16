@@ -41,7 +41,7 @@
             {
                 <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success" StartIcon="@Icons.Filled.Save" >
                     <MudItem Class="d-flex flex-row">
-                        @if (IsBusy)
+                        @if (_isBusy)
                         {
                             <MudProgressCircular Color="Color.Tertiary" Indeterminate=true Size="Size.Small" />
                         }
@@ -53,7 +53,7 @@
             {
                 <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary" StartIcon="@Icons.Filled.Update">
                     <MudItem Class="d-flex flex-row">
-                        @if (IsBusy)
+                        @if (_isBusy)
                         {
                             <MudProgressCircular Color="Color.Tertiary" Indeterminate=true Size="Size.Small" />
                         }

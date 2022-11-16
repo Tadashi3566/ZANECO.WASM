@@ -47,7 +47,7 @@ public partial class MessageTemplates
 
     private async void SendSMS(MessageTemplateDto request)
     {
-        string transactionContent = $"You're sure you want to send SMS to {ClassSMS.RecepientCount(request.Recepients):N0} recepient(s)?";
+        string transactionContent = $"Are you sure you want to send SMS to {ClassSMS.RecepientCount(request.Recepients):N0} recepient(s)?";
         var parameters = new DialogParameters
         {
             { nameof(TransactionConfirmation.ContentText), transactionContent }
