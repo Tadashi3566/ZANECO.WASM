@@ -1,6 +1,7 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using TextCopy;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
@@ -15,7 +16,8 @@ public partial class MessageTemplates
     protected IMessageTemplatesClient Client { get; set; } = default!;
     [Inject]
     protected IMessageOutsClient MessageOut { get; set; } = default!;
-
+    [Inject]
+    private IClipboard? Clipboard { get; set; }
     protected EntityServerTableContext<MessageTemplateDto, int, MessageTemplateUpdateRequest> Context { get; set; } = default!;
 
     private EntityTable<MessageTemplateDto, int, MessageTemplateUpdateRequest> _table = default!;
@@ -45,6 +47,13 @@ public partial class MessageTemplates
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+
+    private async void CopyMessage(string message)
+    {
+        await Clipboard!.SetTextAsync(message);
+
+        Snackbar.Add("The Template Message was copied to Clipboard", Severity.Success);
+    }
 
     private async void SendSMS(MessageTemplateDto request)
     {

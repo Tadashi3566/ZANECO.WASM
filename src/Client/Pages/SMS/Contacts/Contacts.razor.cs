@@ -22,7 +22,7 @@ public partial class Contacts
     [Inject]
     protected IContactsClient Client { get; set; } = default!;
     [Inject]
-    private IClipboard Clipboard { get; set; }
+    private IClipboard? Clipboard { get; set; }
 
     protected EntityServerTableContext<ContactDto, int, ContactViewModel> Context { get; set; } = default!;
 

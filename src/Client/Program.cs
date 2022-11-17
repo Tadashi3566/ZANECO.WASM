@@ -9,11 +9,11 @@ using ZANECO.WASM.Client.Infrastructure.Preferences;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-builder.RootComponents.Add<App>("#app");
-builder.RootComponents.Add<HeadOutlet>("head::after");
-
 var serviceCollection = builder.Services;
 serviceCollection.InjectClipboard();
+
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddClientServices(builder.Configuration);
 

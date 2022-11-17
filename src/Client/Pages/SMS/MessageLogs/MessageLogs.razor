@@ -4,6 +4,7 @@
 <FshTitle Title="Message Logs" Description="Manage Message Logs" />
 
 <EntityTable @ref="_table" TEntity="MessageLogDto" TId="int" TRequest="MessageLogUpdateRequest" Context="@Context">
+
     <EditFormContent>
         <MudItem xs="12" sm="4">
             <MudTextField Label="Sender" For="@(() => context.MessageFrom)" @bind-Value="context.MessageFrom" ReadOnly=true />
@@ -20,7 +21,6 @@
         <MudItem xs="12">
             <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
         </MudItem>
-
     </EditFormContent>
 
 </EntityTable>
@@ -35,15 +35,17 @@
 
     private RenderFragment<MessageLogDto> TemplateSenderReceiver => context => __builder =>
     {
-        <MudItem Class="d-flex flex-column">
-            <MudChip Icon="@Icons.Material.Filled.Send" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
-            <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageTo</MudChip>
+        <MudItem>
+            <p>
+                <MudChip Icon="@Icons.Material.Filled.Send" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
+                <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageTo</MudChip>
+            </p>
         </MudItem>
     };
 
     private RenderFragment<MessageLogDto> TemplateStatus => context => __builder =>
     {
-        <MudItem Class="d-flex flex-row">
+        <MudItem Class="d-flex flex-column">
             @if (context.StatusCode.ToString().Contains("200") || context.StatusCode.ToString().Contains("201"))
             {
                 <p><MudText Color="Color.Success" Typo="Typo.caption">@context.StatusCode @context.StatusText</MudText></p>
