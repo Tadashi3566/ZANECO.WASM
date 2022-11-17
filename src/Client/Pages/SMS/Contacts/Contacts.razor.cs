@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using TextCopy;
 using ZANECO.WASM.Client.Components.EntityTable;
+using ZANECO.WASM.Client.Components.Services;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
@@ -22,11 +23,11 @@ public partial class Contacts
     [Inject]
     protected IContactsClient Client { get; set; } = default!;
     [Inject]
-    private IClipboard? Clipboard { get; set; }
+    private IClipboardService? ClipboardService { get; set; }
 
-    protected EntityServerTableContext<ContactDto, int, ContactViewModel> Context { get; set; } = default!;
+    protected EntityServerTableContext<ContactDto, Guid, ContactViewModel> Context { get; set; } = default!;
 
-    private EntityTable<ContactDto, int, ContactViewModel> _table = default!;
+    private EntityTable<ContactDto, Guid, ContactViewModel> _table = default!;
 
     private HashSet<ContactDto> _selectedItems = new HashSet<ContactDto>();
 
@@ -66,7 +67,7 @@ public partial class Contacts
 
         if (phoneNumbers.Length > 0)
         {
-            await Clipboard!.SetTextAsync(string.Join(",", phoneNumbers));
+            await ClipboardService!.CopyToClipboard(string.Join(",", phoneNumbers));
 
             Snackbar.Add("Selected Phone Number(s) were copied to Clipboard", Severity.Success);
         }

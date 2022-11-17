@@ -1624,53 +1624,53 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Get Contact details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ContactDto> GetAsync(int id);
+        System.Threading.Tasks.Task<ContactDto> GetAsync(System.Guid id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Get Contact details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ContactDto> GetAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<ContactDto> GetAsync(System.Guid id, System.Threading.CancellationToken cancellationToken);
 
         /// <summary>
         /// Update a Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> UpdateAsync(int id, ContactUpdateRequest request);
+        System.Threading.Tasks.Task<System.Guid> UpdateAsync(System.Guid id, ContactUpdateRequest request);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Update a Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> UpdateAsync(int id, ContactUpdateRequest request, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Guid> UpdateAsync(System.Guid id, ContactUpdateRequest request, System.Threading.CancellationToken cancellationToken);
 
         /// <summary>
         /// Delete a Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> DeleteAsync(int id);
+        System.Threading.Tasks.Task<System.Guid> DeleteAsync(System.Guid id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Delete a Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> DeleteAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Guid> DeleteAsync(System.Guid id, System.Threading.CancellationToken cancellationToken);
 
         /// <summary>
         /// Create a new Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateAsync(ContactCreateRequest request);
+        System.Threading.Tasks.Task<System.Guid> CreateAsync(ContactCreateRequest request);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Create a new Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateAsync(ContactCreateRequest request, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Guid> CreateAsync(ContactCreateRequest request, System.Threading.CancellationToken cancellationToken);
 
     }
 
@@ -1803,7 +1803,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Get Contact details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<ContactDto> GetAsync(int id)
+        public virtual System.Threading.Tasks.Task<ContactDto> GetAsync(System.Guid id)
         {
             return GetAsync(id, System.Threading.CancellationToken.None);
         }
@@ -1813,7 +1813,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Get Contact details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ContactDto> GetAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<ContactDto> GetAsync(System.Guid id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1899,7 +1899,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Update a Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> UpdateAsync(int id, ContactUpdateRequest request)
+        public virtual System.Threading.Tasks.Task<System.Guid> UpdateAsync(System.Guid id, ContactUpdateRequest request)
         {
             return UpdateAsync(id, request, System.Threading.CancellationToken.None);
         }
@@ -1909,7 +1909,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Update a Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> UpdateAsync(int id, ContactUpdateRequest request, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Guid> UpdateAsync(System.Guid id, ContactUpdateRequest request, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1956,7 +1956,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -2001,7 +2001,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Delete a Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> DeleteAsync(int id)
+        public virtual System.Threading.Tasks.Task<System.Guid> DeleteAsync(System.Guid id)
         {
             return DeleteAsync(id, System.Threading.CancellationToken.None);
         }
@@ -2011,7 +2011,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Delete a Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> DeleteAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Guid> DeleteAsync(System.Guid id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2052,7 +2052,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -2097,7 +2097,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Create a new Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> CreateAsync(ContactCreateRequest request)
+        public virtual System.Threading.Tasks.Task<System.Guid> CreateAsync(ContactCreateRequest request)
         {
             return CreateAsync(request, System.Threading.CancellationToken.None);
         }
@@ -2107,7 +2107,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Create a new Contact.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> CreateAsync(ContactCreateRequest request, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Guid> CreateAsync(ContactCreateRequest request, System.Threading.CancellationToken cancellationToken)
         {
             if (request == null)
                 throw new System.ArgumentNullException("request");
@@ -2150,7 +2150,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -31355,7 +31355,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     public partial class ContactDto
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Id { get; set; } = default!;
+        public System.Guid Id { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("contactType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContactType { get; set; } = default!;
@@ -31447,7 +31447,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     public partial class ContactUpdateRequest
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Id { get; set; } = default!;
+        public System.Guid Id { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("contactType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -31753,6 +31753,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
