@@ -5,19 +5,6 @@
 
 <FshTitle Title="Attendance" Description="Employee Attendance Management" />
 
-<MudGrid>
-    <DxGrid >
-        <Columns>
-            <DxGridDataColumn FieldName="AttendanceDate" Caption="Date" DisplayFormat="D" />
-            <DxGridDataColumn FieldName="ScheduleDetailDay" Caption="Day" />
-            <DxGridDataColumn FieldName="ActualTimeIn1" Caption="Time-In1" />
-            <DxGridDataColumn FieldName="ActualTimeOut1" Caption="Time-Out1" />
-            <DxGridDataColumn FieldName="Description" />
-            <DxGridDataColumn FieldName="Notes" />
-        </Columns>
-    </DxGrid>
-</MudGrid>
-
 <EntityTable @ref="_table" TEntity="AttendanceDto" TId="Guid" TRequest="AttendanceUpdateRequest" Context="@Context" MultiSelection=true>
     <AdvancedSearchContent>
         <MudItem Class="mt-3">

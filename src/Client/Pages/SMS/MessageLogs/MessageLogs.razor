@@ -35,8 +35,8 @@
 
     private RenderFragment<MessageLogDto> TemplateSenderReceiver => context => __builder =>
     {
-        <MudItem Class="d-flex flex-row">
-            <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
+        <MudItem Class="d-flex flex-column">
+            <MudChip Icon="@Icons.Material.Filled.Send" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
             <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageTo</MudChip>
         </MudItem>
     };
@@ -46,11 +46,11 @@
         <MudItem Class="d-flex flex-row">
             @if (context.StatusCode.ToString().Contains("200") || context.StatusCode.ToString().Contains("201"))
             {
-                <MudText Color="Color.Success" Typo="Typo.caption">@context.StatusCode @context.StatusText</MudText>
+                <p><MudText Color="Color.Success" Typo="Typo.caption">@context.StatusCode @context.StatusText</MudText></p>
             }
             else
             {
-                <MudText Color="Color.Error" Typo="Typo.caption">@context.StatusCode @context.StatusText</MudText>
+                <p><MudText Color="Color.Error" Typo="Typo.caption">@context.StatusCode @context.StatusText</MudText></p>
             }
         </MudItem>
     };

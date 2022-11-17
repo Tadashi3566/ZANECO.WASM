@@ -20,6 +20,9 @@
             <MudSwitch Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSwitch Label="Multiple Send" For="@(() => context.IsMultiple)" @bind-Checked="context.IsMultiple" Color="Color.Tertiary" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect T="string" Label="Message Type" @bind-Value="context.MessageType" For="@(() => context.MessageType)" Variant="Variant.Filled">
                 <MudSelectItem Value="@("sms.automatic")" />
                 <MudSelectItem Value="@("sms.automatic.flash")" />

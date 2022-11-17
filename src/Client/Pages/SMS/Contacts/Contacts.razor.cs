@@ -21,7 +21,7 @@ public partial class Contacts
     [Inject]
     protected IContactsClient Client { get; set; } = default!;
     [Inject]
-    public IClipboard Clipboard { get; set; }
+    private IClipboard? Clipboard { get; set; }
 
     protected EntityServerTableContext<ContactDto, int, ContactViewModel> Context { get; set; } = default!;
 
@@ -65,7 +65,7 @@ public partial class Contacts
 
         if (phoneNumbers.Length > 0)
         {
-            await Clipboard.SetTextAsync(string.Join(",", phoneNumbers));
+            await Clipboard!.SetTextAsync(string.Join(",", phoneNumbers));
 
             Snackbar.Add("Selected Phone Number(s) were copied to Clipboard", Severity.Success);
         }

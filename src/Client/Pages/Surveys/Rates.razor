@@ -7,16 +7,16 @@
 
     <EditFormContent>
         <MudItem xs="12" md="6">
-            <MudTextField Label="Code" For="@(() => context.Number)" @bind-Value="context.Number" />
+            <MudTextField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" />
         </MudItem>
-        <MudItem xs="12" md="12">
+        <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
-        <MudItem xs="12" md="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
         </MudItem>
-        <MudItem xs="12" md="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
         </MudItem>
     </EditFormContent>
 
