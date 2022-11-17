@@ -12,6 +12,7 @@ using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.SMS.Contacts;
+
 public partial class Contacts
 {
     [CascadingParameter]
@@ -21,7 +22,7 @@ public partial class Contacts
     [Inject]
     protected IContactsClient Client { get; set; } = default!;
     [Inject]
-    private IClipboard? Clipboard { get; set; }
+    private IClipboard Clipboard { get; set; }
 
     protected EntityServerTableContext<ContactDto, int, ContactViewModel> Context { get; set; } = default!;
 

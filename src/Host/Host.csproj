@@ -6,6 +6,7 @@
         <AssemblyName>ZANECO.WASM.Host</AssemblyName>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'ZANECO.WASM.Server' " />
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.8" />
     </ItemGroup>
