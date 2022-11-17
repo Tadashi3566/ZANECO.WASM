@@ -9,24 +9,24 @@
         <MudMenuItem Icon="@Icons.Filled.Send" IconColor="Color.Secondary" OnClick="@(() => SendSMS(@context))">Send</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
             <MudSelect T="string" Label="Template Type" @bind-Value="context.TemplateType" For="@(() => context.TemplateType)" Variant="Variant.Filled">
                 <MudSelectItem Value="@("ADVISORY")" />
                 <MudSelectItem Value="@("POWER INTERRUPTION")" />
                 <MudSelectItem Value="@("OTHERS")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSwitch Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary"/>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSwitch Label="Multiple Send" For="@(() => context.IsMultiple)" @bind-Checked="context.IsMultiple" Color="Color.Tertiary" />
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
             <MudSelect T="string" Label="Message Type" @bind-Value="context.MessageType" For="@(() => context.MessageType)" Variant="Variant.Filled">
                 <MudSelectItem Value="@("sms.automatic")" />
                 <MudSelectItem Value="@("sms.automatic.flash")" />
             </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
+            <MudSwitch Class="mt-3" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary"/>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
+            <MudSwitch Class="mt-3" Label="Multiple Send" For="@(() => context.IsMultiple)" @bind-Checked="context.IsMultiple" Color="Color.Tertiary" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
@@ -51,7 +51,7 @@
     private RenderFragment<MessageTemplateDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">@context.Description</MudText>
+            <MudText Typo="Typo.caption">@context.Description</MudText>
             <MudText Typo="Typo.caption">@context.Notes</MudText>
         </MudItem>
     };
