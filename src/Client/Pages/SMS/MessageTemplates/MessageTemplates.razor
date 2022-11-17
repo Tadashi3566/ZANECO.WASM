@@ -6,7 +6,7 @@
 <EntityTable @ref="_table" TEntity="MessageTemplateDto" TId="int" TRequest="MessageTemplateUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.Send" IconColor="Color.Secondary" OnClick="@(() => SendSMS(@context))">Send</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => SendSMS(@context))">Send</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
