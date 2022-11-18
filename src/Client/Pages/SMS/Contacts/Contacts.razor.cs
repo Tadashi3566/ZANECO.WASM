@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -10,6 +11,9 @@ using ZANECO.WASM.Client.Components.Services;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Pages.SMS.MessageOuts;
+using ZANECO.WASM.Client.Pages.SMS.Modals;
+using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.SMS.Contacts;
@@ -23,8 +27,7 @@ public partial class Contacts
     [Inject]
     protected IContactsClient Client { get; set; } = default!;
     [Inject]
-    private IClipboardService? ClipboardService { get; set; }
-
+    protected IMessageOutsClient MessageOutClient { get; set; } = default!;
     protected EntityServerTableContext<ContactDto, Guid, ContactViewModel> Context { get; set; } = default!;
 
     private EntityTable<ContactDto, Guid, ContactViewModel> _table = default!;
@@ -32,6 +35,9 @@ public partial class Contacts
     private HashSet<ContactDto> _selectedItems = new HashSet<ContactDto>();
 
     private bool _canCreateSMS;
+
+    [Inject]
+    private IClipboardService? ClipboardService { get; set; }
 
     protected override async void OnInitialized()
     {
@@ -73,8 +79,26 @@ public partial class Contacts
         }
     }
 
+    private async Task InvokeSendMessageModal()
+    {
+        var parameters = new DialogParameters()
+        {
+            { nameof(SendMessageModal.PhoneNumbers), string.Join(',', _selectedItems.Select(x => x.PhoneNumber).ToArray()) },
+        };
+
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true, DisableBackdropClick = true };
+        var dialog = DialogService.Show<SendMessageModal>("Create Message", parameters, options);
+        var result = await dialog.Result;
+
+        //    if (!result.Cancelled)
+        //    {
+        //        await ReloadDataAsync();
+        //    }
+    }
+
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
     // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
+
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {
         if (e.File != null)

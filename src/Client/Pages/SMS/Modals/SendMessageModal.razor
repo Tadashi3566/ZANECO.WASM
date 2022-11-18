@@ -1,0 +1,53 @@
+﻿<EditForm Model="@Context" OnValidSubmit="Submit">
+    <MudDialog>
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+                <MudIcon Icon="@Icons.Material.Filled.Work" Class="mr-3 mb-n1" />
+                Create Message
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4" lg="3">
+                    <MudSwitch Class="mt-3" Label="Use m360 API (Default:SIM)" For="@(() => Context.IsAPI)" @bind-Checked="Context.IsAPI" Color="Color.Tertiary" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4" lg="3">
+                    <MudSelect T="string" Label="Message Type" @bind-Value="Context.MessageType" For="@(() => Context.MessageType)" Variant="Variant.Filled">
+                        <MudSelectItem Value="@("sms.automatic")" />
+                        <MudSelectItem Value="@("sms.automatic.flash")" />
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Label="Recepient" For="@(() => Context.MessageTo)" @bind-Value="@PhoneNumbers" Lines="10" Variant="Variant.Filled" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Counter=160 Immediate=true HelperText="Recommended SMS is up to 160 characters" Label="Message" For="@(() => Context.MessageText)" @bind-Value="Context.MessageText" Lines="5" Variant="Variant.Filled" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton StartIcon="@Icons.Filled.Cancel" OnClick="Cancel">Cancel</MudButton>
+            <MudButton StartIcon="@Icons.Filled.Save" Color="Color.Error" Variant="Variant.Filled" OnClick="Submit">Send</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter]
+    public string? PhoneNumbers { get; set; }
+
+    [Parameter]
+    protected MessageOutCreateRequest Context { get; set; } = default!;
+
+    void Submit()
+    {
+
+
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}

@@ -4,7 +4,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.Surveys.RatingTemplates;
-public class RateAutocomplete : MudAutocomplete<Guid>
+public class AutocompleteRate : MudAutocomplete<Guid>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
@@ -16,14 +16,14 @@ public class RateAutocomplete : MudAutocomplete<Guid>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Label = "Rate";
-        Variant = Variant.Filled;
+        Clearable = true;
         Dense = true;
+        Label = "Rate";
         Margin = Margin.Dense;
         ResetValueOnEmptyText = true;
-        SearchFunc = SearchRates;
-        ToStringFunc = GetRateName;
-        Clearable = true;
+        SearchFunc = SearchName;
+        ToStringFunc = GetName;
+        Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }
 
@@ -39,7 +39,7 @@ public class RateAutocomplete : MudAutocomplete<Guid>
         }
     }
 
-    private async Task<IEnumerable<Guid>> SearchRates(string value)
+    private async Task<IEnumerable<Guid>> SearchName(string value)
     {
         var filter = new RateSearchRequest
         {
@@ -57,6 +57,6 @@ public class RateAutocomplete : MudAutocomplete<Guid>
         return _rates.Select(x => x.Id);
     }
 
-    private string GetRateName(Guid id) =>
+    private string GetName(Guid id) =>
         _rates.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

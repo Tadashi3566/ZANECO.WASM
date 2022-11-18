@@ -6,7 +6,7 @@
 <EntityTable @ref="_table" TEntity="RatingTemplateDto" TId="Guid" TRequest="RatingTemplateUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" md="6">
-            <RateAutocomplete For="@(() => context.RateId)" @bind-Value="context.RateId"  />
+            <AutocompleteRate For="@(() => context.RateId)" @bind-Value="context.RateId" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Comment" For="@(() => context.Comment)" @bind-Value="context.Comment" />
