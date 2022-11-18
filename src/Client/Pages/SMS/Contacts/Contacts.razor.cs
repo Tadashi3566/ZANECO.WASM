@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
-using TextCopy;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Components.Services;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;

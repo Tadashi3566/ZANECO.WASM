@@ -6,7 +6,7 @@
             OnClick="@((e) => DrawerToggle())" />
     </MudTooltip>
      <MudButton Variant="Variant.Text" DisableElevation="true" Link="/">
-            @L["ZANECO"]</MudButton>
+            @L["ZANECO Web Application"]</MudButton>
     <MudSpacer />
     
     <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
@@ -31,10 +31,10 @@
             </MudMenu>
         </MudTooltip>
         <LanguageSelector />
-        <MudTooltip Text="Fork Repository">
+        @*<MudTooltip Text="Fork Repository">
             <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit"
                 Link="https://github.com/fullstackhero/blazor-wasm-boilerplate" Target="_blank" />
-        </MudTooltip>
+        </MudTooltip>*@
         <NotificationConnectionStatus></NotificationConnectionStatus>
     </MudHidden>
     <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">

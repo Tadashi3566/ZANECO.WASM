@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;
-using TextCopy;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;

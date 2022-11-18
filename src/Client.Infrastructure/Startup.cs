@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
 using MudBlazor.Services;
 using System.Globalization;
-using TextCopy;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Notifications;
