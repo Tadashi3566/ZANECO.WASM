@@ -1,5 +1,4 @@
 ﻿using Mapster;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -10,9 +9,6 @@ using ZANECO.WASM.Client.Components.Services;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
-using ZANECO.WASM.Client.Pages.SMS.MessageOuts;
-using ZANECO.WASM.Client.Pages.SMS.Modals;
-using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.SMS.Contacts;
@@ -78,21 +74,12 @@ public partial class Contacts
         }
     }
 
-    private async Task InvokeSendMessageModal()
+    private void Send()
     {
-        var parameters = new DialogParameters()
-        {
-            { nameof(SendMessageModal.PhoneNumbers), string.Join(',', _selectedItems.Select(x => x.PhoneNumber).ToArray()) },
-        };
-
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<SendMessageModal>("Create Message", parameters, options);
-        var result = await dialog.Result;
-
-        //    if (!result.Cancelled)
-        //    {
-        //        await ReloadDataAsync();
-        //    }
+        string[] phoneNumbers = _selectedItems.Select(x => x.PhoneNumber).ToArray()!;
+        string recepients = string.Join(",", phoneNumbers);
+        Navigation.NavigateTo($"/sms/send/{recepients}");
+        //Navigation.NavigateTo($"/sms/send/");
     }
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.

@@ -70,19 +70,19 @@ public partial class MessageTemplates
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
-            string recepients = ClassSMS.RemoveWhiteSpaces(request.Recepients);
-            string[] recepientArray = recepients.Split(',');
-            recepientArray = ClassSMS.GetDistinctFromArray(recepientArray);
-            foreach (string recepient in recepientArray)
-            {
-                _messageOut.IsAPI = request.IsAPI;
-                _messageOut.MessageType = request.MessageType;
-                _messageOut.MessageTo = recepient;
-                _messageOut.MessageText = request.Message;
+            //string recepients = ClassSMS.RemoveWhiteSpaces(request.Recepients);
+            //string[] recepientArray = recepients.Split(',');
+            //recepientArray = ClassSMS.GetDistinctFromArray(recepientArray);
+            //foreach (string recepient in recepientArray)
+            //{
+                //_messageOut.IsAPI = request.IsAPI;
+                //_messageOut.MessageType = request.MessageType;
+                //_messageOut.MessageTo = request.Recepients;
+                //_messageOut.MessageText = request.Message;
                 _messageOut.Description = request.Subject;
 
-                await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar, successMessage: "SMS successfully created and sent to queue.");
-            }
+                await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar, successMessage: "Messages successfully created and sent to queue.");
+            //}
         }
     }
 }

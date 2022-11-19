@@ -4,7 +4,7 @@ using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
-namespace ZANECO.WASM.Client.Pages.Surveys.Comments;
+namespace ZANECO.WASM.Client.Pages.Surveys.RatingTemplates;
 public partial class RatingTemplates
 {
     [Inject]

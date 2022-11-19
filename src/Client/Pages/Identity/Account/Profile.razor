@@ -20,24 +20,24 @@
             <MudCardActions Class="d-flex justify-center">
                 <InputFile id="fileInput" OnChange="UploadFiles" hidden accept=".jpg,.jpeg,.png" />
                 <div style="padding-bottom:20px">
-                <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
-                    StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
-                    @L["Upload"]
-                </MudButton>
-                @if(!string.IsNullOrEmpty(_imageUrl))
-                {
-                    <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                        StartIcon="@Icons.Filled.RemoveRedEye" Link="@_imageUrl" Style="margin-left: 5px;" >
-                        @L["View"]
+                    <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
+                               StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
+                        @L["Upload"]
                     </MudButton>
+                    @if (!string.IsNullOrEmpty(_imageUrl))
+                    {
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                               StartIcon="@Icons.Filled.RemoveRedEye" Link="@_imageUrl" Style="margin-left: 5px;">
+                            @L["View"]
+                        </MudButton>
 
-                    <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
-                        StartIcon="@Icons.Filled.Delete" OnClick="RemoveImageAsync" Style="margin-left: 5px;" >
-                        @L["Delete"]
-                    </MudButton>
-                }
+                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                               StartIcon="@Icons.Filled.Delete" OnClick="RemoveImageAsync" Style="margin-left: 5px;">
+                            @L["Delete"]
+                        </MudButton>
+                    }
 
-                    </div>
+                </div>
 
             </MudCardActions>
         </MudCard>
@@ -56,25 +56,25 @@
                         <CustomValidation @ref="_customValidation" />
                         <MudItem xs="12" md="6">
                             <MudTextField @bind-Value="@_user.FirstName"
-                                For="@(() => _user.FirstName)"
-                                Label="@L["First Name"]" Variant="Variant.Outlined" />
+                                          For="@(() => _user.FirstName)"
+                                          Label="@L["First Name"]" Variant="Variant.Outlined" />
                         </MudItem>
                         <MudItem xs="12" md="6">
                             <MudTextField @bind-Value="@_user.LastName"
-                                For="@(() => _user.LastName)"
-                                Label="@L["Last Name"]" Variant="Variant.Outlined" />
+                                          For="@(() => _user.LastName)"
+                                          Label="@L["Last Name"]" Variant="Variant.Outlined" />
                         </MudItem>
                         <MudItem xs="12" md="6">
                             <MudTextField @bind-Value="@_user.PhoneNumber"
-                                For="@(() => _user.PhoneNumber)"
-                                Label="@L["Phone Number"]"
-                                Variant="Variant.Outlined" />
+                                          For="@(() => _user.PhoneNumber)"
+                                          Label="@L["Phone Number"]"
+                                          Variant="Variant.Outlined" />
                         </MudItem>
                         <MudItem xs="12" md="6">
                             <MudTextField @bind-Value="@_user.Email" Label="@L["Email"]"
-                                For="@(() => _user.Email)"
-                                Variant="Variant.Outlined"
-                                InputType="InputType.Email" Disabled=true />
+                                          For="@(() => _user.Email)"
+                                          Variant="Variant.Outlined"
+                                          InputType="InputType.Email" Disabled=true />
                         </MudItem>
                         <MudItem xs="12">
                             <MudTextField @bind-Value="@_user.Description"
@@ -94,7 +94,7 @@
                 </MudCardContent>
                 <MudCardActions Class="pb-4 pl-4">
                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" StartIcon="@Icons.Filled.Save"
-                        ButtonType="ButtonType.Submit">@L["Save Changes"]</MudButton>
+                               ButtonType="ButtonType.Submit">@L["Save Changes"]</MudButton>
                 </MudCardActions>
             </MudCard>
         </EditForm>

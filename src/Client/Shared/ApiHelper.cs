@@ -48,49 +48,6 @@ public static class ApiHelper
         return default;
     }
 
-    public static async Task<T?> ExecuteCallGuardedAsync<T>(
-        Func<Task<T>> call,
-        string? successMessage = null)
-    {
-        try
-        {
-            var result = await call();
-
-            if (!string.IsNullOrWhiteSpace(successMessage))
-            {
-                // snackbar.Add(successMessage, Severity.Info);
-                ErrorString = successMessage;
-            }
-
-            return result;
-        }
-        catch (ApiException<HttpValidationProblemDetails> ex)
-        {
-            if (ex.Result.Errors is not null)
-            {
-                // customValidation?.DisplayErrors(ex.Result.Errors);
-                ErrorString = "Something went wrong! Check multiple errors.";
-            }
-            else
-            {
-                // snackbar.Add("Something went wrong!", Severity.Error);
-                ErrorString = "Something went wrong!";
-            }
-        }
-        catch (ApiException<ErrorResult> ex)
-        {
-            // snackbar.Add(ex.Result.Exception, Severity.Error);
-            ErrorString = ex.Result.Exception!;
-        }
-        catch (Exception ex)
-        {
-            // snackbar.Add(ex.Message, Severity.Error);
-            ErrorString = ex.Message;
-        }
-
-        return default;
-    }
-
     public static async Task<bool> ExecuteCallGuardedAsync(
         Func<Task> call,
         ISnackbar snackbar,

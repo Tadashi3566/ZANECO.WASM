@@ -17,7 +17,7 @@
         @if (_canViewRoleClaims)
         {
             <MudMenuItem OnClick="@(() => EmployeePayrollGenerate(context.EmployeeId, context.PayrollId))" >Generate Payroll</MudMenuItem>
-            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/payroll/employeepayrolldetails/{context.EmployeeId}/{context.PayrollId}"))" >Payroll Details</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeepayrolldetails/{context.EmployeeId}/{context.PayrollId}"))" >Payroll Details</MudMenuItem>
         }
     </ExtraActions>
     <EditFormContent>

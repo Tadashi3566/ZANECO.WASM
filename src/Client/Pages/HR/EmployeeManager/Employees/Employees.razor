@@ -2,8 +2,6 @@
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Employees)]
 
-@inject NavigationManager NavigationManager
-
 <FshTitle Title="Employees" Description="Employee Management" />
 
 <EntityTable @ref="_table" TEntity="EmployeeDto" TId="Guid" TRequest="EmployeeViewModel" Context="@Context" MultiSelection=true>
@@ -16,14 +14,14 @@
         @if (_canViewRoleClaims)
         {
             <MudDivider />
-            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/hr/employers/{context.Id}"))" >Employers</MudMenuItem>
-            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/hr/dependents/{context.Id}"))" >Dependents</MudMenuItem>
-            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/hr/designations/{context.Id}"))" >Designations</MudMenuItem>
-            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/hr/powerbills/{context.Id}"))" >Power Bill</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/employers/{context.Id}"))" >Employers</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/dependents/{context.Id}"))" >Dependents</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/designations/{context.Id}"))" >Designations</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/powerbills/{context.Id}"))">Power Bill</MudMenuItem>
             <MudDivider />
-            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/payroll/attendance/{context.Id}/{SearchPayrollId}"))" >Attendance</MudMenuItem>
-            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/payroll/loans/{context.Id}"))" >Loans</MudMenuItem>
-            <MudMenuItem OnClick="@(() => NavigationManager.NavigateTo($"/payroll/employeeadjustments/{context.Id}"))" >Adjustments</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/attendance/{context.Id}/{SearchPayrollId}"))" >Attendance</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/loans/{context.Id}"))" >Loans</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeeadjustments/{context.Id}"))" >Adjustments</MudMenuItem>
             <MudMenuItem OnClick="@(() => EmployeePayrollGenerate(context.Id, SearchPayrollId))" >Generate Payroll</MudMenuItem>
             <MudMenuItem OnClick="@(() => NavigatePage("/payroll/employeepayrolldetails", context.Id, SearchPayrollId))" >Payroll Details</MudMenuItem>
         }

@@ -33,7 +33,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="Pages\Surveys\Comments\Comments.razor">
+      <Content Update="Pages\Surveys\Ratings\Ratings.razor">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       </Content>
     </ItemGroup>

@@ -102,7 +102,7 @@ public partial class Employees
         {
             Snackbar.Add("Employee Payroll has been successfully generated", Severity.Success);
 
-            NavigationManager.NavigateTo($"/payroll/employeepayrolldetails/{employeeId}/{payrollId}");
+            Navigation.NavigateTo($"/payroll/employeepayrolldetails/{employeeId}/{payrollId}");
         }
     }
 
@@ -114,7 +114,7 @@ public partial class Employees
             return;
         }
 
-        NavigationManager.NavigateTo($"{page}/{employeeId}/{payrollId}");
+        Navigation.NavigateTo($"{page}/{employeeId}/{payrollId}");
     }
 
     // Advanced Search

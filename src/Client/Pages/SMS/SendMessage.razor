@@ -1,0 +1,8 @@
+﻿@page "/sms/send"
+@page "/sms/send/{Recepients}"
+
+@attribute [MustHavePermission(FSHAction.Create, FSHResource.SMS)]
+
+<FshTitle Title="Write Message" Description="Write Message and send to the recepients." />
+
+<SendMessageComponent Recepients="@Recepients"/>
