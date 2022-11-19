@@ -9,17 +9,12 @@ using ZANECO.WASM.Client.Infrastructure.Preferences;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-// var serviceCollection = builder.Services;
-// serviceCollection.InjectClipboard();
-
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddClientServices(builder.Configuration);
 
 builder.Services.AddScoped<IClipboardService, ClipboardService>();
-
-// builder.Services.AddDevExpressBlazor(configure => configure.BootstrapVersion = BootstrapVersion.v5);
 
 var host = builder.Build();
 

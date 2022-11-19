@@ -33,6 +33,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Update="Pages\Surveys\Comments\Comments.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Update="Roslynator.Analyzers" Version="4.1.1">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

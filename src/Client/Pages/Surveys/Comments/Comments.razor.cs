@@ -5,7 +5,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.Surveys.Comments;
-public partial class RatingTemplates
+public partial class Comments
 {
     [Inject]
     protected IRatesClient RatesClient { get; set; } = default!;
