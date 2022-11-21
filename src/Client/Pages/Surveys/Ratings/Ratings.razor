@@ -1,22 +1,27 @@
 ﻿@page "/survey/ratings"
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Rating)]
 
-<FshTitle Title="RatingTemplates" Description="Manage RatingTemplates" />
+<FshTitle Title="Ratings" Description="Manage Ratings" />
 
-<EntityTable @ref="_table" TEntity="RatingTemplateDto" TId="Guid" TRequest="RatingTemplateUpdateRequest" Context="@Context">
+<EntityTable @ref="_table" TEntity="RatingDto" TId="Guid" TRequest="RatingUpdateRequest" Context="@Context">
     <EditFormContent>
-        <MudItem xs="12" md="6">
-            <AutocompleteRatingTemplate For="@(() => context.RateId)" @bind-Value="context.RateId" />
+        <MudItem xs="12">
+            <MudRating Size="Size.Large" @bind-SelectedValue="context.RateNumber" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Comment" For="@(() => context.Comment)" @bind-Value="context.Comment" />
+            <MudTextField Label="Comment" For="@(() => context.Comment)" @bind-Value="context.Comment" Lines="5" />
         </MudItem>
-        <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
-        </MudItem>
-        <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
-        </MudItem>
+
+        @if (context.Id != Guid.Empty)
+        {
+            <MudItem xs="12">
+                <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+            </MudItem>
+        }
+        
     </EditFormContent>
 
 </EntityTable>

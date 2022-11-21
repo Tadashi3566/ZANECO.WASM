@@ -1,0 +1,29 @@
+﻿<EditForm Model="@_model" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <CustomValidation @ref="_customValidation" />
+    <MudCard>
+        <MudCardHeader>
+            <MudText>How would you like to rate our Services?</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6">
+                    <MudRating Class="align-end" @bind-SelectedValue="_model.RateNumber" MaxValue="5" Size="Size.Large" HoveredValueChanged="@(() => SetRateName(_model.RateNumber))" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudText @bind-Value="_model.Comment">@_rateName</MudText>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Label="Comment or Rating Survey" For="@(() => _model.Comment)" @bind-Value="_model.Comment" Lines="5" />
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions>
+            <MudItem Class="ma-2">
+                <MudButton Color="Color.Primary" Class="ml-auto" Size="Size.Large" StartIcon="@Icons.Filled.Send" Variant="Variant.Filled"
+                           ButtonType="ButtonType.Submit">Submit</MudButton>
+            </MudItem>
+        </MudCardActions>
+    </MudCard>
+    
+</EditForm>

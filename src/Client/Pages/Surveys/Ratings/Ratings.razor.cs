@@ -10,41 +10,41 @@ public partial class Ratings
     [Inject]
     protected IRatesClient RatesClient { get; set; } = default!;
     [Inject]
-    protected IRatingTemplatesClient RatingTemplatesClient { get; set; } = default!;
+    protected IRatingsClient RatingsClient { get; set; } = default!;
 
-    protected EntityServerTableContext<RatingTemplateDto, Guid, RatingTemplateUpdateRequest> Context { get; set; } = default!;
+    protected EntityServerTableContext<RatingDto, Guid, RatingUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<RatingTemplateDto, Guid, RatingTemplateUpdateRequest> _table = default!;
+    private EntityTable<RatingDto, Guid, RatingUpdateRequest> _table = default!;
 
     protected override void OnInitialized() =>
         Context = new(
-            entityName: "Rating Template",
-            entityNamePlural: "Rating Templates",
+            entityName: "Rating",
+            entityNamePlural: "Ratings",
             entityResource: FSHResource.Rating,
             fields: new()
             {
-                new(dto => dto.RateNumber, "Number", "Number"),
-                new(dto => dto.RateName, "Name", "Name"),
+                new(dto => dto.RateNumber, "Stars", "Number"),
                 new(dto => dto.Comment, "Comment", "Comment"),
                 new(dto => dto.Description, "Description", "Description"),
                 new(dto => dto.Notes, "Notes", "Notes"),
             },
             enableAdvancedSearch: true,
             idFunc: prod => prod.Id,
-            searchFunc: async filter => (await RatingTemplatesClient
-                .SearchAsync(filter.Adapt<RatingTemplateSearchRequest>()))
-                .Adapt<PaginationResponse<RatingTemplateDto>>(),
-            createFunc: async prod => await RatingTemplatesClient.CreateAsync(prod.Adapt<RatingTemplateCreateRequest>()),
-            updateFunc: async (id, prod) => await RatingTemplatesClient.UpdateAsync(id, prod.Adapt<RatingTemplateUpdateRequest>()),
-            deleteFunc: async id => await RatingTemplatesClient.DeleteAsync(id),
-            exportFunc: async filter =>
-                {
-                    var exportFilter = filter.Adapt<RatingTemplateExportRequest>();
+            searchFunc: async filter => (await RatingsClient
+                .SearchAsync(filter.Adapt<RatingSearchRequest>()))
+                .Adapt<PaginationResponse<RatingDto>>(),
+            createFunc: async prod => await RatingsClient.CreateAsync(prod.Adapt<RatingCreateRequest>()),
+            updateFunc: async (id, prod) => await RatingsClient.UpdateAsync(id, prod.Adapt<RatingUpdateRequest>()),
+            deleteFunc: async id => await RatingsClient.DeleteAsync(id)
+            //exportFunc: async filter =>
+            //    {
+            //        var exportFilter = filter.Adapt<RatingExportRequest>();
 
-                    exportFilter.RateId = SearchRateId == default ? null : SearchRateId;
+            //        exportFilter.RateId = SearchRateId == default ? null : SearchRateId;
 
-                    return await RatingTemplatesClient.ExportAsync(exportFilter);
-                });
+            //        return await RatingsClient.ExportAsync(exportFilter);
+            //    }
+                );
 
     // Advanced Search
     private Guid _searchRateId;

@@ -31945,9 +31945,12 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
         public int RateNumber { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("rateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string RateName { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 1)]
+        [System.ComponentModel.DataAnnotations.StringLength(1024, MinimumLength = 1)]
         public string Comment { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -31967,6 +31970,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("rateNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
         public int RateNumber { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("rateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string RateName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
