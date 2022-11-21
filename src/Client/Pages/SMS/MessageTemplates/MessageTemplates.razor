@@ -1,7 +1,7 @@
 ﻿@page "/sms/templates"
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
-
+ 
 <FshTitle Title="Message Templates" Description="Manage Message Templates" />
 
 <EntityTable @ref="_table" TEntity="MessageTemplateDetail" TId="int" TRequest="MessageTemplateUpdateRequest" Context="@Context">

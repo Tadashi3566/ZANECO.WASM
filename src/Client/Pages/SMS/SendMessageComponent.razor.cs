@@ -24,8 +24,6 @@ public partial class SendMessageComponent
 
     private CustomValidation? _customValidation;
 
-    private bool _fastMode = false;
-
     protected override void OnParametersSet()
     {
         if (Recepients != null)
@@ -46,13 +44,17 @@ public partial class SendMessageComponent
 
     private async Task Send()
     {
-        string transactionContent = $"Are you sure you want to send SMS to {ClassSMS.RecepientCount(_model.MessageTo):N0} recepient(s)?";
+        string transactionTitle = "Send Message";
+        string transactionContent = $"Are you sure you want to {transactionTitle} to {ClassSMS.RecepientCount(_model.MessageTo):N0} recepient(s)?";
         var parameters = new DialogParameters
         {
-            { nameof(TransactionConfirmation.ContentText), transactionContent }
+            { nameof(TransactionConfirmation.TransactionIcon), Icons.Material.Filled.Send },
+            { nameof(TransactionConfirmation.TransactionTitle), transactionTitle },
+            { nameof(TransactionConfirmation.ContentText), transactionContent },
+            { nameof(TransactionConfirmation.ConfirmText), "Send" }
         };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<TransactionConfirmation>("Send", parameters, options);
+        var dialog = DialogService.Show<TransactionConfirmation>(transactionTitle, parameters, options);
         var result = await dialog.Result;
         if (!result.Cancelled)
         {

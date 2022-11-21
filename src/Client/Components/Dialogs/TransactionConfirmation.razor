@@ -1,18 +1,16 @@
-﻿@inject IStringLocalizer<TransactionConfirmation> L
-
-<MudDialog>
+﻿<MudDialog>
     <TitleContent>
         <MudText Typo="Typo.h6">
-            <MudIcon Icon="@Icons.Material.Filled.Work" Class="mr-3 mb-n1" />
-            @L["Transaction Confirmation"]
+            <MudIcon Icon=@TransactionIcon Class="mr-3 mb-n1" />
+            @TransactionTitle Confirmation
         </MudText>
     </TitleContent>
     <DialogContent>
         <MudText>@ContentText</MudText>
     </DialogContent>
     <DialogActions>
-        <MudButton StartIcon="@Icons.Filled.Cancel" OnClick="Cancel">@L["Cancel"]</MudButton>
-        <MudButton StartIcon="@Icons.Filled.Save" Color="Color.Error" Variant="Variant.Filled" OnClick="Submit">@L["Confirm"]</MudButton>
+        <MudButton StartIcon="@Icons.Filled.Cancel" OnClick="Cancel">Cancel</MudButton>
+        <MudButton StartIcon=@TransactionIcon Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">@ConfirmText</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -21,7 +19,16 @@
     MudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
+    public string TransactionIcon { get; set; } = @Icons.Material.Filled.Work;
+
+    [Parameter]
+    public string TransactionTitle { get; set; } = "Transaction";
+
+    [Parameter]
     public string? ContentText { get; set; }
+
+    [Parameter]
+    public string ConfirmText { get; set; } = "Confirm";
 
     void Submit()
     {
