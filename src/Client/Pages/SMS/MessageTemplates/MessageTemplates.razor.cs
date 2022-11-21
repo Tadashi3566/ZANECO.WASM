@@ -1,7 +1,6 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
@@ -20,17 +19,15 @@ public partial class MessageTemplates
     [Inject]
     private IClipboardService? ClipboardService { get; set; }
 
-    // private IClipboard? Clipboard { get; set; }
-    protected EntityServerTableContext<MessageTemplateDto, int, MessageTemplateUpdateRequest> Context { get; set; } = default!;
+    protected EntityServerTableContext<MessageTemplateDetail, int, MessageTemplateUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<MessageTemplateDto, int, MessageTemplateUpdateRequest> _table = default!;
+    private EntityTable<MessageTemplateDetail, int, MessageTemplateUpdateRequest> _table = default!;
 
     private MessageOutCreateRequest _messageOut = new();
-
     protected override void OnInitialized() =>
         Context = new(
-            entityName: "MessageTemplate",
-            entityNamePlural: "MessageTemplates",
+            entityName: "Message Template",
+            entityNamePlural: "Message Templates",
             entityResource: FSHResource.SMS,
             fields: new()
             {
@@ -45,11 +42,21 @@ public partial class MessageTemplates
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<MessageTemplateSearchRequest>()))
-                .Adapt<PaginationResponse<MessageTemplateDto>>(),
+                .Adapt<PaginationResponse<MessageTemplateDetail>>(),
             createFunc: async data => await Client.CreateAsync(data.Adapt<MessageTemplateCreateRequest>()),
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+
+    //private void ViewRecepients(int id)
+    //{
+    //    var template = Client.SearchAsync(new MessageTemplateSearchRequest());
+    //    template.ShowRecepients = !template.ShowRecepients;
+    //    foreach (var otherTemplates in _templates.Except(new[] { template }))
+    //    {
+    //        otherTemplates.ShowRecepients = false;
+    //    }
+    //}
 
     private async void CopyMessage(string message)
     {
@@ -58,7 +65,7 @@ public partial class MessageTemplates
         Snackbar.Add("The Template Message was copied to Clipboard", Severity.Success);
     }
 
-    private async void SendSMS(MessageTemplateDto request)
+    private async void SendSMS(MessageTemplateDetail request)
     {
         string transactionContent = $"Are you sure you want to send SMS to {ClassSMS.RecepientCount(request.Recepients):N0} recepient(s)?";
         DialogParameters parameters = new()
@@ -70,11 +77,6 @@ public partial class MessageTemplates
         DialogResult result = await dialog.Result;
         if (!result.Cancelled)
         {
-            //string recepients = ClassSMS.RemoveWhiteSpaces(request.Recepients);
-            //string[] recepientArray = recepients.Split(',');
-            //recepientArray = ClassSMS.GetDistinctFromArray(recepientArray);
-            //foreach (string recepient in recepientArray)
-            //{
             _messageOut.IsAPI = request.IsAPI;
             _messageOut.MessageType = request.MessageType;
             _messageOut.MessageTo = request.Recepients;
@@ -82,7 +84,11 @@ public partial class MessageTemplates
             _messageOut.Description = request.Subject;
 
             await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar, successMessage: "Messages successfully created and sent to queue.");
-            //}
         }
+    }
+
+    public class MessageTemplateDetail : MessageTemplateDto
+    {
+        public bool ShowRecepients { get; set; }
     }
 }

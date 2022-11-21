@@ -33,8 +33,6 @@ public partial class MessageLogs
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<MessageLogSearchRequest>()))
                 .Adapt<PaginationResponse<MessageLogDto>>(),
-
-            // createFunc: async data => await Client.CreateAsync(data.Adapt<MessageLogCreateRequest>()),
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);

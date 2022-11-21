@@ -9,7 +9,6 @@ public partial class MessageOuts
 {
     [Inject]
     protected IMessageOutsClient Client { get; set; } = default!;
-
     protected EntityServerTableContext<MessageOutDto, int, MessageOutCreateRequest> Context { get; set; } = default!;
 
     private EntityTable<MessageOutDto, int, MessageOutCreateRequest> _table = default!;

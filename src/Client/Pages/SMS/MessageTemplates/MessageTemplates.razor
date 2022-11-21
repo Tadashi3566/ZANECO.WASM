@@ -4,9 +4,10 @@
 
 <FshTitle Title="Message Templates" Description="Manage Message Templates" />
 
-<EntityTable @ref="_table" TEntity="MessageTemplateDto" TId="int" TRequest="MessageTemplateUpdateRequest" Context="@Context">
+<EntityTable @ref="_table" TEntity="MessageTemplateDetail" TId="int" TRequest="MessageTemplateUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
+        @*<MudMenuItem Icon="@Icons.Filled.Contacts" OnClick="@(() => ViewRecepients(context.Id))">@((context.ShowRecepients == true) ? "Hide" : "Show") Recepients</MudMenuItem>*@
         <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => CopyMessage(context.Message))">Copy Message</MudMenuItem>
         <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => SendSMS(@context))">Send</MudMenuItem>
     </ExtraActions>
@@ -47,10 +48,38 @@
         </MudItem>
     </EditFormContent>
 
+    <ChildRowContent>
+        @if (context.ShowRecepients)
+        {
+            <MudTr>
+                <td colspan="6">
+                    <MudCard Elevation="25" style="margin: 10px !important;">
+                        @*<MudCardHeader>
+                            <CardHeaderContent>
+                                <MudAlert Severity="Severity.Info" Typo="Typo.body1">
+                                    @L["Details for Tenant"] :
+                                    <strong>@context.Id</strong>
+                                </MudAlert>
+                            </CardHeaderContent>
+                        </MudCardHeader>*@
+                        <MudCardContent>
+                            <table class="mud-table-root">
+                                <tbody class="mud-table-body">
+                                    <tr class="mud-table-row">
+                                        <MudText>@context.Recepients</MudText>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </MudCardContent>
+                    </MudCard>
+                </td>
+            </MudTr>
+        }
+    </ChildRowContent>
 </EntityTable>
 
 @code {
-    private RenderFragment<MessageTemplateDto> TemplateDescriptionNotes => context => __builder =>
+    private RenderFragment<MessageTemplateDetail> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.caption">@context.Description</MudText>
