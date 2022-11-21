@@ -7,14 +7,15 @@
         </MudCardHeader>
         <MudCardContent>
             <MudGrid>
-                <MudItem xs="12" sm="6">
-                    <MudRating Class="align-end" @bind-SelectedValue="_model.RateNumber" MaxValue="5" Size="Size.Large" HoveredValueChanged="@(() => SetRateName(_model.RateNumber))" />
+                <MudItem xs="12" sm="6" Class="align-self-center">
+                    <MudRating @bind-SelectedValue="_model.RateNumber" MaxValue="5" Size="Size.Large" HoveredValueChanged="@(() => SetRateName(_model.RateNumber))" />
                 </MudItem>
-                <MudItem xs="12" sm="6">
-                    <MudText @bind-Value="_model.Comment">@_rateName</MudText>
+                <MudItem xs="12" sm="6" Class="align-self-center">
+                    <MudText Typo="Typo.h5">@_rateName</MudText>
                 </MudItem>
+                
                 <MudItem xs="12">
-                    <MudTextField Label="Comment or Rating Survey" For="@(() => _model.Comment)" @bind-Value="_model.Comment" Lines="5" />
+                    <MudTextField Label="Comment or Rating Survey" For="@(() => _model.Comment)" @bind-Value="_model.Comment" Lines="5"  />
                 </MudItem>
             </MudGrid>
         </MudCardContent>
