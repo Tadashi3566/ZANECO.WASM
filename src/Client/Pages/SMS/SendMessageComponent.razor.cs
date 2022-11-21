@@ -24,12 +24,24 @@ public partial class SendMessageComponent
 
     private CustomValidation? _customValidation;
 
-    protected override async Task OnParametersSetAsync()
+    private bool _fastMode = false;
+
+    protected override void OnParametersSet()
     {
         if (Recepients != null)
         {
             _model.MessageTo = Recepients;
         }
+    }
+
+    private bool SetFastMode()
+    {
+        if (!_model.IsAPI)
+        {
+            _model.IsMultiple = false;
+            return true;
+        }
+        return false;
     }
 
     private async Task Send()

@@ -26,7 +26,7 @@ public partial class MessageOuts
                 new(data => data.MessageTo, "Recepient", "MessageTo"),
                 new(data => data.MessageText, "Message", "MessageText"),
             },
-            enableAdvancedSearch: true,
+            enableAdvancedSearch: false,
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<MessageOutSearchRequest>()))

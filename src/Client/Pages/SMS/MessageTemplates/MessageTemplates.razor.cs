@@ -61,13 +61,13 @@ public partial class MessageTemplates
     private async void SendSMS(MessageTemplateDto request)
     {
         string transactionContent = $"Are you sure you want to send SMS to {ClassSMS.RecepientCount(request.Recepients):N0} recepient(s)?";
-        var parameters = new DialogParameters
+        DialogParameters parameters = new()
         {
             { nameof(TransactionConfirmation.ContentText), transactionContent }
         };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<TransactionConfirmation>("Send", parameters, options);
-        var result = await dialog.Result;
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        IDialogReference dialog = DialogService.Show<TransactionConfirmation>("Send", parameters, options);
+        DialogResult result = await dialog.Result;
         if (!result.Cancelled)
         {
             //string recepients = ClassSMS.RemoveWhiteSpaces(request.Recepients);
@@ -75,13 +75,13 @@ public partial class MessageTemplates
             //recepientArray = ClassSMS.GetDistinctFromArray(recepientArray);
             //foreach (string recepient in recepientArray)
             //{
-                //_messageOut.IsAPI = request.IsAPI;
-                //_messageOut.MessageType = request.MessageType;
-                //_messageOut.MessageTo = request.Recepients;
-                //_messageOut.MessageText = request.Message;
-                _messageOut.Description = request.Subject;
+            _messageOut.IsAPI = request.IsAPI;
+            _messageOut.MessageType = request.MessageType;
+            _messageOut.MessageTo = request.Recepients;
+            _messageOut.MessageText = request.Message;
+            _messageOut.Description = request.Subject;
 
-                await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar, successMessage: "Messages successfully created and sent to queue.");
+            await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar, successMessage: "Messages successfully created and sent to queue.");
             //}
         }
     }
