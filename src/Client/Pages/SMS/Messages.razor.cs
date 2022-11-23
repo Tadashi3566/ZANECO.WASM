@@ -11,32 +11,56 @@ public partial class Messages
     [Parameter]
     public string Recepient { get; set; } = string.Empty;
     [Inject]
-    protected IMessageInsClient Client { get; set; } = default!;
-    protected EntityServerTableContext<MessageInDto, int, MessageInUpdateRequest> Context { get; set; } = default!;
+    protected IMessageInsClient ClientIn { get; set; } = default!;
+    [Inject]
+    protected IMessageLogsClient ClientLog { get; set; } = default!;
+    protected EntityServerTableContext<MessageInDto, int, MessageInUpdateRequest> ContextIn { get; set; } = default!;
+    protected EntityServerTableContext<MessageLogDto, int, MessageLogUpdateRequest> ContextLog { get; set; } = default!;
 
-    private EntityTable<MessageInDto, int, MessageInUpdateRequest> _table = default!;
+    private EntityTable<MessageInDto, int, MessageInUpdateRequest> _tableIn = default!;
 
-    protected override void OnInitialized() =>
-        Context = new(
-            entityName: "Message",
-            entityNamePlural: "Messages",
+    private EntityTable<MessageLogDto, int, MessageLogUpdateRequest> _tableLog = default!;
+
+    protected override void OnInitialized()
+    {
+        ContextIn = new(
+            entityName: "Inbox",
+            entityNamePlural: "Inbox",
             entityResource: FSHResource.SMS,
             fields: new()
             {
                 new(data => data.ReceiveTime, "Date/Time", "ReceiveTime"),
                 new(data => data.MessageText, "Message", "MessageText"),
             },
-            enableAdvancedSearch: false,
             idFunc: data => data.Id,
             searchFunc: async _filter =>
             {
                 var filter = _filter.Adapt<MessageInSearchRequest>();
                 filter.Keyword = Recepient;
-                var result = await Client.SearchAsync(filter);
+                var result = await ClientIn.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<MessageInDto>>();
             },
-            //searchFunc: async filter => (await Client
-            //    .SearchAsync(filter.Adapt<MessageInSearchRequest>()))
-            //    .Adapt<PaginationResponse<MessageInDto>>(),
+            updateFunc: async (id, data) => await ClientIn.UpdateAsync(id, data),
             exportAction: string.Empty);
+
+        ContextLog = new(
+            entityName: "Outbox",
+            entityNamePlural: "Outbox",
+            entityResource: FSHResource.SMS,
+            fields: new()
+            {
+                new(data => data.SendTime, "Date/Time", "SendTime"),
+                new(data => data.MessageText, "Message", "MessageText"),
+            },
+            idFunc: data => data.Id,
+            searchFunc: async _filter =>
+            {
+                var filter = _filter.Adapt<MessageLogSearchRequest>();
+                filter.Keyword = Recepient;
+                var result = await ClientLog.SearchAsync(filter);
+                return result.Adapt<PaginationResponse<MessageLogDto>>();
+            },
+            updateFunc: async (id, data) => await ClientLog.UpdateAsync(id, data),
+            exportAction: string.Empty);
+    }
 }

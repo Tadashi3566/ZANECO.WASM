@@ -48,7 +48,7 @@
     private RenderFragment<MessageInDto> TemplateSenderReceiver => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudChip Icon="@Icons.Material.Filled.Chat" IconColor="Color.Tertiary" Label Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/send/{context.MessageFrom}"))">@context.MessageFrom</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.Chat" IconColor="Color.Tertiary" Label Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">@context.MessageFrom</MudChip>
             <MudChip Icon="@Icons.Material.Filled.CallReceived" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.MessageTo</MudChip>
         </MudItem>
     };

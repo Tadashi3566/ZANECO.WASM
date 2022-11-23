@@ -32769,6 +32769,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Id { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("sendTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? SendTime { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("isAPI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsAPI { get; set; } = default!;
 
@@ -32792,6 +32795,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class MessageOutCreateRequest
     {
+        [Newtonsoft.Json.JsonProperty("sendTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? SendTime { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("isAPI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsAPI { get; set; } = default!;
 

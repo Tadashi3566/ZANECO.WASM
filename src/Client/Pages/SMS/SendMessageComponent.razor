@@ -14,9 +14,12 @@
                 <MudSelectItem Value="@("sms.automatic.flash")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="12">
-            <MudTextField Label="Recepient" For="@(() => _model.MessageTo)" @bind-Value="_model.MessageTo" Lines="10" Variant="Variant.Filled" />
-        </MudItem>
+        @if (DisplayRecepients)
+        {
+            <MudItem xs="12">
+                <MudTextField Label="Recepient" For="@(() => _model.MessageTo)" @bind-Value="_model.MessageTo" Lines="10" Variant="Variant.Filled" />
+            </MudItem>
+        }
         <MudItem xs="12">
             <MudTextField Counter=160 Immediate=true HelperText="Recommended SMS is up to 160 characters" Label="Message" For="@(() => _model.MessageText)" @bind-Value="_model.MessageText" Lines="5" Variant="Variant.Filled" />
         </MudItem>

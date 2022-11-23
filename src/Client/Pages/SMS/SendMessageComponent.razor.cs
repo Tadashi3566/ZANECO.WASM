@@ -13,6 +13,8 @@ public partial class SendMessageComponent
 {
     [Parameter]
     public string Recepients { get; set; } = string.Empty;
+    [Parameter]
+    public bool DisplayRecepients { get; set; } = true;
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
     [Inject]
@@ -26,6 +28,8 @@ public partial class SendMessageComponent
 
     protected override void OnParametersSet()
     {
+        _model.MessageType = "sms.automatic";
+
         if (Recepients != null)
         {
             _model.MessageTo = Recepients;

@@ -3,14 +3,11 @@
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
 
-<FshTitle Title="Messages" Description="Messages from Phone Number" />
+<FshTitle Title="Messages" Description="Messages from Sender/Receiver" />
 
-<EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
-    <EditFormContent>
-        
-    </EditFormContent>
-</EntityTable>
+<SendMessageComponent DisplayRecepients=false Recepients="@Recepient" />
+<MudSpacer/>
 
-<MudPaper Class="ma-3">
-    <SendMessageComponent Recepients="@Recepient" />
-</MudPaper>
+<EntityTable @ref="_tableIn" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@ContextIn"/>
+
+<EntityTable @ref="_tableLog" TEntity="MessageLogDto" TId="int" TRequest="MessageLogUpdateRequest" Context="@ContextLog" />
