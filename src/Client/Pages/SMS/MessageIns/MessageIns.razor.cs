@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.SMS.MessageIns;
@@ -21,6 +23,8 @@ public partial class MessageIns
 
     private EntityTable<MessageInDto, int, MessageInUpdateRequest> _table = default!;
 
+    private readonly MessageInUpdateRequest _readRequest = new();
+
     private bool _canCreateSMS;
 
     protected override async Task OnInitializedAsync()
@@ -29,8 +33,8 @@ public partial class MessageIns
         _canCreateSMS = await AuthService.HasPermissionAsync(state.User, FSHAction.Create, FSHResource.SMS);
 
         Context = new(
-            entityName: "MessageIn",
-            entityNamePlural: "MessageIns",
+            entityName: "Inbox Message",
+            entityNamePlural: "Inbox Messages",
             entityResource: FSHResource.SMS,
             fields: new()
             {
@@ -51,8 +55,18 @@ public partial class MessageIns
             exportAction: string.Empty);
     }
 
-    private void Chat(string phoneNumber)
+    private async Task ReadMessages(int id, string phoneNumber)
     {
+        _readRequest.Id = id;
+        _readRequest.MessageFrom = phoneNumber;
 
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.UpdateAsync(id, _readRequest), Snackbar, successMessage: $"Messages from {phoneNumber} has been read.") > 0)
+        {
+            Navigation.NavigateTo($"/sms/messages/{phoneNumber}");
+        }
+
+        //await Client.UpdateAsync(id, _readRequest);
+        //Navigation.NavigateTo($"/sms/messages/{phoneNumber}");
+        //Snackbar.Add($"Messages from {phoneNumber} has been read.", Severity.Normal);
     }
 }

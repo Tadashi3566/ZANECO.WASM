@@ -3056,14 +3056,14 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Read an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> Update2Async(int? id, MessageInReadRequest request);
+        System.Threading.Tasks.Task<int> ReadAsync(int? id, MessageInReadRequest request);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Read an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> Update2Async(int? id, MessageInReadRequest request, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<int> ReadAsync(int? id, MessageInReadRequest request, System.Threading.CancellationToken cancellationToken);
 
     }
 
@@ -3588,9 +3588,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Read an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> Update2Async(int? id, MessageInReadRequest request)
+        public virtual System.Threading.Tasks.Task<int> ReadAsync(int? id, MessageInReadRequest request)
         {
-            return Update2Async(id, request, System.Threading.CancellationToken.None);
+            return ReadAsync(id, request, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3598,7 +3598,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Read an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> Update2Async(int? id, MessageInReadRequest request, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> ReadAsync(int? id, MessageInReadRequest request, System.Threading.CancellationToken cancellationToken)
         {
             if (request == null)
                 throw new System.ArgumentNullException("request");
