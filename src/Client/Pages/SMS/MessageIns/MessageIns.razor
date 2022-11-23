@@ -33,30 +33,24 @@
     private RenderFragment<MessageInDto> TemplateReceivedTime => context => __builder =>
     {
         <MudItem>
-            <MudChip Icon="@Icons.Material.Filled.Watch" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.ReceiveTime</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.CallReceived" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.ReceiveTime</MudChip>
+            @if (@context.IsRead)
+            {
+                <MudChip Icon="@Icons.Material.Filled.MarkChatRead" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.ReadOn</MudChip>
+            }
+            else
+            {
+                <MudChip Icon="@Icons.Material.Filled.MarkChatUnread" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.ReadOn</MudChip>
+            }
         </MudItem>
     };
 
     private RenderFragment<MessageInDto> TemplateSenderReceiver => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
-            <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageTo</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.Chat" IconColor="Color.Tertiary" Label Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/send/{context.MessageFrom}"))">@context.MessageFrom</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.CallReceived" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.MessageTo</MudChip>
         </MudItem>
-    };
-
-    private RenderFragment<MessageInDto> TemplateMessage => context => __builder =>
-    {
-        <p>
-            if (@context.IsRead)
-            {
-                <MudText >@context.MessageText</MudText>
-            }
-            else
-            {
-                <MudChip Label Color="Color.Surface">@context.MessageText</MudChip>
-            }
-        </p>
     };
 
     private RenderFragment<MessageInDto> TemplateDescriptionNotes => context => __builder =>
