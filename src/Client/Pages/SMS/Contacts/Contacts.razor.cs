@@ -34,7 +34,7 @@ public partial class Contacts
     [Inject]
     private IClipboardService? ClipboardService { get; set; }
 
-    protected override async void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
         _canCreateSMS = await AuthService.HasPermissionAsync(state.User, FSHAction.Create, FSHResource.SMS);

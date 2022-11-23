@@ -27,8 +27,7 @@ public partial class Dependents
         }
     }
 
-    protected override void OnInitialized()
-    {
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Dependent",
             entityNamePlural: "Dependents",
@@ -77,7 +76,6 @@ public partial class Dependents
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
-    }
 
     // Advanced Search
     private Guid _searchEmployeeId;

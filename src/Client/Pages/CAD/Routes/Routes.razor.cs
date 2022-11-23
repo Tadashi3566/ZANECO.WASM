@@ -14,7 +14,7 @@ public partial class Routes
 
     private EntityTable<RouteDto, Guid, RouteUpdateRequest> _table = default!;
 
-    protected override void OnInitialized() =>
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Route",
             entityNamePlural: "Routes",

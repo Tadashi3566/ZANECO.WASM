@@ -2988,56 +2988,69 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     public partial interface IMessageInsClient : IApiService
     {
         /// <summary>
-        /// Search MessageIns using available filters.
+        /// Search Inbox Message using available filters.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<PaginationResponseOfMessageInDto> SearchAsync(MessageInSearchRequest request);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Search MessageIns using available filters.
+        /// Search Inbox Message using available filters.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<PaginationResponseOfMessageInDto> SearchAsync(MessageInSearchRequest request, System.Threading.CancellationToken cancellationToken);
 
         /// <summary>
-        /// Get MessageIn details.
+        /// Get Inbox Message details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<MessageInDto> GetAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Get MessageIn details.
+        /// Get Inbox Message details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<MessageInDto> GetAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <summary>
-        /// Update a MessageIn.
+        /// Update an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<int> UpdateAsync(int id, MessageInUpdateRequest request);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Update a MessageIn.
+        /// Update an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<int> UpdateAsync(int id, MessageInUpdateRequest request, System.Threading.CancellationToken cancellationToken);
 
         /// <summary>
-        /// Delete a MessageIn.
+        /// Delete an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<int> DeleteAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Delete a MessageIn.
+        /// Delete an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<int> DeleteAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Read an Inbox Message.
+        /// </summary>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<int> Update2Async(int? id, MessageInReadRequest request);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Read an Inbox Message.
+        /// </summary>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<int> Update2Async(int? id, MessageInReadRequest request, System.Threading.CancellationToken cancellationToken);
 
     }
 
@@ -3069,7 +3082,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
         /// <summary>
-        /// Search MessageIns using available filters.
+        /// Search Inbox Message using available filters.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<PaginationResponseOfMessageInDto> SearchAsync(MessageInSearchRequest request)
@@ -3079,7 +3092,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Search MessageIns using available filters.
+        /// Search Inbox Message using available filters.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<PaginationResponseOfMessageInDto> SearchAsync(MessageInSearchRequest request, System.Threading.CancellationToken cancellationToken)
@@ -3167,7 +3180,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         }
 
         /// <summary>
-        /// Get MessageIn details.
+        /// Get Inbox Message details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<MessageInDto> GetAsync(int id)
@@ -3177,7 +3190,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Get MessageIn details.
+        /// Get Inbox Message details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<MessageInDto> GetAsync(int id, System.Threading.CancellationToken cancellationToken)
@@ -3263,7 +3276,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         }
 
         /// <summary>
-        /// Update a MessageIn.
+        /// Update an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<int> UpdateAsync(int id, MessageInUpdateRequest request)
@@ -3273,7 +3286,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Update a MessageIn.
+        /// Update an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<int> UpdateAsync(int id, MessageInUpdateRequest request, System.Threading.CancellationToken cancellationToken)
@@ -3365,7 +3378,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         }
 
         /// <summary>
-        /// Delete a MessageIn.
+        /// Delete an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<int> DeleteAsync(int id)
@@ -3375,7 +3388,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Delete a MessageIn.
+        /// Delete an Inbox Message.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<int> DeleteAsync(int id, System.Threading.CancellationToken cancellationToken)
@@ -3394,6 +3407,109 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<HttpValidationProblemDetails>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<HttpValidationProblemDetails>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorResult>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorResult>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Read an Inbox Message.
+        /// </summary>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<int> Update2Async(int? id, MessageInReadRequest request)
+        {
+            return Update2Async(id, request, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Read an Inbox Message.
+        /// </summary>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<int> Update2Async(int? id, MessageInReadRequest request, System.Threading.CancellationToken cancellationToken)
+        {
+            if (request == null)
+                throw new System.ArgumentNullException("request");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append("api/v1/messageins/chat?");
+            if (id != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(request, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -31919,10 +32035,16 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.Guid Id { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("rateNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string RateNumber { get; set; } = default!;
+        public int RateNumber { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("rateName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string RateName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Comment { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("reference", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Reference { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Description { get; set; } = default!;
@@ -31942,16 +32064,19 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     public partial class RatingCreateRequest
     {
         [Newtonsoft.Json.JsonProperty("rateNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
+        [System.ComponentModel.DataAnnotations.Range(1, 5)]
         public int RateNumber { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("rateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("rateName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string RateName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(1024, MinimumLength = 1)]
         public string Comment { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("reference", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Reference { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Description { get; set; } = default!;
@@ -31968,16 +32093,19 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.Guid Id { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("rateNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
+        [System.ComponentModel.DataAnnotations.Range(1, 5)]
         public int RateNumber { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("rateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("rateName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string RateName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(1024, MinimumLength = 1)]
         public string Comment { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("reference", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Reference { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Description { get; set; } = default!;
@@ -32340,6 +32468,12 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("messageParts", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int MessageParts { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("isRead", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsRead { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("readOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? ReadOn { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Description { get; set; } = default!;
 
@@ -32369,11 +32503,28 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("messageText", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string MessageText { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("isRead", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsRead { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("readOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? ReadOn { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Notes { get; set; } = default!;
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class MessageInReadRequest
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("messageFrom", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? MessageFrom { get; set; } = default!;
 
     }
 

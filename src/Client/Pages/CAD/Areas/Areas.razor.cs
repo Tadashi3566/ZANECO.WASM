@@ -14,7 +14,7 @@ public partial class Areas
 
     private EntityTable<AreaDto, Guid, AreaUpdateRequest> _table = default!;
 
-    protected override void OnInitialized() =>
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Area",
             entityNamePlural: "Areas",

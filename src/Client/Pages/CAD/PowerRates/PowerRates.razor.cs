@@ -14,7 +14,7 @@ public partial class PowerRates
 
     private EntityTable<PowerRateDto, Guid, PowerRateUpdateRequest> _table = default!;
 
-    protected override void OnInitialized() =>
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "PowerRate",
             entityNamePlural: "PowerRates",

@@ -15,7 +15,7 @@ public partial class PowerConsumptions
 
     private EntityTable<PowerConsumptionDto, Guid, PowerConsumptionUpdateRequest> _table = default!;
 
-    protected override void OnInitialized() =>
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Power Consumption",
             entityNamePlural: "Power Consumptions",

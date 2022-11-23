@@ -24,8 +24,7 @@ public partial class EmployeeAdjustments
         }
     }
 
-    protected override void OnInitialized()
-    {
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Employee Adjustment",
             entityNamePlural: "Employee Adjustments",
@@ -58,7 +57,6 @@ public partial class EmployeeAdjustments
             updateFunc: async (id, EmployeeAdjustment) => await Client.UpdateAsync(id, EmployeeAdjustment.Adapt<EmployeeAdjustmentUpdateRequest>()),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
-    }
 
     // Advanced Search
     private Guid _searchEmployeeId;

@@ -16,7 +16,7 @@ public partial class RatingTemplates
 
     private EntityTable<RatingTemplateDto, Guid, RatingTemplateUpdateRequest> _table = default!;
 
-    protected override void OnInitialized() =>
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Rating Template",
             entityNamePlural: "Rating Templates",

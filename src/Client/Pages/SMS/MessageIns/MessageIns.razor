@@ -4,6 +4,10 @@
 <FshTitle Title="Message Inbox" Description="Manage Message Inbox" />
 
 <EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
+    <ExtraActions>
+        <MudDivider />
+        <MudMenuItem Icon="@Icons.Filled.Chat" OnClick="@(() => Chat(context.MessageFrom))">Copy Phone Numbers</MudMenuItem>
+    </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="4">
             <MudTextField Label="Sender" For="@(() => context.MessageFrom)" @bind-Value="context.MessageFrom" ReadOnly=true />
@@ -39,6 +43,20 @@
             <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
             <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageTo</MudChip>
         </MudItem>
+    };
+
+    private RenderFragment<MessageInDto> TemplateMessage => context => __builder =>
+    {
+        <p>
+            if (@context.IsRead)
+            {
+                <MudText >@context.MessageText</MudText>
+            }
+            else
+            {
+                <MudChip Label Color="Color.Surface">@context.MessageText</MudChip>
+            }
+        </p>
     };
 
     private RenderFragment<MessageInDto> TemplateDescriptionNotes => context => __builder =>

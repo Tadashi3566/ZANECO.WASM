@@ -23,8 +23,7 @@ public partial class Calendars
         }
     }
 
-    protected override Task OnInitializedAsync()
-    {
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Calendar",
             entityNamePlural: "Calendar",
@@ -64,8 +63,6 @@ public partial class Calendars
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
-        return Task.CompletedTask;
-    }
 
     // Advanced Search
     private Guid _searchEmployeeId;

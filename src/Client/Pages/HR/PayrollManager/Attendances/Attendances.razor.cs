@@ -27,11 +27,11 @@ public partial class Attendances
         }
     }
 
-    protected override Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Context = new(
             entityName: "Attendance",
-            entityNamePlural: "Attendance",
+            entityNamePlural: "Attendances",
             entityResource: FSHResource.Attendance,
             fields: new()
             {
@@ -75,7 +75,6 @@ public partial class Attendances
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
-        return Task.CompletedTask;
     }
 
     // Advanced Search

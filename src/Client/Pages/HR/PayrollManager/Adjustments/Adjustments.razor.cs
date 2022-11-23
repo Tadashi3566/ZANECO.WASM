@@ -14,8 +14,7 @@ public partial class Adjustments
 
     private EntityTable<AdjustmentDto, Guid, AdjustmentUpdateRequest> _table = default!;
 
-    protected override Task OnInitializedAsync()
-    {
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Adjustment",
             entityNamePlural: "Adjustments",
@@ -42,6 +41,4 @@ public partial class Adjustments
             updateFunc: async (id, Adjustment) => await Client.UpdateAsync(id, Adjustment),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
-        return Task.CompletedTask;
-    }
 }

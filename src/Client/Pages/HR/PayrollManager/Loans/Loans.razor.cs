@@ -27,8 +27,7 @@ public partial class Loans
         }
     }
 
-    protected override void OnInitialized()
-    {
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Employee Loan",
             entityNamePlural: "Employee Loans",
@@ -76,7 +75,6 @@ public partial class Loans
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
-    }
 
     // Advanced Search
     private Guid _searchEmployeeId;

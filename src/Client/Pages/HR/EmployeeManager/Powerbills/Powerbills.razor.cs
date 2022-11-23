@@ -27,8 +27,7 @@ public partial class Powerbills
         }
     }
 
-    protected override void OnInitialized()
-    {
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Power Bill",
             entityNamePlural: "Power Bills",
@@ -77,7 +76,6 @@ public partial class Powerbills
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
-    }
 
     // Advanced Search
     private Guid _searchEmployeeId;

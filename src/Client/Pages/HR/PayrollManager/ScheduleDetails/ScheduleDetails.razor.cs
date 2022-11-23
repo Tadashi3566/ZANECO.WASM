@@ -27,8 +27,7 @@ public partial class ScheduleDetails
         }
     }
 
-    protected override void OnInitialized()
-    {
+    protected override async Task OnInitializedAsync() =>
         Context = new(
             entityName: "Schedule Detail",
             entityNamePlural: "Schedule Details",
@@ -66,7 +65,6 @@ public partial class ScheduleDetails
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data.Adapt<ScheduleDetailUpdateRequest>()),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
-    }
 
     // Advanced Search
     private Guid _searchScheduleId;
