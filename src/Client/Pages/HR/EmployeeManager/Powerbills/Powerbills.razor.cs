@@ -27,7 +27,7 @@ public partial class Powerbills
         }
     }
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Power Bill",
             entityNamePlural: "Power Bills",

@@ -14,7 +14,7 @@ public partial class Ranks
 
     private EntityTable<RankDto, Guid, RankUpdateRequest> _table = default!;
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Rank",
             entityNamePlural: "Ranks",

@@ -17,7 +17,7 @@ public partial class Members
 
     private EntityTable<MemberDto, Guid, MemberViewModel> _table = default!;
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Member",
             entityNamePlural: "Members",

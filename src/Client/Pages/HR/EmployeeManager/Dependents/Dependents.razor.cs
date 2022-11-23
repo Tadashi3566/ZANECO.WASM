@@ -27,7 +27,7 @@ public partial class Dependents
         }
     }
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Dependent",
             entityNamePlural: "Dependents",

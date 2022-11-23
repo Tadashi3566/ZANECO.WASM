@@ -13,7 +13,7 @@ public partial class MessageOuts
 
     private EntityTable<MessageOutDto, int, MessageOutCreateRequest> _table = default!;
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Message",
             entityNamePlural: "Messages",

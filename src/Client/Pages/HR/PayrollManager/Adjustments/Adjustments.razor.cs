@@ -14,7 +14,7 @@ public partial class Adjustments
 
     private EntityTable<AdjustmentDto, Guid, AdjustmentUpdateRequest> _table = default!;
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Adjustment",
             entityNamePlural: "Adjustments",

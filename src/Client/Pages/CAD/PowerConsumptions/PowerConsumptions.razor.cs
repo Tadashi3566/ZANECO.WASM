@@ -15,7 +15,7 @@ public partial class PowerConsumptions
 
     private EntityTable<PowerConsumptionDto, Guid, PowerConsumptionUpdateRequest> _table = default!;
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Power Consumption",
             entityNamePlural: "Power Consumptions",
@@ -51,7 +51,7 @@ public partial class PowerConsumptions
     //    }
     // }
 
-    private async Task<IEnumerable<string>> SearchBillMonth(string value)
+    private static async Task<IEnumerable<string>> SearchBillMonth(string value)
     {
         string[] billMonths = CadFunctions.BillMonths();
 

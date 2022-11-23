@@ -27,7 +27,7 @@ public partial class Loans
         }
     }
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Employee Loan",
             entityNamePlural: "Employee Loans",

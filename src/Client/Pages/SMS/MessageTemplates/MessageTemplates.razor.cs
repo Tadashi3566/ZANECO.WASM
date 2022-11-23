@@ -24,7 +24,7 @@ public partial class MessageTemplates
     private EntityTable<MessageTemplateDetail, int, MessageTemplateUpdateRequest> _table = default!;
 
     private MessageOutCreateRequest _messageOut = new();
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Message Template",
             entityNamePlural: "Message Templates",

@@ -31,7 +31,7 @@ public partial class EmployeePayrollDetails
         }
     }
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Employee Payroll",
             entityNamePlural: "Employee Payroll",

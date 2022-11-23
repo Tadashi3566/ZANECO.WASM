@@ -27,7 +27,7 @@ public partial class ScheduleDetails
         }
     }
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Schedule Detail",
             entityNamePlural: "Schedule Details",

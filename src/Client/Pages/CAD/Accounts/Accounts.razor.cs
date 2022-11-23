@@ -17,7 +17,7 @@ public partial class Accounts
 
     private EntityTable<AccountDto, Guid, AccountViewModel> _table = default!;
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Account",
             entityNamePlural: "Accounts",

@@ -14,7 +14,7 @@ public partial class Barangays
 
     private EntityTable<BarangayDto, Guid, BarangayUpdateRequest> _table = default!;
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Barangay",
             entityNamePlural: "Barangays",

@@ -14,7 +14,7 @@ public partial class Rates
 
     private EntityTable<RateDto, Guid, RateUpdateRequest> _table = default!;
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Rate",
             entityNamePlural: "Rates",

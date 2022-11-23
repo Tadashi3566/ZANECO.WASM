@@ -23,7 +23,7 @@ public partial class Calendars
         }
     }
 
-    protected override async Task OnInitializedAsync() =>
+    protected override void OnInitialized() =>
         Context = new(
             entityName: "Calendar",
             entityNamePlural: "Calendar",
