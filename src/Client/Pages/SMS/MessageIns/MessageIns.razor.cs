@@ -57,12 +57,12 @@ public partial class MessageIns
 
         _timer = new System.Threading.Timer(async _ =>  // async void
         {
-            await ReadMessages(string.Empty, false);
+            await ReadMessages("", true);
 
             // we need StateHasChanged() because this is an async void handler
             // we need to Invoke it because we could be on the wrong Thread          
             await InvokeAsync(StateHasChanged);
-        }, null, 0, 60000);
+        }, null, 0, 30000);
     }
 
     public void Dispose() => _timer?.Dispose();
