@@ -48,16 +48,6 @@ public partial class MessageTemplates
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
 
-    //private void ViewRecepients(int id)
-    //{
-    //    var template = Client.SearchAsync(new MessageTemplateSearchRequest());
-    //    template.ShowRecepients = !template.ShowRecepients;
-    //    foreach (var otherTemplates in _templates.Except(new[] { template }))
-    //    {
-    //        otherTemplates.ShowRecepients = false;
-    //    }
-    //}
-
     private async void CopyMessage(string message)
     {
         await ClipboardService!.CopyToClipboard(message);
