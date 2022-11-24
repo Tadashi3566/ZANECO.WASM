@@ -19,11 +19,11 @@ public partial class MessageIns
     [Inject]
     protected IMessageInsClient Client { get; set; } = default!;
 
-    protected EntityServerTableContext<MessageInDto, int, MessageInUpdateRequest> Context { get; set; } = default!;
+    protected EntityServerTableContext<MessageInDto, int, MessageInReadRequest> Context { get; set; } = default!;
 
-    private EntityTable<MessageInDto, int, MessageInUpdateRequest> _table = default!;
+    private EntityTable<MessageInDto, int, MessageInReadRequest> _table = default!;
 
-    private readonly MessageInUpdateRequest _readRequest = new();
+    private readonly MessageInReadRequest _readRequest = new();
 
     private bool _canCreateSMS;
 
@@ -64,9 +64,5 @@ public partial class MessageIns
         {
             Navigation.NavigateTo($"/sms/messages/{phoneNumber}");
         }
-
-        //await Client.UpdateAsync(id, _readRequest);
-        //Navigation.NavigateTo($"/sms/messages/{phoneNumber}");
-        //Snackbar.Add($"Messages from {phoneNumber} has been read.", Severity.Normal);
     }
 }

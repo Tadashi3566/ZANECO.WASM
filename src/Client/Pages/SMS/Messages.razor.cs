@@ -13,10 +13,10 @@ public partial class Messages
     protected IMessageInsClient ClientIn { get; set; } = default!;
     [Inject]
     protected IMessageLogsClient ClientLog { get; set; } = default!;
-    protected EntityServerTableContext<MessageInDto, int, MessageInUpdateRequest> ContextIn { get; set; } = default!;
+    protected EntityServerTableContext<MessageInDto, int, MessageInReadRequest> ContextIn { get; set; } = default!;
     protected EntityServerTableContext<MessageLogDto, int, MessageLogUpdateRequest> ContextLog { get; set; } = default!;
 
-    private EntityTable<MessageInDto, int, MessageInUpdateRequest> _tableIn = default!;
+    private EntityTable<MessageInDto, int, MessageInReadRequest> _tableIn = default!;
 
     private EntityTable<MessageLogDto, int, MessageLogUpdateRequest> _tableLog = default!;
 
