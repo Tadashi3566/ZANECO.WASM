@@ -1,12 +1,16 @@
 ﻿@page "/sms/inbox"
+
 @attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
+
+@implements IDisposable
 
 <FshTitle Title="Message Inbox" Description="Manage Message Inbox" />
 
-<EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInReadRequest" Context="@Context">
+<EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.Chat" OnClick="@(() => ReadMessages(context.Id, context.MessageFrom))">Read</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.Chat" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">Messages</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.AppRegistration" OnClick="@(() => ReadMessages(context.MessageFrom, true))">AGMA Registration</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="4">
@@ -48,7 +52,7 @@
     private RenderFragment<MessageInDto> TemplateSenderReceiver => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudChip Icon="@Icons.Material.Filled.Chat" IconColor="Color.Tertiary" Label Color="Color.Surface" OnClick="@(() => ReadMessages(context.Id, context.MessageFrom))">@context.MessageFrom</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.Chat" IconColor="Color.Tertiary" Label Color="Color.Surface" OnClick="@(() => ReadMessages(context.MessageFrom))">@context.MessageFrom</MudChip>
             <MudChip Icon="@Icons.Material.Filled.CallReceived" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.MessageTo</MudChip>
         </MudItem>
     };

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
@@ -19,13 +18,15 @@ public partial class MessageIns
     [Inject]
     protected IMessageInsClient Client { get; set; } = default!;
 
-    protected EntityServerTableContext<MessageInDto, int, MessageInReadRequest> Context { get; set; } = default!;
+    protected EntityServerTableContext<MessageInDto, int, MessageInUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<MessageInDto, int, MessageInReadRequest> _table = default!;
+    private EntityTable<MessageInDto, int, MessageInUpdateRequest> _table = default!;
 
-    private readonly MessageInReadRequest _readRequest = new();
+    private MessageInReadRequest _readRequest = new();
 
     private bool _canCreateSMS;
+
+    Timer? _timer;
 
     protected override async Task OnInitializedAsync()
     {
@@ -53,16 +54,26 @@ public partial class MessageIns
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+
+        _timer = new System.Threading.Timer(async _ =>  // async void
+        {
+            await ReadMessages(string.Empty, false);
+
+            // we need StateHasChanged() because this is an async void handler
+            // we need to Invoke it because we could be on the wrong Thread          
+            await InvokeAsync(StateHasChanged);
+        }, null, 0, 60000);
     }
 
-    private async Task ReadMessages(int id, string phoneNumber)
-    {
-        _readRequest.Id = id;
-        _readRequest.MessageFrom = phoneNumber;
+    public void Dispose() => _timer?.Dispose();
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.UpdateAsync(id, _readRequest), Snackbar, successMessage: $"Messages from {phoneNumber} has been read.") > 0)
-        {
-            Navigation.NavigateTo($"/sms/messages/{phoneNumber}");
-        }
+    private async Task ReadMessages(string messageFrom, bool isAgma = false)
+    {
+        _readRequest.MessageFrom = messageFrom;
+        _readRequest.IsAgma = isAgma;
+
+        await ApiHelper.ExecuteCallGuardedAsync(() => Client.ReadAsync(_readRequest), Snackbar, successMessage: isAgma ? $"Unread Messages were checked for AGMA Registration" : "Messages from sender has been marked as read.");
+
+        await _table.ReloadDataAsync();
     }
 }

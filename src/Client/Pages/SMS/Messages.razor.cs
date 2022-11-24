@@ -39,7 +39,7 @@ public partial class Messages
                 var result = await ClientIn.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<MessageInDto>>();
             },
-            updateFunc: async (id, data) => await ClientIn.UpdateAsync(id, data),
+            updateFunc: null, //(id, data) => await ClientIn.UpdateAsync(id, data),
             exportAction: string.Empty);
 
         ContextLog = new(
