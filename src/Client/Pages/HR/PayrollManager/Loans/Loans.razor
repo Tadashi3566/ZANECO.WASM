@@ -38,10 +38,10 @@
             <MudNumericField Label="Months" For="@(() => context.Months)" @bind-Value="context.Months" OnBlur="(() => SetDateEnd(context.PaymentSchedule, context.Amount, context.DateStart, context.Months))" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudDatePicker Label="End" For="@(() => context.DateEnd)" @bind-Date="@_dtend" DateFormat="MMMM dd, yyyy" ReadOnly=true />
+            <MudDatePicker Label="End" For="@(() => context.DateEnd)" @bind-Date="@_dtend" DateFormat="MMMM dd, yyyy" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudNumericField Label="Ammortization" For="@(() => context.Ammortization)" @bind-Value="@_ammortization" Format="N2" ReadOnly=true />
+            <MudNumericField Label="Ammortization" For="@(() => context.Ammortization)" @bind-Value="@_ammortization" Format="N2" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
 
         <MudItem xs="12">

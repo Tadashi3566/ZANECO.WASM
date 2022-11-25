@@ -7,19 +7,19 @@
 
     <EditFormContent>
         <MudItem xs="12" sm="4">
-            <MudTextField Label="Sender" For="@(() => context.MessageFrom)" @bind-Value="context.MessageFrom" ReadOnly=true />
+            <MudTextField Label="Sender" For="@(() => context.MessageFrom)" @bind-Value="context.MessageFrom" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12" sm="4">
-            <MudTextField Label="Receiver" For="@(() => context.MessageTo)" @bind-Value="context.MessageTo" ReadOnly=true />
+            <MudTextField Label="Receiver" For="@(() => context.MessageTo)" @bind-Value="context.MessageTo" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Counter=160 Label="Message" For="@(() => context.MessageText)" @bind-Value="context.MessageText" Lines="5" ReadOnly=true />
+            <MudTextField Counter=160 Label="Message" For="@(() => context.MessageText)" @bind-Value="context.MessageText" Lines="5" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Variant="Variant.Filled" />
         </MudItem>
     </EditFormContent>
 

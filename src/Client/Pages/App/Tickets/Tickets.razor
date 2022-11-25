@@ -70,7 +70,7 @@
             <AutocompleteEmployee Label="Assigned To" For="@(() => context.AssignedTo)" @bind-Value="context.AssignedTo" />
         </MudItem>
         <MudItem xs="12" md="4">
-            <MudTextField Label="Status" For="@(() => context.Status)" @bind-Value="context.Status" ReadOnly=true />
+            <MudTextField Label="Status" For="@(() => context.Status)" @bind-Value="context.Status" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
 
         @*
