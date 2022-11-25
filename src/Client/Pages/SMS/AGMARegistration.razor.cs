@@ -8,8 +8,8 @@ using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
-namespace ZANECO.WASM.Client.Pages.SMS.MessageIns;
-public partial class MessageIns
+namespace ZANECO.WASM.Client.Pages.SMS;
+public partial class AGMARegistration
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
@@ -24,12 +24,14 @@ public partial class MessageIns
 
     private MessageInReadRequest _readRequest = new();
 
-    private bool _canEditSMS;
+    private bool _canCreateSMS;
+
+    Timer? _timer;
 
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
-        _canEditSMS = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.SMS);
+        _canCreateSMS = await AuthService.HasPermissionAsync(state.User, FSHAction.Create, FSHResource.SMS);
 
         Context = new(
             entityName: "Inbox Message",
@@ -44,7 +46,7 @@ public partial class MessageIns
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: true,
-            hasExtraActionsFunc: () => _canEditSMS,
+            hasExtraActionsFunc: () => _canCreateSMS,
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<MessageInSearchRequest>()))
@@ -52,5 +54,26 @@ public partial class MessageIns
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+
+        _timer = new System.Threading.Timer(async _ =>  // async void
+        {
+            await CheckAGMARegistration("", true);
+
+            // we need StateHasChanged() because this is an async void handler
+            // we need to Invoke it because we could be on the wrong Thread          
+            await InvokeAsync(StateHasChanged);
+        }, null, 0, 30000);
+    }
+
+    public void Dispose() => _timer?.Dispose();
+
+    private async Task CheckAGMARegistration(string messageFrom, bool isAgma = false)
+    {
+        _readRequest.MessageFrom = messageFrom;
+        _readRequest.IsAgma = isAgma;
+
+        await ApiHelper.ExecuteCallGuardedAsync(() => Client.ReadAsync(_readRequest), Snackbar, successMessage: isAgma ? $"Unread Messages were checked for AGMA Registration" : "Messages from sender has been marked as read.");
+
+        await _table.ReloadDataAsync();
     }
 }

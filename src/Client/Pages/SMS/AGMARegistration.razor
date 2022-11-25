@@ -1,13 +1,15 @@
-﻿@page "/sms/inbox"
+﻿@page "/sms/agma"
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
 
-<FshTitle Title="Message Inbox" Description="Manage Message Inbox" />
+@implements IDisposable
+
+<FshTitle Title="AGMA Registration" Description="AGMA Registration Management" />
 
 <EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.Chat" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">Messages</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.AppRegistration" OnClick="@(() => CheckAGMARegistration(context.MessageFrom, true))">AGMA</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="4">
