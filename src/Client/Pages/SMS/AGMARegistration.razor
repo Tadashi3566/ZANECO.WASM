@@ -9,7 +9,7 @@
 <EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.AppRegistration" OnClick="@(() => CheckAGMARegistration(context.MessageFrom, true))">AGMA</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.AppRegistration" OnClick="@(() => CheckAGMARegistration(context.MessageFrom, true))" OnTouch="@(() => CheckAGMARegistration(context.MessageFrom, true))">AGMA</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="4">

@@ -13,10 +13,10 @@ public partial class Messages
     protected IMessageInsClient ClientIn { get; set; } = default!;
     [Inject]
     protected IMessageLogsClient ClientLog { get; set; } = default!;
-    protected EntityServerTableContext<MessageInDto, int, MessageInReadRequest> ContextIn { get; set; } = default!;
+    protected EntityServerTableContext<MessageInDto, int, MessageInUpdateRequest> ContextIn { get; set; } = default!;
     protected EntityServerTableContext<MessageLogDto, int, MessageLogUpdateRequest> ContextLog { get; set; } = default!;
 
-    private EntityTable<MessageInDto, int, MessageInReadRequest> _tableIn = default!;
+    private EntityTable<MessageInDto, int, MessageInUpdateRequest> _tableIn = default!;
 
     private EntityTable<MessageLogDto, int, MessageLogUpdateRequest> _tableLog = default!;
 
@@ -39,7 +39,7 @@ public partial class Messages
                 var result = await ClientIn.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<MessageInDto>>();
             },
-            updateFunc: null, //(id, data) => await ClientIn.UpdateAsync(id, data),
+            updateFunc: async (id, data) => await ClientIn.UpdateAsync(id, data),
             exportAction: string.Empty);
 
         ContextLog = new(

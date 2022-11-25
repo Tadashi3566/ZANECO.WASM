@@ -10,7 +10,7 @@
     <ExtraActions>
         @if (_canViewRoleClaims)
         {
-            <MudMenuItem OnClick="@(() => ManagePermissions(context.Id))" >@L["Manage Permission"]</MudMenuItem>
+            <MudMenuItem OnClick="@(() => ManagePermissions(context.Id))" OnTouch="@(() => ManagePermissions(context.Id))">@L["Manage Permission"]</MudMenuItem>
         }
     </ExtraActions>
 

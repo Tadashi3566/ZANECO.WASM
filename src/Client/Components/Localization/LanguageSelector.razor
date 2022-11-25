@@ -11,7 +11,7 @@
             }
             else
             {
-                <MudMenuItem OnClick="(()=> ChangeLanguageAsync(language.Code))">@L[language.DisplayName]</MudMenuItem>
+                <MudMenuItem OnClick="(()=> ChangeLanguageAsync(language.Code))" OnTouch="(()=> ChangeLanguageAsync(language.Code))">@L[language.DisplayName]</MudMenuItem>
             }
         }
     </MudMenu>

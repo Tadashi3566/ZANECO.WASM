@@ -7,8 +7,8 @@
 <EntityTable MultiSelection=true @ref="_table" SelectedItems="@_selectedItems" TEntity="ContactDto" TId="Guid" TRequest="ContactViewModel" Context="@Context">
     <ExtraActions>
         <MudDivider/>
-        <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => OnCopyPhoneNumbersChecked())">Copy Phone Numbers</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => Send())">Send Message</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => OnCopyPhoneNumbersChecked())" OnTouch="@(() => OnCopyPhoneNumbersChecked())">Copy Phone Numbers</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => Send())" OnTouch="@(() => Send())">Send Message</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>
@@ -81,7 +81,7 @@
     private RenderFragment<ContactDto> TemplatePhoneNumber => context => __builder =>
     {
         <MudItem>
-            <MudChip Icon="@Icons.Material.Filled.Phone" Label="true" Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.PhoneNumber}"))">@context.PhoneNumber</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.Phone" Label="true" Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.PhoneNumber}"))" >@context.PhoneNumber</MudChip>
         </MudItem>
     };
 

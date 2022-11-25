@@ -33,20 +33,20 @@
     <ExtraActions>
         @if(_canUpgrade)
         {
-            <MudMenuItem OnClick="@(() => ViewUpgradeSubscriptionModalAsync(context.Id))">@L["Upgrade Subscription"]</MudMenuItem>
+            <MudMenuItem OnClick="@(() => ViewUpgradeSubscriptionModalAsync(context.Id))" OnTouch="@(() => ViewUpgradeSubscriptionModalAsync(context.Id))">@L["Upgrade Subscription"]</MudMenuItem>
         }
-        <MudMenuItem OnClick="@(() => ViewTenantDetails(context.Id))">
+        <MudMenuItem OnClick="@(() => ViewTenantDetails(context.Id))" OnTouch="@(() => ViewTenantDetails(context.Id))">
             @((context.ShowDetails == true) ? L["Hide"] : L["Show"]) @L["Tenant Details"]
         </MudMenuItem>
         @if (_canModify)
         {
             @if (!context.IsActive)
             {
-                <MudMenuItem Style="color:limegreen!important" OnClick="@(() => ActivateTenantAsync(context.Id))">@L["Activate Tenant"]</MudMenuItem>
+                <MudMenuItem Style="color:limegreen!important" OnClick="@(() => ActivateTenantAsync(context.Id))" OnTouch="@(() => ActivateTenantAsync(context.Id))">@L["Activate Tenant"]</MudMenuItem>
             }
             else
             {
-                <MudMenuItem Style="color:red!important" OnClick="@(() => DeactivateTenantAsync(context.Id))">@L["Deactivate Tenant"]</MudMenuItem>
+                <MudMenuItem Style="color:red!important" OnClick="@(() => DeactivateTenantAsync(context.Id))" OnTouch="@(() => DeactivateTenantAsync(context.Id))">@L["Deactivate Tenant"]</MudMenuItem>
             }
         }
     </ExtraActions>

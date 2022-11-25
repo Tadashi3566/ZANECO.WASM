@@ -11,8 +11,8 @@
         @if (_canViewRoleClaims)
         {
             <MudDivider/>
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/scheduledetails/{context.Id}"))" >Schedules</MudMenuItem>
-            <MudMenuItem OnClick="@(() => SetAsCurrentSchedule(context.Id))" >Set as Current Schedule</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/scheduledetails/{context.Id}"))" OnTouch="@(() => Navigation.NavigateTo($"/payroll/scheduledetails/{context.Id}"))">Schedules</MudMenuItem>
+            <MudMenuItem OnClick="@(() => SetAsCurrentSchedule(context.Id))" OnTouch="@(() => SetAsCurrentSchedule(context.Id))">Set as Current Schedule</MudMenuItem>
         }
     </ExtraActions>
     <EditFormContent>

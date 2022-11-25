@@ -16,7 +16,7 @@
         @if (_canViewRoleClaims)
         {
             <MudDivider/>
-            <MudMenuItem OnClick="(() => SetCurrentDesignation(context.EmployeeId, context.Id))")">Set as Current Designation</MudMenuItem>
+            <MudMenuItem OnClick="(() => SetCurrentDesignation(context.EmployeeId, context.Id))" OnTouch="(() => SetCurrentDesignation(context.EmployeeId, context.Id))">Set as Current Designation</MudMenuItem>
         }
     </ExtraActions>
     <EditFormContent>

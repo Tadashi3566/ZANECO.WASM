@@ -10,8 +10,8 @@
     <ExtraActions>
         @if (_canViewRoleClaims)
         {
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeepayroll/{context.Id}"))" >Employees Payroll</MudMenuItem>
-            <MudMenuItem OnClick="@(() => PayrollGenerate(context.Id))" >Calculate Summary</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeepayroll/{context.Id}"))" OnTouch="@(() => Navigation.NavigateTo($"/payroll/employeepayroll/{context.Id}"))">Employees Payroll</MudMenuItem>
+            <MudMenuItem OnClick="@(() => PayrollGenerate(context.Id))" OnTouch="@(() => PayrollGenerate(context.Id))">Calculate Summary</MudMenuItem>
         }
     </ExtraActions>
     <EditFormContent>

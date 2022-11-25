@@ -22,8 +22,6 @@ public partial class MessageIns
 
     private EntityTable<MessageInDto, int, MessageInUpdateRequest> _table = default!;
 
-    private MessageInReadRequest _readRequest = new();
-
     private bool _canEditSMS;
 
     protected override async Task OnInitializedAsync()
