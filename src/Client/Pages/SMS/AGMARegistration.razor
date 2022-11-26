@@ -7,9 +7,13 @@
 <FshTitle Title="AGMA Registration" Description="AGMA Registration Management" />
 
 <EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
+    <AdvancedSearchContent>
+        <MudNumericField @bind-Value="_seconds"></MudNumericField>
+    </AdvancedSearchContent>
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.AppRegistration" OnClick="@(() => CheckAGMARegistration(context.MessageFrom, true))" OnTouch="@(() => CheckAGMARegistration(context.MessageFrom, true))">AGMA</MudMenuItem>
+        <MudSwitch Class="ml-2" Color="Color.Tertiary" T=bool Label="Auto Read" @bind-Checked="_autoRead" />
+        <MudMenuItem Icon="@Icons.Filled.AppRegistration" OnClick="@(() => CheckAGMARegistration(true))" OnTouch="@(() => CheckAGMARegistration(true))">AGMA</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="4">
@@ -49,7 +53,7 @@
     private RenderFragment<MessageInDto> TemplateSenderReceiver => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudChip Icon="@Icons.Material.Filled.Chat" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.MessageFrom</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.Chat" IconColor="Color.Tertiary" Label Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">@context.MessageFrom</MudChip>
             <MudChip Icon="@Icons.Material.Filled.CallReceived" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.MessageTo</MudChip>
         </MudItem>
     };

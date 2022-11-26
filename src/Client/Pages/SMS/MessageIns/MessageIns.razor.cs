@@ -22,6 +22,8 @@ public partial class MessageIns
 
     private EntityTable<MessageInDto, int, MessageInUpdateRequest> _table = default!;
 
+    private MessageInReadRequest _readRequest = new();
+
     private bool _canEditSMS;
 
     protected override async Task OnInitializedAsync()
@@ -50,5 +52,14 @@ public partial class MessageIns
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+    }
+
+    private async Task ReadInbox(string messageFrom)
+    {
+        _readRequest.MessageFrom = messageFrom;
+
+        await ApiHelper.ExecuteCallGuardedAsync(() => Client.ReadAsync(_readRequest), Snackbar, successMessage: "Messages from sender has been marked as read.");
+
+        await _table.ReloadDataAsync();
     }
 }

@@ -21,12 +21,13 @@ public partial class AGMARegistration
     protected EntityServerTableContext<MessageInDto, int, MessageInUpdateRequest> Context { get; set; } = default!;
 
     private EntityTable<MessageInDto, int, MessageInUpdateRequest> _table = default!;
-
     private MessageInReadRequest _readRequest = new();
 
     private bool _canCreateSMS;
+    private bool _autoRead;
+    private int _seconds = 20;
 
-    Timer? _timer;
+    private Timer? _timer;
 
     protected override async Task OnInitializedAsync()
     {
@@ -57,23 +58,28 @@ public partial class AGMARegistration
 
         _timer = new System.Threading.Timer(async _ =>  // async void
         {
-            await CheckAGMARegistration("", true);
+            await CheckAGMARegistration();
 
             // we need StateHasChanged() because this is an async void handler
             // we need to Invoke it because we could be on the wrong Thread          
             await InvokeAsync(StateHasChanged);
-        }, null, 0, 30000);
+        }, null, 0, _seconds * 1000);
     }
 
     public void Dispose() => _timer?.Dispose();
 
-    private async Task CheckAGMARegistration(string messageFrom, bool isAgma = false)
+    private async Task CheckAGMARegistration(bool forceRead = false)
     {
-        _readRequest.MessageFrom = messageFrom;
-        _readRequest.IsAgma = isAgma;
+        if (_autoRead || forceRead)
+        {
+            //_timer.Change(0, _seconds * 1000);
 
-        await ApiHelper.ExecuteCallGuardedAsync(() => Client.ReadAsync(_readRequest), Snackbar, successMessage: isAgma ? $"Unread Messages were checked for AGMA Registration" : "Messages from sender has been marked as read.");
+            _readRequest.MessageFrom = "";
+            _readRequest.IsAgma = true;
 
-        await _table.ReloadDataAsync();
+            await ApiHelper.ExecuteCallGuardedAsync(() => Client.ReadAsync(_readRequest), Snackbar, successMessage: $"Unread Messages were checked for AGMA Registration");
+
+            await _table.ReloadDataAsync();
+        }
     }
 }

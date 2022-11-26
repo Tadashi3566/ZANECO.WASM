@@ -39,7 +39,7 @@
             }
             else
             {
-                <MudChip Icon="@Icons.Material.Filled.MarkChatUnread" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.ReadOn</MudChip>
+                <MudChip Icon="@Icons.Material.Filled.MarkChatUnread" IconColor="Color.Tertiary" Label Color="Color.Surface" OnClick="(() => ReadInbox(context.MessageFrom))">@context.ReadOn</MudChip>
             }
         </MudItem>
     };
@@ -47,7 +47,7 @@
     private RenderFragment<MessageInDto> TemplateSenderReceiver => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudChip Icon="@Icons.Material.Filled.Chat" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.MessageFrom</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.Chat" IconColor="Color.Tertiary" Label Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">@context.MessageFrom</MudChip>
             <MudChip Icon="@Icons.Material.Filled.CallReceived" IconColor="Color.Tertiary" Label Color="Color.Surface">@context.MessageTo</MudChip>
         </MudItem>
     };

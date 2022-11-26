@@ -38,7 +38,7 @@
         <MudItem>
             <p>
                 <MudChip Icon="@Icons.Material.Filled.Send" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
-                <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageTo</MudChip>
+                <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">@context.MessageTo</MudChip>
             </p>
         </MudItem>
     };
