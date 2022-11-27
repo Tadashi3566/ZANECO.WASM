@@ -8,7 +8,8 @@
     <ExtraActions>
         <MudDivider />
         @*<MudMenuItem Icon="@Icons.Filled.Contacts" OnClick="@(() => ViewRecepients(context.Id))">@((context.ShowRecepients == true) ? "Hide" : "Show") Recepients</MudMenuItem>*@
-        <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => CopyMessage(context.Message))" OnTouch="@(() => CopyMessage(context.Message))">Copy Message</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => MessageTemplateCopy(context.Message))" OnTouch="@(() => MessageTemplateCopy(context.Message))" Class="mr-3">Copy Message</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.ContentCopy" OnClick="@(() => MessageTemplateDuplicate(context))" OnTouch="@(() => MessageTemplateDuplicate(context))">Duplicate</MudMenuItem>
         <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => SendSMS(@context))" OnTouch="@(() => SendSMS(@context))">Send</MudMenuItem>
     </ExtraActions>
     <EditFormContent>

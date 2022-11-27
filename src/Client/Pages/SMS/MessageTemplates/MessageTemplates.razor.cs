@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
@@ -15,6 +16,8 @@ public partial class MessageTemplates
     [Inject]
     protected IMessageTemplatesClient Client { get; set; } = default!;
     [Inject]
+    protected IMessageTemplatesClient MessageTemplate { get; set; } = default!;
+    [Inject]
     protected IMessageOutsClient MessageOut { get; set; } = default!;
     [Inject]
     private IClipboardService? ClipboardService { get; set; }
@@ -24,6 +27,7 @@ public partial class MessageTemplates
     private EntityTable<MessageTemplateDetail, int, MessageTemplateUpdateRequest> _table = default!;
 
     private MessageOutCreateRequest _messageOut = new();
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Message Template",
@@ -48,11 +52,43 @@ public partial class MessageTemplates
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
 
-    private async void CopyMessage(string message)
+    private async Task MessageTemplateCopy(string message)
     {
         await ClipboardService!.CopyToClipboard(message);
 
         Snackbar.Add("The Template Message was copied to Clipboard", Severity.Success);
+    }
+
+    private async Task MessageTemplateDuplicate(MessageTemplateDto dto)
+    {
+        string transactionContent = $"Are you sure you want to duplicate this Message Template?";
+        DialogParameters parameters = new()
+        {
+            { nameof(TransactionConfirmation.ContentText), transactionContent },
+            { nameof(TransactionConfirmation.ConfirmText), "Duplicate" }
+        };
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        IDialogReference dialog = DialogService.Show<TransactionConfirmation>("Duplicate", parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            MessageTemplateCreateRequest newMessageTemplate = new()
+            {
+                TemplateType = dto.TemplateType,
+                MessageType = dto.MessageType,
+                IsAPI = dto.IsAPI,
+                IsMultiple = dto.IsMultiple,
+                Recepients = dto.Recepients,
+                Subject = dto.Subject,
+                Message = dto.Message,
+                Description = dto.Description!,
+                Notes = dto.Notes!,
+            };
+
+            await ApiHelper.ExecuteCallGuardedAsync(() => MessageTemplate.CreateAsync(newMessageTemplate), Snackbar, successMessage: "Message Template successfully duplicated.");
+
+            await _table.ReloadDataAsync();
+        }
     }
 
     private async void SendSMS(MessageTemplateDetail request)
@@ -60,7 +96,8 @@ public partial class MessageTemplates
         string transactionContent = $"Are you sure you want to send SMS to {ClassSMS.RecepientCount(request.Recepients):N0} recepient(s)?";
         DialogParameters parameters = new()
         {
-            { nameof(TransactionConfirmation.ContentText), transactionContent }
+            { nameof(TransactionConfirmation.ContentText), transactionContent },
+            { nameof(TransactionConfirmation.ConfirmText), "Send" }
         };
         DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
         IDialogReference dialog = DialogService.Show<TransactionConfirmation>("Send", parameters, options);
