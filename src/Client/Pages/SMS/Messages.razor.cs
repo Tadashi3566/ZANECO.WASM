@@ -29,6 +29,7 @@ public partial class Messages
             fields: new()
             {
                 new(data => data.ReceiveTime, "Date/Time", "ReceiveTime"),
+                new(data => data.MessageTo, "Receiver", "MessageTo"),
                 new(data => data.MessageText, "Message", "MessageText"),
             },
             idFunc: data => data.Id,
@@ -49,6 +50,7 @@ public partial class Messages
             fields: new()
             {
                 new(data => data.SendTime, "Date/Time", "SendTime"),
+                new(data => data.MessageFrom, "Sender", "MessageFrom"),
                 new(data => data.MessageText, "Message", "MessageText"),
             },
             idFunc: data => data.Id,

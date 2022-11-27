@@ -64,6 +64,7 @@ public partial class MessageTemplates
         string transactionContent = $"Are you sure you want to duplicate this Message Template?";
         DialogParameters parameters = new()
         {
+            { nameof(TransactionConfirmation.TransactionTitle), "Duplicate Message Template" },
             { nameof(TransactionConfirmation.ContentText), transactionContent },
             { nameof(TransactionConfirmation.ConfirmText), "Duplicate" }
         };
