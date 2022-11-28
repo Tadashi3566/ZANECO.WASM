@@ -78,7 +78,7 @@ public partial class MessageTemplates
                 TemplateType = dto.TemplateType,
                 MessageType = dto.MessageType,
                 IsAPI = dto.IsAPI,
-                IsMultiple = dto.IsMultiple,
+                IsFastMode = dto.IsFastMode,
                 Recepients = dto.Recepients,
                 Subject = dto.Subject,
                 Message = dto.Message,
