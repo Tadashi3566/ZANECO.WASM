@@ -40,7 +40,7 @@ public partial class SendMessageComponent
     {
         if (!_model.IsAPI)
         {
-            _model.IsMultiple = false;
+            _model.IsFastMode = false;
             return true;
         }
         return false;
