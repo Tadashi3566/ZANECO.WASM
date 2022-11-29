@@ -46,17 +46,17 @@
                 <div class="justify-center mud-text-align-center">
                     @if (_canCreate)
                     {
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                        <MudButton Class="ma-1" Variant="Variant.Filled" Color="Color.Primary"
                             OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add"
                             IconColor="Color.Surface">@L["Create"]</MudButton>
                     }
                     @if (_canExport)
                     {
-                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary"
+                        <MudButton Class="ma-1" Variant="Variant.Filled" Color="Color.Tertiary"
                             OnClick="(() => ExportAsync())" StartIcon="@Icons.Material.Filled.ImportExport"
                             Style="margin-left: 5px;" IconColor="Color.Surface">@L["Export"]</MudButton>
                     }
-                    <MudButton Variant="Variant.Filled" OnClick="ReloadDataAsync"
+                    <MudButton Class="ma-1" Variant="Variant.Filled" OnClick="ReloadDataAsync"
                         StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary"
                         Style="margin-left: 5px;">@L["Reload"]</MudButton>
                 </div>

@@ -1,4 +1,5 @@
 ﻿@page "/app/tickets"
+
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Tickets)]
 
 <FshTitle Title="Tickets" Description="Manage Tickets" />
@@ -8,10 +9,22 @@
         @if (_canViewRoleClaims)
         {
             <MudDivider/>
-            <MudMenuItem >Open</MudMenuItem>
-            <MudMenuItem >Suspend</MudMenuItem>
-            <MudMenuItem >Close</MudMenuItem>
-            <MudMenuItem >Approve</MudMenuItem>
+            @if (context.Status.Equals("PENDING") || context.Status.Equals("SUSPENDED"))
+            {
+                <MudMenuItem Icon="@Icons.Filled.OpenInFull" OnClick="@(() => Navigation.NavigateTo($"/app/ticket/{context.Id}"))">Open</MudMenuItem>
+            }
+            @if (context.Status.Equals("OPENED"))
+            {
+                <MudMenuItem Icon="@Icons.Filled.OpenInNew">Suspend</MudMenuItem>
+            }
+            @if (context.Status.Equals("OPENED") || context.Status.Equals("SUSPENDED"))
+            {
+                <MudMenuItem Icon="@Icons.Filled.HourglassTop">Close</MudMenuItem>
+            }
+            @if (context.Status.Equals("CLOSED"))
+            {
+                <MudMenuItem Icon="@Icons.Filled.Check">Approve</MudMenuItem>
+            }
         }
     </ExtraActions>
     <EditFormContent>

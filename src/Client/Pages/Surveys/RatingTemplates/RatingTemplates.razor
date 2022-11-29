@@ -1,7 +1,7 @@
 ﻿@page "/survey/ratingtemplates"
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Rating)]
 
-<FshTitle Title="RatingTemplates" Description="Manage RatingTemplates" />
+<FshTitle Title="Rating Templates" Description="Rating Templates are pre-made comments." />
 
 <EntityTable @ref="_table" TEntity="RatingTemplateDto" TId="Guid" TRequest="RatingTemplateUpdateRequest" Context="@Context">
     <EditFormContent>
