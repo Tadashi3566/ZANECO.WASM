@@ -1,6 +1,7 @@
 ﻿using MudBlazor;
 
 namespace ZANECO.WASM.Client.Infrastructure.Theme;
+
 public class DarkTheme : MudTheme
 {
     public DarkTheme()

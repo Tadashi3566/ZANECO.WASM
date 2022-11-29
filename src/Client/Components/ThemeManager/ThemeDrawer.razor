@@ -18,6 +18,8 @@
                 CurrentColor="Color.Secondary" />
             <RadiusPanel Radius="ThemePreference==null ? 0 : ThemePreference.BorderRadius"
                 OnSliderChanged="UpdateBorderRadius" />
+            <ElevationPanel Elevation="ThemePreference==null ? 0 : ThemePreference.Elevation"
+                OnSliderChanged="UpdateElevation" />
             <TableCustomizationPanel OnDenseSwitchToggled="ToggleEntityTableDense"
                 OnStripedSwitchToggled="ToggleEntityTableStriped" OnBorderdedSwitchToggled="ToggleEntityTableBorder"
                 OnHoverableSwitchToggled="ToggleEntityTableHoverable" />

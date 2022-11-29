@@ -7,6 +7,7 @@ using MudBlazor;
 using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Components.EntityTable;
@@ -19,8 +20,6 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
     [Parameter]
     public bool Loading { get; set; }
-    [Parameter]
-    public bool MultiSelection { get; set; }
     [Parameter]
     public HashSet<TEntity>? SelectedItems { get; set; }
     [Parameter]
@@ -46,6 +45,8 @@ public partial class EntityTable<TEntity, TId, TRequest>
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
 
+    private ClientPreference _preference = new();
+
     private bool _canSearch;
     private bool _canCreate;
     private bool _canUpdate;
@@ -56,6 +57,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
     private MudTable<TEntity> _table = default!;
     private IEnumerable<TEntity>? _entityList;
+
     private int _totalItems;
 
     protected override async Task OnInitializedAsync()

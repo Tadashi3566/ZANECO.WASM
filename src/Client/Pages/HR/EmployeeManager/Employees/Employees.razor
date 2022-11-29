@@ -4,7 +4,7 @@
 
 <FshTitle Title="Employees" Description="Employee Management" />
 
-<EntityTable @ref="_table" TEntity="EmployeeDto" TId="Guid" TRequest="EmployeeViewModel" Context="@Context" MultiSelection=true>
+<EntityTable @ref="_table" TEntity="EmployeeDto" TId="Guid" TRequest="EmployeeViewModel" Context="@Context" >
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
             <AutocompletePayroll @bind-Value="SearchPayrollId" />

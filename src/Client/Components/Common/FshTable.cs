@@ -5,6 +5,7 @@ using ZANECO.WASM.Client.Infrastructure.Notifications;
 using ZANECO.WASM.Client.Infrastructure.Preferences;
 
 namespace ZANECO.WASM.Client.Components.Common;
+
 public class FshTable<T> : MudTable<T>
 {
     [Inject]
@@ -34,5 +35,6 @@ public class FshTable<T> : MudTable<T>
         Striped = tablePreference.IsStriped;
         Bordered = tablePreference.HasBorder;
         Hover = tablePreference.IsHoverable;
+        MultiSelection = tablePreference.IsMultiSelection;
     }
 }

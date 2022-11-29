@@ -1,10 +1,10 @@
 {
   "name": "ZANECO Web Application",
-  "short_name": "ZANECO Web Application",
+  "short_name": "ZANECO Web",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#3eaf7c",
+  "theme_color": "#03a9f4",
   "prefer_related_applications": false,
   "icons": [
     {

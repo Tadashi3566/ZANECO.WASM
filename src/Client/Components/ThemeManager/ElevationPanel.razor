@@ -1,0 +1,15 @@
+<MudExpansionPanel HideIcon="true">
+    <TitleContent>
+        <div class="d-flex">
+            <MudText Class="mt-1">Elevation</MudText>
+            <MudAvatar Color="Color.Primary" Class="d-flex ml-auto"
+                style="width: 30px;height:30px;font-size:small!important">@Elevation.ToString()
+            </MudAvatar>
+        </div>
+    </TitleContent>
+    <ChildContent>
+        <MudSlider @bind-Value="@Elevation" Min="0" Max="@MaxValue" Immediate="false" Step="1" Color="Color.Primary"
+            @oninput="@((e) => ChangedSelection(e))">
+            @Elevation.ToString()</MudSlider>
+    </ChildContent>
+</MudExpansionPanel>
