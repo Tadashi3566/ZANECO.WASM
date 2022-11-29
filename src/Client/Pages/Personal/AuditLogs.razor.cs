@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 
 namespace ZANECO.WASM.Client.Pages.Personal;
 public partial class AuditLogs
@@ -18,6 +19,8 @@ public partial class AuditLogs
     private bool _searchInOldValues;
     private bool _searchInNewValues;
     private List<RelatedAuditTrail> _trails = new();
+
+    private ClientPreference _preference = new();
 
     // Configure Automapper
     static AuditLogs() =>

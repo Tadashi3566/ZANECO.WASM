@@ -15,7 +15,7 @@ else
             @if (_canToggleUserStatus)
             {
                 <MudItem xs="12" sm="12" md="12">
-                    <MudCard Elevation="25">
+                    <MudCard Elevation="@_preference.Elevation">
                         <MudCardHeader>
                             <CardHeaderContent>
                                 <MudText Typo="Typo.body1">@_localizer["Administrator Settings."]</MudText>
@@ -37,7 +37,7 @@ else
             }
         </AuthorizeView>
         <MudItem xs="12" sm="4" md="4">
-            <MudCard Elevation="25">
+            <MudCard Elevation="@_preference.Elevation">
                 <MudCardContent Style="padding:0px!important">
                     <div class="d-flex justify-center mb-4">
                         @if (!string.IsNullOrEmpty(_imageUrl))
@@ -57,7 +57,7 @@ else
                     <div style="padding-bottom:20px">
                         @if (!string.IsNullOrEmpty(_imageUrl))
                         {
-                            <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info"
+                            <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info"
                         Size="Size.Small" Target="_blank" StartIcon="@Icons.Filled.RemoveRedEye" Link="@_imageUrl"
                         Style="margin-left: 5px;">
                                 @_localizer["View"]
@@ -69,7 +69,7 @@ else
             </MudCard>
         </MudItem>
         <MudItem xs="12" sm="8" md="8">
-            <MudCard Elevation="25">
+            <MudCard Elevation="@_preference.Elevation">
                 <MudCardHeader>
                     <CardHeaderContent>
                         <MudText>@_localizer["Public Profile"]</MudText>

@@ -6,6 +6,10 @@ namespace ZANECO.WASM.Client.Components.ThemeManager;
 public partial class TableCustomizationPanel
 {
     [Parameter]
+    public bool IsFixedHeaderFooter { get; set; }
+    [Parameter]
+    public bool IsAllowUnsorted { get; set; }
+    [Parameter]
     public bool IsDense { get; set; }
     [Parameter]
     public bool IsStriped { get; set; }
@@ -13,6 +17,8 @@ public partial class TableCustomizationPanel
     public bool HasBorder { get; set; }
     [Parameter]
     public bool IsHoverable { get; set; }
+    [Parameter]
+    public bool IsMultiSelection { get; set; }
     [Inject]
     protected INotificationPublisher Notifications { get; set; } = default!;
 
@@ -25,11 +31,22 @@ public partial class TableCustomizationPanel
             _tablePreference = clientPreference.TablePreference;
         }
 
+        IsFixedHeaderFooter = _tablePreference.IsFixedHeaderFooter;
+        IsAllowUnsorted = _tablePreference.IsAllowUnsorted;
+
         IsDense = _tablePreference.IsDense;
         IsStriped = _tablePreference.IsStriped;
         HasBorder = _tablePreference.HasBorder;
         IsHoverable = _tablePreference.IsHoverable;
+
+        IsMultiSelection = _tablePreference.IsMultiSelection;
     }
+
+    [Parameter]
+    public EventCallback<bool> OnFixedHeaderFooterSwitchToggled { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnAllowUnsortedSwitchToggled { get; set; }
 
     [Parameter]
     public EventCallback<bool> OnDenseSwitchToggled { get; set; }
@@ -42,6 +59,23 @@ public partial class TableCustomizationPanel
 
     [Parameter]
     public EventCallback<bool> OnHoverableSwitchToggled { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnMultipleSelectionSwitchToggled { get; set; }
+
+    private async Task ToggleFixedHeaderFooterSwitch()
+    {
+        _tablePreference.IsFixedHeaderFooter = !_tablePreference.IsFixedHeaderFooter;
+        await OnFixedHeaderFooterSwitchToggled.InvokeAsync(_tablePreference.IsFixedHeaderFooter);
+        await Notifications.PublishAsync(_tablePreference);
+    }
+
+    private async Task ToggleAllowUnsortedSwitch()
+    {
+        _tablePreference.IsAllowUnsorted = !_tablePreference.IsAllowUnsorted;
+        await OnAllowUnsortedSwitchToggled.InvokeAsync(_tablePreference.IsAllowUnsorted);
+        await Notifications.PublishAsync(_tablePreference);
+    }
 
     private async Task ToggleDenseSwitch()
     {
@@ -68,6 +102,13 @@ public partial class TableCustomizationPanel
     {
         _tablePreference.IsHoverable = !_tablePreference.IsHoverable;
         await OnHoverableSwitchToggled.InvokeAsync(_tablePreference.IsHoverable);
+        await Notifications.PublishAsync(_tablePreference);
+    }
+
+    private async Task ToggleMultipleSelectionSwitch()
+    {
+        _tablePreference.IsMultiSelection = !_tablePreference.IsMultiSelection;
+        await OnMultipleSelectionSwitchToggled.InvokeAsync(_tablePreference.IsMultiSelection);
         await Notifications.PublishAsync(_tablePreference);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Components.Common;
@@ -18,6 +19,8 @@ public partial class PersonCard
     private string? Email { get; set; }
     private string? FullName { get; set; }
     private string? ImageUri { get; set; }
+
+    private ClientPreference _preference = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

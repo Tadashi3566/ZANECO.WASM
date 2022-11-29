@@ -3,13 +3,13 @@ using ZANECO.WASM.Client.Infrastructure.Preferences;
 
 namespace ZANECO.WASM.Client.Components.ThemeManager;
 
-public partial class RadiusPanel
+public partial class ElevationPanel
 {
     [Parameter]
-    public double Radius { get; set; }
+    public double Elevation { get; set; }
 
     [Parameter]
-    public double MaxValue { get; set; } = 30;
+    public double MaxValue { get; set; } = 25;
 
     [Parameter]
     public EventCallback<double> OnSliderChanged { get; set; }
@@ -17,12 +17,12 @@ public partial class RadiusPanel
     protected override async Task OnInitializedAsync()
     {
         if (await ClientPreferences.GetPreference() is not ClientPreference themePreference) themePreference = new ClientPreference();
-        Radius = themePreference.BorderRadius;
+        Elevation = themePreference.Elevation;
     }
 
     private async Task ChangedSelection(ChangeEventArgs args)
     {
-        Radius = int.Parse(args?.Value?.ToString() ?? "0");
-        await OnSliderChanged.InvokeAsync(Radius);
+        Elevation = int.Parse(args?.Value?.ToString() ?? "0");
+        await OnSliderChanged.InvokeAsync(Elevation);
     }
 }

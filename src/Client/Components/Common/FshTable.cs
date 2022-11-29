@@ -5,6 +5,7 @@ using ZANECO.WASM.Client.Infrastructure.Notifications;
 using ZANECO.WASM.Client.Infrastructure.Preferences;
 
 namespace ZANECO.WASM.Client.Components.Common;
+
 public class FshTable<T> : MudTable<T>
 {
     [Inject]
@@ -30,9 +31,15 @@ public class FshTable<T> : MudTable<T>
 
     private void SetTablePreference(FshTablePreference tablePreference)
     {
+        FixedHeader = tablePreference.IsFixedHeaderFooter;
+        FixedFooter = tablePreference.IsFixedHeaderFooter;
+        AllowUnsorted = tablePreference.IsAllowUnsorted;
+
         Dense = tablePreference.IsDense;
         Striped = tablePreference.IsStriped;
         Bordered = tablePreference.HasBorder;
         Hover = tablePreference.IsHoverable;
+
+        MultiSelection = tablePreference.IsMultiSelection;
     }
 }

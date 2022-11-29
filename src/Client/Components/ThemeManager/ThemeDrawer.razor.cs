@@ -3,6 +3,7 @@ using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Infrastructure.Theme;
 
 namespace ZANECO.WASM.Client.Components.ThemeManager;
+
 public partial class ThemeDrawer
 {
     [Parameter]
@@ -18,6 +19,8 @@ public partial class ThemeDrawer
     [EditorRequired]
     [Parameter]
     public EventCallback<ClientPreference> ThemePreferenceChanged { get; set; }
+
+    private ClientPreference _preference = new();
 
     private readonly List<string> _colors = CustomColors.ThemeColors;
 
@@ -48,11 +51,38 @@ public partial class ThemeDrawer
         }
     }
 
+    private async Task UpdateElevation(double elevation)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.Elevation = Convert.ToInt32(elevation);
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
+
     private async Task ToggleDarkLightMode(bool isDarkMode)
     {
         if (ThemePreference is not null)
         {
             ThemePreference.IsDarkMode = isDarkMode;
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
+
+    private async Task ToggleEntityTableFixedHeaderFooter(bool isFixedHeaderFooter)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.TablePreference.IsFixedHeaderFooter = isFixedHeaderFooter;
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
+
+    private async Task ToggleEntityTableAllowUnsorted(bool isAllowUnsorted)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.TablePreference.IsAllowUnsorted = isAllowUnsorted;
             await ThemePreferenceChanged.InvokeAsync(ThemePreference);
         }
     }
@@ -89,6 +119,15 @@ public partial class ThemeDrawer
         if (ThemePreference is not null)
         {
             ThemePreference.TablePreference.IsHoverable = isHoverable;
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
+
+    private async Task ToggleEntityTableMultipleSelection(bool isMultipleSelection)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.TablePreference.IsMultiSelection = isMultipleSelection;
             await ThemePreferenceChanged.InvokeAsync(ThemePreference);
         }
     }

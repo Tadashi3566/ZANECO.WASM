@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 using ZANECO.WebApi.Shared.MultiTenancy;
@@ -33,6 +34,8 @@ public partial class RolePermissions
     private bool _loaded;
 
     static RolePermissions() => TypeAdapterConfig<FSHPermission, PermissionViewModel>.NewConfig().MapToConstructor(true);
+
+    private ClientPreference _preference = new();
 
     protected override async Task OnInitializedAsync()
     {

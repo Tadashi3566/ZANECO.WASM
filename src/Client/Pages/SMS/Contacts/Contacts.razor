@@ -4,11 +4,11 @@
 
 <FshTitle Title="Contacts" Description="Manage Contacts" />
 
-<EntityTable MultiSelection=true @ref="_table" SelectedItems="@_selectedItems" TEntity="ContactDto" TId="Guid" TRequest="ContactViewModel" Context="@Context">
+<EntityTable @ref="_table" SelectedItems="@_selectedItems" TEntity="ContactDto" TId="Guid" TRequest="ContactViewModel" Context="@Context">
     <ExtraActions>
         <MudDivider/>
         <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => OnCopyPhoneNumbersChecked())" OnTouch="@(() => OnCopyPhoneNumbersChecked())">Copy Phone Numbers</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => Send())" OnTouch="@(() => Send())">Send Message</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => Send(context))" OnTouch="@(() => Send(context))">Send Message</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>
@@ -47,25 +47,25 @@
             </MudItem>
             <MudItem>
                 <div>
-                    <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
+                    <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
                         StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
                         Upload
                     </MudButton>
                     @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
-                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
                             StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
                             View
                         </MudButton>
 
-                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
                             StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
                             Delete
                         </MudButton>
                     }
                     @if(!string.IsNullOrEmpty(context.ImageInBytes))
                     {
-                        <MudButton HtmlTag="label" DisableElevation OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                        <MudButton HtmlTag="label"  OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
                             StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;" >
                             Clear
                         </MudButton>

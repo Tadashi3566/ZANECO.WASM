@@ -1,6 +1,7 @@
 ﻿using MudBlazor;
 
 namespace ZANECO.WASM.Client.Infrastructure.Theme;
+
 public static class CustomTypography
 {
     public static Typography FSHTypography => new Typography()

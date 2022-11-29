@@ -5,7 +5,7 @@
 
 <FshTitle Title="Calendar" Description="Employee Calendar Management" />
 
-<EntityTable @ref="_table" TEntity="CalendarDto" TId="Guid" TRequest="CalendarUpdateRequest" Context="@Context" MultiSelection=true>
+<EntityTable @ref="_table" TEntity="CalendarDto" TId="Guid" TRequest="CalendarUpdateRequest" Context="@Context" >
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />

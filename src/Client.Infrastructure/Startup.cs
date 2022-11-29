@@ -23,7 +23,7 @@ public static class Startup
                     configuration.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
                     configuration.SnackbarConfiguration.HideTransitionDuration = 100;
                     configuration.SnackbarConfiguration.ShowTransitionDuration = 100;
-                    configuration.SnackbarConfiguration.VisibleStateDuration = 3000;
+                    configuration.SnackbarConfiguration.VisibleStateDuration = 5000;
                     configuration.SnackbarConfiguration.ShowCloseIcon = false;
                 })
             .AddScoped<IClientPreferenceManager, ClientPreferenceManager>()

@@ -74,12 +74,19 @@ public partial class Contacts
         }
     }
 
-    private void Send()
+    private void Send(ContactDto dto)
     {
-        string[] phoneNumbers = _selectedItems.Select(x => x.PhoneNumber).ToArray()!;
-        string recepients = string.Join(",", phoneNumbers);
-        Navigation.NavigateTo($"/sms/send/{recepients}");
-        //Navigation.NavigateTo($"/sms/send/");
+        if (_selectedItems.Count > 0)
+        {
+            string[] phoneNumbers = _selectedItems.Select(x => x.PhoneNumber).ToArray()!;
+            string recepients = string.Join(",", phoneNumbers);
+
+            Navigation.NavigateTo($"/sms/send/{recepients}");
+        }
+        else
+        {
+            Navigation.NavigateTo($"/sms/send/{dto.PhoneNumber}");
+        }
     }
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.

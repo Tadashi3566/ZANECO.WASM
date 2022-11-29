@@ -10,21 +10,24 @@ public partial class BaseLayout
     private bool _themeDrawerOpen;
     private bool _rightToLeft;
 
+    private ClientPreference _preference = new();
+
     protected override async Task OnInitializedAsync()
     {
         _themePreference = await ClientPreferences.GetPreference() as ClientPreference;
         if (_themePreference == null) _themePreference = new ClientPreference();
         SetCurrentTheme(_themePreference);
 
-        Snackbar.Add("Like this boilerplate? ", Severity.Normal, config =>
+        //This function will be intended for tickets or comments
+        Snackbar.Add("Want to know other Company Information and Services? ", Severity.Normal, config =>
         {
             config.BackgroundBlurred = true;
-            config.Icon = Icons.Custom.Brands.GitHub;
-            config.Action = "Star us on Github!";
+            config.Icon = Icons.Custom.Brands.Chrome;
+            config.Action = "Visit our Website!";
             config.ActionColor = Color.Primary;
             config.Onclick = snackbar =>
             {
-                Navigation.NavigateTo("https://github.com/fullstackhero/blazor-wasm-boilerplate");
+                Navigation.NavigateTo("https://www.zaneco.com.ph");
                 return Task.CompletedTask;
             };
         });

@@ -1,5 +1,4 @@
 ﻿using Mapster;
-using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
@@ -7,6 +6,7 @@ using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Components.Services;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -28,6 +28,8 @@ public partial class MessageTemplates
 
     private MessageOutCreateRequest _messageOut = new();
 
+    private ClientPreference _preference = new();
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Message Template",
@@ -37,7 +39,7 @@ public partial class MessageTemplates
             {
                 new(data => data.TemplateType, "Template Type", "TemplateType"),
                 new(data => data.IsAPI, "API", "IsAPI", typeof(bool)),
-                new(data => data.IsMultiple, "Multiple", "IsMultiple", typeof(bool)),
+                new(data => data.IsFastMode, "Multiple", "isFastMode", typeof(bool)),
                 new(data => data.Subject, "Subject", "Subject"),
                 new(data => data.Message, "Message", "Message"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
@@ -78,7 +80,7 @@ public partial class MessageTemplates
                 TemplateType = dto.TemplateType,
                 MessageType = dto.MessageType,
                 IsAPI = dto.IsAPI,
-                IsMultiple = dto.IsMultiple,
+                IsFastMode = dto.IsFastMode,
                 Recepients = dto.Recepients,
                 Subject = dto.Subject,
                 Message = dto.Message,

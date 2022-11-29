@@ -21,7 +21,7 @@
                 Class="mud-elevation-25" Text="@L["Advanced Search"]">
                 <MudTextField @bind-Value="SearchString"
                     Placeholder="@($"{L["Search for"]} {Context.EntityNamePlural}")" Adornment="Adornment.Start"
-                    AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"
+                    AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Immediate=false
                     Style="flex:none!important;margin:0px!important" TextChanged="OnSearchStringChanged">
                 </MudTextField>
                 @if (Context.AdvancedSearchEnabled)
@@ -39,23 +39,24 @@
             </MudExpansionPanel>
         }
 
-        <FshTable @ref="_table" MultiSelection="@MultiSelection" @bind-SelectedItems="SelectedItems" Elevation="25" ServerData="@ServerReloadFunc" Items="@_entityList" Filter="LocalSearch"
+        <FshTable @ref="_table" @bind-SelectedItems="SelectedItems" ServerData="@ServerReloadFunc" Items="@_entityList" Filter="LocalSearch"
+                  Height="@(_tablePreference.IsFixedHeaderFooter ?"500px":"")"
             Loading="@Loading" LoadingProgressColor="@Color.Secondary" ChildRowContent="@ChildRowContent">
             <ToolBarContent>
                 <div class="justify-center mud-text-align-center">
                     @if (_canCreate)
                     {
-                        <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary"
                             OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add"
                             IconColor="Color.Surface">@L["Create"]</MudButton>
                     }
                     @if (_canExport)
                     {
-                        <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Tertiary"
+                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary"
                             OnClick="(() => ExportAsync())" StartIcon="@Icons.Material.Filled.ImportExport"
                             Style="margin-left: 5px;" IconColor="Color.Surface">@L["Export"]</MudButton>
                     }
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="ReloadDataAsync"
+                    <MudButton Variant="Variant.Filled" OnClick="ReloadDataAsync"
                         StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary"
                         Style="margin-left: 5px;">@L["Reload"]</MudButton>
                 </div>
@@ -114,7 +115,7 @@
                     }
                     else if (HasActions)
                     {
-                        <MudMenu Label="@L["Actions"]" Variant="Variant.Filled" DisableElevation="true"
+                        <MudMenu Label="@L["Actions"]" Variant="Variant.Filled"
                             EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left"
                             OffsetX="true">
                             @if (CanUpdateEntity(context))
@@ -133,7 +134,7 @@
                     }
                     else
                     {
-                        <MudButton Variant="Variant.Filled" DisableElevation="true"
+                        <MudButton Variant="Variant.Filled"
                             StartIcon="@Icons.Material.Filled.DoNotTouch" IconColor="Color.Secondary" Size="Size.Small" Color="Color.Surface">
                             @L["No Allowed Actions"]
                         </MudButton>

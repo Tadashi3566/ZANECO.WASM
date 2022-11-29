@@ -7,6 +7,7 @@ using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -27,6 +28,8 @@ public partial class Profile
     private char _firstLetterOfName;
 
     private CustomValidation? _customValidation;
+
+    private ClientPreference _preference = new();
 
     protected override async Task OnInitializedAsync()
     {

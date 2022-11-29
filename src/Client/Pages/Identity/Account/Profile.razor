@@ -2,7 +2,7 @@
 
 <MudGrid>
     <MudItem xs="12" sm="12" md="4">
-        <MudCard Elevation="25">
+        <MudCard Elevation="@_preference.Elevation">
             <MudCardContent Style="padding:0px!important">
                 <div class="d-flex justify-center mb-4">
                     @if (!string.IsNullOrEmpty(_imageUrl))
@@ -26,12 +26,12 @@
                     </MudButton>
                     @if (!string.IsNullOrEmpty(_imageUrl))
                     {
-                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
                                StartIcon="@Icons.Filled.RemoveRedEye" Link="@_imageUrl" Style="margin-left: 5px;">
                             @L["View"]
                         </MudButton>
 
-                        <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
                                StartIcon="@Icons.Filled.Delete" OnClick="RemoveImageAsync" Style="margin-left: 5px;">
                             @L["Delete"]
                         </MudButton>
@@ -44,7 +44,7 @@
     </MudItem>
     <MudItem xs="12" sm="12" md="8">
         <EditForm Model="@_user" OnValidSubmit="UpdateProfileAsync">
-            <MudCard Elevation="25">
+            <MudCard Elevation="@_preference.Elevation">
                 <MudCardHeader>
                     <CardHeaderContent>
                         <MudText>@L["Profile Details"]</MudText>
@@ -68,12 +68,12 @@
                             <MudTextField @bind-Value="@_user.PhoneNumber"
                                           For="@(() => _user.PhoneNumber)"
                                           Label="@L["Phone Number"]"
-                                          Variant="Variant.Outlined" />
+                                         Variant="Variant.Outlined" />
                         </MudItem>
                         <MudItem xs="12" md="6">
                             <MudTextField @bind-Value="@_user.Email" Label="@L["Email"]"
                                           For="@(() => _user.Email)"
-                                          Variant="Variant.Outlined"
+                                         Variant="Variant.Outlined"
                                           InputType="InputType.Email" Disabled=true />
                         </MudItem>
                         <MudItem xs="12">
@@ -81,14 +81,14 @@
                                           For="@(() => _user.Description)"
                                           Label="@L["Description"]"
                                           Lines="2"
-                                          Variant="Variant.Outlined" />
+                                         Variant="Variant.Outlined" />
                         </MudItem>
                         <MudItem xs="12">
                             <MudTextField @bind-Value="@_user.Notes"
                                           For="@(() => _user.Notes)"
                                           Label="@L["Notes"]"
                                           Lines="2"
-                                          Variant="Variant.Outlined" />
+                                         Variant="Variant.Outlined" />
                         </MudItem>
                     </MudGrid>
                 </MudCardContent>

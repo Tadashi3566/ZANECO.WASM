@@ -30,7 +30,7 @@
             <MudSwitch Class="mt-3" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
-            <MudSwitch Class="mt-3" Label="Multiple Send" For="@(() => context.IsMultiple)" @bind-Checked="context.IsMultiple" Color="Color.Tertiary" />
+            <MudSwitch Class="mt-3" Label="Fast Mode" For="@(() => context.IsFastMode)" @bind-Checked="context.IsFastMode" Color="Color.Tertiary" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
@@ -54,7 +54,7 @@
         {
             <MudTr>
                 <td colspan="6">
-                    <MudCard Elevation="25" style="margin: 10px !important;">
+                    <MudCard Elevation="@_preference.Elevation" style="margin: 10px !important;">
                         @*<MudCardHeader>
                             <CardHeaderContent>
                                 <MudAlert Severity="Severity.Info" Typo="Typo.body1">

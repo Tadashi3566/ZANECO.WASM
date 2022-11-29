@@ -2,6 +2,7 @@
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.MultiTenancy;
 
@@ -20,6 +21,8 @@ public partial class SelfRegister
     private bool _passwordVisibility;
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    private ClientPreference _preference = new();
 
     private async Task SubmitAsync()
     {
