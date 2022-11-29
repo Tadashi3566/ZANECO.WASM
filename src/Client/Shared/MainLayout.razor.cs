@@ -15,6 +15,8 @@ public partial class MainLayout
     private bool _drawerOpen;
     private bool _rightToLeft;
 
+    private ClientPreference _preference = new();
+
     protected override async Task OnInitializedAsync()
     {
         if (await ClientPreferences.GetPreference() is ClientPreference preference)
@@ -22,14 +24,6 @@ public partial class MainLayout
             _rightToLeft = preference.IsRTL;
             _drawerOpen = preference.IsDrawerOpen;
         }
-    }
-
-    private async Task RightToLeftToggle()
-    {
-        bool isRtl = await ClientPreferences.ToggleLayoutDirectionAsync();
-        _rightToLeft = isRtl;
-
-        await OnRightToLeftToggle.InvokeAsync(isRtl);
     }
 
     public async Task ToggleDarkMode()

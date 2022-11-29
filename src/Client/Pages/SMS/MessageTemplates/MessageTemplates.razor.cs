@@ -1,5 +1,4 @@
 ﻿using Mapster;
-using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
@@ -7,6 +6,7 @@ using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Components.Services;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -27,6 +27,8 @@ public partial class MessageTemplates
     private EntityTable<MessageTemplateDetail, int, MessageTemplateUpdateRequest> _table = default!;
 
     private MessageOutCreateRequest _messageOut = new();
+
+    private ClientPreference _preference = new();
 
     protected override void OnInitialized() =>
         Context = new(

@@ -10,6 +10,8 @@ public partial class BaseLayout
     private bool _themeDrawerOpen;
     private bool _rightToLeft;
 
+    private ClientPreference _preference = new();
+
     protected override async Task OnInitializedAsync()
     {
         _themePreference = await ClientPreferences.GetPreference() as ClientPreference;
@@ -17,7 +19,7 @@ public partial class BaseLayout
         SetCurrentTheme(_themePreference);
 
         //This function will be intended for tickets or comments
-        Snackbar.Add("Want to know Company Services? ", Severity.Normal, config =>
+        Snackbar.Add("Want to know other Company Information and Services? ", Severity.Normal, config =>
         {
             config.BackgroundBlurred = true;
             config.Icon = Icons.Custom.Brands.Chrome;

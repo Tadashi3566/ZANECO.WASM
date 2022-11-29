@@ -3,6 +3,7 @@ using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Infrastructure.Theme;
 
 namespace ZANECO.WASM.Client.Components.ThemeManager;
+
 public partial class ThemeDrawer
 {
     [Parameter]
@@ -18,6 +19,8 @@ public partial class ThemeDrawer
     [EditorRequired]
     [Parameter]
     public EventCallback<ClientPreference> ThemePreferenceChanged { get; set; }
+
+    private ClientPreference _preference = new();
 
     private readonly List<string> _colors = CustomColors.ThemeColors;
 
@@ -48,11 +51,11 @@ public partial class ThemeDrawer
         }
     }
 
-    private async Task UpdateElevation(int elevation)
+    private async Task UpdateElevation(double elevation)
     {
         if (ThemePreference is not null)
         {
-            ThemePreference.Elevation = elevation;
+            ThemePreference.Elevation = Convert.ToInt32(elevation);
             await ThemePreferenceChanged.InvokeAsync(ThemePreference);
         }
     }
@@ -98,15 +101,6 @@ public partial class ThemeDrawer
         if (ThemePreference is not null)
         {
             ThemePreference.TablePreference.IsHoverable = isHoverable;
-            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
-        }
-    }
-
-    private async Task ToggleEntityTableMultiSelection(bool isMultiSelection)
-    {
-        if (ThemePreference is not null)
-        {
-            ThemePreference.TablePreference.IsMultiSelection = isMultiSelection;
             await ThemePreferenceChanged.InvokeAsync(ThemePreference);
         }
     }

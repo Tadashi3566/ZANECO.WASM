@@ -1,7 +1,7 @@
 ﻿@inject IStringLocalizer<Security> L
 
 <EditForm Model="@_passwordModel" OnValidSubmit="ChangePasswordAsync">
-    <MudCard Elevation="25">
+    <MudCard Elevation="@_preference.Elevation">
         <MudCardHeader>
             <CardHeaderContent>
                 <MudText>@L["Change Password"]</MudText>
@@ -20,7 +20,7 @@
                 <MudItem xs="12" md="6">
                     <MudTextField T="string" @bind-Value="_passwordModel.ConfirmNewPassword"
                         For="@(() => _passwordModel.ConfirmNewPassword)" Label="@L["Password Confirmation"]"
-                        Variant="Variant.Outlined" InputType="_newPasswordInput" Adornment="Adornment.End"
+                       Variant="Variant.Outlined" InputType="_newPasswordInput" Adornment="Adornment.End"
                         AdornmentIcon="@_newPasswordInputIcon"
                         OnAdornmentClick="@(() => TogglePasswordVisibility(true))" />
                 </MudItem>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -36,6 +37,8 @@ public partial class UserProfile
     private string? _imageUrl;
     private bool _loaded;
     private bool _canToggleUserStatus;
+
+    private ClientPreference _preference = new();
 
     private async Task ToggleUserStatus()
     {

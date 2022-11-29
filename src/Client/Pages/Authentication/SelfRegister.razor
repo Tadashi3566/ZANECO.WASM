@@ -4,7 +4,7 @@
 @inject IStringLocalizer<SharedResource> LS
 
 <EditForm Model="@_createUserRequest" OnValidSubmit="SubmitAsync">
-    <MudCard Elevation="0">
+    <MudCard Elevation="@_preference.Elevation">
         <MudCardHeader>
             <CardHeaderContent>
                 <MudTooltip Text="Go Back">

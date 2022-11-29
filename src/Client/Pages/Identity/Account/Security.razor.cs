@@ -2,6 +2,7 @@
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.Identity.Account;
@@ -13,6 +14,8 @@ public partial class Security
     private readonly ChangePasswordRequest _passwordModel = new();
 
     private CustomValidation? _customValidation;
+
+    private ClientPreference _preference = new();
 
     private async Task ChangePasswordAsync()
     {

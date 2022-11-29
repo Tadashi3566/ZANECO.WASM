@@ -4,7 +4,7 @@
 
 <FshTitle Title="@L["Account"]" Description="@L["Manage your account"]" />
 
-<MudTabs Elevation="25" Color="Color.Transparent" Rounded="true" PanelClass="mt-6">
+<MudTabs Elevation="@_preference.Elevation" Color="Color.Transparent" Rounded="true" PanelClass="mt-6">
     <MudTabPanel Text="@L["Profile"]">
         <Profile />
     </MudTabPanel>
@@ -22,6 +22,8 @@
     public IAuthenticationService AuthService { get; set; } = default!;
 
     public bool SecurityTabHidden { get; set; } = false;
+
+    private ClientPreference _preference = new();
 
     protected override void OnInitialized()
     {

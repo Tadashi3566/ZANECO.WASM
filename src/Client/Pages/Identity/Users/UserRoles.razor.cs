@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -17,6 +18,8 @@ public partial class UserRoles
     protected IAuthorizationService AuthService { get; set; } = default!;
     [Inject]
     protected IUsersClient UsersClient { get; set; } = default!;
+
+    private ClientPreference _preference = new();
 
     private List<UserRoleDto> _userRolesList = default!;
 
