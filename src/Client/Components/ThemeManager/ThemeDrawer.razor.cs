@@ -69,20 +69,20 @@ public partial class ThemeDrawer
         }
     }
 
-    private async Task ToggleEntityTableFixedHeader(bool isFixedHeader)
+    private async Task ToggleEntityTableFixedHeaderFooter(bool isFixedHeaderFooter)
     {
         if (ThemePreference is not null)
         {
-            ThemePreference.TablePreference.IsFixedHeader = isFixedHeader;
+            ThemePreference.TablePreference.IsFixedHeaderFooter = isFixedHeaderFooter;
             await ThemePreferenceChanged.InvokeAsync(ThemePreference);
         }
     }
 
-    private async Task ToggleEntityTableFixedFooter(bool isFixedFooter)
+    private async Task ToggleEntityTableAllowUnsorted(bool isAllowUnsorted)
     {
         if (ThemePreference is not null)
         {
-            ThemePreference.TablePreference.IsFixedFooter = isFixedFooter;
+            ThemePreference.TablePreference.IsAllowUnsorted = isAllowUnsorted;
             await ThemePreferenceChanged.InvokeAsync(ThemePreference);
         }
     }

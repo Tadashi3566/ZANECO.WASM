@@ -6,9 +6,9 @@ namespace ZANECO.WASM.Client.Components.ThemeManager;
 public partial class TableCustomizationPanel
 {
     [Parameter]
-    public bool IsFixedHeader { get; set; }
+    public bool IsFixedHeaderFooter { get; set; }
     [Parameter]
-    public bool IsFixedFooter { get; set; }
+    public bool IsAllowUnsorted { get; set; }
     [Parameter]
     public bool IsDense { get; set; }
     [Parameter]
@@ -31,8 +31,8 @@ public partial class TableCustomizationPanel
             _tablePreference = clientPreference.TablePreference;
         }
 
-        IsFixedHeader = _tablePreference.IsFixedHeader;
-        IsFixedFooter = _tablePreference.IsFixedFooter;
+        IsFixedHeaderFooter = _tablePreference.IsFixedHeaderFooter;
+        IsAllowUnsorted = _tablePreference.IsAllowUnsorted;
 
         IsDense = _tablePreference.IsDense;
         IsStriped = _tablePreference.IsStriped;
@@ -43,10 +43,10 @@ public partial class TableCustomizationPanel
     }
 
     [Parameter]
-    public EventCallback<bool> OnFixedHeaderSwitchToggled { get; set; }
+    public EventCallback<bool> OnFixedHeaderFooterSwitchToggled { get; set; }
 
     [Parameter]
-    public EventCallback<bool> OnFixedFooterSwitchToggled { get; set; }
+    public EventCallback<bool> OnAllowUnsortedSwitchToggled { get; set; }
 
     [Parameter]
     public EventCallback<bool> OnDenseSwitchToggled { get; set; }
@@ -63,17 +63,17 @@ public partial class TableCustomizationPanel
     [Parameter]
     public EventCallback<bool> OnMultipleSelectionSwitchToggled { get; set; }
 
-    private async Task ToggleFixedHeaderSwitch()
+    private async Task ToggleFixedHeaderFooterSwitch()
     {
-        _tablePreference.IsFixedHeader = !_tablePreference.IsFixedHeader;
-        await OnFixedHeaderSwitchToggled.InvokeAsync(_tablePreference.IsFixedHeader);
+        _tablePreference.IsFixedHeaderFooter = !_tablePreference.IsFixedHeaderFooter;
+        await OnFixedHeaderFooterSwitchToggled.InvokeAsync(_tablePreference.IsFixedHeaderFooter);
         await Notifications.PublishAsync(_tablePreference);
     }
 
-    private async Task ToggleFixedFooterSwitch()
+    private async Task ToggleAllowUnsortedSwitch()
     {
-        _tablePreference.IsFixedFooter = !_tablePreference.IsFixedFooter;
-        await OnFixedFooterSwitchToggled.InvokeAsync(_tablePreference.IsFixedFooter);
+        _tablePreference.IsAllowUnsorted = !_tablePreference.IsAllowUnsorted;
+        await OnAllowUnsortedSwitchToggled.InvokeAsync(_tablePreference.IsAllowUnsorted);
         await Notifications.PublishAsync(_tablePreference);
     }
 

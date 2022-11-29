@@ -31,8 +31,9 @@ public class FshTable<T> : MudTable<T>
 
     private void SetTablePreference(FshTablePreference tablePreference)
     {
-        FixedHeader = tablePreference.IsFixedHeader;
-        FixedFooter = tablePreference.IsFixedFooter;
+        FixedHeader = tablePreference.IsFixedHeaderFooter;
+        FixedFooter = tablePreference.IsFixedHeaderFooter;
+        AllowUnsorted = tablePreference.IsAllowUnsorted;
 
         Dense = tablePreference.IsDense;
         Striped = tablePreference.IsStriped;

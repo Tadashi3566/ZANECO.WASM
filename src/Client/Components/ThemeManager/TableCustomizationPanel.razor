@@ -8,10 +8,10 @@
         </div>
     </TitleContent>
     <ChildContent>
-        <MudSwitch T="bool" Label="Fixed Header" Color="Color.Info" @oninput="@ToggleFixedHeaderSwitch"
-                   @bind-Checked="@IsFixedHeader" />
-        <MudSwitch T="bool" Label="Fixed Footer" Color="Color.Info" @oninput="@ToggleFixedFooterSwitch"
-                   @bind-Checked="@IsFixedFooter" />
+        <MudSwitch T="bool" Label="Fixed Header" Color="Color.Info" @oninput="@ToggleFixedHeaderFooterSwitch"
+                   @bind-Checked="@IsFixedHeaderFooter" />
+        <MudSwitch T="bool" Label="Allow Unsorted" Color="Color.Info" @oninput="@ToggleAllowUnsortedSwitch"
+                   @bind-Checked="@IsAllowUnsorted" />
 
         <MudSwitch T="bool" Label="Dense" Color="Color.Info" @oninput="@ToggleDenseSwitch"
                    @bind-Checked="@IsDense" />
