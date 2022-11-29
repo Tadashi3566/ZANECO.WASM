@@ -6,6 +6,10 @@ namespace ZANECO.WASM.Client.Components.ThemeManager;
 public partial class TableCustomizationPanel
 {
     [Parameter]
+    public bool IsFixedHeader { get; set; }
+    [Parameter]
+    public bool IsFixedFooter { get; set; }
+    [Parameter]
     public bool IsDense { get; set; }
     [Parameter]
     public bool IsStriped { get; set; }
@@ -27,12 +31,22 @@ public partial class TableCustomizationPanel
             _tablePreference = clientPreference.TablePreference;
         }
 
+        IsFixedHeader = _tablePreference.IsFixedHeader;
+        IsFixedFooter = _tablePreference.IsFixedFooter;
+
         IsDense = _tablePreference.IsDense;
         IsStriped = _tablePreference.IsStriped;
         HasBorder = _tablePreference.HasBorder;
         IsHoverable = _tablePreference.IsHoverable;
+
         IsMultiSelection = _tablePreference.IsMultiSelection;
     }
+
+    [Parameter]
+    public EventCallback<bool> OnFixedHeaderSwitchToggled { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnFixedFooterSwitchToggled { get; set; }
 
     [Parameter]
     public EventCallback<bool> OnDenseSwitchToggled { get; set; }
@@ -48,6 +62,20 @@ public partial class TableCustomizationPanel
 
     [Parameter]
     public EventCallback<bool> OnMultipleSelectionSwitchToggled { get; set; }
+
+    private async Task ToggleFixedHeaderSwitch()
+    {
+        _tablePreference.IsFixedHeader = !_tablePreference.IsFixedHeader;
+        await OnFixedHeaderSwitchToggled.InvokeAsync(_tablePreference.IsFixedHeader);
+        await Notifications.PublishAsync(_tablePreference);
+    }
+
+    private async Task ToggleFixedFooterSwitch()
+    {
+        _tablePreference.IsFixedFooter = !_tablePreference.IsFixedFooter;
+        await OnFixedFooterSwitchToggled.InvokeAsync(_tablePreference.IsFixedFooter);
+        await Notifications.PublishAsync(_tablePreference);
+    }
 
     private async Task ToggleDenseSwitch()
     {
@@ -80,7 +108,7 @@ public partial class TableCustomizationPanel
     private async Task ToggleMultipleSelectionSwitch()
     {
         _tablePreference.IsMultiSelection = !_tablePreference.IsMultiSelection;
-        await OnHoverableSwitchToggled.InvokeAsync(_tablePreference.IsMultiSelection);
+        await OnMultipleSelectionSwitchToggled.InvokeAsync(_tablePreference.IsMultiSelection);
         await Notifications.PublishAsync(_tablePreference);
     }
 }

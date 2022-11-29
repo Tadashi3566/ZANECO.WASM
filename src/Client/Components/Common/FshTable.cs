@@ -31,10 +31,14 @@ public class FshTable<T> : MudTable<T>
 
     private void SetTablePreference(FshTablePreference tablePreference)
     {
+        FixedHeader = tablePreference.IsFixedHeader;
+        FixedFooter = tablePreference.IsFixedFooter;
+
         Dense = tablePreference.IsDense;
         Striped = tablePreference.IsStriped;
         Bordered = tablePreference.HasBorder;
         Hover = tablePreference.IsHoverable;
+
         MultiSelection = tablePreference.IsMultiSelection;
     }
 }

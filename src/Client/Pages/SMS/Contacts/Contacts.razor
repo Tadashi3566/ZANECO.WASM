@@ -8,7 +8,7 @@
     <ExtraActions>
         <MudDivider/>
         <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => OnCopyPhoneNumbersChecked())" OnTouch="@(() => OnCopyPhoneNumbersChecked())">Copy Phone Numbers</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => Send())" OnTouch="@(() => Send())">Send Message</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => Send(context))" OnTouch="@(() => Send(context))">Send Message</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>

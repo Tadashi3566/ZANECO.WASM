@@ -45,8 +45,6 @@ public partial class EntityTable<TEntity, TId, TRequest>
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
 
-    private ClientPreference _preference = new();
-
     private bool _canSearch;
     private bool _canCreate;
     private bool _canUpdate;
@@ -60,8 +58,15 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
     private int _totalItems;
 
+    FshTablePreference _tablePreference = new();
+
     protected override async Task OnInitializedAsync()
     {
+        if (await ClientPreferences.GetPreference() is ClientPreference clientPreference)
+        {
+            _tablePreference = clientPreference.TablePreference;
+        }
+
         var state = await AuthState;
         _canSearch = await CanDoActionAsync(Context.SearchAction, state);
         _canCreate = await CanDoActionAsync(Context.CreateAction, state);

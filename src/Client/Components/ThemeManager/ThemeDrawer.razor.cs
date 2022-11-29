@@ -69,6 +69,24 @@ public partial class ThemeDrawer
         }
     }
 
+    private async Task ToggleEntityTableFixedHeader(bool isFixedHeader)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.TablePreference.IsFixedHeader = isFixedHeader;
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
+
+    private async Task ToggleEntityTableFixedFooter(bool isFixedFooter)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.TablePreference.IsFixedFooter = isFixedFooter;
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
+
     private async Task ToggleEntityTableDense(bool isDense)
     {
         if (ThemePreference is not null)
@@ -101,6 +119,15 @@ public partial class ThemeDrawer
         if (ThemePreference is not null)
         {
             ThemePreference.TablePreference.IsHoverable = isHoverable;
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
+
+    private async Task ToggleEntityTableMultipleSelection(bool isMultipleSelection)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.TablePreference.IsMultiSelection = isMultipleSelection;
             await ThemePreferenceChanged.InvokeAsync(ThemePreference);
         }
     }

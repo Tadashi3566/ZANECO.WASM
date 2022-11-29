@@ -20,9 +20,14 @@
                 OnSliderChanged="UpdateBorderRadius" />
             <ElevationPanel Elevation="ThemePreference == null ? 0 : ThemePreference.Elevation"
                 OnSliderChanged="UpdateElevation" />
-            <TableCustomizationPanel OnDenseSwitchToggled="ToggleEntityTableDense"
-                OnStripedSwitchToggled="ToggleEntityTableStriped" OnBorderdedSwitchToggled="ToggleEntityTableBorder"
-                OnHoverableSwitchToggled="ToggleEntityTableHoverable" />
+            <TableCustomizationPanel
+                OnFixedHeaderSwitchToggled="ToggleEntityTableFixedHeader"
+                OnFixedFooterSwitchToggled="ToggleEntityTableFixedFooter"
+                OnDenseSwitchToggled="ToggleEntityTableDense"
+                OnStripedSwitchToggled="ToggleEntityTableStriped"
+                OnBorderdedSwitchToggled="ToggleEntityTableBorder"
+                OnHoverableSwitchToggled="ToggleEntityTableHoverable"
+                OnMultipleSelectionSwitchToggled="ToggleEntityTableMultipleSelection"/>
         </MudExpansionPanels>
     </div>
 </MudDrawer>
