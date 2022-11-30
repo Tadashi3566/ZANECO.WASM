@@ -41,5 +41,6 @@ public class FshTable<T> : MudTable<T>
         Hover = tablePreference.IsHoverable;
 
         MultiSelection = tablePreference.IsMultiSelection;
+        Virtualize = tablePreference.IsVirtualize;
     }
 }

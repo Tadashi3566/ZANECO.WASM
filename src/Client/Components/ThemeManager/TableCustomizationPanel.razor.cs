@@ -19,6 +19,8 @@ public partial class TableCustomizationPanel
     public bool IsHoverable { get; set; }
     [Parameter]
     public bool IsMultiSelection { get; set; }
+    [Parameter]
+    public bool IsVirtualize { get; set; }
     [Inject]
     protected INotificationPublisher Notifications { get; set; } = default!;
 
@@ -40,28 +42,25 @@ public partial class TableCustomizationPanel
         IsHoverable = _tablePreference.IsHoverable;
 
         IsMultiSelection = _tablePreference.IsMultiSelection;
+        IsVirtualize = _tablePreference.IsVirtualize;
     }
 
     [Parameter]
     public EventCallback<bool> OnFixedHeaderFooterSwitchToggled { get; set; }
-
     [Parameter]
     public EventCallback<bool> OnAllowUnsortedSwitchToggled { get; set; }
-
     [Parameter]
     public EventCallback<bool> OnDenseSwitchToggled { get; set; }
-
     [Parameter]
     public EventCallback<bool> OnStripedSwitchToggled { get; set; }
-
     [Parameter]
     public EventCallback<bool> OnBorderdedSwitchToggled { get; set; }
-
     [Parameter]
     public EventCallback<bool> OnHoverableSwitchToggled { get; set; }
-
     [Parameter]
     public EventCallback<bool> OnMultipleSelectionSwitchToggled { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnVirtualizeSwitchToggled { get; set; }
 
     private async Task ToggleFixedHeaderFooterSwitch()
     {
@@ -109,6 +108,13 @@ public partial class TableCustomizationPanel
     {
         _tablePreference.IsMultiSelection = !_tablePreference.IsMultiSelection;
         await OnMultipleSelectionSwitchToggled.InvokeAsync(_tablePreference.IsMultiSelection);
+        await Notifications.PublishAsync(_tablePreference);
+    }
+
+    private async Task ToggleVirtualizeSwitch()
+    {
+        _tablePreference.IsVirtualize = !_tablePreference.IsVirtualize;
+        await OnVirtualizeSwitchToggled.InvokeAsync(_tablePreference.IsVirtualize);
         await Notifications.PublishAsync(_tablePreference);
     }
 }

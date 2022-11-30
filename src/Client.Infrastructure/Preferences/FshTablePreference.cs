@@ -10,4 +10,5 @@ public class FshTablePreference : INotificationMessage
     public bool HasBorder { get; set; }
     public bool IsHoverable { get; set; }
     public bool IsMultiSelection { get; set; }
+    public bool IsVirtualize { get; set; }
 }

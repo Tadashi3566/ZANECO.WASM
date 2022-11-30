@@ -131,4 +131,13 @@ public partial class ThemeDrawer
             await ThemePreferenceChanged.InvokeAsync(ThemePreference);
         }
     }
+
+    private async Task ToggleEntityTableVirtualize(bool isVirtualize)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.TablePreference.IsVirtualize = isVirtualize;
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
 }
