@@ -40,9 +40,9 @@ public partial class Tickets
             fields: new()
             {
                 new(dto => dto.GroupCode, "Group", "Group"),
-                new(dto => dto.Impact, "Impact", "Impact"),
-                new(dto => dto.Urgency, "Urgency", "Urgency"),
-                new(dto => dto.Priority, "Priority", "Priority"),
+                new(dto => dto.Impact, "Impact/Urgency/Priority", "Impact", Template: TemplateScale),
+                //new(dto => dto.Urgency, "Urgency", "Urgency"),
+                //new(dto => dto.Priority, "Priority", "Priority"),
                 new(dto => dto.Name, "Name", "Name"),
                 new(dto => dto.Description, "Description", "Description"),
                 new(dto => dto.Notes, "Notes", "Notes"),

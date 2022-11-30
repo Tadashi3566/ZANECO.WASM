@@ -150,3 +150,47 @@
     </EditFormContent>
 
 </EntityTable>
+
+@code {
+    private RenderFragment<TicketDto> TemplateScale => context => __builder =>
+    {
+        <MudItem>
+            <MudChip Color="@Scale(context.Impact!)">@context.Impact</MudChip>
+            <MudChip Color="@Scale(context.Urgency!)">@context.Urgency</MudChip>
+            <MudChip Color="@Scale(context.Priority!)">@context.Priority</MudChip>
+        </MudItem>
+    };
+
+    private Color Scale(string scale)
+    {
+        switch (scale)
+        {
+            case "HIGH":
+            case "CRITICAL":
+                return Color.Error;
+
+            case "MID":
+            case "MAJOR":
+                return Color.Warning;
+
+            default:
+                return Color.Surface;
+        }
+    }
+
+    //private RenderFragment<TicketDto> TemplateNameAddress => context => __builder =>
+    //{
+    //    <MudItem Class="d-flex flex-column">
+    //        <MudText Typo="Typo.subtitle1">@context.Name</MudText>
+    //        <MudText Typo="Typo.caption">@context.Address</MudText>
+    //    </MudItem>
+    //};
+
+    //private RenderFragment<TicketDto> TemplateDescriptionNotes => context => __builder =>
+    //{
+    //    <MudItem Class="d-flex flex-column">
+    //        <MudText Typo="Typo.subtitle1">@context.Description</MudText>
+    //        <MudText Typo="Typo.caption">@context.Notes</MudText>
+    //    </MudItem>
+    //};
+}
