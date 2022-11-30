@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.Common;
+using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Components.Services;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
@@ -74,18 +76,34 @@ public partial class Contacts
         }
     }
 
-    private void Send(ContactDto dto)
+    private async Task Send(ContactDto dto)
     {
+        string[] phoneNumbers; //= _selectedItems.Select(x => x.PhoneNumber).ToArray()!;
+        string recepients; //= string.Join(",", phoneNumbers);
+
         if (_selectedItems.Count > 0)
         {
-            string[] phoneNumbers = _selectedItems.Select(x => x.PhoneNumber).ToArray()!;
-            string recepients = string.Join(",", phoneNumbers);
+            phoneNumbers = _selectedItems.Select(x => x.PhoneNumber).ToArray()!;
+            recepients = string.Join(",", phoneNumbers);
 
-            Navigation.NavigateTo($"/sms/send/{recepients}");
+            //Navigation.NavigateTo($"/sms/send/{recepients}");
         }
         else
         {
-            Navigation.NavigateTo($"/sms/send/{dto.PhoneNumber}");
+            recepients = dto.PhoneNumber;
+            //Navigation.NavigateTo($"/sms/send/{dto.PhoneNumber}");
+        }
+
+        DialogParameters parameters = new()
+        {
+            { nameof(SendMessageDialog.Recepients), recepients },
+        };
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+        IDialogReference dialog = DialogService.Show<SendMessageDialog>("Send Message", parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+
         }
     }
 

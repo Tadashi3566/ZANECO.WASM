@@ -81,7 +81,7 @@
     private RenderFragment<ContactDto> TemplatePhoneNumber => context => __builder =>
     {
         <MudItem>
-            <MudChip Icon="@Icons.Material.Filled.Phone" Label="true" Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.PhoneNumber}"))" >@context.PhoneNumber</MudChip>
+            <MudChip Icon="@Icons.Material.Filled.Phone" Label="true" Color="Color.Surface" OnClick="@(() => Send(context))">@context.PhoneNumber</MudChip>
         </MudItem>
     };
 
