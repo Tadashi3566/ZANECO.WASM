@@ -2,14 +2,14 @@
     <DataAnnotationsValidator />
     <CustomValidation @ref="_customValidation" />
     <MudGrid>
-        <MudItem xs="12" md="6">
+        @*<MudItem xs="12" md="6">
             <AutocompleteGroup For="@(() => _ticket.GroupId)" @bind-Value="_ticket.GroupId" />
+        </MudItem>*@
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => _ticket.Name)" @bind-Value="_ticket.Name" Variant="Variant.Outlined"/>
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Name" For="@(() => _ticket.Name)" @bind-Value="_ticket.Name" />
-        </MudItem>
-        <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => _ticket.Description)" @bind-Value="_ticket.Description" />
+            <MudTextField Label="Description" For="@(() => _ticket.Description)" @bind-Value="_ticket.Description" Variant="Variant.Outlined"/>
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Notes" For="@(() => _ticket.Notes)" @bind-Value="_ticket.Notes" />
@@ -60,12 +60,12 @@
             <MudTextField Label="Status" For="@(() => _ticket.Status)" @bind-Value="_ticket.Status" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
 
-        @*<MudItem>
+        <MudItem>
             <MudButton Color="Color.Primary" Class="ml-auto" StartIcon="@Icons.Filled.Send" Variant="Variant.Filled"
                        ButtonType="ButtonType.Submit">Save Changes</MudButton>
-        </MudItem>*@
+        </MudItem>
 
-        <MudItem xs="12" sm="12" md="4">
+        @*<MudItem xs="12" sm="12" md="4">
             <MudCard Elevation="@_preference.Elevation">
                 <MudCardContent Style="padding:0px!important">
                     <div class="d-flex justify-center mb-4">
@@ -103,6 +103,6 @@
 
                 </MudCardActions>
             </MudCard>
-        </MudItem>
+        </MudItem>*@
     </MudGrid>
 </EditForm>

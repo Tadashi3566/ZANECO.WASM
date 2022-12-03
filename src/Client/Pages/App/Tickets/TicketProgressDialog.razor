@@ -1,0 +1,36 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon=@Icons.Filled.CallToAction Class="mr-3 mb-n1" />
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField Label="Progress" @bind-Value="Request!.Name" For="(() => Request!.Name)"/>
+    </DialogContent>
+    <DialogActions>
+        <MudButton StartIcon="@Icons.Filled.Cancel" OnClick="Cancel">Cancel</MudButton>
+        <MudButton StartIcon=@Icons.Filled.CallToAction Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">Set Progress</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter]
+    public Guid TicketId { get; set; }
+
+    [Parameter]
+    public string? Action { get; set; }
+
+    private TicketProgressCreateRequest? Request { get; set; }
+
+    void Submit()
+    {
+
+
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}

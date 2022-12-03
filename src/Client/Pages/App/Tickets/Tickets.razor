@@ -2,16 +2,17 @@
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Tickets)]
 
-<FshTitle Title="Tickets" Description="Manage Tickets" />
+<FshTitle Title="Ticket Management" Description="Create and manage Incident, Support etc. Tickets" />
 
 <EntityTable @ref="_table" TEntity="TicketDto" TId="Guid" TRequest="TicketViewModel" Context="@Context">
     <ExtraActions>
         @if (_canViewRoleClaims)
         {
-            <MudDivider/>
+            <MudDivider />
             @if (context.Status.Equals("PENDING") || context.Status.Equals("SUSPENDED"))
             {
-                <MudMenuItem Icon="@Icons.Filled.OpenInFull" OnClick="@(() => Navigation.NavigateTo($"/app/ticket/{context.Id}"))">Open</MudMenuItem>
+                @*<MudMenuItem Icon="@Icons.Filled.OpenInFull" OnClick="@(() => Navigation.NavigateTo($"/app/ticket/{context.Id}"))">Open</MudMenuItem>*@
+                <MudMenuItem Icon="@Icons.Filled.OpenInFull" OnClick="@(() => SetProgress("Open", context.Id))">Open</MudMenuItem>
             }
             @if (context.Status.Equals("OPENED"))
             {

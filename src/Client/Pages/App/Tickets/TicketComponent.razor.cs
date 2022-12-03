@@ -43,9 +43,16 @@ public partial class TicketComponent
             _ticketDto = await TicketClient.GetAsync(Id);
 
             _ticket.Id = Id;
+            _ticket.Impact = _ticketDto.Impact;
+            _ticket.Urgency = _ticketDto.Urgency;
+            _ticket.Priority = _ticketDto.Priority;
             _ticket.Name = _ticketDto.Name;
             _ticket.Description = _ticketDto.Description;
             _ticket.Notes = _ticketDto.Notes;
+            _ticket.RequestedBy = _ticketDto.RequestedBy;
+            _ticket.RequestThrough = _ticketDto.RequestThrough;
+            _ticket.Reference = _ticketDto.Reference;
+            _ticket.Status = _ticketDto.Status;
         }
     }
 

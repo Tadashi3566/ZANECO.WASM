@@ -4,13 +4,17 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.Common;
+using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.App.Tickets;
+
 public partial class Tickets
 {
     [CascadingParameter]
@@ -41,8 +45,6 @@ public partial class Tickets
             {
                 new(dto => dto.GroupCode, "Group", "Group"),
                 new(dto => dto.Impact, "Impact/Urgency/Priority", "Impact", Template: TemplateScale),
-                //new(dto => dto.Urgency, "Urgency", "Urgency"),
-                //new(dto => dto.Priority, "Priority", "Priority"),
                 new(dto => dto.Name, "Name", "Name"),
                 new(dto => dto.Description, "Description", "Description"),
                 new(dto => dto.Notes, "Notes", "Notes"),
@@ -136,6 +138,33 @@ public partial class Tickets
         Context.AddEditModal.RequestModel.ImagePath = string.Empty;
         Context.AddEditModal.RequestModel.DeleteCurrentImage = true;
         Context.AddEditModal.ForceRender();
+    }
+
+    private async Task<bool> SetProgress(string action, Guid ticketId)
+    {
+        TicketProgressCreateRequest request = new();
+
+        var parameters = new DialogParameters
+        {
+            { nameof(SetProgressDialog.TicketId), ticketId },
+        };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        var dialog = DialogService.Show<TicketProgressDialog>($"{action} Ticket", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            string temp = request.Name;
+
+            //if (!_model.IsAPI)
+            //{
+            //    _model.IsFastMode = true;
+            //}
+
+            //await ApiHelper.ExecuteCallGuardedAsync(() => MessageClient.CreateAsync(_model), Snackbar, _customValidation,
+            //    "Message successfully sent to the recepient(s).");
+        }
+
+        return false;
     }
 }
 
