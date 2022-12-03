@@ -32,6 +32,8 @@ public partial class Tickets
 
     private bool _canViewRoleClaims;
 
+    private string? _userId;
+
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
@@ -142,26 +144,42 @@ public partial class Tickets
 
     private async Task<bool> SetProgress(string action, Guid ticketId)
     {
-        TicketProgressCreateRequest request = new();
-
         var parameters = new DialogParameters
         {
-            { nameof(SetProgressDialog.TicketId), ticketId },
+            { nameof(TicketProgressDialog.TicketId), ticketId },
+            { nameof(TicketProgressDialog.Action), action },
         };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
         var dialog = DialogService.Show<TicketProgressDialog>($"{action} Ticket", parameters, options);
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
-            string temp = request.Name;
+            if ((await AuthState).User is { } user)
+            {
+                _userId = user.GetUserId();
+            }
 
-            //if (!_model.IsAPI)
-            //{
-            //    _model.IsFastMode = true;
-            //}
+            switch (action)
+            {
+                case "Open":
+                    //await ApiHelper.ExecuteCallGuardedAsync(() => TicketsClient(_model), Snackbar, _customValidation,
+                    //    "Message successfully sent to the recepient(s).");        
+                    break;
 
-            //await ApiHelper.ExecuteCallGuardedAsync(() => MessageClient.CreateAsync(_model), Snackbar, _customValidation,
-            //    "Message successfully sent to the recepient(s).");
+                case "Suspend":
+
+                    break;
+
+                case "Close":
+
+                    break;
+
+                case "Approve":
+
+                    break;
+
+                default: break;
+            }
         }
 
         return false;

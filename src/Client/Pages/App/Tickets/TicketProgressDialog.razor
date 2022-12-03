@@ -1,15 +1,20 @@
-﻿<MudDialog>
+﻿@using ZANECO.WASM.Client.Components.Dialogs;
+
+<MudDialog>
     <TitleContent>
         <MudText Typo="Typo.h6">
-            <MudIcon Icon=@Icons.Filled.CallToAction Class="mr-3 mb-n1" />
+            <MudIcon Icon=@Icons.Filled.LabelImportant Class="mr-3 mb-n1" />
+            @Action Ticket
         </MudText>
     </TitleContent>
     <DialogContent>
-        <MudTextField Label="Progress" @bind-Value="Request!.Name" For="(() => Request!.Name)"/>
+        <MudTextField Label="Ticket Progress" @bind-Value="@Name" />
+        <MudTextField Label="Description" @bind-Value="@Description" />
+        <MudTextField Label="Notes" @bind-Value="@Notes" />
     </DialogContent>
     <DialogActions>
         <MudButton StartIcon="@Icons.Filled.Cancel" OnClick="Cancel">Cancel</MudButton>
-        <MudButton StartIcon=@Icons.Filled.CallToAction Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">Set Progress</MudButton>
+        <MudButton StartIcon=@Icons.Filled.CallToAction Color="Color.Primary" Variant="Variant.Filled" OnClick="@(() => Submit())">Set Progress</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -23,13 +28,43 @@
     [Parameter]
     public string? Action { get; set; }
 
-    private TicketProgressCreateRequest? Request { get; set; }
+    [Inject]
+    protected ITicketProgressClient Client { get; set; } = default!;
 
-    void Submit()
+    private string? Name { get; set; }
+    private string? Description { get; set; }
+    private string? Notes { get; set; }
+
+    async Task Submit()
     {
+        string transactionTitle = "Add Ticket Progress";
+        string transactionContent = $"Are you sure you want to Add Ticket Progress?";
+        DialogParameters parameters = new()
+        {
+            { nameof(TransactionConfirmation.TransactionTitle), transactionTitle },
+            { nameof(TransactionConfirmation.ContentText), transactionContent },
+        };
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        IDialogReference dialog = DialogService.Show<TransactionConfirmation>(transactionTitle, parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            TicketProgressCreateRequest ticketProgress = new();
 
+            if (string.IsNullOrEmpty(Name))
+            {
+                Name = $"{Action} Ticket";
+            }
 
-        MudDialog.Close(DialogResult.Ok(true));
+            ticketProgress.TicketId = TicketId;
+            ticketProgress.Name = Name;
+            ticketProgress.Description = Description;
+            ticketProgress.Notes = Notes;
+
+            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(ticketProgress), Snackbar, successMessage: $"{Action} Ticket successfully created.");
+
+            MudDialog.Close(DialogResult.Ok(true));
+        }
     }
 
     void Cancel() => MudDialog.Cancel();
