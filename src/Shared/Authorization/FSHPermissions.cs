@@ -36,6 +36,7 @@ public static class FSHResource
     public const string Rating = nameof(Rating);
     public const string Surveys = nameof(Surveys);
 
+    public const string Accounting = nameof(Accounting);
     public const string Employees = nameof(Employees);
     public const string Employers = nameof(Employers);
     public const string Designations = nameof(Designations);
@@ -140,6 +141,13 @@ public static class FSHPermissions
         new("Update Rating Surveys", FSHAction.Update, FSHResource.Surveys),
         new("Delete Rating Surveys", FSHAction.Delete, FSHResource.Surveys),
         new("Export Rating Surveys", FSHAction.Export, FSHResource.Surveys),
+
+        new("View Accounting", FSHAction.View, FSHResource.Accounting, IsBasic: true),
+        new("Search Accounting", FSHAction.Search, FSHResource.Accounting, IsBasic: true),
+        new("Create Accounting", FSHAction.Create, FSHResource.Accounting),
+        new("Update Accounting", FSHAction.Update, FSHResource.Accounting),
+        new("Delete Accounting", FSHAction.Delete, FSHResource.Accounting),
+        new("Export Accounting", FSHAction.Export, FSHResource.Accounting),
 
         new("View Employees", FSHAction.View, FSHResource.Employees, IsBasic: true),
         new("Search Employees", FSHAction.Search, FSHResource.Employees, IsBasic: true),

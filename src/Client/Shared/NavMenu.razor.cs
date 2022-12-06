@@ -67,7 +67,7 @@ public partial class NavMenu
         _canViewSurveys = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Surveys);
 
         _canViewEmployees = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Employees);
-        _canViewAccounting = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Employees);
+        _canViewAccounting = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Accounting);
 
         _canViewCAD = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.CAD);
     }
