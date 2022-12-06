@@ -1,6 +1,6 @@
 ﻿@inject IStringLocalizer<MainLayout> L
 
-<MudAppBar Elevation="@_preference.Elevation">
+<MudAppBar Elevation="0">
     <MudTooltip Text="Toggle Drawer">
         <MudIconButton Icon="@Icons.Rounded.Notes" Color="Color.Inherit" Edge="Edge.Start"
             OnClick="@((e) => DrawerToggle())" />
@@ -93,7 +93,7 @@
     </MudMenu>
 </MudAppBar>
 
-<MudDrawer @bind-Open="_drawerOpen" Elevation="@_preference.Elevation" ClipMode="DrawerClipMode.Never">
+<MudDrawer @bind-Open="_drawerOpen" Elevation="0" ClipMode="DrawerClipMode.Never">
     <NavMenu />
 </MudDrawer>
 
