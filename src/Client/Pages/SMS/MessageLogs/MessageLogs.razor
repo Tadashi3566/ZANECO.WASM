@@ -1,7 +1,7 @@
 ﻿@page "/sms/logs"
 @attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
 
-<FshTitle Title="Message Logs" Description="Manage Message Logs" />
+<FshTitle Title="Message Logs" Description="Message Logs Management" />
 
 <EntityTable @ref="_table" TEntity="MessageLogDto" TId="int" TRequest="MessageLogUpdateRequest" Context="@Context">
 
@@ -38,7 +38,7 @@
         <MudItem>
             <p>
                 <MudChip Icon="@Icons.Material.Filled.Send" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
-                <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">@context.MessageTo</MudChip>
+                <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageTo}"))">@context.MessageTo</MudChip>
             </p>
         </MudItem>
     };

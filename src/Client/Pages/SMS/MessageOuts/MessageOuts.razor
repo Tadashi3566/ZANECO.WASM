@@ -1,7 +1,7 @@
 ﻿@page "/sms/outs"
 @attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
 
-<FshTitle Title="Send Message" Description="Send Messages" />
+<FshTitle Title="Send Message" Description="Send Message to single or multiple recepients" />
 
 <EntityTable @ref="_table" TEntity="MessageOutDto" TId="int" TRequest="MessageOutCreateRequest" Context="@Context">
     <EditFormContent>
