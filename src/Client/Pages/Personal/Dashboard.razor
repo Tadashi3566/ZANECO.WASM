@@ -1,4 +1,5 @@
 ﻿@page "/dashboard"
+
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Dashboard)]
 
 @inject IStringLocalizer<Dashboard> L
@@ -17,7 +18,7 @@ else
                 <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Class="mx-4"
                 Style="width:54px; height:54px;"></MudIcon>
                 <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@L["Registered Accounts"]</MudText>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@L["Registered"]</MudText>
                     <MudText Typo="Typo.h5">@RegisteredCount</MudText>
                 </div>
             </MudPaper>

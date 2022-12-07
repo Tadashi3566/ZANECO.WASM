@@ -63,6 +63,7 @@ public partial class Dashboard
             {
                 _dataEnterBarChartSeries
                     .RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
+
                 _dataEnterBarChartSeries.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
             }
         }
