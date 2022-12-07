@@ -37475,12 +37475,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class StatsDto
     {
-        [Newtonsoft.Json.JsonProperty("productCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int ProductCount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("brandCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int BrandCount { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("userCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int UserCount { get; set; } = default!;
 
@@ -37493,6 +37487,18 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("productByBrandTypePieChart", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.IDictionary<string, double>? ProductByBrandTypePieChart { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("registered", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<Master2022> Registered { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("registeredCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int RegisteredCount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("smsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SmsCount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("webCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int WebCount { get; set; } = default!;
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -37503,6 +37509,68 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double>? Data { get; set; } = default!;
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class Master2022 : AuditableEntityOfInteger
+    {
+        [Newtonsoft.Json.JsonProperty("accountNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? AccountNumber { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Name { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("contact_number", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Contact_number { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("is_registered", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Is_registered { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("verification_code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Verification_code { get; set; } = default!;
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public abstract partial class AuditableEntityOfInteger : BaseEntityOfInteger
+    {
+        [Newtonsoft.Json.JsonProperty("createdBy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid CreatedBy { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("createdOn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime CreatedOn { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("lastModifiedBy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid LastModifiedBy { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("lastModifiedOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? LastModifiedOn { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("deletedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? DeletedBy { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("deletedOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? DeletedOn { get; set; } = default!;
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public abstract partial class BaseEntityOfInteger
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("domainEvents", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<DomainEvent> DomainEvents { get; set; } = default!;
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public abstract partial class DomainEvent
+    {
+        [Newtonsoft.Json.JsonProperty("triggeredOn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TriggeredOn { get; set; } = default!;
 
     }
 

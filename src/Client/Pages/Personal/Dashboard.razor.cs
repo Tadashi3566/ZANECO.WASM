@@ -10,9 +10,12 @@ namespace ZANECO.WASM.Client.Pages.Personal;
 public partial class Dashboard
 {
     [Parameter]
-    public int ProductCount { get; set; }
+    public int RegisteredCount { get; set; }
     [Parameter]
-    public int BrandCount { get; set; }
+    public int SmsCount { get; set; }
+    [Parameter]
+    public int WebCount { get; set; }
+
     [Parameter]
     public int UserCount { get; set; }
     [Parameter]
@@ -49,10 +52,13 @@ public partial class Dashboard
                 Snackbar)
             is StatsDto statsDto)
         {
-            ProductCount = statsDto.ProductCount;
-            BrandCount = statsDto.BrandCount;
+            RegisteredCount = statsDto.RegisteredCount;
+            SmsCount = statsDto.SmsCount;
+            WebCount= statsDto.WebCount;
+
             UserCount = statsDto.UserCount;
             RoleCount = statsDto.RoleCount;
+
             foreach (var item in statsDto.DataEnterBarChart)
             {
                 _dataEnterBarChartSeries
