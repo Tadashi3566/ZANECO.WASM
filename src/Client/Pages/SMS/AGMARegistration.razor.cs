@@ -40,7 +40,7 @@ public partial class AGMARegistration
             entityResource: FSHResource.SMS,
             fields: new()
             {
-                new(data => data.Id, "Id", "Id"),
+                //new(data => data.Id, "Id", "Id"),
                 new(data => data.ReceiveTime, "Receive Date/Time", "ReceiveTime", Template: TemplateReceivedTime),
                 new(data => data.MessageFrom, "Sender/Receiver", "MessageFrom", Template: TemplateSenderReceiver),
                 new(data => data.MessageText, "Message", "MessageText"),
