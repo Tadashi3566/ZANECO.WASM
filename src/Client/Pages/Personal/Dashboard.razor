@@ -4,7 +4,7 @@
 
 @inject IStringLocalizer<Dashboard> L
 
-<FshTitle Title="@L["Dashboard"]" Description="@L["Realtime Updates & Insights with SignalR."]" />
+<FshTitle Title="@L["Dashboard"]" Description="@L["Realtime Updates & Insights with SignalR"]" />
 
 @if (!_loaded)
 {
@@ -18,7 +18,7 @@ else
                 <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Class="mx-4"
                 Style="width:54px; height:54px;"></MudIcon>
                 <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@L["Registered"]</MudText>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@L["Registered Accounts"]</MudText>
                     <MudText Typo="Typo.h5">@RegisteredCount</MudText>
                 </div>
             </MudPaper>
@@ -43,7 +43,11 @@ else
                 </div>
             </MudPaper>
         </MudItem>
-
+        <MudItem>
+            <MudButton Class="ma-1" Variant="Variant.Filled" Color="Color.Primary"
+                       OnClick="(() => LoadDataAsync())" StartIcon="@Icons.Material.Filled.Refresh"
+                       IconColor="Color.Surface">@L["Refresh"]</MudButton>
+        </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
                 <MudIcon Icon="@Icons.Material.Filled.Face" Color="Color.Success" Class="mx-4"
