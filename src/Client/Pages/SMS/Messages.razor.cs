@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.SMS;
@@ -19,6 +20,16 @@ public partial class Messages
     private EntityTable<MessageInDto, int, MessageInUpdateRequest> _tableIn = default!;
 
     private EntityTable<MessageLogDto, int, MessageLogUpdateRequest> _tableLog = default!;
+
+    //private MessageInReadRequest _readRequest = new();
+
+    //protected override async Task OnParametersSetAsync()
+    //{
+    //    if (Recepient.Length > 0)
+    //    {
+    //        await ReadInbox(Recepient);
+    //    }
+    //}
 
     protected override void OnInitialized()
     {
@@ -64,4 +75,10 @@ public partial class Messages
             updateFunc: async (id, data) => await ClientLog.UpdateAsync(id, data),
             exportAction: string.Empty);
     }
+
+    //private async Task ReadInbox(string messageFrom)
+    //{
+    //    _readRequest.MessageFrom = messageFrom;
+    //    await ApiHelper.ExecuteCallGuardedAsync(() => ClientIn.ReadAsync(_readRequest), Snackbar, successMessage: $"Messages from sender {Recepient} has been marked as read.");
+    //}
 }
