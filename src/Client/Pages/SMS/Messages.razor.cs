@@ -21,15 +21,15 @@ public partial class Messages
 
     private EntityTable<MessageLogDto, int, MessageLogUpdateRequest> _tableLog = default!;
 
-    //private MessageInReadRequest _readRequest = new();
+    private MessageInReadRequest _readRequest = new();
 
-    //protected override async Task OnParametersSetAsync()
-    //{
-    //    if (Recepient.Length > 0)
-    //    {
-    //        await ReadInbox(Recepient);
-    //    }
-    //}
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Recepient.Length > 0)
+        {
+            await ReadInbox(Recepient);
+        }
+    }
 
     protected override void OnInitialized()
     {
@@ -76,9 +76,9 @@ public partial class Messages
             exportAction: string.Empty);
     }
 
-    //private async Task ReadInbox(string messageFrom)
-    //{
-    //    _readRequest.MessageFrom = messageFrom;
-    //    await ApiHelper.ExecuteCallGuardedAsync(() => ClientIn.ReadAsync(_readRequest), Snackbar, successMessage: $"Messages from sender {Recepient} has been marked as read.");
-    //}
+    private async Task ReadInbox(string messageFrom)
+    {
+        _readRequest.MessageFrom = messageFrom;
+        await ApiHelper.ExecuteCallGuardedAsync(() => ClientIn.ReadAsync(_readRequest), Snackbar, successMessage: $"Messages from sender {Recepient} has been marked as read.");
+    }
 }
