@@ -26,7 +26,8 @@ public partial class Dashboard
     [Inject]
     private ICourier Courier { get; set; } = default!;
 
-    private readonly string[] _dataEnterBarChartXAxisLabels = { "District 1", "District 2", "District 3", "District 4", "District 5", "District 6", "District 7", "District 8", "District 9", "District 10" };
+    //private readonly string[] _dataEnterBarChartXAxisLabels = { "District 1", "District 2", "District 3", "District 4", "District 5", "District 6", "District 7", "District 8", "District 9", "District 10" };
+    private readonly string[] _dataEnterBarChartXAxisLabels = { "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10" };
     private readonly List<MudBlazor.ChartSeries> _dataEnterBarChartSeries = new();
     private bool _loaded;
 
