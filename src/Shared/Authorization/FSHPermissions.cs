@@ -54,6 +54,7 @@ public static class FSHResource
     public const string Payroll = nameof(Payroll);
 
     public const string CAD = nameof(CAD);
+    public const string Raffles = nameof(Raffles);
 }
 
 public static class FSHPermissions
@@ -239,6 +240,13 @@ public static class FSHPermissions
         new("Update CAD Aplications", FSHAction.Update, FSHResource.CAD),
         new("Delete CAD Aplications", FSHAction.Delete, FSHResource.CAD),
         new("Export CAD Aplications", FSHAction.Export, FSHResource.CAD),
+
+        new("View Raffle", FSHAction.View, FSHResource.Raffles, IsBasic: true),
+        new("Search Raffle", FSHAction.Search, FSHResource.Raffles, IsBasic: true),
+        new("Create Raffle", FSHAction.Create, FSHResource.Raffles),
+        new("Update Raffle", FSHAction.Update, FSHResource.Raffles),
+        new("Delete Raffle", FSHAction.Delete, FSHResource.Raffles),
+        new("Export Raffle", FSHAction.Export, FSHResource.Raffles),
     };
 
     public static IReadOnlyList<FSHPermission> All { get; } = new ReadOnlyCollection<FSHPermission>(_all);

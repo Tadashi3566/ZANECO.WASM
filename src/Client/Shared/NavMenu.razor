@@ -142,6 +142,17 @@
             }
         </MudNavGroup>
     }
+    @if (_canViewRaffle)
+    {
+        <MudNavGroup Title="Raffle" Icon="@Icons.Filled.AddBox">
+            @if (_canViewRaffle)
+            {
+                <MudNavLink Href="/raffle/profiles" Icon="@Icons.Filled.Style" Class="fsh-nav-child">Profiles</MudNavLink>
+                <MudNavLink Href="/raffle/prizes" Icon="@Icons.Filled.Interests" Class="fsh-nav-child">Prizes</MudNavLink>
+                <MudNavLink Href="/raffle/winners" Icon="@Icons.Filled.FamilyRestroom" Class="fsh-nav-child">Winners</MudNavLink>
+            }
+        </MudNavGroup>
+    }
     @if (CanViewAdministrationGroup)
     {
         <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">Administration</MudText>

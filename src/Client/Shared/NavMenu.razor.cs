@@ -40,6 +40,7 @@ public partial class NavMenu
     // private bool _canViewHRPayroll;
 
     private bool _canViewCAD;
+    private bool _canViewRaffle;
 
     // private bool _canViewAccounts;
 
@@ -70,5 +71,7 @@ public partial class NavMenu
         _canViewAccounting = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Accounting);
 
         _canViewCAD = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.CAD);
+
+        _canViewRaffle = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Raffles);
     }
 }
