@@ -21,11 +21,11 @@ public partial class Prizes
         Context = new(
             entityName: "Prize",
             entityNamePlural: "Prizes",
-            entityResource: FSHResource.Prizes,
+            entityResource: FSHResource.Raffles,
             fields: new()
             {
+                new(data => data.RaffleName, "Raffle", "RaffleName"),
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.PrizeDate.ToString("MMM dd, yyyy"), "Prize Date", "PrizeDate"),
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
             },
