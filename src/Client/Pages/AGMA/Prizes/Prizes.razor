@@ -9,6 +9,14 @@
         <MudItem xs="12" md="6">
             <AutocompleteRaffle Label="Raffle" For="@(() => context.RaffleId)" @bind-Value="context.RaffleId" />
         </MudItem>
+        <MudItem xs="12" md="6">
+            <MudSelect Label="Impact" For="@(() => context.PrizeType)" @bind-Value="context.PrizeType">
+                <MudSelectItem Value="@("MAJOR")" />
+                <MudSelectItem Value="@("MINOR")" />
+                <MudSelectItem Value="@("CONSOLATION")" />
+                <MudSelectItem Value="@("OTHER")" />
+            </MudSelect>
+        </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
