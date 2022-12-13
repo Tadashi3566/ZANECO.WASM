@@ -26,6 +26,7 @@ public partial class Prizes
             {
                 new(data => data.RaffleName, "Raffle", "RaffleName"),
                 new(data => data.PrizeType, "Type", "PrizeType"),
+                new(data => data.Winners, "Winners", "Winners"),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
