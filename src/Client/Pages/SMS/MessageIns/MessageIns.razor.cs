@@ -37,8 +37,7 @@ public partial class MessageIns
             entityResource: FSHResource.SMS,
             fields: new()
             {
-                //new(data => data.Id, "Id", "Id"),
-                new(data => data.ReceiveTime, "Receive Date/Time", "ReceiveTime", Template: TemplateReceivedTime),
+                new(data => data.ReceiveTime, "Date/Time", "ReadOn", Template: TemplateReceivedTime),
                 new(data => data.MessageFrom, "Sender/Receiver", "MessageFrom", Template: TemplateSenderReceiver),
                 new(data => data.MessageText, "Message", "MessageText"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
