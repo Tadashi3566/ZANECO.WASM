@@ -39982,36 +39982,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("webCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int WebCount { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("district1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double[] District1 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("district2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double[] District2 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("district3", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double[] District3 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("district4", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double[] District4 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("district5", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double[] District5 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("district6", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double[] District6 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("district7", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double[] District7 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("district8", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double[] District8 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("district9", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double[] District9 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("district10", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double[] District10 { get; set; } = default!;
-
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -40021,8 +39991,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string? Name { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        //public System.Collections.Generic.ICollection<double>? Data { get; set; } = default!;
-        public double[] Data { get; set; } = default!;
+        public System.Collections.Generic.ICollection<double>? Data { get; set; } = default!;
 
     }
 
@@ -42256,6 +42225,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("raffleName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string RaffleName { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("prizeType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PrizeType { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; } = default!;
 
@@ -42282,6 +42254,11 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("raffleId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Guid RaffleId { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("prizeType", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 1)]
+        public string PrizeType { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -42310,6 +42287,11 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("raffleName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string RaffleName { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("prizeType", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 1)]
+        public string PrizeType { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
