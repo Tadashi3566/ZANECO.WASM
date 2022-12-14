@@ -6,19 +6,19 @@
 
 <EntityTable @ref="_table" TEntity="PrizeDto" TId="Guid" TRequest="PrizeViewModel" Context="@Context">
     <EditFormContent>
-        <MudItem xs="12" sm="6">
+        <MudItem xs="12" sm="6" md="4">
             <AutocompleteRaffle Label="Raffle" For="@(() => context.RaffleId)" @bind-Value="context.RaffleId" />
         </MudItem>
-        <MudItem xs="12" sm="6">
-            <MudSelect Label="Impact" For="@(() => context.PrizeType)" @bind-Value="context.PrizeType">
+        <MudItem xs="12" sm="6" md="4">
+            <MudSelect Label="Type" For="@(() => context.PrizeType)" @bind-Value="context.PrizeType">
                 <MudSelectItem Value="@("MAJOR")" />
                 <MudSelectItem Value="@("MINOR")" />
                 <MudSelectItem Value="@("CONSOLATION")" />
                 <MudSelectItem Value="@("OTHER")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6">
-            <MudNumericField Label="Winners" For="@(() => context.Winners)" @bind-Value="context.Winners" Format="N0"/>
+        <MudItem xs="12" sm="6" md="4">
+            <MudNumericField Label="Winners" For="@(() => context.Winners)" @bind-Value="context.Winners" Format="N0" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />

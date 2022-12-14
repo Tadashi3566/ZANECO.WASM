@@ -1,9 +1,15 @@
 ﻿@page "/cad/accounts"
+
 @attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
 
 <FshTitle Title="Accounts" Description="Manage Accounts" />
 
 <EntityTable @ref="_table" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context">
+    <ExtraActions>
+        <MudDivider />
+        <MudMenuItem Icon="@Icons.Filled.AddCard" >Migrate from AGMA</MudMenuItem>
+    </ExtraActions>
+
     <EditFormContent>
         <MudItem xs="12" sm="6">
             <MudTextField Label="Account Number" For="@(() => context.AccountCode)" @bind-Value="context.AccountCode" />
@@ -18,7 +24,7 @@
         <MudItem xs="12">
             <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" />
         </MudItem>
-        
+
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Reading Date" For="@(() => context.PresentReadingDate)" @bind-Date="context.PresentReadingDate" DateFormat="MMMM dd, yyyy" />
         </MudItem>
@@ -41,9 +47,9 @@
 
         <MudItem xs="12">
             <MudItem>
-                @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                @if (!string.IsNullOrEmpty(context.ImageInBytes))
                 {
-                    <MudAvatar Image ="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                    <MudAvatar Image="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
                 }
                 else
                 {
@@ -55,22 +61,22 @@
                     <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
                         Upload Picture
                     </MudButton>
-                    @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
+                                   StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;">
                             View
                         </MudButton>
 
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
-                            StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
+                                   StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;">
                             Delete
                         </MudButton>
                     }
-                    @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                    @if (!string.IsNullOrEmpty(context.ImageInBytes))
                     {
-                        <MudButton HtmlTag="label"  OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;" >
+                        <MudButton HtmlTag="label" OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                                   StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;">
                             Clear
                         </MudButton>
                     }

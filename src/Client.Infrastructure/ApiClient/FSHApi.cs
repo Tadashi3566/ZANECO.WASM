@@ -39974,13 +39974,13 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.Collections.Generic.ICollection<Master2022> Registered { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("registeredCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int RegisteredCount { get; set; } = default!;
+        public double RegisteredCount { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("smsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int SmsCount { get; set; } = default!;
+        public double SmsCount { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("webCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int WebCount { get; set; } = default!;
+        public double WebCount { get; set; } = default!;
 
     }
 

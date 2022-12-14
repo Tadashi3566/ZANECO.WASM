@@ -5,16 +5,17 @@ using ZANECO.WASM.Client.Infrastructure.Notifications;
 using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Notifications;
+using MudBlazor;
 
 namespace ZANECO.WASM.Client.Pages.Personal;
 public partial class Dashboard
 {
     [Parameter]
-    public int RegisteredCount { get; set; }
+    public double RegisteredCount { get; set; }
     [Parameter]
-    public int SmsCount { get; set; }
+    public double SmsCount { get; set; }
     [Parameter]
-    public int WebCount { get; set; }
+    public double WebCount { get; set; }
 
     [Parameter]
     public int UserCount { get; set; }
@@ -26,9 +27,14 @@ public partial class Dashboard
     [Inject]
     private ICourier Courier { get; set; } = default!;
 
-    //private readonly string[] _dataEnterBarChartXAxisLabels = { "District 1", "District 2", "District 3", "District 4", "District 5", "District 6", "District 7", "District 8", "District 9", "District 10" };
+    private readonly string[] _regTypeLabels = { "SMS", "WEB" };
+    private readonly List<double> _regTypeData = new();
+
     private readonly string[] _dataEnterBarChartXAxisLabels = { "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10" };
     private readonly List<MudBlazor.ChartSeries> _dataEnterBarChartSeries = new();
+
+    private readonly ChartOptions _chartOptions = new();
+
     private bool _loaded;
 
     private ClientPreference _preference = new();
@@ -57,6 +63,10 @@ public partial class Dashboard
             SmsCount = statsDto.SmsCount;
             WebCount= statsDto.WebCount;
 
+            _regTypeData.Clear();
+            _regTypeData.Add(statsDto.SmsCount);
+            _regTypeData.Add(statsDto.WebCount);
+
             UserCount = statsDto.UserCount;
             RoleCount = statsDto.RoleCount;
 
@@ -67,6 +77,10 @@ public partial class Dashboard
 
                 _dataEnterBarChartSeries.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
             }
+
+            _chartOptions.MaxNumYAxisTicks = 2000;
+            _chartOptions.XAxisLines = false;
+            _chartOptions.YAxisLines = false;
         }
     }
 }
