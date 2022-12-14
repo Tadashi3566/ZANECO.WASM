@@ -45,27 +45,20 @@ else
     </MudItem>
 
     @*<MudItem xs="12" sm="6">
-            <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:500px;">
-                <MudChart ChartType="ChartType.Pie" InputData="@_regTypeData.ToArray()"
-                            InputLabels="@_regTypeLabels" Width="100%"
-                            Height="400px" />
-            </MudPaper>
-        </MudItem>*@
+        <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:500px;">
+            <MudChart ChartType="ChartType.Pie" InputData="@_regTypeData.ToArray()"
+                        InputLabels="@_regTypeLabels" Width="100%"
+                        Height="400px" />
+        </MudPaper>
+    </MudItem>*@
 
-    <MudHidden Breakpoint="Breakpoint.MdAndDown" Invert="true">
+    <MudItem xs="12" sm="12" md="6">
         <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:500px;">
             <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataEnterBarChartSeries" ChartOptions="@_chartOptions"
                       XAxisLabels="@_dataEnterBarChartXAxisLabels.Select(a => L[a].Value).ToArray()" Width="100%"
                       Height="400px" />
         </MudPaper>
-    </MudHidden>
-    <MudHidden Breakpoint="Breakpoint.LgAndUp" Invert="true">
-        <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:1000px;">
-            <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataEnterBarChartSeries" ChartOptions="@_chartOptions"
-                      XAxisLabels="@_dataEnterBarChartXAxisLabels.Select(a => L[a].Value).ToArray()" Width="100%"
-                      Height="900px" />
-        </MudPaper>
-    </MudHidden>
+    </MudItem>
 
     <MudItem xs="12" sm="6" md="4" lg="3">
         <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
