@@ -7,37 +7,37 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
-namespace ZANECO.WASM.Client.Pages.AGMA.Prizes;
-public partial class Prizes
+namespace ZANECO.WASM.Client.Pages.AGMA.Winners;
+public partial class Winners
 {
     [Inject]
-    protected IPrizesClient Client { get; set; } = default!;
+    protected IWinnersClient Client { get; set; } = default!;
 
-    protected EntityServerTableContext<PrizeDto, Guid, PrizeViewModel> Context { get; set; } = default!;
+    protected EntityServerTableContext<WinnerDto, Guid, WinnerViewModel> Context { get; set; } = default!;
 
-    private EntityTable<PrizeDto, Guid, PrizeViewModel> _table = default!;
+    private EntityTable<WinnerDto, Guid, WinnerViewModel> _table = default!;
 
     protected override void OnInitialized() =>
         Context = new(
-            entityName: "Prize",
-            entityNamePlural: "Prizes",
+            entityName: "Winner",
+            entityNamePlural: "Winners",
             entityResource: FSHResource.Raffles,
             fields: new()
             {
                 new(data => data.RaffleName, "Raffle", "RaffleName"),
-                new(data => data.PrizeType, "Type", "PrizeType"),
-                new(data => data.Winners, "Winners", "Winners"),
+                new(data => data.PrizeName, "Prize", "PrizeName"),
                 new(data => data.Name, "Name", "Name"),
+                new(data => data.Address, "Address", "Address"),
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
             },
             enableAdvancedSearch: true,
-            idFunc: Prize => Prize.Id,
+            idFunc: Winner => Winner.Id,
             searchFunc: async filter => (await Client
-                .SearchAsync(filter.Adapt<PrizeSearchRequest>()))
-                .Adapt<PaginationResponse<PrizeDto>>(),
-            createFunc: async Prize => await Client.CreateAsync(Prize.Adapt<PrizeCreateRequest>()),
-            updateFunc: async (id, Prize) => await Client.UpdateAsync(id, Prize),
+                .SearchAsync(filter.Adapt<WinnerSearchRequest>()))
+                .Adapt<PaginationResponse<WinnerDto>>(),
+            createFunc: async Winner => await Client.CreateAsync(Winner.Adapt<WinnerCreateRequest>()),
+            updateFunc: async (id, Winner) => await Client.UpdateAsync(id, Winner),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
 
@@ -78,7 +78,7 @@ public partial class Prizes
     }
 }
 
-public class PrizeViewModel : PrizeUpdateRequest
+public class WinnerViewModel : WinnerUpdateRequest
 {
     public string? ImagePath { get; set; }
     public string? ImageInBytes { get; set; }

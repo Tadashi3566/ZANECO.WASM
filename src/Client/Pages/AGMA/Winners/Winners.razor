@@ -1,27 +1,22 @@
-﻿@page "/raffle/prizes"
+﻿@page "/raffle/winners"
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Raffles)]
 
-<FshTitle Title="Prizes" Description="Manage Prizes" />
+<FshTitle Title="Winners" Description="Manage Winners" />
 
-<EntityTable @ref="_table" TEntity="PrizeDto" TId="Guid" TRequest="PrizeViewModel" Context="@Context">
+<EntityTable @ref="_table" TEntity="WinnerDto" TId="Guid" TRequest="WinnerViewModel" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4">
             <AutocompleteRaffle Label="Raffle" For="@(() => context.RaffleId)" @bind-Value="context.RaffleId" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
-            <MudSelect Label="Type" For="@(() => context.PrizeType)" @bind-Value="context.PrizeType">
-                <MudSelectItem Value="@("MAJOR")" />
-                <MudSelectItem Value="@("MINOR")" />
-                <MudSelectItem Value="@("CONSOLATION")" />
-                <MudSelectItem Value="@("OTHER")" />
-            </MudSelect>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4">
-            <MudNumericField Label="Winners" For="@(() => context.Winners)" @bind-Value="context.Winners" Format="N0" />
+            <AutocompletePrize Label="Prize" For="@(() => context.PrizeId)" @bind-Value="context.PrizeId" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />

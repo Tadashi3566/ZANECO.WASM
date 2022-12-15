@@ -8,6 +8,7 @@ using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.CAD.Accounts;
+
 public partial class Accounts
 {
     [Inject]
@@ -98,6 +99,11 @@ public partial class Accounts
         Context.AddEditModal.RequestModel.ImagePath = string.Empty;
         Context.AddEditModal.RequestModel.DeleteCurrentImage = true;
         Context.AddEditModal.ForceRender();
+    }
+
+    private async Task MigrateFromAGMA()
+    {
+
     }
 }
 
