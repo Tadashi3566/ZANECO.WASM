@@ -1,5 +1,4 @@
-﻿using Mapster;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
@@ -57,7 +56,7 @@ public partial class TicketComponent
     }
 
     private async Task OnSubmit() => await ApiHelper.ExecuteCallGuardedAsync((Func<Task<Guid>>)(() =>
-        TicketClient.UpdateAsync((Guid)this.Id, _ticket)), Snackbar, _customValidation,
+        TicketClient.UpdateAsync(this.Id, _ticket)), Snackbar, _customValidation,
         "The Ticket has been successfully updated.");
 
     private async Task UploadFiles(InputFileChangeEventArgs e)

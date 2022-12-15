@@ -61,7 +61,7 @@ public partial class Dashboard
         {
             RegisteredCount = statsDto.RegisteredCount;
             SmsCount = statsDto.SmsCount;
-            WebCount= statsDto.WebCount;
+            WebCount = statsDto.WebCount;
 
             _regTypeData.Clear();
             _regTypeData.Add(statsDto.SmsCount);

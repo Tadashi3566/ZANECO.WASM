@@ -1,13 +1,4 @@
-﻿using Mapster;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
-using MudBlazor;
-using ZANECO.WASM.Client.Components.Common;
-using ZANECO.WASM.Client.Components.Dialogs;
-using ZANECO.WASM.Client.Infrastructure.ApiClient;
-using ZANECO.WASM.Client.Infrastructure.Common;
-using ZANECO.WASM.Client.Infrastructure.Preferences;
-using ZANECO.WASM.Client.Shared;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace ZANECO.WASM.Client.Pages.App.Tickets;
 
