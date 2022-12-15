@@ -33,7 +33,7 @@ public partial class Dashboard
     private readonly string[] _dataEnterBarChartXAxisLabels = { "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10" };
     private readonly List<MudBlazor.ChartSeries> _dataEnterBarChartSeries = new();
 
-    private readonly ChartOptions _chartOptions = new();
+    private ChartOptions _chartOptions = new();
 
     private bool _loaded;
 
@@ -48,6 +48,9 @@ public partial class Dashboard
         });
 
         await LoadDataAsync();
+
+        _chartOptions.YAxisTicks = 100;
+        _chartOptions.LineStrokeWidth = 1;
 
         _loaded = true;
     }
@@ -77,10 +80,6 @@ public partial class Dashboard
 
                 _dataEnterBarChartSeries.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
             }
-
-            _chartOptions.MaxNumYAxisTicks = 2000;
-            _chartOptions.XAxisLines = false;
-            _chartOptions.YAxisLines = false;
         }
     }
 }
