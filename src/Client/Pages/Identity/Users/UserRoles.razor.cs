@@ -38,7 +38,7 @@ public partial class UserRoles
         _canEditUsers = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.Users);
         _canSearchRoles = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.UserRoles);
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.GetByIdAsync(Id), Snackbar)is UserDetailsDto user)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.GetByIdAsync(Id), Snackbar) is UserDetailsDto user)
         {
             _title = $"{user.FirstName} {user.LastName}";
             _description = string.Format(L["Manage {0} {1}'s Roles"], user.FirstName, user.LastName);

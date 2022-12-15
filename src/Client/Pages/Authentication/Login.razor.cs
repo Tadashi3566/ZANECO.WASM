@@ -4,7 +4,6 @@ using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
-using ZANECO.WASM.Client.Pages.Multitenancy;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.MultiTenancy;
 
