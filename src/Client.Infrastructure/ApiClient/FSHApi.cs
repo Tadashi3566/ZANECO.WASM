@@ -667,7 +667,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -705,7 +705,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -1357,7 +1357,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -1395,7 +1395,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -2252,7 +2252,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -2290,7 +2290,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -2942,7 +2942,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -2980,7 +2980,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -3618,7 +3618,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -3656,7 +3656,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -4197,7 +4197,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -4235,7 +4235,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -4663,7 +4663,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -4701,7 +4701,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -5353,7 +5353,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -5391,7 +5391,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -5705,7 +5705,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -5743,7 +5743,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -6365,7 +6365,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -6403,7 +6403,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -7148,7 +7148,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -7186,7 +7186,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -7929,7 +7929,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -7967,7 +7967,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -8302,7 +8302,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -8340,7 +8340,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -9664,7 +9664,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -9702,7 +9702,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -10354,7 +10354,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -10392,7 +10392,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -11044,7 +11044,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -11082,7 +11082,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -11734,7 +11734,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -11772,7 +11772,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -12424,7 +12424,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -12462,7 +12462,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -13114,7 +13114,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -13152,7 +13152,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -14009,7 +14009,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -14047,7 +14047,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -14810,7 +14810,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -14848,7 +14848,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -15500,7 +15500,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -15538,7 +15538,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -16190,7 +16190,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -16228,7 +16228,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -16991,7 +16991,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -17029,7 +17029,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -17681,7 +17681,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -17719,7 +17719,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -18371,7 +18371,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -18409,7 +18409,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -19266,7 +19266,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -19304,7 +19304,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -20163,7 +20163,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -20201,7 +20201,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -21160,7 +21160,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -21198,7 +21198,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -22055,7 +22055,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -22093,7 +22093,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -22950,7 +22950,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -22988,7 +22988,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -23190,7 +23190,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -23228,7 +23228,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -24096,7 +24096,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -24134,7 +24134,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -24991,7 +24991,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -25029,7 +25029,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -25681,7 +25681,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -25719,7 +25719,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -26371,7 +26371,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -26409,7 +26409,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -27061,7 +27061,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -27099,7 +27099,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -27751,7 +27751,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -27789,7 +27789,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -28441,7 +28441,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -28479,7 +28479,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -29131,7 +29131,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -29169,7 +29169,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -29821,7 +29821,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -29859,7 +29859,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -30511,7 +30511,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -30549,7 +30549,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -31201,7 +31201,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -31239,7 +31239,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -31891,7 +31891,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -31929,7 +31929,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -32581,7 +32581,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -32619,7 +32619,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -33271,7 +33271,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -33309,7 +33309,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -34166,7 +34166,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -34204,7 +34204,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
@@ -35163,7 +35163,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         {
             if (value == null)
             {
-                return "";
+                return string.Empty;
             }
 
             if (value is System.Enum)
@@ -35201,7 +35201,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
             }
 
             var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
+            return result == null ? string.Empty : result;
         }
     }
 
