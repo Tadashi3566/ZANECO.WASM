@@ -47,15 +47,23 @@ else
         <MudItem xs="12" sm="12" md="8">
             <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:500px;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataEnterBarChartSeries" ChartOptions="@_chartOptions"
-                          XAxisLabels="@_dataEnterBarChartXAxisLabels.Select(a => L[a].Value).ToArray()" Width="100%"
+                          XAxisLabels="@_dataEnterBarChartXAxisLabels.Select(a => L[a].Value).ToArray()" Width="90%"
                           Height="400px"/>
             </MudPaper>
         </MudItem>
 
         <MudItem>
-            <MudButton Class="ma-1" Variant="Variant.Filled" Color="Color.Primary"
-                   OnClick="(() => LoadDataAsync())" StartIcon="@Icons.Material.Filled.Refresh"
-                   IconColor="Color.Surface">@L["Refresh"]</MudButton>
+            <MudButton Class="ma-1" Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => LoadDataAsync())">
+                <MudItem Class="d-flex flex-row">
+                    @if (_busy)
+                    {
+                        <MudProgressCircular Color="Color.Tertiary" Indeterminate=true Size="Size.Small" />
+                    }
+                <MudText Class="ml-2">@L["Refresh"]</MudText>
+                </MudItem>
+                
+
+            </MudButton>
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4">
