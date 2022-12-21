@@ -36,6 +36,7 @@ public partial class Dashboard
     private ChartOptions _chartOptions = new();
 
     private bool _loaded;
+    private bool _busy;
 
     private ClientPreference _preference = new();
 
@@ -54,6 +55,8 @@ public partial class Dashboard
 
     private async Task LoadDataAsync()
     {
+        _busy = true;
+
         if (await ApiHelper.ExecuteCallGuardedAsync(
                 () => DashboardClient.GetAsync(),
                 Snackbar)
@@ -81,5 +84,7 @@ public partial class Dashboard
                 _dataEnterBarChartSeries.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
             }
         }
+
+        _busy = false;
     }
 }
