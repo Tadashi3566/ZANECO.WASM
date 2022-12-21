@@ -5,6 +5,7 @@ using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.CAD.Accounts;
@@ -17,6 +18,8 @@ public partial class Accounts
     protected EntityServerTableContext<AccountDto, Guid, AccountViewModel> Context { get; set; } = default!;
 
     private EntityTable<AccountDto, Guid, AccountViewModel> _table = default!;
+
+    private AccountMigrateRequest _accountMigrateRequest = new();
 
     protected override void OnInitialized() =>
         Context = new(
@@ -31,7 +34,7 @@ public partial class Accounts
                 new(data => data.Address, "Address", "Address"),
                 new(data => data.PresentReadingDate.ToString("MMM dd, yyyy"), "Reading Date", "PresentReadingDate"),
                 new(data => data.BillMonth, "Bill Month", "BillMonth"),
-                new(data => data.UsedKWH, "KWH", "ConsumedKWH"),
+                new(data => data.UsedKWH.ToString("N2"), "KWH", "ConsumedKWH"),
                 new(data => data.BillAmount.ToString("N2"), "Bill Amount", "BillAmount"),
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
@@ -101,9 +104,12 @@ public partial class Accounts
         Context.AddEditModal.ForceRender();
     }
 
-    private async Task MigrateFromAGMA()
+    private async Task MigrateAccount(int idCode, string accountNumber)
     {
+        _accountMigrateRequest.IndexCode = idCode;
+        _accountMigrateRequest.AccountNumber = accountNumber;
 
+        await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAsync(_accountMigrateRequest), Snackbar, successMessage: "Messages successfully created and sent to queue.");
     }
 }
 

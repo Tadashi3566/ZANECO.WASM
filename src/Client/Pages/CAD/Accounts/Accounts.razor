@@ -7,7 +7,7 @@
 <EntityTable @ref="_table" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.AddCard" >Migrate from AGMA</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.AddCard" OnClick="@(() => MigrateAccount(context.IdCode, context.AccountCode))">Migrate from AGMA</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>
