@@ -49,7 +49,7 @@ public partial class Dashboard
         });
 
         await LoadDataAsync();
-        
+
         _loaded = true;
     }
 

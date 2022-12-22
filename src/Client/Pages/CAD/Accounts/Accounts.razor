@@ -7,15 +7,15 @@
 <EntityTable @ref="_table" SelectedItems="@_selectedItems" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount(0, context.AccountNumber))">Migrate Acounts</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.Checklist" OnClick="@(() => MigrateAccount(context.IdCode, context.AccountNumber))">Migrate Ledger</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount())">Migrate Acounts</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.Checklist" OnClick="@(() => MigrateAccount())">Migrate Ledger</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>
-        <MudItem xs="12" sm="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" />
         </MudItem>
-        <MudItem xs="12" sm="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Meter Serial" For="@(() => context.MeterSerial)" @bind-Value="context.MeterSerial" />
         </MudItem>
 
@@ -33,7 +33,7 @@
             <MudTextField Label="Bill Month" For="@(() => context.BillMonth)" @bind-Value="context.BillMonth" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="KWH" For="@(() => context.UsedKWH)" @bind-Value="context.UsedKWH" />
+            <MudTextField Label="KWH" For="@(() => context.UsedKWH)" @bind-Value="context.UsedKWH" Format="N2"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Bill Amount" For="@(() => context.BillAmount)" @bind-Value="context.BillAmount" Format="N2" />
@@ -86,5 +86,4 @@
             </MudItem>
         </MudItem>
     </EditFormContent>
-
 </EntityTable>

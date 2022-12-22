@@ -2,12 +2,10 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
-using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
-using ZANECO.WASM.Client.Pages.SMS;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -108,9 +106,9 @@ public partial class Accounts
         Context.AddEditModal.ForceRender();
     }
 
-    private async Task MigrateAccount(int idCode, string accountNumber)
+    private async Task MigrateAccount()
     {
-        string actionTitle = idCode > 0 ? "Migrate Ledger" : "Migrate Account";
+        string actionTitle = _selectedItems.Count > 0 ? "Migrate Ledger" : "Migrate Account";
         string transactionTitle = actionTitle;
         string transactionContent = $"Are you sure you want to {actionTitle}";
         var parameters = new DialogParameters
@@ -131,16 +129,13 @@ public partial class Accounts
             {
                 foreach (string accountNum in accountNumbers)
                 {
-                    _accountMigrateRequest.IndexCode = 0;
                     _accountMigrateRequest.AccountNumber = accountNum;
                     await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAsync(_accountMigrateRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
                 }
             }
             else
             {
-                _accountMigrateRequest.IndexCode = idCode;
-                _accountMigrateRequest.AccountNumber = accountNumber;
-
+                _accountMigrateRequest.AccountNumber = string.Empty;
                 await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAsync(_accountMigrateRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
             }
         }

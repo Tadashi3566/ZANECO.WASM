@@ -40,8 +40,8 @@
         }
 
         <FshTable @ref="_table" @bind-SelectedItems="SelectedItems" ServerData="@ServerReloadFunc" Items="@_entityList" Filter="LocalSearch"
-                  Height="@(_tablePreference.IsFixedHeaderFooter ?"1000px":"")"
-            Loading="@Loading" LoadingProgressColor="@Color.Secondary" ChildRowContent="@ChildRowContent">
+                  Height="@(_tablePreference.IsFixedHeaderFooter ? "1000px" : "")"
+                  Loading="@Loading" LoadingProgressColor="@Color.Secondary" ChildRowContent="@ChildRowContent">
             <ToolBarContent>
                 <div class="justify-center mud-text-align-center">
                     @if (_canCreate)
@@ -144,7 +144,7 @@
 
             <PagerContent>
                 @*<TablePager />*@
-                <MudTablePager PageSizeOptions="@(new int[]{10, 15, 30, 50, 100, 500, 1000, 5000, 10000, 20000})" />
+                *<MudTablePager PageSizeOptions="@(new int[]{10, 15, 50, 100, 500, 1000, 5000, 10000, 20000, 50000, 100000 })" />
             </PagerContent>
             
         </FshTable>

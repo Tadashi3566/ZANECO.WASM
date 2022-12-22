@@ -16,7 +16,7 @@
         <MudItem xs="12">
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
         </MudItem>
-        <MudItem xs="12" sm="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteAdjustments For="@(() => context.AdjustmentId)" @bind-Value="context.AdjustmentId" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
