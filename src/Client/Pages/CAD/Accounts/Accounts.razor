@@ -7,8 +7,8 @@
 <EntityTable @ref="_table" SelectedItems="@_selectedItems" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount())">Migrate Acounts</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.Checklist" OnClick="@(() => MigrateAccount())">Migrate Ledger</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount())" OnTouch="@(() => MigrateAccount())">Migrate Acounts</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.Checklist" OnClick="@(() => MigrateAccount())" OnTouch="@(() => MigrateAccount())">Migrate Ledger</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>
