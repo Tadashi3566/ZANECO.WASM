@@ -45,7 +45,7 @@ public class AutocompleteAccountNumber : MudAutocomplete<string>
         }
 
         return _list
-            .Where(x => x.AccountCode != string.Empty)
-            .Select(x => x.AccountCode);
+            .Where(x => x.AccountNumber != string.Empty)
+            .Select(x => x.AccountNumber);
     }
 }

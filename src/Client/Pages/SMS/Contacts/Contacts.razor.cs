@@ -27,7 +27,7 @@ public partial class Contacts
 
     private EntityTable<ContactDto, Guid, ContactViewModel> _table = default!;
 
-    private HashSet<ContactDto> _selectedItems = new HashSet<ContactDto>();
+    private HashSet<ContactDto> _selectedItems = new();
 
     private bool _canCreateSMS;
 

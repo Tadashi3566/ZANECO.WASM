@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.Common;
+using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Pages.SMS;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -21,6 +24,8 @@ public partial class Accounts
 
     private AccountMigrateRequest _accountMigrateRequest = new();
 
+    private HashSet<AccountDto> _selectedItems = new();
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Account",
@@ -28,8 +33,7 @@ public partial class Accounts
             entityResource: FSHResource.CAD,
             fields: new()
             {
-                new(data => data.AccountCode, "Account Number", "AccountNumber"),
-                new(data => data.MeterSerial, "Meter Serial", "MeterSerial"),
+                new(data => data.AccountNumber, "Account", "AccountNumber"),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Address, "Address", "Address"),
                 new(data => data.PresentReadingDate.ToString("MMM dd, yyyy"), "Reading Date", "PresentReadingDate"),
@@ -106,10 +110,40 @@ public partial class Accounts
 
     private async Task MigrateAccount(int idCode, string accountNumber)
     {
-        _accountMigrateRequest.IndexCode = idCode;
-        _accountMigrateRequest.AccountNumber = accountNumber;
+        string actionTitle = idCode > 0 ? "Migrate Ledger" : "Migrate Account";
+        string transactionTitle = actionTitle;
+        string transactionContent = $"Are you sure you want to {actionTitle}";
+        var parameters = new DialogParameters
+        {
+            { nameof(TransactionConfirmation.TransactionIcon), Icons.Material.Filled.Send },
+            { nameof(TransactionConfirmation.TransactionTitle), transactionTitle },
+            { nameof(TransactionConfirmation.ContentText), transactionContent },
+            { nameof(TransactionConfirmation.ConfirmText), "Migrate" }
+        };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        var dialog = DialogService.Show<TransactionConfirmation>(transactionTitle, parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            string[] accountNumbers = _selectedItems.Select(x => x.AccountNumber).ToArray()!;
 
-        await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAsync(_accountMigrateRequest), Snackbar, successMessage: "Messages successfully created and sent to queue.");
+            if (accountNumbers.Length > 0)
+            {
+                foreach (string accountNum in accountNumbers)
+                {
+                    _accountMigrateRequest.IndexCode = 0;
+                    _accountMigrateRequest.AccountNumber = accountNum;
+                    await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAsync(_accountMigrateRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
+                }
+            }
+            else
+            {
+                _accountMigrateRequest.IndexCode = idCode;
+                _accountMigrateRequest.AccountNumber = accountNumber;
+
+                await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAsync(_accountMigrateRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
+            }
+        }
     }
 }
 

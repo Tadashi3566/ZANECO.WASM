@@ -4,15 +4,16 @@
 
 <FshTitle Title="Accounts" Description="Manage Accounts" />
 
-<EntityTable @ref="_table" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context">
+<EntityTable @ref="_table" SelectedItems="@_selectedItems" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.AddCard" OnClick="@(() => MigrateAccount(context.IdCode, context.AccountCode))">Migrate from AGMA</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount(0, context.AccountNumber))">Migrate Acounts</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.Checklist" OnClick="@(() => MigrateAccount(context.IdCode, context.AccountNumber))">Migrate Ledger</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>
         <MudItem xs="12" sm="6">
-            <MudTextField Label="Account Number" For="@(() => context.AccountCode)" @bind-Value="context.AccountCode" />
+            <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" />
         </MudItem>
         <MudItem xs="12" sm="6">
             <MudTextField Label="Meter Serial" For="@(() => context.MeterSerial)" @bind-Value="context.MeterSerial" />
