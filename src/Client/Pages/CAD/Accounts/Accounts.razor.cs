@@ -22,6 +22,8 @@ public partial class Accounts
 
     private AccountMigrateRequest _accountMigrateRequest = new();
 
+    private string? _searchString;
+
     private HashSet<AccountDto> _selectedItems = new();
 
     private int[] _pageSizes = new int[] { 10, 15, 50, 100, 500, 1000, 5000, 10000, 50000, 100000 };
@@ -34,14 +36,12 @@ public partial class Accounts
             fields: new()
             {
                 new(data => data.AccountNumber, "Account", "AccountNumber"),
-                new(data => data.Name, "Name", "Name"),
-                new(data => data.Address, "Address", "Address"),
+                new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
                 new(data => data.PresentReadingDate.ToString("MMM dd, yyyy"), "Reading Date", "PresentReadingDate"),
                 new(data => data.BillMonth, "Bill Month", "BillMonth"),
                 new(data => data.UsedKWH.ToString("N2"), "KWH", "ConsumedKWH"),
                 new(data => data.BillAmount.ToString("N2"), "Bill Amount", "BillAmount"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

@@ -1,6 +1,6 @@
 ﻿namespace ZANECO.WASM.Client.Components.Common;
 
-internal class ClassSMS
+internal class ClassSms
 {
     public static string RemoveWhiteSpaces(string input)
     {
@@ -19,6 +19,14 @@ internal class ClassSMS
     public static string[] GetDistinctFromArray(string[] array)
     {
         return array.Distinct().ToArray();
+    }
+
+    public static int GetDistinctRecepients(string recepients)
+    {
+        recepients = ClassSms.RemoveWhiteSpaces(recepients);
+        string[] recepientArray = recepients.Split(',');
+
+        return ClassSms.GetDistinctFromArray(recepientArray).Length;
     }
 
     public static int RecepientCount(string recepients)

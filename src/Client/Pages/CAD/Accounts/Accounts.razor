@@ -4,7 +4,7 @@
 
 <FshTitle Title="Accounts" Description="Manage Accounts" />
 
-<EntityTable @ref="_table" SelectedItems="@_selectedItems" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context" PageSizes="@_pageSizes">
+<EntityTable @bind-SearchString="@_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context" PageSizes="@_pageSizes">
     <ExtraActions>
         <MudDivider />
         <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount())" OnTouch="@(() => MigrateAccount())">Migrate Acounts</MudMenuItem>
@@ -87,3 +87,29 @@
         </MudItem>
     </EditFormContent>
 </EntityTable>
+
+@code {
+    private RenderFragment<AccountDto> TemplateNameAddress => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<AccountDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

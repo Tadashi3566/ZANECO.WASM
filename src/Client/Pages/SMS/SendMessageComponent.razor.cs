@@ -49,7 +49,7 @@ public partial class SendMessageComponent
     private async Task Send()
     {
         string transactionTitle = "Send Message";
-        string transactionContent = $"Are you sure you want to {transactionTitle} to {ClassSMS.RecepientCount(_model.MessageTo):N0} recepient(s)?";
+        string transactionContent = $"Are you sure you want to {transactionTitle} to {ClassSms.RecepientCount(_model.MessageTo):N0} recepient(s)?";
         var parameters = new DialogParameters
         {
             { nameof(TransactionConfirmation.TransactionIcon), Icons.Material.Filled.Send },
