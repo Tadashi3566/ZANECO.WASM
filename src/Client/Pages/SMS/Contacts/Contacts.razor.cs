@@ -29,6 +29,8 @@ public partial class Contacts
 
     private HashSet<ContactDto> _selectedItems = new();
 
+    private int[] _pageSizes = new int[] { 10, 15, 50, 100, 500, 1000 };
+
     private bool _canCreateSMS;
 
     [Inject]

@@ -23,6 +23,8 @@ public partial class EntityTable<TEntity, TId, TRequest>
     [Parameter]
     public HashSet<TEntity>? SelectedItems { get; set; }
     [Parameter]
+    public int[] PageSizes { get; set; } = new int[] { 10, 15, 50, 100 };
+    [Parameter]
     public string? SearchString { get; set; }
     [Parameter]
     public EventCallback<string> SearchStringChanged { get; set; }

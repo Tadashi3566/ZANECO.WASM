@@ -4,7 +4,7 @@
 
 <FshTitle Title="Accounts" Description="Manage Accounts" />
 
-<EntityTable @ref="_table" SelectedItems="@_selectedItems" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context">
+<EntityTable @ref="_table" SelectedItems="@_selectedItems" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context" PageSizes="@_pageSizes">
     <ExtraActions>
         <MudDivider />
         <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount())" OnTouch="@(() => MigrateAccount())">Migrate Acounts</MudMenuItem>

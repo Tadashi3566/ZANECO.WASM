@@ -144,7 +144,8 @@
 
             <PagerContent>
                 @*<TablePager />*@
-                *<MudTablePager PageSizeOptions="@(new int[]{10, 15, 50, 100, 500, 1000, 5000, 10000, 20000 })" />
+                @*<MudTablePager PageSizeOptions="@(new int[]{10, 15, 50, 100, 500, 1000, 5000, 10000, 20000 })" />*@
+                <MudTablePager PageSizeOptions="@PageSizes" />
             </PagerContent>
             
         </FshTable>

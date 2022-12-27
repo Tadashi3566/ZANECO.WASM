@@ -24,6 +24,8 @@ public partial class Accounts
 
     private HashSet<AccountDto> _selectedItems = new();
 
+    private int[] _pageSizes = new int[] { 10, 15, 50, 100, 500, 1000, 5000, 10000, 50000, 100000 };
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Account",
