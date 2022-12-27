@@ -37,9 +37,9 @@ public partial class MessageTemplates
             entityResource: FSHResource.SMS,
             fields: new()
             {
-                new(data => data.TemplateType, "Template Type", "TemplateType"),
+                new(data => data.TemplateType, "Type", "TemplateType"),
                 new(data => data.IsAPI, "API", "IsAPI", typeof(bool)),
-                new(data => data.IsFastMode, "Multiple", "isFastMode", typeof(bool)),
+                new(data => data.IsFastMode, "Fast-Mode", "IsFastMode", typeof(bool)),
                 new(data => data.Subject, "Subject", "Subject"),
                 new(data => data.Message, "Message", "Message"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),

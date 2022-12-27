@@ -27,6 +27,8 @@ public partial class Contacts
 
     private EntityTable<ContactDto, Guid, ContactViewModel> _table = default!;
 
+    private string? _searchString;
+
     private HashSet<ContactDto> _selectedItems = new();
 
     private int[] _pageSizes = new int[] { 10, 15, 50, 100, 500, 1000 };

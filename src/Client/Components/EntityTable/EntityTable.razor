@@ -63,8 +63,8 @@
                 <MudSpacer />
                 @if (_canSearch && !_advancedSearchExpanded)
                 {
-                    <MudTextField @bind-Value="SearchString" Immediate="true" FullWidth="false"
-                        Placeholder="@($"{L["Search for"]} {Context.EntityNamePlural}")" Adornment="Adornment.End"
+                    <MudTextField @bind-Value="SearchString" FullWidth="false" Immediate="false"
+                              Placeholder="@($"{L["Search for"]} {Context.EntityNamePlural}")" Adornment="Adornment.End"
                         AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"
                         TextChanged="OnSearchStringChanged">
                     </MudTextField>

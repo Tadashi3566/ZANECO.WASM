@@ -4,7 +4,7 @@
 
 <FshTitle Title="Contacts" Description="Manage Contacts" />
 
-<EntityTable @ref="_table" SelectedItems="@_selectedItems" TEntity="ContactDto" TId="Guid" TRequest="ContactViewModel" Context="@Context" PageSizes="@_pageSizes">
+<EntityTable @bind-SearchString="@_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="ContactDto" TId="Guid" TRequest="ContactViewModel" Context="@Context" PageSizes="@_pageSizes">
     <ExtraActions>
         <MudDivider/>
         <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => OnCopyPhoneNumbersChecked())" OnTouch="@(() => OnCopyPhoneNumbersChecked())">Copy Phone Numbers</MudMenuItem>
@@ -88,16 +88,24 @@
     private RenderFragment<ContactDto> TemplateNameAddress => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1" >@context.Name</MudText>
-            <MudText Typo="Typo.caption">@context.Address</MudText>
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />
+            </MudText>
         </MudItem>
     };
 
     private RenderFragment<ContactDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">@context.Description</MudText>
-            <MudText Typo="Typo.caption">@context.Notes</MudText>
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
         </MudItem>
     };
 }
