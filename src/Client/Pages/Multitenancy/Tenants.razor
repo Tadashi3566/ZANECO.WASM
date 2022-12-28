@@ -9,23 +9,23 @@
 <EntityTable @ref="EntityTable" TEntity="TenantDetail" TId="Guid" TRequest="CreateTenantRequest" Context="@Context"
     @bind-SearchString="_searchString">
     <EditFormContent>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField T="string" For="@(() => context.Id)" @bind-Value="context.Id" Label="@L["Key"]" />
         </MudItem>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField T="string" For="@(() => context.Name)" @bind-Value="context.Name" Label="@L["Name"]" />
         </MudItem>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField T="string" For="@(() => context.ConnectionString)" HelperText="@L["To use default connection string, leave this field blank."]" @bind-Value="context.ConnectionString"
                 Label="@L["Connection String"]" />
         </MudItem>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField T="string" For="@(() => context.AdminEmail)" @bind-Value="context.AdminEmail"
                 Label="@L["Admin Email"]" />
         </MudItem>
         @if (Authentication.ProviderType == AuthProvider.AzureAd)
         {
-            <MudItem xs="12" md="6">
+            <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudTextField T="string" For="@(() => context.Issuer)" @bind-Value="context.Issuer" Label="@L["Issuer"]" />
             </MudItem>
         }

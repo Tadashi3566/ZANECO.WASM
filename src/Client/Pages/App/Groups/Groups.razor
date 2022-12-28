@@ -6,7 +6,7 @@
 <EntityTable @ref="_table" TEntity="GroupDto" TId="Guid" TRequest="GroupViewModel" Context="@Context">
 
     <EditFormContent>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect T="string" Label="Application" For="@(() => context.Application)" @bind-Value="context.Application" Variant="Variant.Filled">
                 <MudSelectItem Value="@("ACCOUNTING")"/>
                 <MudSelectItem Value="@("CAD")" />
@@ -15,16 +15,16 @@
                 <MudSelectItem Value="@("TICKET")"/>
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteParent Label="Parent" For="@(() => context.Parent)" @bind-Value="context.Parent" />
         </MudItem>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteTag Label="Tag" For="@(() => context.Tag)" @bind-Value="context.Tag" />
         </MudItem>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Code" For="@(() => context.Code)" @bind-Value="context.Code" />
         </MudItem>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2"/>
         </MudItem>
         <MudItem xs="12">

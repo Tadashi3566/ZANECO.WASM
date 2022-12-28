@@ -101,6 +101,18 @@
         </MudItem>
     };
 
+    private RenderFragment<AccountDto> TemplateBillingDate => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.caption">
+                @context.PreviousReadingDate.ToString("MMM dd, yyyy")
+            </MudText>
+            <MudText Typo="Typo.subtitle1">
+                @context.PresentReadingDate.ToString("MMM dd, yyyy")
+            </MudText>
+        </MudItem>
+    };
+
     private RenderFragment<AccountDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">

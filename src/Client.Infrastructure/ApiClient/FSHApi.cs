@@ -40599,7 +40599,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string BillMonth { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("previousReadingDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? PreviousReadingDate { get; set; } = default!;
+        public System.DateTime PreviousReadingDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("previousReadingKWH", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal PreviousReadingKWH { get; set; } = default!;

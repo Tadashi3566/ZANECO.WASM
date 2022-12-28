@@ -9,10 +9,10 @@
 <EntityTable TEntity="BrandDto" TId="Guid" TRequest="BrandUpdateRequest" Context="@Context">
 
     <EditFormContent>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField T="string" For="@(() => context.Name)" @bind-Value="context.Name" Label="@L["Name"]" />
         </MudItem>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField For="@(() => context.Description)" @bind-Value="context.Description"
                 Label="@L["Description"]" />
         </MudItem>

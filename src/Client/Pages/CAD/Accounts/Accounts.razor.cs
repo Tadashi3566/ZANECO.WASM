@@ -37,13 +37,13 @@ public partial class Accounts
             {
                 new(data => data.AccountNumber, "Account", "AccountNumber"),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
-                new(data => data.PresentReadingDate.ToString("MMM dd, yyyy"), "Reading Date", "PresentReadingDate"),
                 new(data => data.BillMonth, "Bill Month", "BillMonth"),
-                new(data => data.UsedKWH.ToString("N2"), "KWH", "ConsumedKWH"),
+                new(data => data.PresentReadingDate.ToString("MMM dd, yyyy"), "Reading Date", "PresentReadingDate", Template: TemplateBillingDate),
+                new(data => data.UsedKWH.ToString("N2"), "KWH", "UsedKWH"),
                 new(data => data.BillAmount.ToString("N2"), "Bill Amount", "BillAmount"),
-                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Description, "Description", "Description/Notes", Template: TemplateDescriptionNotes),
             },
-            enableAdvancedSearch: false,
+            enableAdvancedSearch: true,
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<AccountSearchRequest>()))

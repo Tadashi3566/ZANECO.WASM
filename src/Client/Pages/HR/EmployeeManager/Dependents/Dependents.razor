@@ -20,13 +20,13 @@
         <MudItem xs="12">
             <MudTextField Label="Dependent" For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Gender" For="@(() => context.Gender)" @bind-Value="context.Gender" >
                 <MudSelectItem Value="@("MALE")"/>
                 <MudSelectItem Value="@("FEMALE")"/>
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" md="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Birth Date" For="@(() => context.BirthDate)" @bind-Date="context.BirthDate" DateFormat="MMMM dd, yyyy"/>
         </MudItem>
         <MudItem xs="12">
