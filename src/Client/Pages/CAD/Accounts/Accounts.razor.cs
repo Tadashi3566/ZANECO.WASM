@@ -20,11 +20,15 @@ public partial class Accounts
 
     private EntityTable<AccountDto, Guid, AccountViewModel> _table = default!;
 
-    private AccountMigrateRequest _accountMigrateRequest = new();
+    private AccountMigrateAccountRequest _accountMigrateAccountRequest = new();
+
+    private AccountMigrateLedgerRequest _accountMigrateLedgerRequest = new();
 
     private string? _searchString;
 
     private HashSet<AccountDto> _selectedItems = new();
+
+    private bool _isBackgroundJob;
 
     private int[] _pageSizes = new int[] { 10, 15, 50, 100, 500, 1000, 5000, 10000, 50000, 100000 };
 
@@ -108,9 +112,9 @@ public partial class Accounts
         Context.AddEditModal.ForceRender();
     }
 
-    private async Task MigrateAccount()
+    private async Task MigrateAccount(string application)
     {
-        string actionTitle = _selectedItems.Count > 0 ? "Migrate Ledger" : "Migrate Account";
+        string actionTitle = application.Equals("ACCOUNT") ? "Migrate Accounts" : "Migrate Ledger";
         string transactionTitle = actionTitle;
         string transactionContent = $"Are you sure you want to {actionTitle}";
         var parameters = new DialogParameters
@@ -125,20 +129,24 @@ public partial class Accounts
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
-            string[] accountNumbers = _selectedItems.Select(x => x.AccountNumber).ToArray()!;
-
-            if (accountNumbers.Length > 0)
+            if (application.Equals("ACCOUNT"))
             {
-                foreach (string accountNum in accountNumbers)
-                {
-                    _accountMigrateRequest.AccountNumber = accountNum;
-                    await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAsync(_accountMigrateRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
-                }
+                _accountMigrateAccountRequest.IsBackgroundJob = _isBackgroundJob;
+                await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAccountAsync(_accountMigrateAccountRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
             }
-            else
+            else if(application.Equals("LEDGER"))
             {
-                _accountMigrateRequest.AccountNumber = string.Empty;
-                await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAsync(_accountMigrateRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
+                string[] accountNumbers = _selectedItems.Select(x => x.AccountNumber).ToArray()!;
+
+                if (accountNumbers.Length > 0)
+                {
+                    foreach (string accountNumber in accountNumbers)
+                    {
+                        _accountMigrateLedgerRequest.AccountNumber = accountNumber;
+                        _accountMigrateLedgerRequest.IsBackgroundJob = _isBackgroundJob;
+                        await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateLedgerAsync(_accountMigrateLedgerRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
+                    }
+                }
             }
         }
     }

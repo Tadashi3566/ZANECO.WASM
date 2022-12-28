@@ -7,8 +7,11 @@
 <EntityTable @bind-SearchString="@_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context" PageSizes="@_pageSizes">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount())" OnTouch="@(() => MigrateAccount())">Migrate Acounts</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.Checklist" OnClick="@(() => MigrateAccount())" OnTouch="@(() => MigrateAccount())">Migrate Ledger</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.Checklist" OnClick="@(() => MigrateAccount(""))" OnTouch="@(() => MigrateAccount(""))">Ledger</MudMenuItem>
+        <MudDivider />
+        <MudSwitch Class="ml-2" @bind-Checked="_isBackgroundJob" Color="Color.Success" Label="Background Job" />
+        <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount("ACCOUNT"))" OnTouch="@(() => MigrateAccount("ACCOUNT"))">Migrate Acounts</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.Checklist" OnClick="@(() => MigrateAccount("LEDGER"))" OnTouch="@(() => MigrateAccount("LEDGER"))">Migrate Ledger</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>
