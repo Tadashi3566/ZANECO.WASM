@@ -13,30 +13,30 @@
 
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" />
+            <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Meter Serial" For="@(() => context.MeterSerial)" @bind-Value="context.MeterSerial" />
+            <MudTextField Label="Meter Serial" For="@(() => context.MeterSerial)" @bind-Value="context.MeterSerial" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField Label="Account Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+            <MudTextField Label="Account Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" />
+            <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Reading Date" For="@(() => context.PresentReadingDate)" @bind-Date="context.PresentReadingDate" DateFormat="MMMM dd, yyyy" />
+            <MudDatePicker Label="Reading Date" For="@(() => context.PresentReadingDate)" @bind-Date="context.PresentReadingDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Bill Month" For="@(() => context.BillMonth)" @bind-Value="context.BillMonth" />
+            <MudTextField Label="Bill Month" For="@(() => context.BillMonth)" @bind-Value="context.BillMonth" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="KWH" For="@(() => context.UsedKWH)" @bind-Value="context.UsedKWH" Format="N2"/>
+            <MudTextField Label="KWH" For="@(() => context.UsedKWH)" @bind-Value="context.UsedKWH" Format="N2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Bill Amount" For="@(() => context.BillAmount)" @bind-Value="context.BillAmount" Format="N2" />
+            <MudNumericField Label="Bill Amount" For="@(() => context.BillAmount)" @bind-Value="context.BillAmount" Format="N2" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12">

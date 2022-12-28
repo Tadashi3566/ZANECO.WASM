@@ -37,8 +37,8 @@ public partial class Accounts
             {
                 new(data => data.AccountNumber, "Account", "AccountNumber"),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
+                new(data => data.PresentReadingDate, "Reading Dates", "PresentReadingDate", Template: TemplateBillingDate),
                 new(data => data.BillMonth, "Bill Month", "BillMonth"),
-                new(data => data.PresentReadingDate.ToString("MMM dd, yyyy"), "Reading Date", "PresentReadingDate", Template: TemplateBillingDate),
                 new(data => data.UsedKWH.ToString("N2"), "KWH", "UsedKWH"),
                 new(data => data.BillAmount.ToString("N2"), "Bill Amount", "BillAmount"),
                 new(data => data.Description, "Description", "Description/Notes", Template: TemplateDescriptionNotes),

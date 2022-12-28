@@ -40598,7 +40598,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("billMonth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BillMonth { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("previousReadingDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("previousReadingDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime PreviousReadingDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("previousReadingKWH", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -40764,8 +40764,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AccountMigrateRequest
     {
-        [Newtonsoft.Json.JsonProperty("accountNumber", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
+        [Newtonsoft.Json.JsonProperty("accountNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AccountNumber { get; set; } = default!;
 
     }
@@ -42825,6 +42824,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Tag { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("number", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Number { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Code { get; set; } = default!;
 
@@ -42866,6 +42868,10 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 1)]
         public string Parent { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("number", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0, int.MaxValue)]
+        public int Number { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -42912,6 +42918,10 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 1)]
         public string Parent { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("number", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0, int.MaxValue)]
+        public int Number { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]

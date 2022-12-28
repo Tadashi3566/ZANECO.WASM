@@ -3,7 +3,7 @@
 
 <FshTitle Title="Groups" Description="Manage Groups" />
 
-<EntityTable @ref="_table" TEntity="GroupDto" TId="Guid" TRequest="GroupViewModel" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="GroupDto" TId="Guid" TRequest="GroupViewModel" Context="@Context">
 
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
@@ -16,19 +16,22 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <AutocompleteParent Label="Parent" For="@(() => context.Parent)" @bind-Value="context.Parent" />
+            <AutocompleteParent Label="Parent" For="@(() => context.Parent)" @bind-Value="context.Parent" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <AutocompleteTag Label="Tag" For="@(() => context.Tag)" @bind-Value="context.Tag" />
+            <AutocompleteTag Label="Tag" For="@(() => context.Tag)" @bind-Value="context.Tag" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Code" For="@(() => context.Code)" @bind-Value="context.Code" />
+            <MudNumericField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2"/>
+            <MudTextField Label="Code" For="@(() => context.Code)" @bind-Value="context.Code" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <AutocompleteManager Label="Manager" For="@(() => context.Manager)" @bind-Value="context.Manager" />
@@ -83,3 +86,29 @@
     </EditFormContent>
 
 </EntityTable>
+
+@code {
+    private RenderFragment<GroupDto> TemplateCodeName => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<GroupDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

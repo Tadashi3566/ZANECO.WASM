@@ -6,7 +6,7 @@
     <MudSnackbarProvider />
     <AuthorizeView>
         <NotAuthorized>
-            <MudAppBar Elevation="@_preference.Elevation" Style="background:#6e6e6e00!important">
+            <MudAppBar Elevation="0" Style="background:#6e6e6e00!important">
                 <ThemeDrawer @bind-ThemeDrawerOpen="_themeDrawerOpen" ThemePreference="_themePreference"
                     ThemePreferenceChanged="ThemePreferenceChanged" />
                 <ThemeButton OnClick="@(() => _themeDrawerOpen = true)" />
