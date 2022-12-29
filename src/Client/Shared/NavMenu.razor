@@ -127,7 +127,7 @@
     }
     @if (_canViewCAD)
     {
-        <MudNavGroup Title="Consumer Accounts" Icon="@Icons.Filled.AddBox">
+        <MudNavGroup Title="CAD" Icon="@Icons.Filled.AddBox">
             @if (_canViewCAD)
             {
                 <MudNavLink Href="/cad/areas" Icon="@Icons.Filled.Place" Class="fsh-nav-child">Areas</MudNavLink>
@@ -139,6 +139,7 @@
 
                 <MudNavLink Href="/cad/members" Icon="@Icons.Filled.Groups" Class="fsh-nav-child">Members</MudNavLink>
                 <MudNavLink Href="/cad/accounts" Icon="@Icons.Filled.Groups" Class="fsh-nav-child">Accounts</MudNavLink>
+                <MudNavLink Href="/cad/ledger" Icon="@Icons.Filled.FormatListBulleted" Class="fsh-nav-child">Ledger</MudNavLink>
             }
         </MudNavGroup>
     }

@@ -1,0 +1,40 @@
+﻿@page "/cad/ledger"
+@page "/cad/ledger/{AccountId:guid}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
+
+<FshTitle Title="Ledgers" Description="Manage Account Ledger" />
+
+<EntityTable @ref="_table" TEntity="LedgerDto" TId="Guid" TRequest="LedgerUpdateRequest" Context="@Context" >
+
+    <EditFormContent>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Bill Month" For="@(() => context.BillMonth)" @bind-Value="context.BillMonth" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Bill Number" For="@(() => context.BillNumber)" @bind-Value="context.BillNumber" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Debit" For="@(() => context.Debit)" @bind-Value="context.Debit" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Credit" For="@(() => context.Credit)" @bind-Value="context.Credit" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Balance" For="@(() => context.Balance)" @bind-Value="context.Balance" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="PostingDate" For="@(() => context.PostingDate)" @bind-Value="context.PostingDate" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+        </MudItem>
+ 
+    </EditFormContent>
+</EntityTable>

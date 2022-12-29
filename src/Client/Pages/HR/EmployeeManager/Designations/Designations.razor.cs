@@ -143,14 +143,6 @@ public partial class Designations
         }
     }
 
-    private string GetEmployeeId(Guid contextId)
-    {
-        if (SearchEmployeeId.Equals(Guid.Empty))
-            return contextId.ToString();
-        else
-            return SearchEmployeeId.ToString();
-    }
-
     private bool DisableInput(string rateType)
     {
         if (rateType is not null)

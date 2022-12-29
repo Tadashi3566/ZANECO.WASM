@@ -41230,23 +41230,26 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid Id { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("accountId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid AccountId { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("idCode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int IdCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("accountNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AccountNumber { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Document { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("billMonth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BillMonth { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("reading", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public float Reading { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("billNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BillNumber { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("presentReading", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double PresentReading { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kwh", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public float Kwh { get; set; } = default!;
+        public double Kwh { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("ucnpcsd", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Ucnpcsd { get; set; } = default!;
@@ -41287,24 +41290,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("vat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Vat { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("vatDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatDistDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatDistDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatGenDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatGenDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatTransDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatTransDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatslGenDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatslGenDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatslTransDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatslTransDiscount { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("debit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Debit { get; set; } = default!;
 
@@ -41314,11 +41299,11 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Balance { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("collector", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Collector { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("collector", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Collector { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("postingDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? PostingDate { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("postingDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime PostingDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
@@ -41331,12 +41316,17 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LedgerSearchRequest : PaginationFilter
     {
+        [Newtonsoft.Json.JsonProperty("accountId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? AccountId { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LedgerCreateRequest
     {
+        [Newtonsoft.Json.JsonProperty("accountId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid AccountId { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("idCode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int IdCode { get; set; } = default!;
 
@@ -41394,24 +41384,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("vat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Vat { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("vatDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatDistDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatDistDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatGenDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatGenDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatTransDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatTransDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatslGenDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatslGenDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatslTransDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatslTransDiscount { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("debit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Debit { get; set; } = default!;
 
@@ -41441,14 +41413,17 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid Id { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("accountId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid AccountId { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("idCode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int IdCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("accountNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AccountNumber { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Document { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("billNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BillNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("billMonth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BillMonth { get; set; } = default!;
@@ -41498,24 +41473,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("vat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Vat { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("vatDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatDistDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatDistDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatGenDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatGenDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatTransDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatTransDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatslGenDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatslGenDiscount { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatslTransDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatslTransDiscount { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("debit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Debit { get; set; } = default!;
 
@@ -41539,9 +41496,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("deleteCurrentImage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool DeleteCurrentImage { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
 
     }
 

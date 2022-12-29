@@ -45,7 +45,7 @@ public partial class Accounts
                 new(data => data.BillMonth, "Bill Month", "BillMonth"),
                 new(data => data.UsedKWH.ToString("N2"), "KWH", "UsedKWH"),
                 new(data => data.BillAmount.ToString("N2"), "Bill Amount", "BillAmount"),
-                new(data => data.Description, "Description", "Description/Notes", Template: TemplateDescriptionNotes),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: true,
             idFunc: data => data.Id,

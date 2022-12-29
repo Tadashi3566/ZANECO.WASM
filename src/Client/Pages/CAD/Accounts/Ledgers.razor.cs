@@ -1,0 +1,72 @@
+﻿using Mapster;
+using Microsoft.AspNetCore.Components;
+using ZANECO.WASM.Client.Components.EntityTable;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WebApi.Shared.Authorization;
+
+namespace ZANECO.WASM.Client.Pages.CAD.Accounts;
+
+public partial class Ledgers
+{
+    [Parameter]
+    public Guid AccountId { get; set; } = Guid.Empty;
+    [Inject]
+    protected ILedgersClient Client { get; set; } = default!;
+
+    protected EntityServerTableContext<LedgerDto, Guid, LedgerUpdateRequest> Context { get; set; } = default!;
+
+    private EntityTable<LedgerDto, Guid, LedgerUpdateRequest> _table = default!;
+
+    //private string? _searchString;
+
+    //Advanced Search
+    //private Guid _searchAccountId;
+    //private Guid SearchAccountId
+    //{
+    //    get => _searchAccountId;
+    //    set
+    //    {
+    //        _searchAccountId = value;
+    //        _ = _table.ReloadDataAsync();
+    //    }
+    //}
+
+    //protected override void OnParametersSet()
+    //{
+    //    if (AccountId != Guid.Empty)
+    //    {
+    //        _searchAccountId = AccountId;
+    //    }
+    //}
+
+    protected override void OnInitialized() =>
+        Context = new(
+            entityName: "Ledger",
+            entityNamePlural: "Ledger",
+            entityResource: FSHResource.CAD,
+            fields: new()
+            {
+                new(data => data.BillMonth, "Bill Month", "BillMonth"),
+                //new(data => data.BillNumber, "Bill Number", "BillNumber"),
+                //new(data => data.Debit.ToString("N2"), "Debit", "Debit"),
+                //new(data => data.Credit.ToString("N2"), "Credit", "Credit"),
+                //new(data => data.Balance.ToString("N2"), "Balance", "Balance"),
+                //new(data => data.PostingDate.ToString("MMM dd, yyyy"), "PostingDate", "PostingDate"),
+            },
+            enableAdvancedSearch: true,
+            idFunc: data => data.Id,
+            searchFunc: async filter => (await Client
+                .SearchAsync(filter.Adapt<LedgerSearchRequest>()))
+                .Adapt<PaginationResponse<LedgerDto>>(),
+            //searchFunc: async _filter =>
+            //{
+            //    var filter = _filter.Adapt<LedgerSearchRequest>();
+            //    filter.AccountId = SearchAccountId == default ? null : SearchAccountId;
+            //    var result = await Client.SearchAsync(filter);
+            //    return result.Adapt<PaginationResponse<LedgerDto>>();
+            //},
+            createFunc: async data => await Client.CreateAsync(data.Adapt<LedgerCreateRequest>()),
+            updateFunc: async (id, Ledger) => await Client.UpdateAsync(id, Ledger.Adapt<LedgerUpdateRequest>()),
+            deleteFunc: async id => await Client.DeleteAsync(id),
+            exportAction: string.Empty);
+}

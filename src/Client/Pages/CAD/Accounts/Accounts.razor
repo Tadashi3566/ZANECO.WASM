@@ -2,24 +2,31 @@
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
 
-<FshTitle Title="Accounts" Description="Manage Accounts" />
+<FshTitle Title="Accounts" Description="Manage and Migrate Accounts" />
 
 <EntityTable @bind-SearchString="@_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context" PageSizes="@_pageSizes">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.Checklist" OnClick="@(() => MigrateAccount(""))" OnTouch="@(() => MigrateAccount(""))">Ledger</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.FormatListBulleted" OnClick="@(() => Navigation.NavigateTo($"/cad/ledger/{context.Id}"))" OnTouch="@(() => Navigation.NavigateTo($"/cad/ledger/{context.Id}"))" >Ledger</MudMenuItem>
         <MudDivider />
         <MudSwitch Class="ml-2" @bind-Checked="_isBackgroundJob" Color="Color.Success" Label="Background Job" />
         <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount("ACCOUNT"))" OnTouch="@(() => MigrateAccount("ACCOUNT"))">Migrate Acounts</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.Checklist" OnClick="@(() => MigrateAccount("LEDGER"))" OnTouch="@(() => MigrateAccount("LEDGER"))">Migrate Ledger</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Filled.ChecklistRtl" OnClick="@(() => MigrateAccount("LEDGER"))" OnTouch="@(() => MigrateAccount("LEDGER"))">Migrate Ledger</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSelect Label="Account Type" For="@(() => context.AccountType)" @bind-Value="context.AccountType" Variant="Variant.Filled" >
+                <MudSelectItem Value="@("HIGH VOLTAGE")" />
+                <MudSelectItem Value="@("LOW VOLTAGE")" />
+                <MudSelectItem Value="@("RESIDENTIAL")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Meter Serial" For="@(() => context.MeterSerial)" @bind-Value="context.MeterSerial" Variant="Variant.Filled" />
+            <MudNumericField Label="Multiplier" For="@(() => context.Multiplier)" @bind-Value="context.Multiplier" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12">
@@ -30,10 +37,42 @@
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Reading Date" For="@(() => context.PresentReadingDate)" @bind-Date="context.PresentReadingDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <MudTextField Label="Feeder" For="@(() => context.Feeder)" @bind-Value="context.Feeder" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Area" For="@(() => context.Area)" @bind-Value="context.Area" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Barangay" For="@(() => context.Route)" @bind-Value="context.Route" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Route" For="@(() => context.Cipher)" @bind-Value="context.Cipher" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Pole" For="@(() => context.Pole)" @bind-Value="context.Pole" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Transformer" For="@(() => context.Transformer)" @bind-Value="context.Transformer" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Meter Brand" For="@(() => context.MeterBrand)" @bind-Value="context.MeterBrand" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Meter Serial" For="@(() => context.MeterSerial)" @bind-Value="context.MeterSerial" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Tag" For="@(() => context.Tag)" @bind-Value="context.Tag" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Bill Month" For="@(() => context.BillMonth)" @bind-Value="context.BillMonth" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Reading Date" For="@(() => context.PresentReadingDate)" @bind-Date="context.PresentReadingDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="KWH" For="@(() => context.UsedKWH)" @bind-Value="context.UsedKWH" Format="N2" Variant="Variant.Filled" />

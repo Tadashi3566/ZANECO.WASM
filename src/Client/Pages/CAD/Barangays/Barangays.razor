@@ -6,7 +6,7 @@
 <EntityTable @ref="_table" TEntity="BarangayDto" TId="Guid" TRequest="BarangayUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12">
-            <AreaAutocomplete For="@(() => context.AreaId)" @bind-Value="context.AreaId" />
+            <AutocompleteArea For="@(() => context.AreaId)" @bind-Value="context.AreaId" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Barangay Name" For="@(() => context.Name)" @bind-Value="context.Name" />

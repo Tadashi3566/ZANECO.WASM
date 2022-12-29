@@ -5,10 +5,11 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.CAD;
-public class AreaAutocomplete : MudAutocomplete<Guid>
+
+public class AutocompleteArea : MudAutocomplete<Guid>
 {
     [Inject]
-    private IStringLocalizer<AreaAutocomplete> L { get; set; } = default!;
+    private IStringLocalizer<AutocompleteArea> L { get; set; } = default!;
     [Inject]
     private IAreasClient AreasClient { get; set; } = default!;
     [Inject]
@@ -19,14 +20,14 @@ public class AreaAutocomplete : MudAutocomplete<Guid>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Label = "Area";
-        Variant = Variant.Filled;
+        Clearable = true;
         Dense = true;
+        Label = "Area";
         Margin = Margin.Dense;
         ResetValueOnEmptyText = true;
-        SearchFunc = SearchAreas;
-        ToStringFunc = GetAreaName;
-        Clearable = true;
+        SearchFunc = SearchName;
+        ToStringFunc = GetName;
+        Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }
 
@@ -44,7 +45,7 @@ public class AreaAutocomplete : MudAutocomplete<Guid>
         }
     }
 
-    private async Task<IEnumerable<Guid>> SearchAreas(string value)
+    private async Task<IEnumerable<Guid>> SearchName(string value)
     {
         var filter = new AreaSearchRequest
         {
@@ -62,6 +63,6 @@ public class AreaAutocomplete : MudAutocomplete<Guid>
         return _areas.Select(x => x.Id);
     }
 
-    private string GetAreaName(Guid id) =>
+    private string GetName(Guid id) =>
         _areas.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

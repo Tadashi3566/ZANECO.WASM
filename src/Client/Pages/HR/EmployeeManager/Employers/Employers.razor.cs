@@ -48,9 +48,7 @@ public partial class Employers
             searchFunc: async _filter =>
             {
                 var filter = _filter.Adapt<EmployerSearchRequest>();
-
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
-
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<EmployerDto>>();
             },
