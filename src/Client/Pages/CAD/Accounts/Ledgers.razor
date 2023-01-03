@@ -3,9 +3,9 @@
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
 
-<FshTitle Title="Ledgers" Description="Manage Account Ledger" />
+<FshTitle Title="Ledger" Description="Manage Account Ledger" />
 
-<EntityTable @ref="_table" TEntity="LedgerDto" TId="Guid" TRequest="LedgerUpdateRequest" Context="@Context" >
+<EntityTable Context="@Context" @ref="_table" SearchString="@_searchString" TEntity="LedgerDto" TId="Guid" TRequest="LedgerUpdateRequest"  >
 
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">

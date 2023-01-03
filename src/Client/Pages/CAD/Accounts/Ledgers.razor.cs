@@ -17,27 +17,27 @@ public partial class Ledgers
 
     private EntityTable<LedgerDto, Guid, LedgerUpdateRequest> _table = default!;
 
-    //private string? _searchString;
+    private string? _searchString;
 
     //Advanced Search
-    //private Guid _searchAccountId;
-    //private Guid SearchAccountId
-    //{
-    //    get => _searchAccountId;
-    //    set
-    //    {
-    //        _searchAccountId = value;
-    //        _ = _table.ReloadDataAsync();
-    //    }
-    //}
+    private Guid _searchAccountId;
+    private Guid SearchAccountId
+    {
+        get => _searchAccountId;
+        set
+        {
+            _searchAccountId = value;
+            _ = _table.ReloadDataAsync();
+        }
+    }
 
-    //protected override void OnParametersSet()
-    //{
-    //    if (AccountId != Guid.Empty)
-    //    {
-    //        _searchAccountId = AccountId;
-    //    }
-    //}
+    protected override void OnParametersSet()
+    {
+        if (AccountId != Guid.Empty)
+        {
+            _searchAccountId = AccountId;
+        }
+    }
 
     protected override void OnInitialized() =>
         Context = new(
@@ -46,18 +46,22 @@ public partial class Ledgers
             entityResource: FSHResource.CAD,
             fields: new()
             {
+                //new(data => data.Id, "Id", "Id"),
+                //new(data => data.AccountId, "AccountId", "AccountId"),
                 new(data => data.BillMonth, "Bill Month", "BillMonth"),
-                //new(data => data.BillNumber, "Bill Number", "BillNumber"),
-                //new(data => data.Debit.ToString("N2"), "Debit", "Debit"),
-                //new(data => data.Credit.ToString("N2"), "Credit", "Credit"),
-                //new(data => data.Balance.ToString("N2"), "Balance", "Balance"),
-                //new(data => data.PostingDate.ToString("MMM dd, yyyy"), "PostingDate", "PostingDate"),
+                new(data => data.BillNumber, "Bill Number", "BillNumber"),
+                new(data => data.Debit.ToString("N2"), "Debit", "Debit"),
+                new(data => data.Credit.ToString("N2"), "Credit", "Credit"),
+                new(data => data.Balance.ToString("N2"), "Balance", "Balance"),
+                new(data => data.PostingDate.ToString("MMM dd, yyyy"), "PostingDate", "PostingDate"),
             },
-            enableAdvancedSearch: true,
+            enableAdvancedSearch: false,
             idFunc: data => data.Id,
-            searchFunc: async filter => (await Client
-                .SearchAsync(filter.Adapt<LedgerSearchRequest>()))
-                .Adapt<PaginationResponse<LedgerDto>>(),
+            searchFunc: async _filter =>
+            {
+                var result = await Client.AccountLedgerAsync(_searchAccountId);
+                return result.Adapt<PaginationResponse<LedgerDto>>();
+            },
             //searchFunc: async _filter =>
             //{
             //    var filter = _filter.Adapt<LedgerSearchRequest>();
@@ -65,8 +69,8 @@ public partial class Ledgers
             //    var result = await Client.SearchAsync(filter);
             //    return result.Adapt<PaginationResponse<LedgerDto>>();
             //},
-            createFunc: async data => await Client.CreateAsync(data.Adapt<LedgerCreateRequest>()),
-            updateFunc: async (id, Ledger) => await Client.UpdateAsync(id, Ledger.Adapt<LedgerUpdateRequest>()),
-            deleteFunc: async id => await Client.DeleteAsync(id),
+            createFunc: null, //async data => await Client.CreateAsync(data.Adapt<LedgerCreateRequest>()),
+            updateFunc: null, //async (id, Ledger) => await Client.UpdateAsync(id, Ledger.Adapt<LedgerUpdateRequest>()),
+            deleteFunc: null, //async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
 }

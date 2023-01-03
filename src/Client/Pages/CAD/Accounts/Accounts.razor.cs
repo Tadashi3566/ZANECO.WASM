@@ -6,6 +6,7 @@ using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -24,11 +25,11 @@ public partial class Accounts
 
     private AccountMigrateLedgerRequest _accountMigrateLedgerRequest = new();
 
+    private ClientPreference _preference = new();
+
     private string? _searchString;
 
     private HashSet<AccountDto> _selectedItems = new();
-
-    private bool _isBackgroundJob;
 
     private int[] _pageSizes = new int[] { 10, 15, 50, 100, 500, 1000, 5000, 10000, 50000, 100000 };
 
@@ -129,9 +130,11 @@ public partial class Accounts
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
+            _accountMigrateAccountRequest.IsBackgroundJob = _preference.BackgroundPreference.IsBackgroundJob;
+            _accountMigrateAccountRequest.IsScheduled = _preference.BackgroundPreference.IsScheduled;
+
             if (application.Equals("ACCOUNT"))
             {
-                _accountMigrateAccountRequest.IsBackgroundJob = _isBackgroundJob;
                 await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAccountAsync(_accountMigrateAccountRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
             }
             else if(application.Equals("LEDGER"))
@@ -143,7 +146,7 @@ public partial class Accounts
                     foreach (string accountNumber in accountNumbers)
                     {
                         _accountMigrateLedgerRequest.AccountNumber = accountNumber;
-                        _accountMigrateLedgerRequest.IsBackgroundJob = _isBackgroundJob;
+
                         await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateLedgerAsync(_accountMigrateLedgerRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
                     }
                 }

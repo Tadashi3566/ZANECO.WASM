@@ -9,7 +9,6 @@
         <MudDivider />
         <MudMenuItem Icon="@Icons.Filled.FormatListBulleted" OnClick="@(() => Navigation.NavigateTo($"/cad/ledger/{context.Id}"))" OnTouch="@(() => Navigation.NavigateTo($"/cad/ledger/{context.Id}"))" >Ledger</MudMenuItem>
         <MudDivider />
-        <MudSwitch Class="ml-2" @bind-Checked="_isBackgroundJob" Color="Color.Success" Label="Background Job" />
         <MudMenuItem Icon="@Icons.Filled.ManageAccounts" OnClick="@(() => MigrateAccount("ACCOUNT"))" OnTouch="@(() => MigrateAccount("ACCOUNT"))">Migrate Acounts</MudMenuItem>
         <MudMenuItem Icon="@Icons.Filled.ChecklistRtl" OnClick="@(() => MigrateAccount("LEDGER"))" OnTouch="@(() => MigrateAccount("LEDGER"))">Migrate Ledger</MudMenuItem>
     </ExtraActions>

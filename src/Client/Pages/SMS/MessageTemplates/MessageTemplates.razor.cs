@@ -107,6 +107,9 @@ public partial class MessageTemplates
         DialogResult result = await dialog.Result;
         if (!result.Cancelled)
         {
+            _messageOut.IsBackgroundJob = _preference.BackgroundPreference.IsBackgroundJob;
+            _messageOut.IsScheduled = _preference.BackgroundPreference.IsScheduled;
+
             _messageOut.IsAPI = request.IsAPI;
             _messageOut.MessageType = request.MessageType;
             _messageOut.MessageTo = request.Recepients;
