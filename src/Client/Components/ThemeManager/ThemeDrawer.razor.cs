@@ -69,6 +69,7 @@ public partial class ThemeDrawer
         }
     }
 
+    //Table Attribute
     private async Task ToggleEntityTableFixedHeaderFooter(bool isFixedHeaderFooter)
     {
         if (ThemePreference is not null)
@@ -137,6 +138,34 @@ public partial class ThemeDrawer
         if (ThemePreference is not null)
         {
             ThemePreference.TablePreference.IsVirtualize = isVirtualize;
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
+
+    //background Worker
+    private async Task ToggleBackgroundJob(bool isBackgroundJob)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.BackgroundPreference.IsBackgroundJob = isBackgroundJob;
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
+
+    private async Task ToggleScheduled(bool isScheduled)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.BackgroundPreference.IsScheduled = isScheduled;
+            await ThemePreferenceChanged.InvokeAsync(ThemePreference);
+        }
+    }
+
+    private async Task UpdateMinutes(int minutes)
+    {
+        if (ThemePreference is not null)
+        {
+            ThemePreference.BackgroundPreference.InMinutes = minutes;
             await ThemePreferenceChanged.InvokeAsync(ThemePreference);
         }
     }

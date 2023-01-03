@@ -7,10 +7,8 @@ public partial class ElevationPanel
 {
     [Parameter]
     public double Elevation { get; set; }
-
     [Parameter]
     public double MaxValue { get; set; } = 25;
-
     [Parameter]
     public EventCallback<double> OnSliderChanged { get; set; }
 

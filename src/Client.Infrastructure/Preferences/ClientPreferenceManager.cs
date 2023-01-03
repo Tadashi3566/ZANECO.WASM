@@ -7,8 +7,7 @@ public class ClientPreferenceManager : IClientPreferenceManager
 {
     private readonly ILocalStorageService _localStorageService;
 
-    public ClientPreferenceManager(
-        ILocalStorageService localStorageService)
+    public ClientPreferenceManager(ILocalStorageService localStorageService)
     {
         _localStorageService = localStorageService;
     }

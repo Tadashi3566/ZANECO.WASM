@@ -1,0 +1,15 @@
+<MudExpansionPanel HideIcon="true">
+    <TitleContent>
+        <div class="d-flex">
+            <MudText Class="mt-1">Background Worker</MudText>
+            <MudAvatar Color="Color.Primary" Class="d-flex ml-auto"
+                style="width: 30px;height:30px;font-size:small!important">@BackgroundJob.ToString().Substring(0, 1)
+            </MudAvatar>
+        </div>
+    </TitleContent>
+    <ChildContent>
+        <MudSwitch @bind-Checked="@BackgroundJob" Color="Color.Primary" Label="Background Job" @oninput="@ToggleBackgroundJobSwitch" />
+        <MudSwitch @bind-Checked="@Scheduled" Color="Color.Primary" Label="Scheduled" @oninput="@ToggleScheduledSwitch" />
+        <MudNumericField T="int" Label="In Minutes" @onchange="((e) => ChangedMinuteValue(e))" />
+    </ChildContent>
+</MudExpansionPanel>

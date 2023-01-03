@@ -12,5 +12,6 @@ public class ClientPreference : IPreference
     public double BorderRadius { get; set; } = 5;
     public int Elevation { get; set; } = 5;
     public string LanguageCode { get; set; } = LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "en-US";
-    public FshTablePreference TablePreference { get; set; } = new FshTablePreference();
+    public FshTablePreference TablePreference { get; set; } = new();
+    public BackgroundPreference BackgroundPreference { get; set; } = new();
 }

@@ -9,9 +9,9 @@ namespace ZANECO.WASM.Client.Components.Common;
 public class FshTable<T> : MudTable<T>
 {
     [Inject]
-    private IClientPreferenceManager ClientPreferences { get; set; } = default!;
-    [Inject]
     protected ICourier Courier { get; set; } = default!;
+    [Inject]
+    private IClientPreferenceManager ClientPreferences { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {

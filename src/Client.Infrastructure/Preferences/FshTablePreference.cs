@@ -1,6 +1,7 @@
 using ZANECO.WebApi.Shared.Notifications;
 
 namespace ZANECO.WASM.Client.Infrastructure.Preferences;
+
 public class FshTablePreference : INotificationMessage
 {
     public bool IsFixedHeaderFooter { get; set; }
@@ -10,5 +11,12 @@ public class FshTablePreference : INotificationMessage
     public bool HasBorder { get; set; }
     public bool IsHoverable { get; set; }
     public bool IsMultiSelection { get; set; }
-    public bool IsVirtualize { get; set; }
+    public bool IsVirtualize { get; set; } = true;
+}
+
+public class BackgroundPreference : INotificationMessage
+{
+    public bool IsBackgroundJob { get; set; }
+    public bool IsScheduled { get; set; }
+    public int InMinutes { get; set; }
 }
