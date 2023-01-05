@@ -54,6 +54,10 @@
             {
                 <MudNavLink Href="sms/contacts" Icon="@Icons.Filled.ContactPhone" Class="fsh-nav-child">Contacts</MudNavLink>
             }
+            @if (_canViewCAD)
+            {
+                <MudNavLink Href="/cad/accounts" Icon="@Icons.Filled.Groups" Class="fsh-nav-child">Accounts</MudNavLink>
+            }
             @if (_canViewSMS)
             {
                 <MudNavLink Href="sms/templates" Icon="@Icons.Filled.Message" Class="fsh-nav-child">Templates</MudNavLink>

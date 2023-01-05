@@ -16,7 +16,7 @@
             <AutocompleteContactType For="@(() => context.ContactType)" @bind-Value="context.ContactType" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Account Code" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" Variant="Variant.Filled"/>
+            <AutocompleteAccountNumber For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" Variant="Variant.Filled"/>
