@@ -14,7 +14,7 @@ public partial class SelfRegister
     private bool BusySubmitting { get; set; }
 
     [Inject]
-    private IUsersClient UsersClient { get; set; } = default!;
+    private IUsersClient Client { get; set; } = default!;
 
     private string Tenant { get; set; } = MultitenancyConstants.Root.Id;
 
@@ -28,7 +28,7 @@ public partial class SelfRegister
     {
         BusySubmitting = true;
 
-        string? sucessMessage = await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.SelfRegisterAsync(Tenant, _createUserRequest), Snackbar, _customValidation);
+        string? sucessMessage = await ApiHelper.ExecuteCallGuardedAsync(() => Client.SelfRegisterAsync(Tenant, _createUserRequest), Snackbar, _customValidation);
 
         if (sucessMessage != null)
         {

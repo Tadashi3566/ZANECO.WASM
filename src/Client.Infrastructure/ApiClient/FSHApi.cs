@@ -27642,7 +27642,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                 throw new System.ArgumentNullException("request");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/v1/ledger/search");
+            urlBuilder_.Append("api/v1/ledgers/search");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -27741,7 +27741,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/v1/ledger/{id}");
+            urlBuilder_.Append("api/v1/ledgers/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -27824,7 +27824,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/v1/ledger/{id}");
+            urlBuilder_.Append("api/v1/ledgers/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -27923,7 +27923,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                 throw new System.ArgumentNullException("request");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/v1/ledger/{id}");
+            urlBuilder_.Append("api/v1/ledgers/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -28023,7 +28023,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/v1/ledger/{id}");
+            urlBuilder_.Append("api/v1/ledgers/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -28119,7 +28119,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                 throw new System.ArgumentNullException("request");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/v1/ledger");
+            urlBuilder_.Append("api/v1/ledgers");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -36259,12 +36259,12 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("accountNumber", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 1)]
+        [System.ComponentModel.DataAnnotations.StringLength(10, MinimumLength = 1)]
         public string AccountNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("phoneNumber", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.StringLength(32, MinimumLength = 1)]
+        [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 1)]
         public string PhoneNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -36322,12 +36322,12 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("accountNumber", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 1)]
+        [System.ComponentModel.DataAnnotations.StringLength(10, MinimumLength = 1)]
         public string AccountNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("phoneNumber", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 1)]
+        [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 1)]
         public string PhoneNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -37180,6 +37180,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("userName", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 6)]
         public string UserName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.Always)]
@@ -37190,8 +37191,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         public string ConfirmPassword { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("phoneNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? PhoneNumber { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("phoneNumber", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 11)]
+        public string PhoneNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Description { get; set; } = default!;
