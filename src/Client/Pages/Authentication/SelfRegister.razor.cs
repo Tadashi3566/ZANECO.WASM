@@ -9,17 +9,20 @@ using ZANECO.WebApi.Shared.MultiTenancy;
 namespace ZANECO.WASM.Client.Pages.Authentication;
 public partial class SelfRegister
 {
-    private readonly CreateUserRequest _createUserRequest = new();
-    private CustomValidation? _customValidation;
-    private bool BusySubmitting { get; set; }
-
     [Inject]
     private IUsersClient Client { get; set; } = default!;
+
+    private readonly CreateUserRequest _createUserRequest = new();
+
+    private CustomValidation? _customValidation;
+    private bool BusySubmitting { get; set; }
 
     private string Tenant { get; set; } = MultitenancyConstants.Root.Id;
 
     private bool _passwordVisibility;
+
     private InputType _passwordInput = InputType.Password;
+
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
 
     private ClientPreference _preference = new();

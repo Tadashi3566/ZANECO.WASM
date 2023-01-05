@@ -37192,7 +37192,8 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string ConfirmPassword { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("phoneNumber", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 11)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 10)]
         public string PhoneNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
