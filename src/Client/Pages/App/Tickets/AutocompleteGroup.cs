@@ -17,13 +17,14 @@ public class AutocompleteGroup : MudAutocomplete<Guid>
     public override Task SetParametersAsync(ParameterView parameters)
     {
         Label = "Group";
-        Variant = Variant.Filled;
-        Dense = true;
-        Margin = Margin.Dense;
-        ResetValueOnEmptyText = true;
-        SearchFunc = SearchGroups;
-        ToStringFunc = GetGroupName;
+        CoerceText = true;
+        CoerceValue = true;
         Clearable = true;
+        Dense = true;
+        ResetValueOnEmptyText = true;
+        SearchFunc = SearchText;
+        ToStringFunc = GetText;
+        Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }
 
@@ -39,7 +40,7 @@ public class AutocompleteGroup : MudAutocomplete<Guid>
         }
     }
 
-    private async Task<IEnumerable<Guid>> SearchGroups(string value)
+    private async Task<IEnumerable<Guid>> SearchText(string value)
     {
         var filter = new GroupSearchRequest
         {
@@ -57,6 +58,6 @@ public class AutocompleteGroup : MudAutocomplete<Guid>
         return _groups.Where(x => x.Application.Equals("TICKET")).Select(x => x.Id);
     }
 
-    private string GetGroupName(Guid id) =>
+    private string GetText(Guid id) =>
         _groups.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

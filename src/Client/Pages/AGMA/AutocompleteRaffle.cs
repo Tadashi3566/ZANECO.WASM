@@ -17,13 +17,13 @@ public class AutocompleteRaffle : MudAutocomplete<Guid>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
+        Label = "Raffle";
         CoerceText = true;
         CoerceValue = true;
+        Clearable = true;
         Dense = true;
-        Margin = Margin.Dense;
         ResetValueOnEmptyText = true;
         SearchFunc = SearchText;
-        ToStringFunc = GetName;
         Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }

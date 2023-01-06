@@ -3,20 +3,21 @@ using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
-namespace ZANECO.WASM.Client.Pages.HR.EmployeeManager.Designations;
-public class AutocompletePosition : MudAutocomplete<string>
+namespace ZANECO.WASM.Client.Pages.SMS.Contacts;
+
+public class AutocompleteContactAddress : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
     [Inject]
-    private IGroupsClient Client { get; set; } = default!;
+    private IContactsClient Client { get; set; } = default!;
 
-    private List<GroupDto> _groups = new();
+    private List<ContactDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Label = "Designation";
+        Label = "Address";
         CoerceText = true;
         CoerceValue = true;
         Clearable = true;
@@ -28,22 +29,19 @@ public class AutocompletePosition : MudAutocomplete<string>
 
     private async Task<IEnumerable<string>> SearchText(string value)
     {
-        var filter = new GroupSearchRequest
+        var filter = new ContactSearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "Address" }, Keyword = value }
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
                 () => Client.SearchAsync(filter), Snackbar)
-            is PaginationResponseOfGroupDto response)
+            is PaginationResponseOfContactDto response)
         {
-            _groups = response.Data
-                .Where(x => x.Parent.Equals("DESIGNATION"))
-                .ToList();
+            _list = response.Data.ToList();
         }
 
-        return _groups
-            .Select(x => x.Name);
+        return _list.Select(x => x.Address).Distinct();
     }
 }

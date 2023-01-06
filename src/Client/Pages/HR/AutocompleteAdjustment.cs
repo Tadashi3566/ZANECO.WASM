@@ -17,13 +17,14 @@ public class AutocompleteAdjustments : MudAutocomplete<Guid>
     public override Task SetParametersAsync(ParameterView parameters)
     {
         Label = "Adjustment";
-        Variant = Variant.Filled;
-        Dense = true;
-        Margin = Margin.Dense;
-        ResetValueOnEmptyText = true;
-        SearchFunc = SearchAdjustment;
-        ToStringFunc = GetAdjustmentName;
+        CoerceText = true;
+        CoerceValue = true;
         Clearable = true;
+        Dense = true;
+        ResetValueOnEmptyText = true;
+        SearchFunc = SearchText;
+        ToStringFunc = GetText;
+        Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }
 
@@ -39,7 +40,7 @@ public class AutocompleteAdjustments : MudAutocomplete<Guid>
         }
     }
 
-    private async Task<IEnumerable<Guid>> SearchAdjustment(string value)
+    private async Task<IEnumerable<Guid>> SearchText(string value)
     {
         var filter = new AdjustmentSearchRequest
         {
@@ -57,6 +58,6 @@ public class AutocompleteAdjustments : MudAutocomplete<Guid>
         return _adjustment.Select(x => x.Id);
     }
 
-    private string GetAdjustmentName(Guid id) =>
+    private string GetText(Guid id) =>
         _adjustment.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

@@ -17,10 +17,11 @@ public class AutocompleteParent : MudAutocomplete<string>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
+        Label = "Parent";
         CoerceText = true;
         CoerceValue = true;
+        Clearable = true;
         Dense = true;
-        Margin = Margin.Dense;
         ResetValueOnEmptyText = true;
         SearchFunc = SearchText;
         Variant = Variant.Filled;

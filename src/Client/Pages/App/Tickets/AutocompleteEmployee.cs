@@ -17,14 +17,14 @@ public class AutocompleteEmployee : MudAutocomplete<string>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
+        Label = "Employee";
         CoerceText = true;
         CoerceValue = true;
-        Variant = Variant.Filled;
+        Clearable = true;
         Dense = true;
-        Margin = Margin.Dense;
         ResetValueOnEmptyText = true;
         SearchFunc = SearchText;
-        Clearable = true;
+        Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }
 

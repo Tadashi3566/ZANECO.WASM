@@ -20,13 +20,14 @@ public class BrandAutocomplete : MudAutocomplete<Guid>
     public override Task SetParametersAsync(ParameterView parameters)
     {
         Label = L["Brand"];
-        Variant = Variant.Filled;
-        Dense = true;
-        Margin = Margin.Dense;
-        ResetValueOnEmptyText = true;
-        SearchFunc = SearchBrands;
-        ToStringFunc = GetBrandName;
+        CoerceText = true;
+        CoerceValue = true;
         Clearable = true;
+        Dense = true;
+        ResetValueOnEmptyText = true;
+        SearchFunc = SearchText;
+        ToStringFunc = GetText;
+        Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }
 
@@ -44,7 +45,7 @@ public class BrandAutocomplete : MudAutocomplete<Guid>
         }
     }
 
-    private async Task<IEnumerable<Guid>> SearchBrands(string value)
+    private async Task<IEnumerable<Guid>> SearchText(string value)
     {
         var filter = new BrandSearchRequest
         {
@@ -62,6 +63,6 @@ public class BrandAutocomplete : MudAutocomplete<Guid>
         return _brands.Select(x => x.Id);
     }
 
-    private string GetBrandName(Guid id) =>
+    private string GetText(Guid id) =>
         _brands.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

@@ -25,7 +25,7 @@
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" Variant="Variant.Filled"/>
+            <AutocompleteContactAddress For="@(() => context.Address)" @bind-Value="context.Address" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>

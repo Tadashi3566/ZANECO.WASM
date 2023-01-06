@@ -17,13 +17,14 @@ public class AutocompleteSchedule : MudAutocomplete<Guid>
     public override Task SetParametersAsync(ParameterView parameters)
     {
         Label = "Schedule";
-        Variant = Variant.Filled;
-        Dense = true;
-        Margin = Margin.Dense;
-        ResetValueOnEmptyText = true;
-        SearchFunc = SearchSchedules;
-        ToStringFunc = GetScheduleName;
+        CoerceText = true;
+        CoerceValue = true;
         Clearable = true;
+        Dense = true;
+        ResetValueOnEmptyText = true;
+        SearchFunc = SearchText;
+        ToStringFunc = GetText;
+        Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }
 
@@ -39,7 +40,7 @@ public class AutocompleteSchedule : MudAutocomplete<Guid>
         }
     }
 
-    private async Task<IEnumerable<Guid>> SearchSchedules(string value)
+    private async Task<IEnumerable<Guid>> SearchText(string value)
     {
         var filter = new ScheduleSearchRequest
         {
@@ -57,6 +58,6 @@ public class AutocompleteSchedule : MudAutocomplete<Guid>
         return _schedules.Select(x => x.Id);
     }
 
-    private string GetScheduleName(Guid id) =>
+    private string GetText(Guid id) =>
         _schedules.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

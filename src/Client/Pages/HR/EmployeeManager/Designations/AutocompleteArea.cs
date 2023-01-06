@@ -17,12 +17,13 @@ public class AutocompleteArea : MudAutocomplete<string>
     public override Task SetParametersAsync(ParameterView parameters)
     {
         Label = "Area";
-        Variant = Variant.Filled;
+        CoerceText = true;
+        CoerceValue = true;
+        Clearable = true;
         Dense = true;
-        Margin = Margin.Dense;
         ResetValueOnEmptyText = true;
         SearchFunc = SearchText;
-        Clearable = true;
+        Variant = Variant.Filled;
         return base.SetParametersAsync(parameters);
     }
 

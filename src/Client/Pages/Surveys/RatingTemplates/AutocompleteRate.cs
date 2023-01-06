@@ -16,15 +16,15 @@ public class AutocompleteRate : MudAutocomplete<Guid>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
+        Label = "Rate";
+        CoerceText = true;
+        CoerceValue = true;
         Clearable = true;
         Dense = true;
-        Label = "Rate";
-        Margin = Margin.Dense;
         ResetValueOnEmptyText = true;
-        SearchFunc = SearchName;
-        ToStringFunc = GetName;
-        Variant = Variant.Filled;
-        return base.SetParametersAsync(parameters);
+        SearchFunc = SearchText;
+        ToStringFunc = GetText;
+        Variant = Variant.Filled; return base.SetParametersAsync(parameters);
     }
 
     // when the value parameter is set, we have to load that one Rate to be able to show the name
@@ -39,7 +39,7 @@ public class AutocompleteRate : MudAutocomplete<Guid>
         }
     }
 
-    private async Task<IEnumerable<Guid>> SearchName(string value)
+    private async Task<IEnumerable<Guid>> SearchText(string value)
     {
         var filter = new RateSearchRequest
         {
@@ -57,6 +57,6 @@ public class AutocompleteRate : MudAutocomplete<Guid>
         return _rates.Select(x => x.Id);
     }
 
-    private string GetName(Guid id) =>
+    private string GetText(Guid id) =>
         _rates.Find(b => b.Id == id)?.Name ?? string.Empty;
 }
