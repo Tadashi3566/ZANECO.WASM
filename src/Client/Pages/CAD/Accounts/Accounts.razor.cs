@@ -25,7 +25,7 @@ public partial class Accounts
 
     private AccountMigrateLedgerRequest _accountMigrateLedgerRequest = new();
 
-    private ClientPreference _preference = new();
+    private BackgroundPreference _preference = new();
 
     private string? _searchString;
 
@@ -33,7 +33,8 @@ public partial class Accounts
 
     private int[] _pageSizes = new int[] { 10, 15, 50, 100, 500, 1000, 5000, 10000, 50000, 100000 };
 
-    protected override void OnInitialized() =>
+    protected override void OnInitialized()
+    {
         Context = new(
             entityName: "Account",
             entityNamePlural: "Accounts",
@@ -76,6 +77,7 @@ public partial class Accounts
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+    }
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
     // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
@@ -130,8 +132,16 @@ public partial class Accounts
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
-            _accountMigrateAccountRequest.IsBackgroundJob = _preference.BackgroundPreference.IsBackgroundJob;
-            _accountMigrateAccountRequest.IsScheduled = _preference.BackgroundPreference.IsScheduled;
+            if (await ClientPreferences.GetPreference() is ClientPreference clientPreference)
+            {
+                _preference = clientPreference.BackgroundPreference;
+
+                _accountMigrateAccountRequest.IsBackgroundJob = _preference.IsBackgroundJob;
+                _accountMigrateAccountRequest.IsScheduled = _preference.IsScheduled;
+
+                _accountMigrateLedgerRequest.IsBackgroundJob = _preference.IsBackgroundJob;
+                _accountMigrateLedgerRequest.IsScheduled = _preference.IsScheduled;
+            }
 
             if (application.Equals("ACCOUNT"))
             {
