@@ -6,10 +6,10 @@
 <EntityTable @ref="_table" TEntity="PowerRateDto" TId="Guid" TRequest="PowerRateUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="6" sm="3">
-            <MudTextField Label="Code" For="@(() => context.Code)" @bind-Value="context.Code" />
+            <MudTextField Label="Code" For="@(() => context.Code)" @bind-Value="context.Code" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12">

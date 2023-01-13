@@ -7,17 +7,17 @@
 
     <EditFormContent>
         <MudItem xs="4">
-            <MudTextField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" />
+            <MudTextField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="8">
-            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="6">
-            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2"/>
+            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6">
-            <MudNumericField Label="Step Increment" For="@(() => context.Step)" @bind-Value="context.Step" Format="N2"/>
+            <MudNumericField Label="Step Increment" For="@(() => context.Step)" @bind-Value="context.Step" Format="N2" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12">

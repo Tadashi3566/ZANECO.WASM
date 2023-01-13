@@ -16,19 +16,19 @@
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
         </MudItem>
         <MudItem xs="12" sm="6" md="6">
-            <MudDatePicker Label="Attendance Date" For="@(() => context.AttendanceDate)" @bind-Date=" context.AttendanceDate" DateFormat="MMMM dd, yyyy"  />
+            <MudDatePicker Label="Attendance Date" For="@(() => context.AttendanceDate)" @bind-Date=" context.AttendanceDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Actual Time-In 1" For="@(() => context.ActualTimeIn1)" @bind-Value=" context.ActualTimeIn1" />
+            <MudTextField Label="Actual Time-In 1" For="@(() => context.ActualTimeIn1)" @bind-Value=" context.ActualTimeIn1" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Actual Time-Out 1" For="@(() => context.ActualTimeOut1)" @bind-Value="context.ActualTimeOut1" />
+            <MudTextField Label="Actual Time-Out 1" For="@(() => context.ActualTimeOut1)" @bind-Value="context.ActualTimeOut1" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Actual Time-In 2" For="@(() => context.ActualTimeIn2)" @bind-Value="context.ActualTimeIn2" />
+            <MudTextField Label="Actual Time-In 2" For="@(() => context.ActualTimeIn2)" @bind-Value="context.ActualTimeIn2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Actual Time-Out 2" For="@(() => context.ActualTimeOut2)" @bind-Value="context.ActualTimeOut2" />
+            <MudTextField Label="Actual Time-Out 2" For="@(() => context.ActualTimeOut2)" @bind-Value="context.ActualTimeOut2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
             <MudNumericField Label="Late (minutes)" For="@(() => context.LateMinutes)" @bind-Value="context.LateMinutes" ReadOnly=true Variant="Variant.Outlined" />
@@ -40,7 +40,7 @@
             <MudNumericField Label="Total Hours" For="@(() => context.TotalHours)" @bind-Value="context.TotalHours" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudNumericField Label="Paid Hours" For="@(() => context.PaidHours)" @bind-Value="context.PaidHours" />
+            <MudNumericField Label="Paid Hours" For="@(() => context.PaidHours)" @bind-Value="context.PaidHours" Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
             <MudSelect Label="Status" For="@(() => context.Status)" @bind-Value="context.Status" >

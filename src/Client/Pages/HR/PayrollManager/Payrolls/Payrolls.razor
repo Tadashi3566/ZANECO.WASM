@@ -16,7 +16,7 @@
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="6">
-            <MudSelect Label="Payroll Type" For="@(() => context.PayrollType)" @bind-Value="context.PayrollType" >
+            <MudSelect Label="Payroll Type" For="@(() => context.PayrollType)" @bind-Value="context.PayrollType" Variant="Variant.Filled">
                 <MudSelectItem Value="@("MONTHLY")"/>
                 <MudSelectItem Value="@("MID")"/>
                 <MudSelectItem Value="@("END")" />
@@ -24,42 +24,42 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="6">
-            <MudSelect Label="Employment Type" For="@(() => context.EmploymentType)" @bind-Value="context.EmploymentType">
+            <MudSelect Label="Employment Type" For="@(() => context.EmploymentType)" @bind-Value="context.EmploymentType" Variant="Variant.Filled">
                 <MudSelectItem Value="@("JOB ORDER")"/>
                 <MudSelectItem Value="@("REGULAR")"/>
             </MudSelect>
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="6" sm="4">
-            <MudDatePicker Label="Start Date" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Editable=true />
+            <MudDatePicker Label="Start Date" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Editable=true Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4">
-            <MudDatePicker Label="End Date" For="@(() => context.DateEnd)" @bind-Date="context.DateEnd" DateFormat="MMMM dd, yyyy" Editable=true />
+            <MudDatePicker Label="End Date" For="@(() => context.DateEnd)" @bind-Date="context.DateEnd" DateFormat="MMMM dd, yyyy" Editable=true Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4">
-            <MudNumericField Label="Working Days" For="@(() => context.WorkingDays)" @bind-Value="context.WorkingDays" />
+            <MudNumericField Label="Working Days" For="@(() => context.WorkingDays)" @bind-Value="context.WorkingDays" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4">
-            <MudDatePicker Label="Payroll Date" For="@(() => context.PayrollDate)" @bind-Date="context.PayrollDate" DateFormat="MMMM dd, yyyy" Editable=true />
+            <MudDatePicker Label="Payroll Date" For="@(() => context.PayrollDate)" @bind-Date="context.PayrollDate" DateFormat="MMMM dd, yyyy" Editable=true Variant="Variant.Filled"/>
         </MudItem>
 
         <MudItem xs="6" sm="4">
-            <MudNumericField Label="Total Salary" For="@(() => context.TotalSalary)" @bind-Value="context.TotalSalary" Format="N2" Disabled=true />
+            <MudNumericField Label="Total Salary" For="@(() => context.TotalSalary)" @bind-Value="context.TotalSalary" Format="N2" Disabled=true Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4">
-            <MudNumericField Label="Additional" For="@(() => context.TotalAdditional)" @bind-Value="context.TotalAdditional" Format="N2" Disabled=true />
+            <MudNumericField Label="Additional" For="@(() => context.TotalAdditional)" @bind-Value="context.TotalAdditional" Format="N2" Disabled=true Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4">
-            <MudNumericField Label="Gross" For="@(() => context.TotalGross)" @bind-Value="context.TotalGross" Format="N2" Disabled=true />
+            <MudNumericField Label="Gross" For="@(() => context.TotalGross)" @bind-Value="context.TotalGross" Format="N2" Disabled=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="4">
-            <MudNumericField Label="Deduction" For="@(() => context.TotalDeduction)" @bind-Value="context.TotalDeduction" Format="N2" Disabled=true />
+            <MudNumericField Label="Deduction" For="@(() => context.TotalDeduction)" @bind-Value="context.TotalDeduction" Format="N2" Disabled=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="4">
-            <MudNumericField Label="Net" For="@(() => context.TotalNet)" @bind-Value="context.TotalNet" Format="N2" Disabled=true />
+            <MudNumericField Label="Net" For="@(() => context.TotalNet)" @bind-Value="context.TotalNet" Format="N2" Disabled=true Variant="Variant.Outlined" />
         </MudItem>
 
         <MudItem xs="12">

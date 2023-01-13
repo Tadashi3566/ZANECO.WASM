@@ -117,7 +117,6 @@ public partial class EntityTable<TEntity, TId, TRequest>
     }
 
     // Server Side paging/filtering
-
     private async Task OnSearchStringChanged(string? text = null)
     {
         await SearchStringChanged.InvokeAsync(SearchString);

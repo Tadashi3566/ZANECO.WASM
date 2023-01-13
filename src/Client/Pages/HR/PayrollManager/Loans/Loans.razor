@@ -20,22 +20,22 @@
             <AutocompleteAdjustments For="@(() => context.AdjustmentId)" @bind-Value="context.AdjustmentId" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" />
+            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudSelect Label="Payment Schedule" For="@(() => context.PaymentSchedule)" @bind-Value="context.PaymentSchedule">
+            <MudSelect Label="Payment Schedule" For="@(() => context.PaymentSchedule)" @bind-Value="context.PaymentSchedule" Variant="Variant.Filled">
                 <MudSelectItem Value="@("PAYROLL")" />
                 <MudSelectItem Value="@("MONTHLY")" />
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudDatePicker Label="Date Released" For="@(() => context.DateReleased)" @bind-Date="context.DateReleased" DateFormat="MMMM dd, yyyy" />
+            <MudDatePicker Label="Date Released" For="@(() => context.DateReleased)" @bind-Date="context.DateReleased" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudDatePicker Label="Start" For="@(() => context.DateStart)" @bind-Date="context.DateStart" PickerClosed="(() => SetDateEnd(context.PaymentSchedule, context.Amount, context.DateStart, context.Months))" DateFormat="MMMM dd, yyyy" />
+            <MudDatePicker Label="Start" For="@(() => context.DateStart)" @bind-Date="context.DateStart" PickerClosed="(() => SetDateEnd(context.PaymentSchedule, context.Amount, context.DateStart, context.Months))" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudNumericField Label="Months" For="@(() => context.Months)" @bind-Value="context.Months" OnBlur="(() => SetDateEnd(context.PaymentSchedule, context.Amount, context.DateStart, context.Months))" />
+            <MudNumericField Label="Months" For="@(() => context.Months)" @bind-Value="context.Months" OnBlur="(() => SetDateEnd(context.PaymentSchedule, context.Amount, context.DateStart, context.Months))" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
             <MudDatePicker Label="End" For="@(() => context.DateEnd)" @bind-Date="@_dtend" DateFormat="MMMM dd, yyyy" ReadOnly=true Variant="Variant.Outlined" />

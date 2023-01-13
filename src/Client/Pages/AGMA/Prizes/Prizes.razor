@@ -10,7 +10,7 @@
             <AutocompleteRaffle Label="Raffle" For="@(() => context.RaffleId)" @bind-Value="context.RaffleId" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSelect Label="Type" For="@(() => context.PrizeType)" @bind-Value="context.PrizeType">
+            <MudSelect Label="Type" For="@(() => context.PrizeType)" @bind-Value="context.PrizeType" Variant="Variant.Filled" >
                 <MudSelectItem Value="@("MAJOR")" />
                 <MudSelectItem Value="@("MINOR")" />
                 <MudSelectItem Value="@("CONSOLATION")" />
@@ -18,10 +18,10 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Winners" For="@(() => context.Winners)" @bind-Value="context.Winners" Format="N0" />
+            <MudNumericField Label="Winners" For="@(() => context.Winners)" @bind-Value="context.Winners" Format="N0" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />

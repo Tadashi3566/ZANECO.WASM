@@ -22,10 +22,10 @@
             <AutocompleteCalendarType For="@(() => context.CalendarType)" @bind-Value="context.CalendarType" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudSelect Label="Status" For="@(() => context.Status)" @bind-Value="context.Status" >
+            <MudSelect Label="Status" For="@(() => context.Status)" @bind-Value="context.Status" Variant="Variant.Outlined">
                 <MudSelectItem Value="@("FOR APPROVAL")"/>
                 <MudSelectItem Value="@("APPROVED")"/>
                 <MudSelectItem Value="@("DISAPPROVED")"/>

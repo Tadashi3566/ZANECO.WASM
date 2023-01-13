@@ -9,7 +9,7 @@
             <MudRating Size="Size.Large" @bind-SelectedValue="context.RateNumber" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Comment" For="@(() => context.Comment)" @bind-Value="context.Comment" Lines="5" />
+            <MudTextField Label="Comment" For="@(() => context.Comment)" @bind-Value="context.Comment" Lines="5" Variant="Variant.Filled" />
         </MudItem>
 
         @if (context.Id != Guid.Empty)

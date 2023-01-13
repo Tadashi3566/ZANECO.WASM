@@ -47,31 +47,31 @@
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField Label="Member Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+            <MudTextField Label="Member Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" />
+            <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSelect Label="Gender" For="@(() => context.Gender)" @bind-Value="context.Gender" >
+            <MudSelect Label="Gender" For="@(() => context.Gender)" @bind-Value="context.Gender" Variant="Variant.Filled" >
                 <MudSelectItem Value="@("MALE")"/>
                 <MudSelectItem Value="@("FEMALE")"/>
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <AutocompleteCivilStatusMember For="@(() => context.CivilStatus)" @bind-Value="context.CivilStatus" />
+            <AutocompleteCivilStatusMember For="@(() => context.CivilStatus)" @bind-Value="context.CivilStatus" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Phone Number" For="@(() => context.Phone)" @bind-Value="context.Phone" />
+            <MudTextField Label="Phone Number" For="@(() => context.Phone)" @bind-Value="context.Phone" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Birth Date" For="@(() => context.BirthDate)" @bind-Date="context.BirthDate" DateFormat="MMMM dd, yyyy" />
+            <MudDatePicker Label="Birth Date" For="@(() => context.BirthDate)" @bind-Date="context.BirthDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Application Date" For="@(() => context.ApplicationDate)" @bind-Date="context.ApplicationDate" DateFormat="MMMM dd, yyyy" />
+            <MudDatePicker Label="Application Date" For="@(() => context.ApplicationDate)" @bind-Date="context.ApplicationDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Membership Date" For="@(() => context.MembershipDate)" @bind-Date="context.MembershipDate" DateFormat="MMMM dd, yyyy" />
+            <MudDatePicker Label="Membership Date" For="@(() => context.MembershipDate)" @bind-Date="context.MembershipDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />

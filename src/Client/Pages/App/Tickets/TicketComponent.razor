@@ -6,10 +6,10 @@
             <AutocompleteGroup For="@(() => _ticket.GroupId)" @bind-Value="_ticket.GroupId" />
         </MudItem>*@
         <MudItem xs="12">
-            <MudTextField Label="Name" For="@(() => _ticket.Name)" @bind-Value="_ticket.Name" Variant="Variant.Outlined"/>
+            <MudTextField Label="Name" For="@(() => _ticket.Name)" @bind-Value="_ticket.Name" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => _ticket.Description)" @bind-Value="_ticket.Description" Variant="Variant.Outlined"/>
+            <MudTextField Label="Description" For="@(() => _ticket.Description)" @bind-Value="_ticket.Description" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Notes" For="@(() => _ticket.Notes)" @bind-Value="_ticket.Notes" />
@@ -41,7 +41,6 @@
             <AutocompleteEmployee Label="Requested By" For="@(() => _ticket.RequestedBy)" @bind-Value="_ticket.RequestedBy" />
         </MudItem>
         <MudItem xs="6" md="2">
-            @*<MudTextField Label="Through" For="@(() => _context.RequestThrough)" @bind-Value="_context.RequestThrough" />\*@
             <MudSelect T="string" Label="Through" For="@(() => _ticket.RequestThrough)" @bind-Value="_ticket.RequestThrough">
                 <MudSelectItem Value="@("CHAT APP")" />
                 <MudSelectItem Value="@("PERSONAL")" />

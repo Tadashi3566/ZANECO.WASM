@@ -17,13 +17,13 @@
             <AutocompleteSchedule For="@(() => context.ScheduleId)" @bind-Value="SearchScheduleId" Disabled="!SearchScheduleId.Equals(Guid.Empty)" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSelect Label="Schedule Type" For="@(() => context.ScheduleType)" @bind-Value="context.ScheduleType" >
+            <MudSelect Label="Schedule Type" For="@(() => context.ScheduleType)" @bind-Value="context.ScheduleType" Variant="Variant.Filled">
                 <MudSelectItem Value="@("DAY-OFF")"/>
                 <MudSelectItem Value="@("ON-DUTY")"/>
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSelect Label="Day" For="@(() => context.Day)" @bind-Value="context.Day" >
+            <MudSelect Label="Day" For="@(() => context.Day)" @bind-Value="context.Day" Variant="Variant.Filled">
                 <MudSelectItem Value="@("SUNDAY")"/>
                 <MudSelectItem Value="@("MONDAY")"/>
                 <MudSelectItem Value="@("TUESDAY")"/>
@@ -35,22 +35,22 @@
         </MudItem>
 
         <MudItem xs="6" sm="3">
-            <MudTextField Label="Time-In 1" For="@(() => context.TimeIn1)" @bind-Value="context.TimeIn1" />
+            <MudTextField Label="Time-In 1" For="@(() => context.TimeIn1)" @bind-Value="context.TimeIn1" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="3">
-            <MudTextField Label="Time-Out 1" For="@(() => context.TimeOut1)" @bind-Value="context.TimeOut1" />
+            <MudTextField Label="Time-Out 1" For="@(() => context.TimeOut1)" @bind-Value="context.TimeOut1" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="3">
-            <MudTextField Label="Time-In 2" For="@(() => context.TimeIn2)" @bind-Value="context.TimeIn2" />
+            <MudTextField Label="Time-In 2" For="@(() => context.TimeIn2)" @bind-Value="context.TimeIn2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="3">
-            <MudTextField Label="Time-Out 2" For="@(() => context.TimeOut2)" @bind-Value="context.TimeOut2" />
+            <MudTextField Label="Time-Out 2" For="@(() => context.TimeOut2)" @bind-Value="context.TimeOut2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="3">
-            <MudTextField Label="Time-In 3" For="@(() => context.TimeIn3)" @bind-Value="context.TimeIn3" />
+            <MudTextField Label="Time-In 3" For="@(() => context.TimeIn3)" @bind-Value="context.TimeIn3" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="3">
-            <MudTextField Label="Time-Out 3" For="@(() => context.TimeOut3)" @bind-Value="context.TimeOut3" />
+            <MudTextField Label="Time-Out 3" For="@(() => context.TimeOut3)" @bind-Value="context.TimeOut3" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12">
