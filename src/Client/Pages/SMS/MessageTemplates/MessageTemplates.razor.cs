@@ -16,15 +16,13 @@ public partial class MessageTemplates
     [Inject]
     protected IMessageTemplatesClient Client { get; set; } = default!;
     [Inject]
-    protected IMessageTemplatesClient MessageTemplate { get; set; } = default!;
-    [Inject]
     protected IMessageOutsClient MessageOut { get; set; } = default!;
     [Inject]
     private IClipboardService? ClipboardService { get; set; }
 
-    protected EntityServerTableContext<MessageTemplateDetail, int, MessageTemplateUpdateRequest> Context { get; set; } = default!;
+    protected EntityServerTableContext<MessageTemplateDetail, Guid, MessageTemplateUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<MessageTemplateDetail, int, MessageTemplateUpdateRequest> _table = default!;
+    private EntityTable<MessageTemplateDetail, Guid, MessageTemplateUpdateRequest> _table = default!;
 
     private MessageOutCreateRequest _messageOut = new();
 
@@ -38,8 +36,9 @@ public partial class MessageTemplates
             fields: new()
             {
                 new(data => data.TemplateType, "Type", "TemplateType"),
-                new(data => data.IsAPI, "API", "IsAPI", typeof(bool)),
-                new(data => data.IsFastMode, "Fast-Mode", "IsFastMode", typeof(bool)),
+                new(data => data.IsAPI, "API", "IsAPI", typeof(bool), Template: TemplateApiFastMode),
+                //new(data => data.IsFastMode, "Fast-Mode", "IsFastMode", typeof(bool)),
+                new(data => data.ScheduleDate.ToString("MMM dd, yyyy"), "Schedule", "ScheduleDate"),
                 new(data => data.Subject, "Subject", "Subject"),
                 new(data => data.Message, "Message", "Message"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
@@ -88,7 +87,7 @@ public partial class MessageTemplates
                 Notes = dto.Notes!,
             };
 
-            await ApiHelper.ExecuteCallGuardedAsync(() => MessageTemplate.CreateAsync(newMessageTemplate), Snackbar, successMessage: "Message Template successfully duplicated.");
+            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(newMessageTemplate), Snackbar, successMessage: "Message Template successfully duplicated.");
 
             await _table.ReloadDataAsync();
         }

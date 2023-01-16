@@ -4843,53 +4843,53 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Get MessageTemplate details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<MessageTemplateDto> GetAsync(int id);
+        System.Threading.Tasks.Task<MessageTemplateDto> GetAsync(System.Guid id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Get MessageTemplate details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<MessageTemplateDto> GetAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<MessageTemplateDto> GetAsync(System.Guid id, System.Threading.CancellationToken cancellationToken);
 
         /// <summary>
         /// Update a MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> UpdateAsync(int id, MessageTemplateUpdateRequest request);
+        System.Threading.Tasks.Task<System.Guid> UpdateAsync(System.Guid id, MessageTemplateUpdateRequest request);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Update a MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> UpdateAsync(int id, MessageTemplateUpdateRequest request, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Guid> UpdateAsync(System.Guid id, MessageTemplateUpdateRequest request, System.Threading.CancellationToken cancellationToken);
 
         /// <summary>
         /// Delete a MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> DeleteAsync(int id);
+        System.Threading.Tasks.Task<System.Guid> DeleteAsync(System.Guid id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Delete a MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> DeleteAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Guid> DeleteAsync(System.Guid id, System.Threading.CancellationToken cancellationToken);
 
         /// <summary>
         /// Create a new MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateAsync(MessageTemplateCreateRequest request);
+        System.Threading.Tasks.Task<System.Guid> CreateAsync(MessageTemplateCreateRequest request);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Create a new MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> CreateAsync(MessageTemplateCreateRequest request, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Guid> CreateAsync(MessageTemplateCreateRequest request, System.Threading.CancellationToken cancellationToken);
 
     }
 
@@ -5023,7 +5023,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Get MessageTemplate details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<MessageTemplateDto> GetAsync(int id)
+        public virtual System.Threading.Tasks.Task<MessageTemplateDto> GetAsync(System.Guid id)
         {
             return GetAsync(id, System.Threading.CancellationToken.None);
         }
@@ -5033,7 +5033,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Get MessageTemplate details.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<MessageTemplateDto> GetAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<MessageTemplateDto> GetAsync(System.Guid id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -5119,7 +5119,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Update a MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> UpdateAsync(int id, MessageTemplateUpdateRequest request)
+        public virtual System.Threading.Tasks.Task<System.Guid> UpdateAsync(System.Guid id, MessageTemplateUpdateRequest request)
         {
             return UpdateAsync(id, request, System.Threading.CancellationToken.None);
         }
@@ -5129,7 +5129,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Update a MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> UpdateAsync(int id, MessageTemplateUpdateRequest request, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Guid> UpdateAsync(System.Guid id, MessageTemplateUpdateRequest request, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -5177,7 +5177,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -5222,7 +5222,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Delete a MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> DeleteAsync(int id)
+        public virtual System.Threading.Tasks.Task<System.Guid> DeleteAsync(System.Guid id)
         {
             return DeleteAsync(id, System.Threading.CancellationToken.None);
         }
@@ -5232,7 +5232,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Delete a MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> DeleteAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Guid> DeleteAsync(System.Guid id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -5273,7 +5273,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -5318,7 +5318,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Create a new MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> CreateAsync(MessageTemplateCreateRequest request)
+        public virtual System.Threading.Tasks.Task<System.Guid> CreateAsync(MessageTemplateCreateRequest request)
         {
             return CreateAsync(request, System.Threading.CancellationToken.None);
         }
@@ -5328,7 +5328,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Create a new MessageTemplate.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> CreateAsync(MessageTemplateCreateRequest request, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Guid> CreateAsync(MessageTemplateCreateRequest request, System.Threading.CancellationToken cancellationToken)
         {
             if (request == null)
                 throw new System.ArgumentNullException("request");
@@ -5372,7 +5372,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -36678,7 +36678,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     public partial class MessageTemplateDto
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Id { get; set; } = default!;
+        public System.Guid Id { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("templateType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TemplateType { get; set; } = default!;
@@ -36692,14 +36692,17 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("isFastMode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsFastMode { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recepients", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Recepients { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("subject", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Subject { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Message { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("recepients", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Recepients { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("scheduleDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime ScheduleDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Description { get; set; } = default!;
@@ -36720,7 +36723,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     {
         [Newtonsoft.Json.JsonProperty("templateType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.StringLength(32, MinimumLength = 1)]
+        [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 1)]
         public string TemplateType { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("messageType", Required = Newtonsoft.Json.Required.Always)]
@@ -36734,10 +36737,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("isFastMode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsFastMode { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recepients", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public string Recepients { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("subject", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(1024, MinimumLength = 1)]
@@ -36747,6 +36746,13 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(1500, MinimumLength = 1)]
         public string Message { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("recepients", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Recepients { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("scheduleDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime ScheduleDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
@@ -36760,7 +36766,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     public partial class MessageTemplateUpdateRequest
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Id { get; set; } = default!;
+        public System.Guid Id { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("templateType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -36778,10 +36784,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("isFastMode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsFastMode { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recepients", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public string Recepients { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("subject", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(1024, MinimumLength = 1)]
@@ -36791,6 +36793,13 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(1500, MinimumLength = 1)]
         public string Message { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("recepients", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Recepients { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("scheduleDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? ScheduleDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
@@ -41498,7 +41507,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.Guid AccountId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("idCode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int IdCode { get; set; } = default!;
+        public double IdCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("accountNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AccountNumber { get; set; } = default!;
@@ -41592,16 +41601,16 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.Guid AccountId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("idCode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int IdCode { get; set; } = default!;
+        public double IdCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("accountNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AccountNumber { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("billNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BillNumber { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("billMonth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? BillMonth { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("billMonth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BillMonth { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("billNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? BillNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("lastReading", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double LastReading { get; set; } = default!;
@@ -41630,24 +41639,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("uccsr", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Uccsr { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("vatDist", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatDist { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatGen", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatGen { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatTrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatTrans { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatslGen", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatslGen { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatslTrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatslTrans { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal Vat { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("debit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Debit { get; set; } = default!;
 
@@ -41657,8 +41648,41 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Balance { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("collector", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Collector { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("vat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal Vat { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatGeneration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatGeneration { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatTransmission", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatTransmission { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatDistribution", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatDistribution { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatslGeneration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatslGeneration { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatslTransmission", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatslTransmission { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatDiscount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatGenerationDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatGenerationDiscount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatTransmissionDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatTransmissionDiscount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatDistributionDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatDistributionDiscount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatSystemLossDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatSystemLossDiscount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("collector", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Collector { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("postingDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? PostingDate { get; set; } = default!;
@@ -41681,16 +41705,16 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.Guid AccountId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("idCode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int IdCode { get; set; } = default!;
+        public double IdCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("accountNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AccountNumber { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("billNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BillNumber { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("billMonth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? BillMonth { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("billMonth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BillMonth { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("billNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? BillNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("lastReading", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double LastReading { get; set; } = default!;
@@ -41719,24 +41743,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("uccsr", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Uccsr { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("vatDist", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatDist { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatGen", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatGen { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatTrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatTrans { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatslGen", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatslGen { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vatslTrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal VatslTrans { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("vat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal Vat { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("debit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Debit { get; set; } = default!;
 
@@ -41746,8 +41752,41 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Balance { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("collector", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Collector { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("vat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal Vat { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatGeneration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatGeneration { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatTransmission", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatTransmission { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatDistribution", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatDistribution { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatslGeneration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatslGeneration { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatslTransmission", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatslTransmission { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatDiscount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatGenerationDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatGenerationDiscount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatTransmissionDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatTransmissionDiscount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatDistributionDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatDistributionDiscount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("vatSystemLossDiscount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal VatSystemLossDiscount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("collector", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Collector { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("postingDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? PostingDate { get; set; } = default!;

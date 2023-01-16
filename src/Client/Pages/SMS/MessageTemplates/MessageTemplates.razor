@@ -4,10 +4,9 @@
  
 <FshTitle Title="Message Templates" Description="Manage Message Templates" />
 
-<EntityTable @ref="_table" TEntity="MessageTemplateDetail" TId="int" TRequest="MessageTemplateUpdateRequest" Context="@Context">
+<EntityTable @ref="_table" TEntity="MessageTemplateDetail" TId="Guid" TRequest="MessageTemplateUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        @*<MudMenuItem Icon="@Icons.Filled.Contacts" OnClick="@(() => ViewRecepients(context.Id))">@((context.ShowRecepients == true) ? "Hide" : "Show") Recepients</MudMenuItem>*@
         <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => MessageTemplateCopy(context.Message))" OnTouch="@(() => MessageTemplateCopy(context.Message))">Copy Message</MudMenuItem>
         <MudMenuItem Icon="@Icons.Filled.ContentCopy" OnClick="@(() => MessageTemplateDuplicate(context))" OnTouch="@(() => MessageTemplateDuplicate(context))">Duplicate</MudMenuItem>
         <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => SendSMS(@context))" OnTouch="@(() => SendSMS(@context))">Send</MudMenuItem>
@@ -25,6 +24,9 @@
                 <MudSelectItem Value="@("sms.automatic")" />
                 <MudSelectItem Value="@("sms.automatic.flash")" />
             </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
+            <MudDatePicker Label="Schedule" For="@(() => context.ScheduleDate)" @bind-Date="context.ScheduleDate" DateFormat="MMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
             <MudSwitch Class="mt-3" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary"/>
