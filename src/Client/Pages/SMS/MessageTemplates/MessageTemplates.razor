@@ -26,7 +26,7 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
-            <MudDatePicker Label="Schedule" For="@(() => context.ScheduleDate)" @bind-Date="context.ScheduleDate" DateFormat="MMM dd, yyyy" Variant="Variant.Filled" />
+            <MudDatePicker Label="Schedule" For="@(() => context.ScheduleDate)" @bind-Date="context.ScheduleDate" DateFormat="MMM dd, yyyy" MinDate="@DateTime.Today.AddYears(-1)" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
             <MudSwitch Class="mt-3" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary"/>

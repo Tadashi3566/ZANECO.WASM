@@ -80,6 +80,7 @@ public partial class MessageTemplates
                 MessageType = dto.MessageType,
                 IsAPI = dto.IsAPI,
                 IsFastMode = dto.IsFastMode,
+                ScheduleDate = dto.ScheduleDate,
                 Recepients = dto.Recepients,
                 Subject = dto.Subject,
                 Message = dto.Message,
