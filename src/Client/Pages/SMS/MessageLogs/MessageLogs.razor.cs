@@ -21,7 +21,7 @@ public partial class MessageLogs
             entityResource: FSHResource.SMS,
             fields: new()
             {
-                //new(data => data.Id, "Id", "Id"),
+                new(data => data.Id, "Id", "Id"),
                 new(data => data.SendTime, "Send Date/Time", "SendTime", Template: TemplateReceivedTime),
                 new(data => data.MessageFrom, "Sender/Receiver", "MessageFrom", Template: TemplateSenderReceiver),
                 new(data => data.MessageText, "Message", "MessageText"),

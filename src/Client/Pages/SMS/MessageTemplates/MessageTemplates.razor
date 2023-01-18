@@ -85,8 +85,8 @@
     private RenderFragment<MessageTemplateDetail> TemplateApiFastMode => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudSwitch @bind-Checked="@context.IsAPI" Label="Is API" Color="Color.Success"></MudSwitch>
-            <MudSwitch @bind-Checked="@context.IsFastMode" Label="Fast Mode" Color="Color.Success"></MudSwitch>
+            <MudSwitch @bind-Checked="@context.IsAPI" Label="Is API" Color="Color.Success" ReadOnly=true></MudSwitch>
+            <MudSwitch @bind-Checked="@context.IsFastMode" Label="Fast Mode" Color="Color.Success" ReadOnly=true></MudSwitch>
         </MudItem>
     };
 
