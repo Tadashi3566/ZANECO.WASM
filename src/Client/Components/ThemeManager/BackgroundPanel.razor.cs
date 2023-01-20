@@ -12,13 +12,7 @@ public partial class BackgroundPanel
     public bool Scheduled { get; set; }
     [Parameter]
     public int Minutes { get; set; } = 1;
-    [Parameter]
-    public EventCallback<bool> OnBackgroundJobSwitchToggled { get; set; }
-    [Parameter]
-    public EventCallback<bool> OnScheduledSwitchToggled { get; set; }
-    [Parameter]
-    public EventCallback<int> OnMinuteValueChanged { get; set; }
-
+    [Inject]
     protected INotificationPublisher Notifications { get; set; } = default!;
 
     private BackgroundPreference _backgroundPreference = new();
@@ -34,6 +28,13 @@ public partial class BackgroundPanel
         Scheduled = _backgroundPreference.IsScheduled;
         Minutes = _backgroundPreference.InMinutes;
     }
+
+    [Parameter]
+    public EventCallback<bool> OnBackgroundJobSwitchToggled { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnScheduledSwitchToggled { get; set; }
+    [Parameter]
+    public EventCallback<int> OnMinuteValueChanged { get; set; }
 
     private async Task ToggleBackgroundJobSwitch()
     {
