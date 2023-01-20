@@ -43,8 +43,12 @@
                         @if (_isBusy)
                         {
                             <MudProgressCircular Color="Color.Tertiary" Indeterminate=true Size="Size.Small" />
+                            <MudText Class="ml-2">@L["Saving"]</MudText>
                         }
-                        <MudText Class="ml-2">@L["Save"]</MudText>
+                        else
+                        {
+                            <MudText Class="ml-2">@L["Save"]</MudText>
+                        }
                     </MudItem>
                 </MudButton>
             }
@@ -55,8 +59,12 @@
                         @if (_isBusy)
                         {
                             <MudProgressCircular Color="Color.Tertiary" Indeterminate=true Size="Size.Small" />
+                            <MudText Class="ml-2">@L["Updating"]</MudText>
                         }
-                        <MudText Class="ml-2">@L["Update"]</MudText>
+                        else
+                        {
+                            <MudText Class="ml-2">@L["Update"]</MudText>
+                        }
                     </MudItem>
                 </MudButton>
             }
