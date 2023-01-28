@@ -31,9 +31,6 @@
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
             <MudSwitch Class="mt-3" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary"/>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
-            <MudSwitch Class="mt-3" Label="Fast Mode" For="@(() => context.IsFastMode)" @bind-Checked="context.IsFastMode" Color="Color.Tertiary" />
-        </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
         </MudItem>
@@ -56,7 +53,7 @@
         {
             <MudTr>
                 <td colspan="6">
-                    <MudCard Elevation="@_preference.Elevation" style="margin: 10px !important;">
+                    <MudCard Elevation="@_clientPreference.Elevation" style="margin: 10px !important;">
                         @*<MudCardHeader>
                             <CardHeaderContent>
                                 <MudAlert Severity="Severity.Info" Typo="Typo.body1">
@@ -85,8 +82,8 @@
     private RenderFragment<MessageTemplateDetail> TemplateApiFastMode => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudSwitch @bind-Checked="@context.IsAPI" Label="Is API" Color="Color.Success" ReadOnly=true></MudSwitch>
-            <MudSwitch @bind-Checked="@context.IsFastMode" Label="Fast Mode" Color="Color.Success" ReadOnly=true></MudSwitch>
+            <MudSwitch @bind-Checked="@context.IsAPI" Label="API" Color="Color.Success" ReadOnly=true></MudSwitch>
+            <MudSwitch @bind-Checked="@context.IsSent" Label="Sent" Color="Color.Success" ReadOnly=true></MudSwitch>
         </MudItem>
     };
 

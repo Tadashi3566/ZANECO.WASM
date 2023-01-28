@@ -6,9 +6,6 @@
             <MudSwitch Class="mt-3" Label="Use m360 API (Default:SIM)" For="@(() => _model.IsAPI)" @bind-Checked="_model.IsAPI" Color="Color.Tertiary" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSwitch Class="mt-3" Label="Fast Mode (Default:Normal)" For="@(() => _model.IsFastMode)" @bind-Checked="_model.IsFastMode" Color="Color.Tertiary" Disabled="@SetFastMode()" />
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect T="string" Label="Message Type" @bind-Value="_model.MessageType" For="@(() => _model.MessageType)" Variant="Variant.Filled">
                 <MudSelectItem Value="@("sms.automatic")" />
                 <MudSelectItem Value="@("sms.automatic.flash")" />

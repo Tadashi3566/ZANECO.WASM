@@ -81,20 +81,17 @@ public partial class Contacts
 
     private async Task Send(ContactDto dto)
     {
-        string[] phoneNumbers; //= _selectedItems.Select(x => x.PhoneNumber).ToArray()!;
-        string recepients; //= string.Join(",", phoneNumbers);
+        string[] phoneNumbers;
+        string recepients;
 
         if (_selectedItems.Count > 0)
         {
             phoneNumbers = _selectedItems.Select(x => x.PhoneNumber).ToArray()!;
             recepients = string.Join(",", phoneNumbers);
-
-            //Navigation.NavigateTo($"/sms/send/{recepients}");
         }
         else
         {
             recepients = dto.PhoneNumber;
-            //Navigation.NavigateTo($"/sms/send/{dto.PhoneNumber}");
         }
 
         DialogParameters parameters = new()

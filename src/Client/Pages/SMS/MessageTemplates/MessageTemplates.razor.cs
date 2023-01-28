@@ -26,7 +26,9 @@ public partial class MessageTemplates
 
     private MessageOutCreateRequest _messageOut = new();
 
-    private ClientPreference _preference = new();
+    private ClientPreference _clientPreference = new();
+
+    private BackgroundPreference _backgroundPreference = new();
 
     protected override void OnInitialized() =>
         Context = new(
@@ -37,7 +39,6 @@ public partial class MessageTemplates
             {
                 new(data => data.TemplateType, "Type", "TemplateType"),
                 new(data => data.IsAPI, "API", "IsAPI", typeof(bool), Template: TemplateApiFastMode),
-                //new(data => data.IsFastMode, "Fast-Mode", "IsFastMode", typeof(bool)),
                 new(data => data.ScheduleDate.ToString("MMM dd, yyyy"), "Schedule", "ScheduleDate"),
                 new(data => data.Subject, "Subject", "Subject"),
                 new(data => data.Message, "Message", "Message"),
@@ -79,7 +80,6 @@ public partial class MessageTemplates
                 TemplateType = dto.TemplateType,
                 MessageType = dto.MessageType,
                 IsAPI = dto.IsAPI,
-                IsFastMode = dto.IsFastMode,
                 ScheduleDate = dto.ScheduleDate,
                 Recepients = dto.Recepients,
                 Subject = dto.Subject,
@@ -105,10 +105,12 @@ public partial class MessageTemplates
         DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
         IDialogReference dialog = DialogService.Show<TransactionConfirmation>("Send", parameters, options);
         DialogResult result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Cancelled && await ClientPreferences.GetPreference() is ClientPreference clientPreference)
         {
-            _messageOut.IsBackgroundJob = _preference.BackgroundPreference.IsBackgroundJob;
-            _messageOut.IsScheduled = _preference.BackgroundPreference.IsScheduled;
+            _backgroundPreference = clientPreference.BackgroundPreference;
+
+            _messageOut.IsBackgroundJob = _backgroundPreference.IsBackgroundJob;
+            _messageOut.IsScheduled = _backgroundPreference.IsScheduled;
 
             _messageOut.IsAPI = request.IsAPI;
             _messageOut.MessageType = request.MessageType;
@@ -116,7 +118,22 @@ public partial class MessageTemplates
             _messageOut.MessageText = request.Message;
             _messageOut.Description = request.Subject;
 
-            await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar, successMessage: "Messages successfully created and sent to queue.");
+            if (_messageOut.IsBackgroundJob)
+            {
+                Snackbar.Add("Messages are being created and sent to Background Job Worker.", Severity.Info);
+            }
+            else
+            {
+                Snackbar.Add("Messages are being created and sent directly to recepients.", Severity.Info);
+            }
+
+            if (await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar) > 0)
+            {
+                MessageTemplateSendRequest sendRequest = new();
+                sendRequest.Id = request.Id;
+
+                await ApiHelper.ExecuteCallGuardedAsync(() => Client.SentAsync(sendRequest), Snackbar, successMessage: "Messages successfully sent.");
+            }
         }
     }
 
