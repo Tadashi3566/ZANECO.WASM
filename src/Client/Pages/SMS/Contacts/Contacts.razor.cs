@@ -23,6 +23,7 @@ public partial class Contacts
     protected IContactsClient Client { get; set; } = default!;
     [Inject]
     protected IMessageOutsClient MessageOutClient { get; set; } = default!;
+
     protected EntityServerTableContext<ContactDto, Guid, ContactViewModel> Context { get; set; } = default!;
 
     private EntityTable<ContactDto, Guid, ContactViewModel> _table = default!;

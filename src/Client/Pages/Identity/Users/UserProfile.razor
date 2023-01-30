@@ -24,11 +24,13 @@ else
                         </MudCardHeader>
                         <MudCardContent Class="pa-46" Style="padding:26px!important">
                             <MudGrid>
-                                <MudSwitch @bind-Checked="@_active" Color="Color.Primary" Label="@_localizer["Active?"]"></MudSwitch>
-                                <MudCheckBox ReadOnly @bind-Checked="@_emailConfirmed" Disabled Label="@_localizer["Email Confirmed?"]" Color="Color.Secondary">
-                                    </MudCheckBox>
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto"
-                            OnClick="ToggleUserStatus" ButtonType="ButtonType.Submit">@_localizer["Save Changes"]
+                                <MudSwitch @bind-Checked="@_active" Color="Color.Primary" Label="@_localizer["Active?"]"/>
+                                <MudCheckBox ReadOnly @bind-Checked="@_emailConfirmed" Disabled Label="@_localizer["Email Confirmed?"]" Color="Color.Secondary"/>
+                                <MudButton
+                                    Color="Color.Primary"
+                                    Class="ml-auto"
+                                    OnClick="ToggleUserStatus"
+                                    ButtonType="ButtonType.Submit">@_localizer["Save Changes"]
                                 </MudButton>
                             </MudGrid>
                         </MudCardContent>
@@ -77,22 +79,22 @@ else
                 </MudCardHeader>
                 <MudCardContent>
                     <MudGrid>
-                        <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudItem xs="12" sm="6">
                             <MudField Label="@_localizer["First Name"]" Variant="Variant.Outlined">@_firstName</MudField>
                         </MudItem>
-                        <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudItem xs="12" sm="6">
                             <MudField Label="@_localizer["Last Name"]" Variant="Variant.Outlined">@_lastName</MudField>
                         </MudItem>
-                        <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudItem xs="12" sm="6">
                             <MudField Label="@_localizer["Phone Number"]" Variant="Variant.Outlined">@_phoneNumber</MudField>
                         </MudItem>
-                        <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudItem xs="12" sm="6">
                             <MudField Label="@_localizer["Email"]" Variant="Variant.Outlined">@_email</MudField>
                         </MudItem>
-                        <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudItem xs="12">
                             <MudField Label="@_localizer["Description"]" Variant="Variant.Outlined">@_description</MudField>
                         </MudItem>
-                        <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudItem xs="12">
                             <MudField Label="@_localizer["Notes"]" Variant="Variant.Outlined">@_notes</MudField>
                         </MudItem>
                     </MudGrid>
@@ -148,6 +150,5 @@ public class CustomStringToBoolConverter : BoolConverter<string>
                 return null;
             }
         }
-
     }
 }

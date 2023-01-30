@@ -54,41 +54,39 @@
                     <MudGrid>
                         <DataAnnotationsValidator />
                         <CustomValidation @ref="_customValidation" />
-                        <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudItem xs="12" sm="6">
                             <MudTextField @bind-Value="@_user.FirstName"
                                           For="@(() => _user.FirstName)"
-                                          Label="@L["First Name"]" Variant="Variant.Outlined" />
+                                          Label="@L["First Name"]" Variant="Variant.Filled" />
                         </MudItem>
-                        <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudItem xs="12" sm="6">
                             <MudTextField @bind-Value="@_user.LastName"
                                           For="@(() => _user.LastName)"
-                                          Label="@L["Last Name"]" Variant="Variant.Outlined" />
+                                          Label="@L["Last Name"]" Variant="Variant.Filled" />
                         </MudItem>
-                        <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudItem xs="12" sm="6">
                             <MudTextField @bind-Value="@_user.PhoneNumber"
                                           For="@(() => _user.PhoneNumber)"
                                           Label="@L["Phone Number"]"
-                                         Variant="Variant.Outlined" />
+                                          Variant="Variant.Filled" />
                         </MudItem>
-                        <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudItem xs="12" sm="6">
                             <MudTextField @bind-Value="@_user.Email" Label="@L["Email"]"
                                           For="@(() => _user.Email)"
-                                         Variant="Variant.Outlined"
+                                          Variant="Variant.Outlined"
                                           InputType="InputType.Email" Disabled=true />
                         </MudItem>
                         <MudItem xs="12">
                             <MudTextField @bind-Value="@_user.Description"
                                           For="@(() => _user.Description)"
                                           Label="@L["Description"]"
-                                          Lines="2"
-                                         Variant="Variant.Outlined" />
+                                          Lines="2" />
                         </MudItem>
                         <MudItem xs="12">
                             <MudTextField @bind-Value="@_user.Notes"
                                           For="@(() => _user.Notes)"
                                           Label="@L["Notes"]"
-                                          Lines="2"
-                                         Variant="Variant.Outlined" />
+                                          Lines="2" />
                         </MudItem>
                     </MudGrid>
                 </MudCardContent>

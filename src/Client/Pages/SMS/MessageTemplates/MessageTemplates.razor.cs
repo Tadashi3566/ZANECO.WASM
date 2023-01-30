@@ -133,6 +133,8 @@ public partial class MessageTemplates
                 sendRequest.Id = request.Id;
 
                 await ApiHelper.ExecuteCallGuardedAsync(() => Client.SentAsync(sendRequest), Snackbar, successMessage: "Messages successfully sent.");
+
+                await _table.ReloadDataAsync();
             }
         }
     }

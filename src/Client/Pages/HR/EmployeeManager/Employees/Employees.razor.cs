@@ -28,6 +28,8 @@ public partial class Employees
 
     private EntityTable<EmployeeDto, Guid, EmployeeViewModel> _table = default!;
 
+    private string? _searchString;
+
     private bool _canViewRoleClaims;
 
     protected override async Task OnInitializedAsync()
@@ -42,10 +44,12 @@ public partial class Employees
                 fields: new()
                 {
                     new(data => data.Number, "ID", "Number"),
-                    new(data => data.HireDate.ToString("MMM dd, yyyy"), "Date Hired", "HireDate"),
-                    new(data => DisplayLegnthOfService(data.HireDate), "Length of Service", "HireDate"),
-                    new(data => data.RegularDate.ToString("MMM dd, yyyy"), "Date Regular", "RegularDate"),
-                    new(data => DisplayLegnthOfService(data.RegularDate), "LOS as JO/Regular", "RegularDate"),
+                    new(data => data.HireDate.ToString("MMM dd, yyyy"), "Date Hired", "HireDate", Template: TemplateHireDate),
+
+                    // new(data => DisplayLegnthOfService(data.HireDate), "Length of Service", "HireDate"),
+                    new(data => data.RegularDate.ToString("MMM dd, yyyy"), "Date Regular", "RegularDate", Template: TemplateRegularDate),
+
+                    // new(data => DisplayLegnthOfService(data.RegularDate), "LOS as JO/Regular", "RegularDate"),
                     new(data => data.EmploymentType, "Type", "EmploymentType"),
                     new(data => data.NameFull, "Name", "LastName"),
                     new(data => data.Area, "Area", "Area"),
