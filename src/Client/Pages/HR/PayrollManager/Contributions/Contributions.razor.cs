@@ -20,6 +20,7 @@ public partial class Contributions
 
     private EntityTable<ContributionDto, Guid, ContributionUpdateRequest> _table = default!;
 
+    private string? _searchString;
     private bool _canViewRoleClaims;
     private decimal _totalContribution = 0;
 
@@ -35,17 +36,17 @@ public partial class Contributions
             fields: new()
             {
                 new(data => data.ContributionType, "Contribution Type", "ContributionType"),
-                new(data => data.DateEffectivityStart.ToString("MMM dd, yyyy"), "From Date", "DateEffectivityStart"),
-                new(data => data.DateEffectivityEnd.ToString("MMM dd, yyyy"), "To Date", "DateEffectivityEnd"),
-                new(data => data.RangeStart.ToString("N2"), "From", "RangeStart"),
-                new(data => data.RangeEnd.ToString("N2"), "To", "RangeEnd"),
-                new(data => data.EmployerContribution.ToString("N2"), "Employer", "EmployerContribution"),
-                new(data => data.EmployeeContribution.ToString("N2"), "Employee", "EmployeeContribution"),
+                new(data => data.DateEffectivityStart, "Effectivity Date", "DateEffectivityStart", Template: TemplateDateEffectivity),
+                new(data => data.DateEffectivityEnd, "End", visible: false),
+                new(data => data.RangeStart.ToString("N2"), "Amount Range", "RangeStart", Template: TemplateAmountRange),
+                new(data => data.RangeEnd.ToString("N2"), "To", visible: false),
+                new(data => data.EmployerContribution.ToString("N2"), "Employer/Employee", "EmployerContribution", Template: TemplateContribution),
+                new(data => data.EmployeeContribution.ToString("N2"), "Employee", visible: false),
                 new(data => data.TotalContribution.ToString("N2"), "Total", "TotalContribution"),
                 new(data => data.Percentage, "Percentage", "Percentage"),
                 new(data => data.IsFixed, "Fixed", "IsFixed", typeof(bool)),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client

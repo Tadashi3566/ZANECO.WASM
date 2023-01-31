@@ -5,8 +5,7 @@
 
 <FshTitle Title="Designations" Description="Employee Designation Management" />
 
-<EntityTable @ref="_table" TEntity="DesignationDto" TId="Guid" TRequest="DesignationViewModel" Context="@Context">
-
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="DesignationDto" TId="Guid" TRequest="DesignationViewModel" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
@@ -141,3 +140,54 @@
         </MudItem>
     </EditFormContent>
 </EntityTable>
+
+@code
+{
+    private RenderFragment<DesignationDto> TemplateAreaDepartment => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Area" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Department" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<DesignationDto> TemplateDivisionSection => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Division" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Section" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<DesignationDto> TemplatePositionType => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Position" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.EmploymentType" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<DesignationDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

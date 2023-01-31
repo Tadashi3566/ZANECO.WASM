@@ -27,6 +27,8 @@ public partial class Designations
 
     private EntityTable<DesignationDto, Guid, DesignationViewModel> _table = default!;
 
+    private string? _searchString;
+
     private bool _canViewRoleClaims;
 
     protected override void OnParametersSet()
@@ -50,23 +52,20 @@ public partial class Designations
             {
                 new(data => data.IdNumber, "IdNumber", "ID"),
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
-                new(data => data.Area, "Area", "Area"),
-
-                // new(data => data.Department, "Department", "Department"),
-                // new(data => data.Division, "Division", "Division"),
-                // new(data => data.Section, "Section / Unit", "Section"),
-
-                new(data => data.Position, "Designation", "Position"),
-                new(data => data.EmploymentType, "Employment", "EmploymentType"),
+                new(data => data.Area, "Area", "Area", Template: TemplateAreaDepartment),
+                new(data => data.Department, "Department", visible: false),
+                new(data => data.Division, "Division", "Division", Template: TemplateDivisionSection),
+                new(data => data.Section, "Section / Unit", visible: false),
+                new(data => data.Position, "Designation", "Position", Template: TemplatePositionType),
+                new(data => data.EmploymentType, "Employment", visible: false),
                 new(data => data.StartDate.ToString("MMM dd, yyyy"), "Effectivity", "StartDate"),
                 new(data => data.EndDate.ToString("MMM dd, yyyy"), "Until", "EndDate"),
                 new(data => data.SalaryRank, "Rank", "SalaryRank"),
                 new(data => data.SalaryAmount.ToString("N2"), "SalaryAmount", "RatePerHour"),
                 new(data => data.RatePerDay.ToString("N2"), "Rate/Day", "RatePerDay"),
                 new(data => data.RatePerHour.ToString("N2"), "Rate/Hour", "RatePerHour"),
-
-                // new(data => data.Description, "Description", "Description"),
-                // new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,
@@ -85,6 +84,8 @@ public partial class Designations
                 {
                     data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
                 }
+
+                data.EmployeeId = _searchEmployeeId;
 
                 await Client.CreateAsync(data.Adapt<DesignationCreateRequest>());
 

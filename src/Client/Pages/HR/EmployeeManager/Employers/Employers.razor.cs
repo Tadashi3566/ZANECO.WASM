@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using System.Security;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
@@ -19,6 +20,8 @@ public partial class Employers
 
     private EntityTable<EmployerDto, Guid, EmployerViewModel> _table = default!;
 
+    private string? _searchString;
+
     protected override void OnParametersSet()
     {
         if (EmployeeId != Guid.Empty)
@@ -34,14 +37,12 @@ public partial class Employers
             entityResource: FSHResource.Employers,
             fields: new()
             {
-                new(data => data.EmployeeName, "Employee", "Employee"),
-                new(data => data.Name, "Name", "Name"),
-                new(data => data.Address, "Address", "Address"),
+                new(data => data.EmployeeName, "Employee", visible: false),
+                new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
                 new(data => data.Designation, "Designation", "Designation"),
                 new(data => data.StartDate.ToString("MMMM dd, yyyy"), "StartDate", "StartDate"),
                 new(data => data.EndDate.ToString("MMMM dd, yyyy"), "EndDate", "EndDate"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,
@@ -58,6 +59,8 @@ public partial class Employers
                 {
                     data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
+
+                data.EmployeeId = _searchEmployeeId;
 
                 await Client.CreateAsync(data.Adapt<EmployerCreateRequest>());
                 data.ImageInBytes = string.Empty;

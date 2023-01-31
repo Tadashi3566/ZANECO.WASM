@@ -19,6 +19,8 @@ public partial class Powerbills
 
     private EntityTable<PowerbillDto, Guid, PowerbillViewModel> _table = default!;
 
+    private string? _searchString;
+
     protected override void OnParametersSet()
     {
         if (EmployeeId != Guid.Empty)
@@ -37,10 +39,10 @@ public partial class Powerbills
                 new(data => data.EmployeeName, "Employee", "Employee"),
                 new(data => data.Account, "Account", "Account"),
                 new(data => data.Meter, "Meter", "Meter"),
-                new(data => data.Name, "Name", "Name"),
-                new(data => data.Address, "Address", "Address"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
+                new(data => data.Address, "Address", visible: false),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,
@@ -59,6 +61,8 @@ public partial class Powerbills
                 {
                     data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
+
+                data.EmployeeId = _searchEmployeeId;
 
                 await Client.CreateAsync(data.Adapt<PowerbillCreateRequest>());
                 data.ImageInBytes = string.Empty;

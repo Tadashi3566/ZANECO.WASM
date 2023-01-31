@@ -14,6 +14,8 @@ public partial class Adjustments
 
     private EntityTable<AdjustmentDto, Guid, AdjustmentUpdateRequest> _table = default!;
 
+    private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Adjustment",
@@ -30,8 +32,8 @@ public partial class Adjustments
                 new(data => data.IsOptional, "Optional", "IsOptional", typeof(bool)),
                 new(data => data.IsLoan, "Loan", "IsLoan", typeof(bool)),
                 new(data => data.IsActive, "Active", "IsActive", typeof(bool)),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: Adjustment => Adjustment.Id,
             searchFunc: async filter => (await Client

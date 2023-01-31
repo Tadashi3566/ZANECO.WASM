@@ -6,9 +6,9 @@
 
 <FshTitle Title="Contributions" Description="Employee Contribution Management" />
 
-<EntityTable @ref="_table" TEntity="ContributionDto" TId="Guid" TRequest="ContributionUpdateRequest" Context="@Context" >
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="ContributionDto" TId="Guid" TRequest="ContributionUpdateRequest" Context="@Context" >
     <EditFormContent>
-        <MudItem xs="12" sm="6" >
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Contribution Type" For="@(() => context.ContributionType)" @bind-Value="context.ContributionType" Variant="Variant.Filled">
                 <MudSelectItem Value="@("PAG-IBIG")" />
                 <MudSelectItem Value="@("PHILHEALTH")" />
@@ -16,31 +16,31 @@
                 <MudSelectItem Value="@("TAX")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="From Date" DateFormat="MMMM dd, yyyy" For="@(() => context.DateEffectivityStart)" @bind-Date="context.DateEffectivityStart" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="To Date" DateFormat="MMMM dd, yyyy" For="@(() => context.DateEffectivityEnd)" @bind-Date="context.DateEffectivityEnd" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="From" Format="N2" For="@(() => context.RangeStart)" @bind-Value="context.RangeStart" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="To" Format="N2" For="@(() => context.RangeEnd)" @bind-Value="context.RangeEnd" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Employer Contribution" Format="N2" For="@(() => context.EmployerContribution)" @bind-Value="context.EmployerContribution" OnBlur="(() => CalculateTotalContribution(context.EmployerContribution, context.EmployeeContribution))" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Employee Contribution" Format="N2" For="@(() => context.EmployeeContribution)" @bind-Value="context.EmployeeContribution" OnBlur="(() => CalculateTotalContribution(context.EmployerContribution, context.EmployeeContribution))" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Total Contribution" Format="N2" For="@(() => context.TotalContribution)" @bind-Value=_totalContribution ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Percentage" Format="N3" For="@(() => context.Percentage)" @bind-Value="context.Percentage" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSwitch Class="mt-3" Label="Fixed Contribution" Color="Color.Primary" For="@(() => context.IsFixed)" @bind-Checked="context.IsFixed" />
         </MudItem>
         <MudItem xs="12">
@@ -51,3 +51,53 @@
         </MudItem>
     </EditFormContent>
 </EntityTable>
+
+@code {
+    private RenderFragment<ContributionDto> TemplateDateEffectivity => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                @context.DateEffectivityStart.ToString("MMMM dd, yyyy")
+            </MudText>
+            <MudText Typo="Typo.subtitle1">
+                @context.DateEffectivityEnd.ToString("MMMM dd, yyyy")
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<ContributionDto> TemplateAmountRange => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-row">
+            <MudText Class="pa-2" Typo="Typo.body2">
+                @context.RangeStart.ToString("N2")
+            </MudText>
+            <MudText Class="pa-2" Typo="Typo.body2">
+                @context.RangeEnd.ToString("N2")
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<ContributionDto> TemplateContribution => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-row">
+            <MudText Class="pa-2" Typo="Typo.body2">
+                @context.EmployeeContribution.ToString("N2")
+            </MudText>
+            <MudText Class="pa-2" Typo="Typo.body2">
+                @context.EmployerContribution.ToString("N2")
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<ContributionDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}
