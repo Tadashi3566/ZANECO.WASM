@@ -4,7 +4,7 @@
 
 <FshTitle Title="Employees" Description="Employee Management" />
 
-<EntityTable @ref="_table" TEntity="EmployeeDto" TId="Guid" TRequest="EmployeeViewModel" Context="@Context">
+<EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="EmployeeDto" TId="Guid" TRequest="EmployeeViewModel" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
             <AutocompletePayroll @bind-Value="SearchPayrollId" />
@@ -209,7 +209,7 @@
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.body1">@context.HireDate.ToString("MMM dd, yyyy")</MudText>
-            <MudText Typo="Typo.subtitle2">@DisplayLegnthOfService(context.HireDate)</MudText>
+            <MudText Typo="Typo.caption">@DisplayLegnthOfService(context.HireDate)</MudText>
         </MudItem>
     };
 
@@ -217,7 +217,43 @@
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.body1">@context.RegularDate.ToString("MMM dd, yyyy")</MudText>
-            <MudText Typo="Typo.subtitle2">@DisplayLegnthOfService(context.RegularDate)</MudText>
+            <MudText Typo="Typo.caption">@DisplayLegnthOfService(context.RegularDate)</MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<EmployeeDto> TemplateNameAddress => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.FullName" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<EmployeeDto> TemplateAreaDepartment => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Area" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Department" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<EmployeeDto> TemplatePositionType => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Position" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.EmploymentType" HighlightedText="@_searchString" />
+            </MudText>
         </MudItem>
     };
 

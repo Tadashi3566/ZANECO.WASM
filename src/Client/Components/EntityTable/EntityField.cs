@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 
 namespace ZANECO.WASM.Client.Components.EntityTable;
-public record EntityField<TEntity>(Func<TEntity, object?> ValueFunc, string DisplayName, string SortLabel = "", Type? Type = null, RenderFragment<TEntity>? Template = null)
+public record EntityField<TEntity>(Func<TEntity, object?> ValueFunc, string DisplayName, string SortLabel = "", Type? Type = null, bool visible = true, RenderFragment<TEntity>? Template = null)
 {
     /// <summary>
     /// A function that returns the actual value of this field from the supplied entity.
@@ -19,6 +19,10 @@ public record EntityField<TEntity>(Func<TEntity, object?> ValueFunc, string Disp
     /// </summary>
     public string SortLabel { get; init; } = SortLabel;
 
+    /// <summary>
+    /// This will the visibility option of the field when included for searching.
+    /// </summary>
+    public bool Visible { get; init; } = visible;
     /// <summary>
     /// The type of the field. Default is string, but when boolean, it shows as a checkbox.
     /// </summary>

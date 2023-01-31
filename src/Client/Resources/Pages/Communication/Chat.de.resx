@@ -142,6 +142,6 @@
     <value>Absenden</value>
   </data>
   <data name="Want to understand how Chat is implemented in BlazorHero ? Refer this" xml:space="preserve">
-    <value>Du möchtest verstehen, wie der Chat in FullStackHero implementiert ist? Lies hier</value>
+    <value>Du möchtest verstehen, wie der Chat in ZanecoApp implementiert ist? Lies hier</value>
   </data>
 </root>

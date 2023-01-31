@@ -2,7 +2,7 @@ $source = "..\..\dotnet-webapi-boilerplate\src\Core\Shared"
 $destination = "..\src\Shared"
 $excludes = @('bin', 'obj')
 
-Write-Host "Pull changes from the Fullstackhero WebApi Shared Project"
+Write-Host "Pull changes from the ZanecoApp WebApi Shared Project"
 write-Host "---------------------------------------------------------"
 Write-Host
 Write-Host "WARNING! This will delete everything in the shared project ($destination)"

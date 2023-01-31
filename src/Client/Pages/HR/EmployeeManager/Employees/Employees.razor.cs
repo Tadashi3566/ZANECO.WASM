@@ -45,16 +45,15 @@ public partial class Employees
                 {
                     new(data => data.Number, "ID", "Number"),
                     new(data => data.HireDate.ToString("MMM dd, yyyy"), "Date Hired", "HireDate", Template: TemplateHireDate),
-
                     // new(data => DisplayLegnthOfService(data.HireDate), "Length of Service", "HireDate"),
                     new(data => data.RegularDate.ToString("MMM dd, yyyy"), "Date Regular", "RegularDate", Template: TemplateRegularDate),
-
                     // new(data => DisplayLegnthOfService(data.RegularDate), "LOS as JO/Regular", "RegularDate"),
-                    new(data => data.EmploymentType, "Type", "EmploymentType"),
-                    new(data => data.NameFull, "Name", "LastName"),
-                    new(data => data.Area, "Area", "Area"),
-                    new(data => data.Department, "Department", "Department"),
-                    new(data => data.Position, "Designation", "Position"),
+                    new(data => data.NameFull, "Name", "LastName", Template: TemplateNameAddress),
+                    new(data => data.Address, "Address", visible: false),
+                    new(data => data.Area, "Area", "Area", Template: TemplateAreaDepartment),
+                    new(data => data.Department, "Department", visible: false),
+                    new(data => data.Position, "Designation", "Position", Template: TemplatePositionType),
+                    new(data => data.EmploymentType, "Type", visible: false),
                     new(data => data.Notes, "Notes", "Notes")
                 },
                 enableAdvancedSearch: true,
@@ -133,12 +132,13 @@ public partial class Employees
         }
     }
 
-    private string DisplayLegnthOfService(in DateTime dtRegular)
+    private static string DisplayLegnthOfService(in DateTime dtRegular)
     {
         int years = DateTimeFunctions.Years(dtRegular, DateTime.Today);
         int months = dtRegular.Months(DateTime.Today) % 12;
 
         string sYear;
+
         if (years <= 1)
             sYear = "Year";
         else
@@ -150,7 +150,21 @@ public partial class Employees
         else
             sMonth = "Months";
 
-        return $"{years:N0} {sYear} {months} {sMonth}";
+        if (months.Equals(0))
+        {
+            if (years.Equals(0))
+            {
+                return $"{years:N0} {sYear}";
+            }
+            else
+            {
+                return $"{years:N0} {sYear}";
+            }
+        }
+        else
+        {
+            return $"{years:N0} {sYear} {months} {sMonth}";
+        }
     }
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.

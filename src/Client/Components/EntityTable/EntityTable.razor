@@ -75,16 +75,19 @@
                 {
                     foreach (var field in Context.Fields)
                     {
-                        <MudTh>
-                            @if (Context.IsClientContext)
-                            {
-                                <MudTableSortLabel SortBy="@field.ValueFunc">@field.DisplayName</MudTableSortLabel>
-                            }
-                            else
-                            {
-                                <MudTableSortLabel T="TEntity" SortLabel="@field.SortLabel">@field.DisplayName</MudTableSortLabel>
-                            }
-                        </MudTh>
+                        if (field.Visible)
+                        {
+                            <MudTh>
+                                @if (Context.IsClientContext)
+                                {
+                                    <MudTableSortLabel SortBy="@field.ValueFunc">@field.DisplayName</MudTableSortLabel>
+                                }
+                                else
+                                {
+                                    <MudTableSortLabel T="TEntity" SortLabel="@field.SortLabel">@field.DisplayName</MudTableSortLabel>
+                                }
+                            </MudTh>
+                        }
                     }
                 }
                 <MudTh Style="text-align:right">@L["Actions"]</MudTh>
@@ -93,20 +96,23 @@
             <RowTemplate>
                 @foreach (var field in Context.Fields)
                 {
-                    <MudTd DataLabel="@field.DisplayName">
-                        @if (field.Template is not null)
-                        {
-                            @field.Template(context)
-                        }
-                        else if (field.Type == typeof(bool))
-                        {
-                            <MudSwitch Checked="@field.ValueFunc(context)" Color="Color.Tertiary" ReadOnly />
-                        }
-                        else
-                        {
-                            <MudHighlighter Text="@field.ValueFunc(context)?.ToString()" HighlightedText="@SearchString" />
-                        }
-                    </MudTd>
+                    if (field.Visible)
+                    {
+                        <MudTd DataLabel="@field.DisplayName">
+                            @if (field.Template is not null)
+                            {
+                                @field.Template(context)
+                            }
+                            else if (field.Type == typeof(bool))
+                            {
+                                <MudSwitch Checked="@field.ValueFunc(context)" Color="Color.Tertiary" ReadOnly />
+                            }
+                            else
+                            {
+                                <MudHighlighter Text="@field.ValueFunc(context)?.ToString()" HighlightedText="@SearchString" />
+                            }
+                        </MudTd>
+                    }
                 }
                 <MudTd DataLabel="Actions" Style="text-align: right">
                     @if (ActionsContent is not null)

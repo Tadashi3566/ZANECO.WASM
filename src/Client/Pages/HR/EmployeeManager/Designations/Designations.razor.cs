@@ -143,7 +143,7 @@ public partial class Designations
         }
     }
 
-    private bool DisableInput(string rateType)
+    private static bool DisableInput(string rateType)
     {
         if (rateType is not null)
         {

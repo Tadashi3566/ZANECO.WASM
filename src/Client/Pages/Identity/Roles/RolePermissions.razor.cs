@@ -67,7 +67,7 @@ public partial class RolePermissions
         _loaded = true;
     }
 
-    private Color GetGroupBadgeColor(int selected, int all)
+    private static Color GetGroupBadgeColor(int selected, int all)
     {
         if (selected == 0)
             return Color.Error;

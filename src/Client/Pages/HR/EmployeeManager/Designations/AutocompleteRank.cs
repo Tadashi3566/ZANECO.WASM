@@ -4,7 +4,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.HR.EmployeeManager.Designations;
-public class AutocompleteRank : MudAutocomplete<string>
+public class AutocompleteRank : MudAutocomplete<int>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
@@ -26,12 +26,12 @@ public class AutocompleteRank : MudAutocomplete<string>
         Variant = Variant.Filled; return base.SetParametersAsync(parameters);
     }
 
-    private async Task<IEnumerable<string>> SearchText(string value)
+    private async Task<IEnumerable<int>> SearchText(string value)
     {
         var filter = new RankSearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "number" }, Keyword = value }
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
@@ -42,6 +42,6 @@ public class AutocompleteRank : MudAutocomplete<string>
         }
 
         return _groups
-            .Select(x => x.Name);
+            .Select(x => x.Number);
     }
 }
