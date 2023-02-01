@@ -30,6 +30,8 @@ public partial class MessageTemplates
 
     private BackgroundPreference _backgroundPreference = new();
 
+    private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Message Template",

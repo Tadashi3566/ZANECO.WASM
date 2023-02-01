@@ -4,7 +4,7 @@
  
 <FshTitle Title="Message Templates" Description="Manage Message Templates" />
 
-<EntityTable @ref="_table" TEntity="MessageTemplateDetail" TId="Guid" TRequest="MessageTemplateUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="MessageTemplateDetail" TId="Guid" TRequest="MessageTemplateUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
         <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => MessageTemplateCopy(context.Message))" OnTouch="@(() => MessageTemplateCopy(context.Message))">Copy Message</MudMenuItem>
@@ -82,7 +82,7 @@
     private RenderFragment<MessageTemplateDetail> TemplateApiFastMode => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudSwitch @bind-Checked="@context.IsAPI" Label="API" Color="Color.Success" ReadOnly=true></MudSwitch>
+            <MudSwitch @bind-Checked="@context.IsAPI" Label="API" Color="Color.Primary" ReadOnly=true></MudSwitch>
             <MudSwitch @bind-Checked="@context.IsSent" Label="Sent" Color="Color.Success" ReadOnly=true></MudSwitch>
         </MudItem>
     };
@@ -90,8 +90,12 @@
     private RenderFragment<MessageTemplateDetail> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.caption">@context.Description</MudText>
-            <MudText Typo="Typo.caption">@context.Notes</MudText>
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
         </MudItem>
     };
 }
