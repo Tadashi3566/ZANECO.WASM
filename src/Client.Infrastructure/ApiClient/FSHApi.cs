@@ -36721,6 +36721,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("isScheduled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsScheduled { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("schedule", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Schedule { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("isAPI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsAPI { get; set; } = default!;
 

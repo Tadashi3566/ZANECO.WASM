@@ -111,6 +111,7 @@ public partial class MessageTemplates
 
             _messageOut.IsBackgroundJob = _backgroundPreference.IsBackgroundJob;
             _messageOut.IsScheduled = _backgroundPreference.IsScheduled;
+            _messageOut.Schedule = request.ScheduleDate;
 
             _messageOut.IsAPI = request.IsAPI;
             _messageOut.MessageType = request.MessageType;

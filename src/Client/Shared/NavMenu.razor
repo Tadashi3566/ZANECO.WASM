@@ -16,24 +16,9 @@
     }
     <MudNavLink Href="/account" Icon="@Icons.Filled.ManageAccounts">Account</MudNavLink>
     <MudNavLink Href="/audit-logs" Icon="@Icons.Material.Filled.SecurityUpdateGood">Logs</MudNavLink>
-    @if (_canViewProducts || _canViewBrands)
-    {
-        <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">Management</MudText>
-        <MudNavGroup Title="Catalog" Icon="@Icons.Filled.AddBox" >
-            @if (_canViewProducts)
-            {
-                <MudNavLink Href="/catalog/products" Icon="@Icons.Filled.ShoppingBag" Class="fsh-nav-child">
-                    Products
-                </MudNavLink>
-            }
-            @if (_canViewBrands)
-            {
-                <MudNavLink Href="/catalog/brands" Icon="@Icons.Filled.ShoppingBag" Class="fsh-nav-child">
-                    Brands
-                </MudNavLink>
-            }
-        </MudNavGroup>
-    }
+
+    <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">Management</MudText>
+
     @if (_canViewGroups || _canViewTickets)
     {
         <MudNavGroup Title="Application" Icon="@Icons.Filled.AddBox">
@@ -154,6 +139,25 @@
             }
         </MudNavGroup>
     }
+
+    @if (_canViewBrands || _canViewProducts)
+    {
+        <MudNavGroup Title="Catalog" Icon="@Icons.Filled.AddBox">
+            @if (_canViewProducts)
+            {
+                <MudNavLink Href="/catalog/products" Icon="@Icons.Filled.ShoppingBag" Class="fsh-nav-child">
+                    Products
+                </MudNavLink>
+            }
+            @if (_canViewBrands)
+            {
+                <MudNavLink Href="/catalog/brands" Icon="@Icons.Filled.ShoppingBag" Class="fsh-nav-child">
+                    Brands
+                </MudNavLink>
+            }
+        </MudNavGroup>
+    }
+
     @if (CanViewAdministrationGroup)
     {
         <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">Administration</MudText>
