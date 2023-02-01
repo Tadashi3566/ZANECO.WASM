@@ -98,6 +98,12 @@ public partial class MessageTemplates
 
     private async void SendSMS(MessageTemplateDetail request)
     {
+        if (request.ScheduleDate < DateTime.Today)
+        {
+            Snackbar.Add("SMS Template Schedule should be at least today!", Severity.Error);
+            return;
+        }
+
         string transactionContent = $"Are you sure you want to send SMS to {ClassSms.GetDistinctRecepients(request.Recepients):N0} recepient(s)?";
         DialogParameters parameters = new()
         {
@@ -123,7 +129,7 @@ public partial class MessageTemplates
 
             if (_messageOut.IsBackgroundJob)
             {
-                Snackbar.Add("Messages are being created and sent to Background Job Worker.", Severity.Info);
+                Snackbar.Add("Messages are being created and sent to Background Job Worker. Messages will be then sent One(1) Day before the schedule.", Severity.Info);
             }
             else
             {
