@@ -39,7 +39,7 @@ public partial class Dependents
                 new(data => data.EmployeeName, "Employee", "Employee"),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameGender),
                 new(data => data.Gender, "Gender", visible: false),
-                new(data => data.BirthDate.ToString("MMMM dd, yyyy"), "Birt hDate", "BirthDate"),
+                new(data => data.BirthDate, "Birt hDate", "BirthDate", typeof(DateTime)),
                 new(data => data.Relation, "Relation", "Relation"),
                 new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),

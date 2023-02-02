@@ -42,7 +42,7 @@ public partial class EmployeePayrollDetails
                 new(data => data.PayrollName, "Payroll", "PayrollName"),
                 new(data => data.AdjustmentType, "Type", "AdjustmentType"),
                 new(data => data.AdjustmentName, "Name", "Name"),
-                new(data => data.Amount.ToString("N2"), "Amount", "Amount"),
+                new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
             },

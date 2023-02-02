@@ -13,6 +13,7 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.HR.EmployeeManager.Employees;
+
 public partial class Employees
 {
     [CascadingParameter]
@@ -44,10 +45,8 @@ public partial class Employees
                 fields: new()
                 {
                     new(data => data.Number, "ID", "Number"),
-                    new(data => data.HireDate.ToString("MMM dd, yyyy"), "Date Hired", "HireDate", Template: TemplateHireDate),
-                    // new(data => DisplayLegnthOfService(data.HireDate), "Length of Service", "HireDate"),
-                    new(data => data.RegularDate.ToString("MMM dd, yyyy"), "Date Regular", "RegularDate", Template: TemplateRegularDate),
-                    // new(data => DisplayLegnthOfService(data.RegularDate), "LOS as JO/Regular", "RegularDate"),
+                    new(data => data.HireDate, "Date Hired", "HireDate", typeof(DateTime), Template: TemplateHireDate),
+                    new(data => data.RegularDate, "Date Regular", "RegularDate", typeof(DateTime), Template: TemplateRegularDate),
                     new(data => data.NameFull, "Name", "LastName", Template: TemplateNameAddress),
                     new(data => data.Address, "Address", visible: false),
                     new(data => data.Area, "Area", "Area", Template: TemplateAreaDepartment),

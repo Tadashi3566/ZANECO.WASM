@@ -31,7 +31,7 @@ public partial class Groups
                 new(data => data.Tag, "Tag", "Tag"),
                 new(data => data.Number, "Number", "Number"),
                 new(data => data.Name, "Name", "Name", Template: TemplateCodeName),
-                new(data => data.Amount.ToString("N2"), "Amount", "Amount"),
+                new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: true,

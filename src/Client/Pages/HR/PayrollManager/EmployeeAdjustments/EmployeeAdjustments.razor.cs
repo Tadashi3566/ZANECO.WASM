@@ -34,7 +34,7 @@ public partial class EmployeeAdjustments
                 new(data => data.EmployeeName, "Employee", "Employee"),
                 new(data => data.AdjustmentType, "Type", "AdjustmentType"),
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.Amount.ToString("N2"), "Amount", "Amount"),
+                new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
             },

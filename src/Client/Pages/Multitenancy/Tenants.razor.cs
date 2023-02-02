@@ -43,7 +43,7 @@ public partial class Tenants
                 new(tenant => tenant.Id, L["Id"]),
                 new(tenant => tenant.Name, L["Name"]),
                 new(tenant => tenant.AdminEmail, L["Admin Email"]),
-                new(tenant => tenant.ValidUpto.ToString("MMM dd, yyyy"), L["Valid Upto"]),
+                new(tenant => tenant.ValidUpto, L["Valid Upto"], Type: typeof(DateTime)),
                 new(tenant => tenant.IsActive, L["Active"], Type: typeof(bool))
             },
             loadDataFunc: async () => _tenants = (await TenantsClient.GetListAsync()).Adapt<List<TenantDetail>>(),

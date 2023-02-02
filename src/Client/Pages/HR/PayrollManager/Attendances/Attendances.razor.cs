@@ -36,7 +36,7 @@ public partial class Attendances
             fields: new()
             {
                 new(data => data.EmployeeName, "Name", "EmployeeName"),
-                new(data => data.AttendanceDate.ToString("MMM dd, yyyy"), "Date", "AttendanceDate"),
+                new(data => data.AttendanceDate, "Date", "AttendanceDate", typeof(DateTime)),
                 new(data => data.ScheduleDetailDay, "Day", "ScheduleDetailDay"),
                 new(data => data.ActualTimeIn1, "Actual In 1", "ActualTimeIn1"),
                 new(data => data.ActualTimeOut1, "Actual Out 1", "ActualTimeOut1"),

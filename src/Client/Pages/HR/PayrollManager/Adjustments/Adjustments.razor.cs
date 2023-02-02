@@ -27,7 +27,7 @@ public partial class Adjustments
                 new(data => data.EmployeeType, "Employee Type", "EmployeeType"),
                 new(data => data.Number, "Number", "Number"),
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.Amount.ToString("N2"), "Amount", "Amount"),
+                new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.PaymentSchedule, "Schedule", "PaymentSchedule"),
                 new(data => data.IsOptional, "Optional", "IsOptional", typeof(bool)),
                 new(data => data.IsLoan, "Loan", "IsLoan", typeof(bool)),

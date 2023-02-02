@@ -24,12 +24,12 @@ public partial class Members
             entityResource: FSHResource.CAD,
             fields: new()
             {
-                new(data => data.MembershipDate.ToString("MMM dd, yyyy"), "MembershipDate", "MembershipDate"),
+                new(data => data.MembershipDate, "MembershipDate", "MembershipDate", typeof(DateTime)),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Address, "Address", "Address"),
                 new(data => data.Gender, "Gender", "Gender"),
                 new(data => data.Phone, "Phone", "Phone"),
-                new(data => data.BirthDate.ToString("MMM dd, yyyy"), "BirthDate", "BirthDate"),
+                new(data => data.BirthDate, "BirthDate", "BirthDate", typeof(DateTime)),
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
             },

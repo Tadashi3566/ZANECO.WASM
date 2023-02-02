@@ -25,7 +25,7 @@ public partial class PowerConsumptions
                 new(data => data.GroupCode, "Code", "Code"),
                 new(data => data.GroupName, "Name", "Name"),
                 new(data => data.BillMonth, "BillMonth", "BillMonth"),
-                new(data => data.KwhPurchased.ToString("N2"), "KWH Purchased", "KWHPurchased"),
+                new(data => data.KwhPurchased, "KWH Purchased", "KWHPurchased", typeof(decimal)),
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
             },
