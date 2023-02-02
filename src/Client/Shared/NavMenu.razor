@@ -50,7 +50,7 @@
             }
         </MudNavGroup>
     }
-    @if (_canViewRating || _canViewSurveys)
+    @if (_canCreateComment || _canViewRating || _canViewSurveys)
     {
         <MudNavGroup Title="Survey" Icon="@Icons.Filled.AddBox">
             @if (_canViewRating)
@@ -58,9 +58,12 @@
                 <MudNavLink Href="/survey/rates" Icon="@Icons.Filled.StarRate" Class="fsh-nav-child">Rates</MudNavLink>
                 <MudNavLink Href="/survey/ratingtemplates" Icon="@Icons.Filled.HotelClass" Class="fsh-nav-child">Templates</MudNavLink>
             }
-            @if (_canViewSurveys)
+            @if (_canCreateComment)
             {
                 <MudNavLink Href="/survey/comment" Icon="@Icons.Filled.StarHalf" Class="fsh-nav-child">Comment</MudNavLink>
+            }
+            @if (_canViewSurveys)
+            {
                 <MudNavLink Href="/survey/ratings" Icon="@Icons.Filled.StarHalf" Class="fsh-nav-child">Surveys</MudNavLink>
             }
         </MudNavGroup>
