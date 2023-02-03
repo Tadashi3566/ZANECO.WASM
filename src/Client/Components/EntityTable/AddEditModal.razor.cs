@@ -1,5 +1,7 @@
+using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using System;
 using System.ComponentModel.DataAnnotations;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Shared;
@@ -78,14 +80,11 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
     {
         _isBusy = true;
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-            () => SaveFunc(RequestModel),
-            Snackbar,
-            _customValidation,
-            $"{EntityName} {(IsCreate ? L["Created"] : L["Updated"])}."))
-        {
-            MudDialog.Close();
-        }
+        if (await ApiHelper.ExecuteCallGuardedAsync(() =>
+            SaveFunc(RequestModel), Snackbar, _customValidation, $"{EntityName} {(IsCreate ? L["Created"] : L["Updated"])}."))
+            {
+                MudDialog.Close();
+            }
 
         _isBusy = false;
     }

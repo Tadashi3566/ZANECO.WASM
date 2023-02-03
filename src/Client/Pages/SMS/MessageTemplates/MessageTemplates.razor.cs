@@ -90,7 +90,9 @@ public partial class MessageTemplates
                 Notes = dto.Notes!,
             };
 
-            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(newMessageTemplate), Snackbar, successMessage: "Message Template successfully duplicated.");
+            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(newMessageTemplate),
+                Snackbar,
+                successMessage: "Message Template successfully duplicated.");
 
             await _table.ReloadDataAsync();
         }
@@ -136,12 +138,16 @@ public partial class MessageTemplates
                 Snackbar.Add("Messages are being created and sent directly to recepients.", Severity.Info);
             }
 
-            if (await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar) > 0)
+            if (await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut),
+                Snackbar
+                ) > 0)
             {
                 MessageTemplateSendRequest sendRequest = new();
                 sendRequest.Id = request.Id;
 
-                await ApiHelper.ExecuteCallGuardedAsync(() => Client.SentAsync(sendRequest), Snackbar, successMessage: "Messages successfully sent.");
+                await ApiHelper.ExecuteCallGuardedAsync(() => Client.SentAsync(sendRequest),
+                    Snackbar,
+                    successMessage: "Messages successfully sent.");
 
                 await _table.ReloadDataAsync();
             }

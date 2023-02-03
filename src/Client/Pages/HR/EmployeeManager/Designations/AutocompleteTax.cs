@@ -34,9 +34,10 @@ public class AutocompleteTax : MudAutocomplete<string>
             AdvancedSearch = new() { Fields = new[] { "code" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar) is PaginationResponseOfGroupDto response)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
+            is PaginationResponseOfGroupDto dto)
         {
-            _groups = response.Data.Where(x => x.Parent.Equals("TAX")).ToList();
+            _groups = dto.Data.Where(x => x.Parent.Equals("TAX")).ToList();
         }
 
         return _groups.Select(x => x.Code);

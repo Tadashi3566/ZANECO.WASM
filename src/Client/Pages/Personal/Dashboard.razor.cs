@@ -57,26 +57,25 @@ public partial class Dashboard
     {
         _busy = true;
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => DashboardClient.GetAsync(),
-                Snackbar)
-            is StatsDto statsDto)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => DashboardClient.GetAsync(),
+                Snackbar
+            ) is StatsDto dto)
         {
-            RegisteredCount = statsDto.RegisteredCount;
-            SmsCount = statsDto.SmsCount;
-            WebCount = statsDto.WebCount;
+            RegisteredCount = dto.RegisteredCount;
+            SmsCount = dto.SmsCount;
+            WebCount = dto.WebCount;
 
             _regTypeData.Clear();
-            _regTypeData.Add(statsDto.SmsCount);
-            _regTypeData.Add(statsDto.WebCount);
+            _regTypeData.Add(dto.SmsCount);
+            _regTypeData.Add(dto.WebCount);
 
-            UserCount = statsDto.UserCount;
-            RoleCount = statsDto.RoleCount;
+            UserCount = dto.UserCount;
+            RoleCount = dto.RoleCount;
 
             _chartOptions.YAxisTicks = 100;
             _chartOptions.LineStrokeWidth = 1;
 
-            foreach (var item in statsDto.DataEnterBarChart)
+            foreach (var item in dto.DataEnterBarChart)
             {
                 _dataEnterBarChartSeries
                     .RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));

@@ -79,6 +79,8 @@ public partial class Messages
     private async Task ReadInbox(string messageFrom)
     {
         _readRequest.MessageFrom = messageFrom;
-        await ApiHelper.ExecuteCallGuardedAsync(() => ClientIn.ReadAsync(_readRequest), Snackbar, successMessage: $"Messages from sender {Recepient} has been marked as read.");
+        await ApiHelper.ExecuteCallGuardedAsync(() => ClientIn.ReadAsync(_readRequest),
+        Snackbar,
+        successMessage: $"Messages from sender {Recepient} has been marked as read.");
     }
 }

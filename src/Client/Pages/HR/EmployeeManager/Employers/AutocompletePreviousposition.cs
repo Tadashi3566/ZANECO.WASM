@@ -35,8 +35,7 @@ public class AutocompletePreviousposition : MudAutocomplete<string>
             AdvancedSearch = new() { Fields = new[] { "designation" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfEmployerDto response)
         {
             _list = response.Data.ToList();

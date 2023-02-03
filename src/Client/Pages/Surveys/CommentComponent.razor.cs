@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
@@ -71,7 +72,11 @@ public partial class CommentComponent
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
-            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(_model), Snackbar, _customValidation, "Your comment was successfully submitted.");
+            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(_model), _customValidation, "Your comment was successfully submitted.");
+
+            await swal.FireAsync("Success", "Your comment was successfully submitted.", SweetAlertIcon.Success);
+
+
             _model.Comment = string.Empty;
         }
     }

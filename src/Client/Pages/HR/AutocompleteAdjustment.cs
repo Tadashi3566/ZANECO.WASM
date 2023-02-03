@@ -33,9 +33,10 @@ public class AutocompleteAdjustments : MudAutocomplete<Guid>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && _value != default
-            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar) is { } adjustment)
+            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
+            is { } dto)
         {
-            _adjustment.Add(adjustment);
+            _adjustment.Add(dto);
             ForceRender(true);
         }
     }
@@ -48,8 +49,8 @@ public class AutocompleteAdjustments : MudAutocomplete<Guid>
             AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() =>
+            Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfAdjustmentDto response)
         {
             _adjustment = response.Data.ToList();

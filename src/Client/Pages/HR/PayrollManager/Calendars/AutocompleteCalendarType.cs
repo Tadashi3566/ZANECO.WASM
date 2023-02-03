@@ -34,9 +34,11 @@ public class AutocompleteCalendarType : MudAutocomplete<string>
             AdvancedSearch = new() { Fields = new[] { "name", "description", "notes" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar) is PaginationResponseOfGroupDto response)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() =>
+            Client.SearchAsync(filter), Snackbar)
+            is PaginationResponseOfGroupDto dto)
         {
-            _groups = response.Data.Where(x => x.Parent.Equals("CALENDAR") || x.Parent.Equals("LEAVE")).ToList();
+            _groups = dto.Data.Where(x => x.Parent.Equals("CALENDAR") || x.Parent.Equals("LEAVE")).ToList();
         }
 
         return _groups.Select(x => x.Name);

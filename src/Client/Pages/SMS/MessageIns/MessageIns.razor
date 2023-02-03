@@ -7,7 +7,7 @@
 <EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.Chat" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))" OnTouch="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">Messages</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Chat" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))" OnTouch="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">Messages</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="4">

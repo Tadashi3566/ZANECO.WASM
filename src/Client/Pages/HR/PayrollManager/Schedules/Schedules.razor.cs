@@ -60,7 +60,9 @@ public partial class Schedules
             ScheduleId = scheduleId
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => EmployeeClient.SetScheduleAsync(scheduleId, request.Adapt<EmployeeSetScheduleRequest>()), Snackbar))
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => EmployeeClient.SetScheduleAsync(scheduleId, request.Adapt<EmployeeSetScheduleRequest>()),
+                Snackbar
+            ))
         {
             Snackbar.Add("Selected Schedule has been successfully Set to Unscheduled Employees", Severity.Success);
         }

@@ -94,11 +94,9 @@ public partial class Tenants
 
     private async Task DeactivateTenantAsync(string id)
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-            () => TenantsClient.DeactivateAsync(id),
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => TenantsClient.DeactivateAsync(id),
             Snackbar,
-            null,
-            L["Tenant Deactivated."]) is not null)
+            successMessage: L["Tenant Deactivated."]) is not null)
         {
             await EntityTable.ReloadDataAsync();
         }
@@ -106,11 +104,9 @@ public partial class Tenants
 
     private async Task ActivateTenantAsync(string id)
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-            () => TenantsClient.ActivateAsync(id),
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => TenantsClient.ActivateAsync(id),
             Snackbar,
-            null,
-            L["Tenant Activated."]) is not null)
+            successMessage: L["Tenant Activated."]) is not null)
         {
             await EntityTable.ReloadDataAsync();
         }

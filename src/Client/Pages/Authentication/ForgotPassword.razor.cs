@@ -24,9 +24,7 @@ public partial class ForgotPassword
         BusySubmitting = true;
 
         await ApiHelper.ExecuteCallGuardedAsync(
-            () => UsersClient.ForgotPasswordAsync(Tenant, _forgotPasswordRequest),
-            Snackbar,
-            _customValidation);
+            () => UsersClient.ForgotPasswordAsync(Tenant, _forgotPasswordRequest), Snackbar, _customValidation);
 
         BusySubmitting = false;
     }

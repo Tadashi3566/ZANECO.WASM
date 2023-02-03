@@ -1,4 +1,6 @@
-﻿<EditForm Model="@_model" OnValidSubmit="Submit">
+﻿@inject SweetAlertService swal
+
+<EditForm Model="@_model" OnValidSubmit="Submit">
     <DataAnnotationsValidator />
     <CustomValidation @ref="_customValidation" />
     <MudCard>
@@ -23,7 +25,7 @@
         </MudCardContent>
         <MudCardActions>
             <MudItem Class="ma-2">
-                <MudButton Color="Color.Primary" Class="ml-auto" Size="Size.Large" StartIcon="@Icons.Filled.Send" Variant="Variant.Filled"
+                <MudButton Color="Color.Primary" Class="ml-auto" Size="Size.Large" StartIcon="@Icons.Material.Filled.Send" Variant="Variant.Filled"
                            ButtonType="ButtonType.Submit">Submit</MudButton>
             </MudItem>
         </MudCardActions>

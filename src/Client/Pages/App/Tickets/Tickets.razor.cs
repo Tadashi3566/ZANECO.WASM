@@ -159,7 +159,7 @@ public partial class Tickets
             switch (action)
             {
                 case "Open":
-                    //await ApiHelper.ExecuteCallGuardedAsync(() => TicketsClient(_model), Snackbar, _customValidation,
+                    //await ApiHelper.ExecuteCallGuardedAsync(() => TicketsClient(_model, _customValidation,
                     //    "Message successfully sent to the recepient(s).");        
                     break;
 

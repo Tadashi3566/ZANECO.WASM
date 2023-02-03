@@ -103,7 +103,6 @@ public partial class Employees
         if (await ApiHelper.ExecuteCallGuardedAsync(() => PayrollClient.GenerateAsync(request.Adapt<EmployeePayrollDetailGenerateRequest>()), Snackbar))
         {
             Snackbar.Add("Employee Payroll has been successfully generated", Severity.Success);
-
             Navigation.NavigateTo($"/payroll/employeepayrolldetails/{employeeId}/{payrollId}");
         }
     }

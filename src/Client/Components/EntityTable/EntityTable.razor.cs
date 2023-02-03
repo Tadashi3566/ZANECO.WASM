@@ -107,7 +107,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
         Loading = true;
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Context.ClientContext.LoadDataFunc(), Snackbar)
+            () => Context.ClientContext.LoadDataFunc(), Snackbar)
             is List<TEntity> result)
         {
             _entityList = result;
@@ -144,7 +144,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
             var filter = GetPaginationFilter(state);
 
             if (await ApiHelper.ExecuteCallGuardedAsync(
-                    () => Context.ServerContext.SearchFunc(filter), Snackbar)
+                () => Context.ServerContext.SearchFunc(filter), Snackbar)
                 is { } result)
             {
                 _totalItems = result.TotalCount;
@@ -168,7 +168,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
                 var filter = GetBaseFilter();
 
                 if (await ApiHelper.ExecuteCallGuardedAsync(
-                        () => Context.ServerContext.ExportFunc(filter), Snackbar)
+                    () => Context.ServerContext.ExportFunc(filter), Snackbar)
                     is { } result)
                 {
                     using var streamRef = new DotNetStreamReference(result.Stream);
@@ -252,7 +252,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
             requestModel =
                 Context.GetDefaultsFunc is not null
                     && await ApiHelper.ExecuteCallGuardedAsync(
-                            () => Context.GetDefaultsFunc(), Snackbar)
+                        () => Context.GetDefaultsFunc(), Snackbar)
                         is { } defaultsResult
                 ? defaultsResult
                 : new TRequest();
@@ -270,8 +270,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
             requestModel =
                 Context.GetDetailsFunc is not null
                     && await ApiHelper.ExecuteCallGuardedAsync(
-                            () => Context.GetDetailsFunc(id!),
-                            Snackbar)
+                        () => Context.GetDetailsFunc(id!), Snackbar)
                         is { } detailsResult
                 ? detailsResult
                 : entity!.Adapt<TRequest>();
@@ -310,9 +309,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
         {
             _ = Context.DeleteFunc ?? throw new InvalidOperationException("DeleteFunc can't be null!");
 
-            await ApiHelper.ExecuteCallGuardedAsync(
-                () => Context.DeleteFunc(id),
-                Snackbar);
+            await ApiHelper.ExecuteCallGuardedAsync(() => Context.DeleteFunc(id), Snackbar);
 
             await ReloadDataAsync();
         }

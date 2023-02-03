@@ -35,8 +35,7 @@ public class AutocompleteExtension : MudAutocomplete<string>
             AdvancedSearch = new() { Fields = new[] { "extension" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfEmployeeDto response)
         {
             _list = response.Data.ToList();

@@ -33,9 +33,10 @@ public class AutocompletePayroll : MudAutocomplete<Guid>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && _value != default
-            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar) is { } payroll)
+            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
+            is { } dto)
         {
-            _payroll.Add(payroll);
+            _payroll.Add(dto);
             ForceRender(true);
         }
     }

@@ -61,7 +61,9 @@ public partial class SendMessageComponent
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
-            await ApiHelper.ExecuteCallGuardedAsync(() => MessageClient.CreateAsync(_model), Snackbar, _customValidation, "Message successfully sent to the recepient(s).");
+            await ApiHelper.ExecuteCallGuardedAsync(() => MessageClient.CreateAsync(_model),
+                Snackbar,
+                _customValidation, "Message successfully sent to the recepient(s).");
         }
     }
 }

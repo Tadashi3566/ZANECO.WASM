@@ -7,9 +7,9 @@
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="MessageTemplateDetail" TId="Guid" TRequest="MessageTemplateUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => MessageTemplateCopy(context.Message))" OnTouch="@(() => MessageTemplateCopy(context.Message))">Copy Message</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.ContentCopy" OnClick="@(() => MessageTemplateDuplicate(context))" OnTouch="@(() => MessageTemplateDuplicate(context))">Duplicate</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => SendSMS(@context))" OnTouch="@(() => SendSMS(@context))">Send</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.CopyAll" OnClick="@(() => MessageTemplateCopy(context.Message))" OnTouch="@(() => MessageTemplateCopy(context.Message))">Copy Message</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => MessageTemplateDuplicate(context))" OnTouch="@(() => MessageTemplateDuplicate(context))">Duplicate</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Send" OnClick="@(() => SendSMS(@context))" OnTouch="@(() => SendSMS(@context))">Send</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2">

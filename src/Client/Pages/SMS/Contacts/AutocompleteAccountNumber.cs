@@ -37,7 +37,7 @@ public class AutocompleteAccountNumber : MudAutocomplete<string>
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+            () => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfAccountDto response)
         {
             _list = response.Data.ToList();

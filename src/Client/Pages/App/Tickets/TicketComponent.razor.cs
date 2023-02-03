@@ -55,9 +55,9 @@ public partial class TicketComponent
         }
     }
 
-    private async Task OnSubmit() => await ApiHelper.ExecuteCallGuardedAsync((Func<Task<Guid>>)(() =>
-        TicketClient.UpdateAsync(this.Id, _ticket)), Snackbar, _customValidation,
-        "The Ticket has been successfully updated.");
+    private async Task OnSubmit() =>
+        await ApiHelper.ExecuteCallGuardedAsync((Func<Task<Guid>>)(() =>
+        TicketClient.UpdateAsync(this.Id, _ticket)), Snackbar, _customValidation, "The Ticket has been successfully updated.");
 
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {

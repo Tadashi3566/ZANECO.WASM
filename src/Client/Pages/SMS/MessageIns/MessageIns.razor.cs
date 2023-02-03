@@ -58,7 +58,9 @@ public partial class MessageIns
     {
         _readRequest.MessageFrom = messageFrom;
 
-        await ApiHelper.ExecuteCallGuardedAsync(() => Client.ReadAsync(_readRequest), Snackbar, successMessage: "Messages from sender has been marked as read.");
+        await ApiHelper.ExecuteCallGuardedAsync(() => Client.ReadAsync(_readRequest),
+            Snackbar,
+            successMessage: "Messages from sender has been marked as read.");
 
         await _table.ReloadDataAsync();
     }

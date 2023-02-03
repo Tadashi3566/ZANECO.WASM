@@ -134,15 +134,15 @@
                     else if (HasActions)
                     {
                         <MudMenu Label="@L["Actions"]" Variant="Variant.Filled"
-                            EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left"
+                            EndIcon="@Icons.Material.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left"
                             OffsetX="true">
                             @if (CanUpdateEntity(context))
                             {
-                                <MudMenuItem Icon="@Icons.Filled.Edit" OnClick="@(() => InvokeModal(context))" OnTouch="@(() => InvokeModal(context))">@L["Edit"]</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => InvokeModal(context))" OnTouch="@(() => InvokeModal(context))">@L["Edit"]</MudMenuItem>
                             }
                             @if (CanDeleteEntity(context))
                             {
-                                <MudMenuItem Icon="@Icons.Filled.Delete" OnClick="@(() => Delete(context))" OnTouch="@(() => Delete(context))" Style="color:red!important">@L["Delete"]</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(context))" OnTouch="@(() => Delete(context))" Style="color:red!important">@L["Delete"]</MudMenuItem>
                             }
                             @if (ExtraActions is not null)
                             {

@@ -34,8 +34,7 @@ public class AutocompleteRank : MudAutocomplete<int>
             AdvancedSearch = new() { Fields = new[] { "number" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfRankDto response)
         {
             _groups = response.Data.ToList();
