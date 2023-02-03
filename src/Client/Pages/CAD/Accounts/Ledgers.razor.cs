@@ -53,7 +53,7 @@ public partial class Ledgers
                 new(data => data.Debit, "Debit", "Debit", typeof(decimal)),
                 new(data => data.Credit, "Credit", "Credit", typeof(decimal)),
                 new(data => data.Balance, "Balance", "Balance", typeof(decimal)),
-                new(data => data.PostingDate, "PostingDate", "PostingDate", typeof(DateTime)),
+                new(data => data.PostingDate, "PostingDate", "PostingDate", typeof(DateOnly)),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

@@ -41,7 +41,7 @@ public partial class MessageTemplates
             {
                 new(data => data.TemplateType, "Type", "TemplateType"),
                 new(data => data.IsAPI, "API", "IsAPI", typeof(bool), Template: TemplateApiFastMode),
-                new(data => data.ScheduleDate, "Schedule", "ScheduleDate", typeof(DateTime)),
+                new(data => data.ScheduleDate, "Schedule", "ScheduleDate", typeof(DateOnly)),
                 new(data => data.Subject, "Subject", "Subject", Template: TemplateSubjectMessage),
                 new(data => data.Message, "Message", visible: false),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),

@@ -4,7 +4,6 @@
 <FshTitle Title="Rates" Description="Manage Rates" />
 
 <EntityTable @ref="_table" TEntity="RateDto" TId="Guid" TRequest="RateUpdateRequest" Context="@Context">
-
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" Variant="Variant.Filled" />
@@ -19,5 +18,4 @@
             <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
         </MudItem>
     </EditFormContent>
-
 </EntityTable>

@@ -107,10 +107,16 @@
                             {
                                 <MudSwitch Checked="@field.ValueFunc(context)" Color="Color.Tertiary" ReadOnly />
                             }
+                            else if (field.Type == typeof(DateOnly))
+                            {
+                                <MudText Align="Align.Right">
+                                    @Convert.ToDateTime(field.ValueFunc(context)).ToString("MMMM dd, yyyy")
+                                </MudText>
+                            }
                             else if (field.Type == typeof(DateTime))
                             {
                                 <MudText Align="Align.Right" >
-                                    @Convert.ToDateTime(field.ValueFunc(context)).ToString("MMMM dd, yyyy")
+                                    @Convert.ToDateTime(field.ValueFunc(context)).ToString("MMMM dd, yyyy HH:mm:ss")
                                 </MudText>
                             }
                             else if (field.Type == typeof(double) || field.Type == typeof(decimal))

@@ -40,10 +40,10 @@ public partial class Payrolls
                 new(data => data.EmploymentType, "Employment Type", "EmploymentType"),
                 new(data => data.Name, "Name", "Name"),
 
-                new(data => data.DateStart, "Date Start", "DateStart", typeof(DateTime)),
-                new(data => data.DateEnd, "Date End", "DateEnd", typeof(DateTime)),
+                new(data => data.DateStart, "Date Start", "DateStart", typeof(DateOnly)),
+                new(data => data.DateEnd, "Date End", "DateEnd", typeof(DateOnly)),
                 new(data => data.WorkingDays, "Working Days", "WorkingDays"),
-                new(data => data.PayrollDate, "Payroll Date", "PayrollDate", typeof(DateTime)),
+                new(data => data.PayrollDate, "Payroll Date", "PayrollDate", typeof(DateOnly)),
 
                 new(data => data.TotalSalary, "Total Salary", "TotalSalary", typeof(decimal)),
                 new(data => data.TotalAdditional, "Total Additional", "TotalAdditional", typeof(decimal)),

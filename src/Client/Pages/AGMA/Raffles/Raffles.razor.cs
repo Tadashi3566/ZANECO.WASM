@@ -25,7 +25,7 @@ public partial class Raffles
             fields: new()
             {
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.RaffleDate, "Raffle Date", "RaffleDate", typeof(DateTime)),
+                new(data => data.RaffleDate, "Raffle Date", "RaffleDate", typeof(DateOnly)),
                 new(data => data.Description, "Description", "Description"),
                 new(data => data.Notes, "Notes", "Notes"),
             },
