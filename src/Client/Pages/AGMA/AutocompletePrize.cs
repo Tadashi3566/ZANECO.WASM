@@ -57,7 +57,4 @@ public class AutocompletePrize : MudAutocomplete<Guid>
 
         return _list.Select(x => x.Id);
     }
-
-    private string GetName(Guid id) =>
-        _list.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

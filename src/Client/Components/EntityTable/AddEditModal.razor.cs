@@ -1,4 +1,3 @@
-using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;
@@ -82,9 +81,9 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
 
         if (await ApiHelper.ExecuteCallGuardedAsync(() =>
             SaveFunc(RequestModel), Snackbar, _customValidation, $"{EntityName} {(IsCreate ? L["Created"] : L["Updated"])}."))
-            {
-                MudDialog.Close();
-            }
+        {
+            MudDialog.Close();
+        }
 
         _isBusy = false;
     }

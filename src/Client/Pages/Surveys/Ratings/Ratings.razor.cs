@@ -47,16 +47,4 @@ public partial class Ratings
             //        return await RatingsClient.ExportAsync(exportFilter);
             //    }
                 );
-
-    // Advanced Search
-    private Guid _searchRateId;
-    private Guid SearchRateId
-    {
-        get => _searchRateId;
-        set
-        {
-            _searchRateId = value;
-            _ = _table.ReloadDataAsync();
-        }
-    }
 }

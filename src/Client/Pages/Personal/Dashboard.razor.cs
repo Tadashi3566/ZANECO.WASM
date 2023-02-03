@@ -26,8 +26,6 @@ public partial class Dashboard
     private IDashboardClient DashboardClient { get; set; } = default!;
     [Inject]
     private ICourier Courier { get; set; } = default!;
-
-    private readonly string[] _regTypeLabels = { "SMS", "WEB" };
     private readonly List<double> _regTypeData = new();
 
     private readonly string[] _dataEnterBarChartXAxisLabels = { "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10" };

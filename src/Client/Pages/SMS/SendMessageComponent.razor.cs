@@ -36,15 +36,6 @@ public partial class SendMessageComponent
         }
     }
 
-    private bool SetFastMode()
-    {
-        if (!_model.IsAPI)
-        {
-            return true;
-        }
-        return false;
-    }
-
     private async Task Send()
     {
         string transactionTitle = "Send Message";
