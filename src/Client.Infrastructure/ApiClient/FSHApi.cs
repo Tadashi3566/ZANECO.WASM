@@ -36092,7 +36092,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string? Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("createdOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DateTime? CreatedOn { get; set; } = default!;
+        public System.DateTime? CreatedOn { get; set; } = default!;
 
     }
 
@@ -36108,9 +36108,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("rateNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(1, 5)]
         public int RateNumber { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("rateName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string RateName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Comment { get; set; } = default!;
@@ -36135,9 +36132,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("rateNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(1, 5)]
         public int RateNumber { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("rateName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string RateName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -40148,6 +40142,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string PhoneNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.RegularExpression(@"^[^@]+@[^@]+$")]
         public string Email { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("civilStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
