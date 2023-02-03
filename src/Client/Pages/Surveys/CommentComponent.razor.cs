@@ -72,6 +72,7 @@ public partial class CommentComponent
         if (!result.Cancelled)
         {
             await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(_model), Snackbar, _customValidation, "Your comment was successfully submitted.");
+            _model.Comment = string.Empty;
         }
     }
 }

@@ -67,6 +67,12 @@ public partial class Login
         BusySubmitting = false;
     }
 
+    private void FillBasicUserCredentials()
+    {
+        _tokenRequest.UserName = "basicuser";
+        _tokenRequest.Password = "basicuser1";
+    }
+
     private void FillAdministratorCredentials()
     {
         _tokenRequest.UserName = MultitenancyConstants.Root.EmailAddress;

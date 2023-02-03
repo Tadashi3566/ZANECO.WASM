@@ -3,18 +3,21 @@
     <CustomValidation @ref="_customValidation" />
     <MudCard>
         <MudCardHeader>
-            <MudText>How would you like to rate our Services?</MudText>
+            <MudText>How would you like to rate our services?</MudText>
         </MudCardHeader>
         <MudCardContent>
             <MudGrid>
-                <MudItem xs="12" sm="6" Class="align-center">
-                    <MudRating @bind-SelectedValue="_model.RateNumber" MaxValue="5" Size="Size.Large" HoveredValueChanged="@(() => SetRateName(_model.RateNumber))" />
-                </MudItem>
-                <MudItem xs="12" sm="6" Class="align-center">
-                    <MudText Typo="Typo.h5">@_rateName</MudText>
-                </MudItem>
+                <MudStack AlignItems="AlignItems.Center">
+                    <MudItem xs="12" sm="6">
+                        <MudRating @bind-SelectedValue="_model.RateNumber" MaxValue="5" Size="Size.Large" HoveredValueChanged="@(() => SetRateName(_model.RateNumber))" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudText Typo="Typo.h5">@_rateName</MudText>
+                    </MudItem>
+                </MudStack>
+                
                 <MudItem xs="12">
-                    <MudTextField Label="Comment or Rating Survey" For="@(() => _model.Comment)" @bind-Value="_model.Comment" Lines="5"  />
+                    <MudTextField Label="Input Comment or Rating Survey" @bind-Value="_model.Comment" For="@(() => _model.Comment)" Lines="5" Variant="Variant.Filled" />
                 </MudItem>
             </MudGrid>
         </MudCardContent>
