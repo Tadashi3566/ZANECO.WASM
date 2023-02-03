@@ -72,7 +72,7 @@ public partial class CommentComponent
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
-            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(_model), _customValidation, "Your comment was successfully submitted.");
+            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(_model), Snackbar, _customValidation, "Your comment was successfully submitted.");
 
             await swal.FireAsync("Success", "Your comment was successfully submitted.", SweetAlertIcon.Success);
 
