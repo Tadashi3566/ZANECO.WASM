@@ -27,6 +27,7 @@ public static class Startup
                     configuration.SnackbarConfiguration.VisibleStateDuration = 5000;
                     configuration.SnackbarConfiguration.ShowCloseIcon = false;
                 })
+            .AddSweetAlert2()
             .AddScoped<IClientPreferenceManager, ClientPreferenceManager>()
             .AutoRegisterInterfaces<IAppService>()
             .AutoRegisterInterfaces<IApiService>()

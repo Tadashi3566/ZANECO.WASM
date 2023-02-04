@@ -1,6 +1,4 @@
-﻿@inject SweetAlertService swal
-
-<EditForm Model="@_model" OnValidSubmit="Submit">
+﻿<EditForm Model="@_rating" OnValidSubmit="Submit">
     <DataAnnotationsValidator />
     <CustomValidation @ref="_customValidation" />
     <MudCard>
@@ -11,7 +9,7 @@
             <MudGrid>
                 <MudStack AlignItems="AlignItems.Center">
                     <MudItem xs="12" sm="6">
-                        <MudRating @bind-SelectedValue="_model.RateNumber" MaxValue="5" Size="Size.Large" HoveredValueChanged="@(() => SetRateName(_model.RateNumber))" />
+                        <MudRating @bind-SelectedValue="_rating.RateNumber" MaxValue="5" Size="Size.Large" HoveredValueChanged="@(() => SetRateName(_rating.RateNumber))" />
                     </MudItem>
                     <MudItem xs="12" sm="6">
                         <MudText Typo="Typo.h5">@_rateName</MudText>
@@ -19,7 +17,7 @@
                 </MudStack>
                 
                 <MudItem xs="12">
-                    <MudTextField Label="Input Comment or Rating Survey" @bind-Value="_model.Comment" For="@(() => _model.Comment)" Lines="5" Variant="Variant.Filled" />
+                    <MudTextField Label="Input Comment or Rating Survey" @bind-Value="_rating.Comment" For="@(() => _rating.Comment)" Lines="5" Variant="Variant.Filled" />
                 </MudItem>
             </MudGrid>
         </MudCardContent>
