@@ -93,7 +93,7 @@
             <MudText Typo="Typo.subtitle2">
                 <MudHighlighter Text="@context.Subject" HighlightedText="@_searchString" />
             </MudText>
-            <MudText Typo="Typo.body2">
+            <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.Message" HighlightedText="@_searchString" />
             </MudText>
         </MudItem>
@@ -102,7 +102,7 @@
     private RenderFragment<MessageTemplateDetail> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.body2">
+            <MudText Typo="Typo.subtitle2">
                 <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">

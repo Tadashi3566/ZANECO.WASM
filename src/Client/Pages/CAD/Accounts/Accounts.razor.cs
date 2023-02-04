@@ -142,13 +142,12 @@ public partial class Accounts
                 _accountMigrateLedgerRequest.IsBackgroundJob = _preference.IsBackgroundJob;
                 _accountMigrateLedgerRequest.IsScheduled = _preference.IsScheduled;
             }
-            
+
             if (application.Equals("ACCOUNT"))
             {
-                await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAccountAsync(_accountMigrateAccountRequest), Snackbar,
-                    successMessage: "Migration has been successfully sent to Background Job Worker.");
+                await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAccountAsync(_accountMigrateAccountRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
             }
-            else if(application.Equals("LEDGER"))
+            else if (application.Equals("LEDGER"))
             {
                 string[] accountNumbers = _selectedItems.Select(x => x.AccountNumber).ToArray()!;
 
@@ -158,8 +157,7 @@ public partial class Accounts
                     {
                         _accountMigrateLedgerRequest.AccountNumber = accountNumber;
 
-                        await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateLedgerAsync(_accountMigrateLedgerRequest), Snackbar,
-                            successMessage: "Migration has been successfully sent to Background Job Worker.");
+                        await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateLedgerAsync(_accountMigrateLedgerRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
                     }
                 }
             }

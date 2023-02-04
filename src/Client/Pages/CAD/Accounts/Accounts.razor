@@ -133,7 +133,7 @@
     private RenderFragment<AccountDto> TemplateNameAddress => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.body2">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">
@@ -145,10 +145,10 @@
     private RenderFragment<AccountDto> TemplateBillingDate => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.caption">
+            <MudText Align="Align.Right" Typo="Typo.caption">
                 @context.PreviousReadingDate.ToString("MMM dd, yyyy")
             </MudText>
-            <MudText Typo="Typo.subtitle1">
+            <MudText Align="Align.Right" Typo="Typo.subtitle1">
                 @context.PresentReadingDate.ToString("MMM dd, yyyy")
             </MudText>
         </MudItem>
@@ -157,7 +157,7 @@
     private RenderFragment<AccountDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.subtitle2">
                 <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">

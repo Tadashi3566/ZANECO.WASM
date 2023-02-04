@@ -91,11 +91,23 @@
     private RenderFragment<GroupDto> TemplateCodeName => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.caption">
+            <MudText Typo="Typo.subtitle2">
                 <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
             </MudText>
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<GroupDto> TemplateParentTag => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Parent" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Tag" HighlightedText="@_searchString" />
             </MudText>
         </MudItem>
     };
@@ -103,7 +115,7 @@
     private RenderFragment<GroupDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.subtitle2">
                 <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">

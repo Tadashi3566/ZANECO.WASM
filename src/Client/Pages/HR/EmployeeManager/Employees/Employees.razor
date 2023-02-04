@@ -70,21 +70,23 @@
         <MudItem xs="12">
             <MudItem Class="d-flex">
                 <MudText Typo="Typo.subtitle1">Effectivity: </MudText>
-                <MudText Typo="Typo.subtitle1" Class="ml-2">@String.Format("{0:MMMM dd, yyyy}", context.StartDate) </MudText>
-                <MudText Typo="Typo.subtitle1" Class="ml-2">Area: </MudText>
-                <MudText Typo="Typo.subtitle1" Class="ml-2">@context.Area</MudText>
+                <MudText Typo="Typo.caption" Class="ml-2 mt-1">@String.Format("{0:MMMM dd, yyyy}", context.StartDate) </MudText>
+            </MudItem>
+            <MudItem Class="d-flex">
+                <MudText Typo="Typo.subtitle1">Area: </MudText>
+                <MudText Typo="Typo.caption" Class="ml-2 mt-1">@context.Area</MudText>
             </MudItem>
             <MudItem Class="d-flex">
                 <MudText Typo="Typo.subtitle1">Department: </MudText>
-                <MudText Typo="Typo.subtitle1" Class="ml-2">@context.Department</MudText>
+                <MudText Typo="Typo.caption" Class="ml-2 mt-1">@context.Department</MudText>
             </MudItem>
             <MudItem Class="d-flex">
                 <MudText Typo="Typo.subtitle1">Section: </MudText>
-                <MudText Typo="Typo.subtitle1" Class="ml-2">@context.Section</MudText>
+                <MudText Typo="Typo.caption" Class="ml-2 mt-1">@context.Section</MudText>
             </MudItem>
             <MudItem Class="d-flex">
                 <MudText Typo="Typo.subtitle1">Designation: </MudText>
-                <MudText Typo="Typo.subtitle1" Class="ml-2">@context.Position</MudText>
+                <MudText Typo="Typo.caption" Class="ml-2 mt-1">@context.Position</MudText>
             </MudItem>
         </MudItem>
 
@@ -224,7 +226,7 @@
     private RenderFragment<EmployeeDto> TemplateNameAddress => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.body1">
                 <MudHighlighter Text="@context.FullName" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">
@@ -260,7 +262,7 @@
     private RenderFragment<EmployeeDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.subtitle2">
                 <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">
