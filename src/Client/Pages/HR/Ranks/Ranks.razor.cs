@@ -14,6 +14,8 @@ public partial class Ranks
 
     private EntityTable<RankDto, Guid, RankUpdateRequest> _table = default!;
 
+    private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Rank",
@@ -26,8 +28,8 @@ public partial class Ranks
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.Step, "Step Increment", "Step", typeof(decimal)),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: Rank => Rank.Id,
             searchFunc: async filter => (await Client

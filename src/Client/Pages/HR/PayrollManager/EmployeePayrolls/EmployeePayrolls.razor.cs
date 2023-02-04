@@ -27,6 +27,8 @@ public partial class EmployeePayrolls
 
     private EntityTable<EmployeePayrollDto, Guid, EmployeePayrollUpdateRequest> _table = default!;
 
+    private string? _searchString;
+
     private bool _canViewRoleClaims;
 
     protected override void OnParametersSet()
@@ -55,8 +57,8 @@ public partial class EmployeePayrolls
                 new(data => data.Gross, "Gross", "Gross", typeof(decimal)),
                 new(data => data.Deduction, "Deduction", "Deduction", typeof(decimal)),
                 new(data => data.Net, "Net", "Net", typeof(decimal)),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

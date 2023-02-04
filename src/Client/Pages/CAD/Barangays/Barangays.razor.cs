@@ -14,6 +14,7 @@ public partial class Barangays
 
     private EntityTable<BarangayDto, Guid, BarangayUpdateRequest> _table = default!;
 
+    private string? _searchString;
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Barangay",
@@ -23,8 +24,8 @@ public partial class Barangays
             {
                 new(data => data.AreaName, "Area", "AreaName"),
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

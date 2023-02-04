@@ -3,7 +3,7 @@
 
 <FshTitle Title="Routes" Description="Manage Routes" />
 
-<EntityTable @ref="_table" TEntity="RouteDto" TId="Guid" TRequest="RouteUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RouteDto" TId="Guid" TRequest="RouteUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteArea For="@(() => context.AreaId)" @bind-Value="context.AreaId" />
@@ -27,3 +27,18 @@
     </EditFormContent>
 
 </EntityTable>
+
+@code
+{
+    private RenderFragment<RouteDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

@@ -25,6 +25,7 @@ public partial class Schedules
 
     private EntityTable<ScheduleDto, Guid, ScheduleUpdateRequest> _table = default!;
 
+    private string? _searchString;
     private bool _canViewRoleClaims;
 
     protected override async Task OnInitializedAsync()
@@ -39,8 +40,8 @@ public partial class Schedules
             fields: new()
             {
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client

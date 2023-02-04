@@ -3,7 +3,7 @@
 
 <FshTitle Title="Members" Description="Manage Members" />
 
-<EntityTable @ref="_table" TEntity="MemberDto" TId="Guid" TRequest="MemberViewModel" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="MemberDto" TId="Guid" TRequest="MemberViewModel" Context="@Context">
 
     <EditFormContent>
         <MudItem xs="12">
@@ -83,3 +83,30 @@
     </EditFormContent>
 
 </EntityTable>
+
+@code
+{
+    private RenderFragment<MemberDto> TemplateNameAddress => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.body1">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<MemberDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

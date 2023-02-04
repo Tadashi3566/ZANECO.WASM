@@ -15,6 +15,7 @@ public partial class PowerConsumptions
 
     private EntityTable<PowerConsumptionDto, Guid, PowerConsumptionUpdateRequest> _table = default!;
 
+    private string? _searchString;
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Power Consumption",
@@ -26,8 +27,8 @@ public partial class PowerConsumptions
                 new(data => data.GroupName, "Name", "Name"),
                 new(data => data.BillMonth, "BillMonth", "BillMonth"),
                 new(data => data.KwhPurchased, "KWH Purchased", "KWHPurchased", typeof(decimal)),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: true,
             idFunc: data => data.Id,

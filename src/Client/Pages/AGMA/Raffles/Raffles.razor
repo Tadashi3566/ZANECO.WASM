@@ -4,7 +4,7 @@
 
 <FshTitle Title="Raffles" Description="Manage Raffles" />
 
-<EntityTable @ref="_table" TEntity="RaffleDto" TId="Guid" TRequest="RaffleViewModel" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RaffleDto" TId="Guid" TRequest="RaffleViewModel" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Raffle Date" For="@(() => context.RaffleDate)" @bind-Date="context.RaffleDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
@@ -62,3 +62,18 @@
     </EditFormContent>
 
 </EntityTable>
+
+@code
+{
+    private RenderFragment<RaffleDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

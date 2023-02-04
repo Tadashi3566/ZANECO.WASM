@@ -7,7 +7,7 @@
 
 <FshTitle Title="Employees Payroll" Description="Employees Payroll List" />
 
-<EntityTable @ref="_table" TEntity="EmployeePayrollDto" TId="Guid" TRequest="EmployeePayrollUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="EmployeePayrollDto" TId="Guid" TRequest="EmployeePayrollUpdateRequest" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
             <AutocompletePayroll @bind-Value="SearchPayrollId" />
@@ -62,5 +62,19 @@
         </MudItem>
         
     </EditFormContent>
-
 </EntityTable>
+
+@code
+{
+    private RenderFragment<EmployeePayrollDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

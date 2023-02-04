@@ -3,7 +3,7 @@
 
 <FshTitle Title="Ranks" Description="Manage Ranks" />
 
-<EntityTable @ref="_table" TEntity="RankDto" TId="Guid" TRequest="RankUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RankDto" TId="Guid" TRequest="RankUpdateRequest" Context="@Context">
 
     <EditFormContent>
         <MudItem xs="4">
@@ -29,3 +29,18 @@
     </EditFormContent>
 
 </EntityTable>
+
+@code
+{
+    private RenderFragment<RankDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

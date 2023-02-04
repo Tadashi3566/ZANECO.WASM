@@ -24,7 +24,7 @@ public partial class Ratings
             entityResource: FSHResource.Rating,
             fields: new()
             {
-                new(dto => dto.RateNumber, "Stars", "RateNumber", Template: TemplateStars),
+                new(dto => dto.RateNumber, "Rating", "RateNumber", Template: TemplateStars),
                 new(dto => dto.CreatedOn, "Created On", "CreatedOn", typeof(DateTime)),
                 new(dto => dto.Comment, "Comment", "Comment"),
                 new(dto => dto.Description, "Description", "Description", Template: TemplateDescriptionNotes),

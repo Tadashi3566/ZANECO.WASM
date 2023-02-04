@@ -16,6 +16,7 @@ public partial class Loans
 
     private EntityTable<LoanDto, Guid, LoanUpdateRequest> _table = default!;
 
+    private string? _searchString;
     private DateTime? _dtend;
     private decimal _ammortization = 0;
 
@@ -44,8 +45,8 @@ public partial class Loans
                 new(data => data.DateEnd, "End", "DateEnd", typeof(DateOnly)),
                 new(data => data.Ammortization, "Ammortization", "Ammortization", typeof(decimal)),
                 new(data => data.Status, "Status", "Status"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

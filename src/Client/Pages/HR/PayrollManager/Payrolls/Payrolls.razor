@@ -6,7 +6,7 @@
 
 <FshTitle Title="Payroll" Description="Manage Payroll" />
 
-<EntityTable @ref="_table" TEntity="PayrollDto" TId="Guid" TRequest="PayrollUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="PayrollDto" TId="Guid" TRequest="PayrollUpdateRequest" Context="@Context">
     <ExtraActions>
         @if (_canViewRoleClaims)
         {
@@ -69,5 +69,19 @@
             <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
         </MudItem>
     </EditFormContent>
-
 </EntityTable>
+
+@code
+{
+    private RenderFragment<PayrollDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

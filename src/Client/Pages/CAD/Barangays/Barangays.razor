@@ -3,7 +3,7 @@
 
 <FshTitle Title="Barangays" Description="Manage Barangays" />
 
-<EntityTable @ref="_table" TEntity="BarangayDto" TId="Guid" TRequest="BarangayUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="BarangayDto" TId="Guid" TRequest="BarangayUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12">
             <AutocompleteArea For="@(() => context.AreaId)" @bind-Value="context.AreaId" />
@@ -21,3 +21,18 @@
     </EditFormContent>
 
 </EntityTable>
+
+@code
+{
+    private RenderFragment<BarangayDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

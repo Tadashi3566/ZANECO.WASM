@@ -6,7 +6,7 @@
 
 <FshTitle Title="Schedules" Description="Manage Schedules" />
 
-<EntityTable @ref="_table" TEntity="ScheduleDto" TId="Guid" TRequest="ScheduleUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="ScheduleDto" TId="Guid" TRequest="ScheduleUpdateRequest" Context="@Context">
     <ExtraActions>
         @if (_canViewRoleClaims)
         {
@@ -29,3 +29,17 @@
     </EditFormContent>
 
 </EntityTable>
+@code
+{
+    private RenderFragment<ScheduleDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

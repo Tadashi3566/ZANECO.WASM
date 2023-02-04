@@ -17,6 +17,8 @@ public partial class ScheduleDetails
 
     private EntityTable<ScheduleDetailDto, Guid, ScheduleDetailUpdateRequest> _table = default!;
 
+    private string? _searchString;
+
     public IMask TimeSpanMask = new RegexMask("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
 
     protected override void OnParametersSet()
@@ -43,8 +45,8 @@ public partial class ScheduleDetails
                 new(data => data.TimeOut2, "Time-Out 2", "TimeOut2"),
                 new(data => data.TimeIn3, "Time-In 3", "TimeIn3"),
                 new(data => data.TimeOut3, "Time-Out 3", "TimeOut3"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

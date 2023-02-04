@@ -5,7 +5,7 @@
 
 <FshTitle Title="Calendar" Description="Employee Calendar Management" />
 
-<EntityTable @ref="_table" TEntity="CalendarDto" TId="Guid" TRequest="CalendarUpdateRequest" Context="@Context" >
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="CalendarDto" TId="Guid" TRequest="CalendarUpdateRequest" Context="@Context" >
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
@@ -39,3 +39,26 @@
         </MudItem>
     </EditFormContent>
 </EntityTable>
+
+@code
+{
+    private RenderFragment<CalendarDto> TemplateCalendarDateType => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.body1">@context.CalendarDate.ToString("MMM dd, yyyy")</MudText>
+            <MudText Typo="Typo.caption">@context.CalendarType)</MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<CalendarDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

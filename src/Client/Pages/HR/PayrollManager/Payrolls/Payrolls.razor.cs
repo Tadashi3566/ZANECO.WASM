@@ -23,6 +23,7 @@ public partial class Payrolls
 
     private EntityTable<PayrollDto, Guid, PayrollUpdateRequest> _table = default!;
 
+    private string? _searchString;
     private bool _canViewRoleClaims;
 
     protected override async Task OnInitializedAsync()
@@ -51,8 +52,8 @@ public partial class Payrolls
                 new(data => data.TotalDeduction, "Total Deduction", "TotalDeduction", typeof(decimal)),
                 new(data => data.TotalNet, "Total Net", "TotalNet", typeof(decimal)),
 
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: Payroll => Payroll.Id,
             searchFunc: async filter => (await Client

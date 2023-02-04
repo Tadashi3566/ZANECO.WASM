@@ -15,6 +15,8 @@ public partial class Calendars
 
     private EntityTable<CalendarDto, Guid, CalendarUpdateRequest> _table = default!;
 
+    private string? _searchString;
+
     protected override void OnParametersSet()
     {
         if (EmployeeId != Guid.Empty)
@@ -31,13 +33,13 @@ public partial class Calendars
             fields: new()
             {
                 new(data => data.EmployeeName, "Name", "EmployeeName"),
-                new(data => data.CalendarType, "Type", "CalendarType"),
-                new(data => data.CalendarDate, "Date", "CalendarDate"),
+                new(data => data.CalendarDate, "Date", "CalendarDate", Template: TemplateCalendarDateType),
+                new(data => data.CalendarType, "Type", visible: false),
                 new(data => data.Day, "Day", "Day"),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Status, "Status", "Status"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: Calendar => Calendar.Id,
             searchFunc: async _filter =>

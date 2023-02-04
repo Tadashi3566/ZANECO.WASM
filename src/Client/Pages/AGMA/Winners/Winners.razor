@@ -4,7 +4,7 @@
 
 <FshTitle Title="Winners" Description="Manage Winners" />
 
-<EntityTable @ref="_table" TEntity="WinnerDto" TId="Guid" TRequest="WinnerViewModel" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="WinnerDto" TId="Guid" TRequest="WinnerViewModel" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteRaffle Label="Raffle" For="@(() => context.RaffleId)" @bind-Value="context.RaffleId" />
@@ -68,3 +68,18 @@
     </EditFormContent>
 
 </EntityTable>
+
+@code
+{
+    private RenderFragment<WinnerDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

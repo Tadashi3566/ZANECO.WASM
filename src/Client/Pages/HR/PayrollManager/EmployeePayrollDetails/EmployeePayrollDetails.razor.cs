@@ -18,6 +18,7 @@ public partial class EmployeePayrollDetails
 
     private EntityTable<EmployeePayrollDetailDto, Guid, EmployeePayrollDetailUpdateRequest> _table = default!;
 
+    private string? _searchString;
     protected override void OnParametersSet()
     {
         if (PayrollId != Guid.Empty)
@@ -43,8 +44,8 @@ public partial class EmployeePayrollDetails
                 new(data => data.AdjustmentType, "Type", "AdjustmentType"),
                 new(data => data.AdjustmentName, "Name", "Name"),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

@@ -17,6 +17,8 @@ public partial class Members
 
     private EntityTable<MemberDto, Guid, MemberViewModel> _table = default!;
 
+    private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Member",
@@ -25,13 +27,13 @@ public partial class Members
             fields: new()
             {
                 new(data => data.MembershipDate, "MembershipDate", "MembershipDate", typeof(DateOnly)),
-                new(data => data.Name, "Name", "Name"),
-                new(data => data.Address, "Address", "Address"),
+                new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
+                new(data => data.Address, "Address", visible: false),
                 new(data => data.Gender, "Gender", "Gender"),
                 new(data => data.Phone, "Phone", "Phone"),
                 new(data => data.BirthDate, "BirthDate", "BirthDate", typeof(DateOnly)),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,
