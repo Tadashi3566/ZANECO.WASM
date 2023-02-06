@@ -33,7 +33,7 @@ public partial class ScheduleDetails
         Context = new(
             entityName: "Schedule Detail",
             entityNamePlural: "Schedule Details",
-            entityResource: FSHResource.ScheduleDetails,
+            entityResource: FSHResource.Schedules,
             fields: new()
             {
                 new(data => data.ScheduleName, "Schedule", "ScheduleName"),

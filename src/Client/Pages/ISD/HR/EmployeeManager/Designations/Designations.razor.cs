@@ -47,7 +47,7 @@ public partial class Designations
         Context = new(
             entityName: "Designation",
             entityNamePlural: "Designations",
-            entityResource: FSHResource.Designations,
+            entityResource: FSHResource.Employees,
             fields: new()
             {
                 new(data => data.IdNumber, "IdNumber", "ID"),

@@ -40,8 +40,6 @@ public static class FSHResource
     public const string Employees = nameof(Employees);
     public const string Powerbills = nameof(Powerbills);
 
-    public const string Adjustments = nameof(Adjustments);
-
     public const string Schedules = nameof(Schedules);
     public const string Attendance = nameof(Attendance);
 
@@ -159,13 +157,6 @@ public static class FSHPermissions
         new("Update Powerbills", FSHAction.Update, FSHResource.Powerbills),
         new("Delete Powerbills", FSHAction.Delete, FSHResource.Powerbills),
         new("Export Powerbills", FSHAction.Export, FSHResource.Powerbills),
-
-        new("View Adjustments", FSHAction.View, FSHResource.Adjustments, IsBasic: true),
-        new("Search Adjustments", FSHAction.Search, FSHResource.Adjustments, IsBasic: true),
-        new("Create Adjustments", FSHAction.Create, FSHResource.Adjustments),
-        new("Update Adjustments", FSHAction.Update, FSHResource.Adjustments),
-        new("Delete Adjustments", FSHAction.Delete, FSHResource.Adjustments),
-        new("Export Adjustments", FSHAction.Export, FSHResource.Adjustments),
 
         new("View Schedules", FSHAction.View, FSHResource.Schedules, IsBasic: true),
         new("Search Schedules", FSHAction.Search, FSHResource.Schedules, IsBasic: true),

@@ -20,7 +20,7 @@ public partial class Ranks
         Context = new(
             entityName: "Rank",
             entityNamePlural: "Ranks",
-            entityResource: FSHResource.Ranks,
+            entityResource: FSHResource.Payroll,
             fields: new()
             {
                 new(data => data.Id, "Id", "Id"),

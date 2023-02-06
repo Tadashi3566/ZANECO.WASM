@@ -20,7 +20,7 @@ public partial class Adjustments
         Context = new(
             entityName: "Adjustment",
             entityNamePlural: "Adjustments",
-            entityResource: FSHResource.Adjustments,
+            entityResource: FSHResource.Payroll,
             fields: new()
             {
                 new(data => data.AdjustmentType, "Adjustment Type", "AdjustmentType"),

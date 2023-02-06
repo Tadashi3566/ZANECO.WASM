@@ -34,7 +34,7 @@ public partial class Employers
         Context = new(
             entityName: "Employer",
             entityNamePlural: "Employers",
-            entityResource: FSHResource.Employers,
+            entityResource: FSHResource.Employees,
             fields: new()
             {
                 new(data => data.EmployeeName, "Employee", visible: false),

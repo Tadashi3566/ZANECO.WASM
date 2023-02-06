@@ -113,6 +113,15 @@
             }
         </MudNavGroup>
     }
+    @if (_canViewISD)
+    {
+        <MudNavGroup Title="ISD" Icon="@Icons.Material.Filled.AddBox">
+            @if (_canViewISD)
+            {
+                <MudNavLink Href="/isd/members" Icon="@Icons.Material.Filled.Groups" Class="fsh-nav-child">Members</MudNavLink>
+            }
+        </MudNavGroup>
+    }
     @if (_canViewCAD)
     {
         <MudNavGroup Title="CAD" Icon="@Icons.Material.Filled.AddBox">
@@ -125,7 +134,6 @@
                 <MudNavLink Href="/cad/powerrates" Icon="@Icons.Material.Filled.Power" Class="fsh-nav-child">Power Rates</MudNavLink>
                 <MudNavLink Href="/cad/powerconsumptions" Icon="@Icons.Material.Filled.Power" Class="fsh-nav-child">Power Consumptions</MudNavLink>
 
-                <MudNavLink Href="/cad/members" Icon="@Icons.Material.Filled.Groups" Class="fsh-nav-child">Members</MudNavLink>
                 <MudNavLink Href="/cad/accounts" Icon="@Icons.Material.Filled.Groups" Class="fsh-nav-child">Accounts</MudNavLink>
                 <MudNavLink Href="/cad/ledger" Icon="@Icons.Material.Filled.FormatListBulleted" Class="fsh-nav-child">Ledger</MudNavLink>
             }

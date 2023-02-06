@@ -33,7 +33,7 @@ public partial class Dependents
         Context = new(
             entityName: "Dependent",
             entityNamePlural: "Dependents",
-            entityResource: FSHResource.Dependents,
+            entityResource: FSHResource.Employees,
             fields: new()
             {
                 new(data => data.EmployeeName, "Employee", "Employee"),
