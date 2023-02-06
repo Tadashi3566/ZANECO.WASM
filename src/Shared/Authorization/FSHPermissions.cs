@@ -38,22 +38,18 @@ public static class FSHResource
 
     public const string Accounting = nameof(Accounting);
     public const string Employees = nameof(Employees);
-    public const string Employers = nameof(Employers);
-    public const string Designations = nameof(Designations);
-    public const string Dependents = nameof(Dependents);
     public const string Powerbills = nameof(Powerbills);
 
-    public const string Ranks = nameof(Ranks);
     public const string Adjustments = nameof(Adjustments);
-    public const string EmployeeAdjustments = nameof(EmployeeAdjustments);
 
     public const string Schedules = nameof(Schedules);
-    public const string ScheduleDetails = nameof(ScheduleDetails);
     public const string Attendance = nameof(Attendance);
 
     public const string Payroll = nameof(Payroll);
 
     public const string CAD = nameof(CAD);
+    public const string ISD = nameof(ISD);
+
     public const string Raffles = nameof(Raffles);
 }
 
@@ -157,40 +153,12 @@ public static class FSHPermissions
         new("Delete Employees", FSHAction.Delete, FSHResource.Employees),
         new("Export Employees", FSHAction.Export, FSHResource.Employees),
 
-        new("View Employers", FSHAction.View, FSHResource.Employers, IsBasic: true),
-        new("Search Employers", FSHAction.Search, FSHResource.Employers, IsBasic: true),
-        new("Create Employers", FSHAction.Create, FSHResource.Employers),
-        new("Update Employers", FSHAction.Update, FSHResource.Employers),
-        new("Delete Employers", FSHAction.Delete, FSHResource.Employers),
-        new("Export Employers", FSHAction.Export, FSHResource.Employers),
-
-        new("View Designations", FSHAction.View, FSHResource.Designations, IsBasic: true),
-        new("Search Designations", FSHAction.Search, FSHResource.Designations, IsBasic: true),
-        new("Create Designations", FSHAction.Create, FSHResource.Designations),
-        new("Update Designations", FSHAction.Update, FSHResource.Designations),
-        new("Delete Designations", FSHAction.Delete, FSHResource.Designations),
-        new("Export Designations", FSHAction.Export, FSHResource.Designations),
-
-        new("View Dependents", FSHAction.View, FSHResource.Dependents, IsBasic: true),
-        new("Search Dependents", FSHAction.Search, FSHResource.Dependents, IsBasic: true),
-        new("Create Dependents", FSHAction.Create, FSHResource.Dependents),
-        new("Update Dependents", FSHAction.Update, FSHResource.Dependents),
-        new("Delete Dependents", FSHAction.Delete, FSHResource.Dependents),
-        new("Export Dependents", FSHAction.Export, FSHResource.Dependents),
-
         new("View Powerbills", FSHAction.View, FSHResource.Powerbills, IsBasic: true),
         new("Search Powerbills", FSHAction.Search, FSHResource.Powerbills, IsBasic: true),
         new("Create Powerbills", FSHAction.Create, FSHResource.Powerbills),
         new("Update Powerbills", FSHAction.Update, FSHResource.Powerbills),
         new("Delete Powerbills", FSHAction.Delete, FSHResource.Powerbills),
         new("Export Powerbills", FSHAction.Export, FSHResource.Powerbills),
-
-        new("View Ranks", FSHAction.View, FSHResource.Ranks, IsBasic: true),
-        new("Search Ranks", FSHAction.Search, FSHResource.Ranks, IsBasic: true),
-        new("Create Ranks", FSHAction.Create, FSHResource.Ranks),
-        new("Update Ranks", FSHAction.Update, FSHResource.Ranks),
-        new("Delete Ranks", FSHAction.Delete, FSHResource.Ranks),
-        new("Export Ranks", FSHAction.Export, FSHResource.Ranks),
 
         new("View Adjustments", FSHAction.View, FSHResource.Adjustments, IsBasic: true),
         new("Search Adjustments", FSHAction.Search, FSHResource.Adjustments, IsBasic: true),
@@ -199,26 +167,12 @@ public static class FSHPermissions
         new("Delete Adjustments", FSHAction.Delete, FSHResource.Adjustments),
         new("Export Adjustments", FSHAction.Export, FSHResource.Adjustments),
 
-        new("View Employee Adjustments", FSHAction.View, FSHResource.EmployeeAdjustments, IsBasic: true),
-        new("Search Employee Adjustments", FSHAction.Search, FSHResource.EmployeeAdjustments, IsBasic: true),
-        new("Create Employee Adjustments", FSHAction.Create, FSHResource.EmployeeAdjustments),
-        new("Update Employee Adjustments", FSHAction.Update, FSHResource.EmployeeAdjustments),
-        new("Delete Employee Adjustments", FSHAction.Delete, FSHResource.EmployeeAdjustments),
-        new("Export Employee Adjustments", FSHAction.Export, FSHResource.EmployeeAdjustments),
-
         new("View Schedules", FSHAction.View, FSHResource.Schedules, IsBasic: true),
         new("Search Schedules", FSHAction.Search, FSHResource.Schedules, IsBasic: true),
         new("Create Schedules", FSHAction.Create, FSHResource.Schedules),
         new("Update Schedules", FSHAction.Update, FSHResource.Schedules),
         new("Delete Schedules", FSHAction.Delete, FSHResource.Schedules),
         new("Export Schedules", FSHAction.Export, FSHResource.Schedules),
-
-        new("View Schedule Details", FSHAction.View, FSHResource.ScheduleDetails, IsBasic: true),
-        new("Search Schedule Details", FSHAction.Search, FSHResource.ScheduleDetails, IsBasic: true),
-        new("Create Schedule Details", FSHAction.Create, FSHResource.ScheduleDetails),
-        new("Update Schedule Details", FSHAction.Update, FSHResource.ScheduleDetails),
-        new("Delete Schedule Details", FSHAction.Delete, FSHResource.ScheduleDetails),
-        new("Export Schedule Details", FSHAction.Export, FSHResource.ScheduleDetails),
 
         new("View Attendance", FSHAction.View, FSHResource.Attendance, IsBasic: true),
         new("Search Attendance", FSHAction.Search, FSHResource.Attendance, IsBasic: true),
@@ -240,6 +194,13 @@ public static class FSHPermissions
         new("Update CAD Aplications", FSHAction.Update, FSHResource.CAD),
         new("Delete CAD Aplications", FSHAction.Delete, FSHResource.CAD),
         new("Export CAD Aplications", FSHAction.Export, FSHResource.CAD),
+
+        new("View ISD Aplications", FSHAction.View, FSHResource.ISD, IsBasic: true),
+        new("Search ISD Aplications", FSHAction.Search, FSHResource.ISD, IsBasic: true),
+        new("Create ISD Aplications", FSHAction.Create, FSHResource.ISD),
+        new("Update ISD Aplications", FSHAction.Update, FSHResource.ISD),
+        new("Delete ISD Aplications", FSHAction.Delete, FSHResource.ISD),
+        new("Export ISD Aplications", FSHAction.Export, FSHResource.ISD),
 
         new("View Raffle", FSHAction.View, FSHResource.Raffles, IsBasic: true),
         new("Search Raffle", FSHAction.Search, FSHResource.Raffles, IsBasic: true),
