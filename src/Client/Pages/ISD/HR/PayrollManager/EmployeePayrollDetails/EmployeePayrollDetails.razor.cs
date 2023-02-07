@@ -44,7 +44,7 @@ public partial class EmployeePayrollDetails
                 new(data => data.AdjustmentType, "Type", "AdjustmentType"),
                 new(data => data.AdjustmentName, "Name", "Name"),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
-                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,

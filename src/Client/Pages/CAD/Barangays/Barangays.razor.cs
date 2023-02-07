@@ -24,7 +24,7 @@ public partial class Barangays
             {
                 new(data => data.AreaName, "Area", "AreaName"),
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,

@@ -32,7 +32,7 @@ public partial class Groups
                 new(data => data.Number, "Number", "Number"),
                 new(data => data.Name, "Name", "Name", Template: TemplateCodeName),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
-                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: true,
             idFunc: Group => Group.Id,

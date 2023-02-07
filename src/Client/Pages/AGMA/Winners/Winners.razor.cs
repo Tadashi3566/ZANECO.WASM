@@ -30,7 +30,7 @@ public partial class Winners
                 new(data => data.PrizeName, "Prize", "PrizeName"),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Address, "Address", "Address"),
-                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: true,

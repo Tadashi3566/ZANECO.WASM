@@ -42,7 +42,7 @@ public partial class Employers
                 new(data => data.Designation, "Designation", "Designation"),
                 new(data => data.StartDate, "StartDate", "StartDate", typeof(DateOnly)),
                 new(data => data.EndDate, "EndDate", "EndDate", typeof(DateOnly)),
-                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

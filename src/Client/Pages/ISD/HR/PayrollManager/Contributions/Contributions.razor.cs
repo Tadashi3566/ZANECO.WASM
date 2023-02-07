@@ -45,7 +45,7 @@ public partial class Contributions
                 new(data => data.TotalContribution, "Total", "TotalContribution", typeof(decimal)),
                 new(data => data.Percentage, "Percentage", "Percentage"),
                 new(data => data.IsFixed, "Fixed", "IsFixed", typeof(bool)),
-                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: data => data.Id,

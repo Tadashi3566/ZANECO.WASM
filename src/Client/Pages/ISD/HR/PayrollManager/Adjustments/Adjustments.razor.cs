@@ -32,7 +32,7 @@ public partial class Adjustments
                 new(data => data.IsOptional, "Optional", "IsOptional", typeof(bool)),
                 new(data => data.IsLoan, "Loan", "IsLoan", typeof(bool)),
                 new(data => data.IsActive, "Active", "IsActive", typeof(bool)),
-                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: Adjustment => Adjustment.Id,

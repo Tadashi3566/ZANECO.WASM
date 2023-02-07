@@ -38,7 +38,7 @@ public partial class Calendars
                 new(data => data.Day, "Day", "Day"),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Status, "Status", "Status"),
-                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: Calendar => Calendar.Id,
