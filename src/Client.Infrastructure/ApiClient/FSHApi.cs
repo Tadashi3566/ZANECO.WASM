@@ -37914,11 +37914,11 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CalendarSearchRequest : PaginationFilter
     {
-        [Newtonsoft.Json.JsonProperty("employeeId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? EmployeeId { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("employeeId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public System.Guid? EmployeeId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("payrollId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid PayrollId { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("payrollId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public System.Guid PayrollId { get; set; } = default!;
 
     }
 
