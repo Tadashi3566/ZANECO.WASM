@@ -28,8 +28,7 @@ public partial class Members
             {
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
                 new(data => data.Address, "Address", visible: false),
-                new(data => data.Gender, "Gender", "Gender", Template: TemplateGenderBirthDate),
-                new(data => data.Phone, "Phone", "Phone"),
+                new(data => data.PhoneNumber, "PhoneNumber", "PhoneNumber"),
                 new(data => data.ApplicationDate, "MembershipDate", "MembershipDate", Template: TemplateApplicationMembership),
                 new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),

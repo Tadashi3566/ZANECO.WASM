@@ -66,7 +66,7 @@
         <MudItem xs="12">
             <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        @*<MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Gender" For="@(() => context.Gender)" @bind-Value="context.Gender" Variant="Variant.Filled" >
                 <MudSelectItem Value="@("MALE")"/>
                 <MudSelectItem Value="@("FEMALE")"/>
@@ -74,7 +74,7 @@
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Birth Date" For="@(() => context.BirthDate)" @bind-Date="context.BirthDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
-        </MudItem>
+        </MudItem>*@
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" Variant="Variant.Filled" />
         </MudItem>
