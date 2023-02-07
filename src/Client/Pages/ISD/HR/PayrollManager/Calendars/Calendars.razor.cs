@@ -32,12 +32,10 @@ public partial class Calendars
             entityResource: FSHResource.Payroll,
             fields: new()
             {
-                new(data => data.EmployeeName, "Name", "EmployeeName"),
                 new(data => data.CalendarDate, "Date", "CalendarDate", Template: TemplateCalendarDateType),
                 new(data => data.CalendarType, "Type", visible: false),
-                new(data => data.Day, "Day", "Day"),
-                new(data => data.Name, "Name", "Name"),
-                new(data => data.Status, "Status", "Status"),
+                new(data => data.Name, "Name", "Name", Template: TemplateNameDay),
+                new(data => data.Day, "Day", visible: false),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },

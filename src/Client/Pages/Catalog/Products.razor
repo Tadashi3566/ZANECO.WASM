@@ -18,8 +18,7 @@
             <MudTextField Label="@L["Name"]" For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="@L["Description"]" For="@(() => context.Description)"
-                @bind-Value="context.Description" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <BrandAutocomplete For="@(() => context.BrandId)" @bind-Value="context.BrandId"  />

@@ -21,7 +21,7 @@ public partial class Members
 
     protected override void OnInitialized() =>
         Context = new(
-            entityName: "Member",
+            entityName: "data",
             entityNamePlural: "Members",
             entityResource: FSHResource.CAD,
             fields: new()
@@ -48,16 +48,16 @@ public partial class Members
                 await Client.CreateAsync(data.Adapt<MemberCreateRequest>());
                 data.ImageInBytes = string.Empty;
             },
-            updateFunc: async (id, Member) =>
+            updateFunc: async (id, data) =>
             {
-                if (!string.IsNullOrEmpty(Member.ImageInBytes))
+                if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    Member.DeleteCurrentImage = true;
-                    Member.Image = new FileUploadRequest() { Data = Member.ImageInBytes, Extension = Member.ImageExtension ?? string.Empty, Name = $"{Member.Name}_{Guid.NewGuid():N}" };
+                    data.DeleteCurrentImage = true;
+                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
 
-                await Client.UpdateAsync(id, Member.Adapt<MemberUpdateRequest>());
-                Member.ImageInBytes = string.Empty;
+                await Client.UpdateAsync(id, data.Adapt<MemberUpdateRequest>());
+                data.ImageInBytes = string.Empty;
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);

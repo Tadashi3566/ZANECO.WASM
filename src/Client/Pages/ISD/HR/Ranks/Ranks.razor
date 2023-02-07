@@ -6,17 +6,17 @@
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RankDto" TId="Guid" TRequest="RankUpdateRequest" Context="@Context">
 
     <EditFormContent>
-        <MudItem xs="4">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="8">
+        <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
 
-        <MudItem xs="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Step Increment" For="@(() => context.Step)" @bind-Value="context.Step" Format="N2" Variant="Variant.Filled" />
         </MudItem>
 
