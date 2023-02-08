@@ -32,7 +32,7 @@ public class AutocompleteArea : MudAutocomplete<string>
         var filter = new GroupSearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "code", "name", "description" }, Keyword = value }
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(() =>
@@ -40,7 +40,7 @@ public class AutocompleteArea : MudAutocomplete<string>
             is PaginationResponseOfGroupDto response)
         {
             _groups = response.Data
-                .Where(x => x.Parent.Equals("AREA"))
+                .Where(x => x.Parent.Equals("OFFICES"))
                 .ToList();
         }
 

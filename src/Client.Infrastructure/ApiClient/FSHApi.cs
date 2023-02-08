@@ -37970,8 +37970,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("employeeId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid EmployeeId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("calendarDate", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
+        [Newtonsoft.Json.JsonProperty("calendarDate", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? CalendarDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("calendarType", Required = Newtonsoft.Json.Required.Always)]
@@ -39201,10 +39200,10 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("timeOut3", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TimeOut3 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Notes { get; set; } = default!;
 
     }
@@ -39689,10 +39688,19 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.Guid EmployeeId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("idNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int IdNumber { get; set; } = default!;
+        public string IdNumber { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("employeeName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? EmployeeName { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("employeeName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string EmployeeName { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("designationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid DesignationId { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid ScheduleId { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("scheduleName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ScheduleName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("startDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime StartDate { get; set; } = default!;
@@ -39700,56 +39708,50 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("endDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime EndDate { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("area", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? Area { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Area { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("department", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? Department { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("department", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Department { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("division", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? Division { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("division", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Division { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("section", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? Section { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("section", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Section { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("position", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? Position { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("position", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Position { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("employmentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? EmploymentType { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("employmentType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string EmploymentType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salaryRank", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? SalaryRank { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("salaryRank", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SalaryRank { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("salaryAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal SalaryAmount { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("rateType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? RateType { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("payType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PayType { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("rateType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string RateType { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("daysPerMonth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int DaysPerMonth { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ratePerDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal RatePerDay { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("hoursPerDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int HoursPerDay { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("ratePerDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal RatePerDay { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("ratePerHour", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal RatePerHour { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("taxType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? TaxType { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("payType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? PayType { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid ScheduleId { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("scheduleName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ScheduleName { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("taxType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TaxType { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Description { get; set; } = default!;
@@ -39803,8 +39805,8 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("employmentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? EmploymentType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salaryRank", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? SalaryRank { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("salaryRank", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SalaryRank { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("salaryAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal SalaryAmount { get; set; } = default!;
@@ -39851,6 +39853,10 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("designationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid DesignationId { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Guid ScheduleId { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("startDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime StartDate { get; set; } = default!;
 
@@ -39879,7 +39885,8 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         public string EmploymentType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salaryRank", Required = Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonProperty("salaryRank", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0, int.MaxValue)]
         public int SalaryRank { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("salaryAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -39910,10 +39917,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("taxType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TaxType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Guid ScheduleId { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
 
@@ -39937,6 +39940,10 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("designationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid DesignationId { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Guid ScheduleId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("startDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? StartDate { get; set; } = default!;
@@ -39966,8 +39973,16 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         public string EmploymentType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salaryRank", Required = Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonProperty("salaryRank", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0, int.MaxValue)]
         public int SalaryRank { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("salaryAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public decimal SalaryAmount { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("payType", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string PayType { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("rateType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -39989,14 +40004,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("taxType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TaxType { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("payType", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public string PayType { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Guid ScheduleId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
@@ -43842,8 +43849,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.StringLength(128, MinimumLength = 1)]
         public string Name { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("raffleDate", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonProperty("raffleDate", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? RaffleDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
