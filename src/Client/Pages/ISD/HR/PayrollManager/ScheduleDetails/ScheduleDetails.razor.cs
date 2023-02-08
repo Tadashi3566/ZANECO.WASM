@@ -45,6 +45,7 @@ public partial class ScheduleDetails
                 new(data => data.TimeOut2, "Time-Out 2", "TimeOut2"),
                 new(data => data.TimeIn3, "Time-In 3", "TimeIn3"),
                 new(data => data.TimeOut3, "Time-Out 3", "TimeOut3"),
+                new(data => data.TotalHours, "TotalHours", "TotalHours"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
