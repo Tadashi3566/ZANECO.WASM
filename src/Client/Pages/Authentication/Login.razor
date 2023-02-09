@@ -16,17 +16,16 @@
     <MudGrid>
         <DataAnnotationsValidator />
         <CustomValidation @ref="_customValidation" />
+
         <MudItem xs="12">
             <MudTextField T="string" Label="@L["User Name"]" Variant="Variant.Outlined" @bind-Value="_tokenRequest.UserName"
                           For="@(() => _tokenRequest.UserName)" />
         </MudItem>
 
-        @*
         <MudItem xs="12">
             <MudTextField T="string" Label="@L["E-mail"]" Variant="Variant.Outlined" @bind-Value="_tokenRequest.Email"
                 For="@(() => _tokenRequest.Email)" />
         </MudItem>
-        *@
 
         <MudItem xs="12">
             <MudTextField Label="@L["Password"]" Variant="Variant.Outlined" @bind-Value="_tokenRequest.Password"
@@ -34,12 +33,10 @@
                 AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
         </MudItem>
 
-        @*
         <MudItem xs="12">
             <MudTextField T="string" Label="@L["Tenant"]" Variant="Variant.Outlined" @bind-Value="TenantId"
                 For="@(() => TenantId)" Required />
         </MudItem>
-        *@
         
         <MudItem xs="12" sm="6">
             <MudButton StartIcon="@Icons.Material.Filled.AppRegistration" Link="/users/self-register">@L["Register?"]</MudButton>

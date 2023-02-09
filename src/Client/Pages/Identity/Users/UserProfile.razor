@@ -24,14 +24,23 @@ else
                         </MudCardHeader>
                         <MudCardContent Class="pa-46" Style="padding:26px!important">
                             <MudGrid>
-                                <MudSwitch @bind-Checked="@_active" Color="Color.Primary" Label="@_localizer["Active?"]"/>
-                                <MudCheckBox ReadOnly @bind-Checked="@_emailConfirmed" Disabled Label="@_localizer["Email Confirmed?"]" Color="Color.Secondary"/>
-                                <MudButton
-                                    Color="Color.Primary"
-                                    Class="ml-auto"
-                                    OnClick="ToggleUserStatus"
-                                    ButtonType="ButtonType.Submit">@_localizer["Save Changes"]
-                                </MudButton>
+                                <MudItem xs="12" sm="3">
+                                    <MudSwitch @bind-Checked="@_active" Color="Color.Primary" Label="@_localizer["Active?"]" />
+                                </MudItem>
+                                <MudItem xs="12" sm="3">
+                                    <MudCheckBox ReadOnly @bind-Checked="@_emailConfirmed" Disabled Label="@_localizer["Email Confirmed?"]" Color="Color.Secondary" />
+                                </MudItem>
+                                <MudItem xs="12">
+                                    <AutocompleteEmployee @bind-Value="_employeeId"/>
+                                </MudItem>
+                                <MudItem>
+                                    <MudButton Color="Color.Primary"
+                                               Class="ml-auto"
+                                               ButtonType="ButtonType.Submit"
+                                               OnClick="ToggleUserStatus">
+                                               Save Changes
+                                    </MudButton>
+                                </MudItem>
                             </MudGrid>
                         </MudCardContent>
                     </MudCard>
@@ -80,13 +89,16 @@ else
                 <MudCardContent>
                     <MudGrid>
                         <MudItem xs="12" sm="6">
+                            <MudField Label="@_localizer["Employee ID"]" Variant="Variant.Outlined" Disabled=true>@_employeeId</MudField>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
                             <MudField Label="@_localizer["First Name"]" Variant="Variant.Outlined">@_firstName</MudField>
                         </MudItem>
                         <MudItem xs="12" sm="6">
                             <MudField Label="@_localizer["Last Name"]" Variant="Variant.Outlined">@_lastName</MudField>
                         </MudItem>
                         <MudItem xs="12" sm="6">
-                            <MudField Label="@_localizer["PhoneNumber Number"]" Variant="Variant.Outlined">@_phoneNumber</MudField>
+                            <MudField Label="@_localizer["Phone Number"]" Variant="Variant.Outlined">@_phoneNumber</MudField>
                         </MudItem>
                         <MudItem xs="12" sm="6">
                             <MudField Label="@_localizer["Email"]" Variant="Variant.Outlined">@_email</MudField>

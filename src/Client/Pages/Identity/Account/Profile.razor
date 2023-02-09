@@ -54,6 +54,10 @@
                     <MudGrid>
                         <DataAnnotationsValidator />
                         <CustomValidation @ref="_customValidation" />
+                        @*<MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="@_user.EmployeeId"
+                                          Label="@L["Employee Id"]" Variant="Variant." Disabled=true />
+                        </MudItem>*@
                         <MudItem xs="12" sm="6">
                             <MudTextField @bind-Value="@_user.FirstName"
                                           For="@(() => _user.FirstName)"
@@ -67,7 +71,7 @@
                         <MudItem xs="12" sm="6">
                             <MudTextField @bind-Value="@_user.PhoneNumber"
                                           For="@(() => _user.PhoneNumber)"
-                                          Label="@L["PhoneNumber Number"]"
+                                          Label="@L["Phone Number"]"
                                           Variant="Variant.Filled" />
                         </MudItem>
                         <MudItem xs="12" sm="6">

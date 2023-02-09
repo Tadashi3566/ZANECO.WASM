@@ -51,7 +51,7 @@ public partial class Contacts
             fields: new()
             {
                 new(data => data.ContactType, "Contact Type", "ContactType"),
-                new(data => data.PhoneNumber, "PhoneNumber Number", "PhoneNumber", Template: TemplatePhoneNumber),
+                new(data => data.PhoneNumber, "Phone Number", "PhoneNumber", Template: TemplatePhoneNumber),
                 new(data => data.AccountNumber, "Account", "AccountNumber"),
                 new(data => data.Name, "Name/Address", "Name", Template: TemplateNameAddress),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
@@ -76,7 +76,7 @@ public partial class Contacts
         {
             await ClipboardService!.CopyToClipboard(string.Join(",", phoneNumbers));
 
-            Snackbar.Add("Selected PhoneNumber Number(s) were copied to Clipboard", Severity.Success);
+            Snackbar.Add("Selected Phone Number(s) were copied to Clipboard", Severity.Success);
         }
     }
 

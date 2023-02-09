@@ -46,7 +46,7 @@ public class AutocompleteSchedule : MudAutocomplete<Guid>
         var filter = new ScheduleSearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "name", "description", "notes" }, Keyword = value }
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(

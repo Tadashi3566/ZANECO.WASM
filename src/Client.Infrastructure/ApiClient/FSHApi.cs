@@ -6582,51 +6582,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                 }
             }
         }
-
-        private string ConvertToString(object? value, System.Globalization.CultureInfo cultureInfo)
-        {
-            if (value == null)
-            {
-                return "";
-            }
-
-            if (value is System.Enum)
-            {
-                var name = System.Enum.GetName(value.GetType(), value);
-                if (name != null)
-                {
-                    var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
-                    if (field != null)
-                    {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
-                            as System.Runtime.Serialization.EnumMemberAttribute;
-                        if (attribute != null)
-                        {
-                            return attribute.Value != null ? attribute.Value : name;
-                        }
-                    }
-
-                    var converted = System.Convert.ToString(System.Convert.ChangeType(value, System.Enum.GetUnderlyingType(value.GetType()), cultureInfo));
-                    return converted == null ? string.Empty : converted;
-                }
-            }
-            else if (value is bool)
-            {
-                return System.Convert.ToString((bool)value, cultureInfo).ToLowerInvariant();
-            }
-            else if (value is byte[])
-            {
-                return System.Convert.ToBase64String((byte[])value);
-            }
-            else if (value.GetType().IsArray)
-            {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
-                return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
-            }
-
-            var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
-        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -22698,14 +22653,14 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Toggle a user's active status.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ToggleStatusAsync(string? id, ToggleUserStatusRequest request);
+        System.Threading.Tasks.Task ToggleStatusAsync(string? id, UserStatusRequest request);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Toggle a user's active status.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ToggleStatusAsync(string? id, ToggleUserStatusRequest request, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task ToggleStatusAsync(string? id, UserStatusRequest request, System.Threading.CancellationToken cancellationToken);
 
         /// <summary>
         /// Confirm email address for a user.
@@ -23376,7 +23331,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Toggle a user's active status.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task ToggleStatusAsync(string? id, ToggleUserStatusRequest request)
+        public virtual System.Threading.Tasks.Task ToggleStatusAsync(string? id, UserStatusRequest request)
         {
             return ToggleStatusAsync(id, request, System.Threading.CancellationToken.None);
         }
@@ -23386,7 +23341,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         /// Toggle a user's active status.
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task ToggleStatusAsync(string? id, ToggleUserStatusRequest request, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task ToggleStatusAsync(string? id, UserStatusRequest request, System.Threading.CancellationToken cancellationToken)
         {
             if (request == null)
                 throw new System.ArgumentNullException("request");
@@ -24171,51 +24126,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
                     throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
                 }
             }
-        }
-
-        private string ConvertToString(object? value, System.Globalization.CultureInfo cultureInfo)
-        {
-            if (value == null)
-            {
-                return "";
-            }
-
-            if (value is System.Enum)
-            {
-                var name = System.Enum.GetName(value.GetType(), value);
-                if (name != null)
-                {
-                    var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
-                    if (field != null)
-                    {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
-                            as System.Runtime.Serialization.EnumMemberAttribute;
-                        if (attribute != null)
-                        {
-                            return attribute.Value != null ? attribute.Value : name;
-                        }
-                    }
-
-                    var converted = System.Convert.ToString(System.Convert.ChangeType(value, System.Enum.GetUnderlyingType(value.GetType()), cultureInfo));
-                    return converted == null ? string.Empty : converted;
-                }
-            }
-            else if (value is bool)
-            {
-                return System.Convert.ToString((bool)value, cultureInfo).ToLowerInvariant();
-            }
-            else if (value is byte[])
-            {
-                return System.Convert.ToBase64String((byte[])value);
-            }
-            else if (value.GetType().IsArray)
-            {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
-                return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
-            }
-
-            var result = System.Convert.ToString(value, cultureInfo);
-            return result == null ? "" : result;
         }
     }
 
@@ -36990,6 +36900,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid Id { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("employeeId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid EmployeeId { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("userName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? UserName { get; set; } = default!;
 
@@ -37010,6 +36923,8 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("phoneNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? PhoneNumber { get; set; } = default!;
+
+
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Description { get; set; } = default!;
@@ -40786,6 +40701,10 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         public string UserName { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Email { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public string Password { get; set; } = default!;
@@ -40870,8 +40789,11 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ToggleUserStatusRequest
+    public partial class UserStatusRequest
     {
+        [Newtonsoft.Json.JsonProperty("employeeId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? EmployeeId { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("activateUser", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool ActivateUser { get; set; } = default!;
 

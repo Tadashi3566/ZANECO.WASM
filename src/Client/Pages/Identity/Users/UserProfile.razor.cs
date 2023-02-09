@@ -16,7 +16,7 @@ public partial class UserProfile
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
     [Inject]
-    protected IUsersClient UsersClient { get; set; } = default!;
+    protected IUsersClient Client { get; set; } = default!;
 
     [Parameter]
     public string? Id { get; set; }
@@ -24,6 +24,7 @@ public partial class UserProfile
     public string? Title { get; set; }
     [Parameter]
     public string? Email { get; set; }
+    public Guid _employeeId { get; set; }
 
     private bool _active;
     private bool _emailConfirmed;
@@ -42,10 +43,13 @@ public partial class UserProfile
 
     private async Task ToggleUserStatus()
     {
-        var request = new ToggleUserStatusRequest { ActivateUser = _active, UserId = Id };
-        await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.ToggleStatusAsync(Id, request),
-                Snackbar
-            );
+        var request = new UserStatusRequest
+        {
+            UserId = Id,
+            EmployeeId = _employeeId!,
+            ActivateUser = _active,
+        };
+        await ApiHelper.ExecuteCallGuardedAsync(() => Client.ToggleStatusAsync(Id, request), Snackbar);
         Navigation.NavigateTo("/users");
     }
 
@@ -54,9 +58,7 @@ public partial class UserProfile
 
     protected override async Task OnInitializedAsync()
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.GetByIdAsync(Id),
-            Snackbar
-        ) is UserDetailsDto dto)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetByIdAsync(Id), Snackbar) is UserDetailsDto dto)
         {
             _firstName = dto.FirstName;
             _lastName = dto.LastName;
@@ -73,6 +75,7 @@ public partial class UserProfile
             {
                 _firstLetterOfName = _firstName.ToUpper().FirstOrDefault();
             }
+            _employeeId = dto.EmployeeId;
         }
 
         var state = await AuthState;

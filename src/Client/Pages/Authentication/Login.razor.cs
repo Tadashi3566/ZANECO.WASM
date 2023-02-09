@@ -19,6 +19,8 @@ public partial class Login
     public bool BusySubmitting { get; set; }
 
     private readonly TokenRequest _tokenRequest = new();
+    private string TenantId { get; set; } = string.Empty;
+
     private bool _passwordVisibility;
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
@@ -58,7 +60,7 @@ public partial class Login
     {
         BusySubmitting = true;
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => AuthService.LoginAsync("root", _tokenRequest), Snackbar, _customValidation))
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => AuthService.LoginAsync(TenantId, _tokenRequest), Snackbar, _customValidation))
         {
             Snackbar.Add($"Logged in as {_tokenRequest.UserName}", Severity.Info);
         }

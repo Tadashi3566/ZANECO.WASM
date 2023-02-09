@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
 using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
-namespace ZANECO.WASM.Client.Pages.ISD.HR;
+namespace ZANECO.WASM.Client.Pages.Identity.Users;
 public class AutocompleteEmployee : MudAutocomplete<Guid>
 {
     [Inject]
-    private ISnackbar Snackbar { get; set; } = default!;
-    [Inject]
     private IEmployeesClient Client { get; set; } = default!;
+    [Inject]
+    private ISnackbar Snackbar { get; set; } = default!;
 
     private List<EmployeeDto> _employees = new();
 
@@ -28,12 +29,12 @@ public class AutocompleteEmployee : MudAutocomplete<Guid>
         return base.SetParametersAsync(parameters);
     }
 
-    // when the value parameter is set, we have to load that one Employee to be able to show the name
+    // when the value parameter is set, we have to load that one dto to be able to show the name
     // we can't do that in OnInitialized because of a strange bug (https://github.com/MudBlazor/MudBlazor/issues/3818)
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender && _value != default
-            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
+        if (firstRender &&
+            _value != default && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
             is { } dto)
         {
             _employees.Add(dto);
@@ -46,7 +47,7 @@ public class AutocompleteEmployee : MudAutocomplete<Guid>
         var filter = new EmployeeSearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "lastname", "firstname", "middlename" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "firstname", "middlename", "lastname", "address" }, Keyword = value }
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
@@ -59,5 +60,6 @@ public class AutocompleteEmployee : MudAutocomplete<Guid>
         return _employees.Select(x => x.Id);
     }
 
-    private string GetText(Guid id) => _employees.Find(b => b.Id == id)?.NameFull ?? string.Empty;
+    private string GetText(Guid id) =>
+        _employees.Find(b => b.Id == id)?.FullName ?? string.Empty;
 }
