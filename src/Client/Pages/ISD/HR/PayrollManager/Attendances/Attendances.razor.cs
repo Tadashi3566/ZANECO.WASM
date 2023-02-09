@@ -40,6 +40,7 @@ public partial class Attendances
             entityResource: FSHResource.Attendance,
             fields: new()
             {
+                new(data => data.ImagePath, "Image", Template: TemplateImage),
                 new(data => data.EmployeeName, "Name", "EmployeeName"),
                 new(data => data.AttendanceDate, "Date", "AttendanceDate", typeof(DateOnly)),
                 new(data => data.ScheduleDetailDay, "Day", "ScheduleDetailDay"),
@@ -72,7 +73,7 @@ public partial class Attendances
 
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Id}_{Guid.NewGuid():N}" };
+                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
                 }
 
                 await Client.CreateAsync(data.Adapt<AttendanceCreateRequest>());
@@ -85,7 +86,7 @@ public partial class Attendances
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
                     data.DeleteCurrentImage = true;
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Id}_{Guid.NewGuid():N}" };
+                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
                 }
 
                 //await Client.UpdateAsync(id, data);

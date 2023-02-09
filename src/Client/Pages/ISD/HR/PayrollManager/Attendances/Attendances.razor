@@ -100,6 +100,13 @@
 
 @code
 {
+    private RenderFragment<AttendanceDto> TemplateImage => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 10%"> </MudAvatar>
+        </MudItem>
+    };
+
     private RenderFragment<AttendanceDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">

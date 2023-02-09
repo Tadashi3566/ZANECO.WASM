@@ -125,6 +125,12 @@
                                     @Convert.ToDateTime(field.ValueFunc(context)).ToString("MMMM dd, yyyy")
                                 </MudText>
                             }
+                            else if (field.Type == typeof(TimeOnly))
+                            {
+                                <MudText Align="Align.Right">
+                                    @Convert.ToDateTime(field.ValueFunc(context)).ToString("HH:mm")
+                                </MudText>
+                            }
                             else if (field.Type == typeof(DateTime))
                             {
                                 <MudText Align="Align.Right" >

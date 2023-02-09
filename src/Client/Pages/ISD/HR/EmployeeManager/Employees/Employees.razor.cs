@@ -44,6 +44,7 @@ public partial class Employees
                 entityResource: FSHResource.Employees,
                 fields: new()
                 {
+                new(data => data.ImagePath, "Image", Template: TemplateImage),
                     new(data => data.Number, "ID", "Number"),
                     new(data => data.HireDate, "Date Hired", "HireDate", typeof(DateTime), Template: TemplateHireDate),
                     new(data => data.RegularDate, "Date Regular", "RegularDate", typeof(DateTime), Template: TemplateRegularDate),

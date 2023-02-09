@@ -143,6 +143,16 @@
 
 @code
 {
+    private RenderFragment<DesignationDto> TemplateIdActive => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.IdNumber" HighlightedText="@_searchString" />
+            </MudText>
+            <MudSwitch Checked="@context.IsActive" Color="Color.Primary" ReadOnly=true />
+        </MudItem>
+    };
+
     private RenderFragment<DesignationDto> TemplateAreaDepartment => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">

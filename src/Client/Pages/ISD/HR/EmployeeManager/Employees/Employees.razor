@@ -14,9 +14,9 @@
         @if (_canViewRoleClaims)
         {
             <MudDivider />
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/employers/{context.Id}"))">Employers</MudMenuItem>
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/dependents/{context.Id}"))">Dependents</MudMenuItem>
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/designations/{context.Id}"))">Designations</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/dependents/{context.Id}"))">Dependents</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/employers/{context.Id}"))">Employers</MudMenuItem>
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/powerbills/{context.Id}"))">Power Bill</MudMenuItem>
             <MudDivider />
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/attendance/{context.Id}/{SearchPayrollId}"))">Attendance</MudMenuItem>
@@ -207,6 +207,13 @@
 
 @code
 {
+    private RenderFragment<EmployeeDto> TemplateImage => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Rounded=true Style="height: 100px; width: 100px;"> </MudAvatar>
+        </MudItem>
+    };
+
     private RenderFragment<EmployeeDto> TemplateHireDate => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">

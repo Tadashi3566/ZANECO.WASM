@@ -50,7 +50,7 @@ public partial class Designations
             entityResource: FSHResource.Employees,
             fields: new()
             {
-                new(data => data.IdNumber, "IdNumber", "ID"),
+                new(data => data.IdNumber, "IdNumber", "ID", Template: TemplateIdActive),
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.Area, "Area", "Area", Template: TemplateAreaDepartment),
                 new(data => data.Department, "Department", visible: false),
@@ -129,6 +129,8 @@ public partial class Designations
         if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.DesignationCurrentAsync(request.Adapt<DesignationCurrentRequest>()), Snackbar))
         {
             Snackbar.Add("Current Employee Designation has been successfully selected", Severity.Success);
+
+            await _table.ReloadDataAsync();
         }
     }
 
