@@ -33,9 +33,10 @@ public class AutocompleteGroup : MudAutocomplete<Guid>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && _value != default
-            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar) is { } group)
+            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
+            is { } dto)
         {
-            _groups.Add(group);
+            _groups.Add(dto);
             ForceRender(true);
         }
     }

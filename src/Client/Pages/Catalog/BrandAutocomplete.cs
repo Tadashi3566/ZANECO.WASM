@@ -31,16 +31,15 @@ public class BrandAutocomplete : MudAutocomplete<Guid>
         return base.SetParametersAsync(parameters);
     }
 
-    // when the value parameter is set, we have to load that one brand to be able to show the name
+    // when the value parameter is set, we have to load that one dto to be able to show the name
     // we can't do that in OnInitialized because of a strange bug (https://github.com/MudBlazor/MudBlazor/issues/3818)
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender &&
-            _value != default &&
-            await ApiHelper.ExecuteCallGuardedAsync(
-                () => BrandsClient.GetAsync(_value), Snackbar) is { } brand)
+            _value != default && await ApiHelper.ExecuteCallGuardedAsync(() => BrandsClient.GetAsync(_value), Snackbar)
+            is { } dto)
         {
-            _brands.Add(brand);
+            _brands.Add(dto);
             ForceRender(true);
         }
     }

@@ -14,6 +14,8 @@ public partial class Rates
 
     private EntityTable<RateDto, Guid, RateUpdateRequest> _table = default!;
 
+    private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Rate",
@@ -24,8 +26,8 @@ public partial class Rates
                 new(data => data.Id, "Id", "Id"),
                 new(data => data.Number, "Number", "Number"),
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: Rate => Rate.Id,
             searchFunc: async filter => (await Client

@@ -1,5 +1,5 @@
 <MudDrawer Anchor="Anchor.Right" @bind-Open="ThemeDrawerOpen" Elevation="@_preference.Elevation" Variant="@DrawerVariant.Temporary"
-    Width="350px" Height="100vh">
+           Width="350px" Height="100vh">
     <MudDrawerHeader Class="align-center">
         <MudText Typo="Typo.h6">
             Theme and Settings
@@ -8,7 +8,7 @@
         <MudIconButton Color="Color.Default" Icon="@Icons.Material.Filled.Close"
             OnClick="@(() => ThemeDrawerOpenChanged.InvokeAsync(false))" Size="Size.Small" />
     </MudDrawerHeader>
-    <MudDivider Style="margin-bottom:10px!important" />
+    @*<MudDivider Style="margin-bottom:10px!important" />*@
     <div style="padding:20px!important">
         <MudExpansionPanels DisableBorders="true" Elevation="@_preference.Elevation">
             <DarkModePanel OnIconClicked="ToggleDarkLightMode" />

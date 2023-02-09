@@ -36,7 +36,7 @@ public partial class SelfRegister
         if (sucessMessage != null)
         {
             Snackbar.Add(sucessMessage, Severity.Info);
-            Navigation.NavigateTo("/login");
+            //Navigation.NavigateTo("/login");
         }
 
         BusySubmitting = false;

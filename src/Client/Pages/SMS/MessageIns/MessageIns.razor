@@ -7,7 +7,7 @@
 <EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.Chat" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))" OnTouch="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">Messages</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Chat" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))" OnTouch="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">Messages</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="4">
@@ -20,10 +20,10 @@
             <MudTextField Counter=160 Label="Message" For="@(() => context.MessageText)" @bind-Value="context.MessageText" Lines="5" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
     </EditFormContent>
 </EntityTable>

@@ -3,7 +3,7 @@
 
 <FshTitle Title="Barangays" Description="Manage Barangays" />
 
-<EntityTable @ref="_table" TEntity="BarangayDto" TId="Guid" TRequest="BarangayUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="BarangayDto" TId="Guid" TRequest="BarangayUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12">
             <AutocompleteArea For="@(() => context.AreaId)" @bind-Value="context.AreaId" />
@@ -13,11 +13,26 @@
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
     </EditFormContent>
 
 </EntityTable>
+
+@code
+{
+    private RenderFragment<BarangayDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

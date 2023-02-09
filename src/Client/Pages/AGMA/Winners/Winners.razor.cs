@@ -17,6 +17,8 @@ public partial class Winners
 
     private EntityTable<WinnerDto, Guid, WinnerViewModel> _table = default!;
 
+    private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Winner",
@@ -28,8 +30,8 @@ public partial class Winners
                 new(data => data.PrizeName, "Prize", "PrizeName"),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Address, "Address", "Address"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: true,
             idFunc: Winner => Winner.Id,

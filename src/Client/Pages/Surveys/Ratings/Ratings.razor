@@ -3,7 +3,7 @@
 
 <FshTitle Title="Ratings" Description="Manage Ratings" />
 
-<EntityTable @ref="_table" TEntity="RatingDto" TId="Guid" TRequest="RatingUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RatingDto" TId="Guid" TRequest="RatingUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12">
             <MudRating Size="Size.Large" @bind-SelectedValue="context.RateNumber" />
@@ -11,17 +11,32 @@
         <MudItem xs="12">
             <MudTextField Label="Comment" For="@(() => context.Comment)" @bind-Value="context.Comment" Lines="5" Variant="Variant.Filled" />
         </MudItem>
-
-        @if (context.Id != Guid.Empty)
-        {
-            <MudItem xs="12">
-                <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
-            </MudItem>
-            <MudItem xs="12">
-                <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
-            </MudItem>
-        }
-        
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
+        </MudItem>
     </EditFormContent>
-
 </EntityTable>
+
+@code {
+    private RenderFragment<RatingDto> TemplateStars => context => __builder =>
+    {
+        <MudItem>
+            <MudRating @bind-SelectedValue="@context.RateNumber" ReadOnly=true></MudRating>
+        </MudItem>
+    };
+
+    private RenderFragment<RatingDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

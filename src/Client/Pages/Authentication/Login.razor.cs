@@ -5,7 +5,6 @@ using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Shared;
-using ZANECO.WebApi.Shared.MultiTenancy;
 
 namespace ZANECO.WASM.Client.Pages.Authentication;
 public partial class Login
@@ -20,6 +19,8 @@ public partial class Login
     public bool BusySubmitting { get; set; }
 
     private readonly TokenRequest _tokenRequest = new();
+    private string TenantId { get; set; } = string.Empty;
+
     private bool _passwordVisibility;
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
@@ -59,7 +60,7 @@ public partial class Login
     {
         BusySubmitting = true;
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => AuthService.LoginAsync("root", _tokenRequest), Snackbar, _customValidation))
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => AuthService.LoginAsync(TenantId, _tokenRequest), Snackbar, _customValidation))
         {
             Snackbar.Add($"Logged in as {_tokenRequest.UserName}", Severity.Info);
         }
@@ -67,9 +68,9 @@ public partial class Login
         BusySubmitting = false;
     }
 
-    private void FillAdministratorCredentials()
+    private void FillBasicUserCredentials()
     {
-        _tokenRequest.UserName = MultitenancyConstants.Root.EmailAddress;
-        _tokenRequest.Password = MultitenancyConstants.DefaultPassword;
+        _tokenRequest.UserName = "basicuser";
+        _tokenRequest.Password = "basicuser1";
     }
 }

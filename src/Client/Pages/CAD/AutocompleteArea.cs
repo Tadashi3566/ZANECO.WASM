@@ -36,12 +36,12 @@ public class AutocompleteArea : MudAutocomplete<Guid>
     // we can't do that in OnInitialized because of a strange bug (https://github.com/MudBlazor/MudBlazor/issues/3818)
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender &&
-            _value != default &&
-            await ApiHelper.ExecuteCallGuardedAsync(
-                () => AreasClient.GetAsync(_value), Snackbar) is { } area)
+        if (firstRender && _value != default &&
+            await ApiHelper.ExecuteCallGuardedAsync(() =>
+            AreasClient.GetAsync(_value), Snackbar)
+            is { } dto)
         {
-            _areas.Add(area);
+            _areas.Add(dto);
             ForceRender(true);
         }
     }
@@ -54,8 +54,8 @@ public class AutocompleteArea : MudAutocomplete<Guid>
             AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => AreasClient.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() =>
+            AreasClient.SearchAsync(filter), Snackbar)
             is PaginationResponseOfAreaDto response)
         {
             _areas = response.Data.ToList();

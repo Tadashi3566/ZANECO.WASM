@@ -36,8 +36,7 @@ public class AutocompleteManager : MudAutocomplete<string>
             AdvancedSearch = new() { Fields = new[] { "lastname" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfEmployeeDto response)
         {
             _employees = response.Data.ToList();

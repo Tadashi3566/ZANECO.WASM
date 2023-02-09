@@ -13,7 +13,7 @@
     <ExtraActions>
         <MudDivider />
         <MudSwitch Class="ml-2" Color="Color.Tertiary" T=bool Label="Auto Read" @bind-Checked="_autoRead" />
-        <MudMenuItem Icon="@Icons.Filled.AppRegistration" OnClick="@(() => CheckAGMARegistration(true))" OnTouch="@(() => CheckAGMARegistration(true))">AGMA</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.AppRegistration" OnClick="@(() => CheckAGMARegistration(true))" OnTouch="@(() => CheckAGMARegistration(true))">AGMA</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="4">
@@ -26,10 +26,10 @@
             <MudTextField Counter=160 Label="Message" For="@(() => context.MessageText)" @bind-Value="context.MessageText" Lines="5" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
     </EditFormContent>
 </EntityTable>

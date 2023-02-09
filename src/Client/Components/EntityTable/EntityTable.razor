@@ -107,6 +107,36 @@
                             {
                                 <MudSwitch Checked="@field.ValueFunc(context)" Color="Color.Tertiary" ReadOnly />
                             }
+                            else if (field.Type == typeof(double))
+                            {
+                                <MudText Align="Align.Right">
+                                    @Convert.ToDouble(field.ValueFunc(context)).ToString("N2")
+                                </MudText>
+                            }
+                            else if (field.Type == typeof(decimal))
+                            {
+                                <MudText Align="Align.Right">
+                                    @Convert.ToDecimal(field.ValueFunc(context)).ToString("N2")
+                                </MudText>
+                            }
+                            else if (field.Type == typeof(DateOnly))
+                            {
+                                <MudText Align="Align.Right">
+                                    @Convert.ToDateTime(field.ValueFunc(context)).ToString("MMMM dd, yyyy")
+                                </MudText>
+                            }
+                            else if (field.Type == typeof(TimeOnly))
+                            {
+                                <MudText Align="Align.Right">
+                                    @Convert.ToDateTime(field.ValueFunc(context)).ToString("HH:mm")
+                                </MudText>
+                            }
+                            else if (field.Type == typeof(DateTime))
+                            {
+                                <MudText Align="Align.Right" >
+                                    @Convert.ToDateTime(field.ValueFunc(context)).ToString("MMMM dd, yyyy HH:mm:ss")
+                                </MudText>
+                            }
                             else
                             {
                                 <MudHighlighter Text="@field.ValueFunc(context)?.ToString()" HighlightedText="@SearchString" />
@@ -122,15 +152,15 @@
                     else if (HasActions)
                     {
                         <MudMenu Label="@L["Actions"]" Variant="Variant.Filled"
-                            EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left"
+                            EndIcon="@Icons.Material.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left"
                             OffsetX="true">
                             @if (CanUpdateEntity(context))
                             {
-                                <MudMenuItem Icon="@Icons.Filled.Edit" OnClick="@(() => InvokeModal(context))" OnTouch="@(() => InvokeModal(context))">@L["Edit"]</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => InvokeModal(context))" OnTouch="@(() => InvokeModal(context))">@L["Edit"]</MudMenuItem>
                             }
                             @if (CanDeleteEntity(context))
                             {
-                                <MudMenuItem Icon="@Icons.Filled.Delete" OnClick="@(() => Delete(context))" OnTouch="@(() => Delete(context))" Style="color:red!important">@L["Delete"]</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(context))" OnTouch="@(() => Delete(context))" Style="color:red!important">@L["Delete"]</MudMenuItem>
                             }
                             @if (ExtraActions is not null)
                             {

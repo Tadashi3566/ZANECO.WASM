@@ -17,6 +17,8 @@ public partial class Raffles
 
     private EntityTable<RaffleDto, Guid, RaffleViewModel> _table = default!;
 
+    private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Raffle",
@@ -25,9 +27,9 @@ public partial class Raffles
             fields: new()
             {
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.RaffleDate.ToString("MMM dd, yyyy"), "Raffle Date", "RaffleDate"),
-                new(data => data.Description, "Description", "Description"),
-                new(data => data.Notes, "Notes", "Notes"),
+                new(data => data.RaffleDate, "Raffle Date", "RaffleDate", typeof(DateOnly)),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: true,
             idFunc: Raffle => Raffle.Id,

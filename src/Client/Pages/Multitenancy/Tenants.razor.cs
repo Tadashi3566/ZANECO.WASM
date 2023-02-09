@@ -43,7 +43,7 @@ public partial class Tenants
                 new(tenant => tenant.Id, L["Id"]),
                 new(tenant => tenant.Name, L["Name"]),
                 new(tenant => tenant.AdminEmail, L["Admin Email"]),
-                new(tenant => tenant.ValidUpto.ToString("MMM dd, yyyy"), L["Valid Upto"]),
+                new(tenant => tenant.ValidUpto, L["Valid Upto"], Type: typeof(DateTime)),
                 new(tenant => tenant.IsActive, L["Active"], Type: typeof(bool))
             },
             loadDataFunc: async () => _tenants = (await TenantsClient.GetListAsync()).Adapt<List<TenantDetail>>(),
@@ -94,11 +94,9 @@ public partial class Tenants
 
     private async Task DeactivateTenantAsync(string id)
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-            () => TenantsClient.DeactivateAsync(id),
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => TenantsClient.DeactivateAsync(id),
             Snackbar,
-            null,
-            L["Tenant Deactivated."]) is not null)
+            successMessage: L["Tenant Deactivated."]) is not null)
         {
             await EntityTable.ReloadDataAsync();
         }
@@ -106,11 +104,9 @@ public partial class Tenants
 
     private async Task ActivateTenantAsync(string id)
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-            () => TenantsClient.ActivateAsync(id),
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => TenantsClient.ActivateAsync(id),
             Snackbar,
-            null,
-            L["Tenant Activated."]) is not null)
+            successMessage: L["Tenant Activated."]) is not null)
         {
             await EntityTable.ReloadDataAsync();
         }

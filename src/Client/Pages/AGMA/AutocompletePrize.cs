@@ -33,7 +33,8 @@ public class AutocompletePrize : MudAutocomplete<Guid>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && _value != default
-            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar) is { } dto)
+            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
+            is { } dto)
         {
             _list.Add(dto);
             ForceRender(true);
@@ -48,8 +49,7 @@ public class AutocompletePrize : MudAutocomplete<Guid>
             AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfPrizeDto response)
         {
             _list = response.Data.ToList();
@@ -57,7 +57,4 @@ public class AutocompletePrize : MudAutocomplete<Guid>
 
         return _list.Select(x => x.Id);
     }
-
-    private string GetName(Guid id) =>
-        _list.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

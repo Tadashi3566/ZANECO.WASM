@@ -45,8 +45,8 @@ public partial class Accounts
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
                 new(data => data.PresentReadingDate, "Reading Dates", "PresentReadingDate", Template: TemplateBillingDate),
                 new(data => data.BillMonth, "Bill Month", "BillMonth"),
-                new(data => data.UsedKWH.ToString("N2"), "KWH", "UsedKWH"),
-                new(data => data.BillAmount.ToString("N2"), "Bill Amount", "BillAmount"),
+                new(data => data.UsedKWH, "KWH", "UsedKWH", typeof(double)),
+                new(data => data.BillAmount, "Bill Amount", "BillAmount", typeof(decimal)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: true,
@@ -147,7 +147,7 @@ public partial class Accounts
             {
                 await ApiHelper.ExecuteCallGuardedAsync(() => Client.MigrateAccountAsync(_accountMigrateAccountRequest), Snackbar, successMessage: "Migration has been successfully sent to Background Job Worker.");
             }
-            else if(application.Equals("LEDGER"))
+            else if (application.Equals("LEDGER"))
             {
                 string[] accountNumbers = _selectedItems.Select(x => x.AccountNumber).ToArray()!;
 

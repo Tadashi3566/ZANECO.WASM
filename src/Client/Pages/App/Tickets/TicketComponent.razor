@@ -60,7 +60,7 @@
         </MudItem>
 
         <MudItem>
-            <MudButton Color="Color.Primary" Class="ml-auto" StartIcon="@Icons.Filled.Send" Variant="Variant.Filled"
+            <MudButton Color="Color.Primary" Class="ml-auto" StartIcon="@Icons.Material.Filled.Send" Variant="Variant.Filled"
                        ButtonType="ButtonType.Submit">Save Changes</MudButton>
         </MudItem>
 
@@ -82,18 +82,18 @@
                     <InputFile id="fileInput" OnChange="UploadFiles" hidden accept=".jpg,.jpeg,.png" />
                     <div style="padding-bottom:20px">
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
-                                   StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
+                                   StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
                             Upload
                         </MudButton>
                         @if (!string.IsNullOrEmpty(_imageUrl))
                         {
                             <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                                   StartIcon="@Icons.Filled.RemoveRedEye" Link="@_imageUrl" Style="margin-left: 5px;">
+                                   StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@_imageUrl" Style="margin-left: 5px;">
                                 View
                             </MudButton>
 
                             <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
-                                   StartIcon="@Icons.Filled.Delete" OnClick="RemoveImageAsync" Style="margin-left: 5px;">
+                                   StartIcon="@Icons.Material.Filled.Delete" OnClick="RemoveImageAsync" Style="margin-left: 5px;">
                                 Delete
                             </MudButton>
                         }

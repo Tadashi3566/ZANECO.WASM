@@ -33,9 +33,10 @@ public class AutocompleteRaffle : MudAutocomplete<Guid>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && _value != default
-            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar) is { } raffle)
+            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
+            is { } dto)
         {
-            _list.Add(raffle);
+            _list.Add(dto);
             ForceRender(true);
         }
     }
@@ -48,8 +49,7 @@ public class AutocompleteRaffle : MudAutocomplete<Guid>
             AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfRaffleDto response)
         {
             _list = response.Data.ToList();
@@ -57,7 +57,4 @@ public class AutocompleteRaffle : MudAutocomplete<Guid>
 
         return _list.Select(x => x.Id);
     }
-
-    private string GetName(Guid id) =>
-        _list.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

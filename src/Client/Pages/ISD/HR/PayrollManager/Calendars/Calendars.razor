@@ -1,0 +1,72 @@
+﻿@page "/payroll/calendar"
+@page "/payroll/calendar/{EmployeeId:guid}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Payroll)]
+
+<FshTitle Title="Calendar" Description="Employee Calendar Management" />
+
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="CalendarDto" TId="Guid" TRequest="CalendarUpdateRequest" Context="@Context" >
+    <AdvancedSearchContent>
+        @*<MudItem Class="mt-3">
+            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+        </MudItem>*@
+    </AdvancedSearchContent>
+    <EditFormContent>
+        @*<MudItem xs="12">
+            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
+        </MudItem>*@
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <AutocompleteCalendarType For="@(() => context.CalendarType)" @bind-Value="context.CalendarType" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Date" For="@(() => context.CalendarDate)" @bind-Date=" context.CalendarDate" DateFormat="MMMM dd, yyyy" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
+        </MudItem>
+@*        <MudItem xs="6" sm="6" md="3">
+            <MudSelect Label="Status" For="@(() => context.Status)" @bind-Value="context.Status" Variant="Variant.Outlined">
+                <MudSelectItem Value="@("FOR APPROVAL")"/>
+                <MudSelectItem Value="@("APPROVED")"/>
+                <MudSelectItem Value="@("DISAPPROVED")"/>
+            </MudSelect>
+        </MudItem>*@
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+</EntityTable>
+
+@code
+{
+    private RenderFragment<CalendarDto> TemplateCalendarDateType => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.body1">@context.CalendarDate.ToString("MMM dd, yyyy")</MudText>
+            <MudText Typo="Typo.caption">@context.CalendarType</MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<CalendarDto> TemplateNameDay => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.body1">@context.Name</MudText>
+            <MudText Typo="Typo.caption">@context.Day</MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<CalendarDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

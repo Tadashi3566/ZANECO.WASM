@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
@@ -17,16 +18,18 @@ public partial class CommentComponent
     protected IAuthenticationService AuthService { get; set; } = default!;
     [Inject]
     protected IRatingsClient Client { get; set; } = default!;
+    [Inject]
+    protected SweetAlertService? Swal { get; set; }
 
-    private readonly RatingCreateRequest _model = new();
+    private readonly RatingCreateRequest _rating = new();
 
     private CustomValidation? _customValidation;
 
-    private string _rateName = string.Empty;
+    private string _rateName = "Excellent";
 
     protected override void OnInitialized()
     {
-        _model.RateNumber = 5;
+        _rating.RateNumber = 5;
     }
 
     private void SetRateName(int rateNumber)
@@ -71,7 +74,11 @@ public partial class CommentComponent
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
-            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(_model), Snackbar, _customValidation, "Your comment was successfully submitted.");
+            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(_rating), Snackbar, _customValidation, "Your comment was successfully submitted.");
+
+            await Swal.FireAsync("Success", "Your comment was successfully submitted.", SweetAlertIcon.Success);
+
+            _rating.Comment = string.Empty;
         }
     }
 }

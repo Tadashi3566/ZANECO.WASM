@@ -11,20 +11,20 @@
             <MudDivider />
             @if (context.Status.Equals("PENDING") || context.Status.Equals("SUSPENDED"))
             {
-                @*<MudMenuItem Icon="@Icons.Filled.OpenInFull" OnClick="@(() => Navigation.NavigateTo($"/app/ticket/{context.Id}"))">Open</MudMenuItem>*@
-                <MudMenuItem Icon="@Icons.Filled.OpenInFull" OnClick="@(() => SetProgress("Open", context.Id))">Open</MudMenuItem>
+                @*<MudMenuItem Icon="@Icons.Material.Filled.OpenInFull" OnClick="@(() => Navigation.NavigateTo($"/app/ticket/{context.Id}"))">Open</MudMenuItem>*@
+                <MudMenuItem Icon="@Icons.Material.Filled.OpenInFull" OnClick="@(() => SetProgress("Open", context.Id))">Open</MudMenuItem>
             }
             @if (context.Status.Equals("OPENED"))
             {
-                <MudMenuItem Icon="@Icons.Filled.OpenInNew">Suspend</MudMenuItem>
+                <MudMenuItem Icon="@Icons.Material.Filled.OpenInNew">Suspend</MudMenuItem>
             }
             @if (context.Status.Equals("OPENED") || context.Status.Equals("SUSPENDED"))
             {
-                <MudMenuItem Icon="@Icons.Filled.HourglassTop">Close</MudMenuItem>
+                <MudMenuItem Icon="@Icons.Material.Filled.HourglassTop">Close</MudMenuItem>
             }
             @if (context.Status.Equals("CLOSED"))
             {
-                <MudMenuItem Icon="@Icons.Filled.Check">Approve</MudMenuItem>
+                <MudMenuItem Icon="@Icons.Material.Filled.Check">Approve</MudMenuItem>
             }
         }
     </ExtraActions>
@@ -36,10 +36,10 @@
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
 
         <MudItem xs="4">
@@ -122,25 +122,25 @@
             </MudItem>
             <MudItem>
                 <div>
-                    <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
+                    <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
                         Upload
                     </MudButton>
                     @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
+                            StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
                             View
                         </MudButton>
 
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
-                            StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
+                            StartIcon="@Icons.Material.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
                             Delete
                         </MudButton>
                     }
                     @if(!string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label"  OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;" >
+                            StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;" >
                             Clear
                         </MudButton>
                     }

@@ -22,8 +22,7 @@ public partial class Security
         if (await ApiHelper.ExecuteCallGuardedAsync(
             () => PersonalClient.ChangePasswordAsync(_passwordModel),
             Snackbar,
-            _customValidation,
-            L["Password Changed!"]))
+            _customValidation, L["Password Changed!"]))
         {
             _passwordModel.Password = string.Empty;
             _passwordModel.NewPassword = string.Empty;

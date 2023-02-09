@@ -31,6 +31,7 @@ public partial class NavMenu
 
     private bool _canViewRating;
     private bool _canViewSurveys;
+    private bool _canCreateComment;
 
     private bool _canViewEmployees;
     private bool _canViewAccounting;
@@ -39,6 +40,7 @@ public partial class NavMenu
     // private bool _canViewHRAttendance;
     // private bool _canViewHRPayroll;
 
+    private bool _canViewISD;
     private bool _canViewCAD;
     private bool _canViewRaffle;
 
@@ -66,10 +68,12 @@ public partial class NavMenu
 
         _canViewRating = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Rating);
         _canViewSurveys = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Surveys);
+        _canCreateComment = await AuthService.HasPermissionAsync(user, FSHAction.Create, FSHResource.Surveys);
 
         _canViewEmployees = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Employees);
         _canViewAccounting = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Accounting);
 
+        _canViewISD = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.ISD);
         _canViewCAD = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.CAD);
 
         _canViewRaffle = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Raffles);

@@ -35,10 +35,10 @@
         </DialogContent>
 
         <DialogActions>
-            <MudButton Variant="Variant.Filled" OnClick="Cancel" StartIcon="@Icons.Filled.Cancel">@L["Cancel"]</MudButton>
+            <MudButton Variant="Variant.Filled" OnClick="Cancel" StartIcon="@Icons.Material.Filled.Cancel">@L["Cancel"]</MudButton>
             @if (IsCreate)
             {
-                <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success" StartIcon="@Icons.Filled.Save" >
+                <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save" >
                     <MudItem Class="d-flex flex-row">
                         @if (_isBusy)
                         {
@@ -54,7 +54,7 @@
             }
             else
             {
-                <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary" StartIcon="@Icons.Filled.Update">
+                <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Update">
                     <MudItem Class="d-flex flex-row">
                         @if (_isBusy)
                         {

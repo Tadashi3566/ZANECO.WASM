@@ -76,7 +76,8 @@ public partial class AGMARegistration
             _readRequest.MessageFrom = string.Empty;
             _readRequest.IsAgma = true;
 
-            await ApiHelper.ExecuteCallGuardedAsync(() => Client.ReadAsync(_readRequest), Snackbar, successMessage: $"Unread Messages were checked for AGMA Registration");
+            await ApiHelper.ExecuteCallGuardedAsync(() => Client.ReadAsync(_readRequest), Snackbar,
+                successMessage: $"Unread Messages were checked for AGMA Registration");
 
             await _table.ReloadDataAsync();
         }

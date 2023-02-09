@@ -29,7 +29,7 @@
                 <CustomValidation @ref="_customValidation" />
                 <MudItem xs="12" md="6">
                     <MudTextField T="string" Label="Tenant Name" Variant="Variant.Outlined" @bind-Value="Tenant"
-                                  For="@(() => Tenant)" Required Disabled=true />
+                                  For="@(() => Tenant)" Required />
                 </MudItem>
                 <MudItem xs="12" md="6">
                     <MudTextField T="string" Label="User Name" Variant="Variant.Outlined"
@@ -70,7 +70,7 @@
             </MudGrid>
         </MudCardContent>
         <MudCardActions Class="pb-4 pl-4">
-            <MudButton StartIcon="@Icons.Filled.AppRegistration" Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit" Disabled="BusySubmitting" Class="ml-auto">
+            <MudButton StartIcon="@Icons.Material.Filled.AppRegistration" Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit" Disabled="BusySubmitting" Class="ml-auto">
                 @L["Register"]
             </MudButton>
         </MudCardActions>

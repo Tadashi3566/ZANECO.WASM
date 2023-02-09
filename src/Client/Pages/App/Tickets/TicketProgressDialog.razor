@@ -3,7 +3,7 @@
 <MudDialog>
     <TitleContent>
         <MudText Typo="Typo.h6">
-            <MudIcon Icon=@Icons.Filled.LabelImportant Class="mr-3 mb-n1" />
+            <MudIcon Icon=@Icons.Material.Filled.LabelImportant Class="mr-3 mb-n1" />
             @Action Ticket
         </MudText>
     </TitleContent>
@@ -13,8 +13,8 @@
         <MudTextField Label="Notes" @bind-Value="@Notes" />
     </DialogContent>
     <DialogActions>
-        <MudButton StartIcon="@Icons.Filled.Cancel" OnClick="Cancel">Cancel</MudButton>
-        <MudButton StartIcon=@Icons.Filled.CallToAction Color="Color.Primary" Variant="Variant.Filled" OnClick="@(() => Submit())">Set Progress</MudButton>
+        <MudButton StartIcon="@Icons.Material.Filled.Cancel" OnClick="Cancel">Cancel</MudButton>
+        <MudButton StartIcon=@Icons.Material.Filled.CallToAction Color="Color.Primary" Variant="Variant.Filled" OnClick="@(() => Submit())">Set Progress</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -61,7 +61,9 @@
             ticketProgress.Description = Description;
             ticketProgress.Notes = Notes;
 
-            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(ticketProgress), Snackbar, successMessage: $"{Action} Ticket successfully created.");
+            await ApiHelper.ExecuteCallGuardedAsync(() =>
+                Client.CreateAsync(ticketProgress), Snackbar,
+                successMessage: $"{Action} Ticket successfully created.");
 
             MudDialog.Close(DialogResult.Ok(true));
         }

@@ -1,0 +1,45 @@
+﻿@page "/payroll/schedules"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Schedules)]
+
+@inject NavigationManager NavigationManager
+
+<FshTitle Title="Schedules" Description="Manage Schedules" />
+
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="ScheduleDto" TId="Guid" TRequest="ScheduleUpdateRequest" Context="@Context">
+    <ExtraActions>
+        @if (_canViewRoleClaims)
+        {
+            <MudDivider/>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/scheduledetails/{context.Id}"))" OnTouch="@(() => Navigation.NavigateTo($"/payroll/scheduledetails/{context.Id}"))">Schedules</MudMenuItem>
+            <MudMenuItem OnClick="@(() => SetAsCurrentSchedule(context.Id))" OnTouch="@(() => SetAsCurrentSchedule(context.Id))">Set as Current Schedule</MudMenuItem>
+        }
+    </ExtraActions>
+    <EditFormContent>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>
+@code
+{
+    private RenderFragment<ScheduleDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

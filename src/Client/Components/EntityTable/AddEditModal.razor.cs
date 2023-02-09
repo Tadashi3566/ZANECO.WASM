@@ -1,6 +1,9 @@
+using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Shared;
 
@@ -23,6 +26,9 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
     public string EntityName { get; set; } = default!;
     [Parameter]
     public object? Id { get; set; }
+    [Inject]
+    [NotNull]
+    protected SweetAlertService? Swal { get; set; }
 
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; } = default!;
@@ -76,15 +82,15 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
 
     private async Task SaveAsync()
     {
+        string _message = $"{EntityName} {(IsCreate ? L["Created"] : L["Updated"])}.";
         _isBusy = true;
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-            () => SaveFunc(RequestModel),
-            Snackbar,
-            _customValidation,
-            $"{EntityName} {(IsCreate ? L["Created"] : L["Updated"])}."))
+        if (await ApiHelper.ExecuteCallGuardedAsync(() =>
+            SaveFunc(RequestModel), Snackbar, _customValidation, _message))
         {
             MudDialog.Close();
+
+            await Swal.FireAsync("Success", _message, SweetAlertIcon.Success);
         }
 
         _isBusy = false;

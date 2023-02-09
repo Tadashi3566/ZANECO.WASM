@@ -32,9 +32,10 @@ public class AutocompleteRate : MudAutocomplete<Guid>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && _value != default
-            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar) is { } rate)
+            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
+            is { } dto)
         {
-            _rates.Add(rate);
+            _rates.Add(dto);
             ForceRender(true);
         }
     }
@@ -47,8 +48,7 @@ public class AutocompleteRate : MudAutocomplete<Guid>
             AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfRateDto response)
         {
             _rates = response.Data.ToList();

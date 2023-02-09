@@ -7,8 +7,8 @@
 <EntityTable @bind-SearchString="@_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="ContactDto" TId="Guid" TRequest="ContactViewModel" Context="@Context" PageSizes="@_pageSizes">
     <ExtraActions>
         <MudDivider/>
-        <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => OnCopyPhoneNumbersChecked())" OnTouch="@(() => OnCopyPhoneNumbersChecked())">Copy Phone Numbers</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => Send(context))" OnTouch="@(() => Send(context))">Send Message</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.CopyAll" OnClick="@(() => OnCopyPhoneNumbersChecked())" OnTouch="@(() => OnCopyPhoneNumbersChecked())">Copy Phone Numbers</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Send" OnClick="@(() => Send(context))" OnTouch="@(() => Send(context))">Send Message</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>
@@ -48,25 +48,25 @@
             <MudItem>
                 <div>
                     <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
-                        StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
+                        StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
                         Upload
                     </MudButton>
                     @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
+                            StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
                             View
                         </MudButton>
 
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
-                            StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
+                            StartIcon="@Icons.Material.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
                             Delete
                         </MudButton>
                     }
                     @if(!string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label"  OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;" >
+                            StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;" >
                             Clear
                         </MudButton>
                     }
@@ -88,7 +88,7 @@
     private RenderFragment<ContactDto> TemplateNameAddress => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.body2">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">
@@ -100,7 +100,7 @@
     private RenderFragment<ContactDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.subtitle2">
                 <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">

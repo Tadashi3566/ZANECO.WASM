@@ -38,12 +38,16 @@ public partial class UserRoles
         _canEditUsers = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.Users);
         _canSearchRoles = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.UserRoles);
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.GetByIdAsync(Id), Snackbar) is UserDetailsDto user)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.GetByIdAsync(Id),
+            Snackbar
+        ) is UserDetailsDto dto)
         {
-            _title = $"{user.FirstName} {user.LastName}";
-            _description = string.Format(L["Manage {0} {1}'s Roles"], user.FirstName, user.LastName);
+            _title = $"{dto.FirstName} {dto.LastName}";
+            _description = string.Format(L["Manage {0} {1}'s Roles"], dto.FirstName, dto.LastName);
 
-            if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.GetRolesAsync(user.Id.ToString()), Snackbar) is ICollection<UserRoleDto> response)
+            if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.GetRolesAsync(dto.Id.ToString()),
+                Snackbar
+            ) is ICollection<UserRoleDto> response)
             {
                 _userRolesList = response.ToList();
             }
@@ -59,7 +63,9 @@ public partial class UserRoles
             UserRoles = _userRolesList
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.AssignRolesAsync(Id, request), Snackbar, successMessage: L["Updated User Roles."]) is not null)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.AssignRolesAsync(Id, request),
+                Snackbar,
+            successMessage: L["Updated User Roles."]) is not null)
         {
             Navigation.NavigateTo("/users");
         }

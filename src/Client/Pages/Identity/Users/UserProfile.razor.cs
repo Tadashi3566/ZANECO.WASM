@@ -16,7 +16,7 @@ public partial class UserProfile
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
     [Inject]
-    protected IUsersClient UsersClient { get; set; } = default!;
+    protected IUsersClient Client { get; set; } = default!;
 
     [Parameter]
     public string? Id { get; set; }
@@ -24,6 +24,7 @@ public partial class UserProfile
     public string? Title { get; set; }
     [Parameter]
     public string? Email { get; set; }
+    public Guid _employeeId { get; set; }
 
     private bool _active;
     private bool _emailConfirmed;
@@ -42,8 +43,13 @@ public partial class UserProfile
 
     private async Task ToggleUserStatus()
     {
-        var request = new ToggleUserStatusRequest { ActivateUser = _active, UserId = Id };
-        await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.ToggleStatusAsync(Id, request), Snackbar);
+        var request = new UserStatusRequest
+        {
+            UserId = Id,
+            EmployeeId = _employeeId!,
+            ActivateUser = _active,
+        };
+        await ApiHelper.ExecuteCallGuardedAsync(() => Client.ToggleStatusAsync(Id, request), Snackbar);
         Navigation.NavigateTo("/users");
     }
 
@@ -52,23 +58,24 @@ public partial class UserProfile
 
     protected override async Task OnInitializedAsync()
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => UsersClient.GetByIdAsync(Id), Snackbar) is UserDetailsDto user)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetByIdAsync(Id), Snackbar) is UserDetailsDto dto)
         {
-            _firstName = user.FirstName;
-            _lastName = user.LastName;
-            _email = user.Email;
-            _phoneNumber = user.PhoneNumber;
-            _description = user.Description;
-            _notes = user.Notes;
-            _active = user.IsActive;
-            _emailConfirmed = user.EmailConfirmed;
-            _imageUrl = string.IsNullOrEmpty(user.ImageUrl) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + user.ImageUrl);
+            _firstName = dto.FirstName;
+            _lastName = dto.LastName;
+            _email = dto.Email;
+            _phoneNumber = dto.PhoneNumber;
+            _description = dto.Description;
+            _notes = dto.Notes;
+            _active = dto.IsActive;
+            _emailConfirmed = dto.EmailConfirmed;
+            _imageUrl = string.IsNullOrEmpty(dto.ImageUrl) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + dto.ImageUrl);
             Title = $"{_firstName} {_lastName}'s {_localizer["Profile"]}";
             Email = _email;
             if (_firstName?.Length > 0)
             {
                 _firstLetterOfName = _firstName.ToUpper().FirstOrDefault();
             }
+            _employeeId = dto.EmployeeId;
         }
 
         var state = await AuthState;

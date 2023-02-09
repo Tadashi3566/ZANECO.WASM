@@ -13,8 +13,7 @@
             <MudTextField T="string" For="@(() => context.Name)" @bind-Value="context.Name" Label="@L["Name"]" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField For="@(() => context.Description)" @bind-Value="context.Description"
-                Label="@L["Description"]" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
     </EditFormContent>
 

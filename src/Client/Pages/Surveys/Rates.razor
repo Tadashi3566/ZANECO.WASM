@@ -3,8 +3,7 @@
 
 <FshTitle Title="Rates" Description="Manage Rates" />
 
-<EntityTable @ref="_table" TEntity="RateDto" TId="Guid" TRequest="RateUpdateRequest" Context="@Context">
-
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RateDto" TId="Guid" TRequest="RateUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" Variant="Variant.Filled" />
@@ -13,11 +12,25 @@
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
     </EditFormContent>
-
 </EntityTable>
+
+@code
+{
+    private RenderFragment<RateDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

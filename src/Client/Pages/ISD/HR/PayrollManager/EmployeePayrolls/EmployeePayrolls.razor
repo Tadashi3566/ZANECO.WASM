@@ -1,0 +1,80 @@
+﻿@page "/payroll/employeepayroll"
+@page "/payroll/employeepayroll/{PayrollId:guid}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Payroll)]
+
+@inject NavigationManager NavigationManager
+
+<FshTitle Title="Employees Payroll" Description="Employees Payroll List" />
+
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="EmployeePayrollDto" TId="Guid" TRequest="EmployeePayrollUpdateRequest" Context="@Context">
+    <AdvancedSearchContent>
+        <MudItem Class="mt-3">
+            <AutocompletePayroll @bind-Value="SearchPayrollId" />
+        </MudItem>
+    </AdvancedSearchContent>
+    <ExtraActions>
+        @if (_canViewRoleClaims)
+        {
+            <MudMenuItem OnClick="@(() => EmployeePayrollGenerate(context.EmployeeId, context.PayrollId))" OnTouch="@(() => EmployeePayrollGenerate(context.EmployeeId, context.PayrollId))">Generate Payroll</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeepayrolldetails/{context.EmployeeId}/{context.PayrollId}"))" OnTouch="@(() => Navigation.NavigateTo($"/payroll/employeepayrolldetails/{context.EmployeeId}/{context.PayrollId}"))">Payroll Details</MudMenuItem>
+        }
+    </ExtraActions>
+    <EditFormContent>
+        <MudItem xs="12">
+            <AutocompletePayroll For="@(() => context.PayrollId)" @bind-Value="SearchPayrollId" Disabled="!SearchPayrollId.Equals(Guid.Empty)"/>
+        </MudItem>
+        <MudItem xs="12">
+            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="context.EmployeeId" Disabled=true />
+        </MudItem>
+
+        <MudItem xs="12" sm="4">
+            <MudNumericField Label="Start Date" For="@(() => context.DateStart)" @bind-Value="context.DateStart" Format="MMMM dd, yyyy" Disabled=true Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="4">
+            <MudNumericField Label="End Date" For="@(() => context.DateEnd)" @bind-Value="context.DateEnd" Format="MMMM dd, yyyy" Disabled=true Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="4">
+            <MudNumericField Label="Payroll Date" For="@(() => context.PayrollDate)" @bind-Value="context.PayrollDate" Format="MMMM dd, yyyy" Disabled=true Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12" sm="3">
+            <MudNumericField Label="Salary" For="@(() => context.Salary)" @bind-Value="context.Salary" Format="N2" Disabled=true Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="12" sm="3">
+            <MudNumericField Label="Additional" For="@(() => context.Additional)" @bind-Value="context.Additional" Format="N2" Disabled=true Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="12" sm="3">
+            <MudNumericField Label="Gross" For="@(() => context.Gross)" @bind-Value="context.Gross" Format="N2" Disabled=true Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="12" sm="3">
+            <MudNumericField Label="Deduction" For="@(() => context.Deduction)" @bind-Value="context.Deduction" Format="N2" Disabled=true Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="12" sm="3">
+            <MudNumericField Label="Net" For="@(() => context.Net)" @bind-Value="context.Net" Format="N2" Disabled=true Variant="Variant.Outlined" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
+        </MudItem>
+        
+    </EditFormContent>
+</EntityTable>
+
+@code
+{
+    private RenderFragment<EmployeePayrollDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

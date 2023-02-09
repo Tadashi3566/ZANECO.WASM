@@ -35,8 +35,9 @@ public class AutocompleteContactAddress : MudAutocomplete<string>
             AdvancedSearch = new() { Fields = new[] { "Address" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter),
+                Snackbar
+            )
             is PaginationResponseOfContactDto response)
         {
             _list = response.Data.ToList();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
 using MudBlazor.Services;
@@ -26,6 +27,7 @@ public static class Startup
                     configuration.SnackbarConfiguration.VisibleStateDuration = 5000;
                     configuration.SnackbarConfiguration.ShowCloseIcon = false;
                 })
+            .AddSweetAlert2()
             .AddScoped<IClientPreferenceManager, ClientPreferenceManager>()
             .AutoRegisterInterfaces<IAppService>()
             .AutoRegisterInterfaces<IApiService>()

@@ -7,9 +7,9 @@
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="MessageTemplateDetail" TId="Guid" TRequest="MessageTemplateUpdateRequest" Context="@Context">
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem Icon="@Icons.Filled.CopyAll" OnClick="@(() => MessageTemplateCopy(context.Message))" OnTouch="@(() => MessageTemplateCopy(context.Message))">Copy Message</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.ContentCopy" OnClick="@(() => MessageTemplateDuplicate(context))" OnTouch="@(() => MessageTemplateDuplicate(context))">Duplicate</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Filled.Send" OnClick="@(() => SendSMS(@context))" OnTouch="@(() => SendSMS(@context))">Send</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.CopyAll" OnClick="@(() => MessageTemplateCopy(context.Message))" OnTouch="@(() => MessageTemplateCopy(context.Message))">Copy Message</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => MessageTemplateDuplicate(context))" OnTouch="@(() => MessageTemplateDuplicate(context))">Duplicate</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Send" OnClick="@(() => SendSMS(@context))" OnTouch="@(() => SendSMS(@context))">Send</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
@@ -41,10 +41,10 @@
             <MudTextField Label="Recepients" For="@(() => context.Recepients)" @bind-Value="context.Recepients" Lines="10" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
     </EditFormContent>
 
@@ -82,15 +82,27 @@
     private RenderFragment<MessageTemplateDetail> TemplateApiFastMode => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudSwitch @bind-Checked="@context.IsAPI" Label="API" Color="Color.Secondary" ReadOnly=true></MudSwitch>
-            <MudSwitch @bind-Checked="@context.IsSent" Label="Sent" Color="Color.Tertiary" ReadOnly=true></MudSwitch>
+            <MudSwitch @bind-Checked="@context.IsAPI" Label="API" Color="Color.Primary" ReadOnly=true></MudSwitch>
+            <MudSwitch @bind-Checked="@context.IsSent" Label="Sent" Color="Color.Secondary" ReadOnly=true></MudSwitch>
+        </MudItem>
+    };
+
+    private RenderFragment<MessageTemplateDetail> TemplateSubjectMessage => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Subject" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Message" HighlightedText="@_searchString" />
+            </MudText>
         </MudItem>
     };
 
     private RenderFragment<MessageTemplateDetail> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.body2">
+            <MudText Typo="Typo.subtitle2">
                 <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">

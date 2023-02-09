@@ -3,8 +3,7 @@
 
 <FshTitle Title="Message Logs" Description="Message Logs Management" />
 
-<EntityTable @ref="_table" TEntity="MessageLogDto" TId="int" TRequest="MessageLogUpdateRequest" Context="@Context">
-
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="MessageLogDto" TId="int" TRequest="MessageLogUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" sm="4">
             <MudTextField Label="Sender" For="@(() => context.MessageFrom)" @bind-Value="context.MessageFrom" ReadOnly=true Variant="Variant.Outlined" />
@@ -16,52 +15,51 @@
             <MudTextField Counter=160 Label="Message" For="@(() => context.MessageText)" @bind-Value="context.MessageText" Lines="5" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" />
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
     </EditFormContent>
-
 </EntityTable>
 
 @code {
-    private RenderFragment<MessageLogDto> TemplateReceivedTime => context => __builder =>
-    {
-        <MudItem>
-            <MudChip Icon="@Icons.Material.Filled.Watch" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.SendTime</MudChip>
-        </MudItem>
-    };
-
     private RenderFragment<MessageLogDto> TemplateSenderReceiver => context => __builder =>
     {
         <MudItem>
             <p>
+                <MudChip Icon="@Icons.Material.Filled.Watch" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.SendTime</MudChip>
                 <MudChip Icon="@Icons.Material.Filled.Send" IconColor="Color.Tertiary" Label="true" Color="Color.Surface">@context.MessageFrom</MudChip>
                 <MudChip Icon="@Icons.Material.Filled.Phone" IconColor="Color.Tertiary" Label="true" Color="Color.Surface" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageTo}"))">@context.MessageTo</MudChip>
             </p>
         </MudItem>
     };
 
-    private RenderFragment<MessageLogDto> TemplateStatus => context => __builder =>
+    private RenderFragment<MessageLogDto> TemplateMessageStatus => context => __builder =>
     {
-        <MudItem Class="d-flex flex-column">
+        <MudText Typo="Typo.body2">
+            <MudHighlighter Text="@context.MessageText" HighlightedText="@_searchString" />
+
             @if (context.StatusCode.ToString().Contains("200") || context.StatusCode.ToString().Contains("201"))
             {
-                <p><MudText Color="Color.Success" Typo="Typo.caption">@context.StatusCode @context.StatusText</MudText></p>
+            <p><MudText Color="Color.Success" Typo="Typo.caption">@context.StatusCode @context.StatusText</MudText></p>
             }
             else
             {
-                <p><MudText Color="Color.Error" Typo="Typo.caption">@context.StatusCode @context.StatusText</MudText></p>
+            <p><MudText Color="Color.Error" Typo="Typo.caption">@context.StatusCode @context.StatusText</MudText></p>
             }
-        </MudItem>
+        </MudText>
     };
 
     private RenderFragment<MessageLogDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">@context.Description</MudText>
-            <MudText Typo="Typo.caption">@context.Notes</MudText>
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
         </MudItem>
     };
 }

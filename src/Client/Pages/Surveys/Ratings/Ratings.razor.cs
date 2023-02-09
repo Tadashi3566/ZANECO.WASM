@@ -16,6 +16,7 @@ public partial class Ratings
 
     private EntityTable<RatingDto, Guid, RatingUpdateRequest> _table = default!;
 
+    private string? _searchString;
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Rating",
@@ -23,10 +24,11 @@ public partial class Ratings
             entityResource: FSHResource.Rating,
             fields: new()
             {
-                new(dto => dto.RateNumber, "Stars", "Number"),
+                new(dto => dto.RateNumber, "Rating", "RateNumber", Template: TemplateStars),
+                new(dto => dto.CreatedOn, "Created On", "CreatedOn", typeof(DateTime)),
                 new(dto => dto.Comment, "Comment", "Comment"),
-                new(dto => dto.Description, "Description", "Description"),
-                new(dto => dto.Notes, "Notes", "Notes"),
+                new(dto => dto.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(dto => dto.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: true,
             idFunc: prod => prod.Id,
@@ -45,16 +47,4 @@ public partial class Ratings
             //        return await RatingsClient.ExportAsync(exportFilter);
             //    }
                 );
-
-    // Advanced Search
-    private Guid _searchRateId;
-    private Guid SearchRateId
-    {
-        get => _searchRateId;
-        set
-        {
-            _searchRateId = value;
-            _ = _table.ReloadDataAsync();
-        }
-    }
 }

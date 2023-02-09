@@ -36,7 +36,9 @@ public class AutocompleteContactType : MudAutocomplete<string>
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
+            () => Client.SearchAsync(filter),
+                Snackbar
+                )
             is PaginationResponseOfContactDto response)
         {
             _list = response.Data.ToList();

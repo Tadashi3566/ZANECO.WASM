@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ZANECO.WebApi.Shared.Notifications;
 
 namespace ZANECO.WASM.Client.Infrastructure.Notifications;
+
 internal static class Startup
 {
     public static IServiceCollection AddNotifications(this IServiceCollection services)

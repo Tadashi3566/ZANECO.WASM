@@ -14,18 +14,18 @@ public partial class MessageLogs
 
     private EntityTable<MessageLogDto, int, MessageLogUpdateRequest> _table = default!;
 
+    private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
-            entityName: "Message Log",
-            entityNamePlural: "Message Logs",
+            entityName: "Message Logs",
+            entityNamePlural: "Sent messages management",
             entityResource: FSHResource.SMS,
             fields: new()
             {
                 new(data => data.Id, "Id", "Id"),
-                new(data => data.SendTime, "Send Date/Time", "SendTime", Template: TemplateReceivedTime),
-                new(data => data.MessageFrom, "Sender/Receiver", "MessageFrom", Template: TemplateSenderReceiver),
-                new(data => data.MessageText, "Message", "MessageText"),
-                new(data => data.StatusText, "Status", "StatusCode", Template: TemplateStatus),
+                new(data => data.MessageFrom, "Sender/Receiver", "SendTime", Template: TemplateSenderReceiver),
+                new(data => data.MessageText, "Message", "MessageText", Template: TemplateMessageStatus),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: true,

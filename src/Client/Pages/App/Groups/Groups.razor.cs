@@ -27,12 +27,12 @@ public partial class Groups
             fields: new()
             {
                 new(data => data.Application, "Application", "Application"),
-                new(data => data.Parent, "Parent", "Parent"),
-                new(data => data.Tag, "Tag", "Tag"),
+                new(data => data.Parent, "Parent", "Parent", Template: TemplateParentTag),
+                new(data => data.Tag, "Tag", visible: false),
                 new(data => data.Number, "Number", "Number"),
                 new(data => data.Name, "Name", "Name", Template: TemplateCodeName),
-                new(data => data.Amount.ToString("N2"), "Amount", "Amount"),
-                new(data => data.Description, "Description", "Description", Template: TemplateDescriptionNotes),
+                new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
+                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: true,
             idFunc: Group => Group.Id,
