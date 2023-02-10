@@ -14,12 +14,15 @@
         @if (_canViewRoleClaims)
         {
             <MudDivider />
+            <MudMenuItem OnClick="@(() => EmployeeGenerateDailySchedule(context.Id))">Generate Schedule</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeeschedules/{context.Id}/{SearchPayrollId}"))">Daily Schedule</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/attendance/{context.Id}/{SearchPayrollId}"))">Attendance</MudMenuItem>
+            <MudDivider />
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/designations/{context.Id}"))">Designations</MudMenuItem>
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/dependents/{context.Id}"))">Dependents</MudMenuItem>
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/employers/{context.Id}"))">Employers</MudMenuItem>
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/powerbills/{context.Id}"))">Power Bill</MudMenuItem>
             <MudDivider />
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/attendance/{context.Id}/{SearchPayrollId}"))">Attendance</MudMenuItem>
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/loans/{context.Id}"))">Loans</MudMenuItem>
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeeadjustments/{context.Id}"))">Adjustments</MudMenuItem>
             <MudMenuItem OnClick="@(() => EmployeePayrollGenerate(context.Id, SearchPayrollId))">Generate Payroll</MudMenuItem>

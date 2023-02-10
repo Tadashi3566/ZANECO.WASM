@@ -1,10 +1,12 @@
 ﻿using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
+using ZANECO.WASM.Client.Components.Dialogs.ISD.HR.PayrollManager;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
@@ -44,7 +46,7 @@ public partial class Employees
                 entityResource: FSHResource.Employees,
                 fields: new()
                 {
-                new(data => data.ImagePath, "Image", Template: TemplateImage),
+                    new(data => data.ImagePath, "Image", Template: TemplateImage),
                     new(data => data.Number, "ID", "Number"),
                     new(data => data.HireDate, "Date Hired", "HireDate", typeof(DateTime), Template: TemplateHireDate),
                     new(data => data.RegularDate, "Date Regular", "RegularDate", typeof(DateTime), Template: TemplateRegularDate),
@@ -85,6 +87,21 @@ public partial class Employees
                 deleteFunc: async id => await Client.DeleteAsync(id),
                 hasExtraActionsFunc: () => _canViewRoleClaims,
                 exportAction: string.Empty);
+    }
+
+    private async Task EmployeeGenerateDailySchedule(Guid employeeId)
+    {
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        DialogParameters parameters = new()
+        {
+            { nameof(GenerateSchedule.EmployeeId), employeeId },
+        };
+        var dialog = DialogService.Show<GenerateSchedule>("Generate", parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            Snackbar.Add("Employee Daily Schedule has been successfully generated.", Severity.Success);
+        }
     }
 
     private async Task EmployeePayrollGenerate(Guid employeeId, Guid payrollId)

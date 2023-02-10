@@ -1,0 +1,75 @@
+﻿@namespace ZANECO.WASM.Client.Components.Dialogs.ISD.HR.PayrollManager
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon=@Icons.Material.Filled.Schedule Class="mr-3 mb-n1" />
+            Generate Employee Schedule
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudDatePicker @bind-Date="_dateStart" DateFormat="MMMM dd, yyyy">
+                    <PickerActions>
+                        <MudButton OnClick="Today">Today</MudButton>
+                    </PickerActions>
+                </MudDatePicker>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudDatePicker @bind-Date="_dateEnd" DateFormat="MMMM dd, yyyy" />
+            </MudItem>
+        </MudGrid>
+    </DialogContent>
+    <DialogActions>
+        <MudButton StartIcon="@Icons.Material.Filled.Cancel" OnClick="Cancel">Cancel</MudButton>
+        <MudButton StartIcon=@Icons.Material.Filled.Schedule Color="Color.Primary" Disabled="@_isBusy" Variant="Variant.Filled" OnClick="Submit">
+            @if (_isBusy)
+            {
+                <MudProgressCircular Color="Color.Tertiary" Indeterminate=true Size="Size.Small" />
+                <MudText Class="ml-2">Generating</MudText>
+            }
+            else
+            {
+                <MudText Class="ml-2">Generate</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code
+{
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+    [Parameter]
+    public Guid EmployeeId { get; set; }
+    [Inject]
+    protected IAttendanceClient Client { get; set; } = default!;
+
+    private DateTime? _dateStart = new DateTime(DateTime.Today.Year, 1, 1);
+    private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, 12, 31);
+
+    private bool _isBusy;
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private async void Submit()
+    {
+        _isBusy = true;
+
+        AttendanceCreateRequest request = new();
+
+        request.EmployeeId = EmployeeId;
+        request.DateStart = _dateStart;
+        request.DateEnd = _dateEnd;
+
+        await Client.CreateAsync(request);
+
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+    private void Today()
+    {
+        _dateStart = DateTime.Today;
+    }
+}

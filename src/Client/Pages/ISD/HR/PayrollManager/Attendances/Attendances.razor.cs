@@ -40,18 +40,17 @@ public partial class Attendances
             entityResource: FSHResource.Attendance,
             fields: new()
             {
-                new(data => data.ImagePath, "Image", Template: TemplateImage),
-                new(data => data.EmployeeName, "Name", "EmployeeName"),
+                // new(data => data.ImagePath, "Image", Template: TemplateImage),
+                new(data => data.EmployeeName, "Name", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty)),
                 new(data => data.AttendanceDate, "Date", "AttendanceDate", typeof(DateOnly)),
                 new(data => data.ScheduleDetailDay, "Day", "ScheduleDetailDay"),
-                new(data => data.ActualTimeIn1, "Actual In 1", "ActualTimeIn1"),
-                new(data => data.ActualTimeOut1, "Actual Out 1", "ActualTimeOut1"),
-                new(data => data.ActualTimeIn2, "Actual In 2", "ActualTimeIn2"),
-                new(data => data.ActualTimeOut2, "Actual Out 2", "ActualTimeOut2"),
-                new(data => data.LateMinutes, "Late (min)", "MinutesLate"),
-                new(data => data.UnderTimeMinutes, "Under (min)", "UnderTimeMinutes"),
-                new(data => data.TotalHours, "Total Hours", "TotalHours"),
-                new(data => data.PaidHours, "Paid Hours", "PaidHours"),
+                new(data => data.ActualTimeIn1, "Actual TimeIn1", "ActualTimeIn1"),
+                new(data => data.ActualTimeOut1, "Actual TimeOut1", "ActualTimeOut1"),
+                new(data => data.ActualTimeIn2, "Actual TimeIn2", "ActualTimeIn2"),
+                new(data => data.ActualTimeOut2, "Actual TimeOut2", "ActualTimeOut2"),
+                new(data => data.LateMinutes, "Late (Minutes)", "MinutesLate"),
+                new(data => data.UnderTimeMinutes, "Under (Minutes)", "UnderTimeMinutes"),
+                new(data => data.TotalHours, "Total Hours", "TotalHours", Template: TemplateHoursTotalPaid),
                 new(data => data.Status, "Status", "Status"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
@@ -67,21 +66,20 @@ public partial class Attendances
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<AttendanceDto>>();
             },
-            createFunc: async data =>
-            {
-                data.EmployeeId = SearchEmployeeId;
 
-                if (!string.IsNullOrEmpty(data.ImageInBytes))
-                {
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
-                }
-
-                await Client.CreateAsync(data.Adapt<AttendanceCreateRequest>());
-                data.ImageInBytes = string.Empty;
-            },
+            // createFunc: async data =>
+            // {
+            //    data.EmployeeId = SearchEmployeeId;
+            //    if (!string.IsNullOrEmpty(data.ImageInBytes))
+            //    {
+            //        data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
+            //    }
+            //    await Client.CreateAsync(data.Adapt<AttendanceCreateRequest>());
+            //    data.ImageInBytes = string.Empty;
+            // },
             updateFunc: async (id, data) =>
             {
-                data.EmployeeId = SearchEmployeeId;
+                data.EmployeeId = _searchEmployeeId;
 
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
@@ -89,7 +87,7 @@ public partial class Attendances
                     data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
                 }
 
-                //await Client.UpdateAsync(id, data);
+                await Client.UpdateAsync(id, data);
                 await Client.UpdateAsync(id, data.Adapt<AttendanceUpdateRequest>());
                 data.ImageInBytes = string.Empty;
             },
@@ -99,13 +97,14 @@ public partial class Attendances
 
     // Advanced Search
     private Guid _searchEmployeeId;
+
     private Guid SearchEmployeeId
     {
         get => _searchEmployeeId;
         set
         {
             _searchEmployeeId = value;
-            _ = _table.ReloadDataAsync();
+            _table.ReloadDataAsync();
         }
     }
 

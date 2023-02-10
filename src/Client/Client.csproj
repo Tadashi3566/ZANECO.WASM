@@ -34,6 +34,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Remove="Components\Dialogs\ISD\HR\PayrollManager\GenerateSchedule%28copy%29.razor" />
+    </ItemGroup>
+    <ItemGroup>
       <Content Update="Pages\Surveys\Ratings\Ratings.razor">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       </Content>
@@ -44,5 +47,15 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="Components\Dialogs\ISD\" />
+      <None Remove="Components\Dialogs\ISD\HR\" />
+      <None Remove="Components\Dialogs\ISD\HR\PayrollManager\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Components\Dialogs\ISD\" />
+      <Folder Include="Components\Dialogs\ISD\HR\" />
+      <Folder Include="Components\Dialogs\ISD\HR\PayrollManager\" />
     </ItemGroup>
 </Project>

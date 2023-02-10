@@ -30,6 +30,8 @@ public partial class MessageTemplates
 
     private BackgroundPreference _backgroundPreference = new();
 
+    private DateTime _scheduleDateTime { get; set; } = DateTime.Now;
+
     private string? _searchString;
 
     protected override void OnInitialized() =>

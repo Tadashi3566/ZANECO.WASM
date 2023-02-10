@@ -37684,7 +37684,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.Guid? EmployeeId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("payrollId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid PayrollId { get; set; } = default!;
+        public System.Guid? PayrollId { get; set; } = default!;
 
     }
 
@@ -37695,38 +37695,11 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         public System.Guid EmployeeId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("attendanceDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime AttendanceDate { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("dateStart", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? DateStart { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("scheduleId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid ScheduleId { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("scheduleDetailDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ScheduleDetailDay { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("scheduleTimeIn1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ScheduleTimeIn1 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("scheduleTimeOut1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ScheduleTimeOut1 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("scheduleTimeIn2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ScheduleTimeIn2 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("scheduleTimeOut2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ScheduleTimeOut2 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("actualTimeIn1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ActualTimeIn1 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("actualTimeOut1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ActualTimeOut1 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("actualTimeIn2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ActualTimeIn2 { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("actualTimeOut2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ActualTimeOut2 { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("dateEnd", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? DateEnd { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
