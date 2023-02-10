@@ -50,19 +50,18 @@ public partial class Designations
             entityResource: FSHResource.Employees,
             fields: new()
             {
-                new(data => data.IdNumber, "IdNumber", "ID", Template: TemplateIdActive),
-                new(data => data.EmployeeName, "Employee", "EmployeeName"),
+                new(data => data.IdNumber, "IdNumber", "ID", visible: EmployeeId.Equals(Guid.Empty)),
+                new(data => data.EmployeeName, "Employee", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty)),
                 new(data => data.Area, "Area", "Area", Template: TemplateAreaDepartment),
                 new(data => data.Department, "Department", visible: false),
                 new(data => data.Division, "Division", "Division", Template: TemplateDivisionSection),
                 new(data => data.Section, "Section / Unit", visible: false),
                 new(data => data.Position, "Designation", "Position", Template: TemplatePositionType),
                 new(data => data.EmploymentType, "Employment", visible: false),
-                new(data => data.StartDate, "Effectivity", "StartDate", typeof(DateOnly)),
-                new(data => data.EndDate, "Until", "EndDate", typeof(DateOnly)),
+                new(data => data.StartDate, "Effectivity", "StartDate", Template: TemplateEffectivityUntil),
+                new(data => data.EndDate, "Until", "EndDate", visible: false),
                 new(data => data.SalaryRank, "Rank", "SalaryRank"),
                 new(data => data.SalaryAmount, "SalaryAmount", "RatePerHour", typeof(decimal)),
-                new(data => data.RatePerDay, "Rate/Day", "RatePerDay", typeof(decimal)),
                 new(data => data.RatePerHour, "Rate/Hour", "RatePerHour", typeof(decimal)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
@@ -97,11 +96,6 @@ public partial class Designations
                 {
                     data.DeleteCurrentImage = true;
                     data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
-                }
-
-                if (data.RateType.Equals("DAILY"))
-                {
-                    data.DaysPerMonth = 0;
                 }
 
                 if (data.RateType.Equals("MONTHLY"))

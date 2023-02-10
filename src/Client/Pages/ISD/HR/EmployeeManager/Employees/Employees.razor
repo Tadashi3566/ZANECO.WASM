@@ -35,7 +35,7 @@
                 }
                 else
                 {
-                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height:auto; width:auto;"> </MudAvatar>
                 }
             </MudItem>
             <MudItem>
@@ -119,10 +119,10 @@
             <AutocompleteCivilStatusEmployee For="@(() => context.CivilStatus)" @bind-Value="context.CivilStatus" Variant="Variant.Filled"/>
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="8">
             <MudTextField Label="Email Address" For="@(() => context.Email)" @bind-Value="context.Email" Placeholder="employee@zaneco.com.ph" Variant="Variant.Filled"/>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4">
+        <MudItem xs="12" sm="4">
             <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" Placeholder="+63912456789" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12">
@@ -139,7 +139,7 @@
             <MudDatePicker Label="Date Hired" For="@(() => context.HireDate)" @bind-Date="context.HireDate" DateFormat="MMMM dd, yyyy" MinDate="context.BirthDate" MaxDate="@DateTime.Today" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date Regularized" For="@(() => context.RegularDate)" @bind-Date="context.RegularDate" DateFormat="MMMM dd, yyyy" MinDate="context.HireDate" MaxDate="@DateTime.Today" />
+            <MudDatePicker Label="Date Regularized" For="@(() => context.RegularDate)" @bind-Date="context.RegularDate" DateFormat="MMMM dd, yyyy" MinDate="context.HireDate" MaxDate="@DateTime.Today" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
@@ -210,7 +210,7 @@
     private RenderFragment<EmployeeDto> TemplateImage => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Rounded=true Style="height: 100px; width: 100px;"> </MudAvatar>
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Rounded=true Style="height: 80px; width: 80px;"> </MudAvatar>
         </MudItem>
     };
 

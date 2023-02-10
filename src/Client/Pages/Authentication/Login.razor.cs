@@ -20,7 +20,6 @@ public partial class Login
 
     private readonly TokenRequest _tokenRequest = new();
     private string TenantId { get; set; } = string.Empty;
-
     private bool _passwordVisibility;
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
@@ -33,7 +32,7 @@ public partial class Login
             return;
         }
 
-        var authState = await AuthState;
+        AuthenticationState authState = await AuthState;
         if (authState.User.Identity?.IsAuthenticated is true)
         {
             Navigation.NavigateTo("/");

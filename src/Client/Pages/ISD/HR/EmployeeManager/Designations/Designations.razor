@@ -14,7 +14,7 @@
     <ExtraActions>
         @if (_canViewRoleClaims)
         {
-            <MudDivider/>
+            <MudDivider />
             <MudMenuItem OnClick="(() => SetCurrentDesignation(context.EmployeeId, context.Id))" OnTouch="(() => SetCurrentDesignation(context.EmployeeId, context.Id))">Set as Current Designation</MudMenuItem>
         }
     </ExtraActions>
@@ -49,43 +49,40 @@
             <AutocompleteRank For="@(() => context.SalaryRank)" @bind-Value="context.SalaryRank" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSelect Label="Employment" For="@(() => context.EmploymentType)" @bind-Value="context.EmploymentType" Variant="Variant.Filled" >
-                <MudSelectItem Value="@("JOB ORDER")"/>
-                <MudSelectItem Value="@("PROBATION")"/>
-                <MudSelectItem Value="@("REGULAR")"/>
-                <MudSelectItem Value="@("RESIGNED")"/>
-                <MudSelectItem Value="@("RETIRED")"/>
-                <MudSelectItem Value="@("TERMINATED")"/>
+            <MudSelect Label="Employment" For="@(() => context.EmploymentType)" @bind-Value="context.EmploymentType" Variant="Variant.Filled">
+                <MudSelectItem Value="@("JOB ORDER")" />
+                <MudSelectItem Value="@("PROBATION")" />
+                <MudSelectItem Value="@("REGULAR")" />
+                <MudSelectItem Value="@("RESIGNED")" />
+                <MudSelectItem Value="@("RETIRED")" />
+                <MudSelectItem Value="@("TERMINATED")" />
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSelect Label="Rate Type" For="@(() => context.RateType)" @bind-Value="context.RateType" Variant="Variant.Filled" >
-                <MudSelectItem Value="@("DAILY")"/>
-                <MudSelectItem Value="@("MONTHLY")"/>
+            <MudSelect Label="Rate Type" For="@(() => context.RateType)" @bind-Value="context.RateType" Variant="Variant.Filled">
+                <MudSelectItem Value="@("DAILY")" />
+                <MudSelectItem Value="@("MONTHLY")" />
             </MudSelect>
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Days per Month" For="@(() => context.DaysPerMonth)" @bind-Value="context.DaysPerMonth" Disabled="@(!DisableInput(context.RateType))" Variant="Variant.Filled" />
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Per Day" For="@(() => context.RatePerDay)" @bind-Value="context.RatePerDay" Format="N2" Disabled=true Variant="Variant.Filled" />
+            <MudNumericField Label="Per Day" For="@(() => context.RatePerDay)" @bind-Value="context.RatePerDay" Format="N2" Disabled=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Hours per Day" For="@(() => context.HoursPerDay)" @bind-Value="context.HoursPerDay" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Per Hour" For="@(() => context.RatePerHour)" @bind-Value="context.RatePerHour" Format="N2" Disabled=true Variant="Variant.Filled" />
+            <MudNumericField Label="Per Hour" For="@(() => context.RatePerHour)" @bind-Value="context.RatePerHour" Format="N0" Disabled=true Variant="Variant.Outlined" />
         </MudItem>
 
-         <MudItem xs="12">
+        <MudItem xs="12">
             <AutocompleteSchedule For="@(() => context.ScheduleId)" @bind-Value="context.ScheduleId" />
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Pay Type" For="@(() => context.PayType)" @bind-Value="context.PayType" Variant="Variant.Filled">
-                <MudSelectItem Value="@("BI-MONTHLY")"/>
-                <MudSelectItem Value="@("MONTHLY")"/>
+                <MudSelectItem Value="@("BI-MONTHLY")" />
+                <MudSelectItem Value="@("MONTHLY")" />
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
@@ -93,17 +90,17 @@
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
 
         <MudItem xs="12">
             <MudItem>
-                @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                @if (!string.IsNullOrEmpty(context.ImageInBytes))
                 {
-                    <MudAvatar Image ="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                    <MudAvatar Image="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
                 }
                 else
                 {
@@ -115,22 +112,22 @@
                     <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
                         Upload Document
                     </MudButton>
-                    @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
+                                   StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;">
                             View
                         </MudButton>
 
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
-                            StartIcon="@Icons.Material.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
+                                   StartIcon="@Icons.Material.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;">
                             Delete
                         </MudButton>
                     }
-                    @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                    @if (!string.IsNullOrEmpty(context.ImageInBytes))
                     {
-                        <MudButton HtmlTag="label"  OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;" >
+                        <MudButton HtmlTag="label" OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                                   StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;">
                             Clear
                         </MudButton>
                     }
@@ -143,16 +140,6 @@
 
 @code
 {
-    private RenderFragment<DesignationDto> TemplateIdActive => context => __builder =>
-    {
-        <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">
-                <MudHighlighter Text="@context.IdNumber" HighlightedText="@_searchString" />
-            </MudText>
-            <MudSwitch Checked="@context.IsActive" Color="Color.Primary" ReadOnly=true />
-        </MudItem>
-    };
-
     private RenderFragment<DesignationDto> TemplateAreaDepartment => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
@@ -185,6 +172,19 @@
             </MudText>
             <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.EmploymentType" HighlightedText="@_searchString" />
+            </MudText>
+            <MudSwitch Checked="@context.IsActive" Color="Color.Primary" ReadOnly=true />
+        </MudItem>
+    };
+
+    private RenderFragment<DesignationDto> TemplateEffectivityUntil => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1" Align="Align.End">
+                @context.StartDate.ToString("MMMM dd, yyyy")
+            </MudText>
+            <MudText Typo="Typo.caption" Align="Align.End">
+                @context.EndDate.ToString("MMMM dd, yyyy")
             </MudText>
         </MudItem>
     };

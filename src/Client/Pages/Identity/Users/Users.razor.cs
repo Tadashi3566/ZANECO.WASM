@@ -46,11 +46,14 @@ public partial class Users
             deleteAction: string.Empty,
             fields: new()
             {
-                new(user => user.FirstName, L["First Name"]),
-                new(user => user.LastName, L["Last Name"]),
-                new(user => user.UserName, L["UserName"]),
-                new(user => user.Email, L["Email"]),
-                new(user => user.PhoneNumber, L["PhoneNumber"]),
+                new(user => user.ImageUrl, L["Image"], Template: TemplateImage),
+                new(user => user.UserName, L["UserName"], "UserName", Template: TemplateName),
+
+                // new(user => user.FirstName, L["First Name"]),
+                // new(user => user.LastName, L["Last Name"]),
+                new(user => user.Email, L["Email"], "Email", Template: TemplateEmailPhoneNumber),
+
+                // new(user => user.PhoneNumber, L["PhoneNumber"]),
                 new(user => user.EmailConfirmed, L["Email Confirmation"], Type: typeof(bool)),
                 new(user => user.IsActive, L["Active"], Type: typeof(bool))
             },
