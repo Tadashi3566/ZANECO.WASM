@@ -26,12 +26,12 @@ public partial class Schedules
     private EntityTable<ScheduleDto, Guid, ScheduleUpdateRequest> _table = default!;
 
     private string? _searchString;
-    private bool _canViewRoleClaims;
+    private bool _canViewSchedules;
 
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
-        _canViewRoleClaims = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.RoleClaims);
+        _canViewSchedules = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Schedules);
 
         Context = new(
             entityName: "Schedules",
@@ -50,7 +50,7 @@ public partial class Schedules
             createFunc: async data => await Client.CreateAsync(data.Adapt<ScheduleCreateRequest>()),
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
             deleteFunc: async id => await Client.DeleteAsync(id),
-            hasExtraActionsFunc: () => _canViewRoleClaims,
+            hasExtraActionsFunc: () => _canViewSchedules,
             exportAction: string.Empty);
     }
 

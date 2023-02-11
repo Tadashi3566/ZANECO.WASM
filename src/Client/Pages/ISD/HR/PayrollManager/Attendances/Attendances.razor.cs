@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.Dialogs.ISD.HR.PayrollManager;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
@@ -104,6 +105,36 @@ public partial class Attendances
             _searchEmployeeId = value;
             _table.ReloadDataAsync();
         }
+    }
+
+    private static void TimeIn1(in Guid employeeId)
+    {
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        DialogParameters parameters = new()
+        {
+            { nameof(GenerateSchedule.EmployeeId), employeeId },
+        };
+        var dialog = DialogService.Show<GenerateSchedule>("Generate", parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            Snackbar.Add("Employee Daily Schedule has been successfully generated.", Severity.Success);
+        }
+    }
+
+    private static void TimeOut1(in Guid employeeId)
+    {
+
+    }
+
+    private static void TimeIn2(in Guid employeeId)
+    {
+
+    }
+
+    private static void TimeOut2(in Guid employeeId)
+    {
+
     }
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.

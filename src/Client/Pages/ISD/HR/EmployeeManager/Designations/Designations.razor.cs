@@ -29,7 +29,7 @@ public partial class Designations
 
     private string? _searchString;
 
-    private bool _canViewRoleClaims;
+    private bool _canViewEmployees;
 
     protected override void OnParametersSet()
     {
@@ -42,7 +42,7 @@ public partial class Designations
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
-        _canViewRoleClaims = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.RoleClaims);
+        _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
 
         Context = new(
             entityName: "Designation",

@@ -29,7 +29,7 @@ public partial class EmployeePayrolls
 
     private string? _searchString;
 
-    private bool _canViewRoleClaims;
+    private bool _canViewPayroll;
 
     protected override void OnParametersSet()
     {
@@ -42,7 +42,7 @@ public partial class EmployeePayrolls
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
-        _canViewRoleClaims = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.RoleClaims);
+        _canViewPayroll = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Payroll);
 
         Context = new(
             entityName: "Employee Payroll",
@@ -78,7 +78,7 @@ public partial class EmployeePayrolls
             },
             updateFunc: async (id, EmployeePayroll) => await Client.UpdateAsync(id, EmployeePayroll.Adapt<EmployeePayrollUpdateRequest>()),
             deleteFunc: async id => await Client.DeleteAsync(id),
-            hasExtraActionsFunc: () => _canViewRoleClaims,
+            hasExtraActionsFunc: () => _canViewPayroll,
             exportAction: string.Empty);
     }
 

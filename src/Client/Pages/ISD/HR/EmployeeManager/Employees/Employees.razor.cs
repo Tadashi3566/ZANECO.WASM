@@ -33,12 +33,12 @@ public partial class Employees
 
     private string? _searchString;
 
-    private bool _canViewRoleClaims;
+    private bool _canViewEmployees;
 
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
-        _canViewRoleClaims = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.RoleClaims);
+        _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
 
         Context = new(
                 entityName: "Employee",
@@ -85,7 +85,7 @@ public partial class Employees
                     request.ImageInBytes = string.Empty;
                 },
                 deleteFunc: async id => await Client.DeleteAsync(id),
-                hasExtraActionsFunc: () => _canViewRoleClaims,
+                hasExtraActionsFunc: () => _canViewEmployees,
                 exportAction: string.Empty);
     }
 

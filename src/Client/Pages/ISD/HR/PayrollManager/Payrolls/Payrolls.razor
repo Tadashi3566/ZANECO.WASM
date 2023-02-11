@@ -8,7 +8,7 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="PayrollDto" TId="Guid" TRequest="PayrollUpdateRequest" Context="@Context">
     <ExtraActions>
-        @if (_canViewRoleClaims)
+        @if (_canViewPayroll)
         {
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeepayroll/{context.Id}"))" OnTouch="@(() => Navigation.NavigateTo($"/payroll/employeepayroll/{context.Id}"))">Employees Payroll</MudMenuItem>
             <MudMenuItem OnClick="@(() => PayrollGenerate(context.Id))" OnTouch="@(() => PayrollGenerate(context.Id))">Calculate Summary</MudMenuItem>

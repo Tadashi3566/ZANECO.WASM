@@ -8,7 +8,7 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="ScheduleDto" TId="Guid" TRequest="ScheduleUpdateRequest" Context="@Context">
     <ExtraActions>
-        @if (_canViewRoleClaims)
+        @if (_canViewSchedules)
         {
             <MudDivider/>
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/scheduledetails/{context.Id}"))" OnTouch="@(() => Navigation.NavigateTo($"/payroll/scheduledetails/{context.Id}"))">Schedules</MudMenuItem>

@@ -12,7 +12,7 @@
         </MudItem>
     </AdvancedSearchContent>
     <ExtraActions>
-        @if (_canViewRoleClaims)
+        @if (_canViewEmployees)
         {
             <MudDivider />
             <MudMenuItem OnClick="(() => SetCurrentDesignation(context.EmployeeId, context.Id))" OnTouch="(() => SetCurrentDesignation(context.EmployeeId, context.Id))">Set as Current Designation</MudMenuItem>

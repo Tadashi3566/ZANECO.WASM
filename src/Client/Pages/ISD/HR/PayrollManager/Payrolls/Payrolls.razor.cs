@@ -24,12 +24,12 @@ public partial class Payrolls
     private EntityTable<PayrollDto, Guid, PayrollUpdateRequest> _table = default!;
 
     private string? _searchString;
-    private bool _canViewRoleClaims;
+    private bool _canViewPayroll;
 
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
-        _canViewRoleClaims = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.RoleClaims);
+        _canViewPayroll = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Payroll);
 
         Context = new(
             entityName: "Payroll",
@@ -62,7 +62,7 @@ public partial class Payrolls
             createFunc: async Payroll => await Client.CreateAsync(Payroll.Adapt<PayrollCreateRequest>()),
             updateFunc: async (id, Payroll) => await Client.UpdateAsync(id, Payroll),
             deleteFunc: async id => await Client.DeleteAsync(id),
-            hasExtraActionsFunc: () => _canViewRoleClaims,
+            hasExtraActionsFunc: () => _canViewPayroll,
             exportAction: string.Empty);
     }
 

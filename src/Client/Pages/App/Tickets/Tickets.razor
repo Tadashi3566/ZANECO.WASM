@@ -6,7 +6,7 @@
 
 <EntityTable @ref="_table" TEntity="TicketDto" TId="Guid" TRequest="TicketViewModel" Context="@Context">
     <ExtraActions>
-        @if (_canViewRoleClaims)
+        @if (_canViewTickets)
         {
             <MudDivider />
             @if (context.Status.Equals("PENDING") || context.Status.Equals("SUSPENDED"))

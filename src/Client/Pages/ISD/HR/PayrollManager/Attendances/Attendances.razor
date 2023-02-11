@@ -11,6 +11,13 @@
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
         </MudItem>
     </AdvancedSearchContent>
+    <ExtraActions>
+        <MudDivider />
+        <MudMenuItem OnClick="@(() => TimeIn1(context.Id))">Time-In 1</MudMenuItem>
+        <MudMenuItem OnClick="@(() => TimeOut1(context.Id))">Time-Out 1</MudMenuItem>
+        <MudMenuItem OnClick="@(() => TimeIn2(context.Id))">Time-In 2</MudMenuItem>
+        <MudMenuItem OnClick="@(() => TimeOut2(context.Id))">Time-Out 2</MudMenuItem>
+    </ExtraActions>
     <EditFormContent>
         <MudItem xs="12">
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />

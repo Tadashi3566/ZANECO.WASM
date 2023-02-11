@@ -27,14 +27,14 @@ public partial class Tickets
 
     private EntityTable<TicketDto, Guid, TicketViewModel> _table = default!;
 
-    private bool _canViewRoleClaims;
+    private bool _canViewTickets;
 
     private string? _userId;
 
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
-        _canViewRoleClaims = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.RoleClaims);
+        _canViewTickets = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Tickets);
 
         Context = new(
             entityName: "Ticket",
