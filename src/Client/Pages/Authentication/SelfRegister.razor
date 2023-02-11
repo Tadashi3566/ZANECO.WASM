@@ -28,33 +28,44 @@
                 <DataAnnotationsValidator />
                 <CustomValidation @ref="_customValidation" />
                 <MudItem xs="12" md="6">
-                    <MudTextField T="string" Label="Tenant Name" Variant="Variant.Outlined" @bind-Value="Tenant"
-                                  For="@(() => Tenant)" Required />
+                    <MudTextField T="string" Label="Tenant Name" @bind-Value="Tenant" For="@(() => Tenant)" Required
+                                  InputType="InputType.Text"
+                                  Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Storefront"
+                                  Variant="Variant.Outlined" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudTextField T="string" Label="User Name" Variant="Variant.Outlined"
+                    <MudTextField T="string" Label="User Name"
                                   @bind-Value="_createUserRequest.UserName" For="@(() => _createUserRequest.UserName)"
-                                  InputType="InputType.Text" Adornment="Adornment.End" />
+                                  InputType="InputType.Text"
+                                  Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.VerifiedUser"
+                                  Variant="Variant.Outlined" />
                 </MudItem>
                 <MudItem xs="12">
-                    <MudTextField T="string" Label="E-mail" Variant="Variant.Outlined"
-                                  @bind-Value="_createUserRequest.Email" For="@(() => _createUserRequest.Email)"
-                                  InputType="InputType.Email" Adornment="Adornment.End" />
+                    <MudTextField T="string" Label="E-mail" @bind-Value="_createUserRequest.Email" For="@(() => _createUserRequest.Email)"
+                                  InputType="InputType.Email"
+                                  Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.AlternateEmail"
+                                  Variant="Variant.Outlined" />
                 </MudItem>
                 <MudItem xs="12">
-                    <MudTextField T="string" Label="Phone Number" Variant="Variant.Outlined"
+                    <MudTextField T="string" Label="Phone Number" 
                                   @bind-Value="_createUserRequest.PhoneNumber" For="@(() => _createUserRequest.PhoneNumber)"
-                                  InputType="InputType.Telephone" Adornment="Adornment.End" />
+                                  InputType="InputType.Telephone"
+                                  Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Phone"
+                                  Variant="Variant.Outlined" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudTextField T="string" Label="First Name" Variant="Variant.Outlined"
+                    <MudTextField T="string" Label="First Name" 
                                   @bind-Value="_createUserRequest.FirstName" For="@(() => _createUserRequest.FirstName)"
-                                  InputType="InputType.Text" Adornment="Adornment.End" />
+                                  InputType="InputType.Text"
+                                  Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Abc"
+                                  Variant="Variant.Outlined" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudTextField T="string" Label="Last Name" Variant="Variant.Outlined"
+                    <MudTextField T="string" Label="Last Name" 
                                   @bind-Value="_createUserRequest.LastName" For="@(() => _createUserRequest.LastName)"
-                                  InputType="InputType.Text" Adornment="Adornment.End" />
+                                  InputType="InputType.Text"
+                                  Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Abc"
+                                  Variant="Variant.Outlined" />
                 </MudItem>
 
                 <MudItem xs="12" md="6">

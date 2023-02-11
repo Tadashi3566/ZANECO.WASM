@@ -78,6 +78,18 @@
 </EntityTable>
 
 @code {
+    private RenderFragment<ContactDto> TemplateTypeReference => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.body2">
+                <MudHighlighter Text="@context.ContactType" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.AccountNumber" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
     private RenderFragment<ContactDto> TemplatePhoneNumber => context => __builder =>
     {
         <MudItem>

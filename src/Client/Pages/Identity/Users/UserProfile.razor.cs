@@ -9,6 +9,7 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.Identity.Users;
+
 public partial class UserProfile
 {
     [CascadingParameter]

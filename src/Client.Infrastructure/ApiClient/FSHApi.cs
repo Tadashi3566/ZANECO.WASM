@@ -37673,8 +37673,17 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Status { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("imagePath", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? ImagePath { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("imagePathIn1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? ImagePathIn1 { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("imagePathOut1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? ImagePathOut1 { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("imagePathIn2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? ImagePathIn2 { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("imagePathOut2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? ImagePathOut2 { get; set; } = default!;
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -37757,12 +37766,29 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Notes { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("deleteCurrentImage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool DeleteCurrentImage { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("deleteCurrentImageIn1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool DeleteCurrentImageIn1 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("deleteCurrentImageOut1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool DeleteCurrentImageOut1 { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("deleteCurrentImageIn2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool DeleteCurrentImageIn2 { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("deleteCurrentImageOut2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool DeleteCurrentImageOut2 { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("imageIn1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public FileUploadRequest? ImageIn1 { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("imageOut1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public FileUploadRequest? ImageOut1 { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("imageIn2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public FileUploadRequest? ImageIn2 { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("imageOut2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public FileUploadRequest? ImageOut2 { get; set; } = default!;
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -40736,7 +40762,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("phoneNumber", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 1)]
+        [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 11)]
         public string PhoneNumber { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

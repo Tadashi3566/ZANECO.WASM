@@ -18,24 +18,28 @@
         <CustomValidation @ref="_customValidation" />
 
         <MudItem xs="12">
-            <MudTextField T="string" Label="@L["User Name"]" Variant="Variant.Outlined" @bind-Value="_tokenRequest.UserName"
-                          For="@(() => _tokenRequest.UserName)" />
+            <MudTextField T="string" Label="@L["User Name"]" @bind-Value="_tokenRequest.UserName" For="@(() => _tokenRequest.UserName)"
+                          Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.VerifiedUser"
+                          Variant="Variant.Outlined" />
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField T="string" Label="@L["E-mail"]" Variant="Variant.Outlined" @bind-Value="_tokenRequest.Email"
-                For="@(() => _tokenRequest.Email)" />
+            <MudTextField T="string" Label="@L["E-mail"]" @bind-Value="_tokenRequest.Email" For="@(() => _tokenRequest.Email)"
+                          Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.AlternateEmail"
+                          Variant="Variant.Outlined"  />
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField Label="@L["Password"]" Variant="Variant.Outlined" @bind-Value="_tokenRequest.Password"
-                For="@(() => _tokenRequest.Password)" InputType="@_passwordInput" Adornment="Adornment.End"
-                AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+            <MudTextField Label="@L["Password"]" @bind-Value="_tokenRequest.Password" For="@(() => _tokenRequest.Password)"
+                          InputType="@_passwordInput" Adornment="Adornment.End"
+                          AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility"
+                          Variant="Variant.Outlined" />
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField T="string" Label="@L["Tenant"]" Variant="Variant.Outlined" @bind-Value="TenantId"
-                For="@(() => TenantId)" Required />
+            <MudTextField T="string" Label="@L["Tenant"]" @bind-Value="TenantId" For="@(() => TenantId)" Required
+                          Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Storefront"
+                          Variant="Variant.Outlined" />
         </MudItem>
         
         <MudItem xs="12" sm="6">
@@ -50,7 +54,7 @@
                  @if (BusySubmitting)
                  {
                      <MudProgressCircular Color="Color.Tertiary" Indeterminate=true Size="Size.Small" />
-                     <MudText Class="ml-2">@L["Sign In"]</MudText>
+                     <MudText Class="ml-2">@L["Verifying your Credentials"]</MudText>
                  }
                  else
                  {

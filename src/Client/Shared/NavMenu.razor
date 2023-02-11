@@ -50,24 +50,7 @@
             }
         </MudNavGroup>
     }
-    @if (_canCreateComment || _canViewRating || _canViewSurveys)
-    {
-        <MudNavGroup Title="Survey" Icon="@Icons.Material.Filled.AddBox">
-            @if (_canViewRating)
-            {
-                <MudNavLink Href="/survey/rates" Icon="@Icons.Material.Filled.StarRate" Class="fsh-nav-child">Rates</MudNavLink>
-                <MudNavLink Href="/survey/ratingtemplates" Icon="@Icons.Material.Filled.HotelClass" Class="fsh-nav-child">Templates</MudNavLink>
-            }
-            @if (_canCreateComment)
-            {
-                <MudNavLink Href="/survey/comment" Icon="@Icons.Material.Filled.StarHalf" Class="fsh-nav-child">Comment</MudNavLink>
-            }
-            @if (_canViewSurveys)
-            {
-                <MudNavLink Href="/survey/ratings" Icon="@Icons.Material.Filled.StarHalf" Class="fsh-nav-child">Surveys</MudNavLink>
-            }
-        </MudNavGroup>
-    }
+    
     @if (_canViewEmployees)
     {
         <MudNavGroup Title="HR" Icon="@Icons.Material.Filled.AddBox" >
@@ -99,6 +82,7 @@
             }
         </MudNavGroup>
     }
+
     @if (_canViewAccounting)
     {
         <MudNavGroup Title="Accounting" Icon="@Icons.Material.Filled.AddBox">
@@ -113,6 +97,7 @@
             }
         </MudNavGroup>
     }
+
     @if (_canViewISD)
     {
         <MudNavGroup Title="ISD" Icon="@Icons.Material.Filled.AddBox">
@@ -122,6 +107,7 @@
             }
         </MudNavGroup>
     }
+
     @if (_canViewCAD)
     {
         <MudNavGroup Title="CAD" Icon="@Icons.Material.Filled.AddBox">
@@ -139,6 +125,26 @@
             }
         </MudNavGroup>
     }
+
+    @if (_canCreateComment || _canViewRating || _canViewSurveys)
+    {
+        <MudNavGroup Title="Survey" Icon="@Icons.Material.Filled.AddBox">
+            @if (_canViewRating)
+            {
+                <MudNavLink Href="/survey/rates" Icon="@Icons.Material.Filled.StarRate" Class="fsh-nav-child">Rates</MudNavLink>
+                <MudNavLink Href="/survey/ratingtemplates" Icon="@Icons.Material.Filled.HotelClass" Class="fsh-nav-child">Templates</MudNavLink>
+            }
+            @if (_canCreateComment)
+            {
+                <MudNavLink Href="/survey/comment" Icon="@Icons.Material.Filled.StarHalf" Class="fsh-nav-child">Comment</MudNavLink>
+            }
+            @if (_canViewSurveys)
+            {
+                <MudNavLink Href="/survey/ratings" Icon="@Icons.Material.Filled.StarHalf" Class="fsh-nav-child">Surveys</MudNavLink>
+            }
+        </MudNavGroup>
+    }
+
     @if (_canViewRaffle)
     {
         <MudNavGroup Title="Raffle" Icon="@Icons.Material.Filled.AddBox">

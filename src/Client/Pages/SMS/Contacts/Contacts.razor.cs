@@ -50,9 +50,9 @@ public partial class Contacts
             entityResource: FSHResource.Contacts,
             fields: new()
             {
-                new(data => data.ContactType, "Contact Type", "ContactType"),
+                new(data => data.ContactType, "ContactType", visible: false),
+                new(data => data.AccountNumber, "Reference", "AccountNumber", Template: TemplateTypeReference),
                 new(data => data.PhoneNumber, "Phone Number", "PhoneNumber", Template: TemplatePhoneNumber),
-                new(data => data.AccountNumber, "Account", "AccountNumber"),
                 new(data => data.Name, "Name/Address", "Name", Template: TemplateNameAddress),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             },

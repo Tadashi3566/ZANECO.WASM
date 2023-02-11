@@ -1,4 +1,5 @@
 using CurrieTechnologies.Razor.SweetAlert2;
+using DevExpress.Blazor;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using System.Globalization;
@@ -15,7 +16,9 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddClientServices(builder.Configuration);
 
+builder.Services.AddDevExpressBlazor(configure => configure.BootstrapVersion = BootstrapVersion.v5);
 builder.Services.AddSweetAlert2();
+
 builder.Services.AddScoped<IClipboardService, ClipboardService>();
 
 var host = builder.Build();

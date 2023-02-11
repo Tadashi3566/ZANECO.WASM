@@ -31,16 +31,16 @@
             <MudTextField Label="Actual Time-Out 2" For="@(() => context.ActualTimeOut2)" @bind-Value="context.ActualTimeOut2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudNumericField Label="Late (minutes)" For="@(() => context.LateMinutes)" @bind-Value="context.LateMinutes" ReadOnly=true Variant="Variant.Outlined" />
+            <MudNumericField Label="Late (minutes)" For="@(() => context.LateMinutes)" @bind-Value="context.LateMinutes" Format="N0" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudNumericField Label="Undertime (minutes)" For="@(() => context.UnderTimeMinutes)" @bind-Value="context.UnderTimeMinutes" ReadOnly=true Variant="Variant.Outlined" />
+            <MudNumericField Label="Undertime (minutes)" For="@(() => context.UnderTimeMinutes)" @bind-Value="context.UnderTimeMinutes" Format="N0" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudNumericField Label="Total Hours" For="@(() => context.TotalHours)" @bind-Value="context.TotalHours" ReadOnly=true Variant="Variant.Outlined" />
+            <MudNumericField Label="Total Hours" For="@(() => context.TotalHours)" @bind-Value="context.TotalHours" Format="N2" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudNumericField Label="Paid Hours" For="@(() => context.PaidHours)" @bind-Value="context.PaidHours" Variant="Variant.Outlined" />
+            <MudNumericField Label="Paid Hours" For="@(() => context.PaidHours)" @bind-Value="context.PaidHours" Format="N2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
             <MudSelect Label="Status" For="@(() => context.Status)" @bind-Value="context.Status">
@@ -56,15 +56,15 @@
             <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
 
-        <MudItem xs="12">
+        <MudItem xs="12" md="6">
             <MudItem>
-                @if (!string.IsNullOrEmpty(context.ImageInBytes))
+                @if (!string.IsNullOrEmpty(context.ImageBytes))
                 {
-                    <MudAvatar Image="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                    <MudAvatar Image="@context.ImageBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
                 }
                 else
                 {
-                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn1))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
                 }
             </MudItem>
             <MudItem>
@@ -72,10 +72,10 @@
                     <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
                         Upload Picture
                     </MudButton>
-                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePathIn1) && string.IsNullOrEmpty(context.ImageBytes))
                     {
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                                   StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;">
+                                   StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn1)" Style="margin-left: 5px;">
                             View
                         </MudButton>
 
@@ -84,7 +84,7 @@
                             Delete
                         </MudButton>
                     }
-                    @if (!string.IsNullOrEmpty(context.ImageInBytes))
+                    @if (!string.IsNullOrEmpty(context.ImageBytes))
                     {
                         <MudButton HtmlTag="label" OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
                                    StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;">
@@ -100,18 +100,51 @@
 
 @code
 {
-    private RenderFragment<AttendanceDto> TemplateImage => context => __builder =>
+    private RenderFragment<AttendanceDto> TemplateImageTimeIn1 => context => __builder =>
     {
-        <MudItem Class="d-flex flex-column">
-            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 10%"> </MudAvatar>
-        </MudItem>
+        <MudStack Class="ma-1" Justify="Justify.Center" Row=true>
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            <MudText Class="mt-2" Typo="Typo.h5">
+                @context.ActualTimeIn1
+            </MudText>
+        </MudStack>
+    };
+
+    private RenderFragment<AttendanceDto> TemplateImageTimeOut1 => context => __builder =>
+    {
+        <MudStack Class="ma-1" Justify="Justify.Center" Row=true>
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            <MudText Class="mt-2" Typo="Typo.h5">
+                @context.ActualTimeOut1
+            </MudText>
+        </MudStack>
+    };
+
+    private RenderFragment<AttendanceDto> TemplateImageTimeIn2 => context => __builder =>
+    {
+        <MudStack Class="ma-1" Justify="Justify.Center" Row=true>
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            <MudText Class="mt-2" Typo="Typo.h5">
+                @context.ActualTimeIn2
+            </MudText>
+        </MudStack>
+    };
+
+    private RenderFragment<AttendanceDto> TemplateImageTimeOut2 => context => __builder =>
+    {
+        <MudStack Class="ma-1" Justify="Justify.Center" Row=true>
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            <MudText Class="mt-2" Typo="Typo.h5">
+                @context.ActualTimeOut2
+            </MudText>
+        </MudStack>
     };
 
     private RenderFragment<AttendanceDto> TemplateHoursTotalPaid => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.body1">
-                @context.TotalHours/@context.PaidHours
+                @context.TotalHours.ToString("N2")/@context.PaidHours.ToString("N2")
             </MudText>
         </MudItem>
     };
