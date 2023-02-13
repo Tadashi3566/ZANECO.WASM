@@ -8,6 +8,7 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Notifications;
 
 namespace ZANECO.WASM.Client.Pages.Personal;
+
 public partial class Dashboard
 {
     [Parameter]
@@ -55,9 +56,7 @@ public partial class Dashboard
     {
         _busy = true;
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => DashboardClient.GetAsync(),
-                Snackbar
-            ) is StatsDto dto)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => DashboardClient.GetAsync(), Snackbar) is StatsDto dto)
         {
             RegisteredCount = dto.RegisteredCount;
             SmsCount = dto.SmsCount;
