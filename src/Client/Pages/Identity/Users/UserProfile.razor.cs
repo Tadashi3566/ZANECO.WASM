@@ -76,7 +76,7 @@ public partial class UserProfile
             {
                 _firstLetterOfName = _firstName.ToUpper().FirstOrDefault();
             }
-            _employeeId = dto.EmployeeId;
+            _employeeId = (Guid)dto.EmployeeId!;
         }
 
         var state = await AuthState;

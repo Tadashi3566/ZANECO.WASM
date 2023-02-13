@@ -14,19 +14,52 @@
         @if (_canViewEmployees)
         {
             <MudDivider />
-            <MudMenuItem OnClick="@(() => EmployeeGenerateDailySchedule(context.Id))">Generate Schedule</MudMenuItem>
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeeschedules/{context.Id}/{SearchPayrollId}"))">Daily Schedule</MudMenuItem>
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/attendance/{context.Id}/{SearchPayrollId}"))">Attendance</MudMenuItem>
+            <MudMenuItem OnClick="@(() => EmployeeGenerateDailySchedule(context.Id))"
+                OnTouch="@(() => EmployeeGenerateDailySchedule(context.Id))">
+                Generate Schedule
+            </MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeeschedules/{context.Id}/{SearchPayrollId}"))"
+                OnTouch="@(() => Navigation.NavigateTo($"/payroll/employeeschedules/{context.Id}/{SearchPayrollId}"))">
+                Daily Schedule
+            </MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/attendance/{context.Id}"))"
+                OnTouch="@(() => Navigation.NavigateTo($"/payroll/attendance/{context.Id}"))">
+                Attendance
+            </MudMenuItem>
             <MudDivider />
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/designations/{context.Id}"))">Designations</MudMenuItem>
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/dependents/{context.Id}"))">Dependents</MudMenuItem>
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/employers/{context.Id}"))">Employers</MudMenuItem>
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/powerbills/{context.Id}"))">Power Bill</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/designations/{context.Id}"))"
+                OnTouch="@(() => Navigation.NavigateTo($"/hr/designations/{context.Id}"))">
+                Designations
+            </MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/dependents/{context.Id}"))"
+                OnTouch="@(() => Navigation.NavigateTo($"/hr/dependents/{context.Id}"))">
+                Dependents
+            </MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/employers/{context.Id}"))"
+                OnTouch="@(() => Navigation.NavigateTo($"/hr/employers/{context.Id}"))">
+                Employers
+            </MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/powerbills/{context.Id}"))"
+                OnTouch="@(() => Navigation.NavigateTo($"/hr/powerbills/{context.Id}"))">
+                Power Bill
+            </MudMenuItem>
             <MudDivider />
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/loans/{context.Id}"))">Loans</MudMenuItem>
-            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeeadjustments/{context.Id}"))">Adjustments</MudMenuItem>
-            <MudMenuItem OnClick="@(() => EmployeePayrollGenerate(context.Id, SearchPayrollId))">Generate Payroll</MudMenuItem>
-            <MudMenuItem OnClick="@(() => NavigatePage("/payroll/employeepayrolldetails", context.Id, SearchPayrollId))">Payroll Details</MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/loans/{context.Id}"))"
+                OnTouch="@(() => Navigation.NavigateTo($"/payroll/loans/{context.Id}"))">
+                Loans
+            </MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/employeeadjustments/{context.Id}"))"
+                OnTouch="@(() => Navigation.NavigateTo($"/payroll/employeeadjustments/{context.Id}"))">
+                Adjustments
+            </MudMenuItem>
+            <MudMenuItem OnClick="@(() => EmployeePayrollGenerate(context.Id, SearchPayrollId))"
+                OnTouch="@(() => EmployeePayrollGenerate(context.Id, SearchPayrollId))">
+                Generate Payroll
+            </MudMenuItem>
+            <MudMenuItem OnClick="@(() => NavigatePage("/payroll/employeepayrolldetails", context.Id, SearchPayrollId))"
+                OnTouch="@(() => NavigatePage("/payroll/employeepayrolldetails", context.Id, SearchPayrollId))">
+                Payroll Details
+            </MudMenuItem>
         }
     </ExtraActions>
     <EditFormContent>

@@ -104,7 +104,7 @@ public partial class MessageTemplates
     {
         if (request.ScheduleDate < DateTime.Today)
         {
-            Snackbar.Add("SMS Template Schedule should be at least today!", Severity.Error);
+            Snackbar.Add("SMS Template Schedule should be at least _logDate!", Severity.Error);
             return;
         }
 

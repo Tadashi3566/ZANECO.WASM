@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
-using ZANECO.WASM.Client.Components.Dialogs.ISD.HR.PayrollManager;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
@@ -19,9 +18,9 @@ public partial class Attendances
     protected IAttendanceClient Client { get; set; } = default!;
     protected IPayrollClient ClientPayroll { get; set; } = default!;
 
-    protected EntityServerTableContext<AttendanceDto, Guid, AttendanceViewModel> Context { get; set; } = default!;
+    protected EntityServerTableContext<AttendanceDto, Guid, AttendanceUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<AttendanceDto, Guid, AttendanceViewModel> _table = default!;
+    private EntityTable<AttendanceDto, Guid, AttendanceUpdateRequest> _table = default!;
 
     private string? _searchString;
 
@@ -44,7 +43,7 @@ public partial class Attendances
                 new(data => data.EmployeeName, "Name", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty)),
                 new(data => data.AttendanceDate, "Date", "AttendanceDate", typeof(DateOnly)),
                 new(data => data.ScheduleDetailDay, "Day", "ScheduleDetailDay"),
-                new(data => data.ActualTimeIn1, "Actual TimeIn1", "ActualTimeIn1", Template: TemplateImageTimeIn1),
+                new(data => data.ActualTimeIn1, "Actual TimeLog", "ActualTimeIn1", Template: TemplateImageTimeIn1),
                 new(data => data.ActualTimeOut1, "Actual TimeOut1", "ActualTimeOut1", Template: TemplateImageTimeOut1),
                 new(data => data.ActualTimeIn2, "Actual TimeIn2", "ActualTimeIn2", Template: TemplateImageTimeIn2),
                 new(data => data.ActualTimeOut2, "Actual TimeOut2", "ActualTimeOut2", Template: TemplateImageTimeOut2),
@@ -55,7 +54,6 @@ public partial class Attendances
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
-            enableAdvancedSearch: true,
             idFunc: Attendance => Attendance.Id,
             searchFunc: async _filter =>
             {
@@ -79,16 +77,8 @@ public partial class Attendances
             {
                 data.EmployeeId = _searchEmployeeId;
 
-                if (!string.IsNullOrEmpty(data.ImageBytes))
-                {
-                    data.DeleteCurrentImageIn1 = true;
-                    data.ImageIn1 = new FileUploadRequest() { Data = data.ImageBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
-                }
-
-                await Client.UpdateAsync(id, data);
+                // await Client.UpdateAsync(id, data);
                 await Client.UpdateAsync(id, data.Adapt<AttendanceUpdateRequest>());
-
-                data.ImageBytes = string.Empty;
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
@@ -106,77 +96,4 @@ public partial class Attendances
             _table.ReloadDataAsync();
         }
     }
-
-    private static void TimeIn1(in Guid employeeId)
-    {
-        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-        DialogParameters parameters = new()
-        {
-            { nameof(GenerateSchedule.EmployeeId), employeeId },
-        };
-        var dialog = DialogService.Show<GenerateSchedule>("Generate", parameters, options);
-        DialogResult result = await dialog.Result;
-        if (!result.Cancelled)
-        {
-            Snackbar.Add("Employee Daily Schedule has been successfully generated.", Severity.Success);
-        }
-    }
-
-    private static void TimeOut1(in Guid employeeId)
-    {
-
-    }
-
-    private static void TimeIn2(in Guid employeeId)
-    {
-
-    }
-
-    private static void TimeOut2(in Guid employeeId)
-    {
-
-    }
-
-    // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
-    // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
-    private async Task UploadFiles(InputFileChangeEventArgs e)
-    {
-        if (e.File != null)
-        {
-            string? extension = Path.GetExtension(e.File.Name);
-            if (!ApplicationConstants.SupportedImageFormats.Contains(extension.ToLower()))
-            {
-                Snackbar.Add("Image Format Not Supported.", Severity.Error);
-                return;
-            }
-
-            Context.AddEditModal.RequestModel.ImageExtension = extension;
-            var imageFile = await e.File.RequestImageFileAsync(ApplicationConstants.StandardImageFormat, ApplicationConstants.MaxImageWidth, ApplicationConstants.MaxImageHeight);
-            byte[]? buffer = new byte[imageFile.Size];
-            await imageFile.OpenReadStream(ApplicationConstants.MaxAllowedSize).ReadAsync(buffer);
-            Context.AddEditModal.RequestModel.ImageBytes = $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}";
-            Context.AddEditModal.ForceRender();
-        }
-    }
-
-    private void ClearImageInBytes()
-    {
-        Context.AddEditModal.RequestModel.ImageBytes = string.Empty;
-        Context.AddEditModal.ForceRender();
-    }
-
-    private void SetDeleteCurrentImageFlag()
-    {
-        Context.AddEditModal.RequestModel.ImageBytes = string.Empty;
-        Context.AddEditModal.RequestModel.ImagePathIn1 = string.Empty;
-        Context.AddEditModal.RequestModel.DeleteCurrentImageIn1 = true;
-        Context.AddEditModal.ForceRender();
-    }
-}
-
-public class AttendanceViewModel : AttendanceUpdateRequest
-{
-    public string? ImagePathIn1 { get; set; }
-    public string? ImageBytes { get; set; }
-    public string? ImageExtension { get; set; }
 }

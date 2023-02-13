@@ -1,0 +1,101 @@
+﻿@page "/payroll/TimeLog"
+@page "/payroll/TimeLog/{EmployeeId:guid}"
+@page "/payroll/TimeLog/{EmployeeId:guid}/{LogDate:datetime}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
+
+<FshTitle Title="TimeLog" Description="Employee TimeLog Management" />
+
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="TimeLogDto" TId="Guid" TRequest="TimeLogViewModel" Context="@Context">
+    <AdvancedSearchContent>
+        <MudItem Class="mt-3">
+            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+        </MudItem>
+    </AdvancedSearchContent>
+    <EditFormContent>
+        <MudItem xs="12">
+            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSelect T="string" Label="Log Type" For="@(() => context.LogType)" @bind-Value="context.LogType" Variant="Variant.Filled">
+                <MudSelectItem Value="@("TIMEIN1")"/>
+                <MudSelectItem Value="@("TIMEOUT1")"/>
+                <MudSelectItem Value="@("TIMEIN2")" />
+                <MudSelectItem Value="@("TIMEOUT2")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Date" For="@(() => context.LogDate)" @bind-Date="_logDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTimePicker Label="Time" @bind-Time="@_logTime" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudItem>
+                @if (!string.IsNullOrEmpty(context.ImageInBytes))
+                {
+                    <MudAvatar Image="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+            </MudItem>
+            <MudItem>
+                <div>
+                    <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
+                        Upload Picture
+                    </MudButton>
+                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                                   StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;">
+                            View
+                        </MudButton>
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                                   StartIcon="@Icons.Material.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;">
+                            Delete
+                        </MudButton>
+                    }
+                    @if (!string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                                   StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;">
+                            Clear
+                        </MudButton>
+                    }
+                </div>
+                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+            </MudItem>
+        </MudItem>
+    </EditFormContent>
+</EntityTable>
+
+@code
+{
+    private RenderFragment<TimeLogDto> TemplateImage => context => __builder =>
+    {
+        <MudStack Class="ma-1" Justify="Justify.Center" Row=true>
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+        </MudStack>
+    };
+
+    private RenderFragment<TimeLogDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}
