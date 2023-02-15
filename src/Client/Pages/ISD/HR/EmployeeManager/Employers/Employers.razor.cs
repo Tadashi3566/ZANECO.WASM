@@ -18,7 +18,7 @@ public partial class Employers
 
     protected EntityServerTableContext<EmployerDto, Guid, EmployerViewModel> Context { get; set; } = default!;
 
-    private EntityTable<EmployerDto, Guid, EmployerViewModel> _table = default!;
+    private EntityTable<EmployerDto, Guid, EmployerViewModel>? _table;
 
     private string? _searchString;
 

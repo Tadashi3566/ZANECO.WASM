@@ -12,7 +12,7 @@ public partial class Areas
 
     protected EntityServerTableContext<AreaDto, Guid, AreaUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<AreaDto, Guid, AreaUpdateRequest> _table = default!;
+    private EntityTable<AreaDto, Guid, AreaUpdateRequest>? _table;
 
     private string? _searchString;
 

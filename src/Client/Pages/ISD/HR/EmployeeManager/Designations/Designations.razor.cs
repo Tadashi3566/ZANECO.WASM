@@ -25,7 +25,7 @@ public partial class Designations
 
     protected EntityServerTableContext<DesignationDto, Guid, DesignationViewModel> Context { get; set; } = default!;
 
-    private EntityTable<DesignationDto, Guid, DesignationViewModel> _table = default!;
+    private EntityTable<DesignationDto, Guid, DesignationViewModel>? _table;
 
     private string? _searchString;
 

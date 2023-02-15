@@ -12,7 +12,7 @@ public partial class Barangays
 
     protected EntityServerTableContext<BarangayDto, Guid, BarangayUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<BarangayDto, Guid, BarangayUpdateRequest> _table = default!;
+    private EntityTable<BarangayDto, Guid, BarangayUpdateRequest>? _table;
 
     private string? _searchString;
     protected override void OnInitialized() =>

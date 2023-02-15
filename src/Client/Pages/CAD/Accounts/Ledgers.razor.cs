@@ -15,7 +15,7 @@ public partial class Ledgers
 
     protected EntityServerTableContext<LedgerDto, Guid, LedgerUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<LedgerDto, Guid, LedgerUpdateRequest> _table = default!;
+    private EntityTable<LedgerDto, Guid, LedgerUpdateRequest>? _table;
 
     private string? _searchString;
 

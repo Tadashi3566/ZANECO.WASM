@@ -22,7 +22,7 @@ public partial class MessageTemplates
 
     protected EntityServerTableContext<MessageTemplateDetail, Guid, MessageTemplateUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<MessageTemplateDetail, Guid, MessageTemplateUpdateRequest> _table = default!;
+    private EntityTable<MessageTemplateDetail, Guid, MessageTemplateUpdateRequest>? _table;
 
     private MessageOutCreateRequest _messageOut = new();
 

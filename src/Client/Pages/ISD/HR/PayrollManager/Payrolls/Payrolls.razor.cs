@@ -21,7 +21,7 @@ public partial class Payrolls
 
     protected EntityServerTableContext<PayrollDto, Guid, PayrollUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<PayrollDto, Guid, PayrollUpdateRequest> _table = default!;
+    private EntityTable<PayrollDto, Guid, PayrollUpdateRequest>? _table;
 
     private string? _searchString;
     private bool _canViewPayroll;

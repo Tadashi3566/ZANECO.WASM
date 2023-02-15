@@ -17,7 +17,7 @@ public partial class Dependents
 
     protected EntityServerTableContext<DependentDto, Guid, DependentViewModel> Context { get; set; } = default!;
 
-    private EntityTable<DependentDto, Guid, DependentViewModel> _table = default!;
+    private EntityTable<DependentDto, Guid, DependentViewModel>? _table;
 
     private string? _searchString;
 

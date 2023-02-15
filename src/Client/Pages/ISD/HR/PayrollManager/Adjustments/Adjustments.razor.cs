@@ -12,7 +12,7 @@ public partial class Adjustments
 
     protected EntityServerTableContext<AdjustmentDto, Guid, AdjustmentUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<AdjustmentDto, Guid, AdjustmentUpdateRequest> _table = default!;
+    private EntityTable<AdjustmentDto, Guid, AdjustmentUpdateRequest>? _table;
 
     private string? _searchString;
 

@@ -23,7 +23,7 @@ public partial class Schedules
 
     protected EntityServerTableContext<ScheduleDto, Guid, ScheduleUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<ScheduleDto, Guid, ScheduleUpdateRequest> _table = default!;
+    private EntityTable<ScheduleDto, Guid, ScheduleUpdateRequest>? _table;
 
     private string? _searchString;
     private bool _canViewSchedules;

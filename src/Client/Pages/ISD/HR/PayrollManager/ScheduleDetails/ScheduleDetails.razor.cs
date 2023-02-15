@@ -15,7 +15,7 @@ public partial class ScheduleDetails
 
     protected EntityServerTableContext<ScheduleDetailDto, Guid, ScheduleDetailUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<ScheduleDetailDto, Guid, ScheduleDetailUpdateRequest> _table = default!;
+    private EntityTable<ScheduleDetailDto, Guid, ScheduleDetailUpdateRequest>? _table;
 
     private string? _searchString;
 

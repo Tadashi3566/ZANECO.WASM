@@ -12,7 +12,7 @@ public partial class Routes
 
     protected EntityServerTableContext<RouteDto, Guid, RouteUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<RouteDto, Guid, RouteUpdateRequest> _table = default!;
+    private EntityTable<RouteDto, Guid, RouteUpdateRequest>? _table;
 
     private string? _searchString;
 

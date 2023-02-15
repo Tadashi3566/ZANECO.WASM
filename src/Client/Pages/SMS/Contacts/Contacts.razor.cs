@@ -26,7 +26,7 @@ public partial class Contacts
 
     protected EntityServerTableContext<ContactDto, Guid, ContactViewModel> Context { get; set; } = default!;
 
-    private EntityTable<ContactDto, Guid, ContactViewModel> _table = default!;
+    private EntityTable<ContactDto, Guid, ContactViewModel>? _table;
 
     private string? _searchString;
 

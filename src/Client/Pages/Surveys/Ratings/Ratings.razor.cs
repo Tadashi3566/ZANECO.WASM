@@ -14,7 +14,7 @@ public partial class Ratings
 
     protected EntityServerTableContext<RatingDto, Guid, RatingUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<RatingDto, Guid, RatingUpdateRequest> _table = default!;
+    private EntityTable<RatingDto, Guid, RatingUpdateRequest>? _table;
 
     private string? _searchString;
     protected override void OnInitialized() =>

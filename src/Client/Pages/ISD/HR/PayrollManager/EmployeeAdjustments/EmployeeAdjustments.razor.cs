@@ -14,7 +14,7 @@ public partial class EmployeeAdjustments
 
     protected EntityServerTableContext<EmployeeAdjustmentDto, Guid, EmployeeAdjustmentUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<EmployeeAdjustmentDto, Guid, EmployeeAdjustmentUpdateRequest> _table = default!;
+    private EntityTable<EmployeeAdjustmentDto, Guid, EmployeeAdjustmentUpdateRequest>? _table;
 
     private string? _searchString;
 

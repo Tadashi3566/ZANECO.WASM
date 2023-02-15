@@ -12,7 +12,7 @@ public partial class PowerRates
 
     protected EntityServerTableContext<PowerRateDto, Guid, PowerRateUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<PowerRateDto, Guid, PowerRateUpdateRequest> _table = default!;
+    private EntityTable<PowerRateDto, Guid, PowerRateUpdateRequest>? _table;
 
     private string? _searchString;
 

@@ -13,7 +13,7 @@ public partial class PowerConsumptions
 
     protected EntityServerTableContext<PowerConsumptionDto, Guid, PowerConsumptionUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<PowerConsumptionDto, Guid, PowerConsumptionUpdateRequest> _table = default!;
+    private EntityTable<PowerConsumptionDto, Guid, PowerConsumptionUpdateRequest>? _table;
 
     private string? _searchString;
     protected override void OnInitialized() =>

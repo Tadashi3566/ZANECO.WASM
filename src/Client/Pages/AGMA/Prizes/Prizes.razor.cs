@@ -15,7 +15,7 @@ public partial class Prizes
 
     protected EntityServerTableContext<PrizeDto, Guid, PrizeViewModel> Context { get; set; } = default!;
 
-    private EntityTable<PrizeDto, Guid, PrizeViewModel> _table = default!;
+    private EntityTable<PrizeDto, Guid, PrizeViewModel>? _table;
 
     private string? _searchString;
 

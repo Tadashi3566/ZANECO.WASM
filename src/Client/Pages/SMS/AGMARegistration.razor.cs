@@ -20,7 +20,7 @@ public partial class AGMARegistration
 
     protected EntityServerTableContext<MessageInDto, int, MessageInUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<MessageInDto, int, MessageInUpdateRequest> _table = default!;
+    private EntityTable<MessageInDto, int, MessageInUpdateRequest>? _table;
     private MessageInReadRequest _readRequest = new();
 
     private bool _canCreateSMS;

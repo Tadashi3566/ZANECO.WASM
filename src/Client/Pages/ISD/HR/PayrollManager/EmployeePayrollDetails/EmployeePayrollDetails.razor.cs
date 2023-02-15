@@ -16,7 +16,7 @@ public partial class EmployeePayrollDetails
 
     protected EntityServerTableContext<EmployeePayrollDetailDto, Guid, EmployeePayrollDetailUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<EmployeePayrollDetailDto, Guid, EmployeePayrollDetailUpdateRequest> _table = default!;
+    private EntityTable<EmployeePayrollDetailDto, Guid, EmployeePayrollDetailUpdateRequest>? _table;
 
     private string? _searchString;
     protected override void OnParametersSet()

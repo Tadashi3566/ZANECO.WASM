@@ -29,7 +29,7 @@ public partial class Employees
 
     protected EntityServerTableContext<EmployeeDto, Guid, EmployeeViewModel> Context { get; set; } = default!;
 
-    private EntityTable<EmployeeDto, Guid, EmployeeViewModel> _table = default!;
+    private EntityTable<EmployeeDto, Guid, EmployeeViewModel>? _table;
 
     private string? _searchString;
 

@@ -15,7 +15,7 @@ public partial class Raffles
 
     protected EntityServerTableContext<RaffleDto, Guid, RaffleViewModel> Context { get; set; } = default!;
 
-    private EntityTable<RaffleDto, Guid, RaffleViewModel> _table = default!;
+    private EntityTable<RaffleDto, Guid, RaffleViewModel>? _table;
 
     private string? _searchString;
 

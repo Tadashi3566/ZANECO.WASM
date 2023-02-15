@@ -18,7 +18,7 @@ public partial class Contributions
     protected IContributionClient Client { get; set; } = default!;
     protected EntityServerTableContext<ContributionDto, Guid, ContributionUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<ContributionDto, Guid, ContributionUpdateRequest> _table = default!;
+    private EntityTable<ContributionDto, Guid, ContributionUpdateRequest>? _table;
 
     private string? _searchString;
     private bool _canViewPayroll;

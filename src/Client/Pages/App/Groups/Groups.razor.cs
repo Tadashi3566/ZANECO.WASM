@@ -15,7 +15,7 @@ public partial class Groups
 
     protected EntityServerTableContext<GroupDto, Guid, GroupViewModel> Context { get; set; } = default!;
 
-    private EntityTable<GroupDto, Guid, GroupViewModel> _table = default!;
+    private EntityTable<GroupDto, Guid, GroupViewModel>? _table;
 
     private string? _searchString;
 

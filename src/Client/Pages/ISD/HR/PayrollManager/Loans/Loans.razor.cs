@@ -14,7 +14,7 @@ public partial class Loans
 
     protected EntityServerTableContext<LoanDto, Guid, LoanUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<LoanDto, Guid, LoanUpdateRequest> _table = default!;
+    private EntityTable<LoanDto, Guid, LoanUpdateRequest>? _table;
 
     private string? _searchString;
     private DateTime? _dtend;

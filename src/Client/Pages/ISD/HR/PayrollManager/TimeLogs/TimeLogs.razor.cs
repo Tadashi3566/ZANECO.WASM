@@ -19,7 +19,7 @@ public partial class TimeLogs
 
     protected EntityServerTableContext<TimeLogDto, Guid, TimeLogViewModel> Context { get; set; } = default!;
 
-    private EntityTable<TimeLogDto, Guid, TimeLogViewModel> _table = default!;
+    private EntityTable<TimeLogDto, Guid, TimeLogViewModel>? _table;
 
     private string? _searchString;
     private DateTime? _logDate = DateTime.Today;

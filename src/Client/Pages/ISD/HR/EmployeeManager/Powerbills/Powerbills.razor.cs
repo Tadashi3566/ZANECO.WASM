@@ -17,7 +17,7 @@ public partial class Powerbills
 
     protected EntityServerTableContext<PowerbillDto, Guid, PowerbillViewModel> Context { get; set; } = default!;
 
-    private EntityTable<PowerbillDto, Guid, PowerbillViewModel> _table = default!;
+    private EntityTable<PowerbillDto, Guid, PowerbillViewModel>? _table;
 
     private string? _searchString;
 

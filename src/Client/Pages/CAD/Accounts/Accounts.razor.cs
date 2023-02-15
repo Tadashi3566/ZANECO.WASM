@@ -19,7 +19,7 @@ public partial class Accounts
 
     protected EntityServerTableContext<AccountDto, Guid, AccountViewModel> Context { get; set; } = default!;
 
-    private EntityTable<AccountDto, Guid, AccountViewModel> _table = default!;
+    private EntityTable<AccountDto, Guid, AccountViewModel>? _table;
 
     private AccountMigrateAccountRequest _accountMigrateAccountRequest = new();
 

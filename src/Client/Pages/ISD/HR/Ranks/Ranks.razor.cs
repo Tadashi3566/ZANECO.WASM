@@ -12,7 +12,7 @@ public partial class Ranks
 
     protected EntityServerTableContext<RankDto, Guid, RankUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<RankDto, Guid, RankUpdateRequest> _table = default!;
+    private EntityTable<RankDto, Guid, RankUpdateRequest>? _table;
 
     private string? _searchString;
 

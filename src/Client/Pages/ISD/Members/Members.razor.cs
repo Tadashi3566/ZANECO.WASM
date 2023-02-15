@@ -15,7 +15,7 @@ public partial class Members
 
     protected EntityServerTableContext<MemberDto, Guid, MemberViewModel> Context { get; set; } = default!;
 
-    private EntityTable<MemberDto, Guid, MemberViewModel> _table = default!;
+    private EntityTable<MemberDto, Guid, MemberViewModel>? _table;
 
     private string? _searchString;
 

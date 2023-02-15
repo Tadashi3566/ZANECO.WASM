@@ -12,7 +12,7 @@ public partial class Rates
 
     protected EntityServerTableContext<RateDto, Guid, RateUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<RateDto, Guid, RateUpdateRequest> _table = default!;
+    private EntityTable<RateDto, Guid, RateUpdateRequest>? _table;
 
     private string? _searchString;
 

@@ -17,7 +17,7 @@ public partial class Products
 
     protected EntityServerTableContext<ProductDto, Guid, ProductViewModel> Context { get; set; } = default!;
 
-    private EntityTable<ProductDto, Guid, ProductViewModel> _table = default!;
+    private EntityTable<ProductDto, Guid, ProductViewModel>? _table;
 
     protected override void OnInitialized() =>
         Context = new(

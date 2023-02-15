@@ -12,7 +12,7 @@ public partial class MessageLogs
 
     protected EntityServerTableContext<MessageLogDto, int, MessageLogUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<MessageLogDto, int, MessageLogUpdateRequest> _table = default!;
+    private EntityTable<MessageLogDto, int, MessageLogUpdateRequest>? _table;
 
     private string? _searchString;
 

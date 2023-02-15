@@ -15,7 +15,7 @@ public partial class Winners
 
     protected EntityServerTableContext<WinnerDto, Guid, WinnerViewModel> Context { get; set; } = default!;
 
-    private EntityTable<WinnerDto, Guid, WinnerViewModel> _table = default!;
+    private EntityTable<WinnerDto, Guid, WinnerViewModel>? _table;
 
     private string? _searchString;
 

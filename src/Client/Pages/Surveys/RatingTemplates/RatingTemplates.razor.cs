@@ -14,7 +14,7 @@ public partial class RatingTemplates
 
     protected EntityServerTableContext<RatingTemplateDto, Guid, RatingTemplateUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<RatingTemplateDto, Guid, RatingTemplateUpdateRequest> _table = default!;
+    private EntityTable<RatingTemplateDto, Guid, RatingTemplateUpdateRequest>? _table;
 
     protected override void OnInitialized() =>
         Context = new(

@@ -11,7 +11,7 @@ public partial class MessageOuts
     protected IMessageOutsClient Client { get; set; } = default!;
     protected EntityServerTableContext<MessageOutDto, int, MessageOutCreateRequest> Context { get; set; } = default!;
 
-    private EntityTable<MessageOutDto, int, MessageOutCreateRequest> _table = default!;
+    private EntityTable<MessageOutDto, int, MessageOutCreateRequest>? _table;
 
     protected override void OnInitialized() =>
         Context = new(

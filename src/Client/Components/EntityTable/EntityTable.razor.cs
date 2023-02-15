@@ -55,7 +55,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
     private bool _advancedSearchExpanded;
 
-    private MudTable<TEntity> _table = default!;
+    private MudTable<TEntity>? _table;
     private IEnumerable<TEntity>? _entityList;
 
     private int _totalItems;

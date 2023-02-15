@@ -13,7 +13,7 @@ public partial class Calendars
     protected ICalendarClient Client { get; set; } = default!;
     protected EntityServerTableContext<CalendarDto, Guid, CalendarUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<CalendarDto, Guid, CalendarUpdateRequest> _table = default!;
+    private EntityTable<CalendarDto, Guid, CalendarUpdateRequest>? _table;
 
     private string? _searchString;
 

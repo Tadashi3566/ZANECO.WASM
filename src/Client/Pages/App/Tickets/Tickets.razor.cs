@@ -25,7 +25,7 @@ public partial class Tickets
 
     protected EntityServerTableContext<TicketDto, Guid, TicketViewModel> Context { get; set; } = default!;
 
-    private EntityTable<TicketDto, Guid, TicketViewModel> _table = default!;
+    private EntityTable<TicketDto, Guid, TicketViewModel>? _table;
 
     private bool _canViewTickets;
 

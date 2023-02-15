@@ -20,7 +20,7 @@ public partial class Attendances
 
     protected EntityServerTableContext<AttendanceDto, Guid, AttendanceUpdateRequest> Context { get; set; } = default!;
 
-    private EntityTable<AttendanceDto, Guid, AttendanceUpdateRequest> _table = default!;
+    private EntityTable<AttendanceDto, Guid, AttendanceUpdateRequest>? _table;
 
     private string? _searchString;
 
