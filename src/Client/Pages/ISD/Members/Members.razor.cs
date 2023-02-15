@@ -31,7 +31,7 @@ public partial class Members
                 new(data => data.PhoneNumber, "PhoneNumber", "PhoneNumber"),
                 new(data => data.ApplicationDate, "MembershipDate", "MembershipDate", Template: TemplateApplicationMembership),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", visible: false),
+                new(data => data.Notes, "Notes", "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

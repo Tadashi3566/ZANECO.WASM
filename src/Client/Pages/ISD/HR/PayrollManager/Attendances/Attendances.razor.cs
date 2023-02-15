@@ -52,7 +52,7 @@ public partial class Attendances
                 new(data => data.TotalHours, "Total Hours", "TotalHours", Template: TemplateHoursTotalPaid),
                 new(data => data.Status, "Status", "Status"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", visible: false),
+                new(data => data.Notes, "Notes", "Notes", visible: false),
             },
             idFunc: Attendance => Attendance.Id,
             searchFunc: async _filter =>

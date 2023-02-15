@@ -53,7 +53,7 @@ public partial class Payrolls
                 new(data => data.TotalNet, "Total Net", "TotalNet", typeof(decimal)),
 
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", visible: false),
+                new(data => data.Notes, "Notes", "Notes", visible: false),
             },
             idFunc: Payroll => Payroll.Id,
             searchFunc: async filter => (await Client

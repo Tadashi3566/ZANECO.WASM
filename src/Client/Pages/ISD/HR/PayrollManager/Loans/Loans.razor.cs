@@ -46,7 +46,7 @@ public partial class Loans
                 new(data => data.Ammortization, "Ammortization", "Ammortization", typeof(decimal)),
                 new(data => data.Status, "Status", "Status"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", visible: false),
+                new(data => data.Notes, "Notes", "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

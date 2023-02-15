@@ -128,7 +128,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
     {
         if (Context.IsServerContext)
         {
-            await _table.ReloadServerData();
+            await _table!.ReloadServerData();
         }
     }
 

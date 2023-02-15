@@ -58,7 +58,7 @@ public partial class EmployeePayrolls
                 new(data => data.Deduction, "Deduction", "Deduction", typeof(decimal)),
                 new(data => data.Net, "Net", "Net", typeof(decimal)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", visible: false),
+                new(data => data.Notes, "Notes", "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,
