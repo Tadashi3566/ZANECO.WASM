@@ -66,6 +66,7 @@ public partial class Attendances
                 return result.Adapt<PaginationResponse<AttendanceDto>>();
             },
 
+            createFunc: null,
             // createFunc: async data =>
             // {
             //    data.EmployeeId = SearchEmployeeId;

@@ -271,6 +271,7 @@
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.body1">
                 <MudHighlighter Text="@context.FullName" HighlightedText="@_searchString" />
+                @DisplayYearsOld(context.BirthDate)y
             </MudText>
             <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />

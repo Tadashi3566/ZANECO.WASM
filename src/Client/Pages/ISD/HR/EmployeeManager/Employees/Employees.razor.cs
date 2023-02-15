@@ -144,14 +144,19 @@ public partial class Employees
         set
         {
             _searchPayrollId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 
-    private static string DisplayLegnthOfService(in DateTime dtRegular)
+    private static int DisplayYearsOld(in DateTime dtBirthDate)
     {
-        int years = DateTimeFunctions.Years(dtRegular, DateTime.Today);
-        int months = dtRegular.Months(DateTime.Today) % 12;
+        return DateTimeFunctions.Years(dtBirthDate, DateTime.Today);
+    }
+
+    private static string DisplayLegnthOfService(in DateTime dtStart)
+    {
+        int years = DateTimeFunctions.Years(dtStart, DateTime.Today);
+        int months = dtStart.Months(DateTime.Today) % 12;
 
         string sYear;
 

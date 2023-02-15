@@ -1,10 +1,15 @@
 ﻿using MediatR.Courier;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Notifications;
 using ZANECO.WASM.Client.Infrastructure.Preferences;
+using ZANECO.WASM.Client.Pages.Identity.Users;
 using ZANECO.WASM.Client.Shared;
+using ZANECO.WebApi.Shared.Authorization;
 using ZANECO.WebApi.Shared.Notifications;
 
 namespace ZANECO.WASM.Client.Pages.Personal;
@@ -12,32 +17,63 @@ namespace ZANECO.WASM.Client.Pages.Personal;
 public partial class Dashboard
 {
     [Parameter]
-    public double RegisteredCount { get; set; }
-    [Parameter]
-    public double SmsCount { get; set; }
-    [Parameter]
-    public double WebCount { get; set; }
-
-    [Parameter]
     public int UserCount { get; set; }
     [Parameter]
     public int RoleCount { get; set; }
+
+    [Parameter]
+    public int ContactCount { get; set; }
+    [Parameter]
+    public int SMSLogCount { get; set; }
+    [Parameter]
+    public int SMSTemplateCount { get; set; }
+
+    [Parameter]
+    public int MemberCount { get; set; }
+    [Parameter]
+    public int AccountCount { get; set; }
+
+    [Parameter]
+    public int BrandCount { get; set; }
+    [Parameter]
+    public int ProductCount { get; set; }
+
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
+    [Inject]
+    protected IAuthorizationService AuthService { get; set; } = default!;
 
     [Inject]
     private IDashboardClient DashboardClient { get; set; } = default!;
     [Inject]
     private ICourier Courier { get; set; } = default!;
-    private readonly List<double> _regTypeData = new();
 
-    private readonly string[] _dataEnterBarChartXAxisLabels = { "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10" };
-    private readonly List<MudBlazor.ChartSeries> _dataEnterBarChartSeries = new();
-
+    private readonly string[] _dataEnterBarChartXAxisLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+    private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSandurot = new();
+    private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSMS = new();
     private ChartOptions _chartOptions = new();
 
     private bool _loaded;
-    private bool _busy;
 
     private ClientPreference _preference = new();
+
+    private bool _isAdmin;
+    private bool _isISD;
+    private bool _isCAD;
+    private bool _isSandurot;
+    private bool _isContact;
+    private bool _isSMS;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var state = await AuthState;
+        _isAdmin = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.Users);
+        _isISD = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.ISD);
+        _isCAD = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.CAD);
+        _isSandurot = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.Sandurot);
+        _isContact = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.Contacts);
+        _isSMS = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.SMS);
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -54,33 +90,36 @@ public partial class Dashboard
 
     private async Task LoadDataAsync()
     {
-        _busy = true;
-
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => DashboardClient.GetAsync(), Snackbar) is StatsDto dto)
+        if (await ApiHelper.ExecuteCallGuardedAsync(
+            () => DashboardClient.GetAsync(), Snackbar) is StatsDto statsDto)
         {
-            RegisteredCount = dto.RegisteredCount;
-            SmsCount = dto.SmsCount;
-            WebCount = dto.WebCount;
+            UserCount = statsDto.UserCount;
+            RoleCount = statsDto.RoleCount;
 
-            _regTypeData.Clear();
-            _regTypeData.Add(dto.SmsCount);
-            _regTypeData.Add(dto.WebCount);
+            ContactCount = statsDto.ContactCount;
+            SMSLogCount = statsDto.SMSLogCount;
+            SMSTemplateCount = statsDto.SMSTemplateCount;
 
-            UserCount = dto.UserCount;
-            RoleCount = dto.RoleCount;
+            MemberCount = statsDto.MemberCount;
+            AccountCount = statsDto.AccountCount;
 
-            _chartOptions.YAxisTicks = 100;
+            BrandCount = statsDto.BrandCount;
+            ProductCount = statsDto.ProductCount;
+
+            _chartOptions.YAxisTicks = 1000;
             _chartOptions.LineStrokeWidth = 1;
 
-            foreach (var item in dto.DataEnterBarChart)
+            foreach (var item in statsDto.BarChartSandurot)
             {
-                _dataEnterBarChartSeries
-                    .RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
+                _dataBarChartSeriesSandurot.RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
+                _dataBarChartSeriesSandurot.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
+            }
 
-                _dataEnterBarChartSeries.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
+            foreach (var item in statsDto.BarChartSMS)
+            {
+                _dataBarChartSeriesSMS.RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
+                _dataBarChartSeriesSMS.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
             }
         }
-
-        _busy = false;
     }
 }

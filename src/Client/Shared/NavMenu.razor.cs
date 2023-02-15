@@ -36,10 +36,6 @@ public partial class NavMenu
     private bool _canViewEmployees;
     private bool _canViewAccounting;
 
-    // private bool _canViewHRAdditionals;
-    // private bool _canViewHRAttendance;
-    // private bool _canViewHRPayroll;
-
     private bool _canViewISD;
     private bool _canViewCAD;
     private bool _canViewRaffle;

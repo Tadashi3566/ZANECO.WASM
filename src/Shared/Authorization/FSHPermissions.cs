@@ -25,6 +25,7 @@ public static class FSHResource
     public const string Roles = nameof(Roles);
     public const string RoleClaims = nameof(RoleClaims);
 
+    public const string Sandurot = nameof(Sandurot);
     public const string Brands = nameof(Brands);
     public const string Products = nameof(Products);
 
@@ -74,6 +75,12 @@ public static class FSHPermissions
 
         new("View RoleClaims", FSHAction.View, FSHResource.RoleClaims),
         new("Update RoleClaims", FSHAction.Update, FSHResource.RoleClaims),
+
+        new("View Sandurot", FSHAction.View, FSHResource.Sandurot),
+        new("Search Sandurot", FSHAction.Search, FSHResource.Sandurot),
+        new("Create Sandurot", FSHAction.Create, FSHResource.Sandurot),
+        new("Update Sandurot", FSHAction.Update, FSHResource.Sandurot),
+        new("Delete Sandurot", FSHAction.Delete, FSHResource.Sandurot),
 
         new("View Brands", FSHAction.View, FSHResource.Brands),
         new("Search Brands", FSHAction.Search, FSHResource.Brands),

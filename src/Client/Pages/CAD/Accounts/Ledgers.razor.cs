@@ -21,15 +21,6 @@ public partial class Ledgers
 
     //Advanced Search
     private Guid _searchAccountId;
-    private Guid SearchAccountId
-    {
-        get => _searchAccountId;
-        set
-        {
-            _searchAccountId = value;
-            _ = _table.ReloadDataAsync();
-        }
-    }
 
     protected override void OnParametersSet()
     {

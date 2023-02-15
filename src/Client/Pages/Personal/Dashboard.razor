@@ -2,9 +2,7 @@
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Dashboard)]
 
-@inject IStringLocalizer<Dashboard> L
-
-<FshTitle Title="@L["Dashboard"]" Description="@L["Realtime Updates & Insights with SignalR"]" />
+<FshTitle Title="Dashboard" Description="Realtime Updates & Insights with SignalR" />
 
 @if (!_loaded)
 {
@@ -13,81 +11,157 @@
 else
 {
     <MudGrid>
-        <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Class="mx-4"
-                Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@L["Registered Accounts"]</MudText>
-                    <MudText Typo="Typo.h5">@RegisteredCount</MudText>
-                </div>
-            </MudPaper>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.Sms" Color="Color.Secondary" Class="mx-4"
-                Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@L["Through SMS"]</MudText>
-                    <MudText @bind-Value="@SmsCount" Typo="Typo.h5">@SmsCount</MudText>
-                </div>
-            </MudPaper>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.Web" Color="Color.Tertiary" Class="mx-4"
+        @if (_isAdmin)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.ManageAccounts" Color="Color.Primary" Class="mx-4"
+                    Style="width:54px; height:54px;"></MudIcon>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
+                            Application Users
+                        </MudText>
+                        <MudText Typo="Typo.h5">@UserCount.ToString("N0")</MudText>
+                    </div>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Groups" Color="Color.Secondary" Class="mx-4"
+                    Style="width:54px; height:54px;"></MudIcon>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
+                            Application Roles
+                        </MudText>
+                        <MudText Typo="Typo.h5">@RoleCount.ToString("N0")</MudText>
+                    </div>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="12">
+                <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:500px;">
+                    <DxScheduler StartDate="@DateTime.Today"
+                         GroupType="SchedulerGroupType.Resource"
+                         CssClass="w-100">
+                        <DxSchedulerDayView DayCount="1" ShowWorkTimeOnly="true"></DxSchedulerDayView>
+                        <DxSchedulerWeekView ShowWorkTimeOnly="true"></DxSchedulerWeekView>
+                        <DxSchedulerWorkWeekView ShowWorkTimeOnly="true"></DxSchedulerWorkWeekView>
+                        <DxSchedulerMonthView ShowWorkDaysOnly="true" MonthCount="1"></DxSchedulerMonthView>
+                        <DxSchedulerTimelineView Duration="@TimeSpan.FromHours(48)" CellMinWidth="80">
+                            <Scales>
+                                <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Day" UnitCount="1"></DxSchedulerTimeScale>
+                                <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Hour" UnitCount="2"></DxSchedulerTimeScale>
+                            </Scales>
+                        </DxSchedulerTimelineView>
+                    </DxScheduler>
+                </MudPaper>
+            </MudItem>
+        }
+        @if (_isContact)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.ContactPhone" Color="Color.Primary" Class="mx-4"
                      Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@L["Through WEB"]</MudText>
-                    <MudText @bind-Value="@WebCount" Typo="Typo.h5">@WebCount</MudText>
-                </div>
-            </MudPaper>
-        </MudItem>
-        
-        <MudItem xs="12" sm="12" md="8">
-            <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:500px;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataEnterBarChartSeries" ChartOptions="@_chartOptions"
-                          XAxisLabels="@_dataEnterBarChartXAxisLabels.Select(a => L[a].Value).ToArray()" Width="90%"
-                          Height="400px"/>
-            </MudPaper>
-        </MudItem>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
+                            Contacts
+                        </MudText>
+                        <MudText Typo="Typo.h5">@ContactCount.ToString("N0")</MudText>
+                    </div>
+                </MudPaper>
+            </MudItem>
+        }
+        @if (_isSMS)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Send" Color="Color.Primary" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
+                            SMS Logs
+                        </MudText>
+                        <MudText Typo="Typo.h5">@SMSLogCount.ToString("N0")</MudText>
+                    </div>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Message" Color="Color.Secondary" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
+                            SMS Templates
+                        </MudText>
+                        <MudText Typo="Typo.h5">@SMSTemplateCount.ToString("N0")</MudText>
+                    </div>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="12">
+                <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:500px;">
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMS" ChartOptions="@_chartOptions"
+                      XAxisLabels="@_dataEnterBarChartXAxisLabels.Select(a => a.ToString()).ToArray()" Width="100%"
+                      Height="400px"></MudChart>
+                </MudPaper>
+            </MudItem>
+        }
+        @if (_isISD)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Members</MudText>
+                        <MudText Typo="Typo.h5">@MemberCount.ToString("N0")</MudText>
+                    </div>
+                </MudPaper>
+            </MudItem>
+        }
+        @if (_isCAD)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Secondary" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Accounts</MudText>
+                        <MudText Typo="Typo.h5">@AccountCount.ToString("N0")</MudText>
+                    </div>
+                </MudPaper>
+            </MudItem>
+        }
+        @if (_isSandurot)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Brands</MudText>
+                        <MudText Typo="Typo.h5">@BrandCount.ToString("N0")</MudText>
+                    </div>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Secondary" Class="mx-4"
+                         Style="width:54px; height:54px;"></MudIcon>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Products</MudText>
+                        <MudText Typo="Typo.h5">@ProductCount.ToString("N0")</MudText>
+                    </div>
+                </MudPaper>
+            </MudItem>
 
-        <MudItem>
-            <MudButton Class="ma-1" Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => LoadDataAsync())">
-                <MudItem Class="d-flex flex-row">
-                    @if (_busy)
-                    {
-                        <MudProgressCircular Color="Color.Tertiary" Indeterminate=true Size="Size.Small" />
-                    }
-                <MudText Class="ml-2">@L["Refresh"]</MudText>
-                </MudItem>
-                
-
-            </MudButton>
-        </MudItem>
-
-        <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.ManageAccounts" Color="Color.Success" Class="mx-4"
-                Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@L["Application Users"]
-                    </MudText>
-                    <MudText Typo="Typo.h5">@UserCount</MudText>
-                </div>
-            </MudPaper>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.Groups" Color="Color.Warning" Class="mx-4"
-                Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@L["Application Roles"]
-                    </MudText>
-                    <MudText Typo="Typo.h5">@RoleCount</MudText>
-                </div>
-            </MudPaper>
-        </MudItem>
+            <MudItem xs="12" sm="12">
+                <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:500px;">
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSandurot"
+                      XAxisLabels="@_dataEnterBarChartXAxisLabels.Select(a => a.ToString()).ToArray()" Width="100%"
+                      Height="400px"></MudChart>
+                </MudPaper>
+            </MudItem>
+        }
         
     </MudGrid>
 }
