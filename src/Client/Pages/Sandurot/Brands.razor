@@ -1,4 +1,4 @@
-﻿@page "/catalog/brands"
+﻿@page "/sandurot/brands"
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Brands)]
 
 @inject IStringLocalizer<Brands> L
@@ -12,8 +12,11 @@
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField T="string" For="@(() => context.Name)" @bind-Value="context.Name" Label="@L["Name"]" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
     </EditFormContent>
 
@@ -33,6 +36,7 @@
                 new(brand => brand.Id, L["Id"], "Id"),
                 new(brand => brand.Name, L["Name"], "Name"),
                 new(brand => brand.Description, L["Description"], "Description"),
+                new(brand => brand.Description, L["Notes"], "Notes"),
             },
             idFunc: brand => brand.Id,
             searchFunc: async filter => (await BrandsClient

@@ -4,11 +4,11 @@ using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
-namespace ZANECO.WASM.Client.Pages.Catalog;
-public class BrandAutocomplete : MudAutocomplete<Guid>
+namespace ZANECO.WASM.Client.Pages.Sandurot;
+public class AutocompleteBrand : MudAutocomplete<Guid>
 {
     [Inject]
-    private IStringLocalizer<BrandAutocomplete> L { get; set; } = default!;
+    private IStringLocalizer<AutocompleteBrand> L { get; set; } = default!;
     [Inject]
     private IBrandsClient BrandsClient { get; set; } = default!;
     [Inject]

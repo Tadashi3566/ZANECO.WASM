@@ -47,7 +47,7 @@
         DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
         IDialogReference dialog = DialogService.Show<TransactionConfirmation>(transactionTitle, parameters, options);
         DialogResult result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             TicketProgressCreateRequest ticketProgress = new();
 

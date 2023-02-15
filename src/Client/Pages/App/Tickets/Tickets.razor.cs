@@ -149,7 +149,7 @@ public partial class Tickets
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
         var dialog = DialogService.Show<TicketProgressDialog>($"{action} Ticket", parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             if ((await AuthState).User is { } user)
             {

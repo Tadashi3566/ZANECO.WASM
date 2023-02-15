@@ -102,7 +102,7 @@ public partial class Contacts
         DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
         IDialogReference dialog = DialogService.Show<SendMessageDialog>("Send Message", parameters, options);
         DialogResult result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
 
         }

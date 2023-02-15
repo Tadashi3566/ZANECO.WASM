@@ -72,7 +72,7 @@ public partial class CommentComponent
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
         var dialog = DialogService.Show<TransactionConfirmation>(transactionTitle, parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(_rating), Snackbar, _customValidation, "Your comment was successfully submitted.");
 

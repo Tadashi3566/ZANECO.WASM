@@ -77,7 +77,7 @@ public partial class MessageTemplates
         DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
         IDialogReference dialog = DialogService.Show<TransactionConfirmation>("Duplicate", parameters, options);
         DialogResult result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             MessageTemplateCreateRequest newMessageTemplate = new()
             {

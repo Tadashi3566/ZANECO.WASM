@@ -98,7 +98,7 @@ public partial class Employees
         };
         var dialog = DialogService.Show<GenerateSchedule>("Generate", parameters, options);
         DialogResult result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             Snackbar.Add("Employee Daily Schedule has been successfully generated.", Severity.Success);
         }

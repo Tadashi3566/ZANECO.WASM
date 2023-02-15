@@ -7,7 +7,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
-namespace ZANECO.WASM.Client.Pages.Catalog;
+namespace ZANECO.WASM.Client.Pages.Sandurot;
 public partial class Products
 {
     [Inject]
@@ -21,16 +21,16 @@ public partial class Products
 
     protected override void OnInitialized() =>
         Context = new(
-            entityName: L["Product"],
-            entityNamePlural: L["Products"],
+            entityName: "Product",
+            entityNamePlural: "Products",
             entityResource: FSHResource.Products,
             fields: new()
             {
-                new(prod => prod.Id, L["Id"], "Id"),
-                new(prod => prod.Name, L["Name"], "Name"),
-                new(prod => prod.BrandName, L["Brand"], "Brand.Name"),
-                new(prod => prod.Description, L["Description"], "Description"),
-                new(prod => prod.Rate, L["Rate"], "Rate")
+                new(prod => prod.Id, "Id", "Id"),
+                new(prod => prod.Name, "Name", "Name"),
+                new(prod => prod.BrandName, "Brand", "Brand.Name"),
+                new(prod => prod.Description, "Description", "Description"),
+                new(prod => prod.Rate, "Rate", "Rate")
             },
             enableAdvancedSearch: true,
             idFunc: prod => prod.Id,

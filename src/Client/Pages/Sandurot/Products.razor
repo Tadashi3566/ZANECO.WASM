@@ -1,30 +1,40 @@
-﻿@page "/catalog/products"
+﻿@page "/sandurot/products"
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Products)]
 
-@inject IStringLocalizer<Products> L
-
-<FshTitle Title="@L["Products"]" Description="@L["Manage Products."]" />
+<FshTitle Title="Products" Description="Manage Products." />
 
 <EntityTable @ref="_table" TEntity="ProductDto" TId="Guid" TRequest="ProductViewModel" Context="@Context">
 
     <AdvancedSearchContent>
-        <BrandAutocomplete @bind-Value="SearchBrandId" />
-        <MudSlider T="decimal" @bind-value="SearchMinimumRate">@L["Minimum Rate"]: @_searchMinimumRate.ToString()</MudSlider>
-        <MudSlider T="decimal" @bind-value="SearchMaximumRate">@L["Maximum Rate"]: @_searchMaximumRate.ToString()</MudSlider>
+        <AutocompleteBrand @bind-Value="SearchBrandId" />
+        <MudSlider T="decimal" @bind-value="SearchMinimumRate">Minimum Rate: @_searchMinimumRate.ToString()</MudSlider>
+        <MudSlider T="decimal" @bind-value="SearchMaximumRate">Maximum Rate: @_searchMaximumRate.ToString()</MudSlider>
     </AdvancedSearchContent>
 
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="@L["Name"]" For="@(() => context.Name)" @bind-Value="context.Name" />
+            <AutocompleteBrand For="@(() => context.BrandId)" @bind-Value="context.BrandId" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="SKU" For="@(() => context.SKU)" @bind-Value="context.SKU" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Barcode" For="@(() => context.Barcode)" @bind-Value="context.Barcode" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Specification" For="@(() => context.Specification)" @bind-Value="context.Specification" />
+        </MudItem>
+        <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
-            <BrandAutocomplete For="@(() => context.BrandId)" @bind-Value="context.BrandId"  />
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="@L["Rate"]" For="@(() => context.Rate)" @bind-Value="context.Rate" />
+            <MudTextField Label="Rate" For="@(() => context.Rate)" @bind-Value="context.Rate" />
         </MudItem>
         <MudItem xs="12">
             <MudItem>
@@ -41,25 +51,25 @@
                 <div>
                     <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
                         StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
-                        @L["Upload"]
+                        Upload
                     </MudButton>
                     @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
                             StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
-                            @L["View"]
+                            View
                         </MudButton>
 
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
                             StartIcon="@Icons.Material.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
-                            @L["Delete"]
+                            Delete
                         </MudButton>
                     }
                     @if(!string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label"  OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
                             StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;" >
-                            @L["Clear"]
+                            Clear
                         </MudButton>
                     }
                 </div>
@@ -67,5 +77,4 @@
             </MudItem>
         </MudItem>
     </EditFormContent>
-
 </EntityTable>
