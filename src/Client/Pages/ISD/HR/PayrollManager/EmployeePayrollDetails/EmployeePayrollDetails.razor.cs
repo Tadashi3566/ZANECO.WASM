@@ -77,7 +77,7 @@ public partial class EmployeePayrollDetails
         set
         {
             _searchEmployeeId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 
@@ -88,7 +88,7 @@ public partial class EmployeePayrollDetails
         set
         {
             _searchPayrollId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 }

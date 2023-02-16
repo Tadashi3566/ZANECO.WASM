@@ -48,7 +48,7 @@ public partial class PowerConsumptions
     //    set
     //    {
     //        _searchBillMonth = value;
-    //        _ = _table.ReloadDataAsync();
+    //        _ = _table!.ReloadDataAsync();
     //    }
     // }
 

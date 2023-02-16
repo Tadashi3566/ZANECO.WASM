@@ -38,16 +38,17 @@ public static class FSHResource
     public const string Surveys = nameof(Surveys);
 
     public const string Accounting = nameof(Accounting);
+
+    public const string ISD = nameof(ISD);
     public const string Employees = nameof(Employees);
+    public const string Attendance = nameof(Attendance);
     public const string Powerbills = nameof(Powerbills);
 
     public const string Schedules = nameof(Schedules);
-    public const string Attendance = nameof(Attendance);
 
     public const string Payroll = nameof(Payroll);
 
     public const string CAD = nameof(CAD);
-    public const string ISD = nameof(ISD);
 
     public const string Raffles = nameof(Raffles);
 }

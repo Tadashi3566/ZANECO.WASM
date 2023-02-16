@@ -85,7 +85,7 @@ public partial class Loans
         set
         {
             _searchEmployeeId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 

@@ -89,7 +89,7 @@ public partial class Dependents
         set
         {
             _searchEmployeeId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 

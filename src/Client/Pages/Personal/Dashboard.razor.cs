@@ -7,7 +7,6 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Notifications;
 using ZANECO.WASM.Client.Infrastructure.Preferences;
-using ZANECO.WASM.Client.Pages.Identity.Users;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 using ZANECO.WebApi.Shared.Notifications;

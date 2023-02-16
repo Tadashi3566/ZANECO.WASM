@@ -106,7 +106,7 @@ public partial class EmployeePayrolls
         set
         {
             _searchPayrollId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 }

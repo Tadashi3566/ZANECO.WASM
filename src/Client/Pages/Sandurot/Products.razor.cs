@@ -87,7 +87,7 @@ public partial class Products
         set
         {
             _searchBrandId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 
@@ -98,7 +98,7 @@ public partial class Products
         set
         {
             _searchMinimumRate = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 
@@ -109,7 +109,7 @@ public partial class Products
         set
         {
             _searchMaximumRate = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 

@@ -99,7 +99,7 @@ public partial class Tickets
         set
         {
             _searchGroupId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 

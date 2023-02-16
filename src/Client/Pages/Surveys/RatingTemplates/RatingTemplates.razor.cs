@@ -54,7 +54,7 @@ public partial class RatingTemplates
         set
         {
             _searchRateId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 }

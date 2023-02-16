@@ -68,7 +68,7 @@ public partial class EmployeeAdjustments
         set
         {
             _searchEmployeeId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 }

@@ -106,7 +106,7 @@ public partial class TimeLogs
         set
         {
             _searchEmployeeId = value;
-            _table.ReloadDataAsync();
+            _table!.ReloadDataAsync();
         }
     }
 

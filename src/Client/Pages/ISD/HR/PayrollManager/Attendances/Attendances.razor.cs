@@ -65,7 +65,6 @@ public partial class Attendances
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<AttendanceDto>>();
             },
-
             createFunc: null,
             // createFunc: async data =>
             // {
@@ -73,7 +72,6 @@ public partial class Attendances
             //    await Client.CreateAsync(data.Adapt<AttendanceCreateRequest>());
             //    data.ImageInBytes = string.Empty;
             // },
-
             updateFunc: async (id, data) =>
             {
                 data.EmployeeId = _searchEmployeeId;
@@ -94,7 +92,7 @@ public partial class Attendances
         set
         {
             _searchEmployeeId = value;
-            _table.ReloadDataAsync();
+            _table!.ReloadDataAsync();
         }
     }
 }

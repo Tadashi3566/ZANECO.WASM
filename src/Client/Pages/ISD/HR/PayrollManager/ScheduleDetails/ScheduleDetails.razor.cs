@@ -75,7 +75,7 @@ public partial class ScheduleDetails
         set
         {
             _searchScheduleId = value;
-            _ = _table.ReloadDataAsync();
+            _ = _table!.ReloadDataAsync();
         }
     }
 }
