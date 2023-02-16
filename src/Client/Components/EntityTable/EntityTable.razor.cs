@@ -231,7 +231,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
         return filter;
     }
 
-    private async Task InvokeModal(TEntity? entity = default)
+    private async Task InvokeModalAsync(TEntity? entity = default, TEntity? entityToDuplicate = default)
     {
         bool isCreate = entity is null;
 
@@ -244,18 +244,29 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
         TRequest requestModel;
 
-        if (isCreate)
+        if (isCreate || entityToDuplicate is not null)
         {
             _ = Context.CreateFunc ?? throw new InvalidOperationException("CreateFunc can't be null!");
             parameters.Add(nameof(AddEditModal<TRequest>.SaveFunc), Context.CreateFunc);
 
+            //requestModel =
+            //    Context.GetDefaultsFunc is not null
+            //        && await ApiHelper.ExecuteCallGuardedAsync(
+            //                () => Context.GetDefaultsFunc(), Snackbar)
+            //            is { } defaultsResult
+            //    ? defaultsResult
+            //    : new TRequest();
+
             requestModel =
-                Context.GetDefaultsFunc is not null
-                    && await ApiHelper.ExecuteCallGuardedAsync(
-                            () => Context.GetDefaultsFunc(), Snackbar)
-                        is { } defaultsResult
-                ? defaultsResult
-                : new TRequest();
+                entityToDuplicate is not null && Context.GetDuplicateFunc is not null
+                    ? await ApiHelper.ExecuteCallGuardedAsync(() => Context.GetDuplicateFunc(entityToDuplicate), Snackbar) is { } duplicateResult
+                        ? duplicateResult
+                        : new TRequest()
+                    : Context.GetDefaultsFunc is not null
+                            && await ApiHelper.ExecuteCallGuardedAsync(
+                                () => Context.GetDefaultsFunc(), Snackbar) is { } defaultsResult
+                        ? defaultsResult
+                        : new TRequest();
         }
         else
         {

@@ -1,4 +1,5 @@
 ﻿using MudBlazor;
+using System.Diagnostics.CodeAnalysis;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Components.EntityTable;
@@ -32,7 +33,13 @@ public abstract class EntityTableContext<TEntity, TId, TRequest>
     /// A function that executes the Create method on the api with the supplied entity and returns a Task of Result.
     /// No need to check for error messages or api exceptions. These are automatically handled by the component.
     /// </summary>
+    [NotNull]
     public Func<TRequest, Task>? CreateFunc { get; }
+
+    /// <summary>
+    /// A function that duplicates a given entity into a request to create a new one.
+    /// </summary>
+    public Func<TEntity, Task<TRequest>>? GetDuplicateFunc { get; }
 
     /// <summary>
     /// A function that executes the GetDetails method on the api with the supplied Id and returns a Task of Result of TRequest.
@@ -132,6 +139,7 @@ public abstract class EntityTableContext<TEntity, TId, TRequest>
         Func<TEntity, TId>? idFunc,
         Func<Task<TRequest>>? getDefaultsFunc,
         Func<TRequest, Task>? createFunc,
+        Func<TEntity, Task<TRequest>>? getDuplicateFunc,
         Func<TId, Task<TRequest>>? getDetailsFunc,
         Func<TId, TRequest, Task>? updateFunc,
         Func<TId, Task>? deleteFunc,

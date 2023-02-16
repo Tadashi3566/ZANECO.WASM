@@ -62,6 +62,6 @@ public partial class MessageIns
             Snackbar,
             successMessage: "Messages from sender has been marked as read.");
 
-        await _table.ReloadDataAsync();
+        await _table!.ReloadDataAsync();
     }
 }

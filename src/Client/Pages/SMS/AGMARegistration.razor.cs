@@ -79,7 +79,7 @@ public partial class AGMARegistration
             await ApiHelper.ExecuteCallGuardedAsync(() => Client.ReadAsync(_readRequest), Snackbar,
                 successMessage: $"Unread Messages were checked for AGMA Registration");
 
-            await _table.ReloadDataAsync();
+            await _table!.ReloadDataAsync();
         }
     }
 }

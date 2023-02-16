@@ -47,7 +47,7 @@
                     @if (_canCreate)
                     {
                         <MudButton Class="ma-1" Variant="Variant.Filled" Color="Color.Primary"
-                            OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add"
+                            OnClick="(() => InvokeModalAsync())" StartIcon="@Icons.Material.Filled.Add"
                             IconColor="Color.Surface">@L["Create"]</MudButton>
                     }
                     @if (_canExport)
@@ -156,7 +156,8 @@
                             OffsetX="true">
                             @if (CanUpdateEntity(context))
                             {
-                                <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => InvokeModal(context))" OnTouch="@(() => InvokeModal(context))">@L["Edit"]</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => InvokeModalAsync(entityToDuplicate: context))" OnTouch="@(() => InvokeModalAsync(entityToDuplicate: context))" Disabled=true>@L["Duplicate"]</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => InvokeModalAsync(context))" OnTouch="@(() => InvokeModalAsync(context))">@L["Edit"]</MudMenuItem>
                             }
                             @if (CanDeleteEntity(context))
                             {

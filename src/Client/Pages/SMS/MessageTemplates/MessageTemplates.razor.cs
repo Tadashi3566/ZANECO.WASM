@@ -44,8 +44,8 @@ public partial class MessageTemplates
                 new(data => data.TemplateType, "Type", "TemplateType"),
                 new(data => data.IsAPI, "API", "IsAPI", typeof(bool), Template: TemplateApiFastMode),
                 new(data => data.ScheduleDate, "Schedule", "ScheduleDate", typeof(DateOnly)),
-                new(data => data.Subject, "Subject", "Subject", Template: TemplateSubjectMessage),
-                new(data => data.Message, "Message", visible: false),
+                new(data => data.Subject, "Subject", "Subject", visible: false),
+                new(data => data.Message, "Message", "Message", Template: TemplateSubjectMessage),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             },
             enableAdvancedSearch: true,
@@ -96,7 +96,7 @@ public partial class MessageTemplates
                 Snackbar,
                 successMessage: "Message Template successfully duplicated.");
 
-            await _table.ReloadDataAsync();
+            await _table!.ReloadDataAsync();
         }
     }
 
@@ -117,7 +117,7 @@ public partial class MessageTemplates
         DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
         IDialogReference dialog = DialogService.Show<TransactionConfirmation>("Send", parameters, options);
         DialogResult result = await dialog.Result;
-        if (!result.Cancelled && await ClientPreferences.GetPreference() is ClientPreference clientPreference)
+        if (!result.Canceled && await ClientPreferences.GetPreference() is ClientPreference clientPreference)
         {
             _backgroundPreference = clientPreference.BackgroundPreference;
 
@@ -151,7 +151,7 @@ public partial class MessageTemplates
                     Snackbar,
                     successMessage: "Messages successfully sent.");
 
-                await _table.ReloadDataAsync();
+                await _table!.ReloadDataAsync();
             }
         }
     }

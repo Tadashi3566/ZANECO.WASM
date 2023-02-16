@@ -14,7 +14,7 @@ public partial class AuditLogs
     protected EntityClientTableContext<RelatedAuditTrail, Guid, object> Context { get; set; } = default!;
 
     private string? _searchString;
-    private MudDateRangePicker _dateRangePicker = default!;
+    private MudDateRangePicker? _dateRangePicker = default!;
     private DateRange? _dateRange;
     private bool _searchInOldValues;
     private bool _searchInNewValues;

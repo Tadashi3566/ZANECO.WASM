@@ -124,7 +124,7 @@ public partial class Designations
         {
             Snackbar.Add("Current Employee Designation has been successfully selected", Severity.Success);
 
-            await _table.ReloadDataAsync();
+            await _table!.ReloadDataAsync();
         }
     }
 
