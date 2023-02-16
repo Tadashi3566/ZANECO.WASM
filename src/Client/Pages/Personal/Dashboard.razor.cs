@@ -48,9 +48,12 @@ public partial class Dashboard
     [Inject]
     private ICourier Courier { get; set; } = default!;
 
-    private readonly string[] _dataEnterBarChartXAxisLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+    private readonly string[] _dataBarChartXAxisLabelsMonth = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+    private string[]? _daysOfMonth;
     private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSandurot = new();
-    private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSMS = new();
+    private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSMSPerMonth = new();
+    private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSMSPerDay = new();
+
     private ChartOptions _chartOptions = new();
 
     private bool _loaded;
@@ -64,6 +67,8 @@ public partial class Dashboard
     private bool _isContact;
     private bool _isSMS;
 
+    private bool _isEmployee;
+
     protected override async Task OnParametersSetAsync()
     {
         var state = await AuthState;
@@ -73,10 +78,19 @@ public partial class Dashboard
         _isSandurot = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.Sandurot);
         _isContact = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.Contacts);
         _isSMS = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.SMS);
+
+        _isEmployee = await AuthService.HasPermissionAsync(state.User, FSHAction.Create, FSHResource.Attendance);
     }
 
     protected override async Task OnInitializedAsync()
     {
+        _daysOfMonth = new string[DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month)]; // Create a string array to store the day of the month for each date
+
+        for (int day = 1; day <= DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month); day++) // Loop through the days of the month
+        {
+            _daysOfMonth[day - 1] = day.ToString(); // Add the day of the month to the array as a string
+        }
+
         Courier.SubscribeWeak<NotificationWrapper<StatsChangedNotification>>(async _ =>
         {
             await LoadDataAsync();
@@ -106,6 +120,7 @@ public partial class Dashboard
             BrandCount = statsDto.BrandCount;
             ProductCount = statsDto.ProductCount;
 
+
             _chartOptions.YAxisTicks = 1000;
             _chartOptions.LineStrokeWidth = 1;
 
@@ -115,10 +130,16 @@ public partial class Dashboard
                 _dataBarChartSeriesSandurot.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
             }
 
-            foreach (var item in statsDto.BarChartSMS)
+            foreach (var item in statsDto.BarChartSMSPerMonth)
             {
-                _dataBarChartSeriesSMS.RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
-                _dataBarChartSeriesSMS.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
+                _dataBarChartSeriesSMSPerMonth.RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
+                _dataBarChartSeriesSMSPerMonth.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
+            }
+
+            foreach (var item in statsDto.BarChartSMSPerDay)
+            {
+                _dataBarChartSeriesSMSPerDay.RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
+                _dataBarChartSeriesSMSPerDay.Add(new MudBlazor.ChartSeries { Name = item.Name, Data = item.Data?.ToArray() });
             }
         }
     }

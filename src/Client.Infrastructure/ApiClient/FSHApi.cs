@@ -41617,8 +41617,11 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("barChartSandurot", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ChartSeries> BarChartSandurot { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("barChartSMS", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ChartSeries> BarChartSMS { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("barChartSMSPerMonth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ChartSeries> BarChartSMSPerMonth { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("barChartSMSPerDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ChartSeries> BarChartSMSPerDay { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("productByBrandTypePieChart", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.IDictionary<string, double>? ProductByBrandTypePieChart { get; set; } = default!;

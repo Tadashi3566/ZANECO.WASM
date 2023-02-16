@@ -11,6 +11,7 @@
 else
 {
     <MudGrid>
+
         @if (_isAdmin)
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
@@ -97,10 +98,17 @@ else
                     </div>
                 </MudPaper>
             </MudItem>
-            <MudItem xs="12" sm="12">
-                <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:500px;">
-                    <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMS" ChartOptions="@_chartOptions"
-                      XAxisLabels="@_dataEnterBarChartXAxisLabels.Select(a => a.ToString()).ToArray()" Width="100%"
+            <MudItem xs="12">
+                <MudPaper Elevation="@_preference.Elevation" Style="height:500px;">
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerMonth" ChartOptions="@_chartOptions"
+                      XAxisLabels="@_dataBarChartXAxisLabelsMonth.Select(a => a.ToString()).ToArray()" Width="90%"
+                      Height="400px"></MudChart>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12">
+                <MudPaper Elevation="@_preference.Elevation" Style="height:500px;">
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerDay" ChartOptions="@_chartOptions"
+                      XAxisLabels="@_daysOfMonth!.Select(a => a.ToString()).ToArray()" Width="9nd0%"
                       Height="400px"></MudChart>
                 </MudPaper>
             </MudItem>
@@ -157,7 +165,7 @@ else
             <MudItem xs="12" sm="12">
                 <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:500px;">
                     <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSandurot"
-                      XAxisLabels="@_dataEnterBarChartXAxisLabels.Select(a => a.ToString()).ToArray()" Width="100%"
+                      XAxisLabels="@_dataBarChartXAxisLabelsMonth.Select(a => a.ToString()).ToArray()" Width="100%"
                       Height="400px"></MudChart>
                 </MudPaper>
             </MudItem>
