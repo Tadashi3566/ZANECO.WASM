@@ -51,14 +51,13 @@
         </MudNavGroup>
     }
     
-    @if (_canViewEmployees)
+    @if (_canViewEmployees || _canCreateAttendance)
     {
         <MudNavGroup Title="HR" Icon="@Icons.Material.Filled.AddBox" >
+            <MudNavLink Href="/hr/employees" Icon="@Icons.Material.Filled.Groups" Class="fsh-nav-child">Employees</MudNavLink>
+
             @if (_canViewEmployees)
             {
-                <MudNavLink Href="/hr/employees" Icon="@Icons.Material.Filled.Groups" Class="fsh-nav-child">Employees</MudNavLink>
-                @*<MudNavLink Href="/hr/employers" Icon="@Icons.Material.Filled.ManageAccounts" Class="fsh-nav-child">Employers</MudNavLink>*@
-                @*<MudNavLink Href="/hr/designations" Icon="@Icons.Material.Filled.ManageAccounts" Class="fsh-nav-child">Designations</MudNavLink>*@
                 <MudNavLink Href="/hr/powerbills" Icon="@Icons.Material.Filled.ReceiptLong" Class="fsh-nav-child">Power Bills</MudNavLink>
 
                 <MudDivider/>
