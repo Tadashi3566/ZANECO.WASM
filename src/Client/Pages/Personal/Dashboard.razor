@@ -11,7 +11,6 @@
 else
 {
     <MudGrid>
-
         @if (_isAdmin)
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
@@ -38,24 +37,6 @@ else
                     </div>
                 </MudPaper>
             </MudItem>
-            @*<MudItem xs="12" sm="12">
-                <MudPaper Elevation="@_preference.Elevation" Class="pa-4" Style="height:1000px;">
-                    <DxScheduler StartDate="@DateTime.Today"
-                         GroupType="SchedulerGroupType.Resource"
-                         CssClass="w-100">
-                        <DxSchedulerDayView DayCount="1" ShowWorkTimeOnly="true"></DxSchedulerDayView>
-                        <DxSchedulerWeekView ShowWorkTimeOnly="true"></DxSchedulerWeekView>
-                        <DxSchedulerWorkWeekView ShowWorkTimeOnly="true"></DxSchedulerWorkWeekView>
-                        <DxSchedulerMonthView ShowWorkDaysOnly="true" MonthCount="1"></DxSchedulerMonthView>
-                        <DxSchedulerTimelineView Duration="@TimeSpan.FromHours(48)" CellMinWidth="80">
-                            <Scales>
-                                <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Day" UnitCount="1"></DxSchedulerTimeScale>
-                                <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Hour" UnitCount="2"></DxSchedulerTimeScale>
-                            </Scales>
-                        </DxSchedulerTimelineView>
-                    </DxScheduler>
-                </MudPaper>
-            </MudItem>*@
         }
         @if (_isContact)
         {
