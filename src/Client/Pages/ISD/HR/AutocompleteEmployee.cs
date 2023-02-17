@@ -4,6 +4,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR;
+
 public class AutocompleteEmployee : MudAutocomplete<Guid>
 {
     [Inject]

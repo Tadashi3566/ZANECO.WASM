@@ -10,6 +10,14 @@
         <MudItem Class="mt-3">
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
         </MudItem>
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateStart" DateFormat="MMMM dd, yyyy"></MudDatePicker>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateEnd" DateFormat="MMMM dd, yyyy"></MudDatePicker>
+            </MudItem>
+        </MudGrid>
     </AdvancedSearchContent>
     <ExtraActions>
         <MudDivider />

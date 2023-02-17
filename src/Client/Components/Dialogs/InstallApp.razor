@@ -1,0 +1,26 @@
+﻿<MudDialog Class="ma-5 py-2 rounded-xl">
+    <DialogContent>
+        <MudPaper Elevation="0" Class="d-flex flex-column gap-3 justify-center">
+            <div class="d-flex justify-center">
+                <ZanecoLogo />
+            </div> 
+            <MudText Align="Align.Center" Typo="Typo.h6" Color="Color.Default" Style="font-weight: 600"> Add ZanecoApp to Home screen </MudText>
+            <MudText Align="Align.Center" Typo="Typo.body2" Class=""> Install ZANECO Web Application on your home screen, and access it just like a regular app. </MudText>
+        </MudPaper>
+        <div class="mt-5 d-flex flex-column gap-2 justify-center">
+            <MudButton Class="rounded-lg" DisableElevation Color="Color.Success" Variant="Variant.Filled" OnClick="Submit"> Add To Home Screen </MudButton>
+            <MudButton Class="rounded-lg" DisableElevation Color="Color.Default" Variant="Variant.Text" OnClick="Cancel"> Maybe Later </MudButton>
+        </div>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = default!;
+
+    void Submit()
+    {
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+    void Cancel() => MudDialog.Cancel();
+}

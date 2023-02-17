@@ -23,8 +23,6 @@ public partial class TimeLogs
 
     private string? _searchString;
 
-    //private DateTime? _dateStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-    //private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
     private DateTime? _logDate = DateTime.Today;
 
     private TimeSpan? _logTime;
@@ -46,14 +44,12 @@ public partial class TimeLogs
             fields: new()
             {
                 new(data => data.ImagePath, "Image", "ImagePath", Template: TemplateImage),
-                //new(data => data.EmployeeId, "Name", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty)),
                 new(data => data.LogType, "Type", "LogType"),
                 new(data => data.LogDate, "Date", "LogDate", typeof(DateOnly)),
                 new(data => data.LogDateTime, "Time", "LogDateTime", typeof(TimeOnly)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", "Notes", visible: false),
             },
-            enableAdvancedSearch: true,
             idFunc: TimeLog => TimeLog.Id,
             searchFunc: async _filter =>
             {
@@ -88,17 +84,7 @@ public partial class TimeLogs
                 data.LogDate = _logDate;
                 data.LogDateTime = _logDate + _logTime;
 
-                //if (!string.IsNullOrEmpty(data.ImageInBytes))
-                //{
-                //    data.DeleteCurrentImage = true;
-                //    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
-                //}
-
-                //await Client.UpdateAsync(id, data);
-
                 await Client.UpdateAsync(id, data.Adapt<TimeLogUpdateRequest>());
-
-                //data.ImageInBytes = string.Empty;
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);

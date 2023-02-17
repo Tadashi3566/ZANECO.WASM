@@ -60,23 +60,17 @@ public partial class Attendances
                 var filter = _filter.Adapt<AttendanceSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
-                filter.PayrollId = PayrollId;
+                filter.DateStart = DateStart;
+                filter.DateEnd = DateEnd;
 
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<AttendanceDto>>();
             },
             createFunc: null,
-            // createFunc: async data =>
-            // {
-            //    data.EmployeeId = SearchEmployeeId;
-            //    await Client.CreateAsync(data.Adapt<AttendanceCreateRequest>());
-            //    data.ImageInBytes = string.Empty;
-            // },
             updateFunc: async (id, data) =>
             {
                 data.EmployeeId = _searchEmployeeId;
 
-                // await Client.UpdateAsync(id, data);
                 await Client.UpdateAsync(id, data.Adapt<AttendanceUpdateRequest>());
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
@@ -92,6 +86,28 @@ public partial class Attendances
         set
         {
             _searchEmployeeId = value;
+            _table!.ReloadDataAsync();
+        }
+    }
+
+    private DateTime? _dateStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+    private DateTime? DateStart
+    {
+        get => _dateStart;
+        set
+        {
+            _dateStart = value;
+            _table!.ReloadDataAsync();
+        }
+    }
+
+    private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+    private DateTime? DateEnd
+    {
+        get => _dateEnd;
+        set
+        {
+            _dateEnd = value;
             _table!.ReloadDataAsync();
         }
     }
