@@ -25,7 +25,7 @@ public static class Startup
                     configuration.SnackbarConfiguration.HideTransitionDuration = 100;
                     configuration.SnackbarConfiguration.ShowTransitionDuration = 100;
                     configuration.SnackbarConfiguration.VisibleStateDuration = 5000;
-                    configuration.SnackbarConfiguration.ShowCloseIcon = false;
+                    configuration.SnackbarConfiguration.ShowCloseIcon = true;
                 })
             .AddSweetAlert2()
             .AddScoped<IClientPreferenceManager, ClientPreferenceManager>()

@@ -1,6 +1,6 @@
-﻿@page "/payroll/TimeLog"
-@page "/payroll/TimeLog/{EmployeeId:guid}"
-@page "/payroll/TimeLog/{EmployeeId:guid}/{LogDate:datetime}"
+﻿@page "/payroll/timeLogs"
+@page "/payroll/timeLogs/{EmployeeId:guid}"
+@page "/payroll/timeLogs/{EmployeeId:guid}/{LogDate:datetime}"
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
 
@@ -9,8 +9,16 @@
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="TimeLogDto" TId="Guid" TRequest="TimeLogViewModel" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
-            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+            <AutocompleteEmployee @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)"/>
         </MudItem>
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateStart" DateFormat="MMMM dd, yyyy"></MudDatePicker>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateEnd" DateFormat="MMMM dd, yyyy"></MudDatePicker>
+            </MudItem>
+        </MudGrid>
     </AdvancedSearchContent>
     <EditFormContent>
         <MudItem xs="12">

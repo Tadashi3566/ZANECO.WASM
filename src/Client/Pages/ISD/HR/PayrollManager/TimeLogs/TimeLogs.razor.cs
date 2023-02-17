@@ -22,7 +22,11 @@ public partial class TimeLogs
     private EntityTable<TimeLogDto, Guid, TimeLogViewModel>? _table;
 
     private string? _searchString;
+
+    //private DateTime? _dateStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+    //private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
     private DateTime? _logDate = DateTime.Today;
+
     private TimeSpan? _logTime;
 
     protected override void OnParametersSet()
@@ -56,6 +60,8 @@ public partial class TimeLogs
                 var filter = _filter.Adapt<TimeLogSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
+                filter.DateStart = DateStart;
+                filter.DateEnd = DateEnd;
 
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<TimeLogDto>>();
@@ -106,6 +112,28 @@ public partial class TimeLogs
         set
         {
             _searchEmployeeId = value;
+            _table!.ReloadDataAsync();
+        }
+    }
+
+    private DateTime? _dateStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+    private DateTime? DateStart
+    {
+        get => _dateStart;
+        set
+        {
+            _dateStart = value;
+            _table!.ReloadDataAsync();
+        }
+    }
+
+    private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+    private DateTime? DateEnd
+    {
+        get => _dateEnd;
+        set
+        {
+            _dateEnd = value;
             _table!.ReloadDataAsync();
         }
     }
