@@ -8,6 +8,7 @@ using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.TimeLogs;
+
 public partial class TimeLogs
 {
     [Parameter]
@@ -16,6 +17,8 @@ public partial class TimeLogs
     public DateTime LogDate { get; set; }
     [Inject]
     protected ITimeLogsClient Client { get; set; } = default!;
+    [Inject]
+    private IPersonalClient User { get; set; } = default!;
 
     protected EntityServerTableContext<TimeLogDto, Guid, TimeLogViewModel> Context { get; set; } = default!;
 
@@ -35,11 +38,17 @@ public partial class TimeLogs
         }
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        var userDetails = await User.GetProfileAsync();
+        if (userDetails.EmployeeId is not null)
+        {
+            _searchEmployeeId = (Guid)userDetails.EmployeeId!;
+        }
+
         Context = new(
-            entityName: "TimeLog",
-            entityNamePlural: "TimeLogs",
+            entityName: "Time Log",
+            entityNamePlural: "Time Logs",
             entityResource: FSHResource.Attendance,
             fields: new()
             {

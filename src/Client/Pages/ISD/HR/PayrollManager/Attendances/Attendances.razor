@@ -1,5 +1,6 @@
 ﻿@page "/payroll/attendance"
 @page "/payroll/attendance/{EmployeeId:guid}"
+@page "/payroll/attendance/{EmployeeId:guid}/{AttendanceDate:datetime}"
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
 
@@ -23,7 +24,11 @@
         <MudDivider />
         <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))"
                      OnTouch="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))">
-                     Log Time
+                     Time Logs
+        </MudMenuItem>
+        <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))"
+                     OnTouch="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))">
+            Calculate Logs
         </MudMenuItem>
     </ExtraActions>
     <EditFormContent>

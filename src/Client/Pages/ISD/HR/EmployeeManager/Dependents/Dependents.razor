@@ -5,7 +5,7 @@
 
 <FshTitle Title="Dependents" Description="Employee Dependent Management" />
 
-<EntityTable @ref="_table" TEntity="DependentDto" TId="Guid" TRequest="DependentViewModel" Context="@Context">
+<EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="DependentDto" TId="Guid" TRequest="DependentViewModel" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />

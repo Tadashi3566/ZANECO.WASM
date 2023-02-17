@@ -13,10 +13,9 @@ public partial class Attendances
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
     [Parameter]
-    public Guid PayrollId { get; set; } = Guid.Empty;
+    public DateTime? AttendanceDate { get; set; } = DateTime.Today;
     [Inject]
     protected IAttendanceClient Client { get; set; } = default!;
-    protected IPayrollClient ClientPayroll { get; set; } = default!;
 
     protected EntityServerTableContext<AttendanceDto, Guid, AttendanceUpdateRequest> Context { get; set; } = default!;
 
