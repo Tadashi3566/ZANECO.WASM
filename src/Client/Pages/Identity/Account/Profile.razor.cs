@@ -42,6 +42,13 @@ public partial class Profile
             _user.PhoneNumber = user.GetPhoneNumber();
             _imageUrl = string.IsNullOrEmpty(user?.GetImageUrl()) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + user?.GetImageUrl());
             if (_userId is not null) _user.Id = _userId;
+
+            var userDto = await PersonalClient.GetProfileAsync();
+            if (userDto is not null)
+            {
+                _user.Description = userDto.Description;
+                _user.Notes = userDto.Notes;
+            }
         }
 
         if (_user.FirstName?.Length > 0)

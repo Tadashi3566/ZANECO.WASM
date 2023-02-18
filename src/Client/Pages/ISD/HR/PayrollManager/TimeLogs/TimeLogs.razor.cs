@@ -38,14 +38,8 @@ public partial class TimeLogs
         }
     }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        var userDetails = await User.GetProfileAsync();
-        if (userDetails.EmployeeId is not null)
-        {
-            _searchEmployeeId = (Guid)userDetails.EmployeeId!;
-        }
-
         Context = new(
             entityName: "Time Log",
             entityNamePlural: "Time Logs",
@@ -62,6 +56,15 @@ public partial class TimeLogs
             idFunc: TimeLog => TimeLog.Id,
             searchFunc: async _filter =>
             {
+                if (SearchEmployeeId.Equals(Guid.Empty))
+                {
+                    var userDetails = await User.GetProfileAsync();
+                    if (userDetails.EmployeeId is not null)
+                    {
+                        _searchEmployeeId = (Guid)userDetails.EmployeeId!;
+                    }
+                }
+
                 var filter = _filter.Adapt<TimeLogSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;

@@ -2,7 +2,7 @@
 
 <MudAppBar Elevation="0">
     <MudTooltip Text="Toggle Drawer">
-        <MudIconButton Icon="@Icons.Rounded.Notes" Color="Color.Inherit" Edge="Edge.Start"
+        <MudIconButton Icon="@Icons.Material.Rounded.Notes" Color="Color.Inherit" Edge="Edge.Start"
             OnClick="@((e) => DrawerToggle())" />
     </MudTooltip>
      <MudButton Variant="Variant.Text" Link="/">
@@ -70,7 +70,9 @@
         <ChildContent>
             <div class="py-2" style="min-width: 220px">
                 <PersonCard Class="mt-n2" Style="margin-bottom:0px!important" />
-                <MudMenuItem OnClick="Profile">
+                <MudMenuItem
+                    OnClick="Profile"
+                    OnTouch="Profile">
                     <div class="d-flex">
                         <MudIcon Class="mx-2" Icon="@Icons.Material.Filled.Person" />
                         <MudText>@L["Account"]</MudText>
