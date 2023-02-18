@@ -111,7 +111,7 @@ public partial class TimeLogs
         }
     }
 
-    private DateTime? _dateStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+    private DateTime? _dateStart = DateTime.Today; // new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
     private DateTime? DateStart
     {
         get => _dateStart;
@@ -122,7 +122,7 @@ public partial class TimeLogs
         }
     }
 
-    private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+    private DateTime? _dateEnd = DateTime.Today; // new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
     private DateTime? DateEnd
     {
         get => _dateEnd;
