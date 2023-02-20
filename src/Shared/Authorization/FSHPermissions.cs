@@ -25,6 +25,8 @@ public static class FSHResource
     public const string Roles = nameof(Roles);
     public const string RoleClaims = nameof(RoleClaims);
 
+    public const string FileManager = nameof(FileManager);
+
     public const string Sandurot = nameof(Sandurot);
     public const string Brands = nameof(Brands);
     public const string Products = nameof(Products);
@@ -76,6 +78,12 @@ public static class FSHPermissions
 
         new("View RoleClaims", FSHAction.View, FSHResource.RoleClaims),
         new("Update RoleClaims", FSHAction.Update, FSHResource.RoleClaims),
+
+        new("View FileManager", FSHAction.View, FSHResource.FileManager),
+        new("Search FileManager", FSHAction.Search, FSHResource.FileManager),
+        new("Create FileManager", FSHAction.Create, FSHResource.FileManager),
+        new("Update FileManager", FSHAction.Update, FSHResource.FileManager),
+        new("Delete FileManager", FSHAction.Delete, FSHResource.FileManager),
 
         new("View Sandurot", FSHAction.View, FSHResource.Sandurot),
         new("Search Sandurot", FSHAction.Search, FSHResource.Sandurot),

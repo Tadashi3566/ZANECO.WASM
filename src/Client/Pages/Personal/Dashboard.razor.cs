@@ -110,8 +110,6 @@ public partial class Dashboard
             RoleCount = statsDto.RoleCount;
 
             ContactCount = statsDto.ContactCount;
-            SMSLogCount = statsDto.SMSLogCount;
-            SMSTemplateCount = statsDto.SMSTemplateCount;
 
             MemberCount = statsDto.MemberCount;
             AccountCount = statsDto.AccountCount;

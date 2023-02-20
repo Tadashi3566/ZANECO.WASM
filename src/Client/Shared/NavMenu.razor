@@ -12,11 +12,16 @@
     <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">Personal</MudText>
     @if (_canViewDashboard)
     {
+        <MudNavLink Href="/calendar" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.CalendarMonth">Calendar</MudNavLink>
         <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">Dashboard</MudNavLink>
     }
     @if (_canCreateAttendance)
     {
         <MudNavLink Href="/payroll/timelogs" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.CameraFront">Time Log-In/Out</MudNavLink>
+    }
+    @if (_canViewFiles)
+    {
+        <MudNavLink Href="/personal/files" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.FileUpload">Files</MudNavLink>
     }
     <MudNavLink Href="/account" Icon="@Icons.Material.Filled.ManageAccounts">Account</MudNavLink>
     <MudNavLink Href="/audit-logs" Icon="@Icons.Material.Filled.SecurityUpdateGood">Logs</MudNavLink>
@@ -60,9 +65,12 @@
         <MudNavGroup Title="HR" Icon="@Icons.Material.Filled.AddBox" >
             <MudNavLink Href="/hr/employees" Icon="@Icons.Material.Filled.Groups" Class="fsh-nav-child">Employees</MudNavLink>
             <MudNavLink Href="/hr/powerbills" Icon="@Icons.Material.Filled.ReceiptLong" Class="fsh-nav-child">Power Bills</MudNavLink>
+        </MudNavGroup>
+    }
 
-            <MudDivider/>
-
+    @if (_canViewPayroll)
+    {
+        <MudNavGroup Title="Payroll" Icon="@Icons.Material.Filled.AddBox">
             <MudNavLink Href="/hr/ranks" Icon="@Icons.Material.Filled.LocalPolice" Class="fsh-nav-child">Ranks</MudNavLink>
             <MudNavLink Href="/payroll/contributions" Icon="@Icons.Material.Filled.ReceiptLong" Class="fsh-nav-child">Contributions</MudNavLink>
 
@@ -77,7 +85,6 @@
 
             <MudNavLink Href="/payroll" Icon="@Icons.Material.Filled.Payment" Class="fsh-nav-child">Payroll</MudNavLink>
             <MudNavLink Href="/payroll/employeepayroll" Icon="@Icons.Material.Filled.Payment" Class="fsh-nav-child">Employee Payroll</MudNavLink>
-            @*<MudNavLink Href="/payroll/employeepayrolldetails" Icon="@Icons.Material.Filled.Payments" Class="fsh-nav-child">Payroll Details</MudNavLink>*@
         </MudNavGroup>
     }
 

@@ -1,0 +1,17 @@
+﻿@page "/calendar"
+@page "/calendar/{EmployeeId:guid}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Dashboard)]
+
+<FshTitle Title="Calendar" Description="Client Caledar" />
+
+<SfSchedule TValue="AppointmentData" Height="650px" @bind-SelectedDate="@CurrentDate">
+    <ScheduleEventSettings DataSource="@DataSource"></ScheduleEventSettings>
+    <ScheduleViews>
+        <ScheduleView Option="View.Day" StartHour="00:00" EndHour="24:00" AllowVirtualScrolling=true></ScheduleView>
+        <ScheduleView Option="View.Week" StartHour="06:00" EndHour="20:00" AllowVirtualScrolling=true></ScheduleView>
+        <ScheduleView Option="View.WorkWeek" StartHour="08:00" EndHour="18:00" AllowVirtualScrolling=true></ScheduleView>
+        <ScheduleView Option="View.Month"></ScheduleView>
+        <ScheduleView Option="View.Agenda"></ScheduleView>
+    </ScheduleViews>
+</SfSchedule>

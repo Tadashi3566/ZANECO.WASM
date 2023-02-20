@@ -1,0 +1,13 @@
+﻿@page "/personal/files"
+
+@using Syncfusion.Blazor.FileManager
+
+<FshTitle Title="File Manager" Description="Download and Upload Files" />
+
+<SfFileManager TValue="ZANECO.WASM.Client.Infrastructure.ApiClient.FileManagerDirectoryContent">
+    <FileManagerAjaxSettings Url="@(string.Concat(Config[ConfigNames.ApiBaseUrl], "api/v1/FileManager/FileOperations"))"
+                             DownloadUrl="@(string.Concat(Config[ConfigNames.ApiBaseUrl], "api/v1/FileManager/Download"))"
+                             UploadUrl="@(string.Concat(Config[ConfigNames.ApiBaseUrl], "api/v1/FileManager/Upload"))"
+                             GetImageUrl="@(string.Concat(Config[ConfigNames.ApiBaseUrl], "api/v1/FileManager/GetImage"))">
+    </FileManagerAjaxSettings>
+</SfFileManager>
