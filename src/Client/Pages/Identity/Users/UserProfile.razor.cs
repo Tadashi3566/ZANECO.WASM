@@ -59,24 +59,28 @@ public partial class UserProfile
 
     protected override async Task OnInitializedAsync()
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetByIdAsync(Id), Snackbar) is UserDetailsDto dto)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetByIdAsync(Id), Snackbar) is UserDetailsDto userDto)
         {
-            _firstName = dto.FirstName;
-            _lastName = dto.LastName;
-            _email = dto.Email;
-            _phoneNumber = dto.PhoneNumber;
-            _description = dto.Description;
-            _notes = dto.Notes;
-            _active = dto.IsActive;
-            _emailConfirmed = dto.EmailConfirmed;
-            _imageUrl = string.IsNullOrEmpty(dto.ImageUrl) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + dto.ImageUrl);
+            _firstName = userDto.FirstName;
+            _lastName = userDto.LastName;
+            _email = userDto.Email;
+            _phoneNumber = userDto.PhoneNumber;
+            _description = userDto.Description;
+            _notes = userDto.Notes;
+            _active = userDto.IsActive;
+            _emailConfirmed = userDto.EmailConfirmed;
+            _imageUrl = string.IsNullOrEmpty(userDto.ImageUrl) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + userDto.ImageUrl);
             Title = $"{_firstName} {_lastName}'s {_localizer["Profile"]}";
             Email = _email;
             if (_firstName?.Length > 0)
             {
                 _firstLetterOfName = _firstName.ToUpper().FirstOrDefault();
             }
-            _employeeId = (Guid)dto.EmployeeId!;
+
+            if (userDto.EmployeeId is not null)
+            {
+                _employeeId = (Guid)userDto.EmployeeId!;
+            }
         }
 
         var state = await AuthState;

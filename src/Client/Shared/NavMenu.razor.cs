@@ -20,6 +20,7 @@ public partial class NavMenu
     private bool _canViewRoles;
     private bool _canViewUsers;
 
+    private bool _canViewDocuments;
     private bool _canViewFiles;
 
     private bool _canViewProducts;
@@ -58,6 +59,7 @@ public partial class NavMenu
         _canViewRoles = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Roles);
         _canViewUsers = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Users);
 
+        _canViewDocuments = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Documents);
         _canViewFiles = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.FileManager);
 
         _canViewProducts = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Products);
