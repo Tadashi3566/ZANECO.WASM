@@ -11,7 +11,7 @@
 }
 else
 {
-    <MudTabs AlwaysShowScrollButtons="true" ApplyEffectsToContainer="true" Elevation="@_preference.Elevation" Rounded="true" Position="Position.Left" >
+    <MudTabs AlwaysShowScrollButtons="true" ApplyEffectsToContainer="true" Centered="true" Elevation="@_preference.Elevation" Rounded="true" >
         @foreach (var group in _groupedRoleClaims.Keys)
         {
             var selectedRoleClaimsInGroup = _groupedRoleClaims[group].Where(c => c.Enabled).ToList();

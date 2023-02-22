@@ -42977,10 +42977,10 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("hoursPerDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0, int.MaxValue)]
-        public int HoursPerDay { get; set; } = default!;
+        public int HoursPerDay { get; set; } = 8;
 
         [Newtonsoft.Json.JsonProperty("ratePerDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal RatePerDay { get; set; } = default!;
+        public decimal RatePerDay { get; set; } = 351;
 
         [Newtonsoft.Json.JsonProperty("ratePerHour", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal RatePerHour { get; set; } = default!;
@@ -43267,8 +43267,8 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("tin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Tin { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("hiredDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime HiredDate { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("hireDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime HireDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("regularDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime RegularDate { get; set; } = default!;
