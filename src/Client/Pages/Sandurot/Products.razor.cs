@@ -49,7 +49,7 @@ public partial class Products
             {
                 if (!string.IsNullOrEmpty(prod.ImageInBytes))
                 {
-                    prod.Image = new FileUploadRequest() { Data = prod.ImageInBytes, Extension = prod.ImageExtension ?? string.Empty, Name = $"{prod.Name}_{Guid.NewGuid():N}" };
+                    prod.Image = new ImageUploadRequest() { Data = prod.ImageInBytes, Extension = prod.ImageExtension ?? string.Empty, Name = $"{prod.Name}_{Guid.NewGuid():N}" };
                 }
 
                 await ProductsClient.CreateAsync(prod.Adapt<ProductCreateRequest>());
@@ -60,7 +60,7 @@ public partial class Products
                 if (!string.IsNullOrEmpty(prod.ImageInBytes))
                 {
                     prod.DeleteCurrentImage = true;
-                    prod.Image = new FileUploadRequest() { Data = prod.ImageInBytes, Extension = prod.ImageExtension ?? string.Empty, Name = $"{prod.Name}_{Guid.NewGuid():N}" };
+                    prod.Image = new ImageUploadRequest() { Data = prod.ImageInBytes, Extension = prod.ImageExtension ?? string.Empty, Name = $"{prod.Name}_{Guid.NewGuid():N}" };
                 }
 
                 await ProductsClient.UpdateAsync(id, prod.Adapt<ProductUpdateRequest>());

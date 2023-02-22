@@ -67,7 +67,7 @@ public partial class Employees
                 {
                     if (!string.IsNullOrEmpty(request.ImageInBytes))
                     {
-                        request.Image = new FileUploadRequest() { Data = request.ImageInBytes, Extension = request.ImageExtension ?? string.Empty, Name = $"{request.LastName}_{Guid.NewGuid():N}" };
+                        request.Image = new ImageUploadRequest() { Data = request.ImageInBytes, Extension = request.ImageExtension ?? string.Empty, Name = $"{request.LastName}_{Guid.NewGuid():N}" };
                     }
 
                     await Client.CreateAsync(request.Adapt<EmployeeCreateRequest>());
@@ -78,7 +78,7 @@ public partial class Employees
                     if (!string.IsNullOrEmpty(request.ImageInBytes))
                     {
                         request.DeleteCurrentImage = true;
-                        request.Image = new FileUploadRequest() { Data = request.ImageInBytes, Extension = request.ImageExtension ?? string.Empty, Name = $"{request.LastName}_{Guid.NewGuid():N}" };
+                        request.Image = new ImageUploadRequest() { Data = request.ImageInBytes, Extension = request.ImageExtension ?? string.Empty, Name = $"{request.LastName}_{Guid.NewGuid():N}" };
                     }
 
                     await Client.UpdateAsync(id, request.Adapt<EmployeeUpdateRequest>());

@@ -38964,12 +38964,12 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class FileUploadRequest
+    public partial class ImageUploadRequest
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -39030,7 +39030,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -39816,7 +39816,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -39865,7 +39865,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -39966,7 +39966,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.Guid? EmployeeId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("deleteCurrentImage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool DeleteCurrentImage { get; set; } = default!;
@@ -40222,7 +40222,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -40282,7 +40282,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -42244,7 +42244,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -42276,7 +42276,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -42583,7 +42583,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -42625,7 +42625,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -42908,7 +42908,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -42998,7 +42998,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -43100,17 +43100,39 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("content", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Content { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("fileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("fileName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FileName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("file", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public FileUploadRequest? File { get; set; } = default!;
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class FileUploadRequest
+    {
+        [Newtonsoft.Json.JsonProperty("documentDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string DocumentDate { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(150, MinimumLength = 1)]
+        public string Name { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("extension", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(5, MinimumLength = 1)]
+        public string Extension { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public byte[] Data { get; set; } = default!;
 
     }
 
@@ -43291,7 +43313,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -43429,7 +43451,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -43595,7 +43617,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -43640,7 +43662,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -43784,7 +43806,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -43822,7 +43844,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -43967,7 +43989,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -44023,7 +44045,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -44631,7 +44653,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -44750,7 +44772,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -46245,7 +46267,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -46298,7 +46320,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -46482,7 +46504,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string? Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -46514,7 +46536,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -46639,7 +46661,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string? Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -46692,7 +46714,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -46814,7 +46836,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -46855,7 +46877,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -46935,7 +46957,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -46963,7 +46985,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -47069,7 +47091,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string Notes { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 
@@ -47109,7 +47131,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public bool DeleteCurrentImage { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FileUploadRequest? Image { get; set; } = default!;
+        public ImageUploadRequest? Image { get; set; } = default!;
 
     }
 

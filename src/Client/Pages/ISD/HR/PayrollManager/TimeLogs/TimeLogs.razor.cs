@@ -83,7 +83,7 @@ public partial class TimeLogs
 
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{data.LogDate:yyyy_MM_dd}_{data.LogType}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{data.LogDate:yyyy_MM_dd}_{data.LogType}_{Guid.NewGuid():N}" };
                 }
 
                 await Client.CreateAsync(data.Adapt<TimeLogCreateRequest>());

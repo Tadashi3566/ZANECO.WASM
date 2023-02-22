@@ -57,7 +57,7 @@ public partial class Employers
             {
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
 
                 data.EmployeeId = _searchEmployeeId;
@@ -70,7 +70,7 @@ public partial class Employers
                 if (!string.IsNullOrEmpty(Employer.ImageInBytes))
                 {
                     Employer.DeleteCurrentImage = true;
-                    Employer.Image = new FileUploadRequest() { Data = Employer.ImageInBytes, Extension = Employer.ImageExtension ?? string.Empty, Name = $"{Employer.Name}_{Guid.NewGuid():N}" };
+                    Employer.Image = new ImageUploadRequest() { Data = Employer.ImageInBytes, Extension = Employer.ImageExtension ?? string.Empty, Name = $"{Employer.Name}_{Guid.NewGuid():N}" };
                 }
 
                 await Client.UpdateAsync(id, Employer.Adapt<EmployerUpdateRequest>());

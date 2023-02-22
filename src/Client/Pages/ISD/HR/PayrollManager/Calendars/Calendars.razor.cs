@@ -5,10 +5,11 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Calendars;
+
 public partial class Calendars
 {
-    [Parameter]
-    public Guid EmployeeId { get; set; } = Guid.Empty;
+    //[Parameter]
+    //public Guid EmployeeId { get; set; } = Guid.Empty;
     [Inject]
     protected ICalendarClient Client { get; set; } = default!;
     protected EntityServerTableContext<CalendarDto, Guid, CalendarUpdateRequest> Context { get; set; } = default!;
@@ -17,13 +18,13 @@ public partial class Calendars
 
     private string? _searchString;
 
-    protected override void OnParametersSet()
-    {
-        if (EmployeeId != Guid.Empty)
-        {
-            _searchEmployeeId = EmployeeId;
-        }
-    }
+    //protected override void OnParametersSet()
+    //{
+    //    if (EmployeeId != Guid.Empty)
+    //    {
+    //        _searchEmployeeId = EmployeeId;
+    //    }
+    //}
 
     protected override void OnInitialized() =>
         Context = new(
@@ -59,20 +60,20 @@ public partial class Calendars
             {
                 //data.EmployeeId = SearchEmployeeId;
 
-                await Client.UpdateAsync(id, data);
+                await Client.UpdateAsync(id, data.Adapt<CalendarUpdateRequest>());
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
 
     // Advanced Search
-    private Guid _searchEmployeeId;
-    private Guid SearchEmployeeId
-    {
-        get => _searchEmployeeId;
-        set
-        {
-            _searchEmployeeId = value;
-            _ = _table!.ReloadDataAsync();
-        }
-    }
+    //private Guid _searchEmployeeId;
+    //private Guid SearchEmployeeId
+    //{
+    //    get => _searchEmployeeId;
+    //    set
+    //    {
+    //        _searchEmployeeId = value;
+    //        _ = _table!.ReloadDataAsync();
+    //    }
+    //}
 }

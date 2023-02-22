@@ -172,7 +172,7 @@
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date Hired" For="@(() => context.HireDate)" @bind-Date="context.HireDate" DateFormat="MMMM dd, yyyy" MinDate="context.BirthDate" MaxDate="@DateTime.Today" Variant="Variant.Filled"/>
+            <MudDatePicker Label="Date Hired" For="@(() => context.HireDate)" @bind-Date="context.HireDate" DateFormat="MMMM dd, yyyy" MinDate="@context.BirthDate" MaxDate="@DateTime.Today" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Date Regularized" For="@(() => context.RegularDate)" @bind-Date="context.RegularDate" DateFormat="MMMM dd, yyyy" MinDate="context.HireDate" MaxDate="@DateTime.Today" Variant="Variant.Filled" />

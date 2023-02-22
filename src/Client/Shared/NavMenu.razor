@@ -12,7 +12,7 @@
     <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="ml-4 my-3">Personal</MudText>
     @if (_canViewDashboard)
     {
-        <MudNavLink Href="/calendar" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.CalendarMonth">Calendar</MudNavLink>
+        @*<MudNavLink Href="/calendar" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.CalendarMonth">Calendar</MudNavLink>*@
         <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">Dashboard</MudNavLink>
     }
     @if (_canCreateAttendance)

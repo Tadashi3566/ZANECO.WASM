@@ -58,7 +58,7 @@ public partial class Accounts
             {
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
 
                 await Client.CreateAsync(data.Adapt<AccountCreateRequest>());
@@ -69,7 +69,7 @@ public partial class Accounts
                 if (!string.IsNullOrEmpty(Account.ImageInBytes))
                 {
                     Account.DeleteCurrentImage = true;
-                    Account.Image = new FileUploadRequest() { Data = Account.ImageInBytes, Extension = Account.ImageExtension ?? string.Empty, Name = $"{Account.Name}_{Guid.NewGuid():N}" };
+                    Account.Image = new ImageUploadRequest() { Data = Account.ImageInBytes, Extension = Account.ImageExtension ?? string.Empty, Name = $"{Account.Name}_{Guid.NewGuid():N}" };
                 }
 
                 await Client.UpdateAsync(id, Account.Adapt<AccountUpdateRequest>());

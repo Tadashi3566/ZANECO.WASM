@@ -29,7 +29,7 @@
         </MudItem>
         <MudItem xs="12">
             <MudItem>
-                @if (!string.IsNullOrEmpty(context.FileInBytes))
+                @if (context.FileInBytes is not null)
                 {
                 }
                 else
@@ -42,14 +42,14 @@
                     <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
                         Upload File
                     </MudButton>
-                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.FilePath) && string.IsNullOrEmpty(context.FileInBytes))
+                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.FilePath) && context.FileInBytes is null)
                     {
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
                                StartIcon="@Icons.Material.Filled.Delete" OnClick="SetDeleteCurrentFileFlag" Style="margin-left: 5px;">
                             Delete
                         </MudButton>
                     }
-                    @if (!string.IsNullOrEmpty(context.FileInBytes))
+                    @if (context.FileInBytes is not null)
                     {
                         <MudButton HtmlTag="label" OnClick="ClearFileInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
                                StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;">

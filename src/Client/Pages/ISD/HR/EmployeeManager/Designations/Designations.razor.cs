@@ -81,7 +81,7 @@ public partial class Designations
             {
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
                 }
 
                 data.EmployeeId = _searchEmployeeId;
@@ -95,7 +95,7 @@ public partial class Designations
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
                     data.DeleteCurrentImage = true;
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{Guid.NewGuid():N}" };
                 }
 
                 if (data.RateType.Equals("MONTHLY"))

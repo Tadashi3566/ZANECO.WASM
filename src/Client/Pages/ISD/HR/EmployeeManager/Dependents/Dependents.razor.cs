@@ -59,7 +59,7 @@ public partial class Dependents
             {
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
 
                 data.EmployeeId = _searchEmployeeId;
@@ -72,7 +72,7 @@ public partial class Dependents
                 if (!string.IsNullOrEmpty(Dependent.ImageInBytes))
                 {
                     Dependent.DeleteCurrentImage = true;
-                    Dependent.Image = new FileUploadRequest() { Data = Dependent.ImageInBytes, Extension = Dependent.ImageExtension ?? string.Empty, Name = $"{Dependent.Name}_{Guid.NewGuid():N}" };
+                    Dependent.Image = new ImageUploadRequest() { Data = Dependent.ImageInBytes, Extension = Dependent.ImageExtension ?? string.Empty, Name = $"{Dependent.Name}_{Guid.NewGuid():N}" };
                 }
 
                 await Client.UpdateAsync(id, Dependent.Adapt<DependentUpdateRequest>());

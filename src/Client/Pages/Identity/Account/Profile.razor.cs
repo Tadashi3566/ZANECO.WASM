@@ -84,7 +84,7 @@ public partial class Profile
             byte[]? buffer = new byte[imageFile.Size];
             await imageFile.OpenReadStream(ApplicationConstants.MaxAllowedSize).ReadAsync(buffer);
             string? base64String = $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}";
-            _user.Image = new FileUploadRequest() { Name = fileName, Data = base64String, Extension = extension };
+            _user.Image = new ImageUploadRequest() { Name = fileName, Data = base64String, Extension = extension };
 
             await UpdateProfileAsync();
         }

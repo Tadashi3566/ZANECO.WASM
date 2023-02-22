@@ -43,18 +43,18 @@ public partial class Documents
                 .Adapt<PaginationResponse<DocumentDto>>(),
             createFunc: async data =>
             {
-                if (!string.IsNullOrEmpty(data.FileInBytes))
+                if (data.FileInBytes is not null)
                 {
                     data.FileName = _fileName!;
                     data.File = new FileUploadRequest() { Data = data.FileInBytes, Extension = data.FileExtension ?? string.Empty, Name = $"{Guid.NewGuid():N}_{data.FileName}" };
                 }
 
                 await Client.CreateAsync(data.Adapt<DocumentCreateRequest>());
-                data.FileInBytes = string.Empty;
+                data.FileInBytes = null;
             },
             updateFunc: async (id, data) =>
             {
-                if (!string.IsNullOrEmpty(data.FileInBytes))
+                if (data.FileInBytes is not null)
                 {
                     data.DeleteCurrentFile = true;
                     data.FileName = _fileName!;
@@ -62,7 +62,7 @@ public partial class Documents
                 }
 
                 await Client.UpdateAsync(id, data.Adapt<DocumentUpdateRequest>());
-                data.FileInBytes = string.Empty;
+                data.FileInBytes = null;
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
@@ -72,10 +72,10 @@ public partial class Documents
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {
         _file = e.File;
+        _fileName = e.File.Name;
+
         if (_file != null)
         {
-            _fileName = e.File.Name;
-
             byte[] buffer = new byte[_file.Size];
             string? extension = Path.GetExtension(e.File.Name);
             if (!ApplicationConstants.SupportedDocumentFormats.Contains(extension.ToLower()))
@@ -83,11 +83,11 @@ public partial class Documents
                 Snackbar.Add("File Format Not Supported.", Severity.Error);
                 return;
             }
-
             string format = "application/octet-stream";
             await _file.OpenReadStream(_file.Size).ReadAsync(buffer);
             Context.AddEditModal.RequestModel.FileExtension = extension;
-            Context.AddEditModal.RequestModel.FileInBytes = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+            //Context.AddEditModal.RequestModel.FilePath = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+            Context.AddEditModal.RequestModel.FileInBytes = buffer;
             Context.AddEditModal.ForceRender();
 
             //var FileFile = await e.File.RequestImageFileAsync(ApplicationConstants.StandardDocumentFormat, ApplicationConstants.MaxFileWidth, ApplicationConstants.MaxFileHeight);
@@ -114,13 +114,13 @@ public partial class Documents
 
     private void ClearFileInBytes()
     {
-        Context.AddEditModal.RequestModel.FileInBytes = string.Empty;
+        Context.AddEditModal.RequestModel.FileInBytes = null;
         Context.AddEditModal.ForceRender();
     }
 
     private void SetDeleteCurrentFileFlag()
     {
-        Context.AddEditModal.RequestModel.FileInBytes = string.Empty;
+        Context.AddEditModal.RequestModel.FileInBytes = null;
         Context.AddEditModal.RequestModel.FilePath = string.Empty;
         Context.AddEditModal.RequestModel.DeleteCurrentFile = true;
         Context.AddEditModal.ForceRender();
@@ -130,6 +130,6 @@ public partial class Documents
 public class DocumentViewModel : DocumentUpdateRequest
 {
     public string? FilePath { get; set; }
-    public string? FileInBytes { get; set; }
+    public byte[]? FileInBytes { get; set; }
     public string? FileExtension { get; set; }
 }

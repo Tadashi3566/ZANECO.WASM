@@ -59,7 +59,7 @@ public partial class Powerbills
             {
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
 
                 data.EmployeeId = _searchEmployeeId;
@@ -72,7 +72,7 @@ public partial class Powerbills
                 if (!string.IsNullOrEmpty(Powerbill.ImageInBytes))
                 {
                     Powerbill.DeleteCurrentImage = true;
-                    Powerbill.Image = new FileUploadRequest() { Data = Powerbill.ImageInBytes, Extension = Powerbill.ImageExtension ?? string.Empty, Name = $"{Powerbill.Name}_{Guid.NewGuid():N}" };
+                    Powerbill.Image = new ImageUploadRequest() { Data = Powerbill.ImageInBytes, Extension = Powerbill.ImageExtension ?? string.Empty, Name = $"{Powerbill.Name}_{Guid.NewGuid():N}" };
                 }
 
                 await Client.UpdateAsync(id, Powerbill.Adapt<PowerbillUpdateRequest>());

@@ -62,7 +62,7 @@ public partial class Tickets
             {
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
 
                 await TicketsClient.CreateAsync(data.Adapt<TicketCreateRequest>());
@@ -73,7 +73,7 @@ public partial class Tickets
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
                     data.DeleteCurrentImage = true;
-                    data.Image = new FileUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
 
                 await TicketsClient.UpdateAsync(id, data.Adapt<TicketUpdateRequest>());
