@@ -51,7 +51,7 @@ public partial class Contacts
             fields: new()
             {
                 new(data => data.ContactType, "ContactType", visible: false),
-                new(data => data.AccountNumber, "Reference", "AccountNumber", Template: TemplateTypeReference),
+                new(data => data.Reference, "Reference", "Reference", Template: TemplateTypeReference),
                 new(data => data.PhoneNumber, "Phone Number", "PhoneNumber", Template: TemplatePhoneNumber),
                 new(data => data.Name, "Name/Address", "Name", Template: TemplateNameAddress),
                 new(data => data.Address, "Address", "Address", visible: false),

@@ -17,7 +17,7 @@ public class AutocompleteAccountNumber : MudAutocomplete<string>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Label = "Account Number";
+        Label = "Reference";
         CoerceText = true;
         CoerceValue = true;
         Clearable = true;

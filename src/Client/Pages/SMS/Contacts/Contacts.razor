@@ -16,7 +16,7 @@
             <AutocompleteContactType For="@(() => context.ContactType)" @bind-Value="context.ContactType" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <AutocompleteAccountNumber For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" Variant="Variant.Filled"/>
+            <AutocompleteAccountNumber For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" Variant="Variant.Filled"/>
@@ -54,7 +54,7 @@
                     @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
+                            StartIcon="@Icons.Material.Filled.RemoveRedEye" Href="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
                             View
                         </MudButton>
 
@@ -85,7 +85,7 @@
                 <MudHighlighter Text="@context.ContactType" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">
-                <MudHighlighter Text="@context.AccountNumber" HighlightedText="@_searchString" />
+                <MudHighlighter Text="@context.Reference" HighlightedText="@_searchString" />
             </MudText>
         </MudItem>
     };
