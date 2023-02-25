@@ -32,7 +32,7 @@
             <MudSwitch Class="mt-3" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
+            <MudTextField Counter=160 Immediate=true Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Counter=160 Immediate=true HelperText="Recommended SMS is up to 160 characters (0.33 cents)" Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="10" Variant="Variant.Filled" />
