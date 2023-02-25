@@ -85,7 +85,7 @@ public partial class MessageTemplates
                 MessageType = dto.MessageType,
                 IsAPI = dto.IsAPI,
                 ScheduleDate = dto.ScheduleDate,
-                Recepients = dto.Recepients,
+                Recepients = "0123456789",
                 Subject = dto.Subject,
                 Message = dto.Message,
                 Description = dto.Description!,
@@ -108,7 +108,30 @@ public partial class MessageTemplates
             return;
         }
 
-        string transactionContent = $"Are you sure you want to send SMS to {ClassSms.GetDistinctRecepients(request.Recepients):N0} recepient(s)?";
+        //int dividend = 540;
+        //int divisor = 160;
+        //int quotient = dividend / divisor; // integer division
+        //int remainder = dividend % divisor; // modulo operator
+
+        int maxChars = 160;
+        int totalChars = request.Message.Length;
+        decimal sms = totalChars / maxChars;
+        decimal cost = 0.33m;
+
+        decimal totalCost = 0;
+
+        if (totalChars % maxChars > 0)
+        {
+            totalCost = cost * (sms + 1);
+        }
+        else
+        {
+            totalCost = cost * sms;
+        }
+
+        int recepients = ClassSms.GetDistinctRecepients(request.Recepients);
+
+        string transactionContent = $"The cost for this service is P{totalCost} for each recepient and P{totalCost * recepients:N2} for this template. Are you sure you want to send SMS to {recepients:N0} recepient(s)?";
         DialogParameters parameters = new()
         {
             { nameof(TransactionConfirmation.ContentText), transactionContent },
@@ -128,16 +151,17 @@ public partial class MessageTemplates
             _messageOut.IsAPI = request.IsAPI;
             _messageOut.MessageType = request.MessageType;
             _messageOut.MessageTo = request.Recepients;
+            _messageOut.Subject = request.Subject;
             _messageOut.MessageText = request.Message;
             _messageOut.Description = request.Subject;
 
             if (_messageOut.IsBackgroundJob)
             {
-                Snackbar.Add("Messages are being created and sent to Background Job Worker. Messages will be then sent One(1) Day before the schedule.", Severity.Info);
+                Snackbar.Add("SMS are being created and sent to Background Job Worker. The same SMS will be then sent on the Day of the schedule.", Severity.Info);
             }
             else
             {
-                Snackbar.Add("Messages are being created and sent directly to recepients.", Severity.Info);
+                Snackbar.Add("SMS are being created and sent directly to recepients.", Severity.Info);
             }
 
             if (await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut),
@@ -149,7 +173,7 @@ public partial class MessageTemplates
 
                 await ApiHelper.ExecuteCallGuardedAsync(() => Client.SentAsync(sendRequest),
                     Snackbar,
-                    successMessage: "Messages successfully sent.");
+                    successMessage: "SMS successfully sent.");
 
                 await _table!.ReloadDataAsync();
             }

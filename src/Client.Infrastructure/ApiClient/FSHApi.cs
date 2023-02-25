@@ -39322,6 +39322,11 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         public string MessageTo { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("subject", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 1)]
+        public string Subject { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("messageText", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(1500, MinimumLength = 1)]
