@@ -76,7 +76,7 @@ public partial class CommentComponent
         {
             await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(_rating), Snackbar, _customValidation, "Your comment was successfully submitted.");
 
-            await Swal.FireAsync("Success", "Your comment was successfully submitted.", SweetAlertIcon.Success);
+            await Swal!.FireAsync("Success", "Your comment was successfully submitted.", SweetAlertIcon.Success);
 
             _rating.Comment = string.Empty;
         }

@@ -71,15 +71,17 @@
     @if (_canViewPayroll)
     {
         <MudNavGroup Title="Payroll" Icon="@Icons.Material.Filled.AddBox">
-            <MudNavLink Href="/hr/ranks" Icon="@Icons.Material.Filled.LocalPolice" Class="fsh-nav-child">Ranks</MudNavLink>
+            <MudNavLink Href="/payroll/adjustments" Icon="@Icons.Material.Filled.Settings" Class="fsh-nav-child">Adjustments</MudNavLink>
             <MudNavLink Href="/payroll/contributions" Icon="@Icons.Material.Filled.ReceiptLong" Class="fsh-nav-child">Contributions</MudNavLink>
-
-            <MudNavLink Href="/payroll/calendar" Icon="@Icons.Material.Filled.CalendarViewMonth" Class="fsh-nav-child">Calendar</MudNavLink>
+            <MudNavLink Href="/payroll/ranks" Icon="@Icons.Material.Filled.LocalPolice" Class="fsh-nav-child">Ranks</MudNavLink>
+            <MudDivider />
             <MudNavLink Href="/payroll/schedules" Icon="@Icons.Material.Filled.CalendarViewMonth" Class="fsh-nav-child">Schedules</MudNavLink>
             <MudNavLink Href="/payroll/scheduledetails" Icon="@Icons.Material.Filled.CalendarViewWeek" Class="fsh-nav-child">Schedule Details</MudNavLink>
+            <MudDivider />
+            <MudNavLink Href="/payroll/calendar" Icon="@Icons.Material.Filled.CalendarViewMonth" Class="fsh-nav-child">Calendar</MudNavLink>
             <MudNavLink Href="/payroll/attendance" Icon="@Icons.Material.Filled.EventAvailable" Class="fsh-nav-child">Attendance</MudNavLink>
-
-            <MudNavLink Href="/payroll/adjustments" Icon="@Icons.Material.Filled.Settings" Class="fsh-nav-child">Adjustments</MudNavLink>
+            <MudNavLink Href="/payroll/timelogs" Icon="@Icons.Material.Filled.CameraFront">Time Log-In/Out</MudNavLink>
+            <MudDivider />
             <MudNavLink Href="/payroll/loans" Icon="@Icons.Material.Filled.ManageAccounts" Class="fsh-nav-child">Employee Loans</MudNavLink>
             <MudNavLink Href="/payroll/employeeadjustments" Icon="@Icons.Material.Filled.ManageAccounts" Class="fsh-nav-child">Employee Adjustments</MudNavLink>
 

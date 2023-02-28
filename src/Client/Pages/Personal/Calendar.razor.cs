@@ -9,24 +9,24 @@ public partial class Calendar
     [Inject]
     public Guid EmployeeId { get; set; } = Guid.Empty;
     [Inject]
-    private IAppointmentsClient Client { get; set; }
+    private IAppointmentsClient? Client { get; set; }
 
-    private AppointmentSearchRequest request = new();
+    private AppointmentSearchRequest _request = new();
 
-    private List<AppointmentDto> appointments = new();
+    private List<AppointmentDto> _appointments = new();
 
-    DateTime CurrentDate = DateTime.Today;
+    private DateTime _CurrentDate = DateTime.Today;
 
 
     protected override async Task OnInitializedAsync()
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(request), Snackbar) is ICollection<AppointmentDto> response)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client!.SearchAsync(_request), Snackbar) is ICollection<AppointmentDto> response)
         {
-            appointments = response.ToList();
+            _appointments = response.ToList();
         }
     }
 
-    List<AppointmentData> DataSource = new List<AppointmentData>
+    List<AppointmentData> _DataSource = new List<AppointmentData>
     {
         new AppointmentData { Id = 1, Subject = "Paris", StartTime = new DateTime(2020, 2, 13, 10, 0, 0) , EndTime = new DateTime(2020, 2, 13, 12, 0, 0) },
         new AppointmentData { Id = 2, Subject = "Germany", StartTime = new DateTime(2020, 2, 15, 10, 0, 0) , EndTime = new DateTime(2020, 2, 15, 12, 0, 0) }

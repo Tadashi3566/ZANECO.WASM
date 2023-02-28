@@ -6,6 +6,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Loans;
+
 public partial class Loans
 {
     [Parameter]
@@ -38,12 +39,12 @@ public partial class Loans
             {
                 new(data => data.EmployeeName, "Employee", "Employee"),
                 new(data => data.AdjustmentName, "Name", "Name"),
-                new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.PaymentSchedule, "Schedule", "PaymentSchedule"),
-                new(data => data.DateReleased, "Released", "DateReleased", typeof(DateOnly)),
-                new(data => data.DateStart, "Start", "DateStart", typeof(DateOnly)),
+                new(data => data.DateReleased, "Released", visible: false),
+                new(data => data.DateStart, "Released/Start", "DateStart", Template: TemplateDateReleased),
                 new(data => data.Months, "Months", "Months"),
                 new(data => data.DateEnd, "End", "DateEnd", typeof(DateOnly)),
+                new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.Ammortization, "Ammortization", "Ammortization", typeof(decimal)),
                 new(data => data.Status, "Status", "Status"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
@@ -63,17 +64,24 @@ public partial class Loans
             createFunc: async data =>
             {
                 data.EmployeeId = SearchEmployeeId;
+
+                SetDateEnd(data.PaymentSchedule, data.Amount, data.DateStart, data.Months);
                 data.DateEnd = _dtend;
                 data.Ammortization = _ammortization;
 
                 await Client.CreateAsync(data.Adapt<LoanCreateRequest>());
+
+                _ammortization = 0;
             },
             updateFunc: async (id, data) =>
             {
+                SetDateEnd(data.PaymentSchedule, data.Amount, data.DateStart, data.Months);
                 data.DateEnd = _dtend;
                 data.Ammortization = _ammortization;
 
                 await Client.UpdateAsync(id, data.Adapt<LoanUpdateRequest>());
+
+                _ammortization = 0;
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);

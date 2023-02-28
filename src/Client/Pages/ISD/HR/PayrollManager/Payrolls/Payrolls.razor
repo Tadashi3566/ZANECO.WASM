@@ -34,18 +34,17 @@
         </MudItem>
 
         <MudItem xs="6" sm="4">
-            <MudDatePicker Label="Start Date" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Editable=true Variant="Variant.Filled" />
+            <MudDatePicker Label="Start Date" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4">
-            <MudDatePicker Label="End Date" For="@(() => context.DateEnd)" @bind-Date="context.DateEnd" DateFormat="MMMM dd, yyyy" Editable=true Variant="Variant.Filled" />
+            <MudDatePicker Label="End Date" For="@(() => context.DateEnd)" @bind-Date="context.DateEnd" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4">
-            <MudNumericField Label="Working Days" For="@(() => context.WorkingDays)" @bind-Value="context.WorkingDays" Variant="Variant.Filled" />
+            <MudNumericField Label="Working Days" For="@(() => context.WorkingDays)" @bind-Value="_workingDays" Disabled=true Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4">
-            <MudDatePicker Label="Payroll Date" For="@(() => context.PayrollDate)" @bind-Date="context.PayrollDate" DateFormat="MMMM dd, yyyy" Editable=true Variant="Variant.Filled"/>
+            <MudDatePicker Label="Payroll Date" For="@(() => context.PayrollDate)" @bind-Date="context.PayrollDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled"/>
         </MudItem>
-
         <MudItem xs="6" sm="4">
             <MudNumericField Label="Total Salary" For="@(() => context.TotalSalary)" @bind-Value="context.TotalSalary" Format="N2" Disabled=true Variant="Variant.Filled" />
         </MudItem>
@@ -73,6 +72,30 @@
 
 @code
 {
+    private RenderFragment<PayrollDto> TemplateType => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.EmploymentType" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.PayrollType" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<PayrollDto> TemplateDate => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.caption">
+                @context.DateStart.ToString("MMMM dd, yyyy")
+            </MudText>
+            <MudText Typo="Typo.subtitle2">
+                @context.DateEnd.ToString("MMMM dd, yyyy")
+            </MudText>
+        </MudItem>
+    };
+
     private RenderFragment<PayrollDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">

@@ -14,7 +14,6 @@ public partial class Powerbills
     public Guid EmployeeId { get; set; } = Guid.Empty;
     [Inject]
     protected IPowerbillsClient Client { get; set; } = default!;
-
     protected EntityServerTableContext<PowerbillDto, Guid, PowerbillViewModel> Context { get; set; } = default!;
 
     private EntityTable<PowerbillDto, Guid, PowerbillViewModel>? _table;

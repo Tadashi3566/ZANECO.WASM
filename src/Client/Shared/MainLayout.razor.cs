@@ -24,8 +24,6 @@ public partial class MainLayout
     private bool _drawerOpen;
     private bool _rightToLeft;
 
-    static Action? OnInstallable;
-
     private ClientPreference _preference = new();
 
     private DotNetObjectReference<MainLayout>? _reference;

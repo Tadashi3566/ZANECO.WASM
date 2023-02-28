@@ -124,7 +124,7 @@ public partial class Employees
         }
     }
 
-    private void NavigatePage(string page, Guid employeeId, Guid payrollId)
+    private void NavigatePage(string page, in Guid employeeId, in Guid payrollId)
     {
         if (payrollId.Equals(Guid.Empty))
         {

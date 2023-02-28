@@ -6,6 +6,7 @@ using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
+using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -25,6 +26,7 @@ public partial class Payrolls
 
     private string? _searchString;
     private bool _canViewPayroll;
+    private int _workingDays = 10;
 
     protected override async Task OnInitializedAsync()
     {
@@ -37,12 +39,12 @@ public partial class Payrolls
             entityResource: FSHResource.Payroll,
             fields: new()
             {
-                new(data => data.PayrollType, "Payroll Type", "PayrollType"),
-                new(data => data.EmploymentType, "Employment Type", "EmploymentType"),
+                new(data => data.PayrollType, "Payroll Type", visible: false),
+                new(data => data.EmploymentType, "Employment Type", "EmploymentType", Template: TemplateType),
                 new(data => data.Name, "Name", "Name"),
 
-                new(data => data.DateStart, "Date Start", "DateStart", typeof(DateOnly)),
-                new(data => data.DateEnd, "Date End", "DateEnd", typeof(DateOnly)),
+                new(data => data.DateStart, "Date Start", visible: false),
+                new(data => data.DateEnd, "Start-End Dates", "DateEnd", Template: TemplateDate),
                 new(data => data.WorkingDays, "Working Days", "WorkingDays"),
                 new(data => data.PayrollDate, "Payroll Date", "PayrollDate", typeof(DateOnly)),
 
@@ -59,8 +61,18 @@ public partial class Payrolls
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<PayrollSearchRequest>()))
                 .Adapt<PaginationResponse<PayrollDto>>(),
-            createFunc: async Payroll => await Client.CreateAsync(Payroll.Adapt<PayrollCreateRequest>()),
-            updateFunc: async (id, Payroll) => await Client.UpdateAsync(id, Payroll),
+            createFunc: async Payroll =>
+            {
+                Payroll.WorkingDays = DateFunctions.GetWorkingDays((DateTime)Payroll.DateStart!, (DateTime)Payroll.DateEnd!);
+
+                await Client.CreateAsync(Payroll.Adapt<PayrollCreateRequest>());
+            },
+            updateFunc: async (id, Payroll) =>
+            {
+                Payroll.WorkingDays = DateFunctions.GetWorkingDays((DateTime)Payroll.DateStart!, (DateTime)Payroll.DateEnd!);
+
+                await Client.UpdateAsync(id, Payroll);
+            },
             deleteFunc: async id => await Client.DeleteAsync(id),
             hasExtraActionsFunc: () => _canViewPayroll,
             exportAction: string.Empty);
