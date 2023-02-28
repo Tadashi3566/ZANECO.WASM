@@ -5,6 +5,8 @@
 
 <FshTitle Title="Dependents" Description="Employee Dependent Management" />
 
+<MudBreadcrumbs Items="_breadcrumbs"></MudBreadcrumbs>
+
 <EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="DependentDto" TId="Guid" TRequest="DependentViewModel" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">

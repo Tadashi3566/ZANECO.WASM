@@ -91,6 +91,11 @@ public partial class Employers
         }
     }
 
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Employees", href: "/hr/employees"),
+    };
+
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
     // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
     private async Task UploadFiles(InputFileChangeEventArgs e)

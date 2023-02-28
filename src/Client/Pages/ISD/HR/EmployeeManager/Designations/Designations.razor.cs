@@ -140,6 +140,11 @@ public partial class Designations
         }
     }
 
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Employees", href: "/hr/employees"),
+    };
+
     private static bool DisableInput(string rateType)
     {
         if (rateType is not null)

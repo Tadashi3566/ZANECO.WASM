@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
@@ -88,6 +89,11 @@ public partial class Loans
             _ = _table!.ReloadDataAsync();
         }
     }
+
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Employees", href: "/hr/employees"),
+    };
 
     private void SetDateEnd(string schedule, decimal amount, DateTime? dtstart, int months)
     {

@@ -8,6 +8,7 @@ using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Dependents;
+
 public partial class Dependents
 {
     [Parameter]
@@ -92,6 +93,11 @@ public partial class Dependents
             _ = _table!.ReloadDataAsync();
         }
     }
+
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Employees", href: "/hr/employees"),
+    };
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
     // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"

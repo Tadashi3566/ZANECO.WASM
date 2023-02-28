@@ -5,6 +5,8 @@
 
 <FshTitle Title="Employee Payroll Details" Description="Employee Payroll Detail Management" />
 
+<MudBreadcrumbs Items="_breadcrumbs" />
+
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="LoanDto" TId="Guid" TRequest="LoanUpdateRequest" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
@@ -24,8 +26,9 @@
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
             <MudSelect Label="Payment Schedule" For="@(() => context.PaymentSchedule)" @bind-Value="context.PaymentSchedule" Variant="Variant.Filled">
-                <MudSelectItem Value="@("PAYROLL")" />
-                <MudSelectItem Value="@("MONTHLY")" />
+                <MudSelectItem Value="@("EVERY PAYROLL")" />
+                <MudSelectItem Value="@("FIRST PAYROLL")" />
+                <MudSelectItem Value="@("SECOND PAYROLL")" />
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
