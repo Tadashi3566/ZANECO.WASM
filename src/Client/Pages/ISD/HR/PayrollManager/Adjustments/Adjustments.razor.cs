@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
@@ -16,8 +17,9 @@ public partial class Adjustments
 
     private string? _searchString;
 
-    protected override void OnInitialized() =>
-        Context = new(
+    protected override void OnInitialized()
+        {
+            Context = new(
             entityName: "Adjustment",
             entityNamePlural: "Adjustments",
             entityResource: FSHResource.Payroll,
@@ -43,4 +45,5 @@ public partial class Adjustments
             updateFunc: async (id, Adjustment) => await Client.UpdateAsync(id, Adjustment),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+    }
 }

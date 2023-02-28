@@ -1,4 +1,5 @@
 ﻿@page "/payroll/adjustments"
+
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Payroll)]
 
 <FshTitle Title="Adjustments" Description="Manage Adjustments" />
@@ -6,54 +7,54 @@
 <EntityTable @ref="_table" TEntity="AdjustmentDto" TId="Guid" TRequest="AdjustmentUpdateRequest" Context="@Context">
 
     <EditFormContent>
-        <MudItem xs="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Adjustment Type" For="@(() => context.AdjustmentType)" @bind-Value="context.AdjustmentType" Disabled=true Variant="Variant.Filled">
-                <MudSelectItem Value="@("ADDITIONAL")"/>
-                <MudSelectItem Value="@("DEDUCTION")"/>
+                <MudSelectItem Value="@("ADDITIONAL")" />
+                <MudSelectItem Value="@("DEDUCTION")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Adjustment Type" For="@(() => context.EmployeeType)" @bind-Value="context.EmployeeType" Variant="Variant.Filled">
-                <MudSelectItem Value="@("ALL")"/>
-                <MudSelectItem Value="@("REGULAR")"/>
-                <MudSelectItem Value="@("JOB ORDER")"/>
+                <MudSelectItem Value="@("ALL")" />
+                <MudSelectItem Value="@("REGULAR")" />
+                <MudSelectItem Value="@("JOB ORDER")" />
             </MudSelect>
         </MudItem>
 
-        <MudItem xs="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteAdjustment Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
 
-        <MudItem xs="6">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" Variant="Variant.Filled" />
         </MudItem>
 
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Payment Schedule" For="@(() => context.PaymentSchedule)" @bind-Value="context.PaymentSchedule" Variant="Variant.Filled">
-                <MudSelectItem Value="@("PAYROLL")"/>
-                <MudSelectItem Value="@("MID")"/>
+                <MudSelectItem Value="@("PAYROLL")" />
+                <MudSelectItem Value="@("MID")" />
                 <MudSelectItem Value="@("END")" />
                 <MudSelectItem Value="@("SCHEDULE")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSwitch Class="mt-3" Label="Optional" For="@(() => context.IsOptional)" @bind-Checked="context.IsOptional" Color="Color.Success" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSwitch Class="mt-3" Label="Loan" For="@(() => context.IsLoan)" @bind-Checked="context.IsLoan" Color="Color.Success" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSwitch Class="mt-3" Label="Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" Color="Color.Success" />
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
         </MudItem>
     </EditFormContent>
 </EntityTable>

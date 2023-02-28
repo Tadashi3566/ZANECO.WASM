@@ -5,6 +5,8 @@
 
 <FshTitle Title="Employee Adjustments" Description="Employee Adjustment Management" />
 
+<MudBreadcrumbs Items="_breadcrumbs" />
+
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="EmployeeAdjustmentDto" TId="Guid" TRequest="EmployeeAdjustmentUpdateRequest" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
@@ -17,12 +19,18 @@
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
         </MudItem>
 
-        <MudItem xs="12" sm="9">
-            <ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Adjustments.AutocompleteAdjustment Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Adjustments.AutocompleteAdjustment For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
 
-        <MudItem xs="12" sm="3">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Date Start" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Date End" For="@(() => context.DateEnd)" @bind-Date="context.DateEnd" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12">
@@ -31,13 +39,25 @@
         <MudItem xs="12">
             <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
         </MudItem>
-        
+
     </EditFormContent>
 
 </EntityTable>
 
 @code
 {
+    private RenderFragment<EmployeeAdjustmentDto> TemplateDate => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.caption">
+                @context.DateStart
+            </MudText>
+            <MudText Typo="Typo.subtitle2">
+                @context.DateEnd
+            </MudText>
+        </MudItem>
+    };
+
     private RenderFragment<EmployeeAdjustmentDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
