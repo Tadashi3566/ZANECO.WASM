@@ -43,7 +43,7 @@ public partial class Loans
                 new(data => data.EmployeeName, "Employee", "Employee"),
                 new(data => data.AdjustmentName, "Name", "Name"),
                 new(data => data.PaymentSchedule, "Schedule", "PaymentSchedule"),
-                new(data => data.DateStart, "Released/Start", "DateStart", Template: TemplateDate),
+                new(data => data.DateStart, "Date Start-End", "DateStart", Template: TemplateDate),
                 new(data => data.Months, "Months", "Months"),
                 new(data => data.DateEnd, "End", visible: false),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
