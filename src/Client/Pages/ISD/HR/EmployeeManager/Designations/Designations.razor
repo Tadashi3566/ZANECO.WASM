@@ -131,7 +131,7 @@
                         </MudButton>
                     }
                 </div>
-                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+                <InputFile id="fileInput" hidden OnChange="UploadImage" />
             </MudItem>
         </MudItem>
     </EditFormContent>
@@ -139,6 +139,13 @@
 
 @code
 {
+    private RenderFragment<DesignationDto> TemplateImage => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Rounded=true Style="height: 80px; width: 80px;"> </MudAvatar>
+        </MudItem>
+    };
+
     private RenderFragment<DesignationDto> TemplateAreaDepartment => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">

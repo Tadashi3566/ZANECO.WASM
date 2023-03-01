@@ -33,6 +33,10 @@
                 OnTouch="@(() => Navigation.NavigateTo($"/hr/designations/{context.Id}"))">
                 Designations
             </MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/documents/{context.Id}"))"
+                     OnTouch="@(() => Navigation.NavigateTo($"/hr/documents/{context.Id}"))">
+                Documents
+            </MudMenuItem>
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/dependents/{context.Id}"))"
                 OnTouch="@(() => Navigation.NavigateTo($"/hr/dependents/{context.Id}"))">
                 Dependents
@@ -101,7 +105,7 @@
                         </MudButton>
                     }
                 </div>
-                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+                <InputFile id="fileInput" hidden OnChange="UploadImage" />
             </MudItem>
         </MudItem>
 

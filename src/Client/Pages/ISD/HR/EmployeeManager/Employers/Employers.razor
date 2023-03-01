@@ -5,6 +5,8 @@
 
 <FshTitle Title="Employers" Description="Previous Employers Management" />
 
+<MudBreadcrumbs Items="_breadcrumbs"/>
+
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="EmployerDto" TId="Guid" TRequest="EmployerViewModel" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
@@ -77,7 +79,7 @@
                         </MudButton>
                     }
                 </div>
-                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+                <InputFile id="fileInput" hidden OnChange="UploadImage" />
             </MudItem>
         </MudItem>
     </EditFormContent>

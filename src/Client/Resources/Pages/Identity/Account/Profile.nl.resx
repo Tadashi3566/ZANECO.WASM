@@ -156,7 +156,7 @@
   <data name="Delete Image" xml:space="preserve">
     <value>Afbeelding verwijderen</value>
   </data>
-  <data name="Upload Image" xml:space="preserve">
+  <data name="Upload" xml:space="preserve">
     <value>Afbeelding uploaden</value>
   </data>
 </root>

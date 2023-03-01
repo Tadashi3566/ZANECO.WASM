@@ -68,7 +68,7 @@
             <MudItem>
                 <div>
                     <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
-                        Upload Picture
+                        Upload
                     </MudButton>
                     @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
@@ -90,7 +90,7 @@
                         </MudButton>
                     }
                 </div>
-                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+                <InputFile id="fileInput" hidden OnChange="UploadImage" />
             </MudItem>
         </MudItem>
     </EditFormContent>

@@ -83,9 +83,27 @@ public partial class EmployeeAdjustments
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
 
+    // Advanced Search
+    private Guid _searchEmployeeId;
+    private Guid SearchEmployeeId
+    {
+        get => _searchEmployeeId;
+        set
+        {
+            _searchEmployeeId = value;
+            _ = _table!.ReloadDataAsync();
+        }
+    }
+
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+        new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
+    };
+
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
     // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
-    private async Task UploadFiles(InputFileChangeEventArgs e)
+    private async Task UploadImage(InputFileChangeEventArgs e)
     {
         if (e.File != null)
         {
@@ -104,24 +122,6 @@ public partial class EmployeeAdjustments
             Context.AddEditModal.ForceRender();
         }
     }
-
-    // Advanced Search
-    private Guid _searchEmployeeId;
-    private Guid SearchEmployeeId
-    {
-        get => _searchEmployeeId;
-        set
-        {
-            _searchEmployeeId = value;
-            _ = _table!.ReloadDataAsync();
-        }
-    }
-
-    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
-    {
-        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
-        new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
-    };
 
     private void ClearImageInBytes()
     {

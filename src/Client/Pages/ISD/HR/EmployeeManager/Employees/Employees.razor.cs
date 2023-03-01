@@ -88,6 +88,23 @@ public partial class Employees
                 exportAction: string.Empty);
     }
 
+    // Advanced Search
+    private Guid _searchPayrollId;
+    private Guid SearchPayrollId
+    {
+        get => _searchPayrollId;
+        set
+        {
+            _searchPayrollId = value;
+            _ = _table!.ReloadDataAsync();
+        }
+    }
+
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+    };
+
     private async Task EmployeeGenerateDailySchedule(Guid employeeId)
     {
         DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
@@ -135,23 +152,6 @@ public partial class Employees
         Navigation.NavigateTo($"{page}/{employeeId}/{payrollId}");
     }
 
-    // Advanced Search
-    private Guid _searchPayrollId;
-    private Guid SearchPayrollId
-    {
-        get => _searchPayrollId;
-        set
-        {
-            _searchPayrollId = value;
-            _ = _table!.ReloadDataAsync();
-        }
-    }
-
-    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
-    {
-        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
-    };
-
     private static int DisplayYearsOld(in DateTime dtBirthDate)
     {
         return DateTimeFunctions.Years(dtBirthDate, DateTime.Today);
@@ -194,7 +194,7 @@ public partial class Employees
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
     // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
-    private async Task UploadFiles(InputFileChangeEventArgs e)
+    private async Task UploadImage(InputFileChangeEventArgs e)
     {
         if (e.File != null)
         {

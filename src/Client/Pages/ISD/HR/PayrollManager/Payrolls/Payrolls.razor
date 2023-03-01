@@ -6,6 +6,8 @@
 
 <FshTitle Title="Payroll" Description="Manage Payroll" />
 
+<MudBreadcrumbs Items="_breadcrumbs" />
+
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="PayrollDto" TId="Guid" TRequest="PayrollUpdateRequest" Context="@Context">
     <ExtraActions>
         @if (_canViewPayroll)

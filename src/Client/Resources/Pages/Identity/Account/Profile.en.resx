@@ -153,8 +153,8 @@
   <data name="Save Changes" xml:space="preserve">
     <value>Save Changes</value>
   </data>
-  <data name="Upload Image" xml:space="preserve">
-    <value>Upload Image</value>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
   </data>
   <data name="Your Profile has been updated. Please Login to Continue." xml:space="preserve">
     <value>Your Profile has been updated. Please Login to Continue.</value>

@@ -1,5 +1,7 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
@@ -8,133 +10,143 @@ using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Documents;
+
 public partial class Documents
 {
+    [Parameter]
+    public Guid EmployeeId { get; set; } = Guid.Empty;
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
+    [Inject]
+    protected IAuthorizationService AuthService { get; set; } = default!;
     [Inject]
     protected IDocumentsClient Client { get; set; } = default!;
-
     protected EntityServerTableContext<DocumentDto, Guid, DocumentViewModel> Context { get; set; } = default!;
 
     private EntityTable<DocumentDto, Guid, DocumentViewModel>? _table;
 
     private string? _searchString;
 
-    private IBrowserFile? _file;
-
-    private string? _fileName;
-
-    protected override void OnInitialized() =>
-        Context = new(
-            entityName: "data",
-            entityNamePlural: "Documents",
-            entityResource: FSHResource.CAD,
-            fields: new()
-            {
-                new(data => data.Reference, "Reference", "Reference", Template: TemplateDateReference),
-                new(data => data.Name, "Name", "Name"),
-                new(data => data.FileName, "FileName", "FileName", Template: TemplateFileNameContent),
-                new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", "Notes", visible: false),
-            },
-            enableAdvancedSearch: false,
-            idFunc: data => data.Id,
-            searchFunc: async filter => (await Client
-                .SearchAsync(filter.Adapt<DocumentSearchRequest>()))
-                .Adapt<PaginationResponse<DocumentDto>>(),
-            createFunc: async data =>
-            {
-                if (data.FileInBytes is not null)
-                {
-                    data.FileName = _fileName!;
-                    data.File = new FileUploadRequest() { Data = data.FileInBytes, Extension = data.FileExtension ?? string.Empty, Name = $"{Guid.NewGuid():N}_{data.FileName}" };
-                }
-
-                await Client.CreateAsync(data.Adapt<DocumentCreateRequest>());
-                data.FileInBytes = null;
-            },
-            updateFunc: async (id, data) =>
-            {
-                if (data.FileInBytes is not null)
-                {
-                    data.DeleteCurrentFile = true;
-                    data.FileName = _fileName!;
-                    data.File = new FileUploadRequest() { Data = data.FileInBytes, Extension = data.FileExtension ?? string.Empty, Name = $"{Guid.NewGuid():N}_{data.FileName}" };
-                }
-
-                await Client.UpdateAsync(id, data.Adapt<DocumentUpdateRequest>());
-                data.FileInBytes = null;
-            },
-            deleteFunc: async id => await Client.DeleteAsync(id),
-            exportAction: string.Empty);
-
-    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    protected override void OnParametersSet()
     {
-        new BreadcrumbItem("Employees", href: "/hr/employees"),
-    };
-
-    // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have File upload.
-    // The new service should ideally return $"data:{ApplicationConstants.StandardFileFormat};base64,{Convert.ToBase64String(buffer)}"
-    private async Task UploadFiles(InputFileChangeEventArgs e)
-    {
-        _file = e.File;
-        _fileName = e.File.Name;
-
-        if (_file != null)
+        if (EmployeeId != Guid.Empty)
         {
-            byte[] buffer = new byte[_file.Size];
-            string? extension = Path.GetExtension(e.File.Name);
-            if (!ApplicationConstants.SupportedDocumentFormats.Contains(extension.ToLower()))
-            {
-                Snackbar.Add("File Format Not Supported.", Severity.Error);
-                return;
-            }
-            string format = "application/octet-stream";
-            await _file.OpenReadStream(_file.Size).ReadAsync(buffer);
-            Context.AddEditModal.RequestModel.FileExtension = extension;
-            //Context.AddEditModal.RequestModel.FilePath = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-            Context.AddEditModal.RequestModel.FileInBytes = buffer;
-            Context.AddEditModal.ForceRender();
-
-            //var FileFile = await e.File.RequestImageFileAsync(ApplicationConstants.StandardDocumentFormat, ApplicationConstants.MaxFileWidth, ApplicationConstants.MaxFileHeight);
-            //byte[]? buffer = new byte[FileFile.Size];
-            //await FileFile.OpenReadStream(ApplicationConstants.MaxAllowedSize).ReadAsync(buffer);
-            //Context.AddEditModal.RequestModel.FileInBytes = $"data:{ApplicationConstants.StandardFileFormat};base64,{Convert.ToBase64String(buffer)}";
-            //Context.AddEditModal.ForceRender();
+            _searchEmployeeId = EmployeeId;
         }
     }
 
-    //private async Task UploadFiles(InputFileChangeEventArgs e)
-    //{
-    //    _file = e.File;
-    //    if (_file != null)
-    //    {
-    //        var buffer = new byte[_file.Size];
-    //        var extension = Path.GetExtension(_file.Name);
-    //        var format = "application/octet-stream";
-    //        await _file.OpenReadStream(_file.Size).ReadAsync(buffer);
-    //        AddEditDocumentModel.URL = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-    //        AddEditDocumentModel.UploadRequest = new UploadRequest { Data = buffer, UploadType = Application.Enums.UploadType.Documents, Extension = extension };
-    //    }
-    //}
-
-    private void ClearFileInBytes()
+    protected override void OnInitialized()
     {
-        Context.AddEditModal.RequestModel.FileInBytes = null;
+        Context = new(
+        entityName: "data",
+        entityNamePlural: "Documents",
+        entityResource: FSHResource.CAD,
+        fields: new()
+        {
+            new(data => data.ImagePath, "Image", Template: TemplateImage),
+            new(data => data.Reference, "Reference", "Reference", Template: TemplateDateReference),
+            new(data => data.Name, "Name", "Name"),
+            new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
+            new(data => data.Notes, "Notes", "Notes", visible: false),
+        },
+        enableAdvancedSearch: false,
+        idFunc: data => data.Id,
+        searchFunc: async _filter =>
+        {
+            var filter = _filter.Adapt<DocumentSearchRequest>();
+
+            filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
+
+            var result = await Client.SearchAsync(filter);
+            return result.Adapt<PaginationResponse<DocumentDto>>();
+        },
+        createFunc: async data =>
+        {
+            if (data.ImageInBytes is not null)
+            {
+                data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+            }
+
+            data.EmployeeId = SearchEmployeeId;
+
+            await Client.CreateAsync(data.Adapt<DocumentCreateRequest>());
+
+            data.ImageInBytes = null;
+        },
+        updateFunc: async (id, data) =>
+        {
+            if (data.ImageInBytes is not null)
+            {
+                data.DeleteCurrentImage = true;
+                data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+            }
+
+            await Client.UpdateAsync(id, data.Adapt<DocumentUpdateRequest>());
+
+            data.ImageInBytes = null;
+        },
+        deleteFunc: async id => await Client.DeleteAsync(id),
+        exportAction: string.Empty);
+    }
+
+    // Advanced Search
+    private Guid _searchEmployeeId;
+    private Guid SearchEmployeeId
+    {
+        get => _searchEmployeeId;
+        set
+        {
+            _searchEmployeeId = value;
+            _ = _table!.ReloadDataAsync();
+        }
+    }
+
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+        new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
+    };
+
+    // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
+    // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
+    private async Task UploadImage(InputFileChangeEventArgs e)
+    {
+        if (e.File != null)
+        {
+            string? extension = Path.GetExtension(e.File.Name);
+            if (!ApplicationConstants.SupportedImageFormats.Contains(extension.ToLower()))
+            {
+                Snackbar.Add("Image Format Not Supported.", Severity.Error);
+                return;
+            }
+
+            Context.AddEditModal.RequestModel.ImageExtension = extension;
+            var imageFile = await e.File.RequestImageFileAsync(ApplicationConstants.StandardImageFormat, ApplicationConstants.MaxImageWidth, ApplicationConstants.MaxImageHeight);
+            byte[]? buffer = new byte[imageFile.Size];
+            await imageFile.OpenReadStream(ApplicationConstants.MaxAllowedSize).ReadAsync(buffer);
+            Context.AddEditModal.RequestModel.ImageInBytes = $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}";
+            Context.AddEditModal.ForceRender();
+        }
+    }
+
+    private void ClearImageInBytes()
+    {
+        Context.AddEditModal.RequestModel.ImageInBytes = string.Empty;
         Context.AddEditModal.ForceRender();
     }
 
-    private void SetDeleteCurrentFileFlag()
+    private void SetDeleteCurrentImageFlag()
     {
-        Context.AddEditModal.RequestModel.FileInBytes = null;
-        Context.AddEditModal.RequestModel.FilePath = string.Empty;
-        Context.AddEditModal.RequestModel.DeleteCurrentFile = true;
+        Context.AddEditModal.RequestModel.ImageInBytes = string.Empty;
+        Context.AddEditModal.RequestModel.ImagePath = string.Empty;
+        Context.AddEditModal.RequestModel.DeleteCurrentImage = true;
         Context.AddEditModal.ForceRender();
     }
 }
 
 public class DocumentViewModel : DocumentUpdateRequest
 {
-    public string? FilePath { get; set; }
-    public byte[]? FileInBytes { get; set; }
-    public string? FileExtension { get; set; }
+    public string? ImagePath { get; set; }
+    public string? ImageInBytes { get; set; }
+    public string? ImageExtension { get; set; }
 }

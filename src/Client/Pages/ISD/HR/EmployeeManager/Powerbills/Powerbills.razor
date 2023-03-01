@@ -5,7 +5,9 @@
 
 <FshTitle Title="Powerbills" Description="Employee Power Bill Management" />
 
-<EntityTable @ref="_table" TEntity="PowerbillDto" TId="Guid" TRequest="PowerbillViewModel" Context="@Context">
+<MudBreadcrumbs Items="_breadcrumbs"/>
+
+<EntityTable @ref="_table" @bind-SearchString="_searchString" TEntity="PowerbillDto" TId="Guid" TRequest="PowerbillViewModel" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
@@ -73,7 +75,7 @@
                         </MudButton>
                     }
                 </div>
-                <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+                <InputFile id="fileInput" hidden OnChange="UploadImage" />
             </MudItem>
         </MudItem>
     </EditFormContent>

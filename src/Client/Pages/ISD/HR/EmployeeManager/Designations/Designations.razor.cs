@@ -50,6 +50,7 @@ public partial class Designations
             entityResource: FSHResource.Employees,
             fields: new()
             {
+                new(data => data.ImagePath, "Image", Template: TemplateImage),
                 new(data => data.IdNumber, "IdNumber", "ID", visible: EmployeeId.Equals(Guid.Empty)),
                 new(data => data.EmployeeName, "Employee", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty)),
                 new(data => data.Area, "Area", "Area", Template: TemplateAreaDepartment),
@@ -159,7 +160,7 @@ public partial class Designations
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
     // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
 
-    private async Task UploadFiles(InputFileChangeEventArgs e)
+    private async Task UploadImage(InputFileChangeEventArgs e)
     {
         if (e.File != null)
         {

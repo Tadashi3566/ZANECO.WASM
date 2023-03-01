@@ -78,6 +78,11 @@ public partial class Payrolls
             exportAction: string.Empty);
     }
 
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+    };
+
     private async Task PayrollGenerate(Guid payrollId)
     {
         PayrollGenerateRequest request = new()

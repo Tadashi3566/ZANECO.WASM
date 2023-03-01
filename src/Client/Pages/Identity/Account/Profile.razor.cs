@@ -66,7 +66,7 @@ public partial class Profile
         }
     }
 
-    private async Task UploadFiles(InputFileChangeEventArgs e)
+    private async Task UploadImage(InputFileChangeEventArgs e)
     {
         var file = e.File;
         if (file is not null)
