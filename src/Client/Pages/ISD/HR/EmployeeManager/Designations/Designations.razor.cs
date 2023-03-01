@@ -142,7 +142,8 @@ public partial class Designations
 
     private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
     {
-        new BreadcrumbItem("Employees", href: "/hr/employees"),
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+        new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
     };
 
     private static bool DisableInput(string rateType)

@@ -147,6 +147,11 @@ public partial class Employees
         }
     }
 
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+    };
+
     private static int DisplayYearsOld(in DateTime dtBirthDate)
     {
         return DateTimeFunctions.Years(dtBirthDate, DateTime.Today);

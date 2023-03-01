@@ -1,10 +1,12 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.EmployeeAdjustments;
+
 public partial class EmployeeAdjustments
 {
     [Parameter]
@@ -36,6 +38,7 @@ public partial class EmployeeAdjustments
                 new(data => data.EmployeeName, "Employee", "Employee"),
                 new(data => data.AdjustmentType, "Type", "AdjustmentType"),
                 new(data => data.Name, "Name", "Name"),
+                new(data => data.DateStart, "Date Start/End", Template: TemplateDate),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", "Notes", visible: false),
@@ -71,4 +74,10 @@ public partial class EmployeeAdjustments
             _ = _table!.ReloadDataAsync();
         }
     }
+
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+        new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
+    };
 }
