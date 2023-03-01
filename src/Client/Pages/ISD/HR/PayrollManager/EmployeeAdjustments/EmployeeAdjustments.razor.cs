@@ -31,13 +31,13 @@ public partial class EmployeeAdjustments
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Employee Adjustment",
-            entityNamePlural: "Employee Adjustments",
+            entityNamePlural: "Employee Adjustments and Management",
             entityResource: FSHResource.Payroll,
             fields: new()
             {
                 new(data => data.EmployeeName, "Employee", "Employee"),
-                new(data => data.AdjustmentType, "Type", "AdjustmentType"),
-                new(data => data.Name, "Name", "Name"),
+                new(data => data.AdjustmentType, "Type", visible: false),
+                new(data => data.Name, "Name", "Name", Template: TemplateName),
                 new(data => data.DateStart, "Date Start/End", Template: TemplateDate),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),

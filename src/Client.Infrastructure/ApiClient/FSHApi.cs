@@ -41174,10 +41174,10 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public decimal Amount { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dateStart", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime DateStart { get; set; } = default!;
+        public System.DateTime? DateStart { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dateEnd", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime DateEnd { get; set; } = default!;
+        public System.DateTime? DateEnd { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
