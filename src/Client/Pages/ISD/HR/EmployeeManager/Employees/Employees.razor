@@ -4,6 +4,8 @@
 
 <FshTitle Title="Employees" Description="Employee Management" />
 
+<MudBreadcrumbs Items="_breadcrumbs"/>
+
 <EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="EmployeeDto" TId="Guid" TRequest="EmployeeViewModel" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
@@ -287,6 +289,12 @@
             </MudText>
             <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.Department" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Section" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Division" HighlightedText="@_searchString" />
             </MudText>
         </MudItem>
     };

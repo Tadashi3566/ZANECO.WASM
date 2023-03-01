@@ -5,6 +5,8 @@
 
 <FshTitle Title="Designations" Description="Employee Designation Management" />
 
+<MudBreadcrumbs Items="_breadcrumbs"/>
+
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="DesignationDto" TId="Guid" TRequest="DesignationViewModel" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">

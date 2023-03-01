@@ -51,7 +51,7 @@ public partial class Employees
                     new(data => data.RegularDate, "Date Regular", "RegularDate", typeof(DateTime), Template: TemplateRegularDate),
                     new(data => data.NameFull, "Name", "LastName", Template: TemplateNameAddress),
                     new(data => data.Address, "Address", visible: false),
-                    new(data => data.Area, "Area", "Area", Template: TemplateAreaDepartment),
+                    new(data => data.Area, "Area/Department/Section/Division", "Area", Template: TemplateAreaDepartment),
                     new(data => data.Department, "Department", visible: false),
                     new(data => data.Position, "Designation", "Position", Template: TemplatePositionType),
                     new(data => data.EmploymentType, "Type", visible: false),

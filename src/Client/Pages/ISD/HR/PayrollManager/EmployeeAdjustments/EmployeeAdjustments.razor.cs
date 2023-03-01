@@ -1,8 +1,10 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.EmployeeAdjustments;
@@ -13,10 +15,9 @@ public partial class EmployeeAdjustments
     public Guid EmployeeId { get; set; } = default!;
     [Inject]
     protected IEmployeeAdjustmentsClient Client { get; set; } = default!;
+    protected EntityServerTableContext<EmployeeAdjustmentDto, Guid, EmployeeAdjustmentViewModel> Context { get; set; } = default!;
 
-    protected EntityServerTableContext<EmployeeAdjustmentDto, Guid, EmployeeAdjustmentUpdateRequest> Context { get; set; } = default!;
-
-    private EntityTable<EmployeeAdjustmentDto, Guid, EmployeeAdjustmentUpdateRequest>? _table;
+    private EntityTable<EmployeeAdjustmentDto, Guid, EmployeeAdjustmentViewModel>? _table;
 
     private string? _searchString;
 
@@ -35,6 +36,7 @@ public partial class EmployeeAdjustments
             entityResource: FSHResource.Payroll,
             fields: new()
             {
+                new(data => data.ImagePath, "Image", Template: TemplateImage),
                 new(data => data.EmployeeName, "Employee", "Employee"),
                 new(data => data.AdjustmentType, "Type", visible: false),
                 new(data => data.Name, "Name", "Name", Template: TemplateName),
@@ -56,12 +58,52 @@ public partial class EmployeeAdjustments
             },
             createFunc: async data =>
             {
+                if (!string.IsNullOrEmpty(data.ImageInBytes))
+                {
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                }
+
                 data.EmployeeId = EmployeeId;
                 await Client.CreateAsync(data.Adapt<EmployeeAdjustmentCreateRequest>());
+
+                data.ImageInBytes = string.Empty;
             },
-            updateFunc: async (id, EmployeeAdjustment) => await Client.UpdateAsync(id, EmployeeAdjustment.Adapt<EmployeeAdjustmentUpdateRequest>()),
+            updateFunc: async (id, data) =>
+            {
+                if (!string.IsNullOrEmpty(data.ImageInBytes))
+                {
+                    data.DeleteCurrentImage = true;
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                }
+
+                await Client.UpdateAsync(id, data.Adapt<EmployeeAdjustmentUpdateRequest>());
+
+                data.ImageInBytes = string.Empty;
+            },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+
+    // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
+    // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
+    private async Task UploadFiles(InputFileChangeEventArgs e)
+    {
+        if (e.File != null)
+        {
+            string? extension = Path.GetExtension(e.File.Name);
+            if (!ApplicationConstants.SupportedImageFormats.Contains(extension.ToLower()))
+            {
+                Snackbar.Add("Image Format Not Supported.", Severity.Error);
+                return;
+            }
+
+            Context.AddEditModal.RequestModel.ImageExtension = extension;
+            var imageFile = await e.File.RequestImageFileAsync(ApplicationConstants.StandardImageFormat, ApplicationConstants.MaxImageWidth, ApplicationConstants.MaxImageHeight);
+            byte[]? buffer = new byte[imageFile.Size];
+            await imageFile.OpenReadStream(ApplicationConstants.MaxAllowedSize).ReadAsync(buffer);
+            Context.AddEditModal.RequestModel.ImageInBytes = $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}";
+            Context.AddEditModal.ForceRender();
+        }
+    }
 
     // Advanced Search
     private Guid _searchEmployeeId;
@@ -80,4 +122,25 @@ public partial class EmployeeAdjustments
         new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
         new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
     };
+
+    private void ClearImageInBytes()
+    {
+        Context.AddEditModal.RequestModel.ImageInBytes = string.Empty;
+        Context.AddEditModal.ForceRender();
+    }
+
+    private void SetDeleteCurrentImageFlag()
+    {
+        Context.AddEditModal.RequestModel.ImageInBytes = string.Empty;
+        Context.AddEditModal.RequestModel.ImagePath = string.Empty;
+        Context.AddEditModal.RequestModel.DeleteCurrentImage = true;
+        Context.AddEditModal.ForceRender();
+    }
+}
+
+public class EmployeeAdjustmentViewModel : EmployeeAdjustmentUpdateRequest
+{
+    public string? ImagePath { get; set; }
+    public string? ImageInBytes { get; set; }
+    public string? ImageExtension { get; set; }
 }
