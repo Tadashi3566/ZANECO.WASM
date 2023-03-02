@@ -1,6 +1,7 @@
 ﻿@page "/home"
 @page "/"
 
+
 @inject IStringLocalizer<Index> L
 
 <MudContainer>
@@ -32,6 +33,11 @@
         <MudItem xs="12">
              <MudText Align="Align.Center">@L["Version 1.0"]</MudText>
         </MudItem>
+
+        <MudItem xs="12">
+            <EmployeeQRCode />
+        </MudItem>
+
         <MudItem xs="12">
             <MudAlert Severity="Severity.Info"><MudLink Href="https://www.zaneco.com.ph" Target="_blank">@L["Want to know our Company Information and Services? Visit our Website"]</MudLink></MudAlert>
         </MudItem>
@@ -81,13 +87,14 @@
                 </MudExpansionPanel>
             </MudExpansionPanels>
         </MudItem>
-        
     </MudGrid>
 </MudContainer>
 
 @code {
     [CascadingParameter]
-    public Task<AuthenticationState> AuthState { get; set; } = default!;
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
+    [Inject]
+    protected IAuthenticationService AuthService { get; set; } = default!;
 
     public IEnumerable<Claim>? Claims { get; set; }
 

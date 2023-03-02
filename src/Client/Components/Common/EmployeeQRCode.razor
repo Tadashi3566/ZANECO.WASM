@@ -1,0 +1,30 @@
+﻿@using Syncfusion.Blazor.BarcodeGenerator
+
+<SfQRCodeGenerator Width="350px" Height="300px" Value="@_employeeId">
+    <QRCodeGeneratorDisplayText Text="@_name"></QRCodeGeneratorDisplayText>
+</SfQRCodeGenerator>
+
+@code {
+    [Inject]
+    protected IPersonalClient Client { get; set; } = default!;
+
+    private UserDetailsDto? userDto = new();
+
+    private string _employeeId = string.Empty;
+    private string _name = string.Empty;
+    private bool _isLoaded;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _isLoaded = false;
+
+        var userDto = await Client.GetProfileAsync();
+        if (userDto is not null && userDto.EmployeeId is not null)
+        {
+            _employeeId = userDto.EmployeeId.ToString();
+            _name = $"{userDto.FirstName} {userDto.LastName}";
+        }
+        _isLoaded = true;
+        StateHasChanged();
+    }
+}

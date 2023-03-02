@@ -19,7 +19,7 @@ public partial class Profile
     [Inject]
     protected IAuthenticationService AuthService { get; set; } = default!;
     [Inject]
-    protected IPersonalClient PersonalClient { get; set; } = default!;
+    protected IPersonalClient Client { get; set; } = default!;
 
     private readonly UpdateUserRequest _user = new();
 
@@ -43,7 +43,7 @@ public partial class Profile
             _imageUrl = string.IsNullOrEmpty(user?.GetImageUrl()) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + user?.GetImageUrl());
             if (_userId is not null) _user.Id = _userId;
 
-            var userDto = await PersonalClient.GetProfileAsync();
+            var userDto = await Client.GetProfileAsync();
             if (userDto is not null)
             {
                 _user.Description = userDto.Description;
@@ -59,7 +59,7 @@ public partial class Profile
 
     private async Task UpdateProfileAsync()
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => PersonalClient.UpdateProfileAsync(_user), Snackbar, _customValidation))
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.UpdateProfileAsync(_user), Snackbar, _customValidation))
         {
             Snackbar.Add(L["Your Profile has been updated. Please Login again to Continue."], Severity.Success);
             await AuthService.ReLoginAsync(Navigation.Uri);
