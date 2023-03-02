@@ -40,7 +40,7 @@ public partial class Loans
             fields: new()
             {
                 new(data => data.ImagePath, "Image", Template: TemplateImage),
-                new(data => data.EmployeeName, "Employee", "Employee"),
+                new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.AdjustmentName, "Name", "Name"),
                 new(data => data.PaymentSchedule, "Schedule", "PaymentSchedule"),
                 new(data => data.DateStart, "Date Start-End", "DateStart", Template: TemplateDate),

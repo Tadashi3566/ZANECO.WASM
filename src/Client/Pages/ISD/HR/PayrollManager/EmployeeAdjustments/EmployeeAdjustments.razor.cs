@@ -37,7 +37,7 @@ public partial class EmployeeAdjustments
             fields: new()
             {
                 new(data => data.ImagePath, "Image", Template: TemplateImage),
-                new(data => data.EmployeeName, "Employee", "Employee"),
+                new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.AdjustmentType, "Type", visible: false),
                 new(data => data.Name, "Name", "Name", Template: TemplateName),
                 new(data => data.DateStart, "Date Start/End", Template: TemplateDate),

@@ -35,7 +35,7 @@ public partial class Powerbills
             entityResource: FSHResource.Powerbills,
             fields: new()
             {
-                new(data => data.EmployeeName, "Employee", "Employee"),
+                new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.Account, "Account", "Account"),
                 new(data => data.Meter, "Meter", "Meter"),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),

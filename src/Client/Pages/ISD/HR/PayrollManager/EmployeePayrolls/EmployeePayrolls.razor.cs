@@ -50,7 +50,7 @@ public partial class EmployeePayrolls
             entityResource: FSHResource.Payroll,
             fields: new()
             {
-                new(data => data.EmployeeName, "Employee", "Employee"),
+                new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.PayrollName, "Payroll", "PayrollName"),
                 new(data => data.Salary, "Salary", "Salary", typeof(decimal)),
                 new(data => data.Additional, "Additional", "Additional", typeof(decimal)),
