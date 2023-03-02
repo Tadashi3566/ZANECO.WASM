@@ -34,7 +34,8 @@ public partial class MessageTemplates
 
     private string? _searchString;
 
-    protected override void OnInitialized() =>
+    protected override void OnInitialized()
+    {
         Context = new(
             entityName: "Message Template",
             entityNamePlural: "Message Templates",
@@ -54,9 +55,15 @@ public partial class MessageTemplates
                 .SearchAsync(filter.Adapt<MessageTemplateSearchRequest>()))
                 .Adapt<PaginationResponse<MessageTemplateDetail>>(),
             createFunc: async data => await Client.CreateAsync(data.Adapt<MessageTemplateCreateRequest>()),
+            getDuplicateFunc: entityToDuplicate =>
+            {
+                var newEntity = Client.Adapt<MessageTemplateUpdateRequest>();
+                return Task.FromResult(newEntity);
+            },
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+    }
 
     private async Task MessageTemplateCopy(string message)
     {

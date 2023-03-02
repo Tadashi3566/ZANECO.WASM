@@ -17,7 +17,6 @@ public partial class EntityTable<TEntity, TId, TRequest>
     [Parameter]
     [EditorRequired]
     public EntityTableContext<TEntity, TId, TRequest> Context { get; set; } = default!;
-
     [Parameter]
     public bool Loading { get; set; }
     [Parameter]
@@ -28,20 +27,16 @@ public partial class EntityTable<TEntity, TId, TRequest>
     public string? SearchString { get; set; }
     [Parameter]
     public EventCallback<string> SearchStringChanged { get; set; }
-
     [Parameter]
     public RenderFragment? AdvancedSearchContent { get; set; }
-
     [Parameter]
     public RenderFragment<TEntity>? ActionsContent { get; set; }
     [Parameter]
     public RenderFragment<TEntity>? ExtraActions { get; set; }
     [Parameter]
     public RenderFragment<TEntity>? ChildRowContent { get; set; }
-
     [Parameter]
     public RenderFragment<TRequest>? EditFormContent { get; set; }
-
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
     [Inject]
@@ -259,7 +254,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
             requestModel =
                 entityToDuplicate is not null && Context.GetDuplicateFunc is not null
-                    ? await ApiHelper.ExecuteCallGuardedAsync(() => Context.GetDuplicateFunc(entityToDuplicate), Snackbar) is { } duplicateResult
+                    ? await ApiHelper.ExecuteCallGuardedAsync(() => Context.GetDuplicateFunc!(entityToDuplicate), Snackbar) is { } duplicateResult
                         ? duplicateResult
                         : new TRequest()
                     : Context.GetDefaultsFunc is not null

@@ -65,7 +65,6 @@ public partial class Contacts
                 .SearchAsync(filter.Adapt<ContactSearchRequest>()))
                 .Adapt<PaginationResponse<ContactDto>>(),
             createFunc: async data => await Client.CreateAsync(data.Adapt<ContactCreateRequest>()),
-            //getDuplicateFunc: async (data) => await Client.UpdateAsync(data.Id, data),
             updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);

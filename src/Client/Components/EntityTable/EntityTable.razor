@@ -156,12 +156,26 @@
                             OffsetX="true">
                             @if (CanUpdateEntity(context))
                             {
-                                <MudMenuItem Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => InvokeModalAsync(entityToDuplicate: context))" OnTouch="@(() => InvokeModalAsync(entityToDuplicate: context))" Disabled=true>@L["Duplicate"]</MudMenuItem>
-                                <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => InvokeModalAsync(context))" OnTouch="@(() => InvokeModalAsync(context))">@L["Edit"]</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.Edit"
+                                     OnClick="@(() => InvokeModalAsync(context))"
+                                     OnTouch="@(() => InvokeModalAsync(context))">
+                                    @L["Edit"]
+                                </MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.ContentCopy"
+                                            Disabled=true
+                                            OnClick="@(() => InvokeModalAsync(entityToDuplicate: context))"
+                                            OnTouch="@(() => InvokeModalAsync(entityToDuplicate: context))">
+                                            @L["Duplicate"]
+                                </MudMenuItem>
                             }
                             @if (CanDeleteEntity(context))
                             {
-                                <MudMenuItem Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(context))" OnTouch="@(() => Delete(context))" Style="color:red!important">@L["Delete"]</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.Delete"
+                                            OnClick="@(() => Delete(context))"
+                                            OnTouch="@(() => Delete(context))"
+                                            Style="color:red!important">
+                                            @L["Delete"]
+                                </MudMenuItem>
                             }
                             @if (ExtraActions is not null)
                             {
@@ -182,7 +196,7 @@
             <PagerContent>
                 @*<TablePager />*@
                 @*<MudTablePager PageSizeOptions="@(new int[]{10, 15, 50, 100, 500, 1000, 5000, 10000, 20000 })" />*@
-                <MudTablePager PageSizeOptions="@PageSizes" />
+                <MudTablePager Class="mr-6" PageSizeOptions="@PageSizes" />
             </PagerContent>
             
         </FshTable>
