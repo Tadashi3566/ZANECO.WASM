@@ -40,7 +40,7 @@ public partial class Documents
         Context = new(
         entityName: "data",
         entityNamePlural: "Documents",
-        entityResource: FSHResource.CAD,
+        entityResource: FSHResource.FileManager,
         fields: new()
         {
             new(data => data.ImagePath, "Image", Template: TemplateImage),

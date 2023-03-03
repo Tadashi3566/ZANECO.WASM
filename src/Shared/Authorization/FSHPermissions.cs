@@ -45,7 +45,6 @@ public static class FSHResource
     public const string ISD = nameof(ISD);
     public const string Employees = nameof(Employees);
     public const string Attendance = nameof(Attendance);
-    public const string Powerbills = nameof(Powerbills);
 
     public const string Schedules = nameof(Schedules);
 
@@ -173,13 +172,6 @@ public static class FSHPermissions
         new("Update Employees", FSHAction.Update, FSHResource.Employees),
         new("Delete Employees", FSHAction.Delete, FSHResource.Employees),
         new("Export Employees", FSHAction.Export, FSHResource.Employees),
-
-        new("View Powerbills", FSHAction.View, FSHResource.Powerbills),
-        new("Search Powerbills", FSHAction.Search, FSHResource.Powerbills),
-        new("Create Powerbills", FSHAction.Create, FSHResource.Powerbills),
-        new("Update Powerbills", FSHAction.Update, FSHResource.Powerbills),
-        new("Delete Powerbills", FSHAction.Delete, FSHResource.Powerbills),
-        new("Export Powerbills", FSHAction.Export, FSHResource.Powerbills),
 
         new("View Schedules", FSHAction.View, FSHResource.Schedules),
         new("Search Schedules", FSHAction.Search, FSHResource.Schedules),

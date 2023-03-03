@@ -32,7 +32,7 @@ public partial class Powerbills
         Context = new(
             entityName: "Power Bill",
             entityNamePlural: "Power Bills",
-            entityResource: FSHResource.Powerbills,
+            entityResource: FSHResource.Employees,
             fields: new()
             {
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
