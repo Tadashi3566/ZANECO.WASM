@@ -38,7 +38,7 @@ public partial class Documents
     protected override void OnInitialized()
     {
         Context = new(
-        entityName: "data",
+        entityName: "Document",
         entityNamePlural: "Documents",
         entityResource: FSHResource.FileManager,
         fields: new()
@@ -62,12 +62,18 @@ public partial class Documents
         },
         createFunc: async data =>
         {
-            if (data.ImageInBytes is not null)
+            if (SearchEmployeeId.Equals(Guid.Empty))
             {
-                data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                Snackbar.Add("The document should be bind with an Employee", Severity.Error);
+                return;
             }
 
             data.EmployeeId = SearchEmployeeId;
+
+            if (data.ImageInBytes is not null)
+            {
+                data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}", EmployeeId = SearchEmployeeId.ToString(), DateStr = $"{data.DocumentDate:yyyy-MM-dd}" };
+            }
 
             await Client.CreateAsync(data.Adapt<DocumentCreateRequest>());
 
@@ -78,7 +84,7 @@ public partial class Documents
             if (data.ImageInBytes is not null)
             {
                 data.DeleteCurrentImage = true;
-                data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}", EmployeeId = SearchEmployeeId.ToString(), DateStr = $"{data.DocumentDate:yyyy-MM-dd}" };
             }
 
             await Client.UpdateAsync(id, data.Adapt<DocumentUpdateRequest>());

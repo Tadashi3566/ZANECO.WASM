@@ -38985,6 +38985,11 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.Required]
         public string Data { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("employeeId", Required = Newtonsoft.Json.Required.Default)]
+        public string EmployeeId { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("dateStr", Required = Newtonsoft.Json.Required.Default)]
+        public string DateStr { get; set; } = default!;
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
