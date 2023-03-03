@@ -4,7 +4,7 @@
  
 <FshTitle Title="Message Templates" Description="Manage Message Templates" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="MessageTemplateDetail" TId="Guid" TRequest="MessageTemplateUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="MessageTemplateDto" TId="Guid" TRequest="MessageTemplateViewModel" Context="@Context">
     <ExtraActions>
         <MudDivider />
         <MudMenuItem Icon="@Icons.Material.Filled.CopyAll" OnClick="@(() => MessageTemplateCopy(context.Message))" OnTouch="@(() => MessageTemplateCopy(context.Message))">Copy Message</MudMenuItem>
@@ -12,7 +12,7 @@
         <MudMenuItem Icon="@Icons.Material.Filled.Send" OnClick="@(() => SendSMS(@context))" OnTouch="@(() => SendSMS(@context))">Send</MudMenuItem>
     </ExtraActions>
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
+        <MudItem xs="12" sm="6" md="4">
             <MudSelect T="string" Label="Template Type" @bind-Value="context.TemplateType" For="@(() => context.TemplateType)" Variant="Variant.Filled">
                 <MudSelectItem Value="@("ADVISORY")" />
                 <MudSelectItem Value="@("POWER INTERRUPTION")" />
@@ -28,7 +28,7 @@
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
             <MudDatePicker Label="Schedule" For="@(() => context.ScheduleDate)" @bind-Date="context.ScheduleDate" DateFormat="MMM dd, yyyy" MinDate="@DateTime.Today.AddYears(-1)" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
+        <MudItem xs="6" sm="4" md="3" lg="2">
             <MudSwitch Class="mt-3" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" Color="Color.Tertiary" />
         </MudItem>
         <MudItem xs="12">
@@ -46,40 +46,58 @@
         <MudItem xs="12">
             <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
         </MudItem>
-    </EditFormContent>
 
-    <ChildRowContent>
-        @if (context.ShowRecepients)
-        {
-            <MudTr>
-                <td colspan="6">
-                    <MudCard Elevation="@_clientPreference.Elevation" style="margin: 10px !important;">
-                        @*<MudCardHeader>
-                            <CardHeaderContent>
-                                <MudAlert Severity="Severity.Info" Typo="Typo.body1">
-                                    @L["Details for Tenant"] :
-                                    <strong>@context.Id</strong>
-                                </MudAlert>
-                            </CardHeaderContent>
-                        </MudCardHeader>*@
-                        <MudCardContent>
-                            <table class="mud-table-root">
-                                <tbody class="mud-table-body">
-                                    <tr class="mud-table-row">
-                                        <MudText>@context.Recepients</MudText>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </MudCardContent>
-                    </MudCard>
-                </td>
-            </MudTr>
-        }
-    </ChildRowContent>
+        <MudItem xs="12">
+            <MudItem>
+                @if (!string.IsNullOrEmpty(context.ImageInBytes))
+                {
+                    <MudAvatar Image="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+            </MudItem>
+            <MudItem>
+                <div>
+                    <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
+                        Upload
+                    </MudButton>
+                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                               StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;">
+                            View
+                        </MudButton>
+
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                               StartIcon="@Icons.Material.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;">
+                            Delete
+                        </MudButton>
+                    }
+                    @if (!string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                               StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;">
+                            Clear
+                        </MudButton>
+                    }
+                </div>
+                <InputFile id="fileInput" hidden OnChange="UploadImage" />
+            </MudItem>
+        </MudItem>
+    </EditFormContent>
 </EntityTable>
 
 @code {
-    private RenderFragment<MessageTemplateDetail> TemplateApiFastMode => context => __builder =>
+    private RenderFragment<MessageTemplateDto> TemplateImage => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Rounded=true Style="height: 80px; width: 80px;" />
+        </MudItem>
+    };
+
+    private RenderFragment<MessageTemplateDto> TemplateApiFastMode => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
             <MudSwitch @bind-Checked="@context.IsAPI" Label="API" Color="Color.Primary" ReadOnly=true></MudSwitch>
@@ -87,7 +105,7 @@
         </MudItem>
     };
 
-    private RenderFragment<MessageTemplateDetail> TemplateSubjectMessage => context => __builder =>
+    private RenderFragment<MessageTemplateDto> TemplateSubjectMessage => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.subtitle2">
@@ -99,7 +117,7 @@
         </MudItem>
     };
 
-    private RenderFragment<MessageTemplateDetail> TemplateDescriptionNotes => context => __builder =>
+    private RenderFragment<MessageTemplateDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.subtitle2">

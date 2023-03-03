@@ -1,16 +1,19 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Components.Services;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.SMS.MessageTemplates;
+
 public partial class MessageTemplates
 {
     [Inject]
@@ -20,9 +23,9 @@ public partial class MessageTemplates
     [Inject]
     private IClipboardService? ClipboardService { get; set; }
 
-    protected EntityServerTableContext<MessageTemplateDetail, Guid, MessageTemplateUpdateRequest> Context { get; set; } = default!;
+    protected EntityServerTableContext<MessageTemplateDto, Guid, MessageTemplateViewModel> Context { get; set; } = default!;
 
-    private EntityTable<MessageTemplateDetail, Guid, MessageTemplateUpdateRequest>? _table;
+    private EntityTable<MessageTemplateDto, Guid, MessageTemplateViewModel>? _table;
 
     private MessageOutCreateRequest _messageOut = new();
 
@@ -42,6 +45,7 @@ public partial class MessageTemplates
             entityResource: FSHResource.SMS,
             fields: new()
             {
+                new(data => data.ImagePath, "Image", Template: TemplateImage),
                 new(data => data.TemplateType, "Type", "TemplateType"),
                 new(data => data.IsAPI, "API", "IsAPI", typeof(bool), Template: TemplateApiFastMode),
                 new(data => data.ScheduleDate, "Schedule", "ScheduleDate", typeof(DateOnly)),
@@ -53,14 +57,33 @@ public partial class MessageTemplates
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<MessageTemplateSearchRequest>()))
-                .Adapt<PaginationResponse<MessageTemplateDetail>>(),
-            createFunc: async data => await Client.CreateAsync(data.Adapt<MessageTemplateCreateRequest>()),
+                .Adapt<PaginationResponse<MessageTemplateDto>>(),
+            createFunc: async data =>
+            {
+                if (!string.IsNullOrEmpty(data.ImageInBytes))
+                {
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Subject}_{Guid.NewGuid():N}" };
+                }
+
+                await Client.CreateAsync(data.Adapt<MessageTemplateCreateRequest>());
+                data.ImageInBytes = string.Empty;
+            },
             getDuplicateFunc: entityToDuplicate =>
             {
-                var newEntity = Client.Adapt<MessageTemplateUpdateRequest>();
+                var newEntity = Client.Adapt<MessageTemplateViewModel>();
                 return Task.FromResult(newEntity);
             },
-            updateFunc: async (id, data) => await Client.UpdateAsync(id, data),
+            updateFunc: async (id, data) =>
+            {
+                if (!string.IsNullOrEmpty(data.ImageInBytes))
+                {
+                    data.DeleteCurrentImage = true;
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Subject}_{Guid.NewGuid():N}" };
+                }
+
+                await Client.UpdateAsync(id, data);
+                data.ImageInBytes = string.Empty;
+            },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
     }
@@ -107,18 +130,13 @@ public partial class MessageTemplates
         }
     }
 
-    private async void SendSMS(MessageTemplateDetail request)
+    private async void SendSMS(MessageTemplateDto request)
     {
         if (request.ScheduleDate < DateTime.Today)
         {
             Snackbar.Add("SMS Template Schedule should be at least _logDate!", Severity.Error);
             return;
         }
-
-        //int dividend = 540;
-        //int divisor = 160;
-        //int quotient = dividend / divisor; // integer division
-        //int remainder = dividend % divisor; // modulo operator
 
         int maxChars = 160;
         int totalChars = request.Message.Length;
@@ -187,8 +205,46 @@ public partial class MessageTemplates
         }
     }
 
-    public class MessageTemplateDetail : MessageTemplateDto
+    // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
+    // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
+    private async Task UploadImage(InputFileChangeEventArgs e)
     {
-        public bool ShowRecepients { get; set; }
+        if (e.File != null)
+        {
+            string? extension = Path.GetExtension(e.File.Name);
+            if (!ApplicationConstants.SupportedImageFormats.Contains(extension.ToLower()))
+            {
+                Snackbar.Add("Image Format Not Supported.", Severity.Error);
+                return;
+            }
+
+            Context.AddEditModal.RequestModel.ImageExtension = extension;
+            var imageFile = await e.File.RequestImageFileAsync(ApplicationConstants.StandardImageFormat, ApplicationConstants.MaxImageWidth, ApplicationConstants.MaxImageHeight);
+            byte[]? buffer = new byte[imageFile.Size];
+            await imageFile.OpenReadStream(ApplicationConstants.MaxAllowedSize).ReadAsync(buffer);
+            Context.AddEditModal.RequestModel.ImageInBytes = $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}";
+            Context.AddEditModal.ForceRender();
+        }
     }
+
+    private void ClearImageInBytes()
+    {
+        Context.AddEditModal.RequestModel.ImageInBytes = string.Empty;
+        Context.AddEditModal.ForceRender();
+    }
+
+    private void SetDeleteCurrentImageFlag()
+    {
+        Context.AddEditModal.RequestModel.ImageInBytes = string.Empty;
+        Context.AddEditModal.RequestModel.ImagePath = string.Empty;
+        Context.AddEditModal.RequestModel.DeleteCurrentImage = true;
+        Context.AddEditModal.ForceRender();
+    }
+}
+
+public class MessageTemplateViewModel : MessageTemplateUpdateRequest
+{
+    public string? ImagePath { get; set; }
+    public string? ImageInBytes { get; set; }
+    public string? ImageExtension { get; set; }
 }

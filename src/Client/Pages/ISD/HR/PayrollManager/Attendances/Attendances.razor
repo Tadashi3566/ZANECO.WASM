@@ -12,10 +12,10 @@
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
         </MudItem>
         <MudGrid>
-            <MudItem xs="12" sm="6">
+            <MudItem xs="12" sm="6" md="4">
                 <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateStart" DateFormat="MMMM dd, yyyy"></MudDatePicker>
             </MudItem>
-            <MudItem xs="12" sm="6">
+            <MudItem xs="12" sm="6" md="4">
                 <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateEnd" DateFormat="MMMM dd, yyyy"></MudDatePicker>
             </MudItem>
         </MudGrid>
@@ -24,7 +24,7 @@
         <MudDivider />
         <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))"
                      OnTouch="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))">
-                     Time Logs
+            Time Logs
         </MudMenuItem>
         <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))"
                      OnTouch="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))">

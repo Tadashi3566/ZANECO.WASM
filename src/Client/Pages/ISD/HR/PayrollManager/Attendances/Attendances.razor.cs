@@ -8,6 +8,7 @@ using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Attendances;
+
 public partial class Attendances
 {
     [Parameter]
@@ -35,7 +36,7 @@ public partial class Attendances
     {
         Context = new(
             entityName: "Attendance",
-            entityNamePlural: "Attendances",
+            entityNamePlural: "Attendance",
             entityResource: FSHResource.Attendance,
             fields: new()
             {

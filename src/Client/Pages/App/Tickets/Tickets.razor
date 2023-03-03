@@ -9,7 +9,7 @@
         @if (_canViewTickets)
         {
             <MudDivider />
-            @if (context.Status.Equals("PENDING") || context.Status.Equals("SUSPENDED"))
+            @if (context.Status!.Equals("PENDING") || context.Status.Equals("SUSPENDED"))
             {
                 @*<MudMenuItem Icon="@Icons.Material.Filled.OpenInFull" OnClick="@(() => Navigation.NavigateTo($"/app/ticket/{context.Id}"))">Open</MudMenuItem>*@
                 <MudMenuItem Icon="@Icons.Material.Filled.OpenInFull" OnClick="@(() => SetProgress("Open", context.Id))">Open</MudMenuItem>
