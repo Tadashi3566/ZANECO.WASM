@@ -38,7 +38,7 @@
             <MudNumericField Label="Total Contribution" Format="N2" For="@(() => context.TotalContribution)" @bind-Value=_totalContribution ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Percentage" Format="N3" For="@(() => context.Percentage)" @bind-Value="context.Percentage" Variant="Variant.Filled" />
+            <MudNumericField Label="Percentage" Format="N3" For="@(() => context.Percentage)" @bind-Value="context.Percentage" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSwitch Class="mt-3" Label="Fixed Contribution" Color="Color.Primary" For="@(() => context.IsFixed)" @bind-Checked="context.IsFixed" />

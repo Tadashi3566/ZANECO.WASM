@@ -133,7 +133,7 @@
         </MudItem>
 
         <MudItem xs="6" sm="4" md="3">
-            <MudTextField Label="ID Number" For="@(() => context.Number)" @bind-Value="context.Number" Variant="Variant.Filled"/>
+            <MudTextField Label="ID Number" For="@(() => context.Number)" @bind-Value="context.Number" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4" md="3">
             <MudSelect Label="Gender" For="@(() => context.Gender)" @bind-Value="context.Gender" Variant="Variant.Filled">
@@ -162,10 +162,10 @@
         </MudItem>
 
         <MudItem xs="12" sm="8">
-            <MudTextField Label="Email Address" For="@(() => context.Email)" @bind-Value="context.Email" Placeholder="employee@zaneco.com.ph" Variant="Variant.Filled"/>
+            <MudTextField Label="Email Address" For="@(() => context.Email)" @bind-Value="context.Email" Placeholder="employee@zaneco.com.ph" InputMode="InputMode.email" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="4">
-            <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" Placeholder="+63912456789" Variant="Variant.Filled"/>
+            <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" Placeholder="+63912456789" InputMode="InputMode.tel" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Home Address" For="@(() => context.Address)" @bind-Value="context.Address" Variant="Variant.Filled"/>
@@ -185,16 +185,16 @@
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Social Security System (SSS)" For="@(() => context.Sss)" @bind-Value="context.Sss" Variant="Variant.Filled"/>
+            <MudTextField Label="Social Security System (SSS)" For="@(() => context.Sss)" @bind-Value="context.Sss" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="PhilHealth (PHIC)" For="@(() => context.Phic)" @bind-Value="context.Phic" Variant="Variant.Filled"/>
+            <MudTextField Label="PhilHealth (PHIC)" For="@(() => context.Phic)" @bind-Value="context.Phic" InputMode="InputMode.numeric" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="PAG-IBIG (HDMF)" For="@(() => context.Hdmf)" @bind-Value="context.Hdmf" Variant="Variant.Filled"/>
+            <MudTextField Label="PAG-IBIG (HDMF)" For="@(() => context.Hdmf)" @bind-Value="context.Hdmf" InputMode="InputMode.numeric" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Tax Identification Number (TIN)" For="@(() => context.Tin)" @bind-Value="context.Tin" Variant="Variant.Filled"/>
+            <MudTextField Label="Tax Identification Number (TIN)" For="@(() => context.Tin)" @bind-Value="context.Tin" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4" md="3">
             <MudSelect Label="Blood Type" For="@(() => context.BloodType)" @bind-Value="context.BloodType" Variant="Variant.Filled">
@@ -219,7 +219,7 @@
             <AutocompleteEmergencyRelation For="@(() => context.EmergencyRelation)" @bind-Value="context.EmergencyRelation" />
         </MudItem>
         <MudItem xs="6">
-            <MudTextField Label="Emergency Number" For="@(() => context.EmergencyNumber)" @bind-Value="context.EmergencyNumber" />
+            <MudTextField Label="Emergency Number" For="@(() => context.EmergencyNumber)" @bind-Value="context.EmergencyNumber" InputMode="InputMode.numeric" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Father Name" For="@(() => context.FatherName)" @bind-Value="context.FatherName" />

@@ -25,7 +25,7 @@
             <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Multiplier" For="@(() => context.Multiplier)" @bind-Value="context.Multiplier" Variant="Variant.Filled" />
+            <MudNumericField Label="Multiplier" For="@(() => context.Multiplier)" @bind-Value="context.Multiplier" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12">

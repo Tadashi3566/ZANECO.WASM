@@ -24,7 +24,7 @@
             <AutocompleteAdjustments For="@(() => context.AdjustmentId)" @bind-Value="context.AdjustmentId" />
         </MudItem>
         <MudItem xs="12" sm="3">
-            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" Variant="Variant.Filled" />
+            <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12">

@@ -48,7 +48,7 @@
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <AutocompleteRank For="@(() => context.SalaryRank)" @bind-Value="context.SalaryRank" />
+            <AutocompleteRank For="@(() => context.SalaryRank)" @bind-Value="context.SalaryRank" InputMode="InputMode.numeric" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Employment" For="@(() => context.EmploymentType)" @bind-Value="context.EmploymentType" Variant="Variant.Filled">
@@ -68,7 +68,7 @@
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Per Day" For="@(() => context.RatePerDay)" @bind-Value="context.RatePerDay" Format="N2" Variant="Variant.Outlined" />
+            <MudNumericField Label="Per Day" For="@(() => context.RatePerDay)" @bind-Value="context.RatePerDay" Format="N2" InputMode="InputMode.numeric" Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Per Hour" For="@(() => context.RatePerHour)" @bind-Value="context.RatePerHour" Format="N0" Disabled=true Variant="Variant.Outlined" />

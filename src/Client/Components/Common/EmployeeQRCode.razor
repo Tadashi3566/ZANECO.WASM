@@ -10,14 +10,12 @@
 
     private UserDetailsDto? userDto = new();
 
-    private string _employeeId = string.Empty;
+    private string? _employeeId;
     private string _name = string.Empty;
     private bool _isLoaded;
 
     protected override async Task OnInitializedAsync()
     {
-        _isLoaded = false;
-
         var userDto = await Client.GetProfileAsync();
         if (userDto is not null && userDto.EmployeeId is not null)
         {

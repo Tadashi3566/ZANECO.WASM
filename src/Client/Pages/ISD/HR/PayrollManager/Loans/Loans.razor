@@ -38,7 +38,7 @@
             <MudDatePicker Label="Start" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudNumericField Label="Months" For="@(() => context.Months)" @bind-Value="context.Months" Variant="Variant.Filled" />
+            <MudNumericField Label="Months" For="@(() => context.Months)" @bind-Value="context.Months" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
             <MudDatePicker Label="End" For="@(() => context.DateEnd)" @bind-Date="@context.DateEnd" DateFormat="MMMM dd, yyyy" Disabled=true Variant="Variant.Outlined" />
