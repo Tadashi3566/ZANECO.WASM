@@ -40,7 +40,7 @@ public partial class Documents
         Context = new(
         entityName: "Document",
         entityNamePlural: "Documents",
-        entityResource: FSHResource.FileManager,
+        entityResource: FSHResource.Documents,
         fields: new()
         {
             new(data => data.ImagePath, "Image", Template: TemplateImage),
@@ -72,7 +72,14 @@ public partial class Documents
 
             if (data.ImageInBytes is not null)
             {
-                data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}", EmployeeId = SearchEmployeeId.ToString(), DateStr = $"{data.DocumentDate:yyyy-MM-dd}" };
+                data.Image = new ImageUploadRequest()
+                {
+                    Data = data.ImageInBytes,
+                    Extension = data.ImageExtension ?? string.Empty,
+                    Name = $"{data.Name}_{Guid.NewGuid():N}",
+                    EmployeeId = SearchEmployeeId.ToString(),
+                    DateStr = $"{data.DocumentDate:yyyy-MM-dd}"
+                };
             }
 
             await Client.CreateAsync(data.Adapt<DocumentCreateRequest>());
@@ -84,7 +91,14 @@ public partial class Documents
             if (data.ImageInBytes is not null)
             {
                 data.DeleteCurrentImage = true;
-                data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}", EmployeeId = SearchEmployeeId.ToString(), DateStr = $"{data.DocumentDate:yyyy-MM-dd}" };
+                data.Image = new ImageUploadRequest()
+                {
+                    Data = data.ImageInBytes,
+                    Extension = data.ImageExtension ?? string.Empty,
+                    Name = $"{data.Name}_{Guid.NewGuid():N}",
+                    EmployeeId = SearchEmployeeId.ToString(),
+                    DateStr = $"{data.DocumentDate:yyyy-MM-dd}"
+                };
             }
 
             await Client.UpdateAsync(id, data.Adapt<DocumentUpdateRequest>());

@@ -74,7 +74,6 @@ public partial class TimeLogs
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<TimeLogDto>>();
             },
-
             createFunc: async data =>
             {
                 data.EmployeeId = SearchEmployeeId;
@@ -83,13 +82,18 @@ public partial class TimeLogs
 
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.EmployeeId}_{data.LogDate:yyyy_MM_dd}_{data.LogType}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest()
+                    {
+                        Data = data.ImageInBytes,
+                        Extension = data.ImageExtension ?? string.Empty,
+                        EmployeeId = $"{data.EmployeeId}",
+                        Name = $"{data.EmployeeId}_{data.LogDate:yyyy_MM_dd}_{data.LogType}_{Guid.NewGuid():N}"
+                    };
                 }
 
                 await Client.CreateAsync(data.Adapt<TimeLogCreateRequest>());
                 data.ImageInBytes = string.Empty;
             },
-
             updateFunc: async (id, data) =>
             {
                 data.EmployeeId = _searchEmployeeId;

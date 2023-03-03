@@ -1,7 +1,7 @@
 ﻿@page "/hr/documents"
 @page "/hr/documents/{EmployeeId:guid}"
 
-@attribute [MustHavePermission(FSHAction.View, FSHResource.Employees)]
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Documents)]
 
 <FshTitle Title="Documents" Description="Manage Documents" />
 
@@ -13,6 +13,13 @@
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
         </MudItem>
     </AdvancedSearchContent>
+    <ExtraActions>
+        <MudDivider />
+        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                   StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;">
+            View
+        </MudButton>
+    </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Date" For="@(() => context.DocumentDate)" @bind-Date="context.DocumentDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
@@ -84,7 +91,7 @@
     private RenderFragment<DocumentDto> TemplateImage => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Rounded=true Style="height: 80px; width: 80px;"> </MudAvatar>
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Rounded=true Style="height: 80px; width: 80px;" />
         </MudItem>
     };
 
