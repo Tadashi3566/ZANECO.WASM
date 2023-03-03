@@ -53,7 +53,8 @@ public partial class Dashboard
     private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSMSPerMonth = new();
     private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSMSPerDay = new();
 
-    private ChartOptions _chartOptions = new();
+    private ChartOptions _chartOptionMonth = new();
+    private ChartOptions _chartOptionDay = new();
 
     private bool _loaded;
 
@@ -117,9 +118,8 @@ public partial class Dashboard
             BrandCount = statsDto.BrandCount;
             ProductCount = statsDto.ProductCount;
 
-
-            _chartOptions.YAxisTicks = 1000;
-            _chartOptions.LineStrokeWidth = 1;
+            _chartOptionMonth.YAxisTicks = 5000;
+            _chartOptionDay.YAxisTicks = 100;
 
             foreach (var item in statsDto.BarChartSandurot)
             {

@@ -81,15 +81,15 @@ else
             </MudItem>
             <MudItem xs="12">
                 <MudPaper Elevation="@_preference.Elevation" Style="height:500px;">
-                    <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerMonth" ChartOptions="@_chartOptions"
-                      XAxisLabels="@_dataBarChartXAxisLabelsMonth.Select(a => a.ToString()).ToArray()" Width="90%"
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerMonth" ChartOptions="@_chartOptionMonth"
+                      XAxisLabels="@_dataBarChartXAxisLabelsMonth.Select(a => a.ToString()).ToArray()" Width="100%"
                       Height="400px"></MudChart>
                 </MudPaper>
             </MudItem>
             <MudItem xs="12">
                 <MudPaper Elevation="@_preference.Elevation" Style="height:500px;">
-                    <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerDay" ChartOptions="@_chartOptions"
-                      XAxisLabels="@_daysOfMonth!.Select(a => a.ToString()).ToArray()" Width="9nd0%"
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerDay" ChartOptions="@_chartOptionDay"
+                      XAxisLabels="@_daysOfMonth!.Select(a => a.ToString()).ToArray()" Width="100%"
                       Height="400px"></MudChart>
                 </MudPaper>
             </MudItem>
