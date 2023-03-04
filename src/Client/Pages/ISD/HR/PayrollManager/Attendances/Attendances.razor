@@ -4,6 +4,8 @@
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
 
+<MudBreadcrumbs Items="_breadcrumbs" />
+
 <FshTitle Title="Attendance" Description="Employee Attendance Management" />
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="AttendanceDto" TId="Guid" TRequest="AttendanceUpdateRequest" Context="@Context">

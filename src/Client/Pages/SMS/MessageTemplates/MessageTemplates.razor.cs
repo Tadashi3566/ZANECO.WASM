@@ -118,13 +118,9 @@ public partial class MessageTemplates
                 Recepients = "0123456789",
                 Subject = dto.Subject,
                 Message = dto.Message,
-                Description = dto.Description!,
-                Notes = dto.Notes!,
             };
 
-            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(newMessageTemplate),
-                Snackbar,
-                successMessage: "Message Template successfully duplicated.");
+            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(newMessageTemplate), Snackbar, successMessage: "Message Template successfully duplicated.");
 
             await _table!.ReloadDataAsync();
         }
