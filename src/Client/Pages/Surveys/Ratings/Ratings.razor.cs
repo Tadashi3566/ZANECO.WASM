@@ -28,7 +28,7 @@ public partial class Ratings
                 new(dto => dto.CreatedOn, "Created On", "CreatedOn", typeof(DateTime)),
                 new(dto => dto.Comment, "Comment", "Comment"),
                 new(dto => dto.Description, "Description", "Description", Template: TemplateDescriptionNotes),
-                new(dto => dto.Notes, "Notes", visible: false),
+                new(dto => dto.Notes, visible: false),
             },
             enableAdvancedSearch: true,
             idFunc: prod => prod.Id,

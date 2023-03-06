@@ -39,11 +39,11 @@ public partial class Dependents
             {
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameGender),
-                new(data => data.Gender, "Gender", visible: false),
+                new(data => data.Gender, visible: false),
                 new(data => data.BirthDate, "Birt hDate", "BirthDate", typeof(DateOnly)),
                 new(data => data.Relation, "Relation", "Relation"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", "Notes", visible: false),
+                new(data => data.Notes, visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

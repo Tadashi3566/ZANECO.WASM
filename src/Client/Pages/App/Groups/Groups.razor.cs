@@ -28,7 +28,7 @@ public partial class Groups
             {
                 new(data => data.Application, "Application", "Application"),
                 new(data => data.Parent, "Parent", "Parent", Template: TemplateParentTag),
-                new(data => data.Tag, "Tag", visible: false),
+                new(data => data.Tag, visible: false),
                 new(data => data.Number, "Number", "Number"),
                 new(data => data.Name, "Name", "Name", Template: TemplateCodeName),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),

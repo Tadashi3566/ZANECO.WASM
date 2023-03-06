@@ -35,7 +35,7 @@ public partial class Adjustments
                 new(data => data.IsLoan, "Loan", "IsLoan", typeof(bool)),
                 new(data => data.IsActive, "Active", "IsActive", typeof(bool)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", "Notes", visible: false),
+                new(data => data.Notes, visible: false),
             },
             idFunc: Adjustment => Adjustment.Id,
             searchFunc: async filter => (await Client

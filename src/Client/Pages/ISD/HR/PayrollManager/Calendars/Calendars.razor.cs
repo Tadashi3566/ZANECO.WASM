@@ -34,11 +34,11 @@ public partial class Calendars
             fields: new()
             {
                 new(data => data.CalendarDate, "Date", "CalendarDate", Template: TemplateCalendarDateType),
-                new(data => data.CalendarType, "Type", visible: false),
+                new(data => data.CalendarType, visible: false),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameDay),
-                new(data => data.Day, "Day", visible: false),
+                new(data => data.Day, visible: false),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", "Notes", visible: false),
+                new(data => data.Notes, visible: false),
             },
             idFunc: Calendar => Calendar.Id,
             searchFunc: async _filter =>

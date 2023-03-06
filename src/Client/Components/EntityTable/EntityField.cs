@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 
 namespace ZANECO.WASM.Client.Components.EntityTable;
-public record EntityField<TEntity>(Func<TEntity, object?> ValueFunc, string DisplayName, string SortLabel = "", Type? Type = null, bool visible = true, RenderFragment<TEntity>? Template = null)
+
+public record EntityField<TEntity>(Func<TEntity, object?> ValueFunc, string DisplayName = "", string SortLabel = "", Type? Type = null, bool visible = true, RenderFragment<TEntity>? Template = null)
 {
     /// <summary>
     /// A function that returns the actual value of this field from the supplied entity.

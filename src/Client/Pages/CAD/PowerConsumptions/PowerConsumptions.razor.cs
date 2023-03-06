@@ -28,7 +28,7 @@ public partial class PowerConsumptions
                 new(data => data.BillMonth, "BillMonth", "BillMonth"),
                 new(data => data.KwhPurchased, "KWH Purchased", "KWHPurchased", typeof(decimal)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", "Notes", visible: false),
+                new(data => data.Notes, visible: false),
             },
             enableAdvancedSearch: true,
             idFunc: data => data.Id,

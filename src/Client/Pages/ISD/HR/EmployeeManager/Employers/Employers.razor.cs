@@ -37,7 +37,7 @@ public partial class Employers
             entityResource: FSHResource.Employees,
             fields: new()
             {
-                new(data => data.EmployeeName, "Employee", visible: false),
+                new(data => data.EmployeeName, visible: false),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
                 new(data => data.Designation, "Designation", "Designation"),
                 new(data => data.StartDate, "StartDate", "StartDate", typeof(DateOnly)),

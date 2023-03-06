@@ -95,6 +95,18 @@
         </MudItem>
     };
 
+    private RenderFragment<DocumentDto> TemplateEmployee => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.EmployeeId.ToString()" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.EmployeeName" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
     private RenderFragment<DocumentDto> TemplateDateReference => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
