@@ -48,7 +48,7 @@ public partial class Documents
             new(data => data.Reference, "Reference", "Reference", Template: TemplateDateReference),
             new(data => data.Name, "Name", "Name"),
             new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-            new(data => data.Notes, visible: false),
+            new(data => data.Notes, "Notes", visible: false),
         },
         enableAdvancedSearch: false,
         idFunc: data => data.Id,

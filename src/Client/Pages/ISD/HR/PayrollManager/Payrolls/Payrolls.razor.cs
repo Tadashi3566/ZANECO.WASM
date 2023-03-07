@@ -39,15 +39,12 @@ public partial class Payrolls
             entityResource: FSHResource.Payroll,
             fields: new()
             {
-                new(data => data.PayrollType, visible: false),
+                new(data => data.PayrollType, "Payroll Type", visible: false),
                 new(data => data.EmploymentType, "Employment Type", "EmploymentType", Template: TemplateType),
                 new(data => data.Name, "Name", "Name"),
-
-                new(data => data.DateStart, visible: false),
                 new(data => data.DateEnd, "Start-End Dates", "DateEnd", Template: TemplateDate),
                 new(data => data.WorkingDays, "Working Days", "WorkingDays"),
                 new(data => data.PayrollDate, "Payroll Date", "PayrollDate", typeof(DateOnly)),
-
                 new(data => data.TotalSalary, "Total Salary", "TotalSalary", typeof(decimal)),
                 new(data => data.TotalAdditional, "Total Additional", "TotalAdditional", typeof(decimal)),
                 new(data => data.TotalGross, "Total Gross", "TotalGross", typeof(decimal)),
@@ -55,7 +52,7 @@ public partial class Payrolls
                 new(data => data.TotalNet, "Total Net", "TotalNet", typeof(decimal)),
 
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, visible: false),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: Payroll => Payroll.Id,
             searchFunc: async filter => (await Client

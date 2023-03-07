@@ -26,7 +26,7 @@ public partial class PowerRates
                 new(data => data.Code, "Code", "Code"),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, visible: false),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,

@@ -51,7 +51,7 @@ public partial class TimeLogs
                 new(data => data.LogDate, "Date", "LogDate", typeof(DateOnly)),
                 new(data => data.LogDateTime, "Time", "LogDateTime", typeof(TimeOnly)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, visible: false),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: TimeLog => TimeLog.Id,
             searchFunc: async _filter =>

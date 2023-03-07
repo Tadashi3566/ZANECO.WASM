@@ -27,11 +27,11 @@ public partial class Members
             fields: new()
             {
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
-                new(data => data.Address, visible: false),
+                new(data => data.Address, "Address", visible: false),
                 new(data => data.PhoneNumber, "PhoneNumber", "PhoneNumber"),
                 new(data => data.ApplicationDate, "MembershipDate", "MembershipDate", Template: TemplateApplicationMembership),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, visible: false),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: false,
             idFunc: data => data.Id,
