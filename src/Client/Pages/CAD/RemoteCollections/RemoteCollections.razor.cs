@@ -7,37 +7,40 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
-namespace ZANECO.WASM.Client.Pages.ISD.Members;
-public partial class Members
+namespace ZANECO.WASM.Client.Pages.CAD.RemoteCollections;
+
+public partial class RemoteCollections
 {
     [Inject]
-    protected IMembersClient Client { get; set; } = default!;
+    protected IRemoteCollectionsClient Client { get; set; } = default!;
 
-    protected EntityServerTableContext<MemberDto, Guid, MemberViewModel> Context { get; set; } = default!;
+    protected EntityServerTableContext<RemoteCollectionDto, Guid, RemoteCollectionViewModel> Context { get; set; } = default!;
 
-    private EntityTable<MemberDto, Guid, MemberViewModel>? _table;
+    private EntityTable<RemoteCollectionDto, Guid, RemoteCollectionViewModel>? _table;
 
     private string? _searchString;
 
     protected override void OnInitialized() =>
         Context = new(
-            entityName: "Member",
-            entityNamePlural: "Members",
+            entityName: "Remote Collection",
+            entityNamePlural: "Remote Collections",
             entityResource: FSHResource.CAD,
             fields: new()
             {
+                new(data => data.Collector, "Collector", "Collector"),
+                new(data => data.Reference, "Reference", "Reference"),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
                 new(data => data.Address, visible: false),
-                new(data => data.PhoneNumber, "PhoneNumber", "PhoneNumber"),
-                new(data => data.ApplicationDate, "MembershipDate", "MembershipDate", Template: TemplateApplicationMembership),
+                new(data => data.TransactionDate, "Transaction Date", "TransactionDate", typeof(DateTime)),
+                new(data => data.ReportDate, "Report Date", "ReportDate", typeof(DateOnly)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, visible: false),
             },
-            enableAdvancedSearch: false,
+            enableAdvancedSearch: true,
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client
-                .SearchAsync(filter.Adapt<MemberSearchRequest>()))
-                .Adapt<PaginationResponse<MemberDto>>(),
+                .SearchAsync(filter.Adapt<RemoteCollectionSearchRequest>()))
+                .Adapt<PaginationResponse<RemoteCollectionDto>>(),
             createFunc: async data =>
             {
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
@@ -45,7 +48,7 @@ public partial class Members
                     data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
 
-                await Client.CreateAsync(data.Adapt<MemberCreateRequest>());
+                await Client.CreateAsync(data.Adapt<RemoteCollectionCreateRequest>());
                 data.ImageInBytes = string.Empty;
             },
             updateFunc: async (id, data) =>
@@ -56,7 +59,7 @@ public partial class Members
                     data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
                 }
 
-                await Client.UpdateAsync(id, data.Adapt<MemberUpdateRequest>());
+                await Client.UpdateAsync(id, data.Adapt<RemoteCollectionUpdateRequest>());
                 data.ImageInBytes = string.Empty;
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
@@ -99,7 +102,7 @@ public partial class Members
     }
 }
 
-public class MemberViewModel : MemberUpdateRequest
+public class RemoteCollectionViewModel : RemoteCollectionUpdateRequest
 {
     public string? ImagePath { get; set; }
     public string? ImageInBytes { get; set; }

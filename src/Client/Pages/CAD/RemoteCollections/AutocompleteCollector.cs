@@ -3,21 +3,21 @@ using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
-namespace ZANECO.WASM.Client.Pages.SMS.Contacts;
+namespace ZANECO.WASM.Client.Pages.CAD.RemoteCollections;
 
-public class AutocompleteContactType : MudAutocomplete<string>
+public class AutocompleteCollector : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
     [Inject]
-    private IContactsClient Client { get; set; } = default!;
+    private IRemoteCollectionsClient Client { get; set; } = default!;
 
-    private List<ContactDto> _list = new();
+    private List<RemoteCollectionDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Label = "Contact Type";
+        Label = "Colllector";
         CoerceText = true;
         CoerceValue = true;
         Clearable = true;
@@ -30,21 +30,21 @@ public class AutocompleteContactType : MudAutocomplete<string>
 
     private async Task<IEnumerable<string>> SearchText(string value)
     {
-        var filter = new ContactSearchRequest
+        var filter = new RemoteCollectionSearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "contacttype" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "collector" }, Keyword = value }
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
             () => Client.SearchAsync(filter),
                 Snackbar
                 )
-            is PaginationResponseOfContactDto response)
+            is PaginationResponseOfRemoteCollectionDto response)
         {
             _list = response.Data.ToList();
         }
 
-        return _list.Select(x => x.ContactType).Distinct();
+        return _list.Select(x => x.Collector).Distinct();
     }
 }

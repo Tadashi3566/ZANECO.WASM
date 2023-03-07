@@ -1,41 +1,33 @@
-﻿@page "/hr/documents"
-@page "/hr/documents/{EmployeeId:guid}"
+﻿@page "/cad/remotecollections"
 
-@attribute [MustHavePermission(FSHAction.View, FSHResource.Documents)]
+@attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
 
-<FshTitle Title="Documents" Description="Manage Documents" />
+<FshTitle Title="Remote Collections" Description="Remote Collections Management" />
 
-<MudBreadcrumbs Items="_breadcrumbs"/>
-
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="DocumentDto" TId="Guid" TRequest="DocumentViewModel" Context="@Context">
-    <AdvancedSearchContent>
-        <MudItem Class="mt-3">
-            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
-        </MudItem>
-    </AdvancedSearchContent>
-    <ExtraActions>
-        <MudDivider />
-        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                   StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;">
-            View
-        </MudButton>
-    </ExtraActions>
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RemoteCollectionDto" TId="Guid" TRequest="RemoteCollectionViewModel" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date" For="@(() => context.DocumentDate)" @bind-Date="context.DocumentDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <AutocompleteCollector For="@(() => context.Collector)" @bind-Value="context.Collector" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" />
+            <MudNumericField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="6" lg="3">
-            <MudSwitch Class="mt-3" Label="Is Public" For="@(() => context.IsPublic)" @bind-Checked="context.IsPublic" Color="Color.Secondary" />
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Transaction Date" For="@(() => context.TransactionDate)" @bind-Date="context.TransactionDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Report Date" For="@(() => context.ReportDate)" @bind-Date="context.ReportDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Content" For="@(() => context.Content)" @bind-Value="context.Content" Variant="Variant.Filled" Lines="10" />
+            <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" Variant="Variant.Filled" />
         </MudItem>
+        
         <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
         </MudItem>
@@ -88,51 +80,31 @@
 
 @code
 {
-    private RenderFragment<DocumentDto> TemplateImage => context => __builder =>
+    private RenderFragment<RemoteCollectionDto> TemplateNameAddress => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Rounded=true Style="height: 80px; width: 80px;" />
-        </MudItem>
-    };
-
-    private RenderFragment<DocumentDto> TemplateEmployee => context => __builder =>
-    {
-        <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.caption">
-                <MudHighlighter Text="@context.EmployeeId.ToString()" HighlightedText="@_searchString" />
-            </MudText>
             <MudText Typo="Typo.body1">
-                <MudHighlighter Text="@context.EmployeeName" HighlightedText="@_searchString" />
-            </MudText>
-        </MudItem>
-    };
-
-    private RenderFragment<DocumentDto> TemplateDateReference => context => __builder =>
-    {
-        <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle2">
-                @context.DocumentDate.ToString("MMMM dd, yyyy")
-            </MudText>
-            <MudText Typo="Typo.caption">
-                <MudHighlighter Text="@context.Reference" HighlightedText="@_searchString" />
-            </MudText>
-            <MudSwitch Label="Is Public" Checked="@context.IsPublic" Color="Color.Secondary" ReadOnly />
-        </MudItem>
-    };
-
-    private RenderFragment<DocumentDto> TemplateFileNameContent => context => __builder =>
-    {
-        <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle2">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">
-                <MudHighlighter Text="@context.Content" HighlightedText="@_searchString" />
+                <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />
             </MudText>
         </MudItem>
     };
 
-    private RenderFragment<DocumentDto> TemplateDescriptionNotes => context => __builder =>
+    private RenderFragment<RemoteCollectionDto> TemplateDate => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.body1">
+                @context.TransactionDate.ToString("MMM dd, yyyy")
+            </MudText>
+            <MudText Typo="Typo.caption">
+                @context.ReportDate.ToString("MMM dd, yyyy")
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<RemoteCollectionDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.subtitle2">
