@@ -119,7 +119,7 @@ public partial class Dashboard
             ProductCount = statsDto.ProductCount;
 
             _chartOptionMonth.YAxisTicks = 5000;
-            _chartOptionDay.YAxisTicks = 100;
+            _chartOptionDay.YAxisTicks = 1000;
 
             foreach (var item in statsDto.BarChartSandurot)
             {

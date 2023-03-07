@@ -23,7 +23,8 @@ public class AutocompleteCalendarType : MudAutocomplete<string>
         Dense = true;
         ResetValueOnEmptyText = true;
         SearchFunc = SearchText;
-        Variant = Variant.Filled; return base.SetParametersAsync(parameters);
+        Variant = Variant.Filled;
+        return base.SetParametersAsync(parameters);
     }
 
     private async Task<IEnumerable<string>> SearchText(string value)

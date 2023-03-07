@@ -23,7 +23,8 @@ public class AutocompleteRank : MudAutocomplete<int>
         Dense = true;
         ResetValueOnEmptyText = true;
         SearchFunc = SearchText;
-        Variant = Variant.Filled; return base.SetParametersAsync(parameters);
+        Variant = Variant.Filled;
+        return base.SetParametersAsync(parameters);
     }
 
     private async Task<IEnumerable<int>> SearchText(string value)
