@@ -77,6 +77,12 @@ public partial class Attendances
             exportAction: string.Empty);
     }
 
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+        new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
+    };
+
     // Advanced Search
     private Guid _searchEmployeeId;
 

@@ -7,8 +7,12 @@
 <EntityTable @bind-SearchString="@_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="ContactDto" TId="Guid" TRequest="ContactViewModel" Context="@Context" PageSizes="@_pageSizes">
     <ExtraActions>
         <MudDivider/>
-        <MudMenuItem Icon="@Icons.Material.Filled.CopyAll" OnClick="@(() => OnCopyPhoneNumbersChecked())" OnTouch="@(() => OnCopyPhoneNumbersChecked())">Copy Phone Numbers</MudMenuItem>
-        <MudMenuItem Icon="@Icons.Material.Filled.Send" OnClick="@(() => Send(context))" OnTouch="@(() => Send(context))">Send Message</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.CopyAll"
+                     OnClick="@(() => OnCopyPhoneNumbersChecked())"
+                     OnTouch="@(() => OnCopyPhoneNumbersChecked())">Copy Phone Numbers</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Send"
+                     OnClick="@(() => Send(context))"
+                     OnTouch="@(() => Send(context))">Send Message</MudMenuItem>
     </ExtraActions>
 
     <EditFormContent>
@@ -20,7 +24,7 @@
             <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" Variant="Variant.Filled"/>
+            <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" InputType="InputType.Telephone" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled"/>

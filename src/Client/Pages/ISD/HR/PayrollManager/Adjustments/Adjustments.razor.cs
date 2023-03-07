@@ -46,4 +46,9 @@ public partial class Adjustments
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
     }
+
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+    };
 }

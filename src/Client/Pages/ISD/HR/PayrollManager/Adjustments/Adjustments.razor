@@ -4,8 +4,9 @@
 
 <FshTitle Title="Adjustments" Description="Manage Adjustments" />
 
-<EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="AdjustmentDto" TId="Guid" TRequest="AdjustmentUpdateRequest" Context="@Context">
+<MudBreadcrumbs Items="_breadcrumbs" />
 
+<EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="AdjustmentDto" TId="Guid" TRequest="AdjustmentUpdateRequest" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Adjustment Type" For="@(() => context.AdjustmentType)" @bind-Value="context.AdjustmentType" Disabled=true Variant="Variant.Filled">
