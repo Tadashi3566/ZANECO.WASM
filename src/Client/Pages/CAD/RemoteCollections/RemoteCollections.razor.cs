@@ -1,16 +1,27 @@
 ﻿using Mapster;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using System.Globalization;
+using System.Text.RegularExpressions;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.CAD.RemoteCollections;
 
 public partial class RemoteCollections
 {
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
+    [Inject]
+    protected IAuthorizationService AuthService { get; set; } = default!;
     [Inject]
     protected IRemoteCollectionsClient Client { get; set; } = default!;
 
@@ -19,8 +30,14 @@ public partial class RemoteCollections
     private EntityTable<RemoteCollectionDto, Guid, RemoteCollectionViewModel>? _table;
 
     private string? _searchString;
+    private bool _hasCreateAction;
+    private List<string[]>? _remoteCollections;
 
-    protected override void OnInitialized() =>
+    protected override async void OnInitialized()
+    {
+        var state = await AuthState;
+        _hasCreateAction = await AuthService.HasPermissionAsync(state.User, FSHAction.Create, FSHResource.CAD);
+
         Context = new(
             entityName: "Remote Collection",
             entityNamePlural: "Remote Collections",
@@ -29,6 +46,7 @@ public partial class RemoteCollections
             {
                 new(data => data.Collector, "Collector", "Collector"),
                 new(data => data.Reference, "Reference", "Reference"),
+                new(data => data.AccountNumber, "Account Number", "AccountNumber"),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
                 new(data => data.Address, "Address", visible: false),
                 new(data => data.TransactionDate, "Transaction Date", "TransactionDate", typeof(DateTime)),
@@ -37,6 +55,7 @@ public partial class RemoteCollections
                 new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: true,
+            hasExtraActionsFunc: () => _hasCreateAction,
             idFunc: data => data.Id,
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<RemoteCollectionSearchRequest>()))
@@ -64,6 +83,94 @@ public partial class RemoteCollections
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+    }
+
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        var singleFile = e.File;
+
+        Regex regex = new Regex(".+\\.csv", RegexOptions.Compiled);
+        if (!regex.IsMatch(singleFile.Name))
+        {
+            //show error invalidad format file
+            return;
+        }
+
+        var stream = singleFile.OpenReadStream();
+        List<string[]> csv = new();
+        MemoryStream ms = new();
+        await stream.CopyToAsync(ms);
+        stream.Close();
+        string outputFileString = System.Text.Encoding.UTF8.GetString(ms.ToArray());
+
+        foreach (string item in outputFileString.Split(Environment.NewLine))
+        {
+            string[] remoteCollection = SplitCSV(item.ToString());
+
+            if (remoteCollection is not null)
+            {
+                csv.Add(SplitCSV(item.ToString()));
+            }
+        }
+
+        if (csv is not null)
+        {
+            _remoteCollections = csv;
+        }
+    }
+
+    private async Task CreateRemoteCollections(List<string[]>? remoteCollections)
+    {
+        RemoteCollectionCreateRequest request = new();
+
+        if (remoteCollections is not null)
+        {
+            foreach (string[] remoteCollection in remoteCollections)
+            {
+                if (remoteCollection is not null)
+                {
+                    request.Date = remoteCollection[3];
+                    request.Time = remoteCollection[4];
+                    request.ReportDate = Convert.ToDateTime(remoteCollection[10]);
+                    request.Collector = remoteCollection[2];
+                    request.Reference = remoteCollection[5];
+                    request.AccountNumber = remoteCollection[7];
+                    request.Name = remoteCollection[8];
+
+                    string inputString = remoteCollection[9];
+                    string decimalPattern = @"(\d+\.\d+)";
+                    Match match = Regex.Match(inputString, decimalPattern);
+
+                    if (match.Success)
+                    {
+                        string decimalString = match.Groups[1].Value;
+                        request.Amount = decimal.Parse(decimalString);
+                    }
+
+                    await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(request), Snackbar, successMessage: $"Remote Collection with Reference{request.Reference} is added.");
+
+                    await _table!.ReloadDataAsync();
+                }
+            }
+        }
+    }
+
+    private static string[] SplitCSV(string input)
+    {
+        //Excludes commas within quotes  
+        Regex csvSplit = new Regex("(?:^|,)(\"(?:[^\"]+|\"\")*\"|[^,]*)", RegexOptions.Compiled);
+        List<string> list = new List<string>();
+        string? curr = null;
+        foreach (Match match in csvSplit.Matches(input))
+        {
+            curr = match.Value;
+            if (0 == curr.Length) list.Add("");
+
+            list.Add(curr.TrimStart(','));
+        }
+
+        return list.ToArray();
+    }
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
     // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"
