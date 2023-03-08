@@ -44,6 +44,7 @@ public partial class RemoteCollections
             entityResource: FSHResource.CAD,
             fields: new()
             {
+                new(data => data.CollectorId, "Collector Id", "CollectorId"),
                 new(data => data.Collector, "Collector", "Collector"),
                 new(data => data.Reference, "Reference", "Reference"),
                 new(data => data.AccountNumber, "Account Number", "AccountNumber"),
@@ -129,29 +130,37 @@ public partial class RemoteCollections
             {
                 if (remoteCollection is not null)
                 {
-                    request.Date = remoteCollection[3];
-                    request.Time = remoteCollection[4];
-                    request.ReportDate = Convert.ToDateTime(remoteCollection[10]);
-                    request.Collector = remoteCollection[2];
-                    request.Reference = remoteCollection[5];
-                    request.AccountNumber = remoteCollection[7];
-                    request.Name = remoteCollection[8];
-
-                    string inputString = remoteCollection[9];
-                    string decimalPattern = @"(\d+\.\d+)";
-                    Match match = Regex.Match(inputString, decimalPattern);
-
-                    if (match.Success)
+                    try
                     {
-                        string decimalString = match.Groups[1].Value;
-                        request.Amount = decimal.Parse(decimalString);
+                        request.CollectorId = Convert.ToDouble(remoteCollection[1]);
+                        request.Collector = remoteCollection[2];
+                        request.Reference = remoteCollection[5];
+                        request.AccountNumber = remoteCollection[7];
+                        request.Date = remoteCollection[3];
+                        request.Time = remoteCollection[4];
+                        request.ReportDate = Convert.ToDateTime(remoteCollection[10]);
+                        request.Name = remoteCollection[8];
+
+                        string inputString = remoteCollection[9];
+                        string decimalPattern = @"(\d+\.\d+)";
+                        Match match = Regex.Match(inputString, decimalPattern);
+
+                        if (match.Success)
+                        {
+                            string decimalString = match.Groups[1].Value;
+                            request.Amount = decimal.Parse(decimalString);
+                        }
+
+                        await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(request), Snackbar, successMessage: $"Remote Collection with Reference{request.Reference} is added.");
                     }
-
-                    await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(request), Snackbar, successMessage: $"Remote Collection with Reference{request.Reference} is added.");
-
-                    await _table!.ReloadDataAsync();
+                    catch(Exception)
+                    {
+                        continue;
+                    }
                 }
             }
+
+            await _table!.ReloadDataAsync();
         }
     }
 

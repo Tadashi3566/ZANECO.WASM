@@ -15,19 +15,22 @@
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <AutocompleteCollector For="@(() => context.Collector)" @bind-Value="context.Collector" Variant="Variant.Filled" />
+            <MudNumericField Label="Collector Id" For="@(() => context.CollectorId)" @bind-Value="context.CollectorId" Variant="Variant.Filled" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" />
+            <AutocompleteCollector For="@(() => context.Collector)" @bind-Value="context.Collector" Variant="Variant.Filled" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Transaction Date" For="@(() => context.TransactionDate)" @bind-Date="context.TransactionDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <MudNumericField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Report Date" For="@(() => context.ReportDate)" @bind-Date="context.ReportDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <MudDatePicker Label="Transaction Date" For="@(() => context.TransactionDate)" @bind-Date="context.TransactionDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" Variant="Variant.Filled" />
+            <MudDatePicker Label="Report Date" For="@(() => context.ReportDate)" @bind-Date="context.ReportDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" Variant="Variant.Filled" ReadOnly=true/>
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
