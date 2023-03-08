@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
@@ -44,12 +45,13 @@ public partial class RemoteCollections
             entityResource: FSHResource.CAD,
             fields: new()
             {
-                new(data => data.CollectorId, "Collector Id", "CollectorId"),
-                new(data => data.Collector, "Collector", "Collector"),
+                new(data => data.CollectorId, "Collector Id", visible: false),
+                new(data => data.Collector, "Collector", "Collector", Template: TemplateCollector),
                 new(data => data.Reference, "Reference", "Reference"),
                 new(data => data.AccountNumber, "Account Number", "AccountNumber"),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
                 new(data => data.Address, "Address", visible: false),
+                new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.TransactionDate, "Transaction Date", "TransactionDate", typeof(DateTime)),
                 new(data => data.ReportDate, "Report Date", "ReportDate", typeof(DateOnly)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
@@ -126,41 +128,54 @@ public partial class RemoteCollections
 
         if (remoteCollections is not null)
         {
-            foreach (string[] remoteCollection in remoteCollections)
+            string transactionContent = $"There are {remoteCollections.Count} payments in this file. Are you sure you want to import the collections?";
+            DialogParameters parameters = new()
             {
-                if (remoteCollection is not null)
+                { nameof(TransactionConfirmation.TransactionTitle), "Import Remote Collections" },
+                { nameof(TransactionConfirmation.ContentText), transactionContent },
+                { nameof(TransactionConfirmation.ConfirmText), "Import" }
+            };
+            DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            IDialogReference dialog = DialogService.Show<TransactionConfirmation>("Import", parameters, options);
+            DialogResult result = await dialog.Result;
+            if (!result.Canceled)
+            {
+                foreach (string[] remoteCollection in remoteCollections)
                 {
-                    try
+                    if (remoteCollection is not null)
                     {
-                        request.CollectorId = Convert.ToDouble(remoteCollection[1]);
-                        request.Collector = remoteCollection[2];
-                        request.Reference = remoteCollection[5];
-                        request.AccountNumber = remoteCollection[7];
-                        request.Date = remoteCollection[3];
-                        request.Time = remoteCollection[4];
-                        request.ReportDate = Convert.ToDateTime(remoteCollection[10]);
-                        request.Name = remoteCollection[8];
-
-                        string inputString = remoteCollection[9];
-                        string decimalPattern = @"(\d+\.\d+)";
-                        Match match = Regex.Match(inputString, decimalPattern);
-
-                        if (match.Success)
+                        try
                         {
-                            string decimalString = match.Groups[1].Value;
-                            request.Amount = decimal.Parse(decimalString);
-                        }
+                            request.CollectorId = Convert.ToDouble(remoteCollection[1]);
+                            request.Collector = remoteCollection[2];
+                            request.Reference = remoteCollection[5];
+                            request.AccountNumber = remoteCollection[7];
+                            request.Date = remoteCollection[3];
+                            request.Time = remoteCollection[4];
+                            request.ReportDate = Convert.ToDateTime(remoteCollection[10]);
+                            request.Name = remoteCollection[8];
 
-                        await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(request), Snackbar, successMessage: $"Remote Collection with Reference{request.Reference} is added.");
-                    }
-                    catch(Exception)
-                    {
-                        continue;
+                            string inputString = remoteCollection[9];
+                            string decimalPattern = @"(\d+\.\d+)";
+                            Match match = Regex.Match(inputString, decimalPattern);
+
+                            if (match.Success)
+                            {
+                                string decimalString = match.Groups[1].Value;
+                                request.Amount = decimal.Parse(decimalString);
+                            }
+
+                            await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(request), Snackbar, successMessage: $"Remote Collection with Account {request.AccountNumber} was imported.");
+                        }
+                        catch (Exception)
+                        {
+                            continue;
+                        }
                     }
                 }
-            }
 
-            await _table!.ReloadDataAsync();
+                await _table!.ReloadDataAsync();
+            }
         }
     }
 

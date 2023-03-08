@@ -91,6 +91,18 @@
 
 @code
 {
+    private RenderFragment<RemoteCollectionDto> TemplateCollector => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-row">
+            <MudText Typo="Typo.body2">
+                <MudHighlighter Text="@context.CollectorId.ToString()" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Class="ml-1" Typo="Typo.body2">
+                <MudHighlighter Text="@context.Collector" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
     private RenderFragment<RemoteCollectionDto> TemplateNameAddress => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
