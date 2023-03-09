@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using Syncfusion.Blazor.Inputs;
 using System.Text.RegularExpressions;
 using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
@@ -45,6 +46,7 @@ public partial class RemoteCollections
             entityResource: FSHResource.CAD,
             fields: new()
             {
+                new(data => data.ImagePath, "Image", "ImagePath", Template: TemplateImage),
                 new(data => data.CollectorId, "Collector Id", visible: false),
                 new(data => data.Collector, "Collector", "Collector", Template: TemplateCollector),
                 new(data => data.Reference, "Reference", visible: false),
@@ -184,15 +186,9 @@ public partial class RemoteCollections
                             request.ReportDate = Convert.ToDateTime(remoteCollection[10]);
                             request.Name = remoteCollection[8];
 
-                            string inputString = remoteCollection[9];
-                            string decimalPattern = @"(\d+\.\d+)";
-                            Match match = Regex.Match(inputString, decimalPattern);
-
-                            if (match.Success)
-                            {
-                                string decimalString = match.Groups[1].Value;
-                                request.Amount = decimal.Parse(decimalString);
-                            }
+                            string[] amountArray = remoteCollection[9].Split(' ');
+                            string amount = Regex.Replace(amountArray[1], "[^a-zA-Z0-9 .]+", string.Empty);
+                            request.Amount = Convert.ToDecimal(amount);
 
                             await ApiHelper.ExecuteCallGuardedAsync(() => Client.CreateAsync(request), Snackbar, successMessage: $"Remote Collection with Account {request.AccountNumber} was imported.");
                         }

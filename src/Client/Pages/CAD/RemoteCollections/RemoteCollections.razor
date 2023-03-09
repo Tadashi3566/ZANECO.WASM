@@ -95,6 +95,13 @@
 
 @code
 {
+    private RenderFragment<RemoteCollectionDto> TemplateImage => context => __builder =>
+    {
+        <MudStack Class="ma-1" Justify="Justify.Center" Row=true>
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+        </MudStack>
+    };
+
     private RenderFragment<RemoteCollectionDto> TemplateCollector => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
