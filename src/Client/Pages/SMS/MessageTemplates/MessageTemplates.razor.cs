@@ -185,9 +185,7 @@ public partial class MessageTemplates
                 Snackbar.Add("SMS are being created and sent directly to recepients.", Severity.Info);
             }
 
-            if (await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut),
-                Snackbar
-                ) > 0)
+            if (await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar) > 0)
             {
                 MessageTemplateSendRequest sendRequest = new();
                 sendRequest.Id = request.Id;

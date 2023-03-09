@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using Syncfusion.Blazor.Lists;
+using Syncfusion.Blazor.RichTextEditor;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using ZANECO.WASM.Client.Components.Dialogs;
@@ -12,6 +14,7 @@ using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Pages.SMS;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -29,6 +32,8 @@ public partial class RemoteCollections
     protected EntityServerTableContext<RemoteCollectionDto, Guid, RemoteCollectionViewModel> Context { get; set; } = default!;
 
     private EntityTable<RemoteCollectionDto, Guid, RemoteCollectionViewModel>? _table;
+
+    private HashSet<RemoteCollectionDto> _selectedItems = new();
 
     private string? _searchString;
     private bool _hasCreateAction;
@@ -86,6 +91,36 @@ public partial class RemoteCollections
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+    }
+
+    private async Task Send()
+    {
+        RemoteCollectionSMSRequest request = new();
+
+        string transactionContent = $"Are you sure you want to Send SMS Confirmation(s)?";
+        DialogParameters parameters = new()
+            {
+                { nameof(TransactionConfirmation.TransactionTitle), "Send SMS Confirmation(s)" },
+                { nameof(TransactionConfirmation.ContentText), transactionContent },
+                { nameof(TransactionConfirmation.ConfirmText), "Send" }
+            };
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        IDialogReference dialog = DialogService.Show<TransactionConfirmation>("Send", parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            foreach (var item in _selectedItems)
+            {
+                request.Collector = item.Collector;
+                request.Reference = item.Reference;
+                request.ReportDate = item.ReportDate;
+                request.AccountNumber = item.AccountNumber;
+                request.Name = item.Name;
+                request.Amount = item.Amount;
+
+                await Client.SendSmsAsync(request);
+            }
+        }
     }
 
     private async Task OnInputFileChange(InputFileChangeEventArgs e)

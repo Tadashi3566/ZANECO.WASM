@@ -4,13 +4,18 @@
 
 <FshTitle Title="Remote Collections" Description="Remote Collections Management" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RemoteCollectionDto" TId="Guid" TRequest="RemoteCollectionViewModel" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="RemoteCollectionDto" TId="Guid" TRequest="RemoteCollectionViewModel" Context="@Context">
     <ExtraActions>
         <InputFile OnChange="@OnInputFileChange" class="btn btn-primary" />
         <MudMenuItem Icon="@Icons.Material.Filled.ImportExport"
-            OnClick="(() => CreateRemoteCollections(_remoteCollections))"
-            OnTouch="(() => CreateRemoteCollections(_remoteCollections))">
+                     OnClick="(() => CreateRemoteCollections(_remoteCollections))"
+                     OnTouch="(() => CreateRemoteCollections(_remoteCollections))">
             Import
+        </MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Send"
+                     OnClick="(() => Send())"
+                     OnTouch="(() => Send())">
+            Send SMS
         </MudMenuItem>
     </ExtraActions>
     <EditFormContent>
@@ -21,10 +26,10 @@
             <AutocompleteCollector For="@(() => context.Collector)" @bind-Value="context.Collector" Variant="Variant.Filled" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" ReadOnly=true />
+            <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Transaction Date" For="@(() => context.TransactionDate)" @bind-Date="context.TransactionDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" ReadOnly=true />
+            <MudDatePicker Label="Transaction Date" For="@(() => context.TransactionDate)" @bind-Date="context.TransactionDate" DateFormat="MMMM dd, yyyy HH:mm" Variant="Variant.Filled" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="Report Date" For="@(() => context.ReportDate)" @bind-Date="context.ReportDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" ReadOnly=true />
