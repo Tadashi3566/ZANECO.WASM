@@ -20,30 +20,29 @@
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Collector Id" For="@(() => context.CollectorId)" @bind-Value="context.CollectorId" Variant="Variant.Filled" ReadOnly=true />
+            <MudNumericField Label="Collector Id" For="@(() => context.CollectorId)" @bind-Value="context.CollectorId" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <AutocompleteCollector For="@(() => context.Collector)" @bind-Value="context.Collector" Variant="Variant.Filled" ReadOnly=true />
+            <AutocompleteCollector For="@(() => context.Collector)" @bind-Value="context.Collector" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" ReadOnly=true />
+            <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Transaction Date" For="@(() => context.TransactionDate)" @bind-Date="context.TransactionDate" DateFormat="MMMM dd, yyyy HH:mm" Variant="Variant.Filled" ReadOnly=true />
+            <MudDatePicker Label="Transaction Date" For="@(() => context.TransactionDate)" @bind-Date="context.TransactionDate" DateFormat="MMMM dd, yyyy HH:mm" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Report Date" For="@(() => context.ReportDate)" @bind-Date="context.ReportDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" ReadOnly=true />
+            <MudDatePicker Label="Report Date" For="@(() => context.ReportDate)" @bind-Date="context.ReportDate" DateFormat="MMMM dd, yyyy" ReadOnly=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" Variant="Variant.Filled" ReadOnly=true/>
+            <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" ReadOnly=true/>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Official Receipt" For="@(() => context.OrNumber)" @bind-Value="context.OrNumber" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12">
-            <MudTextField Label="Address" For="@(() => context.Address)" @bind-Value="context.Address" Variant="Variant.Filled" />
-        </MudItem>
-        
         <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
         </MudItem>
@@ -98,24 +97,24 @@
 {
     private RenderFragment<RemoteCollectionDto> TemplateCollector => context => __builder =>
     {
-        <MudItem Class="d-flex flex-row">
+        <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.body2">
                 <MudHighlighter Text="@context.CollectorId.ToString()" HighlightedText="@_searchString" />
             </MudText>
-            <MudText Class="ml-1" Typo="Typo.body2">
+            <MudText Typo="Typo.body2">
                 <MudHighlighter Text="@context.Collector" HighlightedText="@_searchString" />
             </MudText>
         </MudItem>
     };
 
-    private RenderFragment<RemoteCollectionDto> TemplateNameAddress => context => __builder =>
+    private RenderFragment<RemoteCollectionDto> TemplateReferenceAccount => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.body1">
-                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
-            </MudText>
             <MudText Typo="Typo.caption">
-                <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />
+                <MudHighlighter Text="@context.Reference" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.body1">
+                <MudHighlighter Text="@context.AccountNumber" HighlightedText="@_searchString" />
             </MudText>
         </MudItem>
     };
@@ -123,10 +122,10 @@
     private RenderFragment<RemoteCollectionDto> TemplateDate => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.body1">
+            <MudText Typo="Typo.caption">
                 @context.TransactionDate.ToString("MMM dd, yyyy")
             </MudText>
-            <MudText Typo="Typo.caption">
+            <MudText Typo="Typo.subtitle2">
                 @context.ReportDate.ToString("MMM dd, yyyy")
             </MudText>
         </MudItem>

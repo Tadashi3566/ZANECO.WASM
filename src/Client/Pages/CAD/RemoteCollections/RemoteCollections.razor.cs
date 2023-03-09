@@ -1,20 +1,15 @@
 ﻿using Mapster;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
-using Syncfusion.Blazor.Lists;
-using Syncfusion.Blazor.RichTextEditor;
-using System.Globalization;
 using System.Text.RegularExpressions;
 using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
-using ZANECO.WASM.Client.Pages.SMS;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -52,13 +47,13 @@ public partial class RemoteCollections
             {
                 new(data => data.CollectorId, "Collector Id", visible: false),
                 new(data => data.Collector, "Collector", "Collector", Template: TemplateCollector),
-                new(data => data.Reference, "Reference", "Reference"),
-                new(data => data.AccountNumber, "Account Number", "AccountNumber"),
-                new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
-                new(data => data.Address, "Address", visible: false),
+                new(data => data.Reference, "Reference", visible: false),
+                new(data => data.AccountNumber, "Reference/Account", "AccountNumber", Template: TemplateReferenceAccount),
+                new(data => data.Name, "Name", "Name"),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.TransactionDate, "Transaction Date", "TransactionDate", typeof(DateTime)),
                 new(data => data.ReportDate, "Report Date", "ReportDate", typeof(DateOnly)),
+                new(data => data.OrNumber, "Official Receipt", "OrNumber"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
@@ -113,12 +108,11 @@ public partial class RemoteCollections
             {
                 request.Collector = item.Collector;
                 request.Reference = item.Reference;
-                request.ReportDate = item.ReportDate;
+                request.TransactionDate = item.TransactionDate;
                 request.AccountNumber = item.AccountNumber;
-                request.Name = item.Name;
                 request.Amount = item.Amount;
 
-                await Client.SendSmsAsync(request);
+                await ApiHelper.ExecuteCallGuardedAsync(() => Client.SendSmsAsync(request), Snackbar, successMessage: $"SMS Payment Confirmations were successfully sent to the selected Remote Collections.");
             }
         }
     }
