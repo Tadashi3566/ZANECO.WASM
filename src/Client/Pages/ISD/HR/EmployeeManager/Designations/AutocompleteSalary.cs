@@ -4,19 +4,20 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Designations;
-public class AutocompleteRank : MudAutocomplete<int>
+
+public class AutocompleteSalary : MudAutocomplete<int>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
     [Inject]
-    private IRanksClient Client { get; set; } = default!;
+    private ISalarysClient Client { get; set; } = default!;
 
-    private List<RankDto> _groups = new();
+    private List<SalaryDto> _groups = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Label = "Rank";
+        Label = "Salary";
         CoerceText = true;
         CoerceValue = true;
         Clearable = true;
@@ -29,16 +30,18 @@ public class AutocompleteRank : MudAutocomplete<int>
 
     private async Task<IEnumerable<int>> SearchText(string value)
     {
-        var filter = new RankSearchRequest
+        var filter = new SalarySearchRequest
         {
             PageSize = 10,
             AdvancedSearch = new() { Fields = new[] { "number" }, Keyword = value }
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
-            is PaginationResponseOfRankDto response)
+            is PaginationResponseOfSalaryDto response)
         {
-            _groups = response.Data.ToList();
+            _groups = response.Data
+                .Where(x => x.IsActive == true)
+                .ToList();
         }
 
         return _groups

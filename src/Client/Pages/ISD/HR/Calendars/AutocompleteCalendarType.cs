@@ -3,7 +3,7 @@ using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
-namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Calendars;
+namespace ZANECO.WASM.Client.Pages.ISD.HR.Calendars;
 public class AutocompleteCalendarType : MudAutocomplete<string>
 {
     [Inject]

@@ -112,7 +112,7 @@ public partial class Employees
         {
             { nameof(GenerateSchedule.EmployeeId), employeeId },
         };
-        var dialog = DialogService.Show<GenerateSchedule>("Generate", parameters, options);
+        var dialog = DialogService.Show<GenerateSchedule>("Calculate", parameters, options);
         DialogResult result = await dialog.Result;
         if (!result.Canceled)
         {

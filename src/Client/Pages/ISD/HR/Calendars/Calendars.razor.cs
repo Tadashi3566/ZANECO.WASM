@@ -4,7 +4,7 @@ using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
-namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Calendars;
+namespace ZANECO.WASM.Client.Pages.ISD.HR.Calendars;
 
 public partial class Calendars
 {

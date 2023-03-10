@@ -1,10 +1,12 @@
-﻿@page "/payroll/timeLogs"
-@page "/payroll/timeLogs/{EmployeeId:guid}"
-@page "/payroll/timeLogs/{EmployeeId:guid}/{LogDate:datetime}"
+﻿@page "/employee/timelogs"
+@page "/employee/timelogs/{EmployeeId:guid}"
+@page "/employee/timelogs/{EmployeeId:guid}/{LogDate:datetime}"
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
 
 <FshTitle Title="Time Logs" Description="Employee Time Log Management" />
+
+<MudBreadcrumbs Items="@_breadcrumbs" />
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="TimeLogDto" TId="Guid" TRequest="TimeLogViewModel" Context="@Context">
     <AdvancedSearchContent>
@@ -33,7 +35,7 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker AutoClose=true Label="Date" For="@(() => context.LogDate)" @bind-Date="_logDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <MudDatePicker AutoClose=true Label="Date" For="@(() => context.LogDate)" @bind-Date="context.LogDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTimePicker Label="Time" @bind-Time="@_logTime" Variant="Variant.Filled" />

@@ -6,24 +6,24 @@ namespace ZANECO.WASM.Client.Pages.Personal;
 
 public partial class Calendar
 {
-    [Inject]
-    public Guid EmployeeId { get; set; } = Guid.Empty;
-    [Inject]
-    private IAppointmentsClient? Client { get; set; }
+    //[Inject]
+    //public Guid EmployeeId { get; set; } = Guid.Empty;
+    //[Inject]
+    //private IAppointmentsClient? Client { get; set; }
 
-    private AppointmentSearchRequest _request = new();
+    //private AppointmentSearchRequest _request = new();
 
-    private List<AppointmentDto> _appointments = new();
+    //private List<AppointmentDto> _appointments = new();
 
     private DateTime _CurrentDate = DateTime.Today;
 
 
     protected override async Task OnInitializedAsync()
     {
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client!.SearchAsync(_request), Snackbar) is ICollection<AppointmentDto> response)
-        {
-            _appointments = response.ToList();
-        }
+        //if (await ApiHelper.ExecuteCallGuardedAsync(() => Client!.SearchAsync(_request), Snackbar) is ICollection<AppointmentDto> response)
+        //{
+        //    _appointments = response.ToList();
+        //}
     }
 
     List<AppointmentData> _DataSource = new List<AppointmentData>
