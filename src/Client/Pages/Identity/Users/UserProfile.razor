@@ -24,14 +24,17 @@ else
                         </MudCardHeader>
                         <MudCardContent Class="pa-46" Style="padding:26px!important">
                             <MudGrid>
-                                <MudItem xs="12" sm="3">
+                                <MudItem xs="12" sm="6" md="4" lg="3">
                                     <MudSwitch @bind-Checked="@_active" Color="Color.Primary" Label="@_localizer["Active?"]" />
                                 </MudItem>
-                                <MudItem xs="12" sm="3">
+                                <MudItem xs="12" sm="6" md="4" lg="3">
                                     <MudCheckBox ReadOnly @bind-Checked="@_emailConfirmed" Disabled Label="@_localizer["Email Confirmed?"]" Color="Color.Secondary" />
                                 </MudItem>
-                                <MudItem xs="12">
+                                <MudItem xs="12" sm="6" md="4" lg="3">
                                     <AutocompleteEmployee @bind-Value="_employeeId"/>
+                                </MudItem>
+                                <MudItem xs="12" sm="6" md="4" lg="3">
+                                    <MudTextField Label="Sandurot Id" @bind-Value="_sandurotId" />
                                 </MudItem>
                                 <MudItem>
                                     <MudButton Color="Color.Primary"
