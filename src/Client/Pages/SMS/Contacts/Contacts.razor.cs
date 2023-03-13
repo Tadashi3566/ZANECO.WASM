@@ -50,13 +50,13 @@ public partial class Contacts
             entityResource: FSHResource.Contacts,
             fields: new()
             {
-                new(data => data.ContactType, "ContactType", visible: false),
+                new(data => data.ContactType, "Contact Type", visible: false),
                 new(data => data.Reference, "Reference", "Reference", Template: TemplateTypeReference),
                 new(data => data.PhoneNumber, "Phone Number", "PhoneNumber", Template: TemplatePhoneNumber),
                 new(data => data.Name, "Name/Address", "Name", Template: TemplateNameAddress),
-                new(data => data.Address, "Address", "Address", visible: false),
+                new(data => data.Address, "Address", visible: false),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", "Notes", visible: false),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: true,
             hasExtraActionsFunc: () => _canCreateSMS,

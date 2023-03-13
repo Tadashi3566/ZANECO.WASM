@@ -43,11 +43,12 @@ public partial class Documents
         entityResource: FSHResource.Documents,
         fields: new()
         {
+            new(data => data.EmployeeName, "Employee", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty), Template: TemplateEmployee),
             new(data => data.ImagePath, "Image", Template: TemplateImage),
             new(data => data.Reference, "Reference", "Reference", Template: TemplateDateReference),
             new(data => data.Name, "Name", "Name"),
             new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-            new(data => data.Notes, "Notes", "Notes", visible: false),
+            new(data => data.Notes, "Notes", visible: false),
         },
         enableAdvancedSearch: false,
         idFunc: data => data.Id,

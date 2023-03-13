@@ -1,0 +1,152 @@
+﻿@page "/cad/remotecollections"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
+
+<FshTitle Title="Remote Collections" Description="Remote Collections Management" />
+
+<EntityTable @bind-SearchString="_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="RemoteCollectionDto" TId="Guid" TRequest="RemoteCollectionViewModel" Context="@Context">
+    <ExtraActions>
+        <InputFile OnChange="@OnInputFileChange" class="btn btn-primary" />
+        <MudMenuItem Icon="@Icons.Material.Filled.ImportExport"
+                     OnClick="(() => CreateRemoteCollections(_remoteCollections))"
+                     OnTouch="(() => CreateRemoteCollections(_remoteCollections))">
+            Import
+        </MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Send"
+                     OnClick="(() => Send())"
+                     OnTouch="(() => Send())">
+            Send SMS
+        </MudMenuItem>
+    </ExtraActions>
+    <EditFormContent>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Collector Id" For="@(() => context.CollectorId)" @bind-Value="context.CollectorId" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <AutocompleteCollector For="@(() => context.Collector)" @bind-Value="context.Collector" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Transaction Date" For="@(() => context.TransactionDate)" @bind-Date="context.TransactionDate" DateFormat="MMMM dd, yyyy HH:mm" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Report Date" For="@(() => context.ReportDate)" @bind-Date="context.ReportDate" DateFormat="MMMM dd, yyyy" ReadOnly=true />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" ReadOnly=true/>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Official Receipt" For="@(() => context.OrNumber)" @bind-Value="context.OrNumber" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudItem>
+                @if (!string.IsNullOrEmpty(context.ImageInBytes))
+                {
+                    <MudAvatar Image="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+            </MudItem>
+            <MudItem>
+                <div>
+                    <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
+                        Upload
+                    </MudButton>
+                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                               StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;">
+                            View
+                        </MudButton>
+
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                               StartIcon="@Icons.Material.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;">
+                            Delete
+                        </MudButton>
+                    }
+                    @if (!string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                               StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;">
+                            Clear
+                        </MudButton>
+                    }
+                </div>
+                <InputFile id="fileInput" hidden OnChange="UploadImage" />
+            </MudItem>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>
+
+@code
+{
+    private RenderFragment<RemoteCollectionDto> TemplateImage => context => __builder =>
+    {
+        <MudStack Class="ma-1" Justify="Justify.Center" Row=true>
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+        </MudStack>
+    };
+
+    private RenderFragment<RemoteCollectionDto> TemplateCollector => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.body2">
+                <MudHighlighter Text="@context.CollectorId.ToString()" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.body2">
+                <MudHighlighter Text="@context.Collector" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<RemoteCollectionDto> TemplateReferenceAccount => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Reference" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.body1">
+                <MudHighlighter Text="@context.AccountNumber" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<RemoteCollectionDto> TemplateDate => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.caption">
+                @context.TransactionDate.ToString("MMM dd, yyyy")
+            </MudText>
+            <MudText Typo="Typo.subtitle2">
+                @context.ReportDate.ToString("MMM dd, yyyy")
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<RemoteCollectionDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

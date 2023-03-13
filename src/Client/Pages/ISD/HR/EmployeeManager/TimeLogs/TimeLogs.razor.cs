@@ -7,7 +7,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
-namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.TimeLogs;
+namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.TimeLogs;
 
 public partial class TimeLogs
 {
@@ -51,7 +51,7 @@ public partial class TimeLogs
                 new(data => data.LogDate, "Date", "LogDate", typeof(DateOnly)),
                 new(data => data.LogDateTime, "Time", "LogDateTime", typeof(TimeOnly)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", "Notes", visible: false),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: TimeLog => TimeLog.Id,
             searchFunc: async _filter =>
@@ -97,14 +97,21 @@ public partial class TimeLogs
             updateFunc: async (id, data) =>
             {
                 data.EmployeeId = _searchEmployeeId;
-                data.LogDate = _logDate;
-                data.LogDateTime = _logDate + _logTime;
+                //data.LogDate = _logDate;
+                data.LogDateTime = data.LogDate + _logTime;
 
                 await Client.UpdateAsync(id, data.Adapt<TimeLogUpdateRequest>());
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
     }
+
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+        new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
+        new BreadcrumbItem("Attendance", href: "/employee/attendance", icon: Icons.Material.Filled.CalendarMonth),
+    };
 
     // Advanced Search
     private Guid _searchEmployeeId;

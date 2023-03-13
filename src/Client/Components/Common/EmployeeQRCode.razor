@@ -1,8 +1,11 @@
 ﻿@using Syncfusion.Blazor.BarcodeGenerator
 
-<SfQRCodeGenerator Width="350px" Height="300px" Value="@_employeeId">
-    <QRCodeGeneratorDisplayText Text="@_name"></QRCodeGeneratorDisplayText>
-</SfQRCodeGenerator>
+@if (userDto!.EmployeeId is not null)
+{
+    <SfQRCodeGenerator Width="350px" Height="300px" Value="@_employeeId">
+        <QRCodeGeneratorDisplayText Text="@_name"></QRCodeGeneratorDisplayText>
+    </SfQRCodeGenerator>
+}
 
 @code {
     [Inject]
@@ -12,7 +15,7 @@
 
     private string? _employeeId = string.Empty;
     private string _name = string.Empty;
-    private bool _isLoaded;
+    private bool _isLoaded = false;
 
     protected override async Task OnInitializedAsync()
     {

@@ -48,13 +48,13 @@ public partial class Dashboard
     private ICourier Courier { get; set; } = default!;
 
     private readonly string[] _dataBarChartXAxisLabelsMonth = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+    private string[]? _daysOfMonth;
     private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSandurot = new();
     private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSMSPerMonth = new();
     private readonly List<MudBlazor.ChartSeries> _dataBarChartSeriesSMSPerDay = new();
-    private string[]? _daysOfMonth;
 
-    private ChartOptions _chartOptionMonths = new();
-    private ChartOptions _chartOptionDays = new();
+    private ChartOptions _chartOptionMonth = new();
+    private ChartOptions _chartOptionDay = new();
 
     private bool _loaded;
 
@@ -118,8 +118,8 @@ public partial class Dashboard
             BrandCount = statsDto.BrandCount;
             ProductCount = statsDto.ProductCount;
 
-            _chartOptionMonths.YAxisTicks = 5000;
-            _chartOptionDays.YAxisTicks = 2000;
+            _chartOptionMonth.YAxisTicks = 5000;
+            _chartOptionDay.YAxisTicks = 1000;
 
             foreach (var item in statsDto.BarChartSandurot)
             {

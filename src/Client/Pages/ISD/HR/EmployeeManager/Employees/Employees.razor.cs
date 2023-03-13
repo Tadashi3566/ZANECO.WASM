@@ -54,7 +54,7 @@ public partial class Employees
                     new(data => data.Area, "Area/Department/Section/Division", "Area", Template: TemplateAreaDepartment),
                     new(data => data.Department, "Department", visible: false),
                     new(data => data.Position, "Designation", "Position", Template: TemplatePositionType),
-                    new(data => data.EmploymentType, "Type", visible: false),
+                    new(data => data.EmploymentType, "Employment Type", visible: false),
                     new(data => data.Notes, "Notes", "Notes")
                 },
                 enableAdvancedSearch: true,
@@ -112,7 +112,7 @@ public partial class Employees
         {
             { nameof(GenerateSchedule.EmployeeId), employeeId },
         };
-        var dialog = DialogService.Show<GenerateSchedule>("Generate", parameters, options);
+        var dialog = DialogService.Show<GenerateSchedule>("Calculate", parameters, options);
         DialogResult result = await dialog.Result;
         if (!result.Canceled)
         {

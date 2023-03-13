@@ -24,7 +24,8 @@ public class AutocompleteRate : MudAutocomplete<Guid>
         ResetValueOnEmptyText = true;
         SearchFunc = SearchText;
         ToStringFunc = GetText;
-        Variant = Variant.Filled; return base.SetParametersAsync(parameters);
+        Variant = Variant.Filled;
+        return base.SetParametersAsync(parameters);
     }
 
     // when the value parameter is set, we have to load that one Rate to be able to show the name

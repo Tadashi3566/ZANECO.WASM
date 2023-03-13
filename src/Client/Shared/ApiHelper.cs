@@ -24,7 +24,7 @@ public static class ApiHelper
 
             if (!string.IsNullOrWhiteSpace(successMessage))
             {
-                snackbar.Add(successMessage, Severity.Info);
+                snackbar.Add(successMessage, Severity.Success);
 
                 // await Swal.FireAsync("Success" ,successMessage, SweetAlertIcon.Success);
             }

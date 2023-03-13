@@ -1,0 +1,76 @@
+﻿@page "/payroll/salaries"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Payroll)]
+
+<FshTitle Title="Salary Profile" Description="Salary Profile Management" />
+
+<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="SalaryDto" TId="Guid" TRequest="SalaryUpdateRequest" Context="@Context">
+
+    <EditFormContent>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSelect Label="Type" For="@(() => context.PayType)" @bind-Value="context.PayType" Variant="Variant.Filled" >
+                <MudSelectItem Value="@("DAILY")" />
+                <MudSelectItem Value="@("MONTHLY")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Date Start" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Date End" For="@(() => context.DateEnd)" @bind-Date="context.DateEnd" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Salary Amount" For="@(() => context.SalaryAmount)" @bind-Value="context.SalaryAmount" Format="N2" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="After Years" For="@(() => context.IncrementYears)" @bind-Value="context.IncrementYears" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Step Increment" For="@(() => context.IncrementAmount)" @bind-Value="context.IncrementAmount" Format="N2" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSwitch Class="mt-3" Label="Is Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3"/>
+        </MudItem>
+    </EditFormContent>
+
+</EntityTable>
+
+@code
+{
+    private RenderFragment<SalaryDto> TemplateDateStartEnd => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.caption">
+                @context.DateStart.ToString("MMMM dd, yyyy")
+            </MudText>
+            <MudText Typo="Typo.subtitle2">
+                @context.DateEnd.ToString("MMMM dd, yyyy")
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<SalaryDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

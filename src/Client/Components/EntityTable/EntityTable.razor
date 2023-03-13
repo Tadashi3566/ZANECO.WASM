@@ -31,6 +31,8 @@
                             CheckedChanged="Context.AllColumnsCheckChanged"></MudCheckBox>
                         @foreach (var field in Context.Fields)
                         {
+                            if (field.Type == typeof(bool) || field.Type == typeof(double) || field.Type == typeof(decimal) || field.Type == typeof(DateOnly) || field.Type == typeof(TimeOnly) || field.Type == typeof(DateTime) || field.Type == typeof(byte)) continue;
+
                             <MudSwitch @bind-Checked="@field.CheckedForSearch" Label="@(field.DisplayName)" Color="Color.Primary"></MudSwitch>
                         }
                     </div>

@@ -2,12 +2,15 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using Syncfusion.Blazor.Lists;
+using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
-namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Attendances;
+namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Attendances;
 
 public partial class Attendances
 {
@@ -21,6 +24,8 @@ public partial class Attendances
     protected EntityServerTableContext<AttendanceDto, Guid, AttendanceUpdateRequest> Context { get; set; } = default!;
 
     private EntityTable<AttendanceDto, Guid, AttendanceUpdateRequest>? _table;
+
+    private HashSet<AttendanceDto> _selectedItems = new();
 
     private string? _searchString;
 
@@ -41,18 +46,18 @@ public partial class Attendances
             fields: new()
             {
                 new(data => data.EmployeeName, "Name", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty)),
-                new(data => data.AttendanceDate, "Date", "AttendanceDate", typeof(DateOnly)),
-                new(data => data.ScheduleDetailDay, "Day", "ScheduleDetailDay"),
+                new(data => data.AttendanceDate, "Date", "AttendanceDate", Template: TemplateDayType),
+                new(data => data.ScheduleDetailDay, "Day", visible: false),
+                new(data => data.DayType, "Type", "DayType", visible: false),
                 new(data => data.ActualTimeIn1, "Actual TimeLog", "ActualTimeIn1", Template: TemplateImageTimeIn1),
                 new(data => data.ActualTimeOut1, "Actual TimeOut1", "ActualTimeOut1", Template: TemplateImageTimeOut1),
                 new(data => data.ActualTimeIn2, "Actual TimeIn2", "ActualTimeIn2", Template: TemplateImageTimeIn2),
                 new(data => data.ActualTimeOut2, "Actual TimeOut2", "ActualTimeOut2", Template: TemplateImageTimeOut2),
-                new(data => data.LateMinutes, "Late (Minutes)", "MinutesLate"),
-                new(data => data.UnderTimeMinutes, "Under (Minutes)", "UnderTimeMinutes"),
+                new(data => data.LateMinutes, "Late/Under (Minutes)", "MinutesLate", Template: TemplateMinutesLateUnder),
                 new(data => data.TotalHours, "Total Hours", "TotalHours", Template: TemplateHoursTotalPaid),
                 new(data => data.Status, "Status", "Status"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", "Notes", visible: false),
+                new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: Attendance => Attendance.Id,
             searchFunc: async _filter =>
@@ -115,6 +120,33 @@ public partial class Attendances
         {
             _dateEnd = value;
             _table!.ReloadDataAsync();
+        }
+    }
+
+    private async Task Calculate()
+    {
+        AttendanceCalculateRequest request = new();
+
+        string transactionContent = $"Are you sure you want to calculate selected attendance?";
+        DialogParameters parameters = new()
+        {
+            { nameof(TransactionConfirmation.TransactionTitle), "Calculate Selected Attendance" },
+            { nameof(TransactionConfirmation.ContentText), transactionContent },
+            { nameof(TransactionConfirmation.ConfirmText), "Calculate" }
+        };
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        IDialogReference dialog = DialogService.Show<TransactionConfirmation>("Calculate", parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            foreach (var item in _selectedItems)
+            {
+                request.Id = item.Id;
+
+                await ApiHelper.ExecuteCallGuardedAsync(() => Client.CalculateAsync(request), Snackbar, successMessage: $"Attendance Id {item.Id} has been successfully calculated.");
+            }
+
+            await _table!.ReloadDataAsync();
         }
     }
 }

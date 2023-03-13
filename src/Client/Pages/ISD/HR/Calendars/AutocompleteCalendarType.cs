@@ -3,7 +3,7 @@ using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
-namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Calendars;
+namespace ZANECO.WASM.Client.Pages.ISD.HR.Calendars;
 public class AutocompleteCalendarType : MudAutocomplete<string>
 {
     [Inject]
@@ -23,7 +23,8 @@ public class AutocompleteCalendarType : MudAutocomplete<string>
         Dense = true;
         ResetValueOnEmptyText = true;
         SearchFunc = SearchText;
-        Variant = Variant.Filled; return base.SetParametersAsync(parameters);
+        Variant = Variant.Filled;
+        return base.SetParametersAsync(parameters);
     }
 
     private async Task<IEnumerable<string>> SearchText(string value)

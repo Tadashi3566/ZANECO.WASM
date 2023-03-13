@@ -1,6 +1,6 @@
-﻿@page "/payroll/attendance"
-@page "/payroll/attendance/{EmployeeId:guid}"
-@page "/payroll/attendance/{EmployeeId:guid}/{AttendanceDate:datetime}"
+﻿@page "/employee/attendance"
+@page "/employee/attendance/{EmployeeId:guid}"
+@page "/employee/attendance/{EmployeeId:guid}/{AttendanceDate:datetime}"
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
 
@@ -8,7 +8,7 @@
 
 <FshTitle Title="Attendance" Description="Employee Attendance Management" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="AttendanceDto" TId="Guid" TRequest="AttendanceUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString="_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="AttendanceDto" TId="Guid" TRequest="AttendanceUpdateRequest" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
@@ -24,39 +24,47 @@
     </AdvancedSearchContent>
     <ExtraActions>
         <MudDivider />
-        <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))"
-                     OnTouch="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))">
+        <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/employee/timelogs/{SearchEmployeeId}"))"
+                     OnTouch="@(() => Navigation.NavigateTo($"/employee/timelogs/{SearchEmployeeId}"))">
             Time Logs
         </MudMenuItem>
-        <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))"
-                     OnTouch="@(() => Navigation.NavigateTo($"/payroll/TimeLog/{SearchEmployeeId}"))">
-            Calculate Logs
+        <MudMenuItem OnClick="@(() => Calculate())"
+                     OnTouch="@(() => Calculate())">
+            Calculate
         </MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12">
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="6">
+        <MudItem xs="6" sm="6" md="3">
+            <MudSelect Label="Type" For="@(() => context.DayType)" @bind-Value="context.DayType" Variant="Variant.Filled" >
+                <MudSelectItem Value="@("DAY-OFF")" />
+                <MudSelectItem Value="@("HOLIDAY")" />
+                <MudSelectItem Value="@("ON-DUTY")" />
+                <MudSelectItem Value="@("OTHER")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3">
             <MudDatePicker Label="Attendance Date" For="@(() => context.AttendanceDate)" @bind-Date=" context.AttendanceDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Actual Time-In 1" For="@(() => context.ActualTimeIn1)" @bind-Value="context.ActualTimeIn1" Format="hh:mm" Variant="Variant.Filled" />
+            <MudTextField Label="Time-In 1" For="@(() => context.ActualTimeIn1)" @bind-Value="context.ActualTimeIn1" Format="hh:mm" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Actual Time-Out 1" For="@(() => context.ActualTimeOut1)" @bind-Value="context.ActualTimeOut1" Format="hh:mm" Variant="Variant.Filled" />
+            <MudTextField Label="Time-Out 1" For="@(() => context.ActualTimeOut1)" @bind-Value="context.ActualTimeOut1" Format="hh:mm" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Actual Time-In 2" For="@(() => context.ActualTimeIn2)" @bind-Value="context.ActualTimeIn2" Format="hh:mm" Variant="Variant.Filled" />
+            <MudTextField Label="Time-In 2" For="@(() => context.ActualTimeIn2)" @bind-Value="context.ActualTimeIn2" Format="hh:mm" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Actual Time-Out 2" For="@(() => context.ActualTimeOut2)" @bind-Value="context.ActualTimeOut2" Format="hh:mm" Variant="Variant.Filled" />
+            <MudTextField Label="Time-Out 2" For="@(() => context.ActualTimeOut2)" @bind-Value="context.ActualTimeOut2" Format="hh:mm" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudNumericField Label="Late (minutes)" For="@(() => context.LateMinutes)" @bind-Value="context.LateMinutes" Format="N0" ReadOnly=true Variant="Variant.Outlined" />
+            <MudNumericField Label="Late (minutes)" For="@(() => context.LateMinutes)" @bind-Value="context.LateMinutes" Format="N2" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudNumericField Label="Undertime (minutes)" For="@(() => context.UnderTimeMinutes)" @bind-Value="context.UnderTimeMinutes" Format="N0" ReadOnly=true Variant="Variant.Outlined" />
+            <MudNumericField Label="Undertime (minutes)" For="@(() => context.UnderTimeMinutes)" @bind-Value="context.UnderTimeMinutes" Format="N2" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
             <MudNumericField Label="Total Hours" For="@(() => context.TotalHours)" @bind-Value="context.TotalHours" Format="N2" ReadOnly=true Variant="Variant.Outlined" />
@@ -82,11 +90,26 @@
 
 @code
 {
+    private RenderFragment<AttendanceDto> TemplateDayType => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.caption">
+                @context.AttendanceDate.ToString("MMMM dd, yyyy")
+            </MudText>
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.ScheduleDetailDay" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.DayType" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+
     private RenderFragment<AttendanceDto> TemplateImageTimeIn1 => context => __builder =>
     {
         <MudStack Justify="Justify.Center" Row=true>
             <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.caption">
                 @context.ActualTimeIn1
             </MudText>
         </MudStack>
@@ -96,7 +119,7 @@
     {
         <MudStack Justify="Justify.Center" Row=true>
             <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathOut1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathOut1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.caption">
                 @context.ActualTimeOut1
             </MudText>
         </MudStack>
@@ -106,7 +129,7 @@
     {
         <MudStack Justify="Justify.Center" Row=true>
             <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn2) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn2))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.caption">
                 @context.ActualTimeIn2
             </MudText>
         </MudStack>
@@ -116,10 +139,19 @@
     {
         <MudStack Justify="Justify.Center" Row=true>
             <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathOut2) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathOut2))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.caption">
                 @context.ActualTimeOut2
             </MudText>
         </MudStack>
+    };
+
+    private RenderFragment<AttendanceDto> TemplateMinutesLateUnder => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.body1">
+                @context.LateMinutes.ToString("N2")/@context.UnderTimeMinutes.ToString("N2")
+            </MudText>
+        </MudItem>
     };
 
     private RenderFragment<AttendanceDto> TemplateHoursTotalPaid => context => __builder =>

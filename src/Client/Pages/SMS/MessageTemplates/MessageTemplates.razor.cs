@@ -49,7 +49,7 @@ public partial class MessageTemplates
                 new(data => data.TemplateType, "Type", "TemplateType"),
                 new(data => data.IsAPI, "API", "IsAPI", typeof(bool), Template: TemplateApiFastMode),
                 new(data => data.ScheduleDate, "Schedule", "ScheduleDate", typeof(DateOnly)),
-                new(data => data.Subject, "Subject", "Subject", visible: false),
+                new(data => data.Subject, "Subject", visible : false),
                 new(data => data.Message, "Message", "Message", Template: TemplateSubjectMessage),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             },
@@ -185,9 +185,7 @@ public partial class MessageTemplates
                 Snackbar.Add("SMS are being created and sent directly to recepients.", Severity.Info);
             }
 
-            if (await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut),
-                Snackbar
-                ) > 0)
+            if (await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar) > 0)
             {
                 MessageTemplateSendRequest sendRequest = new();
                 sendRequest.Id = request.Id;

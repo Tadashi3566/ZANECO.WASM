@@ -1,4 +1,6 @@
-﻿@inject IStringLocalizer<MainLayout> L
+﻿@using ZANECO.WASM.Client.Components.Common
+
+@inject IStringLocalizer<MainLayout> L
 
 <MudAppBar Elevation="0">
     <MudTooltip Text="Toggle Drawer">
@@ -106,4 +108,5 @@
             <MudFab Icon="@Icons.Material.Filled.KeyboardArrowUp" Color="Color.Tertiary" />
         </MudScrollToTop>
     </MudContainer>
+    <CopyrightFooter />
 </MudMainContent>

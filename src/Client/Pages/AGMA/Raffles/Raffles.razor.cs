@@ -29,7 +29,7 @@ public partial class Raffles
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.RaffleDate, "Raffle Date", "RaffleDate", typeof(DateOnly)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
-                new(data => data.Notes, "Notes", "Notes", visible: false),
+                new(data => data.Notes, "Notes", visible: false),
             },
             enableAdvancedSearch: true,
             idFunc: Raffle => Raffle.Id,

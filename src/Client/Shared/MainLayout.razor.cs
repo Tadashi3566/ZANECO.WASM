@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using MudBlazor;
-using System.Security.Cryptography.Xml;
-using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Infrastructure.Preferences;
 
 namespace ZANECO.WASM.Client.Shared;
+
 public partial class MainLayout
 {
     [Parameter]
