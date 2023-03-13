@@ -1,10 +1,17 @@
 ﻿@using Syncfusion.Blazor.BarcodeGenerator
 
-@if (userDto!.EmployeeId is not null)
+@if (_employeeId is not null)
 {
     <SfQRCodeGenerator Width="350px" Height="300px" Value="@_employeeId">
         <QRCodeGeneratorDisplayText Text="@_name"></QRCodeGeneratorDisplayText>
     </SfQRCodeGenerator>
+}
+@if (_sandurotId is not null)
+{
+    <MudDivider />
+    <SfBarcodeGenerator Width="350px" Height="300px" Value="@_sandurotId">
+        <BarcodeGeneratorDisplayText Text="@_name"></BarcodeGeneratorDisplayText>
+    </SfBarcodeGenerator>
 }
 
 @code {
@@ -13,18 +20,28 @@
 
     private UserDetailsDto? userDto = new();
 
-    private string? _employeeId = string.Empty;
+    private string? _employeeId;
+    private string? _sandurotId;
     private string _name = string.Empty;
     private bool _isLoaded = false;
 
     protected override async Task OnInitializedAsync()
     {
         var userDto = await Client.GetProfileAsync();
-        if (userDto is not null && userDto.EmployeeId is not null)
+        if (userDto is not null)
         {
-            _employeeId = userDto.EmployeeId.ToString();
-            _name = $"{userDto.FirstName} {userDto.LastName}";
+            if (userDto is not null && userDto.EmployeeId is not null)
+            {
+                _employeeId = userDto.EmployeeId.ToString();
+                _name = $"{userDto.FirstName} {userDto.LastName}";
+            }
+            if (userDto is not null && userDto.SandurotId is not null)
+            {
+                _sandurotId = userDto.SandurotId.ToString();
+                _name = $"{userDto.FirstName} {userDto.LastName}";
+            }
         }
+        
         _isLoaded = true;
         StateHasChanged();
     }
