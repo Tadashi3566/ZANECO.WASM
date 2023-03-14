@@ -1,24 +1,31 @@
 ﻿@using Syncfusion.Blazor.BarcodeGenerator
 
-@if (_employeeId is not null)
-{
-    <SfQRCodeGenerator Width="350px" Height="300px" Value="@_employeeId">
-        <QRCodeGeneratorDisplayText Text="@_name"></QRCodeGeneratorDisplayText>
-    </SfQRCodeGenerator>
-}
-@if (_sandurotId is not null)
-{
-    <MudDivider />
-    <SfBarcodeGenerator Width="350px" Height="300px" Value="@_sandurotId">
-        <BarcodeGeneratorDisplayText Text="@_name"></BarcodeGeneratorDisplayText>
-    </SfBarcodeGenerator>
-}
+<MudGrid Class="d-flex flex-column" Spacing="5">
+    <MudPaper Class="ma-5" Elevation="25">
+        @if (_employeeId is not null)
+        {
+            <SfQRCodeGenerator Width="350px" Height="300px" Value="@_employeeId">
+                <QRCodeGeneratorDisplayText Text="@_name"></QRCodeGeneratorDisplayText>
+            </SfQRCodeGenerator>
+        }
+    </MudPaper>
+    <MudPaper Class="ma-5" Elevation="25">
+        @if (_sandurotId is not null)
+        {
+            <SfBarcodeGenerator Width="350px" Height="250px" Value="@_sandurotId">
+                <BarcodeGeneratorDisplayText Text="@_name"></BarcodeGeneratorDisplayText>
+            </SfBarcodeGenerator>
+        }
+    </MudPaper>
+</MudGrid>
 
 @code {
     [Inject]
     protected IPersonalClient Client { get; set; } = default!;
 
     private UserDetailsDto? userDto = new();
+
+    ClientPreference _preference = new();
 
     private string? _employeeId;
     private string? _sandurotId;
@@ -30,15 +37,15 @@
         var userDto = await Client.GetProfileAsync();
         if (userDto is not null)
         {
+            _name = $"{userDto.FirstName} {userDto.LastName}";
+
             if (userDto is not null && userDto.EmployeeId is not null)
             {
                 _employeeId = userDto.EmployeeId.ToString();
-                _name = $"{userDto.FirstName} {userDto.LastName}";
             }
             if (userDto is not null && userDto.SandurotId is not null)
             {
                 _sandurotId = userDto.SandurotId.ToString();
-                _name = $"{userDto.FirstName} {userDto.LastName}";
             }
         }
         

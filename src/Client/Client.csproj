@@ -16,6 +16,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
         <PackageReference Include="MudBlazor" Version="6.1.9" />
         <PackageReference Include="Syncfusion.Blazor" Version="20.4.0.51" />
+        <PackageReference Include="Syncfusion.XlsIO.Net.Core" Version="20.4.0.54" />
     </ItemGroup>
 
     <ItemGroup>
