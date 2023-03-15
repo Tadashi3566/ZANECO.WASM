@@ -47952,16 +47952,16 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.DateTime ScheduleTimeOut2 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("actualTimeIn1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ActualTimeIn1 { get; set; } = default!;
+        public string? ActualTimeIn1 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("actualTimeOut1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ActualTimeOut1 { get; set; } = default!;
+        public string? ActualTimeOut1 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("actualTimeIn2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ActualTimeIn2 { get; set; } = default!;
+        public string? ActualTimeIn2 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("actualTimeOut2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ActualTimeOut2 { get; set; } = default!;
+        public string? ActualTimeOut2 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("lateMinutes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double LateMinutes { get; set; } = default!;
@@ -48046,16 +48046,16 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.DateTime? AttendanceDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("actualTimeIn1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ActualTimeIn1 { get; set; } = default!;
+        public string? ActualTimeIn1 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("actualTimeOut1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ActualTimeOut1 { get; set; } = default!;
+        public string? ActualTimeOut1 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("actualTimeIn2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ActualTimeIn2 { get; set; } = default!;
+        public string? ActualTimeIn2 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("actualTimeOut2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ActualTimeOut2 { get; set; } = default!;
+        public string ActualTimeOut2 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("lateMinutes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double LateMinutes { get; set; } = default!;

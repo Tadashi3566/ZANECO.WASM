@@ -14,10 +14,10 @@
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
         </MudItem>
         <MudGrid>
-            <MudItem xs="12" sm="6" md="4">
+            <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateStart" DateFormat="MMMM dd, yyyy"></MudDatePicker>
             </MudItem>
-            <MudItem xs="12" sm="6" md="4">
+            <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateEnd" DateFormat="MMMM dd, yyyy"></MudDatePicker>
             </MudItem>
         </MudGrid>
@@ -49,16 +49,16 @@
             <MudDatePicker Label="Attendance Date" For="@(() => context.AttendanceDate)" @bind-Date=" context.AttendanceDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Time-In 1" For="@(() => context.ActualTimeIn1)" @bind-Value="context.ActualTimeIn1" Format="hh:mm" Variant="Variant.Filled" />
+            <MudTimePicker Label="Time-In 1" AmPm=true @bind-Text="context.ActualTimeIn1" AllowKeyboardInput=true Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Time-Out 1" For="@(() => context.ActualTimeOut1)" @bind-Value="context.ActualTimeOut1" Format="hh:mm" Variant="Variant.Filled" />
+            <MudTimePicker Label="Time-Out 1" AmPm=true @bind-Text="context.ActualTimeOut1" AllowKeyboardInput=true Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Time-In 2" For="@(() => context.ActualTimeIn2)" @bind-Value="context.ActualTimeIn2" Format="hh:mm" Variant="Variant.Filled" />
+            <MudTimePicker Label="Time-In 2" AmPm=true @bind-Text="context.ActualTimeIn2" AllowKeyboardInput=true Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTextField Label="Time-Out 2" For="@(() => context.ActualTimeOut2)" @bind-Value="context.ActualTimeOut2" Format="hh:mm" Variant="Variant.Filled" />
+            <MudTimePicker Label="Time-Out 2" AmPm=true @bind-Text="context.ActualTimeOut2" AllowKeyboardInput=true Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
             <MudNumericField Label="Late (minutes)" For="@(() => context.LateMinutes)" @bind-Value="context.LateMinutes" Format="N2" ReadOnly=true Variant="Variant.Outlined" />
@@ -110,7 +110,11 @@
         <MudStack Justify="Justify.Center" Row=true>
             <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
             <MudText Typo="Typo.caption">
-                @context.ActualTimeIn1
+                @if (context.ActualTimeIn1 is not null)
+                {
+                    @Convert.ToDateTime(context.ActualTimeIn1).ToString("MMM dd, yyyy hh:mm tt")
+                    ;
+                }
             </MudText>
         </MudStack>
     };
@@ -120,7 +124,10 @@
         <MudStack Justify="Justify.Center" Row=true>
             <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathOut1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathOut1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
             <MudText Typo="Typo.caption">
-                @context.ActualTimeOut1
+                @if (context.ActualTimeOut1 is not null)
+                {
+                    @Convert.ToDateTime(context.ActualTimeOut1).ToString("MMM dd, yyyy hh:mm tt");
+                }
             </MudText>
         </MudStack>
     };
@@ -130,7 +137,10 @@
         <MudStack Justify="Justify.Center" Row=true>
             <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn2) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn2))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
             <MudText Typo="Typo.caption">
-                @context.ActualTimeIn2
+                @if (context.ActualTimeIn2 is not null)
+                {
+                    @Convert.ToDateTime(context.ActualTimeIn2).ToString("MMM dd, yyyy hh:mm tt");
+                }
             </MudText>
         </MudStack>
     };
@@ -140,7 +150,10 @@
         <MudStack Justify="Justify.Center" Row=true>
             <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathOut2) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathOut2))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
             <MudText Typo="Typo.caption">
-                @context.ActualTimeOut2
+                @if (context.ActualTimeOut2 is not null)
+                {
+                    @Convert.ToDateTime(context.ActualTimeOut2).ToString("MMM dd, yyyy hh:mm tt");
+                }
             </MudText>
         </MudStack>
     };

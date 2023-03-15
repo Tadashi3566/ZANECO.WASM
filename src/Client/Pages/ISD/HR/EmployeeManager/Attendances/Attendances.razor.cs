@@ -29,6 +29,11 @@ public partial class Attendances
 
     private string? _searchString;
 
+    private TimeSpan? _timeIn1;
+    private TimeSpan? _timeOut1;
+    private TimeSpan? _timeIn2;
+    private TimeSpan? _timeOut2;
+
     protected override void OnParametersSet()
     {
         if (EmployeeId != Guid.Empty)
@@ -49,10 +54,10 @@ public partial class Attendances
                 new(data => data.AttendanceDate, "Date", "AttendanceDate", Template: TemplateDayType),
                 new(data => data.ScheduleDetailDay, "Day", visible: false),
                 new(data => data.DayType, "Type", "DayType", visible: false),
-                new(data => data.ActualTimeIn1, "Actual TimeLog", "ActualTimeIn1", Template: TemplateImageTimeIn1),
-                new(data => data.ActualTimeOut1, "Actual TimeOut1", "ActualTimeOut1", Template: TemplateImageTimeOut1),
-                new(data => data.ActualTimeIn2, "Actual TimeIn2", "ActualTimeIn2", Template: TemplateImageTimeIn2),
-                new(data => data.ActualTimeOut2, "Actual TimeOut2", "ActualTimeOut2", Template: TemplateImageTimeOut2),
+                new(data => data.ActualTimeIn1, "Time-In 1", "ActualTimeIn1", Template: TemplateImageTimeIn1),
+                new(data => data.ActualTimeOut1, "Time-Out 1", "ActualTimeOut1", Template: TemplateImageTimeOut1),
+                new(data => data.ActualTimeIn2, "Time-In 2", "ActualTimeIn2", Template: TemplateImageTimeIn2),
+                new(data => data.ActualTimeOut2, "Time-Out 2", "ActualTimeOut2", Template: TemplateImageTimeOut2),
                 new(data => data.LateMinutes, "Late/Under (Minutes)", "MinutesLate", Template: TemplateMinutesLateUnder),
                 new(data => data.TotalHours, "Total Hours", "TotalHours", Template: TemplateHoursTotalPaid),
                 new(data => data.Status, "Status", "Status"),
