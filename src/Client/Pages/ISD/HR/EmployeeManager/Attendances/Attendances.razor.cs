@@ -29,11 +29,6 @@ public partial class Attendances
 
     private string? _searchString;
 
-    private TimeSpan? _timeIn1;
-    private TimeSpan? _timeOut1;
-    private TimeSpan? _timeIn2;
-    private TimeSpan? _timeOut2;
-
     protected override void OnParametersSet()
     {
         if (EmployeeId != Guid.Empty)

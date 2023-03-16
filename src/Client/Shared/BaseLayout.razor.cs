@@ -27,7 +27,7 @@ public partial class BaseLayout
             config.ActionColor = Color.Primary;
             config.Onclick = snackbar =>
             {
-                Navigation.NavigateTo("https://www.zaneco.com.ph");
+                Navigation.NavigateTo("https://www.zaneco.ph");
                 return Task.CompletedTask;
             };
         });
