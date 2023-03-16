@@ -47933,11 +47933,20 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("attendanceDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime AttendanceDate { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("timeOutDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? TimeOutDate { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("isOvertime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsOvertime { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("scheduleDetailId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid ScheduleDetailId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("scheduleDetailDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ScheduleDetailDay { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("scheduleHours", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ScheduleHours { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("scheduleTimeIn1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime ScheduleTimeIn1 { get; set; } = default!;
@@ -48044,6 +48053,12 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("attendanceDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? AttendanceDate { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("timeOutDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? TimeOutDate { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("isOvertime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsOvertime { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("actualTimeIn1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? ActualTimeIn1 { get; set; } = default!;
