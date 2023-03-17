@@ -16,13 +16,13 @@
         <MudItem xs="12">
             <AutocompleteSchedule For="@(() => context.ScheduleId)" @bind-Value="SearchScheduleId" Disabled="!SearchScheduleId.Equals(Guid.Empty)" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Schedule Type" For="@(() => context.ScheduleType)" @bind-Value="context.ScheduleType" Variant="Variant.Filled">
                 <MudSelectItem Value="@("DAY-OFF")"/>
                 <MudSelectItem Value="@("ON-DUTY")"/>
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Day" For="@(() => context.Day)" @bind-Value="context.Day" Variant="Variant.Filled">
                 <MudSelectItem Value="@("SUNDAY")"/>
                 <MudSelectItem Value="@("MONDAY")"/>

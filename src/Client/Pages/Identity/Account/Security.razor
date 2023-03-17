@@ -11,7 +11,7 @@
             <MudGrid>
                 <DataAnnotationsValidator />
                 <CustomValidation @ref="_customValidation" />
-                <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+                <MudItem xs="12" sm="6" md="4" lg="3">
                     <MudTextField T="string" @bind-Value="_passwordModel.NewPassword"
                                   Label="@L["Password"]"
                                   For="@(() => _passwordModel.NewPassword)"
@@ -21,7 +21,7 @@
                                   OnAdornmentClick="@(() => TogglePasswordVisibility(true))"
                                   Variant="Variant.Outlined" />
                 </MudItem>
-                <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+                <MudItem xs="12" sm="6" md="4" lg="3">
                     <MudTextField T="string" @bind-Value="_passwordModel.ConfirmNewPassword"
                                   For="@(() => _passwordModel.ConfirmNewPassword)"
                                   Label="@L["Password Confirmation"]"
@@ -31,7 +31,7 @@
                                   OnAdornmentClick="@(() => TogglePasswordVisibility(true))"
                                   Variant="Variant.Outlined" />
                 </MudItem>
-                <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+                <MudItem xs="12" sm="6" md="4" lg="3">
                     <MudTextField T="string" @bind-Value="_passwordModel.Password"
                                   For="@(() => _passwordModel.Password)"
                                   Label="@L["Current Password"]"

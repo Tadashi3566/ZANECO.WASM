@@ -64,7 +64,7 @@
             <MudDatePicker Label="Time-Out Date" For="@(() => context.TimeOutDate)" @bind-Date=" context.TimeOutDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudSwitch Class="mt-3" Label="With Overtime" For="@(() => context.IsOvertime)" @bind-Checked=" context.IsOvertime" Color="Color.Primary" />
+            <MudSwitch Class="mt-3" Color="Color.Secondary" Label="With Overtime" For="@(() => context.IsOvertime)" @bind-Checked=" context.IsOvertime" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
             <MudNumericField Label="Late (minutes)" For="@(() => context.LateMinutes)" @bind-Value="context.LateMinutes" Format="N2" ReadOnly=true Variant="Variant.Outlined" />

@@ -12,6 +12,7 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Designations;
+
 public partial class Designations
 {
     [Parameter]

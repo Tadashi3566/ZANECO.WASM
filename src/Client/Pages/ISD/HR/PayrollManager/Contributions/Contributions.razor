@@ -8,7 +8,7 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="ContributionDto" TId="Guid" TRequest="ContributionUpdateRequest" Context="@Context" >
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Contribution Type" For="@(() => context.ContributionType)" @bind-Value="context.ContributionType" Variant="Variant.Filled">
                 <MudSelectItem Value="@("PAG-IBIG")" />
                 <MudSelectItem Value="@("PHILHEALTH")" />
@@ -16,32 +16,32 @@
                 <MudSelectItem Value="@("TAX")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="From Date" DateFormat="MMMM dd, yyyy" For="@(() => context.DateEffectivityStart)" @bind-Date="context.DateEffectivityStart" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudDatePicker Label="To Date" DateFormat="MMMM dd, yyyy" For="@(() => context.DateEffectivityEnd)" @bind-Date="context.DateEffectivityEnd" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="From" Format="N2" For="@(() => context.RangeStart)" @bind-Value="context.RangeStart" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="To" Format="N2" For="@(() => context.RangeEnd)" @bind-Value="context.RangeEnd" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Employer Contribution" Format="N2" For="@(() => context.EmployerContribution)" @bind-Value="context.EmployerContribution" OnBlur="(() => CalculateTotalContribution(context.EmployerContribution, context.EmployeeContribution))" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Employee Contribution" Format="N2" For="@(() => context.EmployeeContribution)" @bind-Value="context.EmployeeContribution" OnBlur="(() => CalculateTotalContribution(context.EmployerContribution, context.EmployeeContribution))" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Total Contribution" Format="N2" For="@(() => context.TotalContribution)" @bind-Value=_totalContribution ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Percentage" Format="N3" For="@(() => context.Percentage)" @bind-Value="context.Percentage" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
-            <MudSwitch Class="mt-3" Label="Fixed Contribution" Color="Color.Primary" For="@(() => context.IsFixed)" @bind-Checked="context.IsFixed" />
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSwitch Class="mt-3" Color="Color.Tertiary" Label="Fixed Contribution" For="@(() => context.IsFixed)" @bind-Checked="context.IsFixed" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2"/>
