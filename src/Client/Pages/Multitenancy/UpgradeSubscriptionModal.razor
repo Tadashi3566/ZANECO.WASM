@@ -11,10 +11,10 @@
         </TitleContent>
         <DialogContent>
             <MudGrid>
-                 <MudItem xs="12" sm="6" md="4" lg="3">
+                 <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
                     <MudTextField For="@(() => Request.TenantId)" @bind-Value="Request.TenantId" ReadOnly DisableUnderLine Label="@L["Tenant Id"]" />
                 </MudItem>
-                <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
                     <MudTextField Value="Request.ExtendedExpiryDate.ToLongDateString()" ReadOnly DisableUnderLine Label="@L["Current Expiry Date"]" />
                 </MudItem>
                 <MudItem xs="12">

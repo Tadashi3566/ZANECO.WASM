@@ -17,18 +17,17 @@
             @L["Sponsor"]</MudButton>
         <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />*@
         <MudTooltip Text="Support">
-            <MudMenu Icon="@Icons.Material.Filled.SupportAgent" Color="Color.Inherit" Dense="true" Direction="Direction.Right"
-                >
+            <MudMenu Icon="@Icons.Material.Filled.SupportAgent" Color="Color.Inherit" Dense="true" AnchorOrigin="Origin.TopRight">
                 <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@L["Community"]</b></MudText>
-                <MudMenuItem Link="https://www.zaneco.ph" Target="_blank">@L["Website"]</MudMenuItem>
-                <MudMenuItem Link="https://www.facebook.com/lamdagzaneco" Target="_blank">@L["Facebook"]</MudMenuItem>
-                @*<MudMenuItem Link="https://www.linkedin.com/in/iammukeshm/" Target="_blank">LinkedIn</MudMenuItem>
-                <MudMenuItem Link="https://www.buymeacoffee.com/codewithmukesh" Target="_blank">Buy Me a Coffee!
+                <MudMenuItem Href="https://www.zaneco.ph" Target="_blank">@L["Website"]</MudMenuItem>
+                <MudMenuItem Href="https://www.facebook.com/lamdagzaneco" Target="_blank">@L["Facebook"]</MudMenuItem>
+                @*<MudMenuItem Href="https://www.linkedin.com/in/iammukeshm/" Target="_blank">LinkedIn</MudMenuItem>
+                <MudMenuItem Href="https://www.buymeacoffee.com/codewithmukesh" Target="_blank">Buy Me a Coffee!
                 </MudMenuItem>
-                <MudMenuItem Link="https://opencollective.com/ZanecoApp" Target="_blank">Open Collective
+                <MudMenuItem Href="https://opencollective.com/ZanecoApp" Target="_blank">Open Collective
                 </MudMenuItem>
                 <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@L["Resources"]</b></MudText>
-                <MudMenuItem Link="https://ZanecoApp.net/" Target="_blank">@L["Documentation"]
+                <MudMenuItem Href="https://ZanecoApp.net/" Target="_blank">@L["Documentation"]
                 </MudMenuItem>*@
             </MudMenu>
         </MudTooltip>
@@ -44,7 +43,7 @@
             <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Inherit"
                 Link="https://opencollective.com/ZanecoApp" Target="_blank" />
         </MudTooltip>*@
-        <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right">
+        <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" Dense="true" AnchorOrigin="Origin.TopRight">
             @*<div class="px-2">
                 <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit"
                     Link="https://github.com/ZanecoApp/blazor-wasm-boilerplate" Target="_blank" />
@@ -52,13 +51,13 @@
                     Link="https://www.buymeacoffee.com/codewithmukesh" Target="_blank" />
             </div>
             <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@L["Community"]</b></MudText>*@
-            <MudMenuItem Link="https://www.zaneco.ph" Target="_blank">@L["Website"]</MudMenuItem>
-            <MudMenuItem Link="https://www.facebook.com/lamdagzaneco" Target="_blank">@L["Facebook"]</MudMenuItem>
-            @*<MudMenuItem Link="https://www.linkedin.com/in/iammukeshm/" Target="_blank">LinkedIn</MudMenuItem>
+            <MudMenuItem Href="https://www.zaneco.ph" Target="_blank">@L["Website"]</MudMenuItem>
+            <MudMenuItem Href="https://www.facebook.com/lamdagzaneco" Target="_blank">@L["Facebook"]</MudMenuItem>
+            @*<MudMenuItem Href="https://www.linkedin.com/in/iammukeshm/" Target="_blank">LinkedIn</MudMenuItem>
             <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@L["Resources"]</b></MudText>
-            <MudMenuItem Link="https://mudblazor.com/getting-started/installation" Target="_blank">
+            <MudMenuItem Href="https://mudblazor.com/getting-started/installation" Target="_blank">
                 @L["MudBlazor Documentation"]</MudMenuItem>
-            <MudMenuItem Link="https://ZanecoApp.net/getting-started/" Target="_blank">
+            <MudMenuItem Href="https://ZanecoApp.net/getting-started/" Target="_blank">
                 @L["Quick-Start Guide"]
             </MudMenuItem>*@
         </MudMenu>
@@ -80,7 +79,7 @@
                         <MudText>@L["Account"]</MudText>
                     </div>
                 </MudMenuItem>
-                <MudMenuItem Link="/dashboard">
+                <MudMenuItem Href="/dashboard">
                     <div class="d-flex">
                         <MudIcon Class="mx-2" Icon="@Icons.Material.Filled.Dashboard" />
                         <MudText>@L["Dashboard"]</MudText>
@@ -105,7 +104,7 @@
     <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
         @ChildContent
         <MudScrollToTop TopOffset="500" Style="z-index:2000;">
-            <MudFab Icon="@Icons.Material.Filled.KeyboardArrowUp" Color="Color.Tertiary" />
+            <MudFab StartIcon="@Icons.Material.Filled.KeyboardArrowUp" Color="Color.Tertiary" />
         </MudScrollToTop>
     </MudContainer>
     <CopyrightFooter />

@@ -22,13 +22,13 @@
         <MudItem xs="12">
             <MudTextField Label="Dependent" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSelect Label="Gender" For="@(() => context.Gender)" @bind-Value="context.Gender" Variant="Variant.Filled" >
                 <MudSelectItem Value="@("MALE")"/>
                 <MudSelectItem Value="@("FEMALE")"/>
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudDatePicker Label="Birth Date" For="@(() => context.BirthDate)" @bind-Date="context.BirthDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">

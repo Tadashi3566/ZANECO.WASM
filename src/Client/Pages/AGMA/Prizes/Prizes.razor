@@ -6,10 +6,10 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="PrizeDto" TId="Guid" TRequest="PrizeViewModel" Context="@Context">
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <AutocompleteRaffle Label="Raffle" For="@(() => context.RaffleId)" @bind-Value="context.RaffleId" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSelect Label="Type" For="@(() => context.PrizeType)" @bind-Value="context.PrizeType" Variant="Variant.Filled" >
                 <MudSelectItem Value="@("MAJOR")" />
                 <MudSelectItem Value="@("MINOR")" />
@@ -17,7 +17,7 @@
                 <MudSelectItem Value="@("OTHER")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudNumericField Label="Winners" For="@(() => context.Winners)" @bind-Value="context.Winners" Format="N0" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">

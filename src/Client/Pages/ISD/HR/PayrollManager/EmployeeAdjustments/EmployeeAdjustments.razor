@@ -23,7 +23,7 @@
             <ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Adjustments.AutocompleteAdjustment For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSelect Label="Payment Schedule" For="@(() => context.PaymentSchedule)" @bind-Value="context.PaymentSchedule" Variant="Variant.Filled">
                 <MudSelectItem Value="@("PAYROLL")" />
                 <MudSelectItem Value="@("MID")" />
@@ -31,13 +31,13 @@
                 <MudSelectItem Value="@("SCHEDULE")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudDatePicker Label="Date Start" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudDatePicker Label="Date End" For="@(() => context.DateEnd)" @bind-Date="context.DateEnd" DateFormat="MMMM dd, yyyy" MinDate="@DateTime.Today" Variant="Variant.Filled" />
         </MudItem>
 

@@ -6,7 +6,7 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RaffleDto" TId="Guid" TRequest="RaffleViewModel" Context="@Context">
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudDatePicker Label="Raffle Date" For="@(() => context.RaffleDate)" @bind-Date="context.RaffleDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">

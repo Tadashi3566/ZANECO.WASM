@@ -54,7 +54,7 @@ public partial class Attendances
                 new(data => data.ActualTimeIn2, "Time-In2", "ActualTimeIn2", Template: TemplateImageTimeIn2),
                 new(data => data.ActualTimeOut2, "Time-Out2", "ActualTimeOut2", Template: TemplateImageTimeOut2),
                 new(data => data.LateMinutes, "Late/Under (Minutes)", "MinutesLate", Template: TemplateMinutesLateUnder),
-                new(data => data.TotalHours, "Total Hours", "TotalHours", Template: TemplateHoursTotalPaid),
+                new(data => data.TotalHours, "Total/Paid (Hours)", "TotalHours", Template: TemplateHoursTotalPaid),
                 new(data => data.Status, "Status", "Status"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),

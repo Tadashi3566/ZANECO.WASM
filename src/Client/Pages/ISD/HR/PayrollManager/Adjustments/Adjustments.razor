@@ -8,13 +8,13 @@
 
 <EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="AdjustmentDto" TId="Guid" TRequest="AdjustmentUpdateRequest" Context="@Context">
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSelect Label="Adjustment Type" For="@(() => context.AdjustmentType)" @bind-Value="context.AdjustmentType" Disabled=true Variant="Variant.Filled">
                 <MudSelectItem Value="@("ADDITIONAL")" />
                 <MudSelectItem Value="@("DEDUCTION")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSelect Label="Adjustment Type" For="@(() => context.EmployeeType)" @bind-Value="context.EmployeeType" Variant="Variant.Filled">
                 <MudSelectItem Value="@("ALL")" />
                 <MudSelectItem Value="@("REGULAR")" />
@@ -22,18 +22,18 @@
             </MudSelect>
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudNumericField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <AutocompleteAdjustment Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSelect Label="Payment Schedule" For="@(() => context.PaymentSchedule)" @bind-Value="context.PaymentSchedule" Variant="Variant.Filled">
                 <MudSelectItem Value="@("PAYROLL")" />
                 <MudSelectItem Value="@("MID")" />
@@ -41,13 +41,13 @@
                 <MudSelectItem Value="@("SCHEDULE")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSwitch Class="mt-3" Label="Optional" For="@(() => context.IsOptional)" @bind-Checked="context.IsOptional" Color="Color.Success" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSwitch Class="mt-3" Label="Loan" For="@(() => context.IsLoan)" @bind-Checked="context.IsLoan" Color="Color.Success" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSwitch Class="mt-3" Label="Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" Color="Color.Success" />
         </MudItem>
 

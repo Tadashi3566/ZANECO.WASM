@@ -16,14 +16,14 @@
     </ExtraActions>
 
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <AutocompleteContactType For="@(() => context.ContactType)" @bind-Value="context.ContactType" Variant="Variant.Filled"/>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             @*<AutocompleteAccountNumber For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" />*@
             <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudTextField Label="Phone Number" For="@(() => context.PhoneNumber)" @bind-Value="context.PhoneNumber" InputType="InputType.Telephone" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12">

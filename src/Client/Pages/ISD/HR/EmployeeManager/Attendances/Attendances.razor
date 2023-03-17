@@ -14,10 +14,10 @@
             <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
         </MudItem>
         <MudGrid>
-            <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
                 <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateStart" DateFormat="MMMM dd, yyyy"></MudDatePicker>
             </MudItem>
-            <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
                 <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateEnd" DateFormat="MMMM dd, yyyy"></MudDatePicker>
             </MudItem>
         </MudGrid>
@@ -49,16 +49,16 @@
             <MudDatePicker Label="Attendance Date" For="@(() => context.AttendanceDate)" @bind-Date=" context.AttendanceDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTimePicker Label="Time-In 1" AmPm=true @bind-Text="context.ActualTimeIn1" AllowKeyboardInput=true Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+            <MudTimePicker Label="Time-In 1" AmPm=true @bind-Text="context.ActualTimeIn1" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTimePicker Label="Time-Out 1" AmPm=true @bind-Text="context.ActualTimeOut1" AllowKeyboardInput=true Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+            <MudTimePicker Label="Time-Out 1" AmPm=true @bind-Text="context.ActualTimeOut1" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTimePicker Label="Time-In 2" AmPm=true @bind-Text="context.ActualTimeIn2" AllowKeyboardInput=true Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+            <MudTimePicker Label="Time-In 2" AmPm=true @bind-Text="context.ActualTimeIn2" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
-            <MudTimePicker Label="Time-Out 2" AmPm=true @bind-Text="context.ActualTimeOut2" AllowKeyboardInput=true Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+            <MudTimePicker Label="Time-Out 2" AmPm=true @bind-Text="context.ActualTimeOut2" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="6" md="3">
             <MudDatePicker Label="Time-Out Date" For="@(() => context.TimeOutDate)" @bind-Date=" context.TimeOutDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
@@ -100,14 +100,20 @@
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.caption">
-                @context.AttendanceDate.ToString("MMMM dd, yyyy")
+                @context.AttendanceDate.ToString("MMMM dd, yyyy (dddd)")
             </MudText>
-            <MudText Typo="Typo.subtitle1">
-                <MudHighlighter Text="@context.ScheduleDetailDay" HighlightedText="@_searchString" />
-            </MudText>
-            <MudText Typo="Typo.subtitle2">
-                <MudHighlighter Text="@context.DayType" HighlightedText="@_searchString" />
-            </MudText>
+            @if (!context.DayType.Equals("ON-DUTY"))
+            {
+                <MudText Color="Color.Secondary" Typo="Typo.button">
+                    <MudHighlighter Text="@context.DayType" HighlightedText="@_searchString" />
+                </MudText>
+            }
+            else
+            {
+                <MudText Typo="Typo.subtitle2">
+                    <MudHighlighter Text="@context.DayType" HighlightedText="@_searchString" />
+                </MudText>
+            }
         </MudItem>
     };
 
@@ -178,19 +184,55 @@
 
     private RenderFragment<AttendanceDto> TemplateMinutesLateUnder => context => __builder =>
     {
-        <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.body1">
-                @context.LateMinutes.ToString("N2")/@context.UnderTimeMinutes.ToString("N2")
-            </MudText>
+        <MudItem Class="d-flex flex-row">
+            @if(context.LateMinutes>0)
+            {
+                <MudChip Color="Color.Error" Label=true>
+                    @context.LateMinutes.ToString("N0")
+                </MudChip>
+            }
+
+            @if (context.UnderTimeMinutes > 0)
+            {
+                <MudChip Color="Color.Error" Label=true>
+                    @context.UnderTimeMinutes.ToString("N0")
+                </MudChip>
+            }
         </MudItem>
     };
 
     private RenderFragment<AttendanceDto> TemplateHoursTotalPaid => context => __builder =>
     {
-        <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.body1">
-                @context.TotalHours.ToString("N2")/@context.PaidHours.ToString("N2")
-            </MudText>
+        <MudItem Class="d-flex flex-row">
+            @if (context.TotalHours > 0 && context.TotalHours < context.ScheduleHours)
+            {
+                <MudChip Color="Color.Warning" Label=true>
+                    @context.TotalHours.ToString("N2")
+                </MudChip>
+            }
+            else
+            {
+                <MudChip Color="Color.Default" Label=true>
+                    @context.TotalHours.ToString("N2")
+                </MudChip>
+            }
+
+            @if (context.PaidHours > context.ScheduleHours)
+            {
+                <MudChip Color="Color.Secondary" Label=true>
+                    @context.PaidHours.ToString("N2")
+                </MudChip>
+            }
+            else
+            {
+                <MudChip Color="Color.Default" Label=true>
+                    @context.PaidHours.ToString("N2")
+                </MudChip>
+            }
+            @if (context.IsOvertime)
+            {
+                <MudChip Color="Color.Tertiary" Size="Size.Small" Variant="Variant.Outlined">Overtime</MudChip>
+            }
         </MudItem>
     };
 

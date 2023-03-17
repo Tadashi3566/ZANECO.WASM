@@ -15,10 +15,10 @@
         @*<MudItem xs="12">
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
         </MudItem>*@
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <AutocompleteCalendarType For="@(() => context.CalendarType)" @bind-Value="context.CalendarType" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudDatePicker Label="Date" For="@(() => context.CalendarDate)" @bind-Date=" context.CalendarDate" DateFormat="MMMM dd, yyyy" />
         </MudItem>
         <MudItem xs="12">

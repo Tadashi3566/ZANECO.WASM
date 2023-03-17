@@ -19,25 +19,25 @@
         </MudMenuItem>
     </ExtraActions>
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudNumericField Label="Collector Id" For="@(() => context.CollectorId)" @bind-Value="context.CollectorId" ReadOnly=true />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <AutocompleteCollector For="@(() => context.Collector)" @bind-Value="context.Collector" ReadOnly=true />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" ReadOnly=true />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudDatePicker Label="Transaction Date" For="@(() => context.TransactionDate)" @bind-Date="context.TransactionDate" DateFormat="MMMM dd, yyyy HH:mm" ReadOnly=true />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudDatePicker Label="Report Date" For="@(() => context.ReportDate)" @bind-Date="context.ReportDate" DateFormat="MMMM dd, yyyy" ReadOnly=true />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudTextField Label="Account Number" For="@(() => context.AccountNumber)" @bind-Value="context.AccountNumber" ReadOnly=true/>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudNumericField Label="Official Receipt" For="@(() => context.OrNumber)" @bind-Value="context.OrNumber" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
