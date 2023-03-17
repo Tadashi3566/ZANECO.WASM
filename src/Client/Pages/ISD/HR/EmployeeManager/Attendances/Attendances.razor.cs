@@ -77,6 +77,11 @@ public partial class Attendances
                 data.EmployeeId = _searchEmployeeId;
 
                 await Client.UpdateAsync(id, data.Adapt<AttendanceUpdateRequest>());
+
+                AttendanceCalculateRequest attendanceCalculateRequest = new();
+                attendanceCalculateRequest.Id = data.Id;
+                await ApiHelper.ExecuteCallGuardedAsync(() => Client.CalculateAsync(attendanceCalculateRequest),
+                    Snackbar, successMessage: $"Attendance Id {attendanceCalculateRequest.Id} has been successfully calculated.");
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
