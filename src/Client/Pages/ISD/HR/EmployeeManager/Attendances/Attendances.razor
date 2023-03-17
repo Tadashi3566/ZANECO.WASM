@@ -114,7 +114,10 @@
     private RenderFragment<AttendanceDto> TemplateImageTimeIn1 => context => __builder =>
     {
         <MudStack Justify="Justify.Center" Row=true>
-            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            @if (context.ImagePathIn1 is not null)
+            {
+                <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            }
             <MudText Typo="Typo.caption">
                 @if (context.ActualTimeIn1 is not null)
                 {
@@ -128,7 +131,10 @@
     private RenderFragment<AttendanceDto> TemplateImageTimeOut1 => context => __builder =>
     {
         <MudStack Justify="Justify.Center" Row=true>
-            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathOut1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathOut1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            @if (context.ImagePathOut1 is not null)
+            {
+                <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathOut1) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathOut1))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            }
             <MudText Typo="Typo.caption">
                 @if (context.ActualTimeOut1 is not null)
                 {
@@ -141,7 +147,10 @@
     private RenderFragment<AttendanceDto> TemplateImageTimeIn2 => context => __builder =>
     {
         <MudStack Justify="Justify.Center" Row=true>
-            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn2) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn2))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            @if (context.ImagePathIn2 is not null)
+            {
+                <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathIn2) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathIn2))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            }
             <MudText Typo="Typo.caption">
                 @if (context.ActualTimeIn2 is not null)
                 {
@@ -154,7 +163,10 @@
     private RenderFragment<AttendanceDto> TemplateImageTimeOut2 => context => __builder =>
     {
         <MudStack Justify="Justify.Center" Row=true>
-            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathOut2) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathOut2))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            @if (context.ImagePathOut2 is not null)
+            {
+                <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePathOut2) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePathOut2))" Square="true" Style="height: 50px; width: 50px;"> </MudAvatar>
+            }
             <MudText Typo="Typo.caption">
                 @if (context.ActualTimeOut2 is not null)
                 {
