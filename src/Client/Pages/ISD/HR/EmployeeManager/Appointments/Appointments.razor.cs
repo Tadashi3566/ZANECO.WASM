@@ -7,18 +7,18 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
-namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Dependents;
+namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Appointments;
 
-public partial class Dependents
+public partial class Appointments
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
     [Inject]
-    protected IDependentsClient Client { get; set; } = default!;
+    protected IAppointmentsClient Client { get; set; } = default!;
 
-    protected EntityServerTableContext<DependentDto, Guid, DependentViewModel> Context { get; set; } = default!;
+    protected EntityServerTableContext<AppointmentDto, int, AppointmentViewModel> Context { get; set; } = default!;
 
-    private EntityTable<DependentDto, Guid, DependentViewModel>? _table;
+    private EntityTable<AppointmentDto, int, AppointmentViewModel>? _table;
 
     private string? _searchString;
 
@@ -32,16 +32,14 @@ public partial class Dependents
 
     protected override void OnInitialized() =>
         Context = new(
-            entityName: "Dependent",
-            entityNamePlural: "Dependents",
+            entityName: "Appointment",
+            entityNamePlural: "Appointments",
             entityResource: FSHResource.Employees,
             fields: new()
             {
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
-                new(data => data.Name, "Name", "Name", Template: TemplateNameGender),
-                new(data => data.Gender, "Gender", visible: false),
-                new(data => data.BirthDate, "Birth Date", "BirthDate", typeof(DateOnly)),
-                new(data => data.Relation, "Relation", "Relation"),
+                new(data => data.Subject, "Subject", "Subject"),
+                new(data => data.StartTime, "Start Time", Template: TemplateStartEnd),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
@@ -49,35 +47,35 @@ public partial class Dependents
             idFunc: data => data.Id,
             searchFunc: async _filter =>
             {
-                var filter = _filter.Adapt<DependentSearchRequest>();
+                var filter = _filter.Adapt<AppointmentSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
 
                 var result = await Client.SearchAsync(filter);
-                return result.Adapt<PaginationResponse<DependentDto>>();
+                return result.Adapt<PaginationResponse<AppointmentDto>>();
             },
             createFunc: async data =>
             {
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Subject}_{Guid.NewGuid():N}" };
                 }
 
                 data.EmployeeId = _searchEmployeeId;
 
-                await Client.CreateAsync(data.Adapt<DependentCreateRequest>());
+                await Client.CreateAsync(data.Adapt<AppointmentCreateRequest>());
                 data.ImageInBytes = string.Empty;
             },
-            updateFunc: async (id, Dependent) =>
+            updateFunc: async (id, Appointment) =>
             {
-                if (!string.IsNullOrEmpty(Dependent.ImageInBytes))
+                if (!string.IsNullOrEmpty(Appointment.ImageInBytes))
                 {
-                    Dependent.DeleteCurrentImage = true;
-                    Dependent.Image = new ImageUploadRequest() { Data = Dependent.ImageInBytes, Extension = Dependent.ImageExtension ?? string.Empty, Name = $"{Dependent.Name}_{Guid.NewGuid():N}" };
+                    Appointment.DeleteCurrentImage = true;
+                    Appointment.Image = new ImageUploadRequest() { Data = Appointment.ImageInBytes, Extension = Appointment.ImageExtension ?? string.Empty, Name = $"{Appointment.Subject}_{Guid.NewGuid():N}" };
                 }
 
-                await Client.UpdateAsync(id, Dependent.Adapt<DependentUpdateRequest>());
-                Dependent.ImageInBytes = string.Empty;
+                await Client.UpdateAsync(id, Appointment.Adapt<AppointmentUpdateRequest>());
+                Appointment.ImageInBytes = string.Empty;
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
@@ -137,7 +135,7 @@ public partial class Dependents
     }
 }
 
-public class DependentViewModel : DependentUpdateRequest
+public class AppointmentViewModel : AppointmentUpdateRequest
 {
     public string? ImagePath { get; set; }
     public string? ImageInBytes { get; set; }

@@ -1,0 +1,118 @@
+﻿@page "/employee/appointments"
+@page "/employee/appointments/{EmployeeId:guid}"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Employees)]
+
+<FshTitle Title="Appointments" Description="Employee Appointment Management" />
+
+<MudBreadcrumbs Items="_breadcrumbs"></MudBreadcrumbs>
+
+<EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="AppointmentDto" TId="int" TRequest="AppointmentViewModel" Context="@Context">
+    <AdvancedSearchContent>
+        <MudItem Class="mt-3">
+            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+        </MudItem>
+    </AdvancedSearchContent>
+
+    <EditFormContent>
+        <MudItem xs="12">
+            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Appointment" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="Start Time" For="@(() => context.StartTime)" @bind-Date="context.StartTime" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudDatePicker Label="End Time" For="@(() => context.EndTime)" @bind-Date="context.EndTime" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Location" For="@(() => context.Location)" @bind-Value="context.Location" Variant="Variant.Filled" />
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSwitch Color="Color.Tertiary" Label="All Day" For="@(() => context.IsAllDay)" @bind-Checked="context.IsAllDay" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSwitch Color="Color.Tertiary" Label="Read-Only" For="@(() => context.IsReadonly)" @bind-Checked="context.IsReadonly" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudSwitch Color="Color.Tertiary" Label="Block" For="@(() => context.IsBlock)" @bind-Checked="context.IsBlock" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudItem>
+                @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                {
+                    <MudAvatar Image ="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                }
+            </MudItem>
+            <MudItem>
+                <div>
+                    <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
+                        Upload
+                    </MudButton>
+                    @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
+                            StartIcon="@Icons.Material.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
+                            View
+                        </MudButton>
+
+                        <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
+                            StartIcon="@Icons.Material.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
+                            Delete
+                        </MudButton>
+                    }
+                    @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                    {
+                        <MudButton HtmlTag="label"  OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
+                            StartIcon="@Icons.Material.Filled.Clear" Style="margin-left: 5px;" >
+                            Clear
+                        </MudButton>
+                    }
+                </div>
+                <InputFile id="fileInput" hidden OnChange="UploadImage" />
+            </MudItem>
+        </MudItem>
+    </EditFormContent>
+</EntityTable>
+
+@code{
+    private RenderFragment<AppointmentDto> TemplateStartEnd => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                @context.StartTime.ToString("dddd MMMM dd, yyyy HH:mm")
+            </MudText>
+            <MudText Typo="Typo.caption">
+                @context.EndTime.ToString("dddd MMMM dd, yyyy HH:mm")
+            </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<AppointmentDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}
