@@ -1,7 +1,7 @@
 ﻿@page "/sms/outs"
 @attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
 
-<FshTitle Title="Send Message" Description="Send Message to single or multiple recepients" />
+<FshTitle Title="Send Message" Description="Send Message to single or multiple Recipients" />
 
 <EntityTable @ref="_table" TEntity="MessageOutDto" TId="int" TRequest="MessageOutCreateRequest" Context="@Context">
     <EditFormContent>
@@ -15,7 +15,7 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Recepient" For="@(() => context.MessageTo)" @bind-Value="context.MessageTo" Lines="10" Variant="Variant.Filled" />
+            <MudTextField Label="Recipient" For="@(() => context.MessageTo)" @bind-Value="context.MessageTo" Lines="10" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Counter=160 Immediate=true HelperText="Recommended SMS is up to 160 characters" Label="Message" For="@(() => context.MessageText)" @bind-Value="context.MessageText" Lines="5" Variant="Variant.Filled" />

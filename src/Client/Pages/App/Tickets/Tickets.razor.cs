@@ -160,7 +160,7 @@ public partial class Tickets
             {
                 case "Open":
                     //await ApiHelper.ExecuteCallGuardedAsync(() => TicketsClient(_rating, _customValidation,
-                    //    "Message successfully sent to the recepient(s).");        
+                    //    "Message successfully sent to the Recipient(s).");        
                     break;
 
                 case "Suspend":

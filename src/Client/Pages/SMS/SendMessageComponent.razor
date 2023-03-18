@@ -11,10 +11,10 @@
                 <MudSelectItem Value="@("sms.automatic.flash")" />
             </MudSelect>
         </MudItem>
-        @if (DisplayRecepients)
+        @if (DisplayRecipients)
         {
             <MudItem xs="12">
-                <MudTextField Label="Recepient" For="@(() => _model.MessageTo)" @bind-Value="_model.MessageTo" Lines="10" Variant="Variant.Filled" />
+                <MudTextField Label="Recipient" For="@(() => _model.MessageTo)" @bind-Value="_model.MessageTo" Lines="10" Variant="Variant.Filled" />
             </MudItem>
         }
         <MudItem xs="12">

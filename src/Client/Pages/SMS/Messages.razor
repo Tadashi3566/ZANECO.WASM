@@ -1,11 +1,11 @@
 ﻿@page "/sms/messages"
-@page "/sms/messages/{recepient}"
+@page "/sms/messages/{Recipient}"
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.SMS)]
 
 <FshTitle Title="Messages" Description="Messages from Sender/Receiver" />
 
-<SendMessageComponent DisplayRecepients=false Recepients="@Recepient" />
+<SendMessageComponent DisplayRecipients=false Recipients="@Recipient" />
 <MudSpacer/>
 
 <EntityTable @ref="_tableIn" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@ContextIn"/>

@@ -44,7 +44,7 @@
             <MudTextField Counter=160 Immediate=true HelperText="Recommended SMS is up to 160 characters (0.33 cents)" Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="10" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Recepients" For="@(() => context.Recepients)" @bind-Value="context.Recepients" Lines="10" Variant="Variant.Filled" />
+            <MudTextField Label="recipient" For="@(() => context.Recipients)" @bind-Value="context.Recipients" Lines="10" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />

@@ -5,5 +5,5 @@ namespace ZANECO.WASM.Client.Pages.SMS;
 public partial class SendMessage
 {
     [Parameter]
-    public string Recepients { get; set; } = string.Empty;
+    public string Recipients { get; set; } = string.Empty;
 }

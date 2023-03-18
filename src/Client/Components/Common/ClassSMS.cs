@@ -21,16 +21,16 @@ internal class ClassSms
         return array.Distinct().ToArray();
     }
 
-    public static int GetDistinctRecepients(string recepients)
+    public static int GetDistinctRecipients(string Recipients)
     {
-        recepients = ClassSms.RemoveWhiteSpaces(recepients);
-        string[] recepientArray = recepients.Split(',');
+        Recipients = ClassSms.RemoveWhiteSpaces(Recipients);
+        string[] RecipientArray = Recipients.Split(',');
 
-        return ClassSms.GetDistinctFromArray(recepientArray).Length;
+        return ClassSms.GetDistinctFromArray(RecipientArray).Length;
     }
 
-    public static int RecepientCount(string recepients)
+    public static int RecipientCount(string Recipients)
     {
-        return RemoveWhiteSpaces(recepients).Split(',').Length;
+        return RemoveWhiteSpaces(Recipients).Split(',').Length;
     }
 }

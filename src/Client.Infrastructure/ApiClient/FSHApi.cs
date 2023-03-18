@@ -44407,8 +44407,8 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Message { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recepients", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Recepients { get; set; } = default!;
+        [Newtonsoft.Json.JsonProperty("recipients", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Recipients { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("scheduleDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime ScheduleDate { get; set; } = default!;
@@ -44459,9 +44459,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.StringLength(1500, MinimumLength = 1)]
         public string Message { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recepients", Required = Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonProperty("recipients", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public string Recepients { get; set; } = default!;
+        public string Recipients { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("scheduleDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime ScheduleDate { get; set; } = default!;
@@ -44506,9 +44506,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.StringLength(1500, MinimumLength = 1)]
         public string Message { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recepients", Required = Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonProperty("recipients", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public string Recepients { get; set; } = default!;
+        public string Recipients { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("scheduleDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? ScheduleDate { get; set; } = default!;

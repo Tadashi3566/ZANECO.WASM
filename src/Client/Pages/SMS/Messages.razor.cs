@@ -9,7 +9,7 @@ namespace ZANECO.WASM.Client.Pages.SMS;
 public partial class Messages
 {
     [Parameter]
-    public string Recepient { get; set; } = string.Empty;
+    public string Recipient { get; set; } = string.Empty;
     [Inject]
     protected IMessageInsClient ClientIn { get; set; } = default!;
     [Inject]
@@ -25,9 +25,9 @@ public partial class Messages
 
     protected override async Task OnParametersSetAsync()
     {
-        if (Recepient.Length > 0)
+        if (Recipient.Length > 0)
         {
-            await ReadInbox(Recepient);
+            await ReadInbox(Recipient);
         }
     }
 
@@ -47,7 +47,7 @@ public partial class Messages
             searchFunc: async _filter =>
             {
                 var filter = _filter.Adapt<MessageInSearchRequest>();
-                filter.Keyword = Recepient;
+                filter.Keyword = Recipient;
                 var result = await ClientIn.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<MessageInDto>>();
             },
@@ -68,7 +68,7 @@ public partial class Messages
             searchFunc: async _filter =>
             {
                 var filter = _filter.Adapt<MessageLogSearchRequest>();
-                filter.Keyword = Recepient;
+                filter.Keyword = Recipient;
                 var result = await ClientLog.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<MessageLogDto>>();
             },
@@ -81,6 +81,6 @@ public partial class Messages
         _readRequest.MessageFrom = messageFrom;
         await ApiHelper.ExecuteCallGuardedAsync(() => ClientIn.ReadAsync(_readRequest),
         Snackbar,
-        successMessage: $"Messages from sender {Recepient} has been marked as read.");
+        successMessage: $"Messages from sender {Recipient} has been marked as read.");
     }
 }

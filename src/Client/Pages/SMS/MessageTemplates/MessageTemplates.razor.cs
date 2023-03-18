@@ -115,7 +115,7 @@ public partial class MessageTemplates
                 MessageType = dto.MessageType,
                 IsAPI = dto.IsAPI,
                 ScheduleDate = dto.ScheduleDate,
-                Recepients = "0123456789",
+                Recipients = "0123456789",
                 Subject = dto.Subject,
                 Message = dto.Message,
             };
@@ -150,9 +150,9 @@ public partial class MessageTemplates
             totalCost = cost * sms;
         }
 
-        int recepients = ClassSms.GetDistinctRecepients(request.Recepients);
+        int Recipients = ClassSms.GetDistinctRecipients(request.Recipients);
 
-        string transactionContent = $"The cost for this service is P{totalCost} for each recepient and P{totalCost * recepients:N2} for this template. Are you sure you want to send SMS to {recepients:N0} recepient(s)?";
+        string transactionContent = $"The cost for this service is P{totalCost} for each Recipient and P{totalCost * Recipients:N2} for this template. Are you sure you want to send SMS to {Recipients:N0} Recipient(s)?";
         DialogParameters parameters = new()
         {
             { nameof(TransactionConfirmation.ContentText), transactionContent },
@@ -171,7 +171,7 @@ public partial class MessageTemplates
 
             _messageOut.IsAPI = request.IsAPI;
             _messageOut.MessageType = request.MessageType;
-            _messageOut.MessageTo = request.Recepients;
+            _messageOut.MessageTo = request.Recipients;
             _messageOut.Subject = request.Subject;
             _messageOut.MessageText = request.Message;
             _messageOut.Description = request.Subject;
@@ -182,7 +182,7 @@ public partial class MessageTemplates
             }
             else
             {
-                Snackbar.Add("SMS are being created and sent directly to recepients.", Severity.Info);
+                Snackbar.Add("SMS are being created and sent directly to Recipients.", Severity.Info);
             }
 
             if (await ApiHelper.ExecuteCallGuardedAsync(() => MessageOut.CreateAsync(_messageOut), Snackbar) > 0)

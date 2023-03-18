@@ -12,9 +12,9 @@ namespace ZANECO.WASM.Client.Pages.SMS;
 public partial class SendMessageComponent
 {
     [Parameter]
-    public string Recepients { get; set; } = string.Empty;
+    public string Recipients { get; set; } = string.Empty;
     [Parameter]
-    public bool DisplayRecepients { get; set; } = true;
+    public bool DisplayRecipients { get; set; } = true;
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
     [Inject]
@@ -30,16 +30,16 @@ public partial class SendMessageComponent
     {
         _model.MessageType = "sms.automatic";
 
-        if (Recepients != null)
+        if (Recipients != null)
         {
-            _model.MessageTo = Recepients;
+            _model.MessageTo = Recipients;
         }
     }
 
     private async Task Send()
     {
         string transactionTitle = "Send Message";
-        string transactionContent = $"Are you sure you want to {transactionTitle} to {ClassSms.RecepientCount(_model.MessageTo):N0} recepient(s)?";
+        string transactionContent = $"Are you sure you want to {transactionTitle} to {ClassSms.RecipientCount(_model.MessageTo):N0} Recipient(s)?";
         var parameters = new DialogParameters
         {
             { nameof(TransactionConfirmation.TransactionIcon), Icons.Material.Filled.Send },
@@ -54,7 +54,7 @@ public partial class SendMessageComponent
         {
             await ApiHelper.ExecuteCallGuardedAsync(() => MessageClient.CreateAsync(_model),
                 Snackbar,
-                _customValidation, "Message successfully sent to the recepient(s).");
+                _customValidation, "Message successfully sent to the Recipient(s).");
         }
     }
 }

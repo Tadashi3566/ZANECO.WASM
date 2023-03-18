@@ -85,21 +85,21 @@ public partial class Contacts
     private async Task Send(ContactDto dto)
     {
         string[] phoneNumbers;
-        string recepients;
+        string Recipients;
 
         if (_selectedItems.Count > 0)
         {
             phoneNumbers = _selectedItems.Select(x => x.PhoneNumber).ToArray()!;
-            recepients = string.Join(",", phoneNumbers);
+            Recipients = string.Join(",", phoneNumbers);
         }
         else
         {
-            recepients = dto.PhoneNumber;
+            Recipients = dto.PhoneNumber;
         }
 
         DialogParameters parameters = new()
         {
-            { nameof(SendMessageDialog.Recepients), recepients },
+            { nameof(SendMessageDialog.Recipients), Recipients },
         };
         DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
         IDialogReference dialog = DialogService.Show<SendMessageDialog>("Send Message", parameters, options);

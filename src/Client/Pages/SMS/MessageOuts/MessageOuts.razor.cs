@@ -22,7 +22,7 @@ public partial class MessageOuts
             {
                 new(data => data.IsAPI, "API", "IsAPI", typeof(bool)),
                 new(data => data.MessageType, "Type", "MessageType"),
-                new(data => data.MessageTo, "Recepient", "MessageTo"),
+                new(data => data.MessageTo, "Recipient", "MessageTo"),
                 new(data => data.MessageText, "Message", "MessageText"),
             },
             enableAdvancedSearch: false,

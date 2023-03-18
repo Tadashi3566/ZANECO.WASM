@@ -6,7 +6,7 @@
         </MudText>
     </TitleContent>
     <DialogContent>
-        <SendMessageComponent Recepients="@Recepients" />
+        <SendMessageComponent Recipients="@Recipients" />
     </DialogContent>
     <DialogActions>
         <MudButton StartIcon="@Icons.Material.Filled.Cancel" OnClick="Cancel">Cancel</MudButton>
@@ -19,7 +19,7 @@
     MudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
-    public string Recepients { get; set; } = string.Empty;
+    public string Recipients { get; set; } = string.Empty;
 
     void Submit()
     {
