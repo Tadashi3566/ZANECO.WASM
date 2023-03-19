@@ -7,13 +7,13 @@
         <MudIconButton Icon="@Icons.Material.Rounded.Notes" Color="Color.Inherit" Edge="Edge.Start"
             OnClick="@((e) => DrawerToggle())" />
     </MudTooltip>
-     <MudButton Variant="Variant.Text" Link="/">
+     <MudButton Variant="Variant.Text" Href="/">
             @L["ZANECO Web Application"]</MudButton>
     <MudSpacer />
     
     <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
         @*<MudButton Variant="Variant.Filled" Color="Color.Secondary"
-            Link="https://opencollective.com/ZanecoApp" Target="_blank" StartIcon="@Icons.Material.Filled.Favorite">
+            Href="https://opencollective.com/ZanecoApp" Target="_blank" StartIcon="@Icons.Material.Filled.Favorite">
             @L["Sponsor"]</MudButton>
         <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />*@
         <MudTooltip Text="Support">
@@ -34,21 +34,21 @@
         <LanguageSelector />
         @*<MudTooltip Text="Fork Repository">
             <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit"
-                Link="https://github.com/ZanecoApp/blazor-wasm-boilerplate" Target="_blank" />
+                Href="https://github.com/ZanecoApp/blazor-wasm-boilerplate" Target="_blank" />
         </MudTooltip>*@
         <NotificationConnectionStatus></NotificationConnectionStatus>
     </MudHidden>
     <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
         @*<MudTooltip Text="Sponsor">
             <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Inherit"
-                Link="https://opencollective.com/ZanecoApp" Target="_blank" />
+                Href="https://opencollective.com/ZanecoApp" Target="_blank" />
         </MudTooltip>*@
         <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" Dense="true" AnchorOrigin="Origin.TopRight">
             @*<div class="px-2">
                 <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit"
-                    Link="https://github.com/ZanecoApp/blazor-wasm-boilerplate" Target="_blank" />
+                    Href="https://github.com/ZanecoApp/blazor-wasm-boilerplate" Target="_blank" />
                 <MudIconButton Icon="@Icons.Material.Filled.Coffee" Color="Color.Inherit"
-                    Link="https://www.buymeacoffee.com/codewithmukesh" Target="_blank" />
+                    Href="https://www.buymeacoffee.com/codewithmukesh" Target="_blank" />
             </div>
             <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@L["Community"]</b></MudText>*@
             <MudMenuItem Href="https://www.zaneco.ph" Target="_blank">@L["Website"]</MudMenuItem>

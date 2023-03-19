@@ -1,0 +1,20 @@
+﻿<BarcodeReader Title="Capture Image using Browser Camera"
+               StartCameraAutomatically="false"
+               ShowStart="true"
+               ShowReset="true"
+               ShowToggleTorch="true"
+               ShowVideoDeviceList="true"
+               VideoWidth="300"
+               VideoHeight="200"
+               OnBarcodeReceived="LocalReceivedBarcodeText" />
+
+@code
+{
+    private string? LocalBarcodeText;
+
+    private void LocalReceivedBarcodeText(BarcodeReceivedEventArgs args)
+    {
+        this.LocalBarcodeText = args.BarcodeText;
+        StateHasChanged();
+    }
+}

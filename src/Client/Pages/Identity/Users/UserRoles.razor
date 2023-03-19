@@ -14,7 +14,7 @@ else
     <MudTable Hover="true" Elevation="@_preference.Elevation" Items="_userRolesList" Filter="new Func<UserRoleDto, bool>(Search)">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
-                <MudButton Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" StartIcon="@Icons.Material.Filled.ArrowBack" Link="/users">
+                <MudButton Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" StartIcon="@Icons.Material.Filled.ArrowBack" Href="/users">
                     @L["Back"]
                 </MudButton>
                 @if (_canEditUsers)
