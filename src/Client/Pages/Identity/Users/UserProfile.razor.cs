@@ -50,6 +50,7 @@ public partial class UserProfile
             UserId = Id,
             EmployeeId = _employeeId!,
             SandurotId = _sandurotId!,
+            EmailConfirmed = _emailConfirmed,
             ActivateUser = _active,
         };
         await ApiHelper.ExecuteCallGuardedAsync(() => Client.ToggleStatusAsync(Id, request), Snackbar);
@@ -79,15 +80,15 @@ public partial class UserProfile
                 _firstLetterOfName = _firstName.ToUpper().FirstOrDefault();
             }
 
-            //if (userDto.EmployeeId is not null)
-            //{
-            _employeeId = (Guid)userDto.EmployeeId!;
-            //}
+            if (userDto.EmployeeId is not null)
+            {
+                _employeeId = (Guid)userDto.EmployeeId!;
+            }
 
-            //if (userDto.SandurotId is not null)
-            //{
-            _sandurotId = userDto.SandurotId!;
-            //}
+            if (userDto.SandurotId is not null)
+            {
+                _sandurotId = userDto.SandurotId!;
+            }
         }
 
         var state = await AuthState;

@@ -25,10 +25,10 @@ else
                         <MudCardContent Class="pa-46" Style="padding:26px!important">
                             <MudGrid>
                                 <MudItem xs="12" sm="6" md="4" lg="3">
-                                    <MudSwitch @bind-Checked="@_active" Color="Color.Primary" Label="@_localizer["Active?"]" />
+                                    <MudSwitch @bind-Checked="@_emailConfirmed" Color="Color.Tertiary" Label="@_localizer["Email Confirmed?"]" />
                                 </MudItem>
                                 <MudItem xs="12" sm="6" md="4" lg="3">
-                                    <MudCheckBox ReadOnly @bind-Checked="@_emailConfirmed" Disabled Label="@_localizer["Email Confirmed?"]" Color="Color.Secondary" />
+                                    <MudSwitch @bind-Checked="@_active" Color="Color.Tertiary" Label="@_localizer["Active?"]" />
                                 </MudItem>
                                 <MudItem xs="12" sm="6" md="4" lg="3">
                                     <AutocompleteEmployee @bind-Value="_employeeId"/>

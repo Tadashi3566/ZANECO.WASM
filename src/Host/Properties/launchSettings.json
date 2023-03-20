@@ -8,16 +8,6 @@
     }
   },
   "profiles": {
-    "ZANECO.WASM.Server": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "applicationUrl": "http://localhost:5012;",
-      //"applicationUrl": "https://localhost:5011;",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
@@ -28,13 +18,22 @@
     },
     "WSL": {
       "commandName": "WSL2",
-      "launchBrowser": true,
-      "launchUrl": "http://localhost:5012",
+      "distributionName": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "http://localhost:5012;"
+        "ASPNETCORE_URLS": "http://localhost:80;"
       },
-      "distributionName": ""
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:80;"
+    },
+    "ZANECO.WASM.Server": {
+      "applicationUrl": "http://localhost:80;",
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      "launchBrowser": true
     }
   }
 }

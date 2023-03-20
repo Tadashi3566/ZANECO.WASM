@@ -5,8 +5,10 @@ using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Shared;
+using ZANECO.WebApi.Shared.MultiTenancy;
 
 namespace ZANECO.WASM.Client.Pages.Authentication;
+
 public partial class Login
 {
     [CascadingParameter]
@@ -19,7 +21,7 @@ public partial class Login
     public bool BusySubmitting { get; set; }
 
     private readonly TokenRequest _tokenRequest = new();
-    private string TenantId { get; set; } = string.Empty;
+    private string TenantId { get; set; } = MultitenancyConstants.Root.Id;
     private bool _passwordVisibility;
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
