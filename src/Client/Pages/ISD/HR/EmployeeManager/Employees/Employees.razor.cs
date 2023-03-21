@@ -33,11 +33,13 @@ public partial class Employees
     private string? _searchString;
 
     private bool _canViewEmployees;
+    private bool _canCreateEmployees;
 
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
         _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
+        _canCreateEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.Create, FSHResource.Employees);
 
         Context = new(
                 entityName: "Employee",

@@ -13,7 +13,7 @@
         </MudItem>
     </AdvancedSearchContent>
     <ExtraActions>
-        @if (_canViewEmployees)
+        @if (_canCreateEmployees)
         {
             <MudDivider />
             <MudMenuItem OnClick="@(() => EmployeeGenerateDailySchedule(context.Id))"

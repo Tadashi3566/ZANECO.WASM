@@ -25,12 +25,10 @@
 
     private UserDetailsDto? userDto = new();
 
-    ClientPreference _preference = new();
-
     private string? _employeeId;
     private string? _sandurotId;
     private string _name = string.Empty;
-    private bool _isLoaded = false;
+    private bool _isLoaded;
 
     protected override async Task OnInitializedAsync()
     {
@@ -39,11 +37,11 @@
         {
             _name = $"{userDto.FirstName} {userDto.LastName}";
 
-            if (userDto is not null && userDto.EmployeeId is not null)
+            if (userDto.EmployeeId is not null)
             {
                 _employeeId = userDto.EmployeeId.ToString();
             }
-            if (userDto is not null && userDto.SandurotId is not null)
+            if (userDto.SandurotId is not null)
             {
                 _sandurotId = userDto.SandurotId.ToString();
             }
