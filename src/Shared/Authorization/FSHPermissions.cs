@@ -45,6 +45,7 @@ public static class FSHResource
     public const string ISD = nameof(ISD);
     public const string Employees = nameof(Employees);
     public const string Attendance = nameof(Attendance);
+    public const string Calendar = nameof(Calendar);
 
     public const string Schedules = nameof(Schedules);
 
@@ -97,16 +98,16 @@ public static class FSHPermissions
         new("Update Sandurot", FSHAction.Update, FSHResource.Sandurot),
         new("Delete Sandurot", FSHAction.Delete, FSHResource.Sandurot),
 
-        new("View Brands", FSHAction.View, FSHResource.Brands),
-        new("Search Brands", FSHAction.Search, FSHResource.Brands),
+        new("View Brands", FSHAction.View, FSHResource.Brands, IsBasic: true),
+        new("Search Brands", FSHAction.Search, FSHResource.Brands, IsBasic: true),
         new("Create Brands", FSHAction.Create, FSHResource.Brands),
         new("Update Brands", FSHAction.Update, FSHResource.Brands),
         new("Delete Brands", FSHAction.Delete, FSHResource.Brands),
         new("Generate Brands", FSHAction.Generate, FSHResource.Brands),
         new("Clean Brands", FSHAction.Clean, FSHResource.Brands),
 
-        new("View Products", FSHAction.View, FSHResource.Products),
-        new("Search Products", FSHAction.Search, FSHResource.Products),
+        new("View Products", FSHAction.View, FSHResource.Products, IsBasic: true),
+        new("Search Products", FSHAction.Search, FSHResource.Products, IsBasic: true),
         new("Create Products", FSHAction.Create, FSHResource.Products),
         new("Update Products", FSHAction.Update, FSHResource.Products),
         new("Delete Products", FSHAction.Delete, FSHResource.Products),
@@ -173,6 +174,13 @@ public static class FSHPermissions
         new("Delete Employees", FSHAction.Delete, FSHResource.Employees),
         new("Export Employees", FSHAction.Export, FSHResource.Employees),
 
+        new("View Calendar", FSHAction.View, FSHResource.Calendar, IsBasic: true),
+        new("Search Calendar", FSHAction.Search, FSHResource.Calendar, IsBasic: true),
+        new("Create Calendar", FSHAction.Create, FSHResource.Calendar),
+        new("Update Calendar", FSHAction.Update, FSHResource.Calendar),
+        new("Delete Calendar", FSHAction.Delete, FSHResource.Calendar),
+        new("Export Calendar", FSHAction.Export, FSHResource.Calendar),
+
         new("View Schedules", FSHAction.View, FSHResource.Schedules),
         new("Search Schedules", FSHAction.Search, FSHResource.Schedules),
         new("Create Schedules", FSHAction.Create, FSHResource.Schedules),
@@ -180,8 +188,8 @@ public static class FSHPermissions
         new("Delete Schedules", FSHAction.Delete, FSHResource.Schedules),
         new("Export Schedules", FSHAction.Export, FSHResource.Schedules),
 
-        new("View Attendance", FSHAction.View, FSHResource.Attendance),
-        new("Search Attendance", FSHAction.Search, FSHResource.Attendance),
+        new("View Attendance", FSHAction.View, FSHResource.Attendance, IsBasic: true),
+        new("Search Attendance", FSHAction.Search, FSHResource.Attendance, IsBasic: true),
         new("Create Attendance", FSHAction.Create, FSHResource.Attendance),
         new("Update Attendance", FSHAction.Update, FSHResource.Attendance),
         new("Delete Attendance", FSHAction.Delete, FSHResource.Attendance),

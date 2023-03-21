@@ -8,29 +8,19 @@ namespace ZANECO.WASM.Client.Pages.ISD.HR.Calendars;
 
 public partial class Calendars
 {
-    //[Parameter]
-    //public Guid EmployeeId { get; set; } = Guid.Empty;
     [Inject]
-    protected ICalendarClient Client { get; set; } = default!;
+    protected ICalendarsClient Client { get; set; } = default!;
     protected EntityServerTableContext<CalendarDto, Guid, CalendarUpdateRequest> Context { get; set; } = default!;
 
     private EntityTable<CalendarDto, Guid, CalendarUpdateRequest>? _table;
 
     private string? _searchString;
 
-    //protected override void OnParametersSet()
-    //{
-    //    if (EmployeeId != Guid.Empty)
-    //    {
-    //        _searchEmployeeId = EmployeeId;
-    //    }
-    //}
-
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Calendar",
             entityNamePlural: "Calendar",
-            entityResource: FSHResource.Payroll,
+            entityResource: FSHResource.Calendar,
             fields: new()
             {
                 new(data => data.CalendarDate, "Date", "CalendarDate", Template: TemplateCalendarDateType),
@@ -63,16 +53,4 @@ public partial class Calendars
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
-
-    // Advanced Search
-    //private Guid _searchEmployeeId;
-    //private Guid SearchEmployeeId
-    //{
-    //    get => _searchEmployeeId;
-    //    set
-    //    {
-    //        _searchEmployeeId = value;
-    //        _ = _table!.ReloadDataAsync();
-    //    }
-    //}
 }

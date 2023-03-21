@@ -44,7 +44,7 @@
     [Parameter]
     public Guid EmployeeId { get; set; }
     [Inject]
-    protected IAttendanceClient Client { get; set; } = default!;
+    protected IAttendancesClient Client { get; set; } = default!;
 
     private DateTime? _dateStart = new DateTime(DateTime.Today.Year, 1, 1);
     private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, 12, 31);

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Pages.Identity.Users;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Shared;
@@ -13,6 +15,9 @@ public partial class NavMenu
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+    [Inject]
+    protected IPersonalClient User { get; set; } = default!;
+    private Guid? _employeeId { get; set; }
 
     private string? _hangfireUrl;
     private bool _canViewHangfire;
@@ -41,19 +46,21 @@ public partial class NavMenu
     private bool _canViewISD;
     private bool _canViewEmployees;
     private bool _canCreateAttendance;
+    private bool _canViewAttendance;
+    private bool _canViewCalendar;
     private bool _canViewPayroll;
 
     private bool _canViewCAD;
     private bool _canViewRaffle;
-
-    // private bool _canViewAccounts;
 
     private bool CanViewAdministrationGroup => _canViewUsers || _canViewRoles || _canViewTenants;
 
     protected override async Task OnParametersSetAsync()
     {
         _hangfireUrl = Config[ConfigNames.ApiBaseUrl] + "jobs";
+
         var user = (await AuthState).User;
+
         _canViewHangfire = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Hangfire);
         _canViewDashboard = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Dashboard);
         _canViewRoles = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Roles);
@@ -78,6 +85,8 @@ public partial class NavMenu
         _canViewISD = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.ISD);
         _canViewEmployees = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Employees);
         _canCreateAttendance = await AuthService.HasPermissionAsync(user, FSHAction.Create, FSHResource.Attendance);
+        _canViewAttendance = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Attendance);
+        _canViewCalendar = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Calendar);
         _canViewPayroll = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Payroll);
 
         _canViewAccounting = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Accounting);

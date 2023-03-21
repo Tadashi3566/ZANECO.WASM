@@ -1,9 +1,12 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -15,16 +18,20 @@ public partial class TimeLogs
     public Guid EmployeeId { get; set; } = Guid.Empty;
     [Parameter]
     public DateTime LogDate { get; set; }
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
+    [Inject]
+    protected IAuthorizationService AuthService { get; set; } = default!;
     [Inject]
     protected ITimeLogsClient Client { get; set; } = default!;
+    protected EntityServerTableContext<TimeLogDto, Guid, TimeLogViewModel> Context { get; set; } = default!;
     [Inject]
     private IPersonalClient User { get; set; } = default!;
-
-    protected EntityServerTableContext<TimeLogDto, Guid, TimeLogViewModel> Context { get; set; } = default!;
 
     private EntityTable<TimeLogDto, Guid, TimeLogViewModel>? _table;
 
     private string? _searchString;
+    private bool _canViewEmployees;
 
     private DateTime? _logDate = DateTime.Today;
 
@@ -38,8 +45,11 @@ public partial class TimeLogs
         }
     }
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
+        var state = await AuthState;
+        _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
+
         Context = new(
             entityName: "Time Log",
             entityNamePlural: "Time Logs",
@@ -58,10 +68,10 @@ public partial class TimeLogs
             {
                 if (SearchEmployeeId.Equals(Guid.Empty))
                 {
-                    var userDetails = await User.GetProfileAsync();
-                    if (userDetails.EmployeeId is not null)
+                    var user = await User.GetProfileAsync();
+                    if (user.EmployeeId is not null)
                     {
-                        _searchEmployeeId = (Guid)userDetails.EmployeeId!;
+                        _searchEmployeeId = (Guid)user.EmployeeId!;
                     }
                 }
 

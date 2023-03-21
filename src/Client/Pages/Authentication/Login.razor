@@ -1,5 +1,7 @@
 ﻿@page "/login"
+
 @attribute [AllowAnonymous]
+
 @inject IStringLocalizer<Login> L
 @inject IStringLocalizer<SharedResource> LS
 
@@ -20,19 +22,21 @@
         <MudItem xs="12">
             <MudTextField T="string" Label="@L["User Name"]" @bind-Value="_tokenRequest.UserName" For="@(() => _tokenRequest.UserName)"
                           Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.VerifiedUser"
+                          InputType="InputType.Text"
                           Variant="Variant.Outlined" />
         </MudItem>
 
         <MudItem xs="12">
             <MudTextField T="string" Label="@L["E-mail"]" @bind-Value="_tokenRequest.Email" For="@(() => _tokenRequest.Email)"
                           Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.AlternateEmail"
-                          Variant="Variant.Outlined"  />
+                          InputType="InputType.Email"
+                          Variant="Variant.Outlined" />
         </MudItem>
 
         <MudItem xs="12">
             <MudTextField Label="@L["Password"]" @bind-Value="_tokenRequest.Password" For="@(() => _tokenRequest.Password)"
-                          InputType="@_passwordInput" Adornment="Adornment.End"
-                          AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility"
+                          Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility"
+                          InputType="@_passwordInput"
                           Variant="Variant.Outlined" />
         </MudItem>
 

@@ -1,6 +1,6 @@
 ﻿@page "/employee/attendance"
-@page "/employee/attendance/{EmployeeId:guid}"
-@page "/employee/attendance/{EmployeeId:guid}/{AttendanceDate:datetime}"
+@page "/employee/attendance/{employeeId:guid}"
+@page "/employee/attendance/{employeeId:guid}/{AttendanceDate:datetime}"
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
 
@@ -11,7 +11,7 @@
 <EntityTable @bind-SearchString="_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="AttendanceDto" TId="Guid" TRequest="AttendanceUpdateRequest" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-3">
-            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+            <AutocompleteEmployee @bind-Value="SearchEmployeeId" Disabled=@(!_canViewEmployees)/>
         </MudItem>
         <MudGrid>
             <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">

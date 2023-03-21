@@ -1,12 +1,12 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
-using Syncfusion.Blazor.Lists;
 using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
-using ZANECO.WASM.Client.Infrastructure.Common;
+using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -18,8 +18,14 @@ public partial class Attendances
     public Guid EmployeeId { get; set; } = Guid.Empty;
     [Parameter]
     public DateTime? AttendanceDate { get; set; } = DateTime.Today;
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
     [Inject]
-    protected IAttendanceClient Client { get; set; } = default!;
+    protected IAuthorizationService AuthService { get; set; } = default!;
+    [Inject]
+    protected IAttendancesClient Client { get; set; } = default!;
+    [Inject]
+    protected IPersonalClient User { get; set; } = default!;
 
     protected EntityServerTableContext<AttendanceDto, Guid, AttendanceUpdateRequest> Context { get; set; } = default!;
 
@@ -28,24 +34,28 @@ public partial class Attendances
     private HashSet<AttendanceDto> _selectedItems = new();
 
     private string? _searchString;
+    private bool _canViewEmployees;
 
     protected override void OnParametersSet()
     {
         if (EmployeeId != Guid.Empty)
         {
-            _searchEmployeeId = EmployeeId;
+            _searchEmployeeId = EmployeeId!;
         }
     }
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
+        var state = await AuthState;
+        _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
+
         Context = new(
             entityName: "Attendance",
             entityNamePlural: "Attendance",
             entityResource: FSHResource.Attendance,
             fields: new()
             {
-                new(data => data.EmployeeName, "Name", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty)),
+                new(data => data.EmployeeName, "Name", "EmployeeName", visible: true),
                 new(data => data.AttendanceDate, "Date", "AttendanceDate", Template: TemplateDayType),
                 new(data => data.ScheduleDetailDay, "Day", visible: false),
                 new(data => data.DayType, "Type", "DayType", visible: false),
@@ -63,6 +73,15 @@ public partial class Attendances
             searchFunc: async _filter =>
             {
                 var filter = _filter.Adapt<AttendanceSearchRequest>();
+
+                if (SearchEmployeeId.Equals(Guid.Empty))
+                {
+                    var user = await User.GetProfileAsync();
+                    if (user.EmployeeId is not null)
+                    {
+                        _searchEmployeeId = (Guid)user.EmployeeId!;
+                    }
+                }
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
                 filter.DateStart = DateStart;
