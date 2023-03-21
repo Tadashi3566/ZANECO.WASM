@@ -35,7 +35,6 @@ public partial class TimeLogs
     private bool _canUpdateAttendance;
 
     private DateTime? _logDate = DateTime.Today;
-
     private TimeSpan? _logTime;
 
     protected override void OnParametersSet()
