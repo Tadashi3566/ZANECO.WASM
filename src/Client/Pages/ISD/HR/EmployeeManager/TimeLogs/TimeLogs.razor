@@ -10,9 +10,12 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="TimeLogDto" TId="Guid" TRequest="TimeLogViewModel" Context="@Context">
     <AdvancedSearchContent>
-        <MudItem Class="mt-3">
-            <AutocompleteEmployee @bind-Value="SearchEmployeeId" Disabled=@(!_canViewEmployees) />
-        </MudItem>
+        @if (_canUpdateAttendance)
+        {
+            <MudItem Class="mt-3">
+                <AutocompleteEmployee @bind-Value="SearchEmployeeId" Disabled=@(!_canViewEmployees) />
+            </MudItem>
+        }
         <MudGrid>
             <MudItem xs="12" sm="6">
                 <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateStart" DateFormat="MMMM dd, yyyy"></MudDatePicker>
@@ -34,19 +37,21 @@
                 <MudSelectItem Value="@("TIMEOUT2")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
-            <MudDatePicker AutoClose=true Label="Date" For="@(() => context.LogDate)" @bind-Date="context.LogDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
-            <MudTimePicker Label="Time" @bind-Time="@_logTime" Variant="Variant.Filled" />
-        </MudItem>
-        <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
-        </MudItem>
-        <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
-        </MudItem>
-
+        @if (_canUpdateAttendance)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+                <MudDatePicker AutoClose=true Label="Date" For="@(() => context.LogDate)" @bind-Date="context.LogDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+                <MudTimePicker Label="Time" @bind-Time="@_logTime" Variant="Variant.Filled" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
+            </MudItem>
+        }
         <MudItem xs="12" md="6">
             <MudItem>
                 @if (!string.IsNullOrEmpty(context.ImageInBytes))

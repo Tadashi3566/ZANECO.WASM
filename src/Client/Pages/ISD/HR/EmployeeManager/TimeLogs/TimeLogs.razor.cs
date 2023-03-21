@@ -32,6 +32,7 @@ public partial class TimeLogs
 
     private string? _searchString;
     private bool _canViewEmployees;
+    private bool _canUpdateAttendance;
 
     private DateTime? _logDate = DateTime.Today;
 
@@ -49,6 +50,7 @@ public partial class TimeLogs
     {
         var state = await AuthState;
         _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
+        _canUpdateAttendance = await AuthService.HasPermissionAsync(state.User, FSHAction.Update, FSHResource.Attendance);
 
         Context = new(
             entityName: "Time Log",

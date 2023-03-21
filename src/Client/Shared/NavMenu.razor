@@ -60,7 +60,7 @@
     
     @if (_canViewEmployees || _canViewAttendance || _canViewCalendar)
     {
-        <MudNavGroup Title="Human Rresource" Icon="@Icons.Material.Filled.AddBox" >
+        <MudNavGroup Title="Human Resource" Icon="@Icons.Material.Filled.AddBox" >
             <MudNavLink Href="/hr/employees" Icon="@Icons.Material.Filled.Groups" Class="fsh-nav-child" Disabled=(!_canViewEmployees)>Employees</MudNavLink>
             <MudDivider />
             <MudNavLink Href="/hr/calendar" Icon="@Icons.Material.Filled.CalendarViewMonth" Class="fsh-nav-child">Calendar</MudNavLink>
