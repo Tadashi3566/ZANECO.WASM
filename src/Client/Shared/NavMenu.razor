@@ -18,10 +18,7 @@
     {
         <MudNavLink Href="/employee/timelogs" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.CameraFront">Time Log-In/Out</MudNavLink>
     }
-    @if (_canViewDocuments)
-    {
-        <MudNavLink Href="/hr/documents" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.DocumentScanner">Documents</MudNavLink>
-    }
+    
     <MudNavLink Href="/account" Icon="@Icons.Material.Filled.ManageAccounts">Account</MudNavLink>
     <MudNavLink Href="/audit-logs" Icon="@Icons.Material.Filled.SecurityUpdateGood">Logs</MudNavLink>
 
@@ -58,7 +55,7 @@
         </MudNavGroup>
     }
     
-    @if (_canViewEmployees || _canViewAttendance || _canViewCalendar)
+    @if (_canViewEmployees || _canViewAttendance || _canViewCalendar || _canViewDocuments)
     {
         <MudNavGroup Title="Human Resource" Icon="@Icons.Material.Filled.AddBox" >
             <MudNavLink Href="/hr/employees" Icon="@Icons.Material.Filled.Groups" Class="fsh-nav-child" Disabled=(!_canViewEmployees)>Employees</MudNavLink>
@@ -68,7 +65,8 @@
             <MudNavLink Href="/employee/attendance" Icon="@Icons.Material.Filled.EventAvailable" Class="fsh-nav-child">Attendance</MudNavLink>
             <MudNavLink Href="/employee/timelogs" Icon="@Icons.Material.Filled.CameraFront" Class="fsh-nav-child">Time Log-In/Out</MudNavLink>
             <MudDivider />
-            <MudNavLink Href="/hr/powerbills" Icon="@Icons.Material.Filled.ReceiptLong" Class="fsh-nav-child" Disabled=(!_canViewEmployees)>Power Bills</MudNavLink>
+            <MudNavLink Href="/hr/documents" Icon="@Icons.Material.Filled.DocumentScanner" Class="fsh-nav-child" Disabled="!_canViewDocuments">Documents</MudNavLink>
+            <MudNavLink Href="/hr/powerbills" Icon="@Icons.Material.Filled.ReceiptLong" Class="fsh-nav-child" Disabled=!_canViewEmployees>Power Bills</MudNavLink>
         </MudNavGroup>
     }
 

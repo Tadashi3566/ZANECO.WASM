@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -15,15 +16,20 @@ public partial class Documents
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
+    [Inject]
+    protected IDocumentsClient Client { get; set; } = default!;
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
     [Inject]
-    protected IDocumentsClient Client { get; set; } = default!;
+    private IPersonalClient User { get; set; } = default!;
+
     protected EntityServerTableContext<DocumentDto, Guid, DocumentViewModel> Context { get; set; } = default!;
 
     private EntityTable<DocumentDto, Guid, DocumentViewModel>? _table;
+
+    private bool _canViewEmployees;
 
     private string? _searchString;
 
@@ -35,15 +41,18 @@ public partial class Documents
         }
     }
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
+        var state = await AuthState;
+        _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
+
         Context = new(
         entityName: "Document",
         entityNamePlural: "Documents",
         entityResource: FSHResource.Documents,
         fields: new()
         {
-            new(data => data.EmployeeName, "Employee", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty), Template: TemplateEmployee),
+            new(data => data.EmployeeName, "Employee", "EmployeeName", visible: !EmployeeId.Equals(Guid.Empty), Template: TemplateEmployee),
             new(data => data.ImagePath, "Image", Template: TemplateImage),
             new(data => data.Reference, "Reference", "Reference", Template: TemplateDateReference),
             new(data => data.Name, "Name", "Name"),
@@ -54,6 +63,15 @@ public partial class Documents
         idFunc: data => data.Id,
         searchFunc: async _filter =>
         {
+            if (SearchEmployeeId.Equals(Guid.Empty))
+            {
+                var user = await User.GetProfileAsync();
+                if (user.EmployeeId is not null)
+                {
+                    _searchEmployeeId = (Guid)user.EmployeeId!;
+                }
+            }
+
             var filter = _filter.Adapt<DocumentSearchRequest>();
 
             filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;

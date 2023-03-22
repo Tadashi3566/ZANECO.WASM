@@ -3,15 +3,18 @@
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Documents)]
 
-<FshTitle Title="Documents" Description="Manage Documents" />
+<FshTitle Title="Documents" Description="Employee Documents" />
 
 <MudBreadcrumbs Items="_breadcrumbs"/>
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="DocumentDto" TId="Guid" TRequest="DocumentViewModel" Context="@Context">
     <AdvancedSearchContent>
-        <MudItem Class="mt-3">
-            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
-        </MudItem>
+        @if (_canViewEmployees)
+        {
+            <MudItem Class="mt-3">
+                <AutocompleteEmployee @bind-Value="SearchEmployeeId" Disabled=@(!_canViewEmployees) />
+            </MudItem>
+        }
     </AdvancedSearchContent>
     <ExtraActions>
         <MudDivider />

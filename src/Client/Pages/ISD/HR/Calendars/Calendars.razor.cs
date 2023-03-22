@@ -34,21 +34,15 @@ public partial class Calendars
             {
                 var filter = _filter.Adapt<CalendarSearchRequest>();
 
-                //filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
-
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<CalendarDto>>();
             },
             createFunc: async data =>
             {
-                //data.EmployeeId = SearchEmployeeId;
-
                 await Client.CreateAsync(data.Adapt<CalendarCreateRequest>());
             },
             updateFunc: async (id, data) =>
             {
-                //data.EmployeeId = SearchEmployeeId;
-
                 await Client.UpdateAsync(id, data.Adapt<CalendarUpdateRequest>());
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
