@@ -6,10 +6,10 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="WinnerDto" TId="Guid" TRequest="WinnerViewModel" Context="@Context">
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteRaffle Label="Raffle" For="@(() => context.RaffleId)" @bind-Value="context.RaffleId" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompletePrize Label="Prize" For="@(() => context.PrizeId)" @bind-Value="context.PrizeId" />
         </MudItem>
         <MudItem xs="12">

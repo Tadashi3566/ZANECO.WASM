@@ -17,12 +17,22 @@
             </MudItem>
         }
         <MudGrid>
-            <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudDateRangePicker @ref="_dateRangePicker" PickerVariant="PickerVariant.Dialog" Label="Date Range" @bind-DateRange="_dateRange">
+                    <PickerActions>
+                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => _dateRangePicker!.Clear())">Clear</MudButton>
+                        <MudButton OnClick="@(() => _dateRangePicker!.Close(false))">Cancel</MudButton>
+                        <MudButton Color="Color.Primary" OnClick="@(() => _dateRangePicker!.Close())">Ok</MudButton>
+                    </PickerActions>
+                </MudDateRangePicker>
+            </MudItem>
+
+            @*<MudItem xs="12" sm="6" md="4" lg="3">
                 <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateStart" DateFormat="MMMM dd, yyyy"></MudDatePicker>
             </MudItem>
-            <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+            <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateEnd" DateFormat="MMMM dd, yyyy"></MudDatePicker>
-            </MudItem>
+            </MudItem>*@
         </MudGrid>
     </AdvancedSearchContent>
     <ExtraActions>

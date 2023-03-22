@@ -11,13 +11,13 @@
     </AdvancedSearchContent>
 
     <EditFormContent>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteBrand For="@(() => context.BrandId)" @bind-Value="context.BrandId" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="SKU" For="@(() => context.Sku)" @bind-Value="context.Sku" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Barcode" For="@(() => context.Barcode)" @bind-Value="context.Barcode" />
         </MudItem>
         <MudItem xs="12">
@@ -32,7 +32,7 @@
         <MudItem xs="12">
             <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Rate" For="@(() => context.Rate)" @bind-Value="context.Rate" />
         </MudItem>
         <MudItem xs="12">

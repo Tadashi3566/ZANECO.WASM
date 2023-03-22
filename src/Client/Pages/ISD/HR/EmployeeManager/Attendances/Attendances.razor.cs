@@ -33,6 +33,9 @@ public partial class Attendances
 
     private HashSet<AttendanceDto> _selectedItems = new();
 
+    private MudDateRangePicker? _dateRangePicker = default!;
+    private DateRange? _dateRange;
+
     private string? _searchString;
     private bool _canViewEmployees;
 
@@ -84,8 +87,12 @@ public partial class Attendances
                 }
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
-                filter.DateStart = DateStart;
-                filter.DateEnd = DateEnd;
+
+                filter.DateStart = _dateRange!.Start;
+                filter.DateEnd = _dateRange.End;
+
+                //filter.DateStart = DateStart;
+                //filter.DateEnd = DateEnd;
 
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<AttendanceDto>>();
