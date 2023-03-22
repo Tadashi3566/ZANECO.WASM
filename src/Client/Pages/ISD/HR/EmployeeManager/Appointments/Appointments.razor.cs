@@ -1,9 +1,12 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -15,10 +18,19 @@ public partial class Appointments
     public Guid EmployeeId { get; set; } = Guid.Empty;
     [Inject]
     protected IAppointmentsClient Client { get; set; } = default!;
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
+    [Inject]
+    protected IAuthorizationService AuthService { get; set; } = default!;
+    [Inject]
+    protected IPersonalClient User { get; set; } = default!;
 
     protected EntityServerTableContext<AppointmentDto, int, AppointmentViewModel> Context { get; set; } = default!;
 
     private EntityTable<AppointmentDto, int, AppointmentViewModel>? _table;
+
+    private bool _canViewEmployees;
+    private bool _canCreateAttendance;
 
     private string? _searchString;
 
@@ -30,11 +42,16 @@ public partial class Appointments
         }
     }
 
-    protected override void OnInitialized() =>
+    protected override async void OnInitialized()
+    {
+        var state = await AuthState;
+        _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
+        _canCreateAttendance = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Attendance);
+
         Context = new(
             entityName: "Appointment",
             entityNamePlural: "Appointments",
-            entityResource: FSHResource.Employees,
+            entityResource: FSHResource.Attendance,
             fields: new()
             {
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
@@ -47,6 +64,15 @@ public partial class Appointments
             idFunc: data => data.Id,
             searchFunc: async _filter =>
             {
+                if (SearchEmployeeId.Equals(Guid.Empty))
+                {
+                    var user = await User.GetProfileAsync();
+                    if (user.EmployeeId is not null)
+                    {
+                        _searchEmployeeId = (Guid)user.EmployeeId!;
+                    }
+                }
+
                 var filter = _filter.Adapt<AppointmentSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
@@ -79,6 +105,7 @@ public partial class Appointments
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+    }
 
     // Advanced Search
     private Guid _searchEmployeeId;

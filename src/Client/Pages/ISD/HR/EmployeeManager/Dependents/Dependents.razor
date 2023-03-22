@@ -9,15 +9,18 @@
 
 <EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="DependentDto" TId="Guid" TRequest="DependentViewModel" Context="@Context">
     <AdvancedSearchContent>
-        <MudItem Class="mt-3">
-            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
-        </MudItem>
+        @if (_canViewEmployees)
+        {
+            <MudItem Class="mt-3">
+                <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+            </MudItem>
+        }
     </AdvancedSearchContent>
 
     <EditFormContent>
-        <MudItem xs="12">
+        @*<MudItem xs="12">
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
-        </MudItem>
+        </MudItem>*@
 
         <MudItem xs="12">
             <MudTextField Label="Dependent" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />

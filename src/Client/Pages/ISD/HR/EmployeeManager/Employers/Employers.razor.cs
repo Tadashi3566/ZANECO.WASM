@@ -1,10 +1,12 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
-using System.Security;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -13,6 +15,12 @@ public partial class Employers
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
+    [Inject]
+    protected IAuthorizationService AuthService { get; set; } = default!;
+    [Inject]
+    protected IPersonalClient User { get; set; } = default!;
     [Inject]
     protected IEmployersClient Client { get; set; } = default!;
 
@@ -20,6 +28,7 @@ public partial class Employers
 
     private EntityTable<EmployerDto, Guid, EmployerViewModel>? _table;
 
+    private bool _canViewEmployees;
     private string? _searchString;
 
     protected override void OnParametersSet()
@@ -30,7 +39,11 @@ public partial class Employers
         }
     }
 
-    protected override void OnInitialized() =>
+    protected override async void OnInitialized()
+    {
+        var state = await AuthState;
+        _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
+
         Context = new(
             entityName: "Employer",
             entityNamePlural: "Employers",
@@ -48,9 +61,21 @@ public partial class Employers
             idFunc: data => data.Id,
             searchFunc: async _filter =>
             {
+                if (SearchEmployeeId.Equals(Guid.Empty))
+                {
+                    var user = await User.GetProfileAsync();
+                    if (user.EmployeeId is not null)
+                    {
+                        _searchEmployeeId = (Guid)user.EmployeeId!;
+                    }
+                }
+
                 var filter = _filter.Adapt<EmployerSearchRequest>();
+
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
+
                 var result = await Client.SearchAsync(filter);
+
                 return result.Adapt<PaginationResponse<EmployerDto>>();
             },
             createFunc: async data =>
@@ -78,6 +103,7 @@ public partial class Employers
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+    }
 
     // Advanced Search
     private Guid _searchEmployeeId;

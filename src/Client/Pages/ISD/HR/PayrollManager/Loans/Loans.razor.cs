@@ -1,9 +1,12 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
@@ -15,11 +18,18 @@ public partial class Loans
     public Guid EmployeeId { get; set; } = default!;
     [Inject]
     protected ILoanClient Client { get; set; } = default!;
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
+    [Inject]
+    protected IAuthorizationService AuthService { get; set; } = default!;
+    [Inject]
+    protected IPersonalClient User { get; set; } = default!;
 
     protected EntityServerTableContext<LoanDto, Guid, LoanViewModel> Context { get; set; } = default!;
 
     private EntityTable<LoanDto, Guid, LoanViewModel>? _table;
 
+    private bool _canViewEmployees;
     private string? _searchString;
     private DateTime? _dtend;
     private decimal _ammortization = 0;
@@ -32,7 +42,11 @@ public partial class Loans
         }
     }
 
-    protected override void OnInitialized() =>
+    protected override async void OnInitialized()
+    {
+        var state = await AuthState;
+        _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
+
         Context = new(
             entityName: "Employee Loan",
             entityNamePlural: "Employee Loans",
@@ -55,11 +69,21 @@ public partial class Loans
             idFunc: data => data.Id,
             searchFunc: async _filter =>
             {
+                if (SearchEmployeeId.Equals(Guid.Empty))
+                {
+                    var user = await User.GetProfileAsync();
+                    if (user.EmployeeId is not null)
+                    {
+                        _searchEmployeeId = (Guid)user.EmployeeId!;
+                    }
+                }
+
                 var filter = _filter.Adapt<LoanSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
 
                 var result = await Client.SearchAsync(filter);
+
                 return result.Adapt<PaginationResponse<LoanDto>>();
             },
             createFunc: async data =>
@@ -99,6 +123,7 @@ public partial class Loans
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+    }
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.
     // The new service should ideally return $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}"

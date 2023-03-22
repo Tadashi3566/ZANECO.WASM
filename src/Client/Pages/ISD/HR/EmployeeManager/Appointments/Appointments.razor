@@ -1,7 +1,7 @@
 ﻿@page "/employee/appointments"
 @page "/employee/appointments/{employeeId:guid}"
 
-@attribute [MustHavePermission(FSHAction.View, FSHResource.Employees)]
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
 
 <FshTitle Title="Appointments" Description="Employee Appointment Management" />
 
@@ -9,12 +9,21 @@
 
 <EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="AppointmentDto" TId="int" TRequest="AppointmentViewModel" Context="@Context">
     <AdvancedSearchContent>
-        <MudItem Class="mt-3">
-            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
-        </MudItem>
+        @if (_canViewEmployees)
+        {
+            <MudItem Class="mt-3">
+                <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+            </MudItem>
+        }
     </AdvancedSearchContent>
 
     <EditFormContent>
+        @if (_canViewEmployees)
+        {
+            <MudItem Class="mt-3">
+                <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+            </MudItem>
+        }
         <MudItem xs="12">
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
         </MudItem>

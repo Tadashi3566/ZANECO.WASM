@@ -26,12 +26,9 @@
         </MudGrid>
     </AdvancedSearchContent>
     <EditFormContent>
-        @if (_canViewEmployees)
-        {
-            <MudItem xs="12">
-                <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
-            </MudItem>
-        }
+        @*<MudItem xs="12">
+            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
+        </MudItem>*@
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSelect T="string" Label="Log Type" For="@(() => context.LogType)" @bind-Value="context.LogType" Variant="Variant.Filled">
                 <MudSelectItem Value="@("TIMEIN1")"/>
@@ -72,6 +69,9 @@
                     <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
                         Take a Picture
                     </MudButton>
+                    <MudItem>
+                        <MudText Typo="Typo.caption">Select Camera and switch to Selfie mode.</MudText>
+                    </MudItem>
                     @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"

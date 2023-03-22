@@ -13,7 +13,8 @@ public partial class EmployeePayrollDetails
     public Guid PayrollId { get; set; } = default!;
     [Inject]
     protected IEmployeePayrollDetailClient Client { get; set; } = default!;
-
+    [Inject]
+    protected IPersonalClient User { get; set; } = default!;
     protected EntityServerTableContext<EmployeePayrollDetailDto, Guid, EmployeePayrollDetailUpdateRequest> Context { get; set; } = default!;
 
     private EntityTable<EmployeePayrollDetailDto, Guid, EmployeePayrollDetailUpdateRequest>? _table;
@@ -51,12 +52,22 @@ public partial class EmployeePayrollDetails
             idFunc: data => data.Id,
             searchFunc: async _filter =>
             {
+                if (SearchEmployeeId.Equals(Guid.Empty))
+                {
+                    var user = await User.GetProfileAsync();
+                    if (user.EmployeeId is not null)
+                    {
+                        _searchEmployeeId = (Guid)user.EmployeeId!;
+                    }
+                }
+
                 var filter = _filter.Adapt<EmployeePayrollDetailSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
                 filter.PayrollId = SearchPayrollId == default ? null : SearchPayrollId;
 
                 var result = await Client.SearchAsync(filter);
+
                 return result.Adapt<PaginationResponse<EmployeePayrollDetailDto>>();
             },
             createFunc: async data =>

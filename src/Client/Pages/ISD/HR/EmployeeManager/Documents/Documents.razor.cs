@@ -23,7 +23,7 @@ public partial class Documents
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
     [Inject]
-    private IPersonalClient User { get; set; } = default!;
+    protected IPersonalClient User { get; set; } = default!;
 
     protected EntityServerTableContext<DocumentDto, Guid, DocumentViewModel> Context { get; set; } = default!;
 
@@ -52,7 +52,7 @@ public partial class Documents
         entityResource: FSHResource.Documents,
         fields: new()
         {
-            new(data => data.EmployeeName, "Employee", "EmployeeName", visible: !EmployeeId.Equals(Guid.Empty), Template: TemplateEmployee),
+            new(data => data.EmployeeName, "Employee", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty), Template: TemplateEmployee),
             new(data => data.ImagePath, "Image", Template: TemplateImage),
             new(data => data.Reference, "Reference", "Reference", Template: TemplateDateReference),
             new(data => data.Name, "Name", "Name"),

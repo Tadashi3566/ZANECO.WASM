@@ -25,7 +25,7 @@ public partial class UserProfile
     public string? Title { get; set; }
     [Parameter]
     public string? Email { get; set; }
-    public string? _sandurotId { get; set; }
+    private string? _sandurotId { get; set; }
     private Guid _employeeId { get; set; }
 
     private bool _active;

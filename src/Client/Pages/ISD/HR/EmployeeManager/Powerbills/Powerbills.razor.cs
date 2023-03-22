@@ -1,23 +1,34 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Powerbills;
+
 public partial class Powerbills
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
+    [Inject]
+    protected IAuthorizationService AuthService { get; set; } = default!;
+    [Inject]
+    protected IPersonalClient User { get; set; } = default!;
     [Inject]
     protected IPowerbillsClient Client { get; set; } = default!;
     protected EntityServerTableContext<PowerbillDto, Guid, PowerbillViewModel> Context { get; set; } = default!;
 
     private EntityTable<PowerbillDto, Guid, PowerbillViewModel>? _table;
 
+    private bool _canViewEmployees;
     private string? _searchString;
 
     protected override void OnParametersSet()
@@ -28,7 +39,11 @@ public partial class Powerbills
         }
     }
 
-    protected override void OnInitialized() =>
+    protected override async void OnInitialized()
+    {
+        var state = await AuthState;
+        _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
+
         Context = new(
             entityName: "Power Bill",
             entityNamePlural: "Power Bills",
@@ -47,11 +62,21 @@ public partial class Powerbills
             idFunc: data => data.Id,
             searchFunc: async _filter =>
             {
+                if (SearchEmployeeId.Equals(Guid.Empty))
+                {
+                    var user = await User.GetProfileAsync();
+                    if (user.EmployeeId is not null)
+                    {
+                        _searchEmployeeId = (Guid)user.EmployeeId!;
+                    }
+                }
+
                 var filter = _filter.Adapt<PowerbillSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
 
                 var result = await Client.SearchAsync(filter);
+
                 return result.Adapt<PaginationResponse<PowerbillDto>>();
             },
             createFunc: async data =>
@@ -79,6 +104,7 @@ public partial class Powerbills
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
+    }
 
     // Advanced Search
     private Guid _searchEmployeeId;

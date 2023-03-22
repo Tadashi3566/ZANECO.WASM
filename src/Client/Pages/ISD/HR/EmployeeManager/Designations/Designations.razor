@@ -9,9 +9,12 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="DesignationDto" TId="Guid" TRequest="DesignationViewModel" Context="@Context">
     <AdvancedSearchContent>
-        <MudItem Class="mt-3">
-            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
-        </MudItem>
+        @if (_canViewEmployees)
+        {
+            <MudItem Class="mt-3">
+                <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+            </MudItem>
+        }
     </AdvancedSearchContent>
     <ExtraActions>
         @if (_canViewEmployees)
@@ -21,9 +24,9 @@
         }
     </ExtraActions>
     <EditFormContent>
-        <MudItem xs="12">
+        @*<MudItem xs="12">
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
-        </MudItem>
+        </MudItem>*@
 
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudDatePicker Label="Start Date" For="@(() => context.StartDate)" @bind-Date="context.StartDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />

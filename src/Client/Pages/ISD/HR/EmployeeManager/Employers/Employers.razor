@@ -9,9 +9,12 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="EmployerDto" TId="Guid" TRequest="EmployerViewModel" Context="@Context">
     <AdvancedSearchContent>
-        <MudItem Class="mt-3">
-            <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
-        </MudItem>
+        @if (_canViewEmployees)
+        {
+            <MudItem Class="mt-3">
+                <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+            </MudItem>
+        }
     </AdvancedSearchContent>
 
     <EditFormContent>

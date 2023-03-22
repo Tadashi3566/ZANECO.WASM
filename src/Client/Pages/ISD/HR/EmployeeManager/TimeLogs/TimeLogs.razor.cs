@@ -26,7 +26,7 @@ public partial class TimeLogs
     protected ITimeLogsClient Client { get; set; } = default!;
     protected EntityServerTableContext<TimeLogDto, Guid, TimeLogViewModel> Context { get; set; } = default!;
     [Inject]
-    private IPersonalClient User { get; set; } = default!;
+    protected IPersonalClient User { get; set; } = default!;
 
     private EntityTable<TimeLogDto, Guid, TimeLogViewModel>? _table;
 
@@ -83,6 +83,7 @@ public partial class TimeLogs
                 filter.DateEnd = DateEnd;
 
                 var result = await Client.SearchAsync(filter);
+
                 return result.Adapt<PaginationResponse<TimeLogDto>>();
             },
             createFunc: async data =>

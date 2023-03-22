@@ -23,7 +23,8 @@ public partial class Designations
     protected IAuthorizationService AuthService { get; set; } = default!;
     [Inject]
     protected IDesignationsClient Client { get; set; } = default!;
-
+    [Inject]
+    protected IPersonalClient User { get; set; } = default!;
     protected EntityServerTableContext<DesignationDto, Guid, DesignationViewModel> Context { get; set; } = default!;
 
     private EntityTable<DesignationDto, Guid, DesignationViewModel>? _table;
@@ -71,6 +72,15 @@ public partial class Designations
             idFunc: data => data.Id,
             searchFunc: async _filter =>
             {
+                if (SearchEmployeeId.Equals(Guid.Empty))
+                {
+                    var user = await User.GetProfileAsync();
+                    if (user.EmployeeId is not null)
+                    {
+                        _searchEmployeeId = (Guid)user.EmployeeId!;
+                    }
+                }
+
                 var filter = _filter.Adapt<DesignationSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
