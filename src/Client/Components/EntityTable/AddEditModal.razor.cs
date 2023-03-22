@@ -8,6 +8,7 @@ using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Components.EntityTable;
+
 public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
 {
     [Parameter]

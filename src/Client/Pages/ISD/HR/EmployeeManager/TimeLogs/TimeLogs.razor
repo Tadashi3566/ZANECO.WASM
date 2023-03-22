@@ -10,7 +10,7 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="TimeLogDto" TId="Guid" TRequest="TimeLogViewModel" Context="@Context">
     <AdvancedSearchContent>
-        @if (_canUpdateAttendance)
+        @if (_canViewEmployees)
         {
             <MudItem Class="mt-3">
                 <AutocompleteEmployee @bind-Value="SearchEmployeeId" Disabled=@(!_canViewEmployees) />
@@ -26,9 +26,12 @@
         </MudGrid>
     </AdvancedSearchContent>
     <EditFormContent>
-        <MudItem xs="12">
-            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
-        </MudItem>
+        @if (_canViewEmployees)
+        {
+            <MudItem xs="12">
+                <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
+            </MudItem>
+        }
         <MudItem xs="12" sm="6" md="4" lg="3" xl="2" xxl="1">
             <MudSelect T="string" Label="Log Type" For="@(() => context.LogType)" @bind-Value="context.LogType" Variant="Variant.Filled">
                 <MudSelectItem Value="@("TIMEIN1")"/>
@@ -67,7 +70,7 @@
             <MudItem>
                 <div>
                     <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
-                        Upload
+                        Take a Picture
                     </MudButton>
                     @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
