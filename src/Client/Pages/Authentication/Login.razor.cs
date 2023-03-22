@@ -72,6 +72,7 @@ public partial class Login
     private void FillBasicUserCredentials()
     {
         _tokenRequest.UserName = "basicuser";
+        _tokenRequest.Email = "basicuser@zaneco.ph";
         _tokenRequest.Password = "basicuser1";
     }
 }
