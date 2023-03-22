@@ -88,11 +88,16 @@ public partial class Attendances
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
 
-                filter.DateStart = _dateRange!.Start;
-                filter.DateEnd = _dateRange.End;
-
-                //filter.DateStart = DateStart;
-                //filter.DateEnd = DateEnd;
+                if (_dateRange is null)
+                {
+                    filter.DateStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                    filter.DateEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+                }
+                else
+                {
+                    filter.DateStart = _dateRange!.Start;
+                    filter.DateEnd = _dateRange.End;
+                }
 
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<AttendanceDto>>();
@@ -132,24 +137,24 @@ public partial class Attendances
         }
     }
 
-    private DateTime? _dateStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+    //private DateTime? _dateStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
     private DateTime? DateStart
     {
-        get => _dateStart;
+        get => _dateRange!.Start;
         set
         {
-            _dateStart = value;
+            _dateRange!.Start = value;
             _table!.ReloadDataAsync();
         }
     }
 
-    private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+    //private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
     private DateTime? DateEnd
     {
-        get => _dateEnd;
+        get => _dateRange!.End;
         set
         {
-            _dateEnd = value;
+            _dateRange!.End = value;
             _table!.ReloadDataAsync();
         }
     }

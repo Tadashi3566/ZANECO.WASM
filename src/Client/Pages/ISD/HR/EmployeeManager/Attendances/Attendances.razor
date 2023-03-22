@@ -17,8 +17,8 @@
             </MudItem>
         }
         <MudGrid>
-            <MudItem xs="12" sm="6" md="4" lg="3">
-                <MudDateRangePicker @ref="_dateRangePicker" PickerVariant="PickerVariant.Dialog" Label="Date Range" @bind-DateRange="_dateRange">
+            <MudItem xs="12">
+                <MudDateRangePicker @ref="_dateRangePicker" @bind-DateRange="_dateRange" DateFormat="MMMM dd, yyyy" PickerVariant="PickerVariant.Dialog" Label="Date Range" >
                     <PickerActions>
                         <MudButton Class="mr-auto align-self-start" OnClick="@(() => _dateRangePicker!.Clear())">Clear</MudButton>
                         <MudButton OnClick="@(() => _dateRangePicker!.Close(false))">Cancel</MudButton>
@@ -50,7 +50,7 @@
         @*<MudItem xs="12">
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
         </MudItem>*@
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="3">
             <MudSelect Label="Type" For="@(() => context.DayType)" @bind-Value="context.DayType" Variant="Variant.Filled" >
                 <MudSelectItem Value="@("DAY-OFF")" />
                 <MudSelectItem Value="@("HOLIDAY")" />
@@ -58,40 +58,54 @@
                 <MudSelectItem Value="@("OTHER")" />
             </MudSelect>
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="3">
             <MudDatePicker Label="Attendance Date" For="@(() => context.AttendanceDate)" @bind-Date=" context.AttendanceDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
-            <MudTimePicker Label="Time-In 1" AmPm=true @bind-Text="context.ActualTimeIn1" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+        <MudDivider/>
+        <MudItem xs="12" sm="6" md="3">
+            <MudTextField Label="Schedule Time-In1" For="@(() => context.ScheduleTimeIn1)" @bind-Value="context.ScheduleTimeIn1" Format="MMMM dd, yyyy hh:mm tt" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
-            <MudTimePicker Label="Time-Out 1" AmPm=true @bind-Text="context.ActualTimeOut1" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+        <MudItem xs="12" sm="6" md="3">
+            <MudTextField Label="Schedule Time-Out1" For="@(() => context.ScheduleTimeOut1)" @bind-Value="context.ScheduleTimeOut1" Format="MMMM dd, yyyy hh:mm tt" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
-            <MudTimePicker Label="Time-In 2" AmPm=true @bind-Text="context.ActualTimeIn2" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+        <MudItem xs="12" sm="6" md="3">
+            <MudTextField Label="Schedule Time-In2" For="@(() => context.ScheduleTimeIn2)" @bind-Value="context.ScheduleTimeIn2" Format="MMMM dd, yyyy hh:mm tt" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
-            <MudTimePicker Label="Time-Out 2" AmPm=true @bind-Text="context.ActualTimeOut2" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+        <MudItem xs="12" sm="6" md="3">
+            <MudTextField Label="Schedule Time-Out2" For="@(() => context.ScheduleTimeOut2)" @bind-Value="context.ScheduleTimeOut2" Format="MMMM dd, yyyy hh:mm tt" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudDivider/>
+        <MudItem xs="12" sm="6" md="3">
+            <MudTimePicker Label="Time-In1" AmPm=true @bind-Text="context.ActualTimeIn1" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudTimePicker Label="Time-Out1" AmPm=true @bind-Text="context.ActualTimeOut1" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudTimePicker Label="Time-In2" AmPm=true @bind-Text="context.ActualTimeIn2" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudTimePicker Label="Time-Out2" AmPm=true @bind-Text="context.ActualTimeOut2" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
             <MudDatePicker Label="Time-Out Date" For="@(() => context.TimeOutDate)" @bind-Date=" context.TimeOutDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="3">
             <MudSwitch Class="mt-3" Color="Color.Secondary" Label="With Overtime" For="@(() => context.IsOvertime)" @bind-Checked=" context.IsOvertime" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="3">
             <MudNumericField Label="Late (minutes)" For="@(() => context.LateMinutes)" @bind-Value="context.LateMinutes" Format="N2" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="3">
             <MudNumericField Label="Undertime (minutes)" For="@(() => context.UnderTimeMinutes)" @bind-Value="context.UnderTimeMinutes" Format="N2" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="3">
             <MudNumericField Label="Total Hours" For="@(() => context.TotalHours)" @bind-Value="context.TotalHours" Format="N2" ReadOnly=true Variant="Variant.Outlined" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="3">
             <MudNumericField Label="Paid Hours" For="@(() => context.PaidHours)" @bind-Value="context.PaidHours" Format="N2" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="6" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="3">
             <MudSelect Label="Status" For="@(() => context.Status)" @bind-Value="context.Status">
                 <MudSelectItem Value="@("FOR APPROVAL")" />
                 <MudSelectItem Value="@("APPROVED")" />

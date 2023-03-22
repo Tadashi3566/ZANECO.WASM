@@ -6,6 +6,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Preferences;
 
 namespace ZANECO.WASM.Client.Pages.Personal;
+
 public partial class AuditLogs
 {
     [Inject]
