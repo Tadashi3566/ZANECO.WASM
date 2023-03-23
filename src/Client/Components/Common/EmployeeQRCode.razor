@@ -20,6 +20,10 @@
 </MudGrid>
 
 @code {
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthState { get; set; } = default!;
+    [Inject]
+    protected IAuthenticationService AuthService { get; set; } = default!;
     [Inject]
     protected IPersonalClient Client { get; set; } = default!;
 
@@ -32,21 +36,23 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var userDto = await Client.GetProfileAsync();
-        if (userDto is not null)
+        if ((await AuthState).User is { } user)
         {
-            _name = $"{userDto.FirstName} {userDto.LastName}";
+            var userDto = await Client.GetProfileAsync();
+            if (userDto is not null)
+            {
+                _name = $"{userDto.FirstName} {userDto.LastName}";
 
-            if (userDto.EmployeeId is not null)
-            {
-                _employeeId = userDto.EmployeeId.ToString();
-            }
-            if (userDto.SandurotId is not null)
-            {
-                _sandurotId = userDto.SandurotId.ToString();
+                if (userDto.EmployeeId is not null)
+                {
+                    _employeeId = userDto.EmployeeId.ToString();
+                }
+                if (userDto.SandurotId is not null)
+                {
+                    _sandurotId = userDto.SandurotId.ToString();
+                }
             }
         }
-        
         _isLoaded = true;
         StateHasChanged();
     }

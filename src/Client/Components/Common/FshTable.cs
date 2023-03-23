@@ -17,7 +17,7 @@ public class FshTable<T> : MudTable<T>
     {
         if (await ClientPreferences.GetPreference() is ClientPreference clientPreference)
         {
-            SetTablePreference(clientPreference.TablePreference);
+            SetClientPreference(clientPreference);
         }
 
         Courier.SubscribeWeak<NotificationWrapper<FshTablePreference>>(wrapper =>
@@ -27,6 +27,13 @@ public class FshTable<T> : MudTable<T>
         });
 
         await base.OnInitializedAsync();
+    }
+
+    private void SetClientPreference(ClientPreference clientPreference)
+    {
+        Elevation = clientPreference.Elevation;
+
+        SetTablePreference(clientPreference.TablePreference);
     }
 
     private void SetTablePreference(FshTablePreference tablePreference)

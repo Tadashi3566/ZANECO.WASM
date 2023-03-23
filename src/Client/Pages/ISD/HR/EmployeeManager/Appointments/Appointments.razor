@@ -18,15 +18,9 @@
     </AdvancedSearchContent>
 
     <EditFormContent>
-        @if (_canViewEmployees)
-        {
-            <MudItem Class="mt-3">
-                <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
-            </MudItem>
-        }
-        <MudItem xs="12">
+        @*<MudItem xs="12">
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
-        </MudItem>
+        </MudItem>*@
 
         <MudItem xs="12">
             <MudTextField Label="Appointment" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
