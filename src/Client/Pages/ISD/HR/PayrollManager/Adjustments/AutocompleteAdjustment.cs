@@ -12,7 +12,7 @@ public class AutocompleteAdjustment : MudAutocomplete<string>
     [Inject]
     private IGroupsClient Client { get; set; } = default!;
 
-    private List<GroupDto> _groups = new();
+    private List<GroupDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -39,13 +39,13 @@ public class AutocompleteAdjustment : MudAutocomplete<string>
         if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfGroupDto response)
         {
-            _groups = response.Data
+            _list = response.Data
                 .Where(x => x.Parent.Equals("ADJUSTMENT"))
                 .OrderBy(x => x.Name)
                 .ToList();
         }
 
-        return _groups
+        return _list
             .Select(x => x.Name);
     }
 }

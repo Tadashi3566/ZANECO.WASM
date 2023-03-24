@@ -4,6 +4,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Designations;
+
 public class AutocompleteArea : MudAutocomplete<string>
 {
     [Inject]
@@ -11,7 +12,7 @@ public class AutocompleteArea : MudAutocomplete<string>
     [Inject]
     private IGroupsClient Client { get; set; } = default!;
 
-    private List<GroupDto> _groups = new();
+    private List<GroupDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -39,12 +40,12 @@ public class AutocompleteArea : MudAutocomplete<string>
             Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfGroupDto response)
         {
-            _groups = response.Data
+            _list = response.Data
                 .Where(x => x.Parent.Equals("OFFICES"))
                 .ToList();
         }
 
-        return _groups
+        return _list
             .Select(x => x.Name);
     }
 }

@@ -23,6 +23,9 @@
         </MudItem>*@
 
         <MudItem xs="12">
+            <AutocompleteAppointmentType For="@(() => context.AppointmentType)" @bind-Value=context.AppointmentType />
+        </MudItem>
+        <MudItem xs="12">
             <MudTextField Label="Appointment" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">

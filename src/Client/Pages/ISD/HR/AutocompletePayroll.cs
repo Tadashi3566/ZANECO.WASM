@@ -11,7 +11,7 @@ public class AutocompletePayroll : MudAutocomplete<Guid>
     [Inject]
     private IPayrollClient Client { get; set; } = default!;
 
-    private List<PayrollDto> _payroll = new();
+    private List<PayrollDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -36,7 +36,7 @@ public class AutocompletePayroll : MudAutocomplete<Guid>
             && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
             is { } dto)
         {
-            _payroll.Add(dto);
+            _list.Add(dto);
             ForceRender(true);
         }
     }
@@ -53,14 +53,14 @@ public class AutocompletePayroll : MudAutocomplete<Guid>
                 () => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfPayrollDto response)
         {
-            _payroll = response.Data.ToList();
+            _list = response.Data.ToList();
         }
 
-        return _payroll
+        return _list
             .Where(p => !p.IsClosed)
             .Select(x => x.Id);
     }
 
     private string GetText(Guid id) =>
-        _payroll.Find(b => b.Id == id)?.Name ?? string.Empty;
+        _list.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

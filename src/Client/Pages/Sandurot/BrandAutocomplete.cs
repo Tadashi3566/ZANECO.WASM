@@ -10,11 +10,11 @@ public class AutocompleteBrand : MudAutocomplete<Guid>
     [Inject]
     private IStringLocalizer<AutocompleteBrand> L { get; set; } = default!;
     [Inject]
-    private IBrandsClient BrandsClient { get; set; } = default!;
+    private IBrandsClient Client { get; set; } = default!;
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
 
-    private List<BrandDto> _brands = new();
+    private List<BrandDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -36,10 +36,10 @@ public class AutocompleteBrand : MudAutocomplete<Guid>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender &&
-            _value != default && await ApiHelper.ExecuteCallGuardedAsync(() => BrandsClient.GetAsync(_value), Snackbar)
+            _value != default && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
             is { } dto)
         {
-            _brands.Add(dto);
+            _list.Add(dto);
             ForceRender(true);
         }
     }
@@ -53,15 +53,15 @@ public class AutocompleteBrand : MudAutocomplete<Guid>
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => BrandsClient.SearchAsync(filter), Snackbar)
+                () => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfBrandDto response)
         {
-            _brands = response.Data.ToList();
+            _list = response.Data.ToList();
         }
 
-        return _brands.Select(x => x.Id);
+        return _list.Select(x => x.Id);
     }
 
     private string GetText(Guid id) =>
-        _brands.Find(b => b.Id == id)?.Name ?? string.Empty;
+        _list.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

@@ -12,7 +12,7 @@ public class AutocompleteLoans : MudAutocomplete<Guid>
     [Inject]
     private IAdjustmentsClient Client { get; set; } = default!;
 
-    private List<AdjustmentDto> _adjustment = new();
+    private List<AdjustmentDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -37,7 +37,7 @@ public class AutocompleteLoans : MudAutocomplete<Guid>
             && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
             is { } dto)
         {
-            _adjustment.Add(dto);
+            _list.Add(dto);
             ForceRender(true);
         }
     }
@@ -54,14 +54,14 @@ public class AutocompleteLoans : MudAutocomplete<Guid>
             Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfAdjustmentDto response)
         {
-            _adjustment = response.Data
+            _list = response.Data
                 .Where(x => x.IsLoan)
                 .ToList();
         }
 
-        return _adjustment.Select(x => x.Id);
+        return _list.Select(x => x.Id);
     }
 
     private string GetText(Guid id) =>
-        _adjustment.Find(b => b.Id == id)?.Name ?? string.Empty;
+        _list.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

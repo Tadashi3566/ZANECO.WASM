@@ -4,6 +4,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.Calendars;
+
 public class AutocompleteCalendarType : MudAutocomplete<string>
 {
     [Inject]
@@ -11,7 +12,7 @@ public class AutocompleteCalendarType : MudAutocomplete<string>
     [Inject]
     private IGroupsClient Client { get; set; } = default!;
 
-    private List<GroupDto> _groups = new();
+    private List<GroupDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -39,9 +40,9 @@ public class AutocompleteCalendarType : MudAutocomplete<string>
             Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfGroupDto dto)
         {
-            _groups = dto.Data.Where(x => x.Parent.Equals("CALENDAR") || x.Parent.Equals("LEAVE")).ToList();
+            _list = dto.Data.Where(x => x.Parent.Equals("CALENDAR") || x.Parent.Equals("LEAVE")).ToList();
         }
 
-        return _groups.Select(x => x.Name);
+        return _list.Select(x => x.Name);
     }
 }

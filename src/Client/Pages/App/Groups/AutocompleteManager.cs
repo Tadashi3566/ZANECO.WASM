@@ -12,7 +12,7 @@ public class AutocompleteManager : MudAutocomplete<string>
     [Inject]
     private IEmployeesClient Client { get; set; } = default!;
 
-    private List<EmployeeDto> _employees = new();
+    private List<EmployeeDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -39,10 +39,10 @@ public class AutocompleteManager : MudAutocomplete<string>
         if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfEmployeeDto response)
         {
-            _employees = response.Data.ToList();
+            _list = response.Data.ToList();
         }
 
-        return _employees
+        return _list
             .Select(x => x.FullName);
     }
 }

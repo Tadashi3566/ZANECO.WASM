@@ -11,7 +11,7 @@ public class AutocompleteSchedule : MudAutocomplete<Guid>
     [Inject]
     private ISchedulesClient Client { get; set; } = default!;
 
-    private List<ScheduleDto> _schedules = new();
+    private List<ScheduleDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -36,7 +36,7 @@ public class AutocompleteSchedule : MudAutocomplete<Guid>
             && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
             is { } dto)
         {
-            _schedules.Add(dto);
+            _list.Add(dto);
             ForceRender(true);
         }
     }
@@ -53,12 +53,12 @@ public class AutocompleteSchedule : MudAutocomplete<Guid>
                 () => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfScheduleDto response)
         {
-            _schedules = response.Data.ToList();
+            _list = response.Data.ToList();
         }
 
-        return _schedules.Select(x => x.Id);
+        return _list.Select(x => x.Id);
     }
 
     private string GetText(Guid id) =>
-        _schedules.Find(b => b.Id == id)?.Name ?? string.Empty;
+        _list.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

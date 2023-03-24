@@ -55,6 +55,7 @@ public partial class Appointments
             fields: new()
             {
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
+                new(data => data.AppointmentType, "Type", "AppointmentType"),
                 new(data => data.Subject, "Subject", "Subject"),
                 new(data => data.StartTime, "Start Time", Template: TemplateStartEnd),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),

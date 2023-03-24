@@ -11,11 +11,11 @@ public class AutocompleteArea : MudAutocomplete<Guid>
     [Inject]
     private IStringLocalizer<AutocompleteArea> L { get; set; } = default!;
     [Inject]
-    private IAreasClient AreasClient { get; set; } = default!;
+    private IAreasClient Client { get; set; } = default!;
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
 
-    private List<AreaDto> _areas = new();
+    private List<AreaDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -38,10 +38,10 @@ public class AutocompleteArea : MudAutocomplete<Guid>
     {
         if (firstRender && _value != default &&
             await ApiHelper.ExecuteCallGuardedAsync(() =>
-            AreasClient.GetAsync(_value), Snackbar)
+            Client.GetAsync(_value), Snackbar)
             is { } dto)
         {
-            _areas.Add(dto);
+            _list.Add(dto);
             ForceRender(true);
         }
     }
@@ -55,15 +55,15 @@ public class AutocompleteArea : MudAutocomplete<Guid>
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(() =>
-            AreasClient.SearchAsync(filter), Snackbar)
+            Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfAreaDto response)
         {
-            _areas = response.Data.ToList();
+            _list = response.Data.ToList();
         }
 
-        return _areas.Select(x => x.Id);
+        return _list.Select(x => x.Id);
     }
 
     private string GetText(Guid id) =>
-        _areas.Find(b => b.Id == id)?.Name ?? string.Empty;
+        _list.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

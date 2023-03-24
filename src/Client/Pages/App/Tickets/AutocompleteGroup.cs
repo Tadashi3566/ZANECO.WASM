@@ -11,7 +11,7 @@ public class AutocompleteGroup : MudAutocomplete<Guid>
     [Inject]
     private IGroupsClient Client { get; set; } = default!;
 
-    private List<GroupDto> _groups = new();
+    private List<GroupDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -36,7 +36,7 @@ public class AutocompleteGroup : MudAutocomplete<Guid>
             && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
             is { } dto)
         {
-            _groups.Add(dto);
+            _list.Add(dto);
             ForceRender(true);
         }
     }
@@ -53,12 +53,12 @@ public class AutocompleteGroup : MudAutocomplete<Guid>
                 () => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfGroupDto response)
         {
-            _groups = response.Data.ToList();
+            _list = response.Data.ToList();
         }
 
-        return _groups.Where(x => x.Application.Equals("TICKET")).Select(x => x.Id);
+        return _list.Where(x => x.Application.Equals("TICKET")).Select(x => x.Id);
     }
 
     private string GetText(Guid id) =>
-        _groups.Find(b => b.Id == id)?.Name ?? string.Empty;
+        _list.Find(b => b.Id == id)?.Name ?? string.Empty;
 }

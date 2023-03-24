@@ -11,7 +11,7 @@ public class AutocompleteTax : MudAutocomplete<string>
     [Inject]
     private IGroupsClient Client { get; set; } = default!;
 
-    private List<GroupDto> _groups = new();
+    private List<GroupDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -38,9 +38,9 @@ public class AutocompleteTax : MudAutocomplete<string>
         if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfGroupDto dto)
         {
-            _groups = dto.Data.Where(x => x.Parent.Equals("TAX")).ToList();
+            _list = dto.Data.Where(x => x.Parent.Equals("TAX")).ToList();
         }
 
-        return _groups.Select(x => x.Code);
+        return _list.Select(x => x.Code);
     }
 }
