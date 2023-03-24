@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using CurrieTechnologies.Razor.SweetAlert2;
 //using DevExpress.Blazor;
 using Microsoft.AspNetCore.Components.Web;
@@ -16,7 +17,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddClientServices(builder.Configuration);
-
+builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddSweetAlert2();
 
 builder.Services.AddSyncfusionBlazor();

@@ -42,16 +42,16 @@ public static class FSHResource
 
     public const string Accounting = nameof(Accounting);
 
-    public const string ISD = nameof(ISD);
     public const string Employees = nameof(Employees);
-    public const string Attendance = nameof(Attendance);
     public const string Calendar = nameof(Calendar);
-
     public const string Schedules = nameof(Schedules);
+    public const string Attendance = nameof(Attendance);
+    public const string Appointment = nameof(Appointment);
 
     public const string Payroll = nameof(Payroll);
 
     public const string CAD = nameof(CAD);
+    public const string ISD = nameof(ISD);
 
     public const string Raffles = nameof(Raffles);
 }
@@ -98,16 +98,16 @@ public static class FSHPermissions
         new("Update Sandurot", FSHAction.Update, FSHResource.Sandurot),
         new("Delete Sandurot", FSHAction.Delete, FSHResource.Sandurot),
 
-        new("View Brands", FSHAction.View, FSHResource.Brands, IsBasic: true),
-        new("Search Brands", FSHAction.Search, FSHResource.Brands, IsBasic: true),
+        new("View Brands", FSHAction.View, FSHResource.Brands),
+        new("Search Brands", FSHAction.Search, FSHResource.Brands),
         new("Create Brands", FSHAction.Create, FSHResource.Brands),
         new("Update Brands", FSHAction.Update, FSHResource.Brands),
         new("Delete Brands", FSHAction.Delete, FSHResource.Brands),
         new("Generate Brands", FSHAction.Generate, FSHResource.Brands),
         new("Clean Brands", FSHAction.Clean, FSHResource.Brands),
 
-        new("View Products", FSHAction.View, FSHResource.Products, IsBasic: true),
-        new("Search Products", FSHAction.Search, FSHResource.Products, IsBasic: true),
+        new("View Products", FSHAction.View, FSHResource.Products),
+        new("Search Products", FSHAction.Search, FSHResource.Products),
         new("Create Products", FSHAction.Create, FSHResource.Products),
         new("Update Products", FSHAction.Update, FSHResource.Products),
         new("Delete Products", FSHAction.Delete, FSHResource.Products),
@@ -194,6 +194,13 @@ public static class FSHPermissions
         new("Update Attendance", FSHAction.Update, FSHResource.Attendance),
         new("Delete Attendance", FSHAction.Delete, FSHResource.Attendance),
         new("Export Attendance", FSHAction.Export, FSHResource.Attendance),
+
+        new("View Appointment", FSHAction.View, FSHResource.Appointment),
+        new("Search Appointment", FSHAction.Search, FSHResource.Appointment),
+        new("Create Appointment", FSHAction.Create, FSHResource.Appointment),
+        new("Update Appointment", FSHAction.Update, FSHResource.Appointment),
+        new("Delete Appointment", FSHAction.Delete, FSHResource.Appointment),
+        new("Export Appointment", FSHAction.Export, FSHResource.Appointment),
 
         new("View Payroll", FSHAction.View, FSHResource.Payroll),
         new("Search Payroll", FSHAction.Search, FSHResource.Payroll),

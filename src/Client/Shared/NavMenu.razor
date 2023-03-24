@@ -55,7 +55,7 @@
         </MudNavGroup>
     }
     
-    @if (_canViewEmployees || _canViewAttendance || _canViewCalendar || _canViewDocuments)
+    @if (_canViewEmployees || _canViewAttendance || _canViewCalendar || _canViewDocuments || _canViewAppointment)
     {
         <MudNavGroup Title="Human Resource" Icon="@Icons.Material.Filled.AddBox" >
             <MudNavLink Href="/hr/employees" Icon="@Icons.Material.Filled.Groups" Class="fsh-nav-child" Disabled=(!_canViewEmployees)>Employees</MudNavLink>

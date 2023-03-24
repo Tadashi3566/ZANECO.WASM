@@ -86,8 +86,7 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
         string _message = $"{EntityName} {(IsCreate ? L["Created"] : L["Updated"])}.";
         _isBusy = true;
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() =>
-            SaveFunc(RequestModel), Snackbar, _customValidation, _message))
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => SaveFunc(RequestModel), Snackbar, _customValidation, _message))
         {
             MudDialog.Close();
 

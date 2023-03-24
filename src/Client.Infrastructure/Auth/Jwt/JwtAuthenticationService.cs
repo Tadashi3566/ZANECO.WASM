@@ -4,6 +4,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Infrastructure.Auth.Jwt;
+
 public class JwtAuthenticationService : AuthenticationStateProvider, IAuthenticationService, IAccessTokenProvider
 {
     private readonly SemaphoreSlim _semaphore = new(1, 1);

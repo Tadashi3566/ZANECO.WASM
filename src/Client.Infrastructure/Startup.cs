@@ -11,6 +11,7 @@ using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Infrastructure;
+
 public static class Startup
 {
     private const string ClientName = "ZANECO.API";

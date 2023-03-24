@@ -45,9 +45,11 @@ public partial class NavMenu
 
     private bool _canViewISD;
     private bool _canViewEmployees;
+    private bool _canViewCalendar;
     private bool _canCreateAttendance;
     private bool _canViewAttendance;
-    private bool _canViewCalendar;
+    private bool _canViewAppointment;
+
     private bool _canViewPayroll;
 
     private bool _canViewCAD;
@@ -83,10 +85,13 @@ public partial class NavMenu
         _canCreateComment = await AuthService.HasPermissionAsync(user, FSHAction.Create, FSHResource.Surveys);
 
         _canViewISD = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.ISD);
+
         _canViewEmployees = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Employees);
+        _canViewCalendar = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Calendar);
         _canCreateAttendance = await AuthService.HasPermissionAsync(user, FSHAction.Create, FSHResource.Attendance);
         _canViewAttendance = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Attendance);
-        _canViewCalendar = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Calendar);
+        _canViewAppointment = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Appointment);
+
         _canViewPayroll = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Payroll);
 
         _canViewAccounting = await AuthService.HasPermissionAsync(user, FSHAction.View, FSHResource.Accounting);

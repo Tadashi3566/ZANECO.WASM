@@ -1,7 +1,7 @@
 ﻿@page "/employee/appointments"
 @page "/employee/appointments/{employeeId:guid}"
 
-@attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Appointment)]
 
 <FshTitle Title="Appointments" Description="Employee Appointment Management" />
 
@@ -15,8 +15,11 @@
                 <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
             </MudItem>
         }
-    </AdvancedSearchContent>
-
+  1  </AdvancedSearchContent>
+    <ExtraActions>
+        <MudMenuItem>For Approval</MudMenuItem>
+        <MudMenuItem Disabled>Approve</MudMenuItem>
+    </ExtraActions>
     <EditFormContent>
         @*<MudItem xs="12">
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
@@ -101,10 +104,10 @@
     private RenderFragment<AppointmentDto> TemplateStartEnd => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle1">
+            <MudText Typo="Typo.caption">
                 @context.StartTime.ToString("dddd MMMM dd, yyyy HH:mm")
             </MudText>
-            <MudText Typo="Typo.caption">
+            <MudText Typo="Typo.subtitle2">
                 @context.EndTime.ToString("dddd MMMM dd, yyyy HH:mm")
             </MudText>
         </MudItem>

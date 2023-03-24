@@ -30,7 +30,7 @@ public partial class Appointments
     private EntityTable<AppointmentDto, int, AppointmentViewModel>? _table;
 
     private bool _canViewEmployees;
-    private bool _canCreateAttendance;
+    //private bool _canCreateAppointment;
 
     private string? _searchString;
 
@@ -46,18 +46,20 @@ public partial class Appointments
     {
         var state = await AuthState;
         _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
-        _canCreateAttendance = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Attendance);
+        //_canCreateAppointment = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Appointment);
 
         Context = new(
             entityName: "Appointment",
             entityNamePlural: "Appointments",
-            entityResource: FSHResource.Attendance,
+            entityResource: FSHResource.Appointment,
             fields: new()
             {
+                new(data => data.Id, "Id", "Id"),
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.AppointmentType, "Type", "AppointmentType"),
                 new(data => data.Subject, "Subject", "Subject"),
-                new(data => data.StartTime, "Start Time", Template: TemplateStartEnd),
+                new(data => data.StartTime, "Date Time", Template: TemplateStartEnd),
+                new(data => data.Status, "Status", "Status"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },

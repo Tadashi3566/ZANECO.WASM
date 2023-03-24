@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using ZANECO.WASM.Client.Infrastructure.Theme;
 
 namespace ZANECO.WASM.Client.Infrastructure.Preferences;
+
 public class ClientPreferenceManager : IClientPreferenceManager
 {
     private readonly ILocalStorageService _localStorageService;
