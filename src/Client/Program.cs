@@ -1,6 +1,5 @@
 using Blazored.LocalStorage;
 using CurrieTechnologies.Razor.SweetAlert2;
-//using DevExpress.Blazor;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Syncfusion.Blazor;
@@ -18,6 +17,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddClientServices(builder.Configuration);
 builder.Services.AddBlazoredLocalStorage();
+
 builder.Services.AddSweetAlert2();
 
 builder.Services.AddSyncfusionBlazor();
@@ -28,7 +28,7 @@ builder.Services.AddScoped<IClipboardService, ClipboardService>();
 var host = builder.Build();
 
 var storageService = host.Services.GetRequiredService<IClientPreferenceManager>();
-if (storageService != null)
+if (storageService is not null)
 {
     CultureInfo culture;
     if (await storageService.GetPreference() is ClientPreference preference)
