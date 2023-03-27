@@ -37,7 +37,7 @@
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Content" For="@(() => context.Content)" @bind-Value="context.Content" Variant="Variant.Filled" Lines="10" />
+            <MudTextField Label="Content" For="@(() => context.Content)" @bind-Value="context.Content" Variant="Variant.Filled" Lines="10" ReadOnly />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
