@@ -25,7 +25,10 @@
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date" For="@(() => context.DocumentDate)" @bind-Date="context.DocumentDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <MudDatePicker Label="Date" For="@(() => context.DocumentDate)" @bind-Date="context.DocumentDate" DateFormat="MMMM dd, yyyy" Editable=true Variant="Variant.Filled" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <AutocompleteDocumentType For="@(() => context.DocumentType)" @bind-Value="context.DocumentType" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" />
@@ -119,7 +122,7 @@
             <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.Reference" HighlightedText="@_searchString" />
             </MudText>
-            <MudSwitch Label="Is Public" Checked="@context.IsPublic" Color="Color.Secondary" ReadOnly />
+            <MudSwitch Label="Public" Checked="@context.IsPublic" Color="Color.Secondary" ReadOnly />
         </MudItem>
     };
 

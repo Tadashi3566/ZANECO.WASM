@@ -55,6 +55,7 @@ public partial class Documents
             new(data => data.EmployeeName, "Employee", "EmployeeName", visible: EmployeeId.Equals(Guid.Empty), Template: TemplateEmployee),
             new(data => data.ImagePath, "Image", Template: TemplateImage),
             new(data => data.Reference, "Reference", "Reference", Template: TemplateDateReference),
+            new(data => data.DocumentType, "Type", "DocumentType"),
             new(data => data.Name, "Name", "Name"),
             new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
             new(data => data.Notes, "Notes", visible: false),
