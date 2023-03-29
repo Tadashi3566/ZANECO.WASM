@@ -88,6 +88,10 @@
                 <InputFile id="fileInput" hidden OnChange="UploadImage" />
             </MudItem>
         </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Raw" For="@(() => context.Raw)" @bind-Value="context.Raw" Variant="Variant.Filled" Lines="10" ReadOnly />
+        </MudItem>
     </EditFormContent>
 
 </EntityTable>

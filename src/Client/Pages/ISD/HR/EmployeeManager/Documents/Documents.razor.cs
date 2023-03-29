@@ -96,7 +96,7 @@ public partial class Documents
                 {
                     Data = data.ImageInBytes,
                     Extension = data.ImageExtension ?? string.Empty,
-                    Name = $"{data.Name}_{Guid.NewGuid():N}",
+                    Name = $"{data.DocumentType}_{Guid.NewGuid():N}",
                     EmployeeId = SearchEmployeeId.ToString(),
                     DateStr = $"{data.DocumentDate:yyyy-MM-dd}"
                 };
@@ -115,7 +115,7 @@ public partial class Documents
                 {
                     Data = data.ImageInBytes,
                     Extension = data.ImageExtension ?? string.Empty,
-                    Name = $"{data.Name}_{Guid.NewGuid():N}",
+                    Name = $"{data.DocumentType}_{Guid.NewGuid():N}",
                     EmployeeId = SearchEmployeeId.ToString(),
                     DateStr = $"{data.DocumentDate:yyyy-MM-dd}"
                 };
@@ -167,6 +167,11 @@ public partial class Documents
             Context.AddEditModal.RequestModel.ImageInBytes = $"data:{ApplicationConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}";
             Context.AddEditModal.ForceRender();
         }
+    }
+
+    private async void UploadMultipleFiles()
+    {
+
     }
 
     private void ClearImageInBytes()
