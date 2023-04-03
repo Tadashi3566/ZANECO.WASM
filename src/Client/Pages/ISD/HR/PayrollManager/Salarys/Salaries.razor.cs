@@ -27,7 +27,7 @@ public partial class Salaries
                 new(data => data.DateStart, "Date Start", "DateStart", Template: TemplateDateStartEnd),
                 new(data => data.Number, "Number", "Number"),
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.SalaryAmount, "Salary Amount", "SalaryAmount", typeof(decimal)),
+                new(data => data.Amount, "Salary Amount", "SalaryAmount", typeof(decimal)),
                 new(data => data.IncrementYears, "After Years", "IncrementYears", typeof(int)),
                 new(data => data.IncrementAmount, "Increment Amount", "IncrementAmount", typeof(decimal)),
                 new(data => data.IsActive, "Is Active", "IsActive", typeof(bool)),
