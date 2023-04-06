@@ -63,7 +63,7 @@
 }
 
 ::-webkit-scrollbar {
-    width: 2px!important;
+    width: 4px!important;
     height: 6px!important;
 }
 .fsh-nav-child {

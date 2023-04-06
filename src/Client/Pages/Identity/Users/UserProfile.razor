@@ -30,23 +30,29 @@ else
                                 <MudItem xs="12" sm="6" md="4" lg="3">
                                     <MudSwitch @bind-Checked="@_active" Color="Color.Tertiary" Label="@_localizer["Active?"]" />
                                 </MudItem>
-                                <MudItem xs="12" sm="6" md="4" lg="3">
+                                <MudItem xs="12" sm="6">
                                     <AutocompleteEmployee @bind-Value="_employeeId"/>
                                 </MudItem>
                                 <MudItem xs="12" sm="6" md="4" lg="3">
                                     <MudTextField Label="Sandurot Id" @bind-Value="_sandurotId" />
                                 </MudItem>
+                                <MudItem xs="12" sm="6" md="4" lg="3">
+                                    <MudTextField Label="Power Bill Account" @bind-Value="_accountNumber" />
+                                </MudItem>
                                 <MudItem>
-                                    <MudButton Color="Color.Primary"
-                                       Class="ml-auto"
-                                       ButtonType="ButtonType.Submit"
-                                       OnClick="ToggleUserStatus"
-                                       Variant="Variant.Filled">
-                                        Save Changes
-                                    </MudButton>
+                                    
                                 </MudItem>
                             </MudGrid>
                         </MudCardContent>
+                        <MudCardActions>
+                            <MudButton Color="Color.Primary"
+                               Class="ml-auto"
+                               ButtonType="ButtonType.Submit"
+                               OnClick="ToggleUserStatus"
+                               Variant="Variant.Filled">
+                                Save Changes
+                            </MudButton>
+                        </MudCardActions>
                     </MudCard>
                 </MudItem>
             }

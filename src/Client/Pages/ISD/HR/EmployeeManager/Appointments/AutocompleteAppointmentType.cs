@@ -37,8 +37,7 @@ public class AutocompleteAppointmentType : MudAutocomplete<string>
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
-                () => Client.SearchAsync(filter), Snackbar)
-            is PaginationResponseOfAppointmentDto response)
+            () => Client.SearchAsync(filter), Snackbar) is PaginationResponseOfAppointmentDto response)
         {
             _list = response.Data.ToList();
         }

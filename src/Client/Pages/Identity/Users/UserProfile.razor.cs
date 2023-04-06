@@ -25,9 +25,10 @@ public partial class UserProfile
     public string? Title { get; set; }
     [Parameter]
     public string? Email { get; set; }
-    private string? _sandurotId { get; set; }
-    private Guid _employeeId { get; set; }
 
+    private Guid _employeeId { get; set; }
+    private string? _sandurotId { get; set; }
+    private string? _accountNumber { get; set; }
     private bool _active;
     private bool _emailConfirmed;
     private char _firstLetterOfName;
@@ -50,6 +51,7 @@ public partial class UserProfile
             UserId = Id,
             EmployeeId = _employeeId!,
             SandurotId = _sandurotId!,
+            AccountNumber = _accountNumber,
             EmailConfirmed = _emailConfirmed,
             ActivateUser = _active,
         };
@@ -88,6 +90,11 @@ public partial class UserProfile
             if (userDto.SandurotId is not null)
             {
                 _sandurotId = userDto.SandurotId!;
+            }
+
+            if (userDto.AccountNumber is not null)
+            {
+                _accountNumber = userDto.AccountNumber!;
             }
         }
 

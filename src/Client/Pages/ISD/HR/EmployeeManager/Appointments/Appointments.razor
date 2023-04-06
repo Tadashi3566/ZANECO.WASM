@@ -15,7 +15,7 @@
                 <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
             </MudItem>
         }
-  1  </AdvancedSearchContent>
+    </AdvancedSearchContent>
     <ExtraActions>
         <MudMenuItem>For Approval</MudMenuItem>
         <MudMenuItem Disabled>Approve</MudMenuItem>
@@ -25,18 +25,23 @@
             <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
         </MudItem>*@
 
-        <MudItem xs="12">
+        <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteAppointmentType For="@(() => context.AppointmentType)" @bind-Value=context.AppointmentType />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Appointment" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Start Time" For="@(() => context.StartTime)" @bind-Date="context.StartTime" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDateTimePicker TValue="DateTime" @bind-Value="context.StartDateTime" Format="MMMM dd, yyyy HH:mm" />
+            </div>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="End Time" For="@(() => context.EndTime)" @bind-Date="context.EndTime" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDateTimePicker TValue="DateTime" @bind-Value="context.EndDateTime" Format="MMMM dd, yyyy HH:mm" />
+            </div>
         </MudItem>
+
         <MudItem xs="12">
             <MudTextField Label="Location" For="@(() => context.Location)" @bind-Value="context.Location" Variant="Variant.Filled" />
         </MudItem>
@@ -44,7 +49,6 @@
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSwitch Color="Color.Tertiary" Label="All Day" For="@(() => context.IsAllDay)" @bind-Checked="context.IsAllDay" />
         </MudItem>
-
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSwitch Color="Color.Tertiary" Label="Read-Only" For="@(() => context.IsReadonly)" @bind-Checked="context.IsReadonly" />
         </MudItem>
@@ -53,10 +57,10 @@
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
+            <MudTextField Label="Description" For="@(() => context.Description)" Value=context.Description Lines="1" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
+            <MudTextField Label="Notes" For="@(() => context.Notes)" Value="context.Notes" Lines="2" />
         </MudItem>
 
         <MudItem xs="12">
@@ -106,10 +110,10 @@
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.caption">
-                @context.StartTime.ToString("dddd MMMM dd, yyyy HH:mm")
+                @context.StartDateTime.ToString("dddd MMMM dd, yyyy HH:mm")
             </MudText>
             <MudText Typo="Typo.subtitle2">
-                @context.EndTime.ToString("dddd MMMM dd, yyyy HH:mm")
+                @context.EndDateTime.ToString("dddd MMMM dd, yyyy HH:mm")
             </MudText>
         </MudItem>
     };

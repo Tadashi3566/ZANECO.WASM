@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using Syncfusion.Blazor.Calendars;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
@@ -30,9 +31,11 @@ public partial class Appointments
     private EntityTable<AppointmentDto, int, AppointmentViewModel>? _table;
 
     private bool _canViewEmployees;
-    //private bool _canCreateAppointment;
 
     private string? _searchString;
+
+    //private DateTime _startDateTime = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 8,0,0);
+    //private DateTime _endDateTime = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 17,0,0);
 
     protected override void OnParametersSet()
     {
@@ -46,7 +49,6 @@ public partial class Appointments
     {
         var state = await AuthState;
         _canViewEmployees = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Employees);
-        //_canCreateAppointment = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Appointment);
 
         Context = new(
             entityName: "Appointment",
@@ -58,7 +60,7 @@ public partial class Appointments
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.AppointmentType, "Type", "AppointmentType"),
                 new(data => data.Subject, "Subject", "Subject"),
-                new(data => data.StartTime, "Date Time", Template: TemplateStartEnd),
+                new(data => data.StartDateTime, "Date Time", Template: TemplateStartEnd),
                 new(data => data.Status, "Status", "Status"),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
@@ -83,28 +85,36 @@ public partial class Appointments
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<AppointmentDto>>();
             },
-            createFunc: async data =>
+            createFunc: async request =>
             {
-                if (!string.IsNullOrEmpty(data.ImageInBytes))
+                if (!string.IsNullOrEmpty(request.ImageInBytes))
                 {
-                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Subject}_{Guid.NewGuid():N}" };
+                    request.Image = new ImageUploadRequest() { Data = request.ImageInBytes, Extension = request.ImageExtension ?? string.Empty, Name = $"{request.Subject}_{Guid.NewGuid():N}" };
                 }
 
-                data.EmployeeId = _searchEmployeeId;
+                request.EmployeeId = _searchEmployeeId;
 
-                await Client.CreateAsync(data.Adapt<AppointmentCreateRequest>());
-                data.ImageInBytes = string.Empty;
+                //request.StartDateTime = _startDateTime;
+                //request.EndDateTime = _endDateTime;
+
+                await Client.CreateAsync(request.Adapt<AppointmentCreateRequest>());
+
+                request.ImageInBytes = string.Empty;
             },
-            updateFunc: async (id, Appointment) =>
+            updateFunc: async (id, request) =>
             {
-                if (!string.IsNullOrEmpty(Appointment.ImageInBytes))
+                if (!string.IsNullOrEmpty(request.ImageInBytes))
                 {
-                    Appointment.DeleteCurrentImage = true;
-                    Appointment.Image = new ImageUploadRequest() { Data = Appointment.ImageInBytes, Extension = Appointment.ImageExtension ?? string.Empty, Name = $"{Appointment.Subject}_{Guid.NewGuid():N}" };
+                    request.DeleteCurrentImage = true;
+                    request.Image = new ImageUploadRequest() { Data = request.ImageInBytes, Extension = request.ImageExtension ?? string.Empty, Name = $"{request.Subject}_{Guid.NewGuid():N}" };
                 }
 
-                await Client.UpdateAsync(id, Appointment.Adapt<AppointmentUpdateRequest>());
-                Appointment.ImageInBytes = string.Empty;
+                //request.StartDateTime = _startDateTime;
+                //request.EndDateTime = _endDateTime;
+
+                await Client.UpdateAsync(id, request.Adapt<AppointmentUpdateRequest>());
+
+                request.ImageInBytes = string.Empty;
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
