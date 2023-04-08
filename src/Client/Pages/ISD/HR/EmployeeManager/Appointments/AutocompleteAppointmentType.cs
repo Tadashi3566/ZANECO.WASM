@@ -36,8 +36,8 @@ public class AutocompleteAppointmentType : MudAutocomplete<string>
             AdvancedSearch = new() { Fields = new[] { "appointmentType" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-            () => Client.SearchAsync(filter), Snackbar) is PaginationResponseOfAppointmentDto response)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
+            is PaginationResponseOfAppointmentDto response)
         {
             _list = response.Data.ToList();
         }
