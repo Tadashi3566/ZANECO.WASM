@@ -34,9 +34,6 @@ public partial class Appointments
 
     private string? _searchString;
 
-    //private DateTime _startDateTime = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 8,0,0);
-    //private DateTime _endDateTime = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 17,0,0);
-
     protected override void OnParametersSet()
     {
         if (EmployeeId != Guid.Empty)
@@ -94,9 +91,6 @@ public partial class Appointments
 
                 request.EmployeeId = _searchEmployeeId;
 
-                //request.StartDateTime = _startDateTime;
-                //request.EndDateTime = _endDateTime;
-
                 await Client.CreateAsync(request.Adapt<AppointmentCreateRequest>());
 
                 request.ImageInBytes = string.Empty;
@@ -108,9 +102,6 @@ public partial class Appointments
                     request.DeleteCurrentImage = true;
                     request.Image = new ImageUploadRequest() { Data = request.ImageInBytes, Extension = request.ImageExtension ?? string.Empty, Name = $"{request.Subject}_{Guid.NewGuid():N}" };
                 }
-
-                //request.StartDateTime = _startDateTime;
-                //request.EndDateTime = _endDateTime;
 
                 await Client.UpdateAsync(id, request.Adapt<AppointmentUpdateRequest>());
 

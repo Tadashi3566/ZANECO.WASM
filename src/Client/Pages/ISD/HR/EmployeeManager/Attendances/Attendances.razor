@@ -59,36 +59,108 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudDatePicker Label="Attendance Date" For="@(() => context.AttendanceDate)" @bind-Date=" context.AttendanceDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDatePicker @bind-Value="context.AttendanceDate"
+                              TValue="DateTime"
+                              CssClass="e-filled"
+                              Format="MMMM dd, yyyy"
+                              FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                              Placeholder="Attendance Date" />
+            </div>
         </MudItem>
         <MudDivider/>
         <MudItem xs="12" sm="6" md="3">
-            <MudTextField Label="Schedule Time-In1" For="@(() => context.ScheduleTimeIn1)" @bind-Value="context.ScheduleTimeIn1" Format="MMMM dd, yyyy hh:mm tt" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDateTimePicker @bind-Value="context.ScheduleTimeIn1"
+                                  TValue="DateTime"
+                                  CssClass="e-filled"
+                                  Format="MMMM dd, yyyy HH:mm (dddd)"
+                                  FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                                  Placeholder="Schedule Time-In 1"
+                                  WeekNumber=true />
+            </div>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudTextField Label="Schedule Time-Out1" For="@(() => context.ScheduleTimeOut1)" @bind-Value="context.ScheduleTimeOut1" Format="MMMM dd, yyyy hh:mm tt" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDateTimePicker @bind-Value="context.ScheduleTimeOut1"
+                                  TValue="DateTime"
+                                  CssClass="e-filled"
+                                  Format="MMMM dd, yyyy HH:mm (dddd)"
+                                  FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                                  Placeholder="Schedule Time-Out 1"
+                                  WeekNumber=true />
+            </div>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudTextField Label="Schedule Time-In2" For="@(() => context.ScheduleTimeIn2)" @bind-Value="context.ScheduleTimeIn2" Format="MMMM dd, yyyy hh:mm tt" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDateTimePicker @bind-Value="context.ScheduleTimeIn2"
+                                  TValue="DateTime"
+                                  CssClass="e-filled"
+                                  Format="MMMM dd, yyyy HH:mm (dddd)"
+                                  FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                                  Placeholder="Schedule Time-In 2"
+                                  WeekNumber=true />
+            </div>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudTextField Label="Schedule Time-Out2" For="@(() => context.ScheduleTimeOut2)" @bind-Value="context.ScheduleTimeOut2" Format="MMMM dd, yyyy hh:mm tt" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDateTimePicker @bind-Value="context.ScheduleTimeOut2"
+                                  TValue="DateTime"
+                                  CssClass="e-filled"
+                                  Format="MMMM dd, yyyy HH:mm (dddd)"
+                                  FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                                  Placeholder="Schedule Time-Out 2"
+                                  WeekNumber=true />
+            </div>
         </MudItem>
         <MudDivider/>
         <MudItem xs="12" sm="6" md="3">
-            <MudTimePicker Label="Actual Time-In1" AmPm=true @bind-Text="context.ActualTimeIn1" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDateTimePicker @bind-Value="context.ActualTimeIn1"
+                                  TValue="DateTime?"
+                                  CssClass="e-filled"
+                                  Format="MMMM dd, yyyy HH:mm (dddd)"
+                                  FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                                  Placeholder="Actual Time-In 1"
+                                  ShowClearButton=true
+                                  WeekNumber=true />
+            </div>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudTimePicker Label="Actual Time-Out1" AmPm=true @bind-Text="context.ActualTimeOut1" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDateTimePicker @bind-Value="context.ActualTimeOut1"
+                                  TValue="DateTime?"
+                                  CssClass="e-filled"
+                                  Format="MMMM dd, yyyy HH:mm (dddd)"
+                                  FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                                  Placeholder="Actual Time-Out 1"
+                                  ShowClearButton=true
+                                  WeekNumber=true />
+            </div>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudTimePicker Label="Actual Time-In2" AmPm=true @bind-Text="context.ActualTimeIn2" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDateTimePicker @bind-Value="context.ActualTimeIn2"
+                                  TValue="DateTime?"
+                                  CssClass="e-filled"
+                                  Format="MMMM dd, yyyy HH:mm (dddd)"
+                                  FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                                  Placeholder="Actual Time-In 2"
+                                  ShowClearButton=true
+                                  WeekNumber=true />
+            </div>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudTimePicker Label="Actual Time-Out2" AmPm=true @bind-Text="context.ActualTimeOut2" Editable=true TimeFormat="h:mm tt" Variant="Variant.Filled" />
-        </MudItem>
-        <MudItem xs="12" sm="6" md="3">
-            <MudDatePicker Label="Time-Out Date" For="@(() => context.TimeOutDate)" @bind-Date=" context.TimeOutDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <div class="e-bigger">
+                <SfDateTimePicker @bind-Value="context.ActualTimeOut2"
+                                  TValue="DateTime?"
+                                  CssClass="e-filled"
+                                  Format="MMMM dd, yyyy HH:mm (dddd)"
+                                  FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                                  Placeholder="Actual Time-Out 2"
+                                  ShowClearButton=true
+                                  WeekNumber=true />
+            </div>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
             <MudSwitch Class="mt-3" Color="Color.Secondary" Label="With Overtime" For="@(() => context.IsOvertime)" @bind-Checked=" context.IsOvertime" />

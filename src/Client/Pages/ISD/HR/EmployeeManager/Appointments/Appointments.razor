@@ -33,12 +33,24 @@
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <div class="e-bigger">
-                <SfDateTimePicker TValue="DateTime" @bind-Value="context.StartDateTime" Format="MMMM dd, yyyy HH:mm" />
+                <SfDateTimePicker @bind-Value="context.StartDateTime"
+                                  TValue="DateTime"
+                                  CssClass="e-filled"
+                                  Format="MMMM dd, yyyy HH:mm (dddd)"
+                                  Placeholder="Start Date/Time"
+                                  FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                                  WeekNumber=true />
             </div>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <div class="e-bigger">
-                <SfDateTimePicker TValue="DateTime" @bind-Value="context.EndDateTime" Format="MMMM dd, yyyy HH:mm" />
+                <SfDateTimePicker TValue="DateTime" @bind-Value="context.EndDateTime"
+                                  TValue="DateTime"
+                                  CssClass="e-filled"
+                                  Format="MMMM dd, yyyy HH:mm (dddd)"
+                                  Placeholder="Start Date/Time"
+                                  FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                                  WeekNumber=true />
             </div>
         </MudItem>
 
@@ -57,10 +69,10 @@
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" Value=context.Description Lines="1" />
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" Value="context.Notes" Lines="2" />
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
         </MudItem>
 
         <MudItem xs="12">
