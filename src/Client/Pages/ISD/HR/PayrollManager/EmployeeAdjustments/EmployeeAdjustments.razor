@@ -11,7 +11,7 @@
     <AdvancedSearchContent>
         @if (_canViewEmployees)
         {
-            <MudItem Class="mt-3">
+            <MudItem Class="mt-1">
                 <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
             </MudItem>
         }
@@ -38,10 +38,10 @@
             <MudNumericField Label="Amount" For="@(() => context.Amount)" @bind-Value="context.Amount" Format="N2" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date Start" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <MudDatePicker Label="Date Start" For="@(() => context.StartDate)" @bind-Date="context.StartDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date End" For="@(() => context.DateEnd)" @bind-Date="context.DateEnd" DateFormat="MMMM dd, yyyy" MinDate="@DateTime.Today" Variant="Variant.Filled" />
+            <MudDatePicker Label="Date End" For="@(() => context.EndDate)" @bind-Date="context.EndDate" DateFormat="MMMM dd, yyyy" MinDate="@DateTime.Today" Variant="Variant.Filled" />
         </MudItem>
 
         <MudItem xs="12">
@@ -119,10 +119,10 @@
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.caption">
-                @context.DateStart.ToString("MMMM dd, yyyy")
+                @context.StartDate.ToString("MMMM dd, yyyy")
             </MudText>
             <MudText Typo="Typo.subtitle2">
-                @context.DateEnd.ToString("MMMM dd, yyyy")
+                @context.EndDate.ToString("MMMM dd, yyyy")
             </MudText>
         </MudItem>
     };

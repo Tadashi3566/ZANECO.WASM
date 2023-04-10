@@ -10,14 +10,14 @@
     <DialogContent>
         <MudGrid>
             <MudItem xs="12" sm="6">
-                <MudDatePicker @bind-Date="_dateStart" AutoClose=true DateFormat="MMMM dd, yyyy" Editable=true>
+                <MudDatePicker @bind-Date="_StartDate" AutoClose=true DateFormat="MMMM dd, yyyy" Editable=true>
                     <PickerActions>
                         <MudButton OnClick="Today">Today</MudButton>
                     </PickerActions>
                 </MudDatePicker>
             </MudItem>
             <MudItem xs="12" sm="6">
-                <MudDatePicker @bind-Date="_dateEnd" AutoClose=true DateFormat="MMMM dd, yyyy" Editable=true/>
+                <MudDatePicker @bind-Date="_EndDate" AutoClose=true DateFormat="MMMM dd, yyyy" Editable=true/>
             </MudItem>
         </MudGrid>
     </DialogContent>
@@ -46,8 +46,8 @@
     [Inject]
     protected IAttendancesClient Client { get; set; } = default!;
 
-    private DateTime? _dateStart = new DateTime(DateTime.Today.Year, 1, 1);
-    private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, 12, 31);
+    private DateTime? _StartDate = new DateTime(DateTime.Today.Year, 1, 1);
+    private DateTime? _EndDate = new DateTime(DateTime.Today.Year, 12, 31);
 
     private bool _isBusy;
 
@@ -60,8 +60,8 @@
         AttendanceCreateRequest request = new();
 
         request.EmployeeId = EmployeeId;
-        request.DateStart = _dateStart;
-        request.DateEnd = _dateEnd;
+        request.StartDate = _StartDate;
+        request.EndDate = _EndDate;
 
         await Client.CreateAsync(request);
 
@@ -70,6 +70,6 @@
 
     private void Today()
     {
-        _dateStart = DateTime.Today;
+        _StartDate = DateTime.Today;
     }
 }

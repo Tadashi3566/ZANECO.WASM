@@ -42,7 +42,7 @@ public partial class Payrolls
                 new(data => data.PayrollType, "Payroll Type", visible: false),
                 new(data => data.EmploymentType, "Employment Type", "EmploymentType", Template: TemplateType),
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.DateEnd, "Start-End Dates", "DateEnd", Template: TemplateDate),
+                new(data => data.EndDate, "Start-End Dates", "EndDate", Template: TemplateDate),
                 new(data => data.WorkingDays, "Working Days", "WorkingDays"),
                 new(data => data.PayrollDate, "Payroll Date", "PayrollDate", typeof(DateOnly)),
                 new(data => data.TotalSalary, "Total Salary", "TotalSalary", typeof(decimal)),
@@ -60,13 +60,13 @@ public partial class Payrolls
                 .Adapt<PaginationResponse<PayrollDto>>(),
             createFunc: async Payroll =>
             {
-                Payroll.WorkingDays = DateFunctions.GetWorkingDays((DateTime)Payroll.DateStart!, (DateTime)Payroll.DateEnd!);
+                Payroll.WorkingDays = DateFunctions.GetWorkingDays((DateTime)Payroll.StartDate!, (DateTime)Payroll.EndDate!);
 
                 await Client.CreateAsync(Payroll.Adapt<PayrollCreateRequest>());
             },
             updateFunc: async (id, Payroll) =>
             {
-                Payroll.WorkingDays = DateFunctions.GetWorkingDays((DateTime)Payroll.DateStart!, (DateTime)Payroll.DateEnd!);
+                Payroll.WorkingDays = DateFunctions.GetWorkingDays((DateTime)Payroll.StartDate!, (DateTime)Payroll.EndDate!);
 
                 await Client.UpdateAsync(id, Payroll);
             },

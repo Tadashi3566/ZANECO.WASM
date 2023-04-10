@@ -2,6 +2,8 @@
 @page "/employee/timelogs/{employeeId:guid}"
 @page "/employee/timelogs/{employeeId:guid}/{LogDate:datetime}"
 
+@using Syncfusion.Blazor.Inputs;
+
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Attendance)]
 
 <FshTitle Title="Time Logs" Description="Employee Time Log Management" />
@@ -10,18 +12,23 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="TimeLogDto" TId="Guid" TRequest="TimeLogViewModel" Context="@Context">
     <AdvancedSearchContent>
-        @if (_canViewEmployees)
-        {
-            <MudItem Class="mt-3">
-                <AutocompleteEmployee @bind-Value="SearchEmployeeId" Disabled=@(!_canViewEmployees) />
-            </MudItem>
-        }
         <MudGrid>
-            <MudItem xs="12" sm="6">
-                <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateStart" DateFormat="MMMM dd, yyyy"></MudDatePicker>
-            </MudItem>
-            <MudItem xs="12" sm="6">
-                <MudDatePicker AutoClose=true Clearable=true @bind-Date="DateEnd" DateFormat="MMMM dd, yyyy"></MudDatePicker>
+            @if (_canViewEmployees)
+            {
+                <MudItem Class="mt-1" xs="12" sm="6">
+                    <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
+                </MudItem>
+            }
+            <MudItem Class="mt-2" xs="12" sm="6">
+                <SfDateRangePicker TValue="DateTime"
+                                   CssClass="e-bigger e-filled"
+                                   @bind-StartDate=_startDate
+                                   @bind-EndDate=_endDate
+                                   Format="MMMM dd, yyyy"
+                                   Placeholder="Select Date Range"
+                                   FloatLabelType="FloatLabelType.Auto"
+                                   ShowClearButton=true
+                                   ShowTodayButton=true />
             </MudItem>
         </MudGrid>
     </AdvancedSearchContent>
@@ -39,11 +46,25 @@
         </MudItem>
         @if (_canUpdateAttendance)
         {
-            <MudItem xs="12" sm="6" md="4" lg="3">
-                <MudDatePicker AutoClose=true Label="Date" For="@(() => context.LogDate)" @bind-Date="context.LogDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <MudItem Class="mt-1" xs="12" sm="6" md="4" lg="3">
+                <SfDatePicker TValue="DateTime"
+                          @bind-Value=context.LogDate
+                          CssClass="e-bigger e-filled"
+                          Format="MMMM dd, yyyy"
+                          Placeholder="Select Date"
+                          FloatLabelType="FloatLabelType.Auto"
+                          ShowClearButton=true
+                          ShowTodayButton=true />
             </MudItem>
-            <MudItem xs="12" sm="6" md="4" lg="3">
-                <MudTimePicker Label="Time" @bind-Time="@_logTime" Variant="Variant.Filled" />
+            <MudItem Class="mt-1" xs="12" sm="6" md="4" lg="3">
+                <SfDateTimePicker TValue="DateTime"
+                              @bind-Value=context.LogDateTime
+                              CssClass="e-bigger e-filled"
+                              Format="MMMM dd, yyyy hh:mm"
+                              Placeholder="Select Date and Time"
+                              FloatLabelType="FloatLabelType.Auto"
+                              ShowClearButton=true
+                              ShowTodayButton=true />
             </MudItem>
         }
         <MudItem xs="12">

@@ -11,7 +11,7 @@
     <AdvancedSearchContent>
         @if (_canViewEmployees)
         {
-            <MudItem Class="mt-3">
+            <MudItem Class="mt-1">
                 <AutocompleteEmployee @bind-Value="SearchEmployeeId" />
             </MudItem>
         }
@@ -38,13 +38,13 @@
             <MudDatePicker Label="Date Released" For="@(() => context.DateReleased)" @bind-Date="context.DateReleased" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudDatePicker Label="Start" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <MudDatePicker Label="Start" For="@(() => context.StartDate)" @bind-Date="context.StartDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
             <MudNumericField Label="Months" For="@(() => context.Months)" @bind-Value="context.Months" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudDatePicker Label="End" For="@(() => context.DateEnd)" @bind-Date="@context.DateEnd" DateFormat="MMMM dd, yyyy" Disabled=true Variant="Variant.Outlined" />
+            <MudDatePicker Label="End" For="@(() => context.EndDate)" @bind-Date="@context.EndDate" DateFormat="MMMM dd, yyyy" Disabled=true Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
             <MudNumericField Label="Ammortization" For="@(() => context.Ammortization)" @bind-Value="@context.Ammortization" Format="N2" Disabled=true Variant="Variant.Outlined" />
@@ -112,10 +112,10 @@
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.caption">
-                @context.DateStart.ToString("MMMM dd, yyyy")
+                @context.StartDate.ToString("MMMM dd, yyyy")
             </MudText>
             <MudText Typo="Typo.subtitle2">
-                @context.DateEnd.ToString("MMMM dd, yyyy")
+                @context.EndDate.ToString("MMMM dd, yyyy")
             </MudText>
         </MudItem>
     };

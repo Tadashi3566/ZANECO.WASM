@@ -6,10 +6,11 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="CalendarDto" TId="Guid" TRequest="CalendarUpdateRequest" Context="@Context" >
     <AdvancedSearchContent>
-
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            
+        </MudItem>
     </AdvancedSearchContent>
     <EditFormContent>
-
         <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteCalendarType For="@(() => context.CalendarType)" @bind-Value="context.CalendarType" />
         </MudItem>

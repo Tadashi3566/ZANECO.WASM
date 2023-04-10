@@ -36,10 +36,10 @@
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Start Date" For="@(() => context.DateStart)" @bind-Date="context.DateStart" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <MudDatePicker Label="Start Date" For="@(() => context.StartDate)" @bind-Date="context.StartDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="End Date" For="@(() => context.DateEnd)" @bind-Date="context.DateEnd" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <MudDatePicker Label="End Date" For="@(() => context.EndDate)" @bind-Date="context.EndDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Working Days" For="@(() => context.WorkingDays)" @bind-Value="_workingDays" Disabled=true Variant="Variant.Filled" />
@@ -90,10 +90,10 @@
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.caption">
-                @context.DateStart.ToString("MMMM dd, yyyy")
+                @context.StartDate.ToString("MMMM dd, yyyy")
             </MudText>
             <MudText Typo="Typo.subtitle2">
-                @context.DateEnd.ToString("MMMM dd, yyyy")
+                @context.EndDate.ToString("MMMM dd, yyyy")
             </MudText>
         </MudItem>
     };

@@ -57,7 +57,7 @@ public partial class Loans
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.AdjustmentName, "Name", "Name"),
                 new(data => data.PaymentSchedule, "Schedule", "PaymentSchedule"),
-                new(data => data.DateStart, "Date Start-End", "DateStart", Template: TemplateDate),
+                new(data => data.StartDate, "Date Start-End", "StartDate", Template: TemplateDate),
                 new(data => data.Months, "Months", "Months"),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.Ammortization, "Ammortization", "Ammortization", typeof(decimal)),
@@ -95,8 +95,8 @@ public partial class Loans
 
                 data.EmployeeId = SearchEmployeeId;
 
-                SetDateEnd(data.PaymentSchedule, data.Amount, data.DateStart, data.Months);
-                data.DateEnd = _dtend;
+                SetEndDate(data.PaymentSchedule, data.Amount, data.StartDate, data.Months);
+                data.EndDate = _dtend;
                 data.Ammortization = _ammortization;
 
                 await Client.CreateAsync(data.Adapt<LoanCreateRequest>());
@@ -112,8 +112,8 @@ public partial class Loans
                     data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.AdjustmentId}_{Guid.NewGuid():N}" };
                 }
 
-                SetDateEnd(data.PaymentSchedule, data.Amount, data.DateStart, data.Months);
-                data.DateEnd = _dtend;
+                SetEndDate(data.PaymentSchedule, data.Amount, data.StartDate, data.Months);
+                data.EndDate = _dtend;
                 data.Ammortization = _ammortization;
 
                 await Client.UpdateAsync(id, data.Adapt<LoanUpdateRequest>());
@@ -165,7 +165,7 @@ public partial class Loans
         new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
     };
 
-    private void SetDateEnd(string schedule, decimal amount, DateTime? dtstart, int months)
+    private void SetEndDate(string schedule, decimal amount, DateTime? dtstart, int months)
     {
         if (dtstart != null)
         {

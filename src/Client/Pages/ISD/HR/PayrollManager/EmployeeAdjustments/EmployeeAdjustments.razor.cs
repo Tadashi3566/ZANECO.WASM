@@ -54,7 +54,7 @@ public partial class EmployeeAdjustments
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.AdjustmentType, "Adjustment Type", visible: false),
                 new(data => data.Name, "Name", "Name", Template: TemplateName),
-                new(data => data.DateStart, "Date Start/End", Template: TemplateDate),
+                new(data => data.StartDate, "Date Start/End", Template: TemplateDate),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),

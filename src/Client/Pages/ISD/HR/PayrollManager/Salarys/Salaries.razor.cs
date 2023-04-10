@@ -24,7 +24,7 @@ public partial class Salaries
             entityResource: FSHResource.Payroll,
             fields: new()
             {
-                new(data => data.DateStart, "Date Start", "DateStart", Template: TemplateDateStartEnd),
+                new(data => data.StartDate, "Date Start", "StartDate", Template: TemplateStartEndDate),
                 new(data => data.Number, "Number", "Number"),
                 new(data => data.Name, "Name", "Name"),
                 new(data => data.Amount, "Salary Amount", "SalaryAmount", typeof(decimal)),

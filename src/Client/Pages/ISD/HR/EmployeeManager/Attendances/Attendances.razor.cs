@@ -33,8 +33,8 @@ public partial class Attendances
 
     private HashSet<AttendanceDto> _selectedItems = new();
 
-    private MudDateRangePicker? _dateRangePicker = default!;
-    private DateRange? _dateRange;
+    private DateTime _startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+    private DateTime _endDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
 
     private string? _searchString;
     private bool _canViewEmployees;
@@ -87,17 +87,8 @@ public partial class Attendances
                 }
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
-
-                if (_dateRange is null)
-                {
-                    filter.DateStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-                    filter.DateEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
-                }
-                else
-                {
-                    filter.DateStart = _dateRange!.Start;
-                    filter.DateEnd = _dateRange.End;
-                }
+                filter.StartDate = _startDate == DateTime.MinValue ? null : _startDate;
+                filter.EndDate = _endDate == DateTime.MinValue ? null : _endDate;
 
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<AttendanceDto>>();
@@ -133,28 +124,6 @@ public partial class Attendances
         set
         {
             _searchEmployeeId = value;
-            _table!.ReloadDataAsync();
-        }
-    }
-
-    //private DateTime? _dateStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-    private DateTime? DateStart
-    {
-        get => _dateRange!.Start;
-        set
-        {
-            _dateRange!.Start = value;
-            _table!.ReloadDataAsync();
-        }
-    }
-
-    //private DateTime? _dateEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
-    private DateTime? DateEnd
-    {
-        get => _dateRange!.End;
-        set
-        {
-            _dateRange!.End = value;
             _table!.ReloadDataAsync();
         }
     }

@@ -34,8 +34,8 @@ public partial class TimeLogs
     private bool _canViewEmployees;
     private bool _canUpdateAttendance;
 
-    private DateTime? _logDate = DateTime.Today;
-    private TimeSpan? _logTime;
+    private DateTime _startDate = DateTime.Today;
+    private DateTime _endDate = DateTime.Today;
 
     protected override void OnParametersSet()
     {
@@ -79,11 +79,10 @@ public partial class TimeLogs
                 var filter = _filter.Adapt<TimeLogSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
-                filter.DateStart = DateStart;
-                filter.DateEnd = DateEnd;
+                filter.StartDate = _startDate == DateTime.MinValue ? null : _startDate;
+                filter.EndDate = _endDate == DateTime.MinValue ? null : _endDate;
 
                 var result = await Client.SearchAsync(filter);
-
                 return result.Adapt<PaginationResponse<TimeLogDto>>();
             },
             createFunc: async data =>
@@ -109,8 +108,6 @@ public partial class TimeLogs
             updateFunc: async (id, data) =>
             {
                 data.EmployeeId = _searchEmployeeId;
-                //data.LogDate = _logDate;
-                data.LogDateTime = data.LogDate + _logTime;
 
                 await Client.UpdateAsync(id, data.Adapt<TimeLogUpdateRequest>());
             },
@@ -137,24 +134,24 @@ public partial class TimeLogs
         }
     }
 
-    private DateTime? _dateStart = DateTime.Today; // new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-    private DateTime? DateStart
+    private DateTime? _StartDate = DateTime.Today; // new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+    private DateTime? StartDate
     {
-        get => _dateStart;
+        get => _StartDate;
         set
         {
-            _dateStart = value;
+            _StartDate = value;
             _table!.ReloadDataAsync();
         }
     }
 
-    private DateTime? _dateEnd = DateTime.Today; // new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
-    private DateTime? DateEnd
+    private DateTime? _EndDate = DateTime.Today; // new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+    private DateTime? EndDate
     {
-        get => _dateEnd;
+        get => _EndDate;
         set
         {
-            _dateEnd = value;
+            _EndDate = value;
             _table!.ReloadDataAsync();
         }
     }

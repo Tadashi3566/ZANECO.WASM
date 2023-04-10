@@ -9,7 +9,7 @@
 
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="EmployeePayrollDto" TId="Guid" TRequest="EmployeePayrollUpdateRequest" Context="@Context">
     <AdvancedSearchContent>
-        <MudItem Class="mt-3">
+        <MudItem Class="mt-1">
             <AutocompletePayroll @bind-Value="SearchPayrollId" />
         </MudItem>
     </AdvancedSearchContent>
@@ -29,10 +29,10 @@
         </MudItem>
 
         <MudItem xs="12" sm="4">
-            <MudNumericField Label="Start Date" For="@(() => context.DateStart)" @bind-Value="context.DateStart" Format="MMMM dd, yyyy" Disabled=true Variant="Variant.Filled" />
+            <MudNumericField Label="Start Date" For="@(() => context.StartDate)" @bind-Value="context.StartDate" Format="MMMM dd, yyyy" Disabled=true Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="4">
-            <MudNumericField Label="End Date" For="@(() => context.DateEnd)" @bind-Value="context.DateEnd" Format="MMMM dd, yyyy" Disabled=true Variant="Variant.Filled" />
+            <MudNumericField Label="End Date" For="@(() => context.EndDate)" @bind-Value="context.EndDate" Format="MMMM dd, yyyy" Disabled=true Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="4">
             <MudNumericField Label="Payroll Date" For="@(() => context.PayrollDate)" @bind-Value="context.PayrollDate" Format="MMMM dd, yyyy" Disabled=true Variant="Variant.Filled" />
