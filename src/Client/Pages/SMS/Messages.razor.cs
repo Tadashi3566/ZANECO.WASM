@@ -6,14 +6,18 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.SMS;
+
 public partial class Messages
 {
     [Parameter]
     public string Recipient { get; set; } = string.Empty;
+
     [Inject]
     protected IMessageInsClient ClientIn { get; set; } = default!;
+
     [Inject]
     protected IMessageLogsClient ClientLog { get; set; } = default!;
+
     protected EntityServerTableContext<MessageInDto, int, MessageInUpdateRequest> ContextIn { get; set; } = default!;
     protected EntityServerTableContext<MessageLogDto, int, MessageLogUpdateRequest> ContextLog { get; set; } = default!;
 

@@ -56,16 +56,16 @@
     margin-left: -12px !important;
 }
 
-.mud-table-toolbar
-{
-    flex-wrap:wrap;
-    margin-bottom:20px!important;
+.mud-table-toolbar {
+    flex-wrap: wrap;
+    margin-bottom: 20px !important;
 }
 
 ::-webkit-scrollbar {
-    width: 4px!important;
-    height: 6px!important;
+    width: 4px !important;
+    height: 6px !important;
 }
+
 .fsh-nav-child {
     padding-left: 10px !important;
 }

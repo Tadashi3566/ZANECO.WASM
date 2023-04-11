@@ -10,6 +10,7 @@ public class FshTable<T> : MudTable<T>
 {
     [Inject]
     protected ICourier Courier { get; set; } = default!;
+
     [Inject]
     private IClientPreferenceManager ClientPreferences { get; set; } = default!;
 

@@ -16,14 +16,19 @@ public partial class Attendances
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
+
     [Parameter]
     public DateTime? AttendanceDate { get; set; } = DateTime.Today;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IAttendancesClient Client { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
 

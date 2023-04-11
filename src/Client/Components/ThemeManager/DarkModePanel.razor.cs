@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using ZANECO.WASM.Client.Infrastructure.Preferences;
 
 namespace ZANECO.WASM.Client.Components.ThemeManager;
+
 public partial class DarkModePanel
 {
     private bool _isDarkMode;

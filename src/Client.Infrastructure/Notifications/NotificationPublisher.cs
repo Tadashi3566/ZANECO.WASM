@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using ZANECO.WebApi.Shared.Notifications;
 
 namespace ZANECO.WASM.Client.Infrastructure.Notifications;
+
 public class NotificationPublisher : INotificationPublisher
 {
     private readonly ILogger<NotificationPublisher> _logger;

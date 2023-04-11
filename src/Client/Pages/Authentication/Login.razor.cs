@@ -13,6 +13,7 @@ public partial class Login
 {
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     public IAuthenticationService AuthService { get; set; } = default!;
 

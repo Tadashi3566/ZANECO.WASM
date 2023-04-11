@@ -11,16 +11,20 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.Multitenancy;
+
 public partial class Tenants
 {
     [Inject]
     private ITenantsClient TenantsClient { get; set; } = default!;
+
     private string? _searchString;
     protected EntityClientTableContext<TenantDetail, Guid, CreateTenantRequest> Context { get; set; } = default!;
     private List<TenantDetail> _tenants = new();
     public EntityTable<TenantDetail, Guid, CreateTenantRequest> EntityTable { get; set; } = default!;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
 

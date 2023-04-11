@@ -1,7 +1,6 @@
 using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using ZANECO.WASM.Client.Components.Common;
@@ -14,19 +13,25 @@ public partial class AddEditModal<TRequest> : IAddEditModal<TRequest>
     [Parameter]
     [EditorRequired]
     public RenderFragment<TRequest> EditFormContent { get; set; } = default!;
+
     [Parameter]
     [EditorRequired]
     public TRequest RequestModel { get; set; } = default!;
+
     [Parameter]
     [EditorRequired]
     public Func<TRequest, Task> SaveFunc { get; set; } = default!;
+
     [Parameter]
     public Func<Task>? OnInitializedFunc { get; set; }
+
     [Parameter]
     [EditorRequired]
     public string EntityName { get; set; } = default!;
+
     [Parameter]
     public object? Id { get; set; }
+
     [Inject]
     [NotNull]
     protected SweetAlertService? Swal { get; set; }

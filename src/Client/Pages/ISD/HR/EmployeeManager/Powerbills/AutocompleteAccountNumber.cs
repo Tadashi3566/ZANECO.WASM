@@ -9,6 +9,7 @@ public class AutocompleteAccountNumber : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IAccountsClient Client { get; set; } = default!;
 

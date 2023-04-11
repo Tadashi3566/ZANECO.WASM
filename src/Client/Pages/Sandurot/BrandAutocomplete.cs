@@ -5,12 +5,15 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.Sandurot;
+
 public class AutocompleteBrand : MudAutocomplete<Guid>
 {
     [Inject]
     private IStringLocalizer<AutocompleteBrand> L { get; set; } = default!;
+
     [Inject]
     private IBrandsClient Client { get; set; } = default!;
+
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
 

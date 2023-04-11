@@ -17,10 +17,13 @@ public partial class Contacts
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IContactsClient Client { get; set; } = default!;
+
     [Inject]
     protected IMessageOutsClient MessageOutClient { get; set; } = default!;
 
@@ -106,7 +109,6 @@ public partial class Contacts
         DialogResult result = await dialog.Result;
         if (!result.Canceled)
         {
-
         }
     }
 

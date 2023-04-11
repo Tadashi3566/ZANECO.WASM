@@ -11,12 +11,15 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Payrolls;
+
 public partial class Payrolls
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IPayrollClient Client { get; set; } = default!;
 

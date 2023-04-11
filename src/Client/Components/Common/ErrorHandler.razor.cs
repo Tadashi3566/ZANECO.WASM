@@ -3,6 +3,7 @@ using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 
 namespace ZANECO.WASM.Client.Components.Common;
+
 public partial class ErrorHandler
 {
     [Inject]

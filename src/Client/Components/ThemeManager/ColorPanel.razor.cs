@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace ZANECO.WASM.Client.Components.ThemeManager;
+
 public partial class ColorPanel
 {
     [Parameter]

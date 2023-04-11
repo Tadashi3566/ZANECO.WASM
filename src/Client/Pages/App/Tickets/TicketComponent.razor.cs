@@ -9,6 +9,7 @@ public partial class TicketComponent
 {
     [Parameter]
     public Guid Id { get; set; }
+
     [Inject]
     protected ITicketsClient TicketClient { get; set; } = default!;
 

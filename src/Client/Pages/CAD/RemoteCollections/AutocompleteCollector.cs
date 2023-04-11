@@ -9,6 +9,7 @@ public class AutocompleteCollector : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IRemoteCollectionsClient Client { get; set; } = default!;
 

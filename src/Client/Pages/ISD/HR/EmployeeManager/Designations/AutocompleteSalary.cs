@@ -9,8 +9,10 @@ public class AutocompleteSalary : MudAutocomplete<int>
 {
     [Parameter]
     public DateTime? Date { get; set; }
+
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private ISalarysClient Client { get; set; } = default!;
 

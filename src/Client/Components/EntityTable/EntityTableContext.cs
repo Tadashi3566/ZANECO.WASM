@@ -189,6 +189,7 @@ public abstract class EntityTableContext<TEntity, TId, TRequest>
 
     // Shortcuts
     public EntityClientTableContext<TEntity, TId, TRequest>? ClientContext => this as EntityClientTableContext<TEntity, TId, TRequest>;
+
     public EntityServerTableContext<TEntity, TId, TRequest>? ServerContext => this as EntityServerTableContext<TEntity, TId, TRequest>;
     public bool IsClientContext => ClientContext is not null;
     public bool IsServerContext => ServerContext is not null;
@@ -196,10 +197,13 @@ public abstract class EntityTableContext<TEntity, TId, TRequest>
     // Advanced Search
     public bool AllColumnsChecked =>
         Fields.All(f => f.CheckedForSearch);
+
     public void AllColumnsCheckChanged(bool checkAll) =>
         Fields.ForEach(f => f.CheckedForSearch = checkAll);
+
     public bool AdvancedSearchEnabled =>
         ServerContext?.EnableAdvancedSearch is true;
+
     public List<string> SearchFields =>
         Fields.Where(f => f.CheckedForSearch).Select(f => f.SortLabel).ToList();
 }

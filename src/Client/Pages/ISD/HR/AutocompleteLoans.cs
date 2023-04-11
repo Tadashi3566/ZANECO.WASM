@@ -9,6 +9,7 @@ public class AutocompleteLoans : MudAutocomplete<Guid>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IAdjustmentsClient Client { get; set; } = default!;
 

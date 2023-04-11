@@ -14,15 +14,19 @@ public partial class UserProfile
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IUsersClient Client { get; set; } = default!;
 
     [Parameter]
     public string? Id { get; set; }
+
     [Parameter]
     public string? Title { get; set; }
+
     [Parameter]
     public string? Email { get; set; }
 

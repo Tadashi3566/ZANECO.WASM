@@ -11,16 +11,21 @@ using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Employers;
+
 public partial class Employers
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
+
     [Inject]
     protected IEmployersClient Client { get; set; } = default!;
 
@@ -107,6 +112,7 @@ public partial class Employers
 
     // Advanced Search
     private Guid _searchEmployeeId;
+
     private Guid SearchEmployeeId
     {
         get => _searchEmployeeId;

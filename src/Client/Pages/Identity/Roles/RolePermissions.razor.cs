@@ -11,14 +11,18 @@ using ZANECO.WebApi.Shared.Authorization;
 using ZANECO.WebApi.Shared.MultiTenancy;
 
 namespace ZANECO.WASM.Client.Pages.Identity.Roles;
+
 public partial class RolePermissions
 {
     [Parameter]
     public string Id { get; set; } = default!; // from route
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IRolesClient RolesClient { get; set; } = default!;
 

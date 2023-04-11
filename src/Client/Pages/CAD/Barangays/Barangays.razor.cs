@@ -5,6 +5,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.CAD.Barangays;
+
 public partial class Barangays
 {
     [Inject]
@@ -15,6 +16,7 @@ public partial class Barangays
     private EntityTable<BarangayDto, Guid, BarangayUpdateRequest>? _table;
 
     private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Barangay",

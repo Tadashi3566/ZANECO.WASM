@@ -10,6 +10,7 @@ public partial class Calendars
 {
     [Inject]
     protected ICalendarsClient Client { get; set; } = default!;
+
     protected EntityServerTableContext<CalendarDto, Guid, CalendarUpdateRequest> Context { get; set; } = default!;
 
     private EntityTable<CalendarDto, Guid, CalendarUpdateRequest>? _table;

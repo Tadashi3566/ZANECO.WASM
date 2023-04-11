@@ -5,10 +5,12 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.Surveys.RatingTemplates;
+
 public partial class RatingTemplates
 {
     [Inject]
     protected IRatesClient RatesClient { get; set; } = default!;
+
     [Inject]
     protected IRatingTemplatesClient RatingTemplatesClient { get; set; } = default!;
 
@@ -48,6 +50,7 @@ public partial class RatingTemplates
 
     // Advanced Search
     private Guid _searchRateId;
+
     private Guid SearchRateId
     {
         get => _searchRateId;

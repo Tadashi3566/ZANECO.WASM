@@ -17,33 +17,40 @@ public partial class Dashboard
 {
     [Parameter]
     public int UserCount { get; set; }
+
     [Parameter]
     public int RoleCount { get; set; }
 
     [Parameter]
     public int ContactCount { get; set; }
+
     [Parameter]
     public int SMSLogCount { get; set; }
+
     [Parameter]
     public int SMSTemplateCount { get; set; }
 
     [Parameter]
     public int MemberCount { get; set; }
+
     [Parameter]
     public int AccountCount { get; set; }
 
     [Parameter]
     public int BrandCount { get; set; }
+
     [Parameter]
     public int ProductCount { get; set; }
 
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
 
     [Inject]
     private IDashboardClient DashboardClient { get; set; } = default!;
+
     [Inject]
     private ICourier Courier { get; set; } = default!;
 

@@ -4,10 +4,12 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Designations;
+
 public class AutocompleteDepartment : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IGroupsClient Client { get; set; } = default!;
 

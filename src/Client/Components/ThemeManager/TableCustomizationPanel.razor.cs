@@ -3,24 +3,33 @@ using ZANECO.WASM.Client.Infrastructure.Notifications;
 using ZANECO.WASM.Client.Infrastructure.Preferences;
 
 namespace ZANECO.WASM.Client.Components.ThemeManager;
+
 public partial class TableCustomizationPanel
 {
     [Parameter]
     public bool IsFixedHeaderFooter { get; set; }
+
     [Parameter]
     public bool IsAllowUnsorted { get; set; }
+
     [Parameter]
     public bool IsDense { get; set; }
+
     [Parameter]
     public bool IsStriped { get; set; }
+
     [Parameter]
     public bool HasBorder { get; set; }
+
     [Parameter]
     public bool IsHoverable { get; set; }
+
     [Parameter]
     public bool IsMultiSelection { get; set; }
+
     [Parameter]
     public bool IsVirtualize { get; set; }
+
     [Inject]
     protected INotificationPublisher Notifications { get; set; } = default!;
 
@@ -47,18 +56,25 @@ public partial class TableCustomizationPanel
 
     [Parameter]
     public EventCallback<bool> OnFixedHeaderFooterSwitchToggled { get; set; }
+
     [Parameter]
     public EventCallback<bool> OnAllowUnsortedSwitchToggled { get; set; }
+
     [Parameter]
     public EventCallback<bool> OnDenseSwitchToggled { get; set; }
+
     [Parameter]
     public EventCallback<bool> OnStripedSwitchToggled { get; set; }
+
     [Parameter]
     public EventCallback<bool> OnBorderdedSwitchToggled { get; set; }
+
     [Parameter]
     public EventCallback<bool> OnHoverableSwitchToggled { get; set; }
+
     [Parameter]
     public EventCallback<bool> OnMultipleSelectionSwitchToggled { get; set; }
+
     [Parameter]
     public EventCallback<bool> OnVirtualizeSwitchToggled { get; set; }
 

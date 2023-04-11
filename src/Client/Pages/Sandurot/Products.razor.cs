@@ -8,10 +8,12 @@ using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.Sandurot;
+
 public partial class Products
 {
     [Inject]
     protected IProductsClient ProductsClient { get; set; } = default!;
+
     [Inject]
     protected IBrandsClient BrandsClient { get; set; } = default!;
 
@@ -81,6 +83,7 @@ public partial class Products
     // Advanced Search
 
     private Guid _searchBrandId;
+
     private Guid SearchBrandId
     {
         get => _searchBrandId;
@@ -92,6 +95,7 @@ public partial class Products
     }
 
     private decimal _searchMinimumRate;
+
     private decimal SearchMinimumRate
     {
         get => _searchMinimumRate;
@@ -103,6 +107,7 @@ public partial class Products
     }
 
     private decimal _searchMaximumRate = 9999;
+
     private decimal SearchMaximumRate
     {
         get => _searchMaximumRate;

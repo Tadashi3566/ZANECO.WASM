@@ -6,6 +6,7 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.MultiTenancy;
 
 namespace ZANECO.WASM.Client.Pages.Authentication;
+
 public partial class ForgotPassword
 {
     private readonly ForgotPasswordRequest _forgotPasswordRequest = new();

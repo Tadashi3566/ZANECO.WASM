@@ -5,6 +5,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.CAD.Routes;
+
 public partial class Routes
 {
     [Inject]

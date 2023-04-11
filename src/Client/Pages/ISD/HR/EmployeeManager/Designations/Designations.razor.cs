@@ -17,14 +17,19 @@ public partial class Designations
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IDesignationsClient Client { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
+
     protected EntityServerTableContext<DesignationDto, Guid, DesignationViewModel> Context { get; set; } = default!;
 
     private EntityTable<DesignationDto, Guid, DesignationViewModel>? _table;
@@ -141,6 +146,7 @@ public partial class Designations
 
     // Advanced Search
     private Guid _searchEmployeeId;
+
     private Guid SearchEmployeeId
     {
         get => _searchEmployeeId;

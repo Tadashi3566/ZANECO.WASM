@@ -12,12 +12,15 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.Identity.Account;
+
 public partial class Profile
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthenticationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient Client { get; set; } = default!;
 

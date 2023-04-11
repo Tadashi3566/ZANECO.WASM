@@ -9,6 +9,7 @@ public class AutocompleteCivilStatusEmployee : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IEmployeesClient Client { get; set; } = default!;
 

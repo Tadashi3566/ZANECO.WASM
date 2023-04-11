@@ -8,10 +8,13 @@ public partial class BackgroundPanel
 {
     [Parameter]
     public bool BackgroundJob { get; set; }
+
     [Parameter]
     public bool Scheduled { get; set; }
+
     [Parameter]
     public int Minutes { get; set; } = 1;
+
     [Inject]
     protected INotificationPublisher Notifications { get; set; } = default!;
 
@@ -31,8 +34,10 @@ public partial class BackgroundPanel
 
     [Parameter]
     public EventCallback<bool> OnBackgroundJobSwitchToggled { get; set; }
+
     [Parameter]
     public EventCallback<bool> OnScheduledSwitchToggled { get; set; }
+
     [Parameter]
     public EventCallback<int> OnMinuteValueChanged { get; set; }
 

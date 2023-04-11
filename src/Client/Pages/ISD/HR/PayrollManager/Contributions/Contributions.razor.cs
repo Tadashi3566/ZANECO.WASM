@@ -8,14 +8,18 @@ using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Contributions;
+
 public partial class Contributions
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IContributionClient Client { get; set; } = default!;
+
     protected EntityServerTableContext<ContributionDto, Guid, ContributionUpdateRequest> Context { get; set; } = default!;
 
     private EntityTable<ContributionDto, Guid, ContributionUpdateRequest>? _table;

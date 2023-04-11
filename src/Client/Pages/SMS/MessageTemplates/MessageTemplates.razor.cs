@@ -18,8 +18,10 @@ public partial class MessageTemplates
 {
     [Inject]
     protected IMessageTemplatesClient Client { get; set; } = default!;
+
     [Inject]
     protected IMessageOutsClient MessageOut { get; set; } = default!;
+
     [Inject]
     private IClipboardService? ClipboardService { get; set; }
 

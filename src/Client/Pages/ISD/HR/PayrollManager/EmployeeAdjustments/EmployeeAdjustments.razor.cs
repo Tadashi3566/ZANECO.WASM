@@ -16,14 +16,19 @@ public partial class EmployeeAdjustments
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = default!;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
+
     [Inject]
     protected IEmployeeAdjustmentsClient Client { get; set; } = default!;
+
     protected EntityServerTableContext<EmployeeAdjustmentDto, Guid, EmployeeAdjustmentViewModel> Context { get; set; } = default!;
 
     private EntityTable<EmployeeAdjustmentDto, Guid, EmployeeAdjustmentViewModel>? _table;
@@ -110,6 +115,7 @@ public partial class EmployeeAdjustments
 
     // Advanced Search
     private Guid _searchEmployeeId;
+
     private Guid SearchEmployeeId
     {
         get => _searchEmployeeId;

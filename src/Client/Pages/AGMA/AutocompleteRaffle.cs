@@ -9,6 +9,7 @@ public class AutocompleteRaffle : MudAutocomplete<Guid>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IRafflesClient Client { get; set; } = default!;
 

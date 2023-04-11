@@ -9,6 +9,7 @@ public class AutocompletePrize : MudAutocomplete<Guid>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IPrizesClient Client { get; set; } = default!;
 

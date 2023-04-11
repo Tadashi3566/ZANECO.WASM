@@ -16,10 +16,13 @@ public partial class Tickets
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IGroupsClient GroupsClient { get; set; } = default!;
+
     [Inject]
     protected ITicketsClient TicketsClient { get; set; } = default!;
 
@@ -93,6 +96,7 @@ public partial class Tickets
     // Advanced Search
 
     private Guid _searchGroupId;
+
     private Guid SearchGroupId
     {
         get => _searchGroupId;
@@ -160,7 +164,7 @@ public partial class Tickets
             {
                 case "Open":
                     //await ApiHelper.ExecuteCallGuardedAsync(() => TicketsClient(_rating, _customValidation,
-                    //    "Message successfully sent to the Recipient(s).");        
+                    //    "Message successfully sent to the Recipient(s).");
                     break;
 
                 case "Suspend":

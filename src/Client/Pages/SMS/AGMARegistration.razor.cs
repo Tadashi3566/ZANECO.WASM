@@ -9,12 +9,15 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.SMS;
+
 public partial class AGMARegistration
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IMessageInsClient Client { get; set; } = default!;
 
@@ -60,7 +63,7 @@ public partial class AGMARegistration
             await CheckAGMARegistration();
 
             // we need StateHasChanged() because this is an async void handler
-            // we need to Invoke it because we could be on the wrong Thread          
+            // we need to Invoke it because we could be on the wrong Thread
             await InvokeAsync(StateHasChanged);
         }, null, 0, _seconds * 1000);
     }

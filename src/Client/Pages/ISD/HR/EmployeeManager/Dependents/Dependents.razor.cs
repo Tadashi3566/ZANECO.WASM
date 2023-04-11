@@ -16,15 +16,19 @@ public partial class Dependents
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
+
     [Inject]
     protected IDependentsClient Client { get; set; } = default!;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
-    
+
     protected EntityServerTableContext<DependentDto, Guid, DependentViewModel> Context { get; set; } = default!;
 
     private EntityTable<DependentDto, Guid, DependentViewModel>? _table;
@@ -108,6 +112,7 @@ public partial class Dependents
 
     // Advanced Search
     private Guid _searchEmployeeId;
+
     private Guid SearchEmployeeId
     {
         get => _searchEmployeeId;

@@ -5,10 +5,12 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.Surveys.Ratings;
+
 public partial class Ratings
 {
     [Inject]
     protected IRatesClient RatesClient { get; set; } = default!;
+
     [Inject]
     protected IRatingsClient RatingsClient { get; set; } = default!;
 
@@ -17,6 +19,7 @@ public partial class Ratings
     private EntityTable<RatingDto, Guid, RatingUpdateRequest>? _table;
 
     private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Rating",

@@ -5,21 +5,27 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.EmployeePayrollDetails;
+
 public partial class EmployeePayrollDetails
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = default!;
+
     [Parameter]
     public Guid PayrollId { get; set; } = default!;
+
     [Inject]
     protected IEmployeePayrollDetailClient Client { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
+
     protected EntityServerTableContext<EmployeePayrollDetailDto, Guid, EmployeePayrollDetailUpdateRequest> Context { get; set; } = default!;
 
     private EntityTable<EmployeePayrollDetailDto, Guid, EmployeePayrollDetailUpdateRequest>? _table;
 
     private string? _searchString;
+
     protected override void OnParametersSet()
     {
         if (PayrollId != Guid.Empty)
@@ -82,6 +88,7 @@ public partial class EmployeePayrollDetails
 
     // Advanced Search
     private Guid _searchEmployeeId;
+
     private Guid SearchEmployeeId
     {
         get => _searchEmployeeId;
@@ -93,6 +100,7 @@ public partial class EmployeePayrollDetails
     }
 
     private Guid _searchPayrollId;
+
     private Guid SearchPayrollId
     {
         get => _searchPayrollId;

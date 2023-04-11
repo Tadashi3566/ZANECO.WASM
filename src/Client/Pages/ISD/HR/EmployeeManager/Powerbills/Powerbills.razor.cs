@@ -16,14 +16,19 @@ public partial class Powerbills
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
+
     [Inject]
     protected IPowerbillsClient Client { get; set; } = default!;
+
     protected EntityServerTableContext<PowerbillDto, Guid, PowerbillViewModel> Context { get; set; } = default!;
 
     private EntityTable<PowerbillDto, Guid, PowerbillViewModel>? _table;
@@ -108,6 +113,7 @@ public partial class Powerbills
 
     // Advanced Search
     private Guid _searchEmployeeId;
+
     private Guid SearchEmployeeId
     {
         get => _searchEmployeeId;

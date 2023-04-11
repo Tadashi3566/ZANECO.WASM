@@ -1,5 +1,4 @@
-﻿using CurrieTechnologies.Razor.SweetAlert2;
-using MudBlazor;
+﻿using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 

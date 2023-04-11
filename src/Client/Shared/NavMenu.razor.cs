@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components.Authorization;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WASM.Client.Infrastructure.Common;
-using ZANECO.WASM.Client.Pages.Identity.Users;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Shared;
@@ -13,10 +12,13 @@ public partial class NavMenu
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
+
     private Guid? _employeeId { get; set; }
 
     private string? _hangfireUrl;

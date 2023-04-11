@@ -6,6 +6,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.CAD.PowerConsumptions;
+
 public partial class PowerConsumptions
 {
     [Inject]
@@ -16,6 +17,7 @@ public partial class PowerConsumptions
     private EntityTable<PowerConsumptionDto, Guid, PowerConsumptionUpdateRequest>? _table;
 
     private string? _searchString;
+
     protected override void OnInitialized() =>
         Context = new(
             entityName: "Power Consumption",
@@ -61,5 +63,4 @@ public partial class PowerConsumptions
             return billMonths;
         return billMonths.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
     }
-
 }

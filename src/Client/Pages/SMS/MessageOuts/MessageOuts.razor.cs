@@ -5,10 +5,12 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.SMS.MessageOuts;
+
 public partial class MessageOuts
 {
     [Inject]
     protected IMessageOutsClient Client { get; set; } = default!;
+
     protected EntityServerTableContext<MessageOutDto, int, MessageOutCreateRequest> Context { get; set; } = default!;
 
     private EntityTable<MessageOutDto, int, MessageOutCreateRequest>? _table;

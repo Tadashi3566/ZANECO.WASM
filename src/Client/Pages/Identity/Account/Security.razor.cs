@@ -6,6 +6,7 @@ using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.Identity.Account;
+
 public partial class Security
 {
     [Inject]

@@ -9,6 +9,7 @@ public class AutocompleteRate : MudAutocomplete<Guid>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IRatesClient Client { get; set; } = default!;
 

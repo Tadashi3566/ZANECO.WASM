@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 namespace ZANECO.WASM.Client.Infrastructure.Auth.AzureAd;
+
 public class AzureAdAuthorizationMessageHandler : AuthorizationMessageHandler
 {
     public AzureAdAuthorizationMessageHandler(IAccessTokenProvider provider, NavigationManager navigation, IConfiguration config)

@@ -3,6 +3,7 @@ using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Infrastructure.Theme;
 
 namespace ZANECO.WASM.Client.Shared;
+
 public partial class BaseLayout
 {
     private ClientPreference? _themePreference;

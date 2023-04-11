@@ -11,16 +11,21 @@ using ZANECO.WASM.Client.Infrastructure.Notifications;
 using ZANECO.WebApi.Shared.Notifications;
 
 namespace ZANECO.WASM.Client.Components.Notifications;
+
 public partial class NotificationConnection : IDisposable, IAsyncDisposable
 {
     [Parameter]
     public RenderFragment ChildContent { get; set; } = default!;
+
     [Inject]
     private IAccessTokenProvider TokenProvider { get; set; } = default!;
+
     [Inject]
     private INotificationPublisher Publisher { get; set; } = default!;
+
     [Inject]
     private IAuthenticationService AuthService { get; set; } = default!;
+
     [Inject]
     private ILogger<NotificationConnection> Logger { get; set; } = default!;
 

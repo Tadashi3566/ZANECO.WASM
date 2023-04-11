@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 
 namespace ZANECO.WebApi.Shared.Authorization;
+
 public static class FSHRoles
 {
     public static string Admin = nameof(Admin);

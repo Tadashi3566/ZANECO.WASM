@@ -48,8 +48,8 @@ namespace ZANECO.WASM.Client.Components.Common
 
         [Parameter] public string Title { get; set; }
 
-        [CascadingParameter] INavigationEventReceiver NavigationEventReceiver { get; set; }
-        [CascadingParameter] BottomNavMenu Parent { get; set; }
+        [CascadingParameter] private INavigationEventReceiver NavigationEventReceiver { get; set; }
+        [CascadingParameter] private BottomNavMenu Parent { get; set; }
 
         private Task HandleNavigation()
         {

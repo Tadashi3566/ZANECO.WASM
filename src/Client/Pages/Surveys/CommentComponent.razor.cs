@@ -14,10 +14,13 @@ public partial class CommentComponent
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthenticationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IRatingsClient Client { get; set; } = default!;
+
     [Inject]
     protected SweetAlertService? Swal { get; set; }
 

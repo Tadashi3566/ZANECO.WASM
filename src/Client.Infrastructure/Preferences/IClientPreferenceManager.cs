@@ -1,6 +1,7 @@
 ﻿using MudBlazor;
 
 namespace ZANECO.WASM.Client.Infrastructure.Preferences;
+
 public interface IClientPreferenceManager : IPreferenceManager
 {
     Task<MudTheme> GetCurrentThemeAsync();

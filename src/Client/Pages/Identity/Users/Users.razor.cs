@@ -8,10 +8,12 @@ using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.Identity.Users;
+
 public partial class Users
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
 
@@ -25,6 +27,7 @@ public partial class Users
 
     // Fields for editform
     protected string Password { get; set; } = string.Empty;
+
     protected string ConfirmPassword { get; set; } = string.Empty;
 
     private bool _passwordVisibility;

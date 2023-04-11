@@ -10,8 +10,10 @@ public class AutocompleteArea : MudAutocomplete<Guid>
 {
     [Inject]
     private IStringLocalizer<AutocompleteArea> L { get; set; } = default!;
+
     [Inject]
     private IAreasClient Client { get; set; } = default!;
+
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
 

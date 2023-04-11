@@ -13,12 +13,16 @@ public partial class SendMessageComponent
 {
     [Parameter]
     public string Recipients { get; set; } = string.Empty;
+
     [Parameter]
     public bool DisplayRecipients { get; set; } = true;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthenticationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IMessageOutsClient MessageClient { get; set; } = default!;
 

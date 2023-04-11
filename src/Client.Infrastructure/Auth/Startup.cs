@@ -5,6 +5,7 @@ using ZANECO.WASM.Client.Infrastructure.Auth.AzureAd;
 using ZANECO.WASM.Client.Infrastructure.Auth.Jwt;
 
 namespace ZANECO.WASM.Client.Infrastructure.Auth;
+
 internal static class Startup
 {
     public static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration config) =>

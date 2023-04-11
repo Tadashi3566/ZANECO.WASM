@@ -5,6 +5,7 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Infrastructure.Auth.AzureAd;
+
 internal class AzureAdClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount>
 {
     // Can't work with actual services in the constructor here, have to

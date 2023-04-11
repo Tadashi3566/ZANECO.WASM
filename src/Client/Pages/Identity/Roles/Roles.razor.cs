@@ -7,12 +7,15 @@ using ZANECO.WASM.Client.Infrastructure.Auth;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.Identity.Roles;
+
 public partial class Roles
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     private IRolesClient RolesClient { get; set; } = default!;
 

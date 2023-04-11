@@ -19,10 +19,13 @@ public partial class Employees
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IEmployeesClient Client { get; set; } = default!;
+
     [Inject]
     protected IEmployeePayrollDetailClient PayrollClient { get; set; } = default!;
 
@@ -92,6 +95,7 @@ public partial class Employees
 
     // Advanced Search
     private Guid _searchPayrollId;
+
     private Guid SearchPayrollId
     {
         get => _searchPayrollId;

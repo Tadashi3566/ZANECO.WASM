@@ -19,8 +19,10 @@ public partial class RemoteCollections
 {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IRemoteCollectionsClient Client { get; set; } = default!;
 
@@ -205,7 +207,7 @@ public partial class RemoteCollections
 
     private static string[] SplitCSV(string input)
     {
-        //Excludes commas within quotes  
+        //Excludes commas within quotes
         Regex csvSplit = new Regex("(?:^|,)(\"(?:[^\"]+|\"\")*\"|[^,]*)", RegexOptions.Compiled);
         List<string> list = new List<string>();
         string? curr = null;

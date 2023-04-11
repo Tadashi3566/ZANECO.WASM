@@ -9,6 +9,7 @@ public class AutocompleteDivision : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IGroupsClient Client { get; set; } = default!;
 

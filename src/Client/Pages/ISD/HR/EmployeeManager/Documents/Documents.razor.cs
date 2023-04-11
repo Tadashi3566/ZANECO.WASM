@@ -16,12 +16,16 @@ public partial class Documents
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
+
     [Inject]
     protected IDocumentsClient Client { get; set; } = default!;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
 
@@ -131,6 +135,7 @@ public partial class Documents
 
     // Advanced Search
     private Guid _searchEmployeeId;
+
     private Guid SearchEmployeeId
     {
         get => _searchEmployeeId;
@@ -171,7 +176,6 @@ public partial class Documents
 
     private async void UploadMultipleFiles()
     {
-
     }
 
     private void ClearImageInBytes()

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 
 namespace ZANECO.WASM.Client.Components.ThemeManager;
+
 public partial class ThemeButton
 {
     [Parameter]

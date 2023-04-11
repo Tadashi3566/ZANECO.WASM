@@ -10,16 +10,21 @@ using ZANECO.WASM.Client.Shared;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.EmployeePayrolls;
+
 public partial class EmployeePayrolls
 {
     [Parameter]
     public Guid PayrollId { get; set; } = default!;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IEmployeePayrollsClient Client { get; set; } = default!;
+
     [Inject]
     protected IEmployeePayrollDetailClient PayrollClient { get; set; } = default!;
 
@@ -100,6 +105,7 @@ public partial class EmployeePayrolls
 
     // Advanced Search
     private Guid _searchPayrollId;
+
     private Guid SearchPayrollId
     {
         get => _searchPayrollId;

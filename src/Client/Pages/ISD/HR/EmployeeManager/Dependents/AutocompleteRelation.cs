@@ -9,6 +9,7 @@ public class AutocompleteRelation : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IDependentsClient Client { get; set; } = default!;
 

@@ -4,10 +4,12 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.Surveys.Ratings;
+
 public class AutocompleteRatingTemplate : MudAutocomplete<Guid>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IRatesClient Client { get; set; } = default!;
 

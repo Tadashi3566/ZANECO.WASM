@@ -9,6 +9,7 @@ public class AutocompleteDocumentType : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IDocumentsClient Client { get; set; } = default!;
 

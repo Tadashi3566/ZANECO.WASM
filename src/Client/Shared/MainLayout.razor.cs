@@ -11,12 +11,16 @@ public partial class MainLayout
 {
     [Parameter]
     public RenderFragment ChildContent { get; set; } = default!;
+
     [Parameter]
     public EventCallback OnDarkModeToggle { get; set; }
+
     [Parameter]
     public EventCallback<bool> OnRightToLeftToggle { get; set; }
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
 
@@ -26,6 +30,7 @@ public partial class MainLayout
     private ClientPreference _preference = new();
 
     private DotNetObjectReference<MainLayout>? _reference;
+
     protected DotNetObjectReference<MainLayout> Reference
     {
         get

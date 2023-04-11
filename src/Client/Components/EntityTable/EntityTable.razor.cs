@@ -11,34 +11,47 @@ using ZANECO.WASM.Client.Infrastructure.Preferences;
 using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Components.EntityTable;
+
 public partial class EntityTable<TEntity, TId, TRequest>
     where TRequest : new()
 {
     [Parameter]
     [EditorRequired]
     public EntityTableContext<TEntity, TId, TRequest> Context { get; set; } = default!;
+
     [Parameter]
     public bool Loading { get; set; }
+
     [Parameter]
     public HashSet<TEntity>? SelectedItems { get; set; }
+
     [Parameter]
     public int[] PageSizes { get; set; } = new int[] { 10, 15, 50, 100 };
+
     [Parameter]
     public string? SearchString { get; set; }
+
     [Parameter]
     public EventCallback<string> SearchStringChanged { get; set; }
+
     [Parameter]
     public RenderFragment? AdvancedSearchContent { get; set; }
+
     [Parameter]
     public RenderFragment<TEntity>? ActionsContent { get; set; }
+
     [Parameter]
     public RenderFragment<TEntity>? ExtraActions { get; set; }
+
     [Parameter]
     public RenderFragment<TEntity>? ChildRowContent { get; set; }
+
     [Parameter]
     public RenderFragment<TRequest>? EditFormContent { get; set; }
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
 
@@ -55,7 +68,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
     private int _totalItems;
 
-    FshTablePreference _tablePreference = new();
+    private FshTablePreference _tablePreference = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -83,7 +96,9 @@ public partial class EntityTable<TEntity, TId, TRequest>
             (Context.EntityResource is { } resource && await AuthService.HasPermissionAsync(state.User, action, resource)));
 
     private bool HasActions => _canUpdate || _canDelete || (Context.HasExtraActionsFunc is not null && Context.HasExtraActionsFunc());
+
     private bool CanUpdateEntity(TEntity entity) => _canUpdate && (Context.CanUpdateEntityFunc is null || Context.CanUpdateEntityFunc(entity));
+
     private bool CanDeleteEntity(TEntity entity) => _canDelete && (Context.CanDeleteEntityFunc is null || Context.CanDeleteEntityFunc(entity));
 
     // Client side paging/filtering

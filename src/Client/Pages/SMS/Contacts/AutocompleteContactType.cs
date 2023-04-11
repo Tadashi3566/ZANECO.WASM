@@ -9,6 +9,7 @@ public class AutocompleteContactType : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IContactsClient Client { get; set; } = default!;
 

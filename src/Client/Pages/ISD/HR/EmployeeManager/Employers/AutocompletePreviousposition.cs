@@ -9,6 +9,7 @@ public class AutocompletePreviousposition : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IEmployersClient Client { get; set; } = default!;
 

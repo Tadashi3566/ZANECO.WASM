@@ -10,6 +10,7 @@ public partial class Ledgers
 {
     [Parameter]
     public Guid AccountId { get; set; } = Guid.Empty;
+
     [Inject]
     protected ILedgersClient Client { get; set; } = default!;
 
@@ -65,4 +66,3 @@ public partial class Ledgers
             deleteFunc: null, //async id => await Client.DeleteAsync(id),
             exportAction: string.Empty);
 }
-

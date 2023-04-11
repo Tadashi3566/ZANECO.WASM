@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 namespace ZANECO.WASM.Client.Infrastructure.Common;
+
 public static class AccessTokenProviderExtensions
 {
     public static async Task<string?> GetAccessTokenAsync(this IAccessTokenProvider tokenProvider) =>

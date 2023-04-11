@@ -45187,7 +45187,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string MessageType { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("isAPI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsAPI { get; set; } = default!;
+        public bool IsAPI { get; set; } = true;
 
         [Newtonsoft.Json.JsonProperty("subject", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]

@@ -8,6 +8,7 @@ using ZANECO.WASM.Client.Infrastructure.Common;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.AGMA.Raffles;
+
 public partial class Raffles
 {
     [Inject]

@@ -16,15 +16,21 @@ public partial class TimeLogs
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = Guid.Empty;
+
     [Parameter]
     public DateTime LogDate { get; set; }
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected ITimeLogsClient Client { get; set; } = default!;
+
     protected EntityServerTableContext<TimeLogDto, Guid, TimeLogViewModel> Context { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
 
@@ -124,6 +130,7 @@ public partial class TimeLogs
 
     // Advanced Search
     private Guid _searchEmployeeId;
+
     private Guid SearchEmployeeId
     {
         get => _searchEmployeeId;
@@ -135,6 +142,7 @@ public partial class TimeLogs
     }
 
     private DateTime? _StartDate = DateTime.Today; // new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+
     private DateTime? StartDate
     {
         get => _StartDate;
@@ -146,6 +154,7 @@ public partial class TimeLogs
     }
 
     private DateTime? _EndDate = DateTime.Today; // new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
     private DateTime? EndDate
     {
         get => _EndDate;

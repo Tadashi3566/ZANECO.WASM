@@ -9,6 +9,7 @@ public class AutocompleteAppointmentType : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
+
     [Inject]
     private IAppointmentsClient Client { get; set; } = default!;
 

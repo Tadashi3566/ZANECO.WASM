@@ -16,12 +16,16 @@ public partial class Loans
 {
     [Parameter]
     public Guid EmployeeId { get; set; } = default!;
+
     [Inject]
     protected ILoanClient Client { get; set; } = default!;
+
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
+
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
 
@@ -149,6 +153,7 @@ public partial class Loans
 
     // Advanced Search
     private Guid _searchEmployeeId;
+
     private Guid SearchEmployeeId
     {
         get => _searchEmployeeId;

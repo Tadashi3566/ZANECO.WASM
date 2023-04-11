@@ -6,10 +6,12 @@ using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.ScheduleDetails;
+
 public partial class ScheduleDetails
 {
     [Parameter]
     public Guid ScheduleId { get; set; } = Guid.Empty;
+
     [Inject]
     protected IScheduleDetailsClient Client { get; set; } = default!;
 
@@ -69,6 +71,7 @@ public partial class ScheduleDetails
 
     // Advanced Search
     private Guid _searchScheduleId;
+
     private Guid SearchScheduleId
     {
         get => _searchScheduleId;
