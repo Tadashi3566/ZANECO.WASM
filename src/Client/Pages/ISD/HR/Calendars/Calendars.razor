@@ -15,7 +15,7 @@
             <AutocompleteCalendarType For="@(() => context.CalendarType)" @bind-Value="context.CalendarType" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date" For="@(() => context.CalendarDate)" @bind-Date=" context.CalendarDate" DateFormat="MMMM dd, yyyy" />
+            <MudDatePicker Label="Date" For="@(() => context.CalendarDate)" @bind-Date=" context.CalendarDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />

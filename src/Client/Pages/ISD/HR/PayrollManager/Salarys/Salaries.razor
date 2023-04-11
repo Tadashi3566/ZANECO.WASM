@@ -1,4 +1,5 @@
 ﻿@page "/payroll/salaries"
+@using Syncfusion.Blazor.Inputs;
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Payroll)]
 
@@ -14,10 +15,22 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date Start" For="@(() => context.StartDate)" @bind-Date="context.StartDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value=context.StartDate
+                          CssClass="e-bigger e-filled"
+                          Format="MMMM dd, yyyy"
+                          Placeholder="Select Start Date"
+                          FloatLabelType="FloatLabelType.Auto"
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date End" For="@(() => context.EndDate)" @bind-Date="context.EndDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value=context.EndDate
+                          CssClass="e-bigger e-filled"
+                          Format="MMMM dd, yyyy"
+                          Placeholder="Select End Date"
+                          FloatLabelType="FloatLabelType.Auto"
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" Variant="Variant.Filled" />

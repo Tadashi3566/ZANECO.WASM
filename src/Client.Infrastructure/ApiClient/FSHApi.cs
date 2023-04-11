@@ -48310,10 +48310,10 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public System.Guid Id { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("startDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? StartDate { get; set; } = default!;
+        public System.DateTime StartDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("endDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? EndDate { get; set; } = default!;
+        public System.DateTime EndDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("payType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PayType { get; set; } = default!;
@@ -50833,10 +50833,10 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string LogType { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("logDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? LogDate { get; set; } = default!;
+        public System.DateTime LogDate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("logDateTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? LogDateTime { get; set; } = default!;
+        public System.DateTime LogDateTime { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
