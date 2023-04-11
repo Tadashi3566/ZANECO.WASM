@@ -90,7 +90,7 @@ public partial class Contacts
         if (_selectedItems.Count > 0)
         {
             phoneNumbers = _selectedItems.Select(x => x.PhoneNumber).ToArray()!;
-            Recipients = string.Join(",", phoneNumbers);
+            Recipients = string.Join(", ", phoneNumbers);
         }
         else
         {
