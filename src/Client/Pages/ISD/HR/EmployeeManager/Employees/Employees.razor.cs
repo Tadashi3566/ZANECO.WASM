@@ -40,7 +40,7 @@ public partial class Employees
     private EntityTable<EmployeeDto, Guid, EmployeeViewModel>? _table;
     private List<EmployeeDto> _list = new();
 
-    private string? _searchString;
+    private string? _searchString { get; set; }
 
     private bool _canViewEmployees;
     private bool _canCreateEmployees;
@@ -99,31 +99,16 @@ public partial class Employees
                 hasExtraActionsFunc: () => _canViewEmployees,
                 exportAction: string.Empty);
 
-        try
-        {
-            string? _payrollId = await _localStorage!.GetItemAsync<string>("payrollId");
-
-            if (_payrollId is not null)
-            {
-                _searchPayrollId = Guid.Parse(_payrollId);
-            }
-
-            StateHasChanged();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-
         var filter = new EmployeeSearchRequest { PageSize = 1000 };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
-            is PaginationResponseOfEmployeeDto response)
-        {
-            _list = response.Data.ToList();
+        //await GetSearchString();
+        await GetPayrollId();
 
-
-        }
+        //if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
+        //    is PaginationResponseOfEmployeeDto response)
+        //{
+        //    _list = response.Data.ToList();
+        //}
     }
 
     // Advanced Search
@@ -156,6 +141,44 @@ public partial class Employees
         if (!result.Canceled)
         {
             Snackbar.Add("Employee Daily Schedule has been successfully generated.", Severity.Success);
+        }
+    }
+
+    //private async Task GetSearchString()
+    //{
+    //    try
+    //    {
+    //        _searchString = await _localStorage!.GetItemAsync<string>("Employees");
+
+    //        if (_searchString is not null)
+    //        {
+    //            await _table!.ReloadDataAsync();
+    //        }
+
+    //        StateHasChanged();
+    //    }
+    //    catch (Exception)
+    //    {
+    //        throw;
+    //    }
+    //}
+
+    private async Task GetPayrollId()
+    {
+        try
+        {
+            string? _payrollId = await _localStorage!.GetItemAsync<string>("payrollId");
+
+            if (_payrollId is not null)
+            {
+                _searchPayrollId = Guid.Parse(_payrollId);
+            }
+
+            StateHasChanged();
+        }
+        catch (Exception)
+        {
+            throw;
         }
     }
 

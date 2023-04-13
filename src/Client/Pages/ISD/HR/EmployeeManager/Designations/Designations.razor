@@ -29,10 +29,25 @@
         </MudItem>*@
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Start Date" For="@(() => context.StartDate)" @bind-Date="context.StartDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            @*<MudDatePicker Label="Start Date" For="@(() => context.StartDate)" @bind-Date="context.StartDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />*@
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value="context.StartDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Placeholder="Start Date"
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="End Date" For="@(() => context.EndDate)" @bind-Date="context.EndDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            @*<MudDatePicker Label="End Date" For="@(() => context.EndDate)" @bind-Date="context.EndDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />*@
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value="context.EndDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Placeholder="End Date"
+                          ShowClearButton=true
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="6" lg="3">
             <AutocompleteArea For="@(() => context.Area)" @bind-Value="context.Area" />
@@ -72,7 +87,10 @@
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudNumericField Label="Per Day" For="@(() => context.RatePerDay)" @bind-Value="context.RatePerDay" Format="N2" InputMode="InputMode.numeric" Variant="Variant.Outlined" />
+            <MudNumericField Label="Salary" For="@(() => context.SalaryAmount)" @bind-Value="context.SalaryAmount" Format="N2" ReadOnly Variant="Variant.Outlined" />
+            </MudItem>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudNumericField Label="Per Day" For="@(() => context.RatePerDay)" @bind-Value="context.RatePerDay" Format="N2" ReadOnly Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Per Hour" For="@(() => context.RatePerHour)" @bind-Value="context.RatePerHour" Format="N0" Disabled=true Variant="Variant.Outlined" />

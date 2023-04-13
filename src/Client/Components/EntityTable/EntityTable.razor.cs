@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
@@ -29,6 +30,9 @@ public partial class EntityTable<TEntity, TId, TRequest>
     public int[] PageSizes { get; set; } = new int[] { 10, 15, 50, 100 };
 
     [Parameter]
+    public string? Owner { get; set; }
+
+    [Parameter]
     public string? SearchString { get; set; }
 
     [Parameter]
@@ -54,6 +58,9 @@ public partial class EntityTable<TEntity, TId, TRequest>
 
     [Inject]
     protected IAuthorizationService AuthService { get; set; } = default!;
+
+    [Inject]
+    private ILocalStorageService? _localStorage { get; set; }
 
     private bool _canSearch;
     private bool _canCreate;
@@ -132,6 +139,9 @@ public partial class EntityTable<TEntity, TId, TRequest>
         await SearchStringChanged.InvokeAsync(SearchString);
 
         await ServerLoadDataAsync();
+
+        //save search string to localstorage
+        await _localStorage!.SetItemAsync(Owner, SearchString);
     }
 
     private async Task ServerLoadDataAsync()

@@ -27,8 +27,7 @@
                 @if (Context.AdvancedSearchEnabled)
                 {
                     <div style="margin-top:10px!important">
-                        <MudCheckBox Label="All Columns" T="bool" Checked="Context.AllColumnsChecked"
-                            CheckedChanged="Context.AllColumnsCheckChanged"></MudCheckBox>
+                        <MudCheckBox Label="All Columns" T="bool" Checked="Context.AllColumnsChecked" CheckedChanged="Context.AllColumnsCheckChanged"></MudCheckBox>
                         @foreach (var field in Context.Fields)
                         {
                             if (field.Type == typeof(bool) || field.Type == typeof(double) || field.Type == typeof(decimal) || field.Type == typeof(DateOnly) || field.Type == typeof(TimeOnly) || field.Type == typeof(DateTime) || field.Type == typeof(byte)) continue;
