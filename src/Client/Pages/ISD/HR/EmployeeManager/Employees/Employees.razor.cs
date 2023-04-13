@@ -1,9 +1,12 @@
-﻿using Mapster;
+﻿using Blazored.LocalStorage;
+using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using System.Security.Cryptography;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Components.Dialogs.ISD.HR.PayrollManager;
 using ZANECO.WASM.Client.Components.EntityTable;
@@ -29,9 +32,13 @@ public partial class Employees
     [Inject]
     protected IEmployeePayrollDetailClient PayrollClient { get; set; } = default!;
 
+    [Inject]
+    private ILocalStorageService? _localStorage { get; set; }
+
     protected EntityServerTableContext<EmployeeDto, Guid, EmployeeViewModel> Context { get; set; } = default!;
 
     private EntityTable<EmployeeDto, Guid, EmployeeViewModel>? _table;
+    private List<EmployeeDto> _list = new();
 
     private string? _searchString;
 
@@ -91,6 +98,32 @@ public partial class Employees
                 deleteFunc: async id => await Client.DeleteAsync(id),
                 hasExtraActionsFunc: () => _canViewEmployees,
                 exportAction: string.Empty);
+
+        try
+        {
+            string? _payrollId = await _localStorage!.GetItemAsync<string>("payrollId");
+
+            if (_payrollId is not null)
+            {
+                _searchPayrollId = Guid.Parse(_payrollId);
+            }
+
+            StateHasChanged();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+
+        var filter = new EmployeeSearchRequest { PageSize = 1000 };
+
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
+            is PaginationResponseOfEmployeeDto response)
+        {
+            _list = response.Data.ToList();
+
+
+        }
     }
 
     // Advanced Search
@@ -124,6 +157,11 @@ public partial class Employees
         {
             Snackbar.Add("Employee Daily Schedule has been successfully generated.", Severity.Success);
         }
+    }
+
+    private void SetPayrollId(Guid payrollId)
+    {
+        _localStorage?.SetItemAsStringAsync("payrollId", payrollId.ToString());
     }
 
     private async Task EmployeePayrollGenerate(Guid employeeId, Guid payrollId)

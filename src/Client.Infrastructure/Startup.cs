@@ -29,6 +29,7 @@ public static class Startup
                     configuration.SnackbarConfiguration.ShowCloseIcon = true;
                 })
             .AddSweetAlert2()
+            .AddBlazoredLocalStorage()
             .AddScoped<IClientPreferenceManager, ClientPreferenceManager>()
             .AutoRegisterInterfaces<IAppService>()
             .AutoRegisterInterfaces<IApiService>()

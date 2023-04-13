@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using Blazored.LocalStorage;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -29,6 +30,7 @@ public partial class Payrolls
 
     private string? _searchString;
     private bool _canViewPayroll;
+
     private int _workingDays = 10;
 
     protected override async Task OnInitializedAsync()
@@ -45,8 +47,8 @@ public partial class Payrolls
                 new(data => data.PayrollType, "Payroll Type", visible: false),
                 new(data => data.EmploymentType, "Employment Type", "EmploymentType", Template: TemplateType),
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.EndDate, "Start-End Dates", "EndDate", Template: TemplateDate),
-                new(data => data.WorkingDays, "Working Days", "WorkingDays"),
+                new(data => data.StartDate, "Period", "StartDate", Template: TemplateDate),
+                new(data => data.WorkingDays, "Days", "WorkingDays"),
                 new(data => data.PayrollDate, "Payroll Date", "PayrollDate", typeof(DateOnly)),
                 new(data => data.TotalSalary, "Total Salary", "TotalSalary", typeof(decimal)),
                 new(data => data.TotalAdditional, "Total Additional", "TotalAdditional", typeof(decimal)),
@@ -67,11 +69,10 @@ public partial class Payrolls
 
                 await Client.CreateAsync(Payroll.Adapt<PayrollCreateRequest>());
             },
-            updateFunc: async (id, Payroll) =>
+            updateFunc: async (id, request) =>
             {
-                Payroll.WorkingDays = DateFunctions.GetWorkingDays((DateTime)Payroll.StartDate!, (DateTime)Payroll.EndDate!);
-
-                await Client.UpdateAsync(id, Payroll);
+                request.WorkingDays = DateFunctions.GetWorkingDays((DateTime)request.StartDate!, (DateTime)request.EndDate!);
+                await Client.UpdateAsync(id, request);
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
             hasExtraActionsFunc: () => _canViewPayroll,

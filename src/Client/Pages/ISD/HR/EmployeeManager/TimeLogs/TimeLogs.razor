@@ -21,7 +21,7 @@
             }
             <MudItem Class="mt-2" xs="12" sm="6">
                 <SfDateRangePicker TValue="DateTime"
-                                   CssClass="e-bigger e-filled"
+                                   CssClass="e-bigger e-filled mt-1"
                                    @bind-StartDate=_startDate
                                    @bind-EndDate=_endDate
                                    Format="MMMM dd, yyyy"
@@ -49,7 +49,7 @@
             <MudItem Class="mt-1" xs="12" sm="6" md="4" lg="3">
                 <SfDatePicker TValue="DateTime"
                           @bind-Value=context.LogDate
-                          CssClass="e-bigger e-filled"
+                          CssClass="e-bigger e-filled mt-1"
                           Format="MMMM dd, yyyy"
                           Placeholder="Select Date"
                           FloatLabelType="FloatLabelType.Auto"
@@ -59,7 +59,7 @@
             <MudItem Class="mt-1" xs="12" sm="6" md="4" lg="3">
                 <SfDateTimePicker TValue="DateTime"
                               @bind-Value=context.LogDateTime
-                              CssClass="e-bigger e-filled"
+                              CssClass="e-bigger e-filled mt-1"
                               Format="MMMM dd, yyyy hh:mm"
                               Placeholder="Select Date and Time"
                               FloatLabelType="FloatLabelType.Auto"

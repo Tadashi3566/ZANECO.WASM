@@ -68,6 +68,7 @@
         <a class="dismiss">🗙</a>
     </div>
 
+    <script src="Blazor.ClientStorage.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
     <script src="_content/Microsoft.Authentication.WebAssembly.Msal/AuthenticationService.js"></script>
@@ -78,40 +79,40 @@
     <script>navigator.serviceWorker.register('service-worker.js');</script>
 
     <script>
-            var themeManager = JSON.parse(window.localStorage.getItem("clientPreference"));
-            var primaryColor = '#03a9f4';
-            var baseColor = '#ffffff';
-            if (themeManager) {
-                if (themeManager.PrimaryColor) {
-                    primaryColor = themeManager.PrimaryColor;
-                }
-                if (themeManager.IsDarkMode) {
-                    baseColor = '#1b1f22';
-                }
+        var themeManager = JSON.parse(window.localStorage.getItem("clientPreference"));
+        var primaryColor = '#03a9f4';
+        var baseColor = '#ffffff';
+        if (themeManager) {
+            if (themeManager.PrimaryColor) {
+                primaryColor = themeManager.PrimaryColor;
             }
-
-            var elements = document.getElementsByClassName('fsh-wasm');
-            for (var i = 0; i < elements.length; i++) {
-                elements[i].style.backgroundImage = 'linear-gradient(-120deg,' + primaryColor + ' 50%,' + baseColor + ' 50%)';
+            if (themeManager.IsDarkMode) {
+                baseColor = '#1b1f22';
             }
+        }
 
-            async function downloadFileFromStream(fileName, contentStreamReference) {
-                const arrayBuffer = await contentStreamReference.arrayBuffer();
-                const blob = new Blob([arrayBuffer]);
-                const url = URL.createObjectURL(blob);
+        var elements = document.getElementsByClassName('fsh-wasm');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.backgroundImage = 'linear-gradient(-120deg,' + primaryColor + ' 50%,' + baseColor + ' 50%)';
+        }
 
-                triggerFileDownload(fileName, url);
+        async function downloadFileFromStream(fileName, contentStreamReference) {
+            const arrayBuffer = await contentStreamReference.arrayBuffer();
+            const blob = new Blob([arrayBuffer]);
+            const url = URL.createObjectURL(blob);
 
-                URL.revokeObjectURL(url);
-            }
+            triggerFileDownload(fileName, url);
 
-            function triggerFileDownload(fileName, url) {
-                const anchorElement = document.createElement('a');
-                anchorElement.href = url;
-                anchorElement.download = fileName ?? '';
-                anchorElement.click();
-                anchorElement.remove();
-            }
+            URL.revokeObjectURL(url);
+        }
+
+        function triggerFileDownload(fileName, url) {
+            const anchorElement = document.createElement('a');
+            anchorElement.href = url;
+            anchorElement.download = fileName ?? '';
+            anchorElement.click();
+            anchorElement.remove();
+        }
     </script>
 </body>
 </html>

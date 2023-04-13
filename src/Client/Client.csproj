@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Blazor.ClientStorage" Version="1.0.5" />
         <PackageReference Include="BlazorBarcodeScanner.ZXing.JS" Version="1.0.3" />
         <PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
         <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.5.0" />

@@ -1,4 +1,6 @@
-﻿using ZANECO.WASM.Client.Infrastructure.ApiClient;
+﻿using Microsoft.AspNetCore.Components.Forms;
+using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Infrastructure.Common;
 
 namespace ZANECO.WASM.Client.Components.EntityTable;
 
@@ -6,8 +8,7 @@ namespace ZANECO.WASM.Client.Components.EntityTable;
 /// Initialization Context for the EntityTable Component.
 /// Use this one if you want to use Server Paging, Sorting and Filtering.
 /// </summary>
-public class EntityServerTableContext<TEntity, TId, TRequest>
-    : EntityTableContext<TEntity, TId, TRequest>
+public class EntityServerTableContext<TEntity, TId, TRequest> : EntityTableContext<TEntity, TId, TRequest>
 {
     /// <summary>
     /// A function that loads the specified page from the api with the specified search criteria

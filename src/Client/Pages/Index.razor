@@ -93,17 +93,3 @@
     </MudGrid>
 </MudContainer>
 
-@code {
-    [CascadingParameter]
-    protected Task<AuthenticationState> AuthState { get; set; } = default!;
-    [Inject]
-    protected IAuthenticationService AuthService { get; set; } = default!;
-
-    public IEnumerable<Claim>? Claims { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthState;
-        Claims = authState.User.Claims;
-    }
-}

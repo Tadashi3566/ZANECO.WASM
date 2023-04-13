@@ -9,7 +9,7 @@
 <EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="EmployeeDto" TId="Guid" TRequest="EmployeeViewModel" Context="@Context">
     <AdvancedSearchContent>
         <MudItem Class="mt-1">
-            <AutocompletePayroll @bind-Value="SearchPayrollId" />
+            <AutocompletePayroll @bind-Value="SearchPayrollId" OnBlur="(() => SetPayrollId(SearchPayrollId))" />
         </MudItem>
     </AdvancedSearchContent>
     <ExtraActions>
