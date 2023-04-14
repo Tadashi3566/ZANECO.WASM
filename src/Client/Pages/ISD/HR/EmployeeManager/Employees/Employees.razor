@@ -171,17 +171,41 @@
             <MudTextField Label="Home Address" For="@(() => context.Address)" @bind-Value="context.Address" Variant="Variant.Filled"/>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Birth Date" For="@(() => context.BirthDate)" @bind-Date="context.BirthDate" DateFormat="MMMM dd, yyyy" MinDate="@DateTime.Today.AddYears(-60)" MaxDate="@DateTime.Today.AddYears(-17)" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime?"
+                          @bind-Value="context.BirthDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Min="@DateTime.Today.AddYears(-60)"
+                          Max="@DateTime.Today.AddYears(-17)"
+                          Placeholder="Birth Date"
+                          ShowClearButton=true
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6">
             <AutocompleteBirthPlace For="@(() => context.BirthPlace)" @bind-Value="context.BirthPlace" />
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date Hired" For="@(() => context.HireDate)" @bind-Date="context.HireDate" DateFormat="MMMM dd, yyyy" MaxDate="@DateTime.Today" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value="context.HireDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Max="@DateTime.Today"
+                          Placeholder="Birth Date"
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date Regularized" For="@(() => context.RegularDate)" @bind-Date="context.RegularDate" DateFormat="MMMM dd, yyyy" MinDate="context.HireDate" MaxDate="@DateTime.Today" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value="context.RegularDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Min="context.HireDate"
+                          Max="@DateTime.Today"
+                          Placeholder="Regular Date"
+                          ShowTodayButton=true />
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">

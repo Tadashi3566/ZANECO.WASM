@@ -7,7 +7,13 @@
 <EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RaffleDto" TId="Guid" TRequest="RaffleViewModel" Context="@Context">
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Raffle Date" For="@(() => context.RaffleDate)" @bind-Date="context.RaffleDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value="context.RaffleDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Placeholder="Raffle Date"
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />

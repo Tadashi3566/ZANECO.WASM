@@ -29,7 +29,6 @@
         </MudItem>*@
 
         <MudItem xs="12" sm="6" md="4" lg="3">
-            @*<MudDatePicker Label="Start Date" For="@(() => context.StartDate)" @bind-Date="context.StartDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />*@
             <SfDatePicker TValue="DateTime"
                           @bind-Value="context.StartDate"
                           CssClass="e-bigger e-filled mt-1"
@@ -39,7 +38,6 @@
                           ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            @*<MudDatePicker Label="End Date" For="@(() => context.EndDate)" @bind-Date="context.EndDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />*@
             <SfDatePicker TValue="DateTime"
                           @bind-Value="context.EndDate"
                           CssClass="e-bigger e-filled mt-1"

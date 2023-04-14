@@ -25,7 +25,14 @@
     </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Date" For="@(() => context.DocumentDate)" @bind-Date="context.DocumentDate" DateFormat="MMMM dd, yyyy" Editable=true Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime?"
+                          @bind-Value="context.DocumentDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Placeholder="Document Date"
+                          ShowClearButton=true
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteDocumentType For="@(() => context.DocumentType)" @bind-Value="context.DocumentType" />

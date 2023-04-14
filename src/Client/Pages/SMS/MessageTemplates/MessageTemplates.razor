@@ -32,7 +32,14 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Schedule" For="@(() => context.ScheduleDate)" @bind-Date="context.ScheduleDate" DateFormat="MMMM dd, yyyy" MinDate="@DateTime.Today.AddYears(-1)" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value="context.ScheduleDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Min="@DateTime.Today.AddYears(-1)"
+                          Placeholder="Schedule"
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSwitch Class="mt-3" Color="Color.Tertiary" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" />

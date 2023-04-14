@@ -32,7 +32,14 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Birth Date" For="@(() => context.BirthDate)" @bind-Date="context.BirthDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime?"
+                          @bind-Value="context.BirthDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Placeholder="Birth Date"
+                          ShowClearButton=true
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12">
             <AutocompleteRelation For="@(() => context.Relation)" @bind-Value="context.Relation" Variant="Variant.Filled" />

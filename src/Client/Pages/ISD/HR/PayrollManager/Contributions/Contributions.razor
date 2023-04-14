@@ -17,10 +17,22 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="From Date" DateFormat="MMMM dd, yyyy" For="@(() => context.DateEffectivityStart)" @bind-Date="context.DateEffectivityStart" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value="context.StartDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Placeholder="Start Date"
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="To Date" DateFormat="MMMM dd, yyyy" For="@(() => context.DateEffectivityEnd)" @bind-Date="context.DateEffectivityEnd" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value="context.EndDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Placeholder="End Date"
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="From" Format="N2" For="@(() => context.RangeStart)" @bind-Value="context.RangeStart" Variant="Variant.Filled" />
@@ -57,10 +69,10 @@
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.subtitle2">
-                @context.DateEffectivityStart.ToString("MMMM dd, yyyy")
+                @context.StartDate.ToString("MMMM dd, yyyy")
             </MudText>
             <MudText Typo="Typo.subtitle1">
-                @context.DateEffectivityEnd.ToString("MMMM dd, yyyy")
+                @context.EndDate.ToString("MMMM dd, yyyy")
             </MudText>
         </MudItem>
     };

@@ -71,7 +71,13 @@
             <MudTextField Label="Bill Month" For="@(() => context.BillMonth)" @bind-Value="context.BillMonth" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudDatePicker Label="Reading Date" For="@(() => context.PresentReadingDate)" @bind-Date="context.PresentReadingDate" DateFormat="MMMM dd, yyyy" Variant="Variant.Filled" />
+            <SfDatePicker TValue="DateTime"
+                          @bind-Value="context.PresentReadingDate"
+                          CssClass="e-bigger e-filled mt-1"
+                          Format="MMMM dd, yyyy"
+                          FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
+                          Placeholder="Present Reading Date"
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="KWH" For="@(() => context.UsedKWH)" @bind-Value="context.UsedKWH" Format="N2" Variant="Variant.Filled" />
