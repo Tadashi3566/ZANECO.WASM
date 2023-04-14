@@ -67,7 +67,7 @@ public partial class Designations
                 new(data => data.Position, "Designation", "Position", Template: TemplatePositionType),
                 new(data => data.EmploymentType, "Employment Type", visible: false),
                 new(data => data.StartDate, "Effectivity", "StartDate", Template: TemplateEffectivityUntil),
-                new(data => data.SalaryNumber, "Rank", "SalaryNumber"),
+                new(data => data.SalaryName, "Rank", "SalaryName"),
                 new(data => data.SalaryAmount, "SalaryAmount", "RatePerHour", typeof(decimal)),
                 new(data => data.RatePerHour, "Rate/Hour", "RatePerHour", typeof(decimal)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),

@@ -40,7 +40,7 @@ public partial class Contributions
             fields: new()
             {
                 new(data => data.ContributionType, "Contribution Type", "ContributionType"),
-                new(data => data.DateEffectivityStart, "Effectivity Date", "DateEffectivityStart", Template: TemplateDateEffectivity),
+                new(data => data.StartDate, "Effectivity Date", "StartDate", Template: TemplateDateEffectivity),
                 new(data => data.RangeStart, "Amount Range", "RangeStart", typeof(decimal), Template: TemplateAmountRange),
                 new(data => data.EmployerContribution, "Employer/Employee", "EmployerContribution", typeof(decimal), Template: TemplateContribution),
                 new(data => data.TotalContribution, "Total", "TotalContribution", typeof(decimal)),

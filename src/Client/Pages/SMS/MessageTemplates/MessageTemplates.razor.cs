@@ -50,7 +50,7 @@ public partial class MessageTemplates
                 new(data => data.ImagePath, "Image", Template: TemplateImage),
                 new(data => data.TemplateType, "Type", "TemplateType"),
                 new(data => data.IsAPI, "API", "IsAPI", typeof(bool), Template: TemplateApiFastMode),
-                new(data => data.ScheduleDate, "Schedule", "ScheduleDate", typeof(DateOnly)),
+                new(data => data.Schedule, "Schedule", "Schedule", typeof(DateTime)),
                 new(data => data.Subject, "Subject", visible : false),
                 new(data => data.Message, "Message", "Message", Template: TemplateSubjectMessage),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
@@ -116,7 +116,7 @@ public partial class MessageTemplates
                 TemplateType = dto.TemplateType,
                 MessageType = dto.MessageType,
                 IsAPI = dto.IsAPI,
-                ScheduleDate = dto.ScheduleDate,
+                Schedule = dto.Schedule,
                 Recipients = "0123456789",
                 Subject = dto.Subject,
                 Message = dto.Message,
@@ -130,7 +130,7 @@ public partial class MessageTemplates
 
     private async void SendSMS(MessageTemplateDto request)
     {
-        if (request.ScheduleDate < DateTime.Today)
+        if (request.Schedule < DateTime.Today)
         {
             Snackbar.Add("SMS Template Schedule should be at least _logDate!", Severity.Error);
             return;
@@ -169,7 +169,7 @@ public partial class MessageTemplates
 
             _messageOut.IsBackgroundJob = _backgroundPreference.IsBackgroundJob;
             _messageOut.IsScheduled = _backgroundPreference.IsScheduled;
-            _messageOut.Schedule = request.ScheduleDate;
+            _messageOut.Schedule = request.Schedule;
 
             _messageOut.IsAPI = request.IsAPI;
             _messageOut.MessageType = request.MessageType;

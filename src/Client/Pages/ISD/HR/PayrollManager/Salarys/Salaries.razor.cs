@@ -35,6 +35,7 @@ public partial class Salaries
                 new(data => data.Notes, "Notes", visible: false),
             },
             idFunc: data => data.Id,
+            enableAdvancedSearch: true,
             searchFunc: async filter => (await Client
                 .SearchAsync(filter.Adapt<SalarySearchRequest>()))
                 .Adapt<PaginationResponse<SalaryDto>>(),

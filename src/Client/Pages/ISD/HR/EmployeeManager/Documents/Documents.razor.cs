@@ -174,10 +174,6 @@ public partial class Documents
         }
     }
 
-    private async void UploadMultipleFiles()
-    {
-    }
-
     private void ClearImageInBytes()
     {
         Context.AddEditModal.RequestModel.ImageInBytes = string.Empty;

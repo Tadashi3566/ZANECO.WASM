@@ -28,6 +28,10 @@
                 OnTouch="@(() => Navigation.NavigateTo($"/employee/attendance/{context.Id}"))">
                 Attendance
             </MudMenuItem>
+            <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/employee/timelogs/{context.Id}"))"
+                     OnTouch="@(() => Navigation.NavigateTo($"/employee/timelogs/{context.Id}"))">
+                Time Logs
+            </MudMenuItem>
             <MudDivider />
             <MudMenuItem OnClick="@(() => Navigation.NavigateTo($"/hr/designations/{context.Id}"))"
                 OnTouch="@(() => Navigation.NavigateTo($"/hr/designations/{context.Id}"))">
@@ -301,7 +305,10 @@
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.body1">
                 <MudHighlighter Text="@context.FullName" HighlightedText="@_searchString" />
-                @DisplayYearsOld(context.BirthDate)y
+                @if(context.BirthDate is not null)
+                {
+                    DisplayYearsOld((DateTime)context.BirthDate);
+                }
             </MudText>
             <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />

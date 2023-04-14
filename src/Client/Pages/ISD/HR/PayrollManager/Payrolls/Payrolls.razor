@@ -42,7 +42,7 @@
                                @bind-StartDate=context.StartDate
                                @bind-EndDate=context.EndDate
                                Format="MMMM dd, yyyy"
-                               Placeholder="Select Date Range"
+                               Placeholder="Date Range"
                                FloatLabelType="FloatLabelType.Auto"
                                ShowTodayButton=true />
         </MudItem>
@@ -51,12 +51,12 @@
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <SfDatePicker TValue="DateTime"
-                               CssClass="e-bigger e-filled mt-1"
-                               @bind-Value=context.PayrollDate
-                               Format="MMMM dd, yyyy"
-                               Placeholder="Select Date Range"
-                               FloatLabelType="FloatLabelType.Auto"
-                               ShowTodayButton=true />
+                          CssClass="e-bigger e-filled mt-1"
+                          @bind-Value=context.PayrollDate
+                          Format="MMMM dd, yyyy"
+                          Placeholder="Payroll Date"
+                          FloatLabelType="FloatLabelType.Auto"
+                          ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudNumericField Label="Total Salary" For="@(() => context.TotalSalary)" @bind-Value="context.TotalSalary" Format="N2" Disabled=true Variant="Variant.Filled" />

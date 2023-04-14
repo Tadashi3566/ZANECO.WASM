@@ -25,10 +25,11 @@
                                    @bind-StartDate=_startDate
                                    @bind-EndDate=_endDate
                                    Format="MMMM dd, yyyy"
-                                   Placeholder="Select Date Range"
+                                   Placeholder="Date Range"
                                    FloatLabelType="FloatLabelType.Auto"
                                    ShowClearButton=true
-                                   ShowTodayButton=true />
+                                   ShowTodayButton=true
+                                   OnChange="(() => _table!.ReloadDataAsync())" />
             </MudItem>
         </MudGrid>
     </AdvancedSearchContent>
@@ -51,7 +52,7 @@
                           @bind-Value=context.LogDate
                           CssClass="e-bigger e-filled mt-1"
                           Format="MMMM dd, yyyy"
-                          Placeholder="Select Date"
+                          Placeholder="Date"
                           FloatLabelType="FloatLabelType.Auto"
                           ShowClearButton=true
                           ShowTodayButton=true />
@@ -60,8 +61,8 @@
                 <SfDateTimePicker TValue="DateTime"
                               @bind-Value=context.LogDateTime
                               CssClass="e-bigger e-filled mt-1"
-                              Format="MMMM dd, yyyy hh:mm"
-                              Placeholder="Select Date and Time"
+                              Format="MMMM dd, yyyy HH:mm"
+                              Placeholder="Date and Time"
                               FloatLabelType="FloatLabelType.Auto"
                               ShowClearButton=true
                               ShowTodayButton=true />

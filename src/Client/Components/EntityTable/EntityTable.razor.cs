@@ -141,7 +141,10 @@ public partial class EntityTable<TEntity, TId, TRequest>
         await ServerLoadDataAsync();
 
         //save search string to localstorage
-        await _localStorage!.SetItemAsync(Owner, SearchString);
+        if (!string.IsNullOrEmpty(Owner))
+        {
+            await _localStorage!.SetItemAsync(Owner, SearchString);
+        }
     }
 
     private async Task ServerLoadDataAsync()

@@ -85,8 +85,10 @@ public partial class TimeLogs
                 var filter = _filter.Adapt<TimeLogSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
-                filter.StartDate = _startDate == DateTime.MinValue ? null : _startDate;
-                filter.EndDate = _endDate == DateTime.MinValue ? null : _endDate;
+                //filter.StartDate = _startDate == DateTime.MinValue ? null : _startDate;
+                //filter.EndDate = _endDate == DateTime.MinValue ? null : _endDate;
+                filter.StartDate = _startDate;
+                filter.EndDate = _endDate;
 
                 var result = await Client.SearchAsync(filter);
                 return result.Adapt<PaginationResponse<TimeLogDto>>();

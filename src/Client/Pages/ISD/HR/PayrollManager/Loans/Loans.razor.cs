@@ -35,7 +35,7 @@ public partial class Loans
 
     private bool _canViewEmployees;
     private string? _searchString;
-    private DateTime? _dtend;
+    private DateTime _dtend;
     private decimal _ammortization = 0;
 
     protected override void OnParametersSet()
@@ -170,12 +170,9 @@ public partial class Loans
         new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
     };
 
-    private void SetEndDate(string schedule, decimal amount, DateTime? dtstart, int months)
+    private void SetEndDate(string schedule, decimal amount, in DateTime dtstart, int months)
     {
-        if (dtstart != null)
-        {
-            _dtend = dtstart?.AddMonths(months);
-        }
+        _dtend = dtstart.AddMonths(months);
 
         if (schedule.Equals("PAYROLL"))
         {

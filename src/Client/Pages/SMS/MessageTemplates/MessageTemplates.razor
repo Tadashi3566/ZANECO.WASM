@@ -32,10 +32,10 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <SfDatePicker TValue="DateTime"
-                          @bind-Value="context.ScheduleDate"
+            <SfDateTimePicker TValue="DateTime"
+                          @bind-Value="context.Schedule"
                           CssClass="e-bigger e-filled mt-1"
-                          Format="MMMM dd, yyyy"
+                          Format="MMMM dd, yyyy HH:mm"
                           FloatLabelType="Syncfusion.Blazor.Inputs.FloatLabelType.Auto"
                           Min="@DateTime.Today.AddYears(-1)"
                           Placeholder="Schedule"
