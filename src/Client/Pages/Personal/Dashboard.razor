@@ -1,5 +1,7 @@
 ﻿@page "/dashboard"
 
+@using Syncfusion.Blazor.Navigations
+
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Dashboard)]
 
 <FshTitle Title="Dashboard" Description="Realtime Updates & Insights with SignalR" />
@@ -11,6 +13,34 @@
 else
 {
     <MudGrid>
+        <MudItem xs="12">
+            @*<MudPaper Elevation="@_preference.Elevation" Style="height:360px;">*@
+                <MudCarousel TData="object" Style="height:350px;" AutoCycle=true EnableSwipeGesture=true ShowArrows=true ShowBullets=true >
+                    @foreach (var interruption in _messageTemplates)
+                    {
+                        <MudCarouselItem Class="ma-1" Color="Color.Secondary" Transition="Transition.Slide">
+                            <MudGrid Class="d-flex flex-column">
+                                <MudItem Class="ml-5 mr-5">
+                                    <MudText Typo="Typo.subtitle1">@interruption.Subject</MudText>
+                                </MudItem>
+                                <MudItem Class="ml-5 mr-5">
+                                    <MudText Typo="Typo.body2">@interruption.Message</MudText>
+                                    <MudGrid Class="d-flex flex-row">
+                                        <MudChip Color="Color.Tertiary" Label=true Size="Size.Small" >
+                                            @interruption.TemplateType
+                                        </MudChip>
+                                    <MudChip Color="Color.Tertiary" Label=true Size="Size.Small" >
+                                            @interruption.Schedule.ToString("dddd MMMM dd, yyyy hh:mm tt")
+                                        </MudChip>
+                                    </MudGrid>
+                                </MudItem>
+                            </MudGrid>
+                        </MudCarouselItem>
+                    }
+                </MudCarousel>
+            @*</MudPaper>*@
+        </MudItem>
+
         @if (_isAdmin)
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
@@ -67,7 +97,7 @@ else
                     </div>
                 </MudPaper>
             </MudItem>
-            <MudItem xs="12" sm="6" md="4" lg="3">
+            @*<MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
                     <MudIcon Icon="@Icons.Material.Filled.Message" Color="Color.Secondary" Class="mx-4"
                      Style="width:54px; height:54px;"></MudIcon>
@@ -78,19 +108,19 @@ else
                         <MudText Typo="Typo.h5">@SMSTemplateCount.ToString("N0")</MudText>
                     </div>
                 </MudPaper>
-            </MudItem>
+            </MudItem>*@
             <MudItem xs="12">
-                <MudPaper Elevation="@_preference.Elevation" Style="height:500px;">
+                <MudPaper Class="ma-1" Elevation="@_preference.Elevation" Style="height:500px;">
                     <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerMonth" ChartOptions="@_chartOptionMonths"
                       XAxisLabels="@_dataBarChartXAxisLabelsMonth.Select(a => a.ToString()).ToArray()" Width="100%"
-                      Height="400px"></MudChart>
+                      Height="450px"></MudChart>
                 </MudPaper>
             </MudItem>
             <MudItem xs="12">
-                <MudPaper Elevation="@_preference.Elevation" Style="height:500px;">
+                <MudPaper Class="ma-1" Elevation="@_preference.Elevation" Style="height:500px;">
                     <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerDay" ChartOptions="@_chartOptionDays"
                       XAxisLabels="@_daysOfMonth!.Select(a => a.ToString()).ToArray()" Width="100%"
-                      Height="400px"></MudChart>
+                      Height="450px"></MudChart>
                 </MudPaper>
             </MudItem>
         }
