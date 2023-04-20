@@ -4,7 +4,7 @@
 
 <FshTitle Title="Remote Collections" Description="Remote Collections Management" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="RemoteCollectionDto" TId="Guid" TRequest="RemoteCollectionViewModel" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table SelectedItems=_selectedItems TEntity="RemoteCollectionDto" TId="Guid" TRequest="RemoteCollectionViewModel" Context=Context>
     <ExtraActions>
         <InputFile OnChange="@OnInputFileChange" class="btn btn-primary" />
         <MudMenuItem Icon="@Icons.Material.Filled.ImportExport"

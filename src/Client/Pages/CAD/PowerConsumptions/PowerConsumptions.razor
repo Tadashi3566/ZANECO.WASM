@@ -3,7 +3,7 @@
 
 <FshTitle Title="Power Consumption" Description="Power Consumption Management" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="PowerConsumptionDto" TId="Guid" TRequest="PowerConsumptionUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="PowerConsumptionDto" TId="Guid" TRequest="PowerConsumptionUpdateRequest" Context=Context>
     <AdvancedSearchContent>
         <MudItem Class="mt-1">
             <MudAutocomplete T="string" Label="Bill Month" SearchFunc="SearchBillMonth" />

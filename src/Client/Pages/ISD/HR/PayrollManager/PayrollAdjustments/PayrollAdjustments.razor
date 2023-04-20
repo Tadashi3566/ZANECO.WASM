@@ -1,0 +1,41 @@
+﻿@page "/payroll/payrolladjustments"
+
+@attribute [MustHavePermission(FSHAction.View, FSHResource.Payroll)]
+
+<FshTitle Title="PayrollAdjustments" Description="Manage PayrollAdjustments" />
+
+<MudBreadcrumbs Items="_breadcrumbs" />
+
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="PayrollAdjustmentDto" TId="Guid" TRequest="PayrollAdjustmentUpdateRequest" Context=Context>
+    <AdvancedSearchContent>
+        <MudItem Class="mt-1">
+            <AutocompletePayroll @bind-Value="SearchPayrollId" OnBlur="(() => SetPayrollId(SearchPayrollId))" />
+        </MudItem>
+    </AdvancedSearchContent>
+    <EditFormContent>
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <AutocompleteAdjustment For="@(() => context.AdjustmentId)" @bind-Value="context.AdjustmentId" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="2" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="3" />
+        </MudItem>
+    </EditFormContent>
+</EntityTable>
+
+@code {
+    private RenderFragment<PayrollAdjustmentDto> TemplateDescriptionNotes => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Notes" HighlightedText="@_searchString" />
+            </MudText>
+        </MudItem>
+    };
+}

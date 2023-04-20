@@ -9,7 +9,7 @@
 
 <MudBreadcrumbs Items="_breadcrumbs"></MudBreadcrumbs>
 
-<EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="AppointmentDto" TId="int" TRequest="AppointmentViewModel" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="AppointmentDto" TId="int" TRequest="AppointmentViewModel" Context=Context>
     <AdvancedSearchContent>
         <MudGrid>
             @if (_canViewEmployees)

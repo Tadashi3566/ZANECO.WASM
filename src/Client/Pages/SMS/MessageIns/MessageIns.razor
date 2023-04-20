@@ -4,7 +4,7 @@
 
 <FshTitle Title="Message Inbox" Description="Read and Manage Inbox Messages" />
 
-<EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
+<EntityTable @ref=_table TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context=Context>
     <ExtraActions>
         <MudDivider />
         <MudMenuItem Icon="@Icons.Material.Filled.Chat" OnClick="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))" OnTouch="@(() => Navigation.NavigateTo($"/sms/messages/{context.MessageFrom}"))">Messages</MudMenuItem>

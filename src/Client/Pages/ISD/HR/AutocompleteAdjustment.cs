@@ -5,7 +5,7 @@ using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR;
 
-public class AutocompleteAdjustments : MudAutocomplete<Guid>
+public class AutocompleteAdjustment : MudAutocomplete<Guid>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;

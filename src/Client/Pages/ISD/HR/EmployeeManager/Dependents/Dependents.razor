@@ -7,7 +7,7 @@
 
 <MudBreadcrumbs Items="_breadcrumbs"></MudBreadcrumbs>
 
-<EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="DependentDto" TId="Guid" TRequest="DependentViewModel" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="DependentDto" TId="Guid" TRequest="DependentViewModel" Context=Context>
     <AdvancedSearchContent>
         @if (_canViewEmployees)
         {

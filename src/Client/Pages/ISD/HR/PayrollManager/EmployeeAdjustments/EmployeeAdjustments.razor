@@ -7,7 +7,7 @@
 
 <MudBreadcrumbs Items="_breadcrumbs" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="EmployeeAdjustmentDto" TId="Guid" TRequest="EmployeeAdjustmentViewModel" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="EmployeeAdjustmentDto" TId="Guid" TRequest="EmployeeAdjustmentViewModel" Context=Context>
     <AdvancedSearchContent>
         @if (_canViewEmployees)
         {
@@ -18,12 +18,8 @@
     </AdvancedSearchContent>
 
     <EditFormContent>
-        @*<MudItem xs="12">
-            <AutocompleteEmployee For="@(() => context.EmployeeId)" @bind-Value="SearchEmployeeId" Disabled="!SearchEmployeeId.Equals(Guid.Empty)" />
-        </MudItem>*@
-
         <MudItem xs="12" sm="6">
-            <ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Adjustments.AutocompleteAdjustment For="@(() => context.Name)" @bind-Value="context.Name" />
+            <AutocompleteAdjustment For="@(() => context.AdjustmentId)" @bind-Value="context.AdjustmentId" />
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
@@ -122,7 +118,7 @@
                 <MudHighlighter Text="@context.AdjustmentType" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">
-                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+                <MudHighlighter Text="@context.AdjustmentName" HighlightedText="@_searchString" />
             </MudText>
         </MudItem>
     };

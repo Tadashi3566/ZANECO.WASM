@@ -1,6 +1,8 @@
-﻿using Mapster;
+﻿using Blazored.LocalStorage;
+using Mapster;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WebApi.Shared.Authorization;
@@ -12,13 +14,18 @@ public partial class Adjustments
     [Inject]
     protected IAdjustmentsClient Client { get; set; } = default!;
 
+    [Inject]
+    private ILocalStorageService? _localStorage { get; set; }
+
     protected EntityServerTableContext<AdjustmentDto, Guid, AdjustmentUpdateRequest> Context { get; set; } = default!;
 
     private EntityTable<AdjustmentDto, Guid, AdjustmentUpdateRequest>? _table;
 
+    private HashSet<AdjustmentDto> _selectedItems = new();
+
     private string? _searchString;
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
         Context = new(
         entityName: "Adjustment",
@@ -38,6 +45,7 @@ public partial class Adjustments
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
         },
+        enableAdvancedSearch: true,
         idFunc: Adjustment => Adjustment.Id,
         searchFunc: async filter => (await Client
             .SearchAsync(filter.Adapt<AdjustmentSearchRequest>()))
@@ -46,10 +54,70 @@ public partial class Adjustments
         updateFunc: async (id, Adjustment) => await Client.UpdateAsync(id, Adjustment),
         deleteFunc: async id => await Client.DeleteAsync(id),
         exportAction: string.Empty);
+
+        await GetPayrollId();
     }
+
 
     private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
     {
         new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
     };
+
+    // Advanced Search
+    private Guid _searchPayrollId;
+
+    private Guid SearchPayrollId
+    {
+        get => _searchPayrollId;
+        set => _searchPayrollId = value;
+    }
+
+    private async Task AddToPayroll(AdjustmentDto dto)
+    {
+        string[] adjustments;
+
+        string transactionTitle = "Add Adjustment to Payroll";
+        string transactionContent = $"Are you sure you want to add Adjustment(s) to Payroll?";
+        DialogParameters parameters = new()
+        {
+            { nameof(TransactionConfirmation.TransactionTitle), transactionTitle },
+            { nameof(TransactionConfirmation.ContentText), transactionContent },
+        };
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        IDialogReference dialog = DialogService.Show<TransactionConfirmation>(transactionTitle, parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            if (_selectedItems.Count > 0)
+            {
+
+            }
+            else
+            {
+                
+            }
+        }
+    }
+
+    private async Task GetPayrollId()
+    {
+        try
+        {
+            string? _payrollId = await _localStorage!.GetItemAsync<string>("payrollId");
+
+            if (_payrollId is not null)
+            {
+                _searchPayrollId = Guid.Parse(_payrollId);
+            }
+
+            StateHasChanged();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    private void SetPayrollId(in Guid payrollId) => _localStorage?.SetItemAsStringAsync("payrollId", payrollId.ToString());
 }

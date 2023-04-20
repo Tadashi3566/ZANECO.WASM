@@ -10,7 +10,7 @@
 
 <MudBreadcrumbs Items="@_breadcrumbs" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="TimeLogDto" TId="Guid" TRequest="TimeLogViewModel" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="TimeLogDto" TId="Guid" TRequest="TimeLogViewModel" Context=Context>
     <AdvancedSearchContent>
         <MudGrid>
             @if (_canViewEmployees)

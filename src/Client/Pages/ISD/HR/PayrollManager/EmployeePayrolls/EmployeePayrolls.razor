@@ -7,7 +7,7 @@
 
 <FshTitle Title="Employees Payroll" Description="Employees Payroll List" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="EmployeePayrollDto" TId="Guid" TRequest="EmployeePayrollUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="EmployeePayrollDto" TId="Guid" TRequest="EmployeePayrollUpdateRequest" Context=Context>
     <AdvancedSearchContent>
         <MudItem Class="mt-1">
             <AutocompletePayroll @bind-Value="SearchPayrollId" />

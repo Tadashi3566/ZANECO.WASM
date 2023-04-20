@@ -6,7 +6,7 @@
 
 <FshTitle Title="AGMA Registration" Description="Read inbox and process AGMA Registration" />
 
-<EntityTable @ref="_table" TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context="@Context">
+<EntityTable @ref=_table TEntity="MessageInDto" TId="int" TRequest="MessageInUpdateRequest" Context=Context>
     <AdvancedSearchContent>
         <MudNumericField @bind-Value="_seconds"></MudNumericField>
     </AdvancedSearchContent>

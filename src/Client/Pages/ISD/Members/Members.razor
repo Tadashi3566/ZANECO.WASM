@@ -3,7 +3,7 @@
 
 <FshTitle Title="Members" Description="Manage Members" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="MemberDto" TId="Guid" TRequest="MemberViewModel" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="MemberDto" TId="Guid" TRequest="MemberViewModel" Context=Context>
     <EditFormContent>
         <MudItem xs="12">
             <MudItem>

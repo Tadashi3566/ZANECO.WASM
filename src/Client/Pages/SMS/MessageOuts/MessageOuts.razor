@@ -3,7 +3,7 @@
 
 <FshTitle Title="Send Message" Description="Send Message to single or multiple Recipients" />
 
-<EntityTable @ref="_table" TEntity="MessageOutDto" TId="int" TRequest="MessageOutCreateRequest" Context="@Context">
+<EntityTable @ref=_table TEntity="MessageOutDto" TId="int" TRequest="MessageOutCreateRequest" Context=Context>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSwitch Class="mt-3" Color="Color.Tertiary" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" />

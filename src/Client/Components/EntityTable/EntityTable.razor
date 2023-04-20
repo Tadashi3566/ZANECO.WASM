@@ -40,7 +40,7 @@
             </MudExpansionPanel>
         }
 
-        <FshTable @ref="_table" @bind-SelectedItems="SelectedItems" ServerData="@ServerReloadFunc" Items="@_entityList" Filter="LocalSearch"
+        <FshTable @ref=_table @bind-SelectedItems="SelectedItems" ServerData="@ServerReloadFunc" Items="@_entityList" Filter="LocalSearch"
                   Height="@(_tablePreference.IsFixedHeaderFooter ? "1000px" : "")"
                   Loading="@Loading" LoadingProgressColor="@Color.Secondary" ChildRowContent="@ChildRowContent">
             <ToolBarContent>

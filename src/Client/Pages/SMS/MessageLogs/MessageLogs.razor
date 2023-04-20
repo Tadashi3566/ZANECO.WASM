@@ -3,7 +3,7 @@
 
 <FshTitle Title="Message Logs" Description="Message Logs Management" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="MessageLogDto" TId="int" TRequest="MessageLogUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="MessageLogDto" TId="int" TRequest="MessageLogUpdateRequest" Context=Context>
     <EditFormContent>
         <MudItem xs="12" sm="4">
             <MudTextField Label="Sender" For="@(() => context.MessageFrom)" @bind-Value="context.MessageFrom" ReadOnly=true Variant="Variant.Outlined" />

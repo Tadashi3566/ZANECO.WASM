@@ -84,6 +84,7 @@ public partial class Dashboard
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
+
         _isAdmin = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Users);
         _isISD = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.ISD);
         _isCAD = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.CAD);

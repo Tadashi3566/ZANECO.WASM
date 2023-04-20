@@ -4,7 +4,7 @@
 
 <FshTitle Title="Ticket Management" Description="Create and manage Incident, Support etc. Tickets" />
 
-<EntityTable @ref="_table" TEntity="TicketDto" TId="Guid" TRequest="TicketViewModel" Context="@Context">
+<EntityTable @ref=_table TEntity="TicketDto" TId="Guid" TRequest="TicketViewModel" Context=Context>
     <ExtraActions>
         @if (_canViewTickets)
         {

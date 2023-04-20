@@ -10,7 +10,7 @@
 
 <FshTitle Title="Attendance" Description="Employee Attendance Management" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="AttendanceDto" TId="Guid" TRequest="AttendanceUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table SelectedItems=_selectedItems TEntity="AttendanceDto" TId="Guid" TRequest="AttendanceUpdateRequest" Context=Context>
     <AdvancedSearchContent>
         <MudGrid>
             @if (_canViewEmployees)

@@ -6,7 +6,7 @@
 
 <FshTitle Title="Schedules" Description="Manage Schedules" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="ScheduleDto" TId="Guid" TRequest="ScheduleUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="ScheduleDto" TId="Guid" TRequest="ScheduleUpdateRequest" Context=Context>
     <ExtraActions>
         @if (_canViewSchedules)
         {

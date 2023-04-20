@@ -1,12 +1,10 @@
 ﻿using Blazored.LocalStorage;
 using Mapster;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
-using System.Security.Cryptography;
 using ZANECO.WASM.Client.Components.Common;
 using ZANECO.WASM.Client.Components.Dialogs.ISD.HR.PayrollManager;
 using ZANECO.WASM.Client.Components.EntityTable;
@@ -182,10 +180,7 @@ public partial class Employees
         }
     }
 
-    private void SetPayrollId(Guid payrollId)
-    {
-        _localStorage?.SetItemAsStringAsync("payrollId", payrollId.ToString());
-    }
+    private void SetPayrollId(Guid payrollId) => _localStorage?.SetItemAsStringAsync("payrollId", payrollId.ToString());
 
     private async Task EmployeePayrollGenerate(Guid employeeId, Guid payrollId)
     {

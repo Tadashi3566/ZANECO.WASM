@@ -3,7 +3,7 @@
 
 <FshTitle Title="Products" Description="Manage Products." />
 
-<EntityTable @ref="_table" TEntity="ProductDto" TId="Guid" TRequest="ProductViewModel" Context="@Context">
+<EntityTable @ref=_table TEntity="ProductDto" TId="Guid" TRequest="ProductViewModel" Context=Context>
     <AdvancedSearchContent>
         <AutocompleteBrand @bind-Value="SearchBrandId" />
         <MudSlider T="decimal" @bind-value="SearchMinimumRate">Minimum Rate: @_searchMinimumRate.ToString()</MudSlider>

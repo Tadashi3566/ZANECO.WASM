@@ -7,7 +7,7 @@
 
 <MudBreadcrumbs Items="_breadcrumbs" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="LoanDto" TId="Guid" TRequest="LoanViewModel" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="LoanDto" TId="Guid" TRequest="LoanViewModel" Context=Context>
     <AdvancedSearchContent>
         @if (_canViewEmployees)
         {

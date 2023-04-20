@@ -6,7 +6,19 @@
 
 <MudBreadcrumbs Items="_breadcrumbs" />
 
-<EntityTable @bind-SearchString="@_searchString" @ref="_table" TEntity="AdjustmentDto" TId="Guid" TRequest="AdjustmentUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table SelectedItems=_selectedItems TEntity="AdjustmentDto" TId="Guid" TRequest="AdjustmentUpdateRequest" Context="Context">
+    <AdvancedSearchContent>
+        <MudItem Class="mt-1">
+            <AutocompletePayroll @bind-Value="SearchPayrollId" OnBlur="(() => SetPayrollId(SearchPayrollId))" />
+        </MudItem>
+    </AdvancedSearchContent>
+    <ExtraActions>
+        <MudDivider />
+        <MudMenuItem OnClick="@(() => AddToPayroll(context))"
+                     OnTouch="@(() => AddToPayroll(context))">
+            Add to Payroll
+        </MudMenuItem>
+    </ExtraActions>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect Label="Adjustment Type" For="@(() => context.AdjustmentType)" @bind-Value="context.AdjustmentType" Disabled=true Variant="Variant.Filled">
@@ -26,7 +38,7 @@
             <MudNumericField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <AutocompleteAdjustment Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" />
+            <AutocompleteGroupAdjustment For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">
@@ -42,7 +54,7 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSwitch Class="mt-3" Color="Color.Tertiary" Label="Optional" For="@(() => context.IsOptional)" @bind-Checked="context.IsOptional" />
+            <MudSwitch Class="mt-3" Color=Color.Tertiary Label="Optional" For="@(() => context.IsOptional)" @bind-Checked="context.IsOptional" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSwitch Class="mt-3" Color="Color.Tertiary" Label="Loan" For="@(() => context.IsLoan)" @bind-Checked="context.IsLoan" />
@@ -61,18 +73,6 @@
 </EntityTable>
 
 @code {
-    //private RenderFragment<AdjustmentDto> TemplateNameAddress => context => __builder =>
-    //{
-    //    <MudItem Class="d-flex flex-column">
-    //        <MudText Typo="Typo.body2">
-    //            <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
-    //        </MudText>
-    //        <MudText Typo="Typo.caption">
-    //            <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />
-    //        </MudText>
-    //    </MudItem>
-    //};
-
     private RenderFragment<AdjustmentDto> TemplateDescriptionNotes => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">

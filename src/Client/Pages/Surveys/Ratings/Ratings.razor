@@ -3,7 +3,7 @@
 
 <FshTitle Title="Ratings" Description="Manage Ratings" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RatingDto" TId="Guid" TRequest="RatingUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="RatingDto" TId="Guid" TRequest="RatingUpdateRequest" Context=Context>
     <EditFormContent>
         <MudItem xs="12">
             <MudRating Size="Size.Large" @bind-SelectedValue="context.RateNumber" />

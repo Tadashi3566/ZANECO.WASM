@@ -4,7 +4,7 @@
 
 <FshTitle Title="Contacts" Description="Manage Contacts" />
 
-<EntityTable @bind-SearchString="@_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="ContactDto" TId="Guid" TRequest="ContactViewModel" Context="@Context" PageSizes="@_pageSizes">
+<EntityTable @bind-SearchString=_searchString @ref=_table SelectedItems=_selectedItems TEntity="ContactDto" TId="Guid" TRequest="ContactViewModel" Context="@Context" PageSizes="@_pageSizes">
     <ExtraActions>
         <MudDivider/>
         <MudMenuItem Icon="@Icons.Material.Filled.CopyAll"

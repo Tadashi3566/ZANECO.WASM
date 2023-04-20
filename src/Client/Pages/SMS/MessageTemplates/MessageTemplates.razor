@@ -4,7 +4,7 @@
 
 <FshTitle Title="Message Templates" Description="Manage Message Templates" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="MessageTemplateDto" TId="Guid" TRequest="MessageTemplateViewModel" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="MessageTemplateDto" TId="Guid" TRequest="MessageTemplateViewModel" Context=Context>
     <ExtraActions>
         <MudDivider />
         <MudMenuItem Icon="@Icons.Material.Filled.CopyAll"

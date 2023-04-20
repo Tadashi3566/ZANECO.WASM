@@ -4,7 +4,7 @@
 
 <FshTitle Title="Accounts" Description="Manage and Migrate Accounts" />
 
-<EntityTable @bind-SearchString="@_searchString" @ref="_table" SelectedItems="@_selectedItems" TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context" PageSizes="@_pageSizes">
+<EntityTable @bind-SearchString=_searchString @ref=_table SelectedItems=_selectedItems TEntity="AccountDto" TId="Guid" TRequest="AccountViewModel" Context="@Context" PageSizes="@_pageSizes">
     <ExtraActions>
         <MudDivider />
         <MudMenuItem Icon="@Icons.Material.Filled.FormatListBulleted" OnClick="@(() => Navigation.NavigateTo($"/cad/ledger/{context.Id}"))" OnTouch="@(() => Navigation.NavigateTo($"/cad/ledger/{context.Id}"))" >Ledger</MudMenuItem>

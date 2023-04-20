@@ -58,7 +58,7 @@ public partial class EmployeeAdjustments
                 new(data => data.ImagePath, "Image", Template: TemplateImage),
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.AdjustmentType, "Adjustment Type", visible: false),
-                new(data => data.Name, "Name", "Name", Template: TemplateName),
+                new(data => data.AdjustmentName, "Adjustment", "AdjustmentName", Template: TemplateName),
                 new(data => data.StartDate, "Date Start/End", Template: TemplateDate),
                 new(data => data.Amount, "Amount", "Amount", typeof(decimal)),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
@@ -89,7 +89,7 @@ public partial class EmployeeAdjustments
             {
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
-                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.AdjustmentId}_{Guid.NewGuid():N}" };
                 }
 
                 data.EmployeeId = EmployeeId;
@@ -102,7 +102,7 @@ public partial class EmployeeAdjustments
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
                     data.DeleteCurrentImage = true;
-                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.Name}_{Guid.NewGuid():N}" };
+                    data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.AdjustmentId}_{Guid.NewGuid():N}" };
                 }
 
                 await Client.UpdateAsync(id, data.Adapt<EmployeeAdjustmentUpdateRequest>());

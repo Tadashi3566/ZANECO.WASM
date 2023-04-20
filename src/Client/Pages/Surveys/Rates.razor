@@ -3,7 +3,7 @@
 
 <FshTitle Title="Rates" Description="Manage Rates" />
 
-<EntityTable @bind-SearchString="_searchString" @ref="_table" TEntity="RateDto" TId="Guid" TRequest="RateUpdateRequest" Context="@Context">
+<EntityTable @bind-SearchString=_searchString @ref=_table TEntity="RateDto" TId="Guid" TRequest="RateUpdateRequest" Context=Context>
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudTextField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" Variant="Variant.Filled" />

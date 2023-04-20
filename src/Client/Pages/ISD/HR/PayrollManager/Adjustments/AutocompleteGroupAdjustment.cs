@@ -5,7 +5,7 @@ using ZANECO.WASM.Client.Shared;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Adjustments;
 
-public class AutocompleteAdjustment : MudAutocomplete<string>
+public class AutocompleteGroupAdjustment : MudAutocomplete<string>
 {
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;

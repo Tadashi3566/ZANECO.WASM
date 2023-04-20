@@ -7,7 +7,7 @@
 
 <MudBreadcrumbs Items="_breadcrumbs"/>
 
-<EntityTable @ref="_table" @bind-SearchString="_searchString" TEntity="PowerbillDto" TId="Guid" TRequest="PowerbillViewModel" Context="@Context">
+<EntityTable @ref=_table @bind-SearchString=_searchString TEntity="PowerbillDto" TId="Guid" TRequest="PowerbillViewModel" Context=Context>
     <AdvancedSearchContent>
         @if (_canViewEmployees)
         {
