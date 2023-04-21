@@ -138,8 +138,8 @@ public partial class Appointments
 
     private List<MudBlazor.BreadcrumbItem> _breadcrumbs = new List<MudBlazor.BreadcrumbItem>
     {
-        new MudBlazor.BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
-        new MudBlazor.BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
+        new BreadcrumbItem("Home", href: "/", icon: Icons.Material.Filled.Home),
+        new BreadcrumbItem("Employees", href: "/hr/employees", icon: Icons.Material.Filled.Groups),
     };
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.

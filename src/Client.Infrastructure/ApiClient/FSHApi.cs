@@ -48747,20 +48747,20 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("payrollId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid PayrollId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("payrollName", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public string PayrollName { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("payrollName", Required = Newtonsoft.Json.Required.Always)]
+        //[System.ComponentModel.DataAnnotations.Required]
+        //public string PayrollName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("adjustmentId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid AdjustmentId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("adjustmentNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
-        public int AdjustmentNumber { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("adjustmentNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //[System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
+        //public int AdjustmentNumber { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("adjustmentName", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public string AdjustmentName { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("adjustmentName", Required = Newtonsoft.Json.Required.Always)]
+        //[System.ComponentModel.DataAnnotations.Required]
+        //public string AdjustmentName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;
@@ -48779,20 +48779,20 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("payrollId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid PayrollId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("payrollName", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public string PayrollName { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("payrollName", Required = Newtonsoft.Json.Required.Always)]
+        //[System.ComponentModel.DataAnnotations.Required]
+        //public string PayrollName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("adjustmentId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid AdjustmentId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("adjustmentNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
-        public int AdjustmentNumber { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("adjustmentNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //[System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
+        //public int AdjustmentNumber { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("adjustmentName", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public string AdjustmentName { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("adjustmentName", Required = Newtonsoft.Json.Required.Always)]
+        //[System.ComponentModel.DataAnnotations.Required]
+        //public string AdjustmentName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; } = default!;

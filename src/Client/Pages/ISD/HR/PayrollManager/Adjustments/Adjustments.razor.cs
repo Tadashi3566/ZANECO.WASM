@@ -5,6 +5,7 @@ using MudBlazor;
 using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
+using ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.PayrollAdjustments;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Adjustments;
@@ -13,6 +14,9 @@ public partial class Adjustments
 {
     [Inject]
     protected IAdjustmentsClient Client { get; set; } = default!;
+
+    [Inject]
+    protected IPayrollAdjustmentsClient PayrollAdjustmentClient { get; set; } = default!;
 
     [Inject]
     private ILocalStorageService? _localStorage { get; set; }
@@ -91,11 +95,9 @@ public partial class Adjustments
         {
             if (_selectedItems.Count > 0)
             {
-
-            }
-            else
-            {
-                
+                var payrollAdjustment = new PayrollAdjustmentCreateRequest();
+                payrollAdjustment.PayrollId = SearchPayrollId;
+                await PayrollAdjustmentClient.CreateAsync(payrollAdjustment.Adapt<PayrollAdjustmentCreateRequest>());
             }
         }
     }
