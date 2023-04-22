@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
-using ZANECO.WASM.Client.Pages.Identity.Users;
-using ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.Schedules;
 using ZANECO.WebApi.Shared.Authorization;
 
 namespace ZANECO.WASM.Client.Pages.ISD.HR.PayrollManager.PayrollAdjustments;
@@ -64,11 +62,13 @@ public partial class PayrollAdjustments
         createFunc: async PayrollAdjustment =>
         {
             PayrollAdjustment.PayrollId = SearchPayrollId;
+
             await Client.CreateAsync(PayrollAdjustment.Adapt<PayrollAdjustmentCreateRequest>());
         },
         updateFunc: async (id, PayrollAdjustment) =>
         {
             PayrollAdjustment.PayrollId = SearchPayrollId;
+
             await Client.UpdateAsync(id, PayrollAdjustment);
         },
         deleteFunc: async id => await Client.DeleteAsync(id),

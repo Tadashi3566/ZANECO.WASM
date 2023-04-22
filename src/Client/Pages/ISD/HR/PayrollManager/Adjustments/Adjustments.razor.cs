@@ -79,8 +79,6 @@ public partial class Adjustments
 
     private async Task AddToPayroll(AdjustmentDto dto)
     {
-        string[] adjustments;
-
         string transactionTitle = "Add Adjustment to Payroll";
         string transactionContent = $"Are you sure you want to add Adjustment(s) to Payroll?";
         DialogParameters parameters = new()
@@ -91,13 +89,18 @@ public partial class Adjustments
         DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
         IDialogReference dialog = DialogService.Show<TransactionConfirmation>(transactionTitle, parameters, options);
         DialogResult result = await dialog.Result;
-        if (!result.Canceled)
+        if (!result.Canceled && _selectedItems.Count > 0)
         {
-            if (_selectedItems.Count > 0)
+            foreach (var payrollId in _selectedItems.Select(x => x.Id))
             {
                 var payrollAdjustment = new PayrollAdjustmentCreateRequest();
+
                 payrollAdjustment.PayrollId = SearchPayrollId;
-                await PayrollAdjustmentClient.CreateAsync(payrollAdjustment.Adapt<PayrollAdjustmentCreateRequest>());
+                payrollAdjustment.AdjustmentId = payrollId;
+
+                await PayrollAdjustmentClient.CreateAsync(payrollAdjustment);
+
+                Snackbar.Add("Adjustment(s) has been added to Payroll.", Severity.Success);
             }
         }
     }
