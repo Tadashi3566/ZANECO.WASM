@@ -1,4 +1,5 @@
 ﻿@page "/cad/accounts"
+@using Syncfusion.Blazor.BarcodeGenerator
 
 @attribute [MustHavePermission(FSHAction.View, FSHResource.CAD)]
 
@@ -136,6 +137,15 @@
 </EntityTable>
 
 @code {
+    private RenderFragment<AccountDto> TemplateBarcode => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <SfBarcodeGenerator Width="100px" Height="80px" Value="@context.AccountNumber">
+                <BarcodeGeneratorDisplayText Text="@context.AccountNumber"></BarcodeGeneratorDisplayText>
+            </SfBarcodeGenerator>
+        </MudItem>
+    };
+
     private RenderFragment<AccountDto> TemplateNameAddress => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">

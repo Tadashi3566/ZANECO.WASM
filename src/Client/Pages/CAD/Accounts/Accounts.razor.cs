@@ -41,7 +41,7 @@ public partial class Accounts
             entityResource: FSHResource.CAD,
             fields: new()
             {
-                new(data => data.AccountNumber, "Account", "AccountNumber"),
+                new(data => data.AccountNumber, "Barcode", "AccountNumber", Template: TemplateBarcode),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
                 new(data => data.PresentReadingDate, "Reading Dates", "PresentReadingDate", Template: TemplateBillingDate),
                 new(data => data.BillMonth, "Bill Month", "BillMonth"),
