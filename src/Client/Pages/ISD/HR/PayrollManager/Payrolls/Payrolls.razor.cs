@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
+using Syncfusion.Blazor.Lists;
+using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
@@ -31,7 +33,7 @@ public partial class Payrolls
     private string? _searchString;
     private bool _canViewPayroll;
 
-    private int _workingDays = 10;
+    //private int _workingDays = 10;
 
     protected override async Task OnInitializedAsync()
     {
@@ -47,9 +49,9 @@ public partial class Payrolls
                 new(data => data.PayrollType, "Payroll Type", visible: false),
                 new(data => data.EmploymentType, "Employment Type", "EmploymentType", Template: TemplateType),
                 new(data => data.Name, "Name", "Name"),
-                new(data => data.StartDate, "Period", "StartDate", Template: TemplateDate),
+                new(data => data.StartDate, "Period/Pay Date", "StartDate", Template: TemplateDate),
                 new(data => data.WorkingDays, "Days", "WorkingDays"),
-                new(data => data.PayrollDate, "Payroll Date", "PayrollDate", typeof(DateOnly)),
+                //new(data => data.PayrollDate, "Payroll Date", "PayrollDate", typeof(DateOnly)),
                 new(data => data.TotalSalary, "Total Salary", "TotalSalary", typeof(decimal)),
                 new(data => data.TotalAdditional, "Total Additional", "TotalAdditional", typeof(decimal)),
                 new(data => data.TotalGross, "Total Gross", "TotalGross", typeof(decimal)),
@@ -65,13 +67,10 @@ public partial class Payrolls
                 .Adapt<PaginationResponse<PayrollDto>>(),
             createFunc: async Payroll =>
             {
-                Payroll.WorkingDays = DateFunctions.GetWorkingDays((DateTime)Payroll.StartDate!, (DateTime)Payroll.EndDate!);
-
                 await Client.CreateAsync(Payroll.Adapt<PayrollCreateRequest>());
             },
             updateFunc: async (id, request) =>
             {
-                request.WorkingDays = DateFunctions.GetWorkingDays((DateTime)request.StartDate!, (DateTime)request.EndDate!);
                 await Client.UpdateAsync(id, request);
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
@@ -86,14 +85,29 @@ public partial class Payrolls
 
     private async Task PayrollGenerate(Guid payrollId)
     {
-        PayrollGenerateRequest request = new()
+        string transactionTitle = "Generate Payroll Summary";
+        string transactionContent = $"Are you sure you want to Generate Payroll Summary?";
+        DialogParameters parameters = new()
         {
-            Id = payrollId
+            { nameof(TransactionConfirmation.TransactionTitle), transactionTitle },
+            { nameof(TransactionConfirmation.ContentText), transactionContent },
         };
-
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.GenerateAsync(request.Adapt<PayrollGenerateRequest>()), Snackbar))
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        IDialogReference dialog = DialogService.Show<TransactionConfirmation>(transactionTitle, parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Canceled)
         {
-            Snackbar.Add("Payroll has been successfully generated", Severity.Success);
+            PayrollGenerateRequest request = new()
+            {
+                Id = payrollId
+            };
+
+            if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.GenerateAsync(request.Adapt<PayrollGenerateRequest>()), Snackbar))
+            {
+                await _table!.ReloadDataAsync();
+
+                Snackbar.Add("Payroll Summary has been successfully generated!", Severity.Success);
+            }
         }
     }
 }

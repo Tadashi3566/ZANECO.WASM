@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using ZANECO.WASM.Client.Components.Common;
+using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.Dialogs.ISD.HR.PayrollManager;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
@@ -36,7 +37,8 @@ public partial class Employees
     protected EntityServerTableContext<EmployeeDto, Guid, EmployeeViewModel> Context { get; set; } = default!;
 
     private EntityTable<EmployeeDto, Guid, EmployeeViewModel>? _table;
-    private List<EmployeeDto> _list = new();
+
+    private HashSet<EmployeeDto> _selectedItems = new();
 
     private string? _searchString { get; set; }
 
@@ -180,9 +182,9 @@ public partial class Employees
         }
     }
 
-    private void SetPayrollId(Guid payrollId) => _localStorage?.SetItemAsStringAsync("payrollId", payrollId.ToString());
+    private void SetPayrollId(in Guid payrollId) => _localStorage?.SetItemAsStringAsync("payrollId", payrollId.ToString());
 
-    private async Task EmployeePayrollGenerate(Guid employeeId, Guid payrollId)
+    private async Task EmployeePayrollGenerate(Guid payrollId, EmployeeDto employee)
     {
         if (payrollId.Equals(Guid.Empty))
         {
@@ -190,16 +192,48 @@ public partial class Employees
             return;
         }
 
-        EmployeePayrollDetailGenerateRequest request = new()
-        {
-            EmployeeId = employeeId,
-            PayrollId = payrollId
-        };
+        //EmployeePayrollDetailGenerateRequest request = new()
+        //{
+        //    EmployeeId = employeeId,
+        //    PayrollId = payrollId
+        //};
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => PayrollClient.GenerateAsync(request.Adapt<EmployeePayrollDetailGenerateRequest>()), Snackbar))
+        //if (await ApiHelper.ExecuteCallGuardedAsync(() => PayrollClient.GenerateAsync(request.Adapt<EmployeePayrollDetailGenerateRequest>()), Snackbar))
+        //{
+        //    Snackbar.Add("Employee Payroll has been successfully generated", Severity.Success);
+        //    Navigation.NavigateTo($"/payroll/employeepayrolldetails/{employeeId}/{payrollId}");
+        //}
+
+        if (_selectedItems.Count == 0)
         {
-            Snackbar.Add("Employee Payroll has been successfully generated", Severity.Success);
-            Navigation.NavigateTo($"/payroll/employeepayrolldetails/{employeeId}/{payrollId}");
+            _selectedItems.Add(employee);
+        }
+
+        string transactionTitle = "Generate Employee(s) Payroll";
+        string transactionContent = $"Are you sure you want to Generate Employee(s) Payroll?";
+        DialogParameters parameters = new()
+        {
+            { nameof(TransactionConfirmation.TransactionTitle), transactionTitle },
+            { nameof(TransactionConfirmation.ContentText), transactionContent },
+        };
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        IDialogReference dialog = DialogService.Show<TransactionConfirmation>(transactionTitle, parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Canceled && _selectedItems.Count > 0)
+        {
+            foreach (var employeeId in _selectedItems.Select(x => x.Id))
+            {
+                EmployeePayrollDetailGenerateRequest request = new()
+                {
+                    PayrollId = payrollId,
+                    EmployeeId = employeeId,
+                };
+
+                if (await ApiHelper.ExecuteCallGuardedAsync(() => PayrollClient.GenerateAsync(request.Adapt<EmployeePayrollDetailGenerateRequest>()), Snackbar))
+                {
+                    Snackbar.Add("Employee Payroll has been successfully generated!", Severity.Success);
+                }
+            }
         }
     }
 

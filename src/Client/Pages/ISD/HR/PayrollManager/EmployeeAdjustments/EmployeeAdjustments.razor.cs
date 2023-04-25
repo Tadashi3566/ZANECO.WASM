@@ -93,6 +93,7 @@ public partial class EmployeeAdjustments
                 }
 
                 data.EmployeeId = EmployeeId;
+
                 await Client.CreateAsync(data.Adapt<EmployeeAdjustmentCreateRequest>());
 
                 data.ImageInBytes = string.Empty;
@@ -102,6 +103,7 @@ public partial class EmployeeAdjustments
                 if (!string.IsNullOrEmpty(data.ImageInBytes))
                 {
                     data.DeleteCurrentImage = true;
+
                     data.Image = new ImageUploadRequest() { Data = data.ImageInBytes, Extension = data.ImageExtension ?? string.Empty, Name = $"{data.AdjustmentId}_{Guid.NewGuid():N}" };
                 }
 

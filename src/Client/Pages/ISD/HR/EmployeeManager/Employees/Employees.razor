@@ -6,7 +6,7 @@
 
 <MudBreadcrumbs Items="_breadcrumbs"/>
 
-<EntityTable @bind-SearchString=_searchString Owner="Employees" @ref=_table TEntity="EmployeeDto" TId="Guid" TRequest="EmployeeViewModel" Context=Context>
+<EntityTable @bind-SearchString=_searchString Owner="Employees" @ref=_table SelectedItems=_selectedItems TEntity="EmployeeDto" TId="Guid" TRequest="EmployeeViewModel" Context=Context>
     <AdvancedSearchContent>
         <MudItem Class="mt-1">
             <AutocompletePayroll @bind-Value="SearchPayrollId" OnBlur="(() => SetPayrollId(SearchPayrollId))" />
@@ -62,8 +62,8 @@
                 OnTouch="@(() => Navigation.NavigateTo($"/payroll/employeeadjustments/{context.Id}"))">
                 Adjustments
             </MudMenuItem>
-            <MudMenuItem OnClick="@(() => EmployeePayrollGenerate(context.Id, SearchPayrollId))"
-                OnTouch="@(() => EmployeePayrollGenerate(context.Id, SearchPayrollId))">
+            <MudMenuItem OnClick="@(() => EmployeePayrollGenerate(SearchPayrollId, context))"
+                     OnTouch="@(() => EmployeePayrollGenerate(SearchPayrollId, context))">
                 Generate Payroll
             </MudMenuItem>
             <MudMenuItem OnClick="@(() => NavigatePage("/payroll/employeepayrolldetails", context.Id, SearchPayrollId))"

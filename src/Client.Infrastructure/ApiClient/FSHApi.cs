@@ -48384,7 +48384,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
     {
         [Newtonsoft.Json.JsonProperty("payrollId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? PayrollId { get; set; } = default!;
-
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -48925,10 +48924,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("endDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime EndDate { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("workingDays", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
-        public int WorkingDays { get; set; } = default!;
-
         [Newtonsoft.Json.JsonProperty("payrollDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime PayrollDate { get; set; } = default!;
 
@@ -48957,6 +48952,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [System.ComponentModel.DataAnnotations.StringLength(128, MinimumLength = 1)]
         public string Name { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("workingDays", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int WorkingDays { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("totalSalary", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal TotalSalary { get; set; } = default!;
 
@@ -48977,10 +48975,6 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("endDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime EndDate { get; set; } = default!;
-
-        [Newtonsoft.Json.JsonProperty("workingDays", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
-        public int WorkingDays { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("payrollDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime PayrollDate { get; set; } = default!;
