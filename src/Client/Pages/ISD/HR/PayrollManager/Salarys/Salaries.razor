@@ -9,7 +9,7 @@
 
     <EditFormContent>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSelect Label="Type" For="@(() => context.PayType)" @bind-Value="context.PayType" Variant="Variant.Filled" >
+            <MudSelect Label="Type" For="@(() => context.RateType)" @bind-Value="context.RateType" Variant="Variant.Filled" >
                 <MudSelectItem Value="@("DAILY")" />
                 <MudSelectItem Value="@("MONTHLY")" />
             </MudSelect>
