@@ -88,18 +88,6 @@
 </EntityTable>
 
 @code {
-    private RenderFragment<GroupDto> TemplateCodeName => context => __builder =>
-    {
-        <MudItem Class="d-flex flex-column">
-            <MudText Typo="Typo.subtitle2">
-                <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
-            </MudText>
-            <MudText Typo="Typo.caption">
-                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
-            </MudText>
-        </MudItem>
-    };
-
     private RenderFragment<GroupDto> TemplateParentTag => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
@@ -109,6 +97,26 @@
             <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.Tag" HighlightedText="@_searchString" />
             </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<GroupDto> TemplateCodeName => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudText Typo="Typo.subtitle1">
+                <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.subtitle2">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudText>
+            @if (!string.IsNullOrEmpty(context.Manager))
+            {
+                <MudGrid>
+                    <MudChip Color="Color.Tertiary" Size="Size.Small">
+                        <MudHighlighter Text="@context.Manager" HighlightedText="@_searchString" />
+                    </MudChip>
+                </MudGrid>
+            }
         </MudItem>
     };
 

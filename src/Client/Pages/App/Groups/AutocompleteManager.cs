@@ -34,7 +34,7 @@ public class AutocompleteManager : MudAutocomplete<string>
         var filter = new EmployeeSearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "lastname" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "firstname", "middlename", "lastname" }, Keyword = value }
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)

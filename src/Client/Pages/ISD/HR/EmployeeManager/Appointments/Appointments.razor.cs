@@ -70,7 +70,7 @@ public partial class Appointments
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
-            enableAdvancedSearch: false,
+            enableAdvancedSearch: true,
             idFunc: data => data.Id,
             searchFunc: async _filter =>
             {
@@ -86,12 +86,11 @@ public partial class Appointments
                 var filter = _filter.Adapt<AppointmentSearchRequest>();
 
                 filter.EmployeeId = SearchEmployeeId == default ? null : SearchEmployeeId;
-                //filter.StartDate = _startDate == DateTime.MinValue ? null : _startDate;
-                //filter.EndDate = _endDate == DateTime.MinValue ? null : _endDate;
                 filter.StartDate = _startDate;
                 filter.EndDate = _endDate;
 
                 var result = await Client.SearchAsync(filter);
+
                 return result.Adapt<PaginationResponse<AppointmentDto>>();
             },
             createFunc: async request =>
