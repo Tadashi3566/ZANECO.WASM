@@ -58,7 +58,7 @@ public partial class Employees
                 fields: new()
                 {
                     new(data => data.ImagePath, "Image", Template: TemplateImage),
-                    new(data => data.Number, "ID", "Number"),
+                    new(data => data.Number, "ID Number", "Number", Template: TemplateActiveIdNumber),
                     new(data => data.HireDate, "Date Hired", "HireDate", typeof(DateTime), Template: TemplateHireDate),
                     new(data => data.RegularDate, "Date Regular", "RegularDate", typeof(DateTime), Template: TemplateRegularDate),
                     new(data => data.NameFull, "Name", "LastName", Template: TemplateNameAddress),

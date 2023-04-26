@@ -137,6 +137,9 @@
         </MudItem>
 
         <MudItem xs="6" sm="4" md="3">
+            <MudSwitch Class="mt-3" Color="Color.Secondary" Label="Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" ReadOnly/>
+        </MudItem>
+        <MudItem xs="6" sm="4" md="3">
             <MudTextField Label="ID Number" For="@(() => context.Number)" @bind-Value="context.Number" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="6" sm="4" md="3">
@@ -284,11 +287,22 @@
         </MudItem>
     };
 
+    private RenderFragment<EmployeeDto> TemplateActiveIdNumber => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            <MudSwitch Color="Color.Secondary" Label="Active" @bind-Checked="context.IsActive" ReadOnly />
+            <MudText Typo="Typo.body1">ID @context.Number</MudText>
+        </MudItem>
+    };
+
     private RenderFragment<EmployeeDto> TemplateHireDate => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.body1">@context.HireDate.ToString("MMM dd, yyyy")</MudText>
-            <MudText Typo="Typo.caption">@DisplayLegnthOfService(context.HireDate)</MudText>
+            @if (context.IsActive)
+            {
+                <MudText Typo="Typo.caption">@DisplayLegnthOfService(context.HireDate)</MudText>
+            }
         </MudItem>
     };
 
@@ -296,7 +310,10 @@
     {
         <MudItem Class="d-flex flex-column">
             <MudText Typo="Typo.body1">@context.RegularDate.ToString("MMM dd, yyyy")</MudText>
-            <MudText Typo="Typo.caption">@DisplayLegnthOfService(context.RegularDate)</MudText>
+            @if (context.IsActive)
+            {
+                <MudText Typo="Typo.caption">@DisplayLegnthOfService(context.RegularDate)</MudText>
+            }
         </MudItem>
     };
 

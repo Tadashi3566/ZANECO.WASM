@@ -31,6 +31,7 @@
                 <MudSelectItem Value="@("REGULAR")" />
                 <MudSelectItem Value="@("RESIGNED")" />
                 <MudSelectItem Value="@("RETIRED")" />
+                <MudSelectItem Value="@("DECEASED")" />
                 <MudSelectItem Value="@("TERMINATED")" />
                 <MudSelectItem Value="@("OTHER")" />
             </MudSelect>
@@ -73,7 +74,7 @@
             <AutocompleteSalary For="@(() => context.SalaryNumber)" @bind-Value="context.SalaryNumber" InputMode="InputMode.numeric" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSelect Label="Rate Type" For="@(() => context.RateType)" @bind-Value="context.RateType" Variant="Variant.Filled">
+            <MudSelect Label="Rate Type" For="@(() => context.RateType)" @bind-Value="context.RateType" Variant="Variant.Filled" ReadOnly>
                 <MudSelectItem Value="@("DAILY")" />
                 <MudSelectItem Value="@("MONTHLY")" />
             </MudSelect>
