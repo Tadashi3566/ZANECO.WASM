@@ -58,10 +58,10 @@
             <MudSwitch Class="mt-3" Color=Color.Tertiary Label="Optional" For="@(() => context.IsOptional)" @bind-Checked="context.IsOptional" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSwitch Class="mt-3" Color="Color.Tertiary" Label="Loan" For="@(() => context.IsLoan)" @bind-Checked="context.IsLoan" />
+            <MudSwitch T="bool" Color="Color.Tertiary" Class="mt-3" Label="Loan" For="@(() => context.IsLoan)" @bind-Checked="context.IsLoan" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSwitch Class="mt-3" Color="Color.Tertiary" Label="Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" />
+            <MudSwitch T="bool" Color="Color.Tertiary" Class="mt-3" Label="Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" />
         </MudItem>
 
         <MudItem xs="12">

@@ -17,11 +17,11 @@
         </MudItem>
         <MudItem xs="12">
             <MudTextField T="string" For="@(() => context.ConnectionString)" HelperText="@L["To use default connection string, leave this field blank."]" @bind-Value="context.ConnectionString"
-                Label="@L["Connection String"]" />
+               Label="@L["Connection String"]" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField T="string" For="@(() => context.AdminEmail)" @bind-Value="context.AdminEmail"
-                Label="@L["Admin Email"]" />
+               Label="@L["Admin Email"]" />
         </MudItem>
         @if (Authentication.ProviderType == AuthProvider.AzureAd)
         {

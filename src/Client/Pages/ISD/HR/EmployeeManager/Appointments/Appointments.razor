@@ -70,13 +70,13 @@
         </MudItem>
 
         <MudItem xs="6" sm="4" md="3" lg="2">
-            <MudSwitch Color="Color.Tertiary" Label="All Day" For="@(() => context.IsAllDay)" @bind-Checked="context.IsAllDay" />
+            <MudSwitch T="bool" Color="Color.Tertiary" Label="All Day" For="@(() => context.IsAllDay)" @bind-Checked="context.IsAllDay" />
         </MudItem>
         <MudItem xs="6" sm="4" md="3" lg="2">
-            <MudSwitch Color="Color.Tertiary" Label="Read-Only" For="@(() => context.IsReadonly)" @bind-Checked="context.IsReadonly" />
+            <MudSwitch T="bool" Color="Color.Tertiary" Label="Read-Only" For="@(() => context.IsReadonly)" @bind-Checked="context.IsReadonly" />
         </MudItem>
         <MudItem xs="6" sm="4" md="3" lg="2">
-            <MudSwitch Color="Color.Tertiary" Label="Block" For="@(() => context.IsBlock)" @bind-Checked="context.IsBlock" />
+            <MudSwitch T="bool" Color="Color.Tertiary" Label="Block" For="@(() => context.IsBlock)" @bind-Checked="context.IsBlock" />
         </MudItem>
 
         <MudItem xs="12">

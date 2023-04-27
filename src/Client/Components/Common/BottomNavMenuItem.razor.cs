@@ -35,7 +35,7 @@ namespace ZANECO.WASM.Client.Components.Common
         /// <summary>
         /// Icon to use if set.
         /// </summary>
-        [Parameter] public string Icon { get; set; }
+        [Parameter] public string? Icon { get; set; }
 
         /// <summary>
         /// The color of the icon. It supports the theme colors, default value uses the themes drawer icon color.

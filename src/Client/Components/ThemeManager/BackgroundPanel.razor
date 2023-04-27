@@ -8,8 +8,8 @@
         </div>
     </TitleContent>
     <ChildContent>
-        <MudSwitch T="bool" @bind-Checked="@BackgroundJob" Color="Color.Primary" Label="Background Job" @oninput="@ToggleBackgroundJobSwitch" />
-        <MudSwitch T="bool" @bind-Checked="@Scheduled" Color="Color.Primary" Label="Scheduled" @oninput="@ToggleScheduledSwitch" />
+        <MudSwitch T="bool" Color="Color.Tertiary" @bind-Checked="@BackgroundJob" Label="Background Job" @oninput="@ToggleBackgroundJobSwitch" />
+        <MudSwitch T="bool" Color="Color.Tertiary" @bind-Checked="@Scheduled" Label="Scheduled" @oninput="@ToggleScheduledSwitch" />
         <MudNumericField T="int" Label="In Minutes" @onchange="((e) => ChangedMinuteValue(e))" />
     </ChildContent>
 </MudExpansionPanel>

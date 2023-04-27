@@ -137,7 +137,7 @@
         </MudItem>
 
         <MudItem xs="6" sm="4" md="3">
-            <MudSwitch Class="mt-3" Color="Color.Secondary" Label="Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" ReadOnly/>
+            <MudSwitch T="bool" Color="Color.Tertiary" Class="mt-3" Label="Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" ReadOnly/>
         </MudItem>
         <MudItem xs="6" sm="4" md="3">
             <MudTextField Label="ID Number" For="@(() => context.Number)" @bind-Value="context.Number" InputMode="InputMode.numeric" Variant="Variant.Filled" />
@@ -297,7 +297,7 @@
     private RenderFragment<EmployeeDto> TemplateActiveIdNumber => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudSwitch Color="Color.Secondary" Label="Active" @bind-Checked="context.IsActive" ReadOnly />
+            <MudSwitch T="bool" Color="Color.Tertiary" Label="Active" @bind-Checked="context.IsActive" ReadOnly />
             <MudText Typo="Typo.body1">ID @context.Number</MudText>
         </MudItem>
     };

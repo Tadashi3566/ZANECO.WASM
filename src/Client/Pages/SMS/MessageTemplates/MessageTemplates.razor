@@ -42,7 +42,7 @@
                           ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSwitch Class="mt-3" Color="Color.Tertiary" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" />
+            <MudSwitch T="bool" Color="Color.Tertiary" Class="mt-3" Label="Use m360 API (Default:SIM)" For="@(() => context.IsAPI)" @bind-Checked="context.IsAPI" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Counter=160 Immediate=true Label="Subject" For="@(() => context.Subject)" @bind-Value="context.Subject" Variant="Variant.Filled" />
@@ -50,13 +50,13 @@
         <MudItem xs="12">
             <MudTextField Counter=160 Immediate=true HelperText="Recommended SMS is up to 160 characters (0.33 cents)" Label="Message" For="@(() => context.Message)" @bind-Value="context.Message" Lines="10" Variant="Variant.Filled" />
         </MudItem>
-        <MudItem xs="12">
-            <MudTextField Label="recipient" For="@(() => context.Recipients)" @bind-Value="context.Recipients" Lines="10" Variant="Variant.Filled" />
-        </MudItem>
-
+        
         <MudItem xs="12">
             <MudExpansionPanels MultiExpansion="true">
                 <MudExpansionPanel Text="Other Information">
+                    <MudItem xs="12">
+                        <MudTextField Label="Recipient" For="@(() => context.Recipients)" @bind-Value="context.Recipients" Lines="20" Variant="Variant.Filled" />
+                    </MudItem>
                     <MudItem xs="12">
                         <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
                     </MudItem>
@@ -120,8 +120,8 @@
     private RenderFragment<MessageTemplateDto> TemplateApiFastMode => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudSwitch @bind-Checked="@context.IsAPI" Label="API" Color="Color.Primary" ReadOnly=true></MudSwitch>
-            <MudSwitch @bind-Checked="@context.IsSent" Label="Sent" Color="Color.Secondary" ReadOnly=true></MudSwitch>
+            <MudSwitch @bind-Checked="@context.IsAPI" Label="API" Color="Color.Tertiary" ReadOnly=true></MudSwitch>
+            <MudSwitch @bind-Checked="@context.IsSent" Label="Sent" Color="Color.Tertiary" ReadOnly=true></MudSwitch>
         </MudItem>
     };
 

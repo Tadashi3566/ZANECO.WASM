@@ -41,7 +41,7 @@
             <MudTextField Label="Reference" For="@(() => context.Reference)" @bind-Value="context.Reference" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="6" lg="3">
-            <MudSwitch Class="mt-3" Color="Color.Tertiary" Label="Is Public" For="@(() => context.IsPublic)" @bind-Checked="context.IsPublic" />
+            <MudSwitch T="bool" Color="Color.Tertiary" Class="mt-3" Label="Is Public" For="@(() => context.IsPublic)" @bind-Checked="context.IsPublic" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
@@ -140,7 +140,7 @@
             <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.Reference" HighlightedText="@_searchString" />
             </MudText>
-            <MudSwitch Label="Public" Checked="@context.IsPublic" Color="Color.Secondary" ReadOnly />
+            <MudSwitch Label="Public" Checked="@context.IsPublic" Color="Color.Tertiary" ReadOnly />
         </MudItem>
     };
 

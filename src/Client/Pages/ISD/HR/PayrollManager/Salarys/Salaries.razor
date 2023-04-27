@@ -49,7 +49,7 @@
             <MudNumericField Label="Step Increment" For="@(() => context.IncrementAmount)" @bind-Value="context.IncrementAmount" Format="N2" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <MudSwitch Class="mt-3" Color="Color.Tertiary" Label="Is Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" />
+            <MudSwitch T="bool" Color="Color.Tertiary" Class="mt-3" Label="Is Active" For="@(() => context.IsActive)" @bind-Checked="context.IsActive" />
         </MudItem>
 
         <MudItem xs="12">
