@@ -35,11 +35,18 @@
         <MudItem xs="12">
             <MudTextField Label="Name" For="@(() => context.Name)" @bind-Value="context.Name" Variant="Variant.Filled" />
         </MudItem>
+
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
-        </MudItem>
-        <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
+            <MudExpansionPanels MultiExpansion="true">
+                <MudExpansionPanel Text="Other Information">
+                    <MudItem xs="12">
+                        <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
+                    </MudItem>
+                </MudExpansionPanel>
+            </MudExpansionPanels>
         </MudItem>
 
         <MudItem xs="4">

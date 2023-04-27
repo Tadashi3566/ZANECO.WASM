@@ -18,7 +18,6 @@ public class AutocompleteEmployee : MudAutocomplete<Guid>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Label = "Employee";
         CoerceText = true;
         CoerceValue = true;
         Clearable = true;

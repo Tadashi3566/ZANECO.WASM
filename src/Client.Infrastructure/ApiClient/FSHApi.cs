@@ -49418,6 +49418,18 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("employeeName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EmployeeName { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("recommendedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid RecommendedBy { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("recommendedOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime RecommendedOn { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("approvedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid ApprovedBy { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("approvedOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime ApprovedOn { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("appointmentType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AppointmentType { get; set; } = default!;
 
@@ -49488,6 +49500,12 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("employeeId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid EmployeeId { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("recommendedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid RecommendedBy { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("approvedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid ApprovedBy { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("appointmentType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(16, MinimumLength = 1)]
@@ -49550,6 +49568,18 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
 
         [Newtonsoft.Json.JsonProperty("employeeId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid EmployeeId { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("recommendedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid RecommendedBy { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("recommendedOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime RecommendedOn { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("approvedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid ApprovedBy { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("approvedOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime ApprovedOn { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("appointmentType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]

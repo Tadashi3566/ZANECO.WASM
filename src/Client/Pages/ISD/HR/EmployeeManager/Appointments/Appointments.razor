@@ -69,21 +69,34 @@
             <MudTextField Label="Location" For="@(() => context.Location)" @bind-Value="context.Location" Variant="Variant.Filled" />
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="6" sm="4" md="3" lg="2">
             <MudSwitch Color="Color.Tertiary" Label="All Day" For="@(() => context.IsAllDay)" @bind-Checked="context.IsAllDay" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="6" sm="4" md="3" lg="2">
             <MudSwitch Color="Color.Tertiary" Label="Read-Only" For="@(() => context.IsReadonly)" @bind-Checked="context.IsReadonly" />
         </MudItem>
-        <MudItem xs="12" sm="6" md="4" lg="3">
+        <MudItem xs="6" sm="4" md="3" lg="2">
             <MudSwitch Color="Color.Tertiary" Label="Block" For="@(() => context.IsBlock)" @bind-Checked="context.IsBlock" />
         </MudItem>
 
         <MudItem xs="12">
-            <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
+            <AutocompleteEmployee Label="Recommender" For="@(() => context.RecommendedBy)" @bind-Value="context.RecommendedBy" HelperText=@string.Format("Recommended On {0}", context.RecommendedOn.ToString("dddd MMMM dd, yyyy hh:mm:ss"))/>
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
+            <AutocompleteEmployee Label="Approver" For="@(() => context.ApprovedBy)" @bind-Value="context.ApprovedBy" HelperText=@string.Format("Approved On {0}", context.ApprovedOn.ToString("dddd MMMM dd, yyyy hh:mm:ss"))/>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudExpansionPanels MultiExpansion="true">
+                <MudExpansionPanel Text="Other Information">
+                    <MudItem xs="12">
+                        <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField Label="Notes" For="@(() => context.Notes)" @bind-Value="context.Notes" Lines="2" />
+                    </MudItem>
+                </MudExpansionPanel>
+            </MudExpansionPanels>
         </MudItem>
 
         <MudItem xs="12">
