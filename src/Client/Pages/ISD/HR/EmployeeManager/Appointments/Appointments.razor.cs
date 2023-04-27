@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using ZANECO.WASM.Client.Components.Dialogs;
 using ZANECO.WASM.Client.Components.EntityTable;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Infrastructure.Auth;
@@ -65,8 +66,9 @@ public partial class Appointments
                 new(data => data.EmployeeName, "Employee", "EmployeeName"),
                 new(data => data.AppointmentType, "Type", "AppointmentType"),
                 new(data => data.Subject, "Subject", "Subject", Template: TemplateSubjectLocation),
-                new(data => data.StartDateTime, "Date Time", Template: TemplateStartEnd),
+                new(data => data.StartDateTime, "", Type: typeof(DateTime), Template: TemplateStartEnd),
                 new(data => data.Status, "Status", "Status"),
+                new(data => data.ApprovedOn, "", Type: typeof(DateTime), Template: TemplateRecommendApprove),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
                 new(data => data.Notes, "Notes", visible: false),
             },
@@ -175,6 +177,35 @@ public partial class Appointments
         Context.AddEditModal.RequestModel.ImagePath = string.Empty;
         Context.AddEditModal.RequestModel.DeleteCurrentImage = true;
         Context.AddEditModal.ForceRender();
+    }
+
+    private async void ForAction(int id, string action)
+    {
+        string transactionTitle = $"{action} Appointment";
+        string transactionContent = $"Are you sure you want to {action} an Appointment?";
+        DialogParameters parameters = new()
+        {
+            { nameof(TransactionConfirmation.TransactionTitle), transactionTitle },
+            { nameof(TransactionConfirmation.ContentText), transactionContent },
+        };
+        DialogOptions options = new() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        IDialogReference dialog = DialogService.Show<TransactionConfirmation>(transactionTitle, parameters, options);
+        DialogResult result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            var user = await User.GetProfileAsync();
+            if (user.EmployeeId is not null)
+            {
+                AppointmentActionRequest request = new()
+                {
+                    Id = id,
+                    EmployeeId = (Guid)user.EmployeeId,
+                    Action = action
+                };
+                
+                await Client.ActionAsync(request);
+            }
+        }
     }
 }
 

@@ -32,8 +32,26 @@
         </MudGrid>
     </AdvancedSearchContent>
     <ExtraActions>
-        <MudMenuItem>For Approval</MudMenuItem>
-        <MudMenuItem Disabled>Approve</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Cancel"
+                     OnClick="@(() => ForAction(context.Id, "CANCELLED"))"
+                     OnTouch="@(() => ForAction(context.Id, "CANCELLED"))">
+            Cancel
+        </MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Handshake"
+                     OnClick="@(() => ForAction(context.Id, "RECOMMENDED"))"
+                     OnTouch="@(() => ForAction(context.Id, "RECOMMENDED"))">
+            Recommend
+        </MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.ThumbUp"
+                     OnClick="@(() => ForAction(context.Id, "APPROVE"))"
+                     OnTouch="@(() => ForAction(context.Id, "APPROVE"))">
+            Approve
+        </MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.ThumbDown"
+                     OnClick="@(() => ForAction(context.Id, "DISAPPROVE"))"
+                     OnTouch="@(() => ForAction(context.Id, "DISAPPROVE"))">
+            Disapprove
+        </MudMenuItem>
     </ExtraActions>
     <EditFormContent>
         @*<MudItem xs="12">
@@ -80,10 +98,10 @@
         </MudItem>
 
         <MudItem xs="12">
-            <AutocompleteEmployee Label="Recommender" For="@(() => context.RecommendedBy)" @bind-Value="context.RecommendedBy" HelperText=@string.Format("Recommended On {0}", context.RecommendedOn.ToString("dddd MMMM dd, yyyy hh:mm:ss"))/>
+            <AutocompleteEmployee Label="Recommender" For="@(() => context.RecommendedBy)" @bind-Value="context.RecommendedBy" HelperText=@string.Format("Recommended on {0:dddd MMMM dd, yyyy hh:mm:ss tt}", context.RecommendedOn) />
         </MudItem>
         <MudItem xs="12">
-            <AutocompleteEmployee Label="Approver" For="@(() => context.ApprovedBy)" @bind-Value="context.ApprovedBy" HelperText=@string.Format("Approved On {0}", context.ApprovedOn.ToString("dddd MMMM dd, yyyy hh:mm:ss"))/>
+            <AutocompleteEmployee Label="Approver" For="@(() => context.ApprovedBy)" @bind-Value="context.ApprovedBy" HelperText=@string.Format("Approved on {0:dddd MMMM dd, yyyy hh:mm:ss tt}", context.ApprovedOn) />
         </MudItem>
 
         <MudItem xs="12">
@@ -163,6 +181,25 @@
             <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.Location" HighlightedText="@_searchString" />
             </MudText>
+        </MudItem>
+    };
+
+    private RenderFragment<AppointmentDto> TemplateRecommendApprove => context => __builder =>
+    {
+        <MudItem Class="d-flex flex-column">
+            @if (context.RecommendedOn is not null)
+            {
+                <MudText Typo="Typo.caption">
+                    @string.Format("{0:dddd MMMM dd, yyyy hh:mm:ss tt}", context.RecommendedOn)
+                </MudText>
+            }
+            @if (context.ApprovedOn is not null)
+            {
+                <MudText Typo="Typo.subtitle2">
+                    @string.Format("{0:dddd MMMM dd, yyyy hh:mm:ss tt}", context.ApprovedOn)
+                </MudText>
+            }
+            
         </MudItem>
     };
 

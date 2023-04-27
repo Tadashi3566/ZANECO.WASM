@@ -16,6 +16,7 @@
             Href="https://opencollective.com/ZanecoApp" Target="_blank" StartIcon="@Icons.Material.Filled.Favorite">
             @L["Sponsor"]</MudButton>
         <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />*@
+
         <MudTooltip Text="Support">
             <MudMenu Icon="@Icons.Material.Filled.SupportAgent" Color="Color.Inherit" Dense="true" AnchorOrigin="Origin.TopRight">
                 <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@L["Community"]</b></MudText>
@@ -36,7 +37,7 @@
             <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit"
                 Href="https://github.com/ZanecoApp/blazor-wasm-boilerplate" Target="_blank" />
         </MudTooltip>*@
-        <NotificationConnectionStatus></NotificationConnectionStatus>
+        <NotificationConnectionStatus/>
     </MudHidden>
     <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
         @*<MudTooltip Text="Sponsor">
@@ -64,6 +65,12 @@
         <NotificationConnectionStatus></NotificationConnectionStatus>
     </MudHidden>
 
+    <MudTooltip Text="Notifications">
+        <MudBadge Class="mx-2 my-4" Content="100" Color="Color.Error" Overlap="true">
+            <MudIcon Icon="@Icons.Material.Filled.Notifications"></MudIcon>
+        </MudBadge>
+    </MudTooltip>
+
     <MudMenu AnchorOrigin="Origin.BottomRight" LockScroll="true" TransformOrigin="Origin.TopRight">
         <ActivatorContent>
             <MudIconButton Icon="@Icons.Material.Filled.Person" Color="Color.Inherit" />
@@ -84,6 +91,12 @@
                         <MudIcon Class="mx-2" Icon="@Icons.Material.Filled.Dashboard" />
                         <MudText>@L["Dashboard"]</MudText>
                     </div>
+                </MudMenuItem>
+                <MudMenuItem>
+                    <MudIcon Class="mx-2" Icon="@Icons.Material.Filled.Notifications" />
+                    <MudBadge Content="100" Color="Color.Error" Class="mx-6 my-4">
+                        <MudText>Notifications</MudText>
+                    </MudBadge>
                 </MudMenuItem>
                 <div class="mt-4 mx-4">
                     <MudButton Color="Color.Error" FullWidth="true" StartIcon="@Icons.Material.Filled.Logout"
