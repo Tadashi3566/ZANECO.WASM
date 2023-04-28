@@ -34,8 +34,8 @@ public class AutocompleteEmployee : MudAutocomplete<Guid>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && _value != default
-            && await ApiHelper.ExecuteCallGuardedAsync(() => Client.GetAsync(_value), Snackbar)
-            is { } dto)
+            && await ApiHelper.ExecuteCallGuardedAsync(() =>
+            Client.GetAsync(_value), Snackbar) is { } dto)
         {
             _list.Add(dto);
             ForceRender(true);
