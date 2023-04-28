@@ -290,7 +290,8 @@
     private RenderFragment<EmployeeDto> TemplateImage => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Rounded=true Style="height: 80px; width: 80px;"> </MudAvatar>
+            <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (Config[ConfigNames.ApiBaseUrl] + @context.ImagePath))" Rounded=true Style="height: 80px; width: 80px;">
+            </MudAvatar>
         </MudItem>
     };
 

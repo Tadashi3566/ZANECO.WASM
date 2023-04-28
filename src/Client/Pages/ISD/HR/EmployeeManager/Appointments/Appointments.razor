@@ -33,23 +33,33 @@
     </AdvancedSearchContent>
     <ExtraActions>
         <MudMenuItem Icon="@Icons.Material.Filled.Cancel"
-                     OnClick="@(() => ForAction(context.Id, "CANCELLED"))"
-                     OnTouch="@(() => ForAction(context.Id, "CANCELLED"))">
+                     OnClick="@(() => ForAction(context.Id, "SEND"))"
+                     OnTouch="@(() => ForAction(context.Id, "SEND"))"
+                     Disabled=@(!context.Status.Equals("CANCELLED"))>
+            Send
+        </MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Cancel"
+                     OnClick="@(() => ForAction(context.Id, "CANCEL"))"
+                     OnTouch="@(() => ForAction(context.Id, "CANCEL"))"
+                     Disabled=@(!context.Status.Equals("PENDING"))>
             Cancel
         </MudMenuItem>
         <MudMenuItem Icon="@Icons.Material.Filled.Handshake"
-                     OnClick="@(() => ForAction(context.Id, "RECOMMENDED"))"
-                     OnTouch="@(() => ForAction(context.Id, "RECOMMENDED"))">
+                     OnClick="@(() => ForAction(context.Id, "RECOMMEND"))"
+                     OnTouch="@(() => ForAction(context.Id, "RECOMMEND"))"
+                     Disabled=@(!context.Status.Equals("PENDING") && !context.RecommendedBy.Equals(SearchEmployeeId))>
             Recommend
         </MudMenuItem>
         <MudMenuItem Icon="@Icons.Material.Filled.ThumbUp"
                      OnClick="@(() => ForAction(context.Id, "APPROVE"))"
-                     OnTouch="@(() => ForAction(context.Id, "APPROVE"))">
+                     OnTouch="@(() => ForAction(context.Id, "APPROVE"))"
+                     Disabled=@(!context.Status.Equals("RECOMMENDED") && !context.ApprovedBy.Equals(SearchEmployeeId))>
             Approve
         </MudMenuItem>
         <MudMenuItem Icon="@Icons.Material.Filled.ThumbDown"
                      OnClick="@(() => ForAction(context.Id, "DISAPPROVE"))"
-                     OnTouch="@(() => ForAction(context.Id, "DISAPPROVE"))">
+                     OnTouch="@(() => ForAction(context.Id, "DISAPPROVE"))"
+                     Disabled=@(!context.Status.Equals("RECOMMENDED") && !context.ApprovedBy.Equals(SearchEmployeeId))>
             Disapprove
         </MudMenuItem>
     </ExtraActions>
@@ -98,14 +108,15 @@
         </MudItem>
 
         <MudItem xs="12">
-            <AutocompleteEmployee Label="Recommender" For="@(() => context.RecommendedBy)" @bind-Value="context.RecommendedBy" HelperText=@string.Format("Recommended on {0:dddd MMMM dd, yyyy hh:mm:ss tt}", context.RecommendedOn) />
-        </MudItem>
-        <MudItem xs="12">
-            <AutocompleteEmployee Label="Approver" For="@(() => context.ApprovedBy)" @bind-Value="context.ApprovedBy" HelperText=@string.Format("Approved on {0:dddd MMMM dd, yyyy hh:mm:ss tt}", context.ApprovedOn) />
-        </MudItem>
-
-        <MudItem xs="12">
             <MudExpansionPanels MultiExpansion="true">
+                <MudExpansionPanel Text="Approval">
+                    <MudItem xs="12">
+                        <AutocompleteEmployee Label="Recommender" For="@(() => context.RecommendedBy)" @bind-Value="context.RecommendedBy" HelperText=@string.Format("Recommended on {0:dddd MMMM dd, yyyy hh:mm:ss tt}", context.RecommendedOn) />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <AutocompleteEmployee Label="Approver" For="@(() => context.ApprovedBy)" @bind-Value="context.ApprovedBy" HelperText=@string.Format("Approved on {0:dddd MMMM dd, yyyy hh:mm:ss tt}", context.ApprovedOn) />
+                    </MudItem>
+                </MudExpansionPanel>
                 <MudExpansionPanel Text="Other Information">
                     <MudItem xs="12">
                         <MudTextField Label="Description" For="@(() => context.Description)" @bind-Value="context.Description" Lines="1" />

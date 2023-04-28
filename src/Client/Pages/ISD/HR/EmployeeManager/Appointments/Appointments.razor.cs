@@ -204,6 +204,8 @@ public partial class Appointments
                 };
                 
                 await Client.ActionAsync(request);
+
+                await _table!.ReloadDataAsync();
             }
         }
     }
