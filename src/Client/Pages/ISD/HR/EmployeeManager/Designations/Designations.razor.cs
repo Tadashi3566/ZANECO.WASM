@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -121,6 +122,23 @@ public partial class Designations
                 }
 
                 await Client.UpdateAsync(id, data.Adapt<DesignationUpdateRequest>());
+
+                // Update Employee Designation if current
+                if (data.IsActive)
+                {
+                    DesignationCurrentRequest currentRequest = new()
+                    {
+                        EmployeeId = data.EmployeeId,
+                        DesignationId = id
+                    };
+
+                    // await Client.DesignationCurrentAsync(currentRequest);
+
+                    if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.DesignationCurrentAsync(currentRequest.Adapt<DesignationCurrentRequest>()), Snackbar))
+                    {
+                        Snackbar.Add("Current Employee Designation has been successfully updated", Severity.Success);
+                    }
+                }
 
                 data.ImageInBytes = string.Empty;
             },

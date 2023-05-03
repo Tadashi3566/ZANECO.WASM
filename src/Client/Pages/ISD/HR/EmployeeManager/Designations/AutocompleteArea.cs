@@ -37,12 +37,11 @@ public class AutocompleteArea : MudAutocomplete<string>
             AdvancedSearch = new() { Fields = new[] { "code", "name", "description" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() =>
-            Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfGroupDto response)
         {
             _list = response.Data
-                .Where(x => x.Parent.Equals("OFFICES"))
+                .Where(x => x.Parent.Equals("OFFICE"))
                 .ToList();
         }
 

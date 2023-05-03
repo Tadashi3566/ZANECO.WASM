@@ -50781,7 +50781,7 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         public string RateType { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("payType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PayType { get; set; } = default!;
+        public string PayType { get; set; } = "BI-MONTHLY";
 
         [Newtonsoft.Json.JsonProperty("ratePerDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal RatePerDay { get; set; } = default!;
