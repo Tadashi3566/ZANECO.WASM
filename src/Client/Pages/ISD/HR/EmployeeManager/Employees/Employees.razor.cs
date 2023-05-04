@@ -99,7 +99,7 @@ public partial class Employees
                 hasExtraActionsFunc: () => _canViewEmployees,
                 exportAction: string.Empty);
 
-        var filter = new EmployeeSearchRequest { PageSize = 1000 };
+        //var filter = new EmployeeSearchRequest { PageSize = 1000 };
 
         //await GetSearchString();
         await GetPayrollId();
