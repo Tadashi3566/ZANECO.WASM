@@ -32,34 +32,34 @@
         </MudGrid>
     </AdvancedSearchContent>
     <ExtraActions>
-        <MudMenuItem Icon="@Icons.Material.Filled.Cancel"
+        <MudMenuItem Icon="@Icons.Material.Filled.Send"
                      OnClick="@(() => ForAction(context.Id, "SEND"))"
                      OnTouch="@(() => ForAction(context.Id, "SEND"))"
-                     Disabled=@(!context.Status.Equals("CANCELLED"))>
+                     Disabled=@(!context.EmployeeId.Equals(SearchEmployeeId) || !context.Status.Equals("CANCELLED"))>
             Send
         </MudMenuItem>
         <MudMenuItem Icon="@Icons.Material.Filled.Cancel"
                      OnClick="@(() => ForAction(context.Id, "CANCEL"))"
                      OnTouch="@(() => ForAction(context.Id, "CANCEL"))"
-                     Disabled=@(!context.Status.Equals("PENDING"))>
+                     Disabled=@(!context.EmployeeId.Equals(SearchEmployeeId) || context.Status.Equals("CANCELLED"))>
             Cancel
         </MudMenuItem>
         <MudMenuItem Icon="@Icons.Material.Filled.Handshake"
                      OnClick="@(() => ForAction(context.Id, "RECOMMEND"))"
                      OnTouch="@(() => ForAction(context.Id, "RECOMMEND"))"
-                     Disabled=@(!context.Status.Equals("PENDING") && !context.RecommendedBy.Equals(SearchEmployeeId))>
+                     Disabled=@(!context.RecommendedBy.Equals(SearchEmployeeId) || !context.Status.Equals("PENDING"))>
             Recommend
         </MudMenuItem>
         <MudMenuItem Icon="@Icons.Material.Filled.ThumbUp"
                      OnClick="@(() => ForAction(context.Id, "APPROVE"))"
                      OnTouch="@(() => ForAction(context.Id, "APPROVE"))"
-                     Disabled=@(!context.Status.Equals("RECOMMENDED") && !context.ApprovedBy.Equals(SearchEmployeeId))>
+                     Disabled=@(!context.ApprovedBy.Equals(SearchEmployeeId) || !context.Status.Equals("RECOMMENDED"))>
             Approve
         </MudMenuItem>
         <MudMenuItem Icon="@Icons.Material.Filled.ThumbDown"
                      OnClick="@(() => ForAction(context.Id, "DISAPPROVE"))"
                      OnTouch="@(() => ForAction(context.Id, "DISAPPROVE"))"
-                     Disabled=@(!context.Status.Equals("RECOMMENDED") && !context.ApprovedBy.Equals(SearchEmployeeId))>
+                     Disabled=@(!context.ApprovedBy.Equals(SearchEmployeeId) || !context.Status.Equals("RECOMMENDED"))>
             Disapprove
         </MudMenuItem>
     </ExtraActions>

@@ -146,7 +146,7 @@
     private RenderFragment<AccountDto> TemplateBarcode => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <SfBarcodeGenerator Width="240px" Height="100px" Value="@context.AccountNumber">
+            <SfBarcodeGenerator Width="220px" Height="100px" Value="@context.AccountNumber">
                 <BarcodeGeneratorDisplayText Text="@context.AccountNumber"></BarcodeGeneratorDisplayText>
             </SfBarcodeGenerator>
         </MudItem>

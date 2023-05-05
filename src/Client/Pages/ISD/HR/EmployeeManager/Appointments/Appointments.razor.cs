@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using Blazored.LocalStorage;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -29,6 +30,9 @@ public partial class Appointments
 
     [Inject]
     protected IPersonalClient User { get; set; } = default!;
+
+    [Inject]
+    protected ILocalStorageService LocalStorage { get; set; } = default!;
 
     protected EntityServerTableContext<AppointmentDto, int, AppointmentViewModel> Context { get; set; } = default!;
 

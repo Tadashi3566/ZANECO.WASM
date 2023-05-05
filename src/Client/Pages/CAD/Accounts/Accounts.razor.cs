@@ -42,7 +42,7 @@ public partial class Accounts
             fields: new()
             {
                 new(data => data.AccountNumber, "Account", "AccountNumber", Template: TemplateBarcode),
-                new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
+                new(data => data.Name, "Name/Address", "Name", Template: TemplateNameAddress),
                 new(data => data.PresentReadingDate, "Reading Dates", "PresentReadingDate", Template: TemplateReadingDate),
                 new(data => data.BillMonth, "Bill Month", "BillMonth"),
                 new(data => data.UsedKWH, "KWH", "UsedKWH", typeof(double)),
