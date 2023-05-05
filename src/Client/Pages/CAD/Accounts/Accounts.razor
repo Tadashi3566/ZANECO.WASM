@@ -146,7 +146,7 @@
     private RenderFragment<AccountDto> TemplateBarcode => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
-            <SfBarcodeGenerator Width="200px" Height="100px" Value="@context.AccountNumber">
+            <SfBarcodeGenerator Width="240px" Height="100px" Value="@context.AccountNumber">
                 <BarcodeGeneratorDisplayText Text="@context.AccountNumber"></BarcodeGeneratorDisplayText>
             </SfBarcodeGenerator>
         </MudItem>
@@ -159,12 +159,15 @@
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
             </MudText>
             <MudText Typo="Typo.caption">
+                <MudHighlighter Text="@context.Pole" HighlightedText="@_searchString" />
+            </MudText>
+            <MudText Typo="Typo.caption">
                 <MudHighlighter Text="@context.Address" HighlightedText="@_searchString" />
             </MudText>
         </MudItem>
     };
 
-    private RenderFragment<AccountDto> TemplateBillingDate => context => __builder =>
+    private RenderFragment<AccountDto> TemplateReadingDate => context => __builder =>
     {
         <MudItem Class="d-flex flex-column">
             <MudText Align="Align.Right" Typo="Typo.caption">

@@ -43,7 +43,7 @@ public partial class Accounts
             {
                 new(data => data.AccountNumber, "Account", "AccountNumber", Template: TemplateBarcode),
                 new(data => data.Name, "Name", "Name", Template: TemplateNameAddress),
-                new(data => data.PresentReadingDate, "Reading Dates", "PresentReadingDate", Template: TemplateBillingDate),
+                new(data => data.PresentReadingDate, "Reading Dates", "PresentReadingDate", Template: TemplateReadingDate),
                 new(data => data.BillMonth, "Bill Month", "BillMonth"),
                 new(data => data.UsedKWH, "KWH", "UsedKWH", typeof(double)),
                 new(data => data.BillAmount, "Bill Amount", "BillAmount", typeof(decimal)),

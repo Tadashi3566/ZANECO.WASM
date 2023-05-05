@@ -27,7 +27,7 @@ public partial class EntityTable<TEntity, TId, TRequest>
     public HashSet<TEntity>? SelectedItems { get; set; }
 
     [Parameter]
-    public int[] PageSizes { get; set; } = new int[] { 10, 15, 50, 100 };
+    public int[] PageSizes { get; set; } = new int[] { 10, 15, 50, 100, 500, 999 };
 
     [Parameter]
     public string? Owner { get; set; }
