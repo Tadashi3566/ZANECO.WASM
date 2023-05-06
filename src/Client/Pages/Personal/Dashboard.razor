@@ -15,7 +15,7 @@ else
     <MudGrid>
         <MudItem xs="12">
             @*<MudPaper Elevation="@_preference.Elevation" Style="height:360px;">*@
-                <MudCarousel TData="object" Style="height:350px;" AutoCycle=true EnableSwipeGesture=true ShowArrows=true ShowBullets=true >
+                <MudCarousel TData="object" Style="height:350px;" AutoCycle=true EnableSwipeGesture=true ShowArrows=true ShowBullets=true AutoCycleTime="TimeSpan.FromSeconds(10)" >
                     @foreach (var interruption in _messageTemplates)
                     {
                         <MudCarouselItem Class="ma-1" Color="Color.Secondary" Transition="Transition.Slide">
@@ -41,6 +41,39 @@ else
             @*</MudPaper>*@
         </MudItem>
 
+        @if (_isEmployeeSearch)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Groups" Color="Color.Primary" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
+                            Happy Birthday
+                        </MudText>
+
+                        <MudListItem Avatar="@Icons.Material.Filled.Image">
+                            Photos
+                        </MudListItem>
+
+                    </div>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Groups" Color="Color.Secondary" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                    <div>
+                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
+                            Happy Annivarsary
+                        </MudText>
+
+
+                    </div>
+                </MudPaper>
+            </MudItem>
+        }
+        <MudDivider/>
         @if (_isAdmin)
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
@@ -97,18 +130,18 @@ else
                     </div>
                 </MudPaper>
             </MudItem>
-            @*<MudItem xs="12" sm="6" md="4" lg="3">
+            <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
                     <MudIcon Icon="@Icons.Material.Filled.Message" Color="Color.Secondary" Class="mx-4"
                      Style="width:54px; height:54px;"></MudIcon>
                     <div>
                         <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
-                            SMS Templates
+                            Power Interruptions
                         </MudText>
                         <MudText Typo="Typo.h5">@SMSTemplateCount.ToString("N0")</MudText>
                     </div>
                 </MudPaper>
-            </MudItem>*@
+            </MudItem>
             <MudItem xs="12">
                 <MudPaper Class="ma-1" Elevation="@_preference.Elevation" Style="height:500px;">
                     <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerMonth" ChartOptions="@_chartOptionMonths"

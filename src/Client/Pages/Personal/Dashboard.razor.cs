@@ -52,10 +52,17 @@ public partial class Dashboard
     private IDashboardClient DashboardClient { get; set; } = default!;
 
     [Inject]
+    private IEmployeesClient EmployeesClient { get; set; } = default!;
+
+    [Inject]
     private IMessageTemplatesClient MessageTemplatesClient { get; set; } = default!;
+
 
     [Inject]
     private ICourier Courier { get; set; } = default!;
+
+    private ICollection<EmployeeDto>? _birthdays;
+    private ICollection<EmployeeDto>? _anniversaries;
 
     private List<MessageTemplateDto> _messageTemplates = new();
 
@@ -73,26 +80,28 @@ public partial class Dashboard
     private ClientPreference _preference = new();
 
     private bool _isAdmin;
+    private bool _isEmployeeSearch;
     private bool _isISD;
     private bool _isCAD;
     private bool _isSandurot;
     private bool _isContact;
     private bool _isSMS;
 
-    private bool _isEmployee;
+    private bool _isAttendance;
 
     protected override async Task OnInitializedAsync()
     {
         var state = await AuthState;
 
         _isAdmin = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Users);
+        _isEmployeeSearch = await AuthService.HasPermissionAsync(state.User, FSHAction.Search, FSHResource.Employees);
         _isISD = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.ISD);
         _isCAD = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.CAD);
         _isSandurot = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Sandurot);
         _isContact = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.Contacts);
         _isSMS = await AuthService.HasPermissionAsync(state.User, FSHAction.View, FSHResource.SMS);
 
-        _isEmployee = await AuthService.HasPermissionAsync(state.User, FSHAction.Create, FSHResource.Attendance);
+        _isAttendance = await AuthService.HasPermissionAsync(state.User, FSHAction.Create, FSHResource.Attendance);
 
         _daysOfMonth = new string[DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month)]; // Create a string array to store the day of the month for each date
 
@@ -104,14 +113,44 @@ public partial class Dashboard
         Courier.SubscribeWeak<NotificationWrapper<StatsChangedNotification>>(async _ =>
         {
             await LoadDataAsync();
+
             StateHasChanged();
         });
 
+        await LoadEmpoloyeeBirthdays();
+        await LoadEmpoloyeeAnniversaries();
 
         await LoadIncomingPowerInterruptions();
+
         await LoadDataAsync();
 
         _loaded = true;
+    }
+
+    private async Task LoadEmpoloyeeBirthdays()
+    {
+        var filter = new EmployeeBirthdayRequest
+        {
+        };
+
+        if (await ApiHelper.ExecuteCallGuardedAsync(async () => await EmployeesClient.BirthdayAsync(filter), Snackbar)
+            is PaginationResponseOfEmployeeDto response)
+        {
+            _birthdays = response.Data.OrderBy(x => x.LastName).ToList();
+        }
+    }
+
+    private async Task LoadEmpoloyeeAnniversaries()
+    {
+        var filter = new EmployeeAnniversaryRequest
+        {
+        };
+
+        if (await ApiHelper.ExecuteCallGuardedAsync(async () => await EmployeesClient.AnniversaryAsync(filter), Snackbar)
+            is PaginationResponseOfEmployeeDto response)
+        {
+            _anniversaries = response.Data.OrderBy(x => x.LastName).ToList();
+        }
     }
 
     private async Task LoadIncomingPowerInterruptions()
@@ -123,7 +162,7 @@ public partial class Dashboard
             IncomingSchedule = true,
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => MessageTemplatesClient.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(async () => await MessageTemplatesClient.SearchAsync(filter), Snackbar)
             is PaginationResponseOfMessageTemplateDto response)
         {
             _messageTemplates = response.Data.OrderBy(x => x.Schedule).ToList();
@@ -134,6 +173,12 @@ public partial class Dashboard
     {
         if (await ApiHelper.ExecuteCallGuardedAsync(() => DashboardClient.GetAsync(), Snackbar) is StatsDto statsDto)
         {
+            if (_isEmployeeSearch)
+            {
+                //_birthdays = statsDto.Birthdays;
+                //_anniversaries = statsDto.Anniversaries;
+            }
+
             if (_isAdmin)
             {
                 UserCount = statsDto.UserCount;
@@ -181,6 +226,8 @@ public partial class Dashboard
 
             BrandCount = statsDto.BrandCount;
             ProductCount = statsDto.ProductCount;
+
+            
         }
     }
 }
