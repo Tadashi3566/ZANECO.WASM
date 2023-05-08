@@ -154,23 +154,35 @@ public partial class Dashboard
 
     private async Task LoadEmpoloyeeBirthdays()
     {
-        var filter = new EmployeeBirthdayRequest();
+        var filter = new EmployeeBirthdayRequest()
+        {
+            PageSize = 100,
+        };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(async () => await EmployeesClient.BirthdayAsync(filter), Snackbar)
             is PaginationResponseOfEmployeeDto response)
         {
-            _birthdays = response.Data.OrderBy(x => x.BirthDate!.Value.Day).ToList();
+            _birthdays = response.Data
+                .Where(x => x.BirthDate!.Value.Day >= DateTime.Today.Day)
+                .OrderBy(x => x.BirthDate!.Value.Day)
+                .ToList();
         }
     }
 
     private async Task LoadEmpoloyeeAnniversaries()
     {
-        var filter = new EmployeeAnniversaryRequest();
+        var filter = new EmployeeAnniversaryRequest()
+        {
+            PageSize = 100,
+        };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(async () => await EmployeesClient.AnniversaryAsync(filter), Snackbar)
             is PaginationResponseOfEmployeeDto response)
         {
-            _anniversaries = response.Data.OrderBy(x => x.HireDate).ToList();
+            _anniversaries = response.Data
+                .Where(x => x.HireDate.Day >= DateTime.Today.Day)
+                .OrderBy(x => x.HireDate)
+                .ToList();
         }
     }
 

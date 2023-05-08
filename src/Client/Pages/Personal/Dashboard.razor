@@ -182,7 +182,7 @@ else
                         {
                             <MudListItem Icon="@Icons.Material.Filled.Cake" IconColor="Color.Primary" Text="Birthday" InitiallyExpanded>
                             <NestedList>
-                                @foreach (var employee in _birthdays)
+                                @foreach (var employee in _birthdays.OrderBy(x => x.BirthDate!.Value.Day))
                                     {
                                         if (employee.BirthDate!.Value.Day.Equals(DateTime.Today.Day))
                                         {
@@ -214,13 +214,13 @@ else
                         {
                                 <MudListItem Icon="@Icons.Material.Filled.Celebration" IconColor="Color.Primary" Text="Anniversary" InitiallyExpanded>
                                 <NestedList>
-                                    @foreach (var employee in _anniversaries)
+                                    @foreach (var employee in _anniversaries.OrderBy(x => x.HireDate.Day))
                                     {
                                         if (employee.HireDate!.Day.Equals(DateTime.Today.Day))
                                         {
                                             <MudListItem>
                                                 <MudChip Color="Color.Primary" Icon="@Icons.Material.Filled.Celebration">
-                                                    @string.Format("{0:MMMM dd}  {1}", employee.HireDate, employee.FullName)
+                                                    @string.Format("{0:MMMM dd}  {1} {2}y", employee.HireDate, employee.FullName, DateTimeFunctions.Years(employee.HireDate, DateTime.Today))
                                                 </MudChip>
                                             </MudListItem>
                                         }
