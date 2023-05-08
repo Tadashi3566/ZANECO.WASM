@@ -144,24 +144,40 @@ public partial class Employees
         }
     }
 
-    //private async Task GetSearchString()
-    //{
-    //    try
-    //    {
-    //        _searchString = await _localStorage!.GetItemAsync<string>("Employees");
+    private static string LengthOfService(in DateTime dtStart)
+    {
+        int years = DateTimeFunctions.Years(dtStart, DateTime.Today);
+        int months = dtStart.Months(DateTime.Today) % 12;
 
-    //        if (_searchString is not null)
-    //        {
-    //            await _table!.ReloadDataAsync();
-    //        }
+        string sYear;
 
-    //        StateHasChanged();
-    //    }
-    //    catch (Exception)
-    //    {
-    //        throw;
-    //    }
-    //}
+        if (years <= 1)
+            sYear = "Year";
+        else
+            sYear = "Years";
+
+        string sMonth;
+        if (months <= 1)
+            sMonth = "Month";
+        else
+            sMonth = "Months";
+
+        if (months.Equals(0))
+        {
+            if (years.Equals(0))
+            {
+                return $"{years:N0} {sYear}";
+            }
+            else
+            {
+                return $"{years:N0} {sYear}";
+            }
+        }
+        else
+        {
+            return $"{years:N0} {sYear} {months} {sMonth}";
+        }
+    }
 
     private async Task GetPayrollId()
     {
@@ -251,41 +267,6 @@ public partial class Employees
     private static int DisplayYearsOld(in DateTime dtBirthDate)
     {
         return DateTimeFunctions.Years(dtBirthDate, DateTime.Today);
-    }
-
-    private static string DisplayLegnthOfService(in DateTime dtStart)
-    {
-        int years = DateTimeFunctions.Years(dtStart, DateTime.Today);
-        int months = dtStart.Months(DateTime.Today) % 12;
-
-        string sYear;
-
-        if (years <= 1)
-            sYear = "Year";
-        else
-            sYear = "Years";
-
-        string sMonth;
-        if (months <= 1)
-            sMonth = "Month";
-        else
-            sMonth = "Months";
-
-        if (months.Equals(0))
-        {
-            if (years.Equals(0))
-            {
-                return $"{years:N0} {sYear}";
-            }
-            else
-            {
-                return $"{years:N0} {sYear}";
-            }
-        }
-        else
-        {
-            return $"{years:N0} {sYear} {months} {sMonth}";
-        }
     }
 
     // TODO : Make this as a shared service or something? Since it's used by Profile Component also for now, and literally any other component that will have image upload.

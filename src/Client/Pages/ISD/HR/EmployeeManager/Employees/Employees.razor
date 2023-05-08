@@ -1,5 +1,7 @@
 ﻿@page "/hr/employees"
 
+@using ZANECO.WASM.Client.Infrastructure.Common
+
 @attribute [MustHavePermission(FSHAction.View, FSHResource.Employees)]
 
 <FshTitle Title="Employees" Description="Employee Management" />
@@ -308,7 +310,7 @@
             <MudText Typo="Typo.body1">@context.HireDate.ToString("MMM dd, yyyy")</MudText>
             @if (context.IsActive)
             {
-                <MudText Typo="Typo.caption">@DisplayLegnthOfService(context.HireDate)</MudText>
+                <MudText Typo="Typo.caption">@LengthOfService(context.HireDate)</MudText>
             }
         </MudItem>
     };
@@ -319,7 +321,7 @@
             <MudText Typo="Typo.body1">@context.RegularDate.ToString("MMM dd, yyyy")</MudText>
             @if (context.IsActive)
             {
-                <MudText Typo="Typo.caption">@DisplayLegnthOfService(context.RegularDate)</MudText>
+                <MudText Typo="Typo.caption">@LengthOfService(context.RegularDate)</MudText>
             }
         </MudItem>
     };

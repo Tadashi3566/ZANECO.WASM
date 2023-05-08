@@ -1,4 +1,4 @@
-﻿namespace ZANECO.WASM.Client.Components.Common;
+﻿namespace ZANECO.WASM.Client.Infrastructure.Common;
 
 public static class DateTimeFunctions
 {

@@ -228,7 +228,7 @@ else
                                         {
                                             <MudListItem>
                                                 <MudText Typo="Typo.caption">
-                                                    @string.Format("{0:MMM dd, yyyy}  {1}", employee.HireDate, employee.FullName)
+                                                    @string.Format("{0:MMM dd, yyyy}  {1} {2}y", employee.HireDate, employee.FullName, DateTimeFunctions.Years(employee.HireDate, DateTime.Today))
                                                 </MudText>
                                             </MudListItem>
                                         }
