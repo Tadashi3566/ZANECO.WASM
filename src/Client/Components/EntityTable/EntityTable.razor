@@ -74,76 +74,70 @@
             <HeaderContent>
                 @if (Context.Fields is not null)
                 {
-                    foreach (var field in Context.Fields)
+                    foreach (var field in Context.Fields.Where(x => x.Visible))
                     {
-                        if (field.Visible)
-                        {
-                            <MudTh>
-                                @if (Context.IsClientContext)
-                                {
-                                    <MudTableSortLabel SortBy="@field.ValueFunc">@field.DisplayName</MudTableSortLabel>
-                                }
-                                else
-                                {
-                                    <MudTableSortLabel T="TEntity" SortLabel="@field.SortLabel">@field.DisplayName</MudTableSortLabel>
-                                }
-                            </MudTh>
-                        }
+                        <MudTh>
+                            @if (Context.IsClientContext)
+                            {
+                                <MudTableSortLabel SortBy="@field.ValueFunc">@field.DisplayName</MudTableSortLabel>
+                            }
+                            else
+                            {
+                                <MudTableSortLabel T="TEntity" SortLabel="@field.SortLabel">@field.DisplayName</MudTableSortLabel>
+                            }
+                        </MudTh>
                     }
                 }
                 <MudTh Style="text-align:right">@L["Actions"]</MudTh>
             </HeaderContent>
 
             <RowTemplate>
-                @foreach (var field in Context.Fields)
+                @foreach (var field in Context.Fields.Where(x => x.Visible))
                 {
-                    if (field.Visible)
-                    {
-                        <MudTd DataLabel="@field.DisplayName">
-                            @if (field.Template is not null)
-                            {
-                                @field.Template(context)
-                            }
-                            else if (field.Type == typeof(bool))
-                            {
-                                <MudSwitch Checked="@field.ValueFunc(context)" Color="Color.Tertiary" ReadOnly />
-                            }
-                            else if (field.Type == typeof(double))
-                            {
-                                <MudText Align="Align.Right">
-                                    @Convert.ToDouble(field.ValueFunc(context)).ToString("N2")
-                                </MudText>
-                            }
-                            else if (field.Type == typeof(decimal))
-                            {
-                                <MudText Align="Align.Right">
-                                    @Convert.ToDecimal(field.ValueFunc(context)).ToString("N2")
-                                </MudText>
-                            }
-                            else if (field.Type == typeof(DateOnly))
-                            {
-                                <MudText Align="Align.Right">
-                                    @Convert.ToDateTime(field.ValueFunc(context)).ToString("MMMM dd, yyyy")
-                                </MudText>
-                            }
-                            else if (field.Type == typeof(TimeOnly))
-                            {
-                                <MudText Align="Align.Right">
-                                    @Convert.ToDateTime(field.ValueFunc(context)).ToString("HH:mm")
-                                </MudText>
-                            }
-                            else if (field.Type == typeof(DateTime))
-                            {
-                                <MudText Align="Align.Right" >
-                                    @Convert.ToDateTime(field.ValueFunc(context)).ToString("MMMM dd, yyyy HH:mm:ss")
-                                </MudText>
-                            }
-                            else
-                            {
-                                <MudHighlighter Text="@field.ValueFunc(context)?.ToString()" HighlightedText="@SearchString" />
-                            }
-                        </MudTd>
-                    }
+                    <MudTd DataLabel="@field.DisplayName">
+                        @if (field.Template is not null)
+                        {
+                            @field.Template(context)
+                        }
+                        else if (field.Type == typeof(bool))
+                        {
+                            <MudSwitch Checked="@field.ValueFunc(context)" Color="Color.Tertiary" ReadOnly />
+                        }
+                        else if (field.Type == typeof(double))
+                        {
+                            <MudText Align="Align.Right">
+                                @Convert.ToDouble(field.ValueFunc(context)).ToString("N2")
+                            </MudText>
+                        }
+                        else if (field.Type == typeof(decimal))
+                        {
+                            <MudText Align="Align.Right">
+                                @Convert.ToDecimal(field.ValueFunc(context)).ToString("N2")
+                            </MudText>
+                        }
+                        else if (field.Type == typeof(DateOnly))
+                        {
+                            <MudText Align="Align.Right">
+                                @Convert.ToDateTime(field.ValueFunc(context)).ToString("MMMM dd, yyyy")
+                            </MudText>
+                        }
+                        else if (field.Type == typeof(TimeOnly))
+                        {
+                            <MudText Align="Align.Right">
+                                @Convert.ToDateTime(field.ValueFunc(context)).ToString("HH:mm")
+                            </MudText>
+                        }
+                        else if (field.Type == typeof(DateTime))
+                        {
+                            <MudText Align="Align.Right" >
+                                @Convert.ToDateTime(field.ValueFunc(context)).ToString("MMMM dd, yyyy HH:mm:ss")
+                            </MudText>
+                        }
+                        else
+                        {
+                            <MudHighlighter Text="@field.ValueFunc(context)?.ToString()" HighlightedText="@SearchString" />
+                        }
+                    </MudTd>
                 }
                 <MudTd DataLabel="Actions" Style="text-align: right">
                     @if (ActionsContent is not null)

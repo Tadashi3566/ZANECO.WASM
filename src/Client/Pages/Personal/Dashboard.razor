@@ -40,46 +40,12 @@ else
                 </MudCarousel>
             @*</MudPaper>*@
         </MudItem>
-
-        @if (_isEmployeeSearch)
-        {
-            <MudItem xs="12" sm="6" md="4" lg="3">
-                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.Groups" Color="Color.Primary" Class="mx-4"
-                     Style="width:54px; height:54px;"></MudIcon>
-                    <div>
-                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
-                            Happy Birthday
-                        </MudText>
-
-                        <MudListItem Avatar="@Icons.Material.Filled.Image">
-                            Photos
-                        </MudListItem>
-
-                    </div>
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="12" sm="6" md="4" lg="3">
-                <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.Groups" Color="Color.Secondary" Class="mx-4"
-                     Style="width:54px; height:54px;"></MudIcon>
-                    <div>
-                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
-                            Happy Annivarsary
-                        </MudText>
-
-
-                    </div>
-                </MudPaper>
-            </MudItem>
-        }
         <MudDivider/>
         @if (_isAdmin)
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.ManageAccounts" Color="Color.Primary" Class="mx-4"
-                    Style="width:54px; height:54px;"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.ManageAccounts" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                     <div>
                         <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
                             Application Users
@@ -90,8 +56,7 @@ else
             </MudItem>
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.Groups" Color="Color.Secondary" Class="mx-4"
-                    Style="width:54px; height:54px;"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.Groups" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                     <div>
                         <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
                             Application Roles
@@ -105,8 +70,7 @@ else
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.ContactPhone" Color="Color.Primary" Class="mx-4"
-                     Style="width:54px; height:54px;"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.ContactPhone" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                     <div>
                         <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
                             Contacts
@@ -120,8 +84,7 @@ else
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.Send" Color="Color.Primary" Class="mx-4"
-                     Style="width:54px; height:54px;"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.Send" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                     <div>
                         <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
                             SMS Logs
@@ -132,8 +95,7 @@ else
             </MudItem>
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.Message" Color="Color.Secondary" Class="mx-4"
-                     Style="width:54px; height:54px;"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.Message" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                     <div>
                         <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
                             Power Interruptions
@@ -142,27 +104,25 @@ else
                     </div>
                 </MudPaper>
             </MudItem>
-            <MudItem xs="12">
-                <MudPaper Class="ma-1" Elevation="@_preference.Elevation" Style="height:500px;">
+            //Charts
+            <MudItem xs="12" sm="12" md="12" lg="6">
+                @*<div class="height:500px; width:auto;">*@
                     <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerMonth" ChartOptions="@_chartOptionMonths"
-                      XAxisLabels="@_dataBarChartXAxisLabelsMonth.Select(a => a.ToString()).ToArray()" Width="100%"
-                      Height="450px"></MudChart>
-                </MudPaper>
+                      XAxisLabels="@_dataBarChartXAxisLabelsMonth.Select(a => a.ToString()).ToArray()" Height="450px">
+                  </MudChart>
+                @*</div>*@
             </MudItem>
-            <MudItem xs="12">
-                <MudPaper Class="ma-1" Elevation="@_preference.Elevation" Style="height:500px;">
+            <MudItem xs="12" sm="12" md="12" lg="6">
                     <MudChart ChartType="ChartType.Bar" ChartSeries="@_dataBarChartSeriesSMSPerDay" ChartOptions="@_chartOptionDays"
-                      XAxisLabels="@_daysOfMonth!.Select(a => a.ToString()).ToArray()" Width="100%"
-                      Height="450px"></MudChart>
-                </MudPaper>
+                      XAxisLabels="@_daysOfMonth!.Select(a => a.ToString()).ToArray()" Height="450px">
+                  </MudChart>
             </MudItem>
         }
         @if (_isISD)
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Class="mx-4"
-                     Style="width:54px; height:54px;"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                     <div>
                         <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Members</MudText>
                         <MudText Typo="Typo.h5">@MemberCount.ToString("N0")</MudText>
@@ -174,8 +134,7 @@ else
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Secondary" Class="mx-4"
-                     Style="width:54px; height:54px;"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                     <div>
                         <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Accounts</MudText>
                         <MudText Typo="Typo.h5">@AccountCount.ToString("N0")</MudText>
@@ -187,8 +146,7 @@ else
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Class="mx-4"
-                     Style="width:54px; height:54px;"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                     <div>
                         <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Brands</MudText>
                         <MudText Typo="Typo.h5">@BrandCount.ToString("N0")</MudText>
@@ -197,8 +155,7 @@ else
             </MudItem>
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudPaper Elevation="@_preference.Elevation" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Secondary" Class="mx-4"
-                         Style="width:54px; height:54px;"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                     <div>
                         <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Products</MudText>
                         <MudText Typo="Typo.h5">@ProductCount.ToString("N0")</MudText>
@@ -214,6 +171,112 @@ else
                 </MudPaper>
             </MudItem>
         }
-
+        <MudDivider/>
+        @if (_isEmployeeSearch)
+        {
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="6" lg="4">
+                    <div class="width: auto; overflow-scroll;">
+                        <MudList Color="Color.Primary" Clickable Dense>
+                        @if (_birthdays is not null && _birthdays.Count > 0)
+                        {
+                            <MudListItem Icon="@Icons.Material.Filled.Cake" IconColor="Color.Primary" Text="Birthday" InitiallyExpanded>
+                            <NestedList>
+                                @foreach (var employee in _birthdays)
+                                    {
+                                        if (employee.BirthDate!.Value.Day.Equals(DateTime.Today.Day))
+                                        {
+                                            <MudListItem>
+                                                <MudChip Color="Color.Primary" Icon="@Icons.Material.Filled.Cake">
+                                                    @string.Format("{0:MMMM dd}  {1}", employee.BirthDate, employee.FullName)
+                                                </MudChip>
+                                            </MudListItem>
+                                        }
+                                        else
+                                        {
+                                            <MudListItem>
+                                                <MudText Typo="Typo.caption">
+                                                    @string.Format("{0:MMM dd}  {1}", employee.BirthDate, employee.FullName)
+                                                </MudText>
+                                            </MudListItem>
+                                        }
+                                    }
+                                </NestedList>
+                            </MudListItem>
+                        }
+                        </MudList>
+                    </div>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6" lg="4">
+                    <div class="width: auto; overflow-scroll;">
+                        <MudList Color="Color.Primary" Clickable Dense>
+                        @if (_anniversaries is not null && _anniversaries.Count > 0)
+                        {
+                                <MudListItem Icon="@Icons.Material.Filled.Celebration" IconColor="Color.Primary" Text="Anniversary" InitiallyExpanded>
+                                <NestedList>
+                                    @foreach (var employee in _anniversaries)
+                                    {
+                                        if (employee.HireDate!.Day.Equals(DateTime.Today.Day))
+                                        {
+                                            <MudListItem>
+                                                <MudChip Color="Color.Primary" Icon="@Icons.Material.Filled.Celebration">
+                                                    @string.Format("{0:MMMM dd}  {1}", employee.HireDate, employee.FullName)
+                                                </MudChip>
+                                            </MudListItem>
+                                        }
+                                        else
+                                        {
+                                            <MudListItem>
+                                                <MudText Typo="Typo.caption">
+                                                    @string.Format("{0:MMM dd, yyyy}  {1}", employee.HireDate, employee.FullName)
+                                                </MudText>
+                                            </MudListItem>
+                                        }
+                                    }
+                                </NestedList>
+                            </MudListItem>
+                        }
+                        </MudList>
+                    </div>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6" lg="4">
+                    <div class="width: auto; overflow-scroll;">
+                        <MudList Color="Color.Primary" Clickable Dense>
+                        @if (_holidays is not null && _holidays.Count > 0)
+                        {
+                            <MudListItem Icon="@Icons.Material.Filled.BeachAccess" IconColor="Color.Primary" Text="Regular Holidays" InitiallyExpanded>
+                                <NestedList>
+                                    @foreach (var holiday in _holidays.Where(x => x.CalendarType.Equals("REGULAR")).OrderBy(x => x.CalendarDate))
+                                    {
+                                        <MudListItem>
+                                            <MudCheckBox T="bool" Checked="@(holiday.CalendarDate <= DateTime.Today)" Dense ReadOnly>
+                                                <MudText Typo="Typo.caption">
+                                                    @string.Format("{0:MMM dd}  {1}", holiday.CalendarDate, holiday.Name)
+                                                </MudText>
+                                            </MudCheckBox>
+                                        </MudListItem>
+                                    }
+                                </NestedList>
+                            </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Church" IconColor="Color.Primary" Text="Special Holidays" InitiallyExpanded>
+                                <NestedList>
+                                    @foreach (var holiday in _holidays.Where(x => x.CalendarType.Equals("SPECIAL")).OrderBy(x => x.CalendarDate))
+                                        {
+                                            <MudListItem>
+                                                <MudCheckBox T="bool" Checked="@(holiday.CalendarDate <= DateTime.Today)" Dense ReadOnly>
+                                                <MudText Typo="Typo.caption">
+                                                    @string.Format("{0:MMM dd}  {1}", holiday.CalendarDate, holiday.Name)
+                                                </MudText>
+                                            </MudCheckBox>
+                                        </MudListItem>
+                                        }
+                                    </NestedList>
+                                </MudListItem>
+                        }
+                        </MudList>
+                    </div>
+                </MudItem>
+            </MudGrid>
+        }
     </MudGrid>
 }

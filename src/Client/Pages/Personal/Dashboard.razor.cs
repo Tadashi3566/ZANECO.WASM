@@ -52,10 +52,13 @@ public partial class Dashboard
     private IDashboardClient DashboardClient { get; set; } = default!;
 
     [Inject]
+    private IMessageTemplatesClient MessageTemplatesClient { get; set; } = default!;
+
+    [Inject]
     private IEmployeesClient EmployeesClient { get; set; } = default!;
 
     [Inject]
-    private IMessageTemplatesClient MessageTemplatesClient { get; set; } = default!;
+    private ICalendarsClient CalendarsClient { get; set; } = default!;
 
 
     [Inject]
@@ -63,6 +66,7 @@ public partial class Dashboard
 
     private ICollection<EmployeeDto>? _birthdays;
     private ICollection<EmployeeDto>? _anniversaries;
+    private ICollection<CalendarDto>? _holidays;
 
     private List<MessageTemplateDto> _messageTemplates = new();
 
@@ -112,45 +116,24 @@ public partial class Dashboard
 
         Courier.SubscribeWeak<NotificationWrapper<StatsChangedNotification>>(async _ =>
         {
+            await LoadIncomingPowerInterruptions();
+            await LoadEmpoloyeeBirthdays();
+            await LoadEmpoloyeeAnniversaries();
+            await LoadHolidays();
+
             await LoadDataAsync();
 
             StateHasChanged();
         });
 
+        await LoadIncomingPowerInterruptions();
         await LoadEmpoloyeeBirthdays();
         await LoadEmpoloyeeAnniversaries();
-
-        await LoadIncomingPowerInterruptions();
+        await LoadHolidays();
 
         await LoadDataAsync();
 
         _loaded = true;
-    }
-
-    private async Task LoadEmpoloyeeBirthdays()
-    {
-        var filter = new EmployeeBirthdayRequest
-        {
-        };
-
-        if (await ApiHelper.ExecuteCallGuardedAsync(async () => await EmployeesClient.BirthdayAsync(filter), Snackbar)
-            is PaginationResponseOfEmployeeDto response)
-        {
-            _birthdays = response.Data.OrderBy(x => x.LastName).ToList();
-        }
-    }
-
-    private async Task LoadEmpoloyeeAnniversaries()
-    {
-        var filter = new EmployeeAnniversaryRequest
-        {
-        };
-
-        if (await ApiHelper.ExecuteCallGuardedAsync(async () => await EmployeesClient.AnniversaryAsync(filter), Snackbar)
-            is PaginationResponseOfEmployeeDto response)
-        {
-            _anniversaries = response.Data.OrderBy(x => x.LastName).ToList();
-        }
     }
 
     private async Task LoadIncomingPowerInterruptions()
@@ -169,16 +152,47 @@ public partial class Dashboard
         }
     }
 
+    private async Task LoadEmpoloyeeBirthdays()
+    {
+        var filter = new EmployeeBirthdayRequest();
+
+        if (await ApiHelper.ExecuteCallGuardedAsync(async () => await EmployeesClient.BirthdayAsync(filter), Snackbar)
+            is PaginationResponseOfEmployeeDto response)
+        {
+            _birthdays = response.Data.OrderBy(x => x.BirthDate!.Value.Day).ToList();
+        }
+    }
+
+    private async Task LoadEmpoloyeeAnniversaries()
+    {
+        var filter = new EmployeeAnniversaryRequest();
+
+        if (await ApiHelper.ExecuteCallGuardedAsync(async () => await EmployeesClient.AnniversaryAsync(filter), Snackbar)
+            is PaginationResponseOfEmployeeDto response)
+        {
+            _anniversaries = response.Data.OrderBy(x => x.HireDate).ToList();
+        }
+    }
+
+    private async Task LoadHolidays()
+    {
+        var filter = new CalendarSearchRequest()
+        {
+             PageSize = 100,
+        };
+
+        if (await ApiHelper.ExecuteCallGuardedAsync(async () => await CalendarsClient.SearchAsync(filter), Snackbar)
+            is PaginationResponseOfCalendarDto response)
+        {
+            _holidays = response.Data.Where(x => x.CalendarDate.Year.Equals(DateTime.Today.Year))
+                .OrderBy(x => x.CalendarDate).ToList();
+        }
+    }
+
     private async Task LoadDataAsync()
     {
         if (await ApiHelper.ExecuteCallGuardedAsync(() => DashboardClient.GetAsync(), Snackbar) is StatsDto statsDto)
         {
-            if (_isEmployeeSearch)
-            {
-                //_birthdays = statsDto.Birthdays;
-                //_anniversaries = statsDto.Anniversaries;
-            }
-
             if (_isAdmin)
             {
                 UserCount = statsDto.UserCount;
@@ -194,6 +208,7 @@ public partial class Dashboard
             {
                 _chartOptionMonths.YAxisTicks = 5000;
                 _chartOptionDays.YAxisTicks = 1000;
+                
 
                 ContactCount = statsDto.ContactCount;
                 SMSLogCount = statsDto.SmsLogCount;
@@ -226,8 +241,6 @@ public partial class Dashboard
 
             BrandCount = statsDto.BrandCount;
             ProductCount = statsDto.ProductCount;
-
-            
         }
     }
 }
