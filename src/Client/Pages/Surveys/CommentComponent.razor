@@ -6,7 +6,7 @@
             <MudText>How would you like to rate our services?</MudText>
         </MudCardHeader>
         <MudCardContent>
-            <MudGrid>
+            <MudGrid Class="d-flex flex-column">
                 <MudStack AlignItems="AlignItems.Center">
                     <MudItem xs="12" sm="6">
                         <MudRating @bind-SelectedValue="_rating.RateNumber" MaxValue="5" Size="Size.Large" HoveredValueChanged="@(() => SetRateName(_rating.RateNumber))" />
@@ -15,7 +15,6 @@
                         <MudText Typo="Typo.h5">@_rateName</MudText>
                     </MudItem>
                 </MudStack>
-                
                 <MudItem xs="12">
                     <MudTextField Label="Input Comment or Rating Survey" @bind-Value="_rating.Comment" For="@(() => _rating.Comment)" Lines="5" Variant="Variant.Filled" />
                 </MudItem>

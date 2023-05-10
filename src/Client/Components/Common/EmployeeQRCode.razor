@@ -1,21 +1,24 @@
 ﻿@using Syncfusion.Blazor.BarcodeGenerator
 
-<MudGrid Class="d-flex flex-column" Spacing="5">
-    <MudPaper Class="ma-5" Elevation="25">
-        @if (_employeeId is not null)
-        {
-            <SfQRCodeGenerator Width="350px" Height="300px" Value="@_employeeId">
-                <QRCodeGeneratorDisplayText Text="@_name"></QRCodeGeneratorDisplayText>
-            </SfQRCodeGenerator>
-        }
-    </MudPaper>
-    <MudPaper Class="ma-5" Elevation="25">
-        @if (_sandurotId is not null)
-        {
-            <SfBarcodeGenerator Width="350px" Height="250px" Value="@_sandurotId">
-                <BarcodeGeneratorDisplayText Text="@_name"></BarcodeGeneratorDisplayText>
-            </SfBarcodeGenerator>
-        }
-    </MudPaper>
+<MudGrid Spacing="5">
+    <MudItem sm="12" md="6">
+        <MudPaper Class="ma-5" Elevation="25">
+            @if (_employeeId is not null)
+            {
+                <SfQRCodeGenerator Width="300" Height="300" Value="@_employeeId">
+                    <QRCodeGeneratorDisplayText Text="@_name"></QRCodeGeneratorDisplayText>
+                </SfQRCodeGenerator>
+            }
+        </MudPaper>
+    </MudItem>
+    <MudItem sm="12" md="6">
+        <MudPaper Class="ma-5" Elevation="25">
+            @if (_sandurotId is not null)
+            {
+                <SfBarcodeGenerator Width="300" Height="200" Value="@_sandurotId">
+                    <BarcodeGeneratorDisplayText Text="@_sandurot"></BarcodeGeneratorDisplayText>
+                </SfBarcodeGenerator>
+            }
+        </MudPaper>
+    </MudItem>
 </MudGrid>
-

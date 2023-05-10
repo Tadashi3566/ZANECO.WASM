@@ -20,15 +20,31 @@ public partial class BaseLayout
         SetCurrentTheme(_themePreference);
 
         //This function will be intended for tickets or comments
-        Snackbar.Add("Want to know other Company Information and Services? ", Severity.Normal, config =>
+        Snackbar.Add("Want to know our Company Information and Services? ", Severity.Normal, config =>
         {
+            config.Action = "Come and visit our Official Website!";
+            config.ActionColor = Color.Primary;
+            config.CloseAfterNavigation = true;
             config.BackgroundBlurred = true;
             config.Icon = Icons.Custom.Brands.Chrome;
-            config.Action = "Visit our Website!";
-            config.ActionColor = Color.Primary;
             config.Onclick = snackbar =>
             {
                 Navigation.NavigateTo("https://www.zaneco.ph");
+                return Task.CompletedTask;
+            };
+        });
+
+        Snackbar.Add("How about sending us your comments, feedbacks and suggestions? ", Severity.Normal, config =>
+        {
+            config.Action = "Write it down here. Let's Go!";
+            config.ActionColor = Color.Secondary;
+            config.BackgroundBlurred = true;
+            config.CloseAfterNavigation = true;
+            config.Icon = Icons.Material.Filled.Comment;
+            config.ShowTransitionDuration = 60;
+            config.Onclick = snackbar =>
+            {
+                Navigation.NavigateTo("/survey/comment");
                 return Task.CompletedTask;
             };
         });

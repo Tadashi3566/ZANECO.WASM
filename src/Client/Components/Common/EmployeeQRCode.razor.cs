@@ -24,6 +24,7 @@ namespace ZANECO.WASM.Client.Components.Common
         private string? _employeeId;
         private string? _sandurotId;
         private string _name = string.Empty;
+        private string _sandurot = string.Empty;
 
         protected override async Task OnInitializedAsync()
         {
@@ -47,6 +48,8 @@ namespace ZANECO.WASM.Client.Components.Common
                     if (userDto.SandurotId is not null)
                     {
                         _sandurotId = userDto.SandurotId.ToString();
+                        _sandurot = $"Sandurot Id: {_sandurotId}";
+
                         await _localStorage.SetItemAsStringAsync("sandurotId", _sandurotId);
                     }
                 }
