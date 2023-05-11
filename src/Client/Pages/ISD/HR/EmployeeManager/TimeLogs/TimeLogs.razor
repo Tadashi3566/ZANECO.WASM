@@ -39,7 +39,8 @@
         </MudItem>*@
         <MudItem xs="12" sm="6" md="4" lg="3">
             <MudSelect T="string" Label="Log Type" For="@(() => context.LogType)" @bind-Value="context.LogType" Variant="Variant.Filled">
-                <MudSelectItem Value="@("TIMEIN1")"/>
+                <MudSelectItem Value="@("YESTERDAY-OUT")" Disabled/>
+                <MudSelectItem Value="@("TIMEIN1")" />
                 <MudSelectItem Value="@("TIMEOUT1")"/>
                 <MudSelectItem Value="@("TIMEIN2")" />
                 <MudSelectItem Value="@("TIMEOUT2")" />

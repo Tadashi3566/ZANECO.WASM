@@ -3,10 +3,13 @@ using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
-namespace ZANECO.WASM.Client.Pages.ISD.HR.EmployeeManager.Designations;
+namespace ZANECO.WASM.Client.Pages.App.Groups;
 
-public class AutocompleteSection : MudAutocomplete<string>
+public class AutocompleteGroupByParent : MudAutocomplete<string>
 {
+    [Parameter]
+    public string Parent { get; set; } = default!;
+
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
 
@@ -18,7 +21,6 @@ public class AutocompleteSection : MudAutocomplete<string>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Label = "Section / Unit";
         CoerceText = true;
         CoerceValue = true;
         Clearable = true;
@@ -34,18 +36,16 @@ public class AutocompleteSection : MudAutocomplete<string>
         var filter = new GroupSearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "name", "description", "notes" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
+        if (await ApiHelper.ExecuteCallGuardedAsync(
+                () => Client.SearchAsync(filter), Snackbar)
             is PaginationResponseOfGroupDto response)
         {
-            _list = response.Data
-                .Where(x => x.Parent.Equals("SECTION"))
-                .ToList();
+            _list = response.Data.ToList();
         }
 
-        return _list
-            .Select(x => x.Name);
+        return _list.Where(x => x.Parent.Equals(Parent)).Select(x => x.Name);
     }
 }

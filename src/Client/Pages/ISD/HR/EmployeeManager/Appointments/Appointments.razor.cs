@@ -71,6 +71,7 @@ public partial class Appointments
                 new(data => data.AppointmentType, "Type", "AppointmentType"),
                 new(data => data.Subject, "Subject", "Subject", Template: TemplateSubjectLocation),
                 new(data => data.StartDateTime, "", Type: typeof(DateTime), Template: TemplateStartEnd),
+                new(data => data.Hours, "Hours", "Hours"),
                 new(data => data.Status, "Status", "Status"),
                 new(data => data.ApprovedOn, "", Type: typeof(DateTime), Template: TemplateRecommendApprove),
                 new(data => data.Description, "Description/Notes", "Description", Template: TemplateDescriptionNotes),
@@ -125,6 +126,8 @@ public partial class Appointments
                 request.ImageInBytes = string.Empty;
             },
             deleteFunc: async id => await Client.DeleteAsync(id),
+            canUpdateEntityFunc: dto => dto.EmployeeId.Equals(SearchEmployeeId),
+            canDeleteEntityFunc: dto => dto.EmployeeId.Equals(SearchEmployeeId),
             exportAction: string.Empty);
     }
 

@@ -37,7 +37,7 @@ public class AutocompleteSalary : MudAutocomplete<int>
         var filter = new SalarySearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "number" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "number", "name", "description", "notes" }, Keyword = value }
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar) is PaginationResponseOfSalaryDto response)

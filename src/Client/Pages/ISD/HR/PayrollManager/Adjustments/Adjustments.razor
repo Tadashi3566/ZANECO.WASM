@@ -38,7 +38,7 @@
             <MudNumericField Label="Number" For="@(() => context.Number)" @bind-Value="context.Number" InputMode="InputMode.numeric" Variant="Variant.Filled" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
-            <AutocompleteGroupAdjustment For="@(() => context.Name)" @bind-Value="context.Name" />
+            <AutocompleteGroupByParent Parent="ADJUSTMENT" Label="Adjustment" For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
 
         <MudItem xs="12" sm="6" md="4" lg="3">

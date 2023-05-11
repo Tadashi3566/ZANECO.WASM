@@ -43,7 +43,6 @@ public class AutocompleteManager : MudAutocomplete<string>
             _list = response.Data.ToList();
         }
 
-        return _list
-            .Select(x => x.FullName);
+        return _list.Select(x => x.FullName);
     }
 }

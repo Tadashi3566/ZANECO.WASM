@@ -3,22 +3,24 @@ using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
-namespace ZANECO.WASM.Client.Pages.ISD.HR;
+namespace ZANECO.WASM.Client.Pages.App.Groups;
 
-public class AutocompleteAdjustment : MudAutocomplete<Guid>
+public class AutocompleteGroupId : MudAutocomplete<Guid>
 {
+    [Parameter]
+    public string Parent { get; set; } = default!;
+
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
 
     [Inject]
-    private IAdjustmentsClient Client { get; set; } = default!;
+    private IGroupsClient Client { get; set; } = default!;
 
-    private List<AdjustmentDto> _list = new();
+    private List<GroupDto> _list = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Label = "Adjustment";
         CoerceText = true;
         CoerceValue = true;
         Clearable = true;
@@ -30,7 +32,7 @@ public class AutocompleteAdjustment : MudAutocomplete<Guid>
         return base.SetParametersAsync(parameters);
     }
 
-    // when the value parameter is set, we have to load that one Employee to be able to show the name
+    // when the value parameter is set, we have to load that one Group to be able to show the name
     // we can't do that in OnInitialized because of a strange bug (https://github.com/MudBlazor/MudBlazor/issues/3818)
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -45,19 +47,20 @@ public class AutocompleteAdjustment : MudAutocomplete<Guid>
 
     private async Task<IEnumerable<Guid>> SearchText(string value)
     {
-        var filter = new AdjustmentSearchRequest
+        var filter = new GroupSearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "name", "description", "notes" }, Keyword = value }
         };
 
-        if (await ApiHelper.ExecuteCallGuardedAsync(() => Client.SearchAsync(filter), Snackbar)
-            is PaginationResponseOfAdjustmentDto response)
+        if (await ApiHelper.ExecuteCallGuardedAsync(
+                () => Client.SearchAsync(filter), Snackbar)
+            is PaginationResponseOfGroupDto response)
         {
             _list = response.Data.ToList();
         }
 
-        return _list.Select(x => x.Id);
+        return _list.Where(x => x.Application.Equals(Parent)).Select(x => x.Id);
     }
 
     private string GetText(Guid id) =>

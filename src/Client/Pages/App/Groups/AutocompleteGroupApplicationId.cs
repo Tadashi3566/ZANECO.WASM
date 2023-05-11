@@ -3,10 +3,13 @@ using MudBlazor;
 using ZANECO.WASM.Client.Infrastructure.ApiClient;
 using ZANECO.WASM.Client.Shared;
 
-namespace ZANECO.WASM.Client.Pages.App.Tickets;
+namespace ZANECO.WASM.Client.Pages.App.Groups;
 
-public class AutocompleteGroup : MudAutocomplete<Guid>
+public class AutocompleteGroupApplicationId : MudAutocomplete<Guid>
 {
+    [Parameter]
+    public string Application { get; set; } = default!;
+
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
 
@@ -18,7 +21,6 @@ public class AutocompleteGroup : MudAutocomplete<Guid>
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Label = "Group";
         CoerceText = true;
         CoerceValue = true;
         Clearable = true;
@@ -48,7 +50,7 @@ public class AutocompleteGroup : MudAutocomplete<Guid>
         var filter = new GroupSearchRequest
         {
             PageSize = 10,
-            AdvancedSearch = new() { Fields = new[] { "name" }, Keyword = value }
+            AdvancedSearch = new() { Fields = new[] { "name", "description", "notes" }, Keyword = value }
         };
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
@@ -58,7 +60,7 @@ public class AutocompleteGroup : MudAutocomplete<Guid>
             _list = response.Data.ToList();
         }
 
-        return _list.Where(x => x.Application.Equals("TICKET")).Select(x => x.Id);
+        return _list.Where(x => x.Application.Equals(Application)).Select(x => x.Id);
     }
 
     private string GetText(Guid id) =>

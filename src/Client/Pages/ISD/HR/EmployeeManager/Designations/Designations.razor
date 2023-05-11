@@ -57,19 +57,19 @@
                           ShowTodayButton=true />
         </MudItem>
         <MudItem xs="12" sm="6" md="6" lg="3">
-            <AutocompleteArea For="@(() => context.Area)" @bind-Value="context.Area" />
+            <AutocompleteGroupByParent Label="Area" Parent="OFFICE" For="@(() => context.Area)" @bind-Value="context.Area" />
         </MudItem>
         <MudItem xs="12">
-            <AutocompleteDepartment For="@(() => context.Department)" @bind-Value="context.Department" />
+            <AutocompleteGroupByParent Label="Department" Parent="DEPARTMENT" For="@(() => context.Department)" @bind-Value="context.Department" />
         </MudItem>
         <MudItem xs="12">
-            <AutocompleteDivision For="@(() => context.Division)" @bind-Value="context.Division" />
+            <AutocompleteGroupByParent Label="Division" Parent="DIVISION" For="@(() => context.Division)" @bind-Value="context.Division" />
         </MudItem>
         <MudItem xs="12">
-            <AutocompleteSection For="@(() => context.Section)" @bind-Value="context.Section" />
+            <AutocompleteGroupByParent Label="Section" Parent="SECTION" For="@(() => context.Section)" @bind-Value="context.Section" />
         </MudItem>
         <MudItem xs="12">
-            <AutocompletePosition For="@(() => context.Position)" @bind-Value="context.Position" />
+            <AutocompleteGroupByParent Label="Designation" Parent="DESIGNATION" For="@(() => context.Position)" @bind-Value="context.Position" />
         </MudItem>
         <MudItem xs="12" sm="6" md="4" lg="3">
             <AutocompleteSalary For="@(() => context.SalaryNumber)" @bind-Value="context.SalaryNumber" InputMode="InputMode.numeric" />

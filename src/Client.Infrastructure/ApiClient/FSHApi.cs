@@ -46007,6 +46007,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("isScheduled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsScheduled { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("isFollowUp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsFollowUp { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("schedule", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime Schedule { get; set; } = default!;
 
@@ -49727,29 +49730,32 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Location { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("hours", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Hours { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("isAllDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsAllDay { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isReadonly", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsReadonly { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("isReadonly", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public bool IsReadonly { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isBlock", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsBlock { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("isBlock", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public bool IsBlock { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("calendarId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? CalendarId { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("calendarId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public int? CalendarId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recurrenceID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? RecurrenceID { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("recurrenceID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public int? RecurrenceID { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recurrenceRule", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? RecurrenceRule { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("recurrenceRule", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public string? RecurrenceRule { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recurrenceException", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? RecurrenceException { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("recurrenceException", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public string? RecurrenceException { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cssClass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? CssClass { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("cssClass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public string? CssClass { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("recommendedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? RecommendedBy { get; set; } = default!;
@@ -49813,6 +49819,9 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Location { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("hours", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Hours { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("isAllDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsAllDay { get; set; } = default!;
 
@@ -49822,20 +49831,20 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("isBlock", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsBlock { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("calendarId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? CalendarId { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("calendarId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public int? CalendarId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recurrenceID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? RecurrenceID { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("recurrenceID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public int? RecurrenceID { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recurrenceRule", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? RecurrenceRule { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("recurrenceRule", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public string? RecurrenceRule { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recurrenceException", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? RecurrenceException { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("recurrenceException", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public string? RecurrenceException { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cssClass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? CssClass { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("cssClass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public string? CssClass { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("recommendedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? RecommendedBy { get; set; } = default!;
@@ -49888,29 +49897,32 @@ namespace ZANECO.WASM.Client.Infrastructure.ApiClient
         [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string? Location { get; set; } = default!;
 
+        [Newtonsoft.Json.JsonProperty("hours", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Hours { get; set; } = default!;
+
         [Newtonsoft.Json.JsonProperty("isAllDay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsAllDay { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isReadonly", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsReadonly { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("isReadonly", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public bool IsReadonly { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isBlock", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsBlock { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("isBlock", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public bool IsBlock { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("calendarId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? CalendarId { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("calendarId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public int? CalendarId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recurrenceID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? RecurrenceID { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("recurrenceID", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public int? RecurrenceID { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recurrenceRule", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? RecurrenceRule { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("recurrenceRule", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public string? RecurrenceRule { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("recurrenceException", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? RecurrenceException { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("recurrenceException", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public string? RecurrenceException { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cssClass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string? CssClass { get; set; } = default!;
+        //[Newtonsoft.Json.JsonProperty("cssClass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public string? CssClass { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("recommendedBy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid RecommendedBy { get; set; } = default!;

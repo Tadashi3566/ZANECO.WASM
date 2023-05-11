@@ -180,7 +180,7 @@ else
                         <MudList Color="Color.Primary" Clickable Dense>
                         @if (_birthdays is not null && _birthdays.Count > 0)
                         {
-                            <MudListItem Icon="@Icons.Material.Filled.Cake" IconColor="Color.Primary" Text="Birthday" InitiallyExpanded>
+                            <MudListItem Icon="@Icons.Material.Filled.Cake" IconColor="Color.Primary" Text="Birthday">
                             <NestedList>
                                 @foreach (var employee in _birthdays.OrderBy(x => x.BirthDate!.Value.Day))
                                     {
@@ -212,7 +212,7 @@ else
                         <MudList Color="Color.Primary" Clickable Dense>
                         @if (_anniversaries is not null && _anniversaries.Count > 0)
                         {
-                                <MudListItem Icon="@Icons.Material.Filled.Celebration" IconColor="Color.Primary" Text="Anniversary" InitiallyExpanded>
+                                <MudListItem Icon="@Icons.Material.Filled.Celebration" IconColor="Color.Primary" Text="Anniversary">
                                 <NestedList>
                                     @foreach (var employee in _anniversaries.OrderBy(x => x.HireDate.Day))
                                     {
@@ -244,7 +244,7 @@ else
                         <MudList Color="Color.Primary" Clickable Dense>
                         @if (_holidays is not null && _holidays.Count > 0)
                         {
-                            <MudListItem Icon="@Icons.Material.Filled.BeachAccess" IconColor="Color.Primary" Text="Regular Holidays" InitiallyExpanded>
+                            <MudListItem Icon="@Icons.Material.Filled.BeachAccess" IconColor="Color.Primary" Text="Regular Holidays">
                                 <NestedList>
                                     @foreach (var holiday in _holidays.Where(x => x.CalendarType.Equals("REGULAR")).OrderBy(x => x.CalendarDate))
                                     {
@@ -258,7 +258,7 @@ else
                                     }
                                 </NestedList>
                             </MudListItem>
-                                <MudListItem Icon="@Icons.Material.Filled.Church" IconColor="Color.Primary" Text="Special Holidays" InitiallyExpanded>
+                                <MudListItem Icon="@Icons.Material.Filled.Church" IconColor="Color.Primary" Text="Special Holidays">
                                 <NestedList>
                                     @foreach (var holiday in _holidays.Where(x => x.CalendarType.Equals("SPECIAL")).OrderBy(x => x.CalendarDate))
                                         {
