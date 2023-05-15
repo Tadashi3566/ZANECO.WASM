@@ -1,5 +1,73 @@
-﻿<h3>TimeLog</h3>
+﻿@using Syncfusion.Blazor.Inputs;
 
-@code {
+<MudItem xs="12" sm="12" md="8">
+    <EditForm Model="@_timeLog" OnValidSubmit="CreateTimeLogAsync">
+        <MudCard Elevation="@_preference.Elevation">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText>Employee Time Log</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <DataAnnotationsValidator />
+                    <CustomValidation @ref="_customValidation" />
+                    <MudItem xs="12" sm="6" md="4" lg="3">
+                        <MudSelect T="string" Label="Log Type" For="@(() => _timeLog.LogType)" @bind-Value="_timeLog.LogType" Variant="Variant.Filled">
+                            <MudSelectItem Value="@("YESTERDAY-OUT")" Disabled />
+                            <MudSelectItem Value="@("TIMEIN1")" />
+                            <MudSelectItem Value="@("TIMEOUT1")" />
+                            <MudSelectItem Value="@("TIMEIN2")" />
+                            <MudSelectItem Value="@("TIMEOUT2")" />
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem Class="mt-1" xs="12" sm="6" md="4" lg="3">
+                        <SfDatePicker TValue="DateTime"
+                                        @bind-Value=_timeLog.LogDate
+                                        CssClass="e-bigger e-filled mt-1"
+                                        Format="MMMM dd, yyyy"
+                                        Placeholder="Date"
+                                        FloatLabelType="FloatLabelType.Auto"
+                                        ShowTodayButton=true />
+                    </MudItem>
 
-}
+                    <MudItem xs="12">
+                        <MudExpansionPanels MultiExpansion="true">
+                            <MudExpansionPanel Text="Other Information">
+                                <MudItem xs="12">
+                                    <MudTextField Label="Description" For="@(() => _timeLog.Description)" @bind-Value="_timeLog.Description" Lines="1" />
+                                </MudItem>
+                                <MudItem xs="12">
+                                    <MudTextField Label="Notes" For="@(() => _timeLog.Notes)" @bind-Value="_timeLog.Notes" Lines="2" />
+                                </MudItem>
+                            </MudExpansionPanel>
+                        </MudExpansionPanels>
+                    </MudItem>
+
+                    <MudItem>
+                        <div>
+                            <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
+                                Take a Picture
+                            </MudButton>
+                            <MudItem>
+                                <MudText Typo="Typo.caption">Select Camera and switch to Selfie mode.</MudText>
+                            </MudItem>
+                        </div>
+                        <InputFile id="fileInput" hidden OnChange="UploadImage" />
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudCardActions Class="pb-4 pl-4">
+                <InputFile id="fileInput" OnChange="UploadImage" hidden accept=".jpg,.jpeg,.png" />
+                <div style="padding-bottom:20px">
+                    <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
+                                StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
+                        Upload
+                    </MudButton>
+                </div>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" StartIcon="@Icons.Material.Filled.Save"
+                            ButtonType="ButtonType.Submit">@_timeLog.LogType</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </EditForm>
+</MudItem>

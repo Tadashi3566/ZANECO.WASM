@@ -169,6 +169,7 @@ public partial class MessageTemplates
 
             _messageOut.IsBackgroundJob = _backgroundPreference.IsBackgroundJob;
             _messageOut.IsScheduled = _backgroundPreference.IsScheduled;
+            //_messageOut.IsFollowUp
             _messageOut.Schedule = request.Schedule;
 
             _messageOut.IsAPI = request.IsAPI;
@@ -192,9 +193,7 @@ public partial class MessageTemplates
                 MessageTemplateSendRequest sendRequest = new();
                 sendRequest.Id = request.Id;
 
-                await ApiHelper.ExecuteCallGuardedAsync(() => Client.SentAsync(sendRequest),
-                    Snackbar,
-                    successMessage: "SMS successfully sent.");
+                await ApiHelper.ExecuteCallGuardedAsync(() => Client.SentAsync(sendRequest), Snackbar, successMessage: "SMS successfully sent.");
 
                 await _table!.ReloadDataAsync();
             }
