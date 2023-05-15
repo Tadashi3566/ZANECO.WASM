@@ -206,7 +206,7 @@ public partial class Appointments
                 AppointmentActionRequest request = new()
                 {
                     Id = id,
-                    EmployeeId = (Guid)user.EmployeeId,
+                    UserEmployeeId = (Guid)user.EmployeeId,
                     Action = action
                 };
                 

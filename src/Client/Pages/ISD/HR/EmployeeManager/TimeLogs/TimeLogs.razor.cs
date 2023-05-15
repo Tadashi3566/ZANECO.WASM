@@ -40,6 +40,7 @@ public partial class TimeLogs
     private bool _canViewEmployees;
     private bool _canUpdateAttendance;
 
+    private DateTime _logDate = DateTime.Today;
     private DateTime _startDate = DateTime.Today;
     private DateTime _endDate = DateTime.Today;
 
@@ -94,7 +95,7 @@ public partial class TimeLogs
             createFunc: async data =>
             {
                 data.EmployeeId = SearchEmployeeId;
-                data.LogDate = DateTime.Today;
+                data.LogDate = _logDate;
                 data.LogDateTime = DateTime.Now;
 
                 if (!string.IsNullOrEmpty(data.ImageInBytes))

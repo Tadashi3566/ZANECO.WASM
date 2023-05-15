@@ -42,7 +42,7 @@
         <MudMenuItem Icon="@Icons.Material.Filled.Cancel"
                      OnClick="@(() => ForAction(context.Id, "CANCEL"))"
                      OnTouch="@(() => ForAction(context.Id, "CANCEL"))"
-                     Disabled=@(!context.EmployeeId.Equals(SearchEmployeeId) || context.Status.Equals("CANCELLED"))>
+                     Disabled=@(context.Status.Equals("CANCELLED") || context.Status.Equals("RECOMMENDED"))>
             Cancel
         </MudMenuItem>
         <MudMenuItem Icon="@Icons.Material.Filled.Handshake"

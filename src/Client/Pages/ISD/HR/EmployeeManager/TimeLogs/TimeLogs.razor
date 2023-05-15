@@ -46,18 +46,19 @@
                 <MudSelectItem Value="@("TIMEOUT2")" />
             </MudSelect>
         </MudItem>
+        <MudItem Class="mt-1" xs="12" sm="6" md="4" lg="3">
+            <SfDatePicker TValue="DateTime"
+                        @bind-Value=_logDate
+                        CssClass="e-bigger e-filled mt-1"
+                        Format="MMMM dd, yyyy"
+                        Placeholder="Date"
+                        FloatLabelType="FloatLabelType.Auto"
+                        ShowClearButton=true
+                        ShowTodayButton=true />
+        </MudItem>
         @if (_canUpdateAttendance)
         {
-            <MudItem Class="mt-1" xs="12" sm="6" md="4" lg="3">
-                <SfDatePicker TValue="DateTime"
-                          @bind-Value=context.LogDate
-                          CssClass="e-bigger e-filled mt-1"
-                          Format="MMMM dd, yyyy"
-                          Placeholder="Date"
-                          FloatLabelType="FloatLabelType.Auto"
-                          ShowClearButton=true
-                          ShowTodayButton=true />
-            </MudItem>
+            
             <MudItem Class="mt-1" xs="12" sm="6" md="4" lg="3">
                 <SfDateTimePicker TValue="DateTime"
                               @bind-Value=context.LogDateTime
